@@ -187,7 +187,7 @@ only. Copy designs, never code, documents, trademarks or branding.
    emergency standards (CAP alerts, EDXL). For each: whether OneMind adopts it and
    where.
 
-17. **Ingestion pipelines: replace or keep Redpanda Connect, and make them
+10. **Ingestion pipelines: replace or keep Redpanda Connect, and make them
     bulletproof.** Today omos runs Redpanda Connect (`platform/data/redpanda-connect/`)
     for four feeds, plus Python feeds (`platform/omos/intel-feeds.yaml`). Compare,
     from primary sources and by building a small proof for the top two:
@@ -227,16 +227,16 @@ only. Copy designs, never code, documents, trademarks or branding.
 
 ### How the leaders do it
 
-10. **Palantir:** the Foundry ontology (object types, link types, properties,
+11. **Palantir:** the Foundry ontology (object types, link types, properties,
     actions, functions, writeback), Gotham's operational picture, AIP (LLMs that
     act through ontology actions with permissions and human approval), Apollo
     (continuous deployment to cloud, edge and disconnected sites), Maven Smart
     System. Output: the OneMind equivalent of each, built on NATS and TAK.
-11. **Anduril Lattice:** the entity model (components, provenance, aliases,
+12. **Anduril Lattice:** the entity model (components, provenance, aliases,
     expiry), tasking and the autonomy loop, sensor fusion, mesh networking, and
     the public Lattice SDK and developer docs. Output: a OneMind entity and task
     model at least as complete, mapped to `ent.*`, `cmd.*` and `evt.*` and to CoT.
-12. **JADC2 and CJADC2:** strategy documents, Sense / Make Sense / Act, data
+13. **JADC2 and CJADC2:** strategy documents, Sense / Make Sense / Act, data
     fabric, mission partner environments, zero trust, DDIL (denied, disrupted,
     intermittent and limited) operations. Output: how each JADC2 capability maps
     to a civilian OneMind capability (homestead, neighbourhood, response team), and
@@ -244,20 +244,20 @@ only. Copy designs, never code, documents, trademarks or branding.
 
 ### Make Sense and Act
 
-13. **Fusion and tracking:** entity resolution across feeds, multi-target
+14. **Fusion and tracking:** entity resolution across feeds, multi-target
     tracking (Kalman, IMM, JPDA, MHT), track-to-track correlation, confidence and
     provenance, handling stale and conflicting data. Recommend the entity
     service's algorithm and the libraries to use.
-14. **AI agents that act:** Hermes over the ontology: tool design, retrieval over
+15. **AI agents that act:** Hermes over the ontology: tool design, retrieval over
     entities and history, planning, watch jobs, multi-agent coordination,
     policy (OpenFGA or equivalent), audit, human-in-the-loop approval levels,
     evaluation and red-teaming of agent actions. Cover the existing omos
     `services/onemind-core` (Synadia Agent Protocol) and `platform/hermes`.
-15. **Security and trust:** zero trust across sites, mTLS and certificates, NATS
+16. **Security and trust:** zero trust across sites, mTLS and certificates, NATS
     accounts, ABAC, CoT `access`/`caveat`/`releasableTo` fields, data
     classification and sharing between groups, supply-chain security, threat
     model for a C2 platform (including a compromised agent or node).
-16. **Edge and disconnected operations:** Apollo-style deployment to the Mac,
+17. **Edge and disconnected operations:** Apollo-style deployment to the Mac,
     the home server and field kits; offline tiles and maps; store-and-forward;
     conflict resolution on reconnect; low-bandwidth links (radios, goTenna,
     Starlink); power and hardware tiers (Jetson, Pi, laptop).
@@ -272,7 +272,7 @@ Phase 2):
 - `docs/design/REFERENCE-ARCHITECTURE.md`: the full system across cloud hub, home
   server, Mac and field kit: bus topology, services, data flows for Sense, Make
   Sense and Act, deployment and update flow, security zones.
-- `docs/design/BUS-DESIGN.md`: the target NATS design from lane 7: streams, KV,
+- `docs/design/BUS-DESIGN.md`: the target NATS design from the NATS research lane: streams, KV,
   Object Store, accounts, permissions, replication, retention, and every
   subject used, all within the locked grammar. List gaps as owner proposals.
 - `docs/design/JADC2-MAP.md` and `docs/design/GAP-ANALYSIS.md`: OneMind against
@@ -298,7 +298,7 @@ Parallel lanes in separate worktrees, one writer per set of files:
 
 | Lane | Repo | Scope (feature IDs) | Starts |
 |---|---|---|---|
-| A — Spine | omos | A0 migrate every feed to the pipeline standard from research lane 17, meeting its full reliability list with tests and the chaos test; A1 fix the feeds, A2–A3 feed registry and health, A4 entity service, A5 layer snapshots, A6 projector AOI filter, A7 mesh gateway PR (LAN test with ATAK goes to the owner checklist), H1–H2 MAVLink + SITL, H6 safety, H9 robotics CoT profile, I4 policy and audit. One focused PR per feature, each with tests | After Phase 1 |
+| A — Spine | omos | A0 migrate every feed to the pipeline standard from the ingestion-pipelines research lane, meeting its full reliability list with tests and the chaos test; A1 fix the feeds, A2–A3 feed registry and health, A4 entity service, A5 layer snapshots, A6 projector AOI filter, A7 mesh gateway PR (LAN test with ATAK goes to the owner checklist), H1–H2 MAVLink + SITL, H6 safety, H9 robotics CoT profile, I4 policy and audit. One focused PR per feature, each with tests | After Phase 1 |
 | B — Client | onemind-xr | B1–B6, C1–C2, F1: the UE project (macOS-ready), `OneMindBus`, `OneMindGlobe`, `OneMindLayers`, `OneMindEntities`, `OneMindCoT`; 10,000 entities at 60 fps | After Phase 1 |
 | C — Surfaces | onemind-xr | F2/F3 web streaming or fallback, J1 L0 light web client, J3 adaptive quality | After B shows a globe |
 | D — Act | both | D1–D6 AOIs, missions, tasking, asset commands, Hermes panel and tools, alerts; H3–H4 ROS 2 and tasking; I1–I3 agents; J2 role modes | After A6 and B |
