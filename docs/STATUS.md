@@ -7,8 +7,9 @@ row that is not done.
 |---|---|---|
 | Phase 0 Pre-flight | done 2026-10-29 | [PREFLIGHT.md](PREFLIGHT.md) |
 | M0 Research | done 2026-10-29: 19 lanes, each independently verified | [research/](research/), [evidence/M0](evidence/M0/) |
-| M0 Design and contracts | in progress (synthesis workflow wf_be184489-a92) | — |
-| M1–M7 | not started | — |
+| M0 Design and contracts | done 2026-10-29: reviewed by three independent review agents (final: approve) | [design/](design/), [contracts/](contracts/), [research/SUMMARY.md](research/SUMMARY.md) |
+| M1 (lane A spine, omos PRs) | next: A4 entity service, A0 collector framework, I4 policy and audit, H2 MAVLink bridge, A7 mesh gateway | — |
+| M2–M7 | not started | — |
 
 ## Blockers (exact cause)
 

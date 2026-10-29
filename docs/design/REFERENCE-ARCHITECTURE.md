@@ -218,7 +218,7 @@ through the caching tile proxy, or from a local PMTiles pack when offline
 | Step | Design | Source |
 |---|---|---|
 | Fusion | Deterministic key identity first, then a per-entity constant-velocity Kalman filter (IMM later), GNN with chi-square gating for keyless `det.*`, track-to-track correlation with covariance intersection; auto-merge only on shared keys | [fusion-and-tracking.md](../research/fusion-and-tracking.md) Recommendation |
-| Provenance | `sources[]` with stream and sequence pointers, `aliases[]`, `expiry_time`, `live`, decomposed confidence, lifecycle `tentative/active/stale/lost/expired` | fusion-and-tracking.md; [lattice-patterns.md](../research/lattice-patterns.md) §A; `docs/contracts/entity.md` |
+| Provenance | `sources[]` with stream and sequence pointers, `aliases[]`, `expiry_t`, `live`, decomposed confidence, lifecycle `tentative/active/stale/lost/expired` | fusion-and-tracking.md; [lattice-patterns.md](../research/lattice-patterns.md) §A; `docs/contracts/entity.md` |
 | Snapshot and delta | A client loads a layer snapshot (`svc.layer.snapshot`, AOI-filtered) and then applies deltas (`svc.layer.watch`), so it renders snapshots, not firehoses | [`layer-snapshot.md`](../contracts/layer-snapshot.md), [`layer-delta.md`](../contracts/layer-delta.md); onemind-xr `CLAUDE.md` |
 | Mission tier to TAK | Only entities inside an AOI or geofence, or tasked, become CoT, and only if their marking allows | FEATURES A6; [security-and-trust.md](../research/security-and-trust.md) §5 |
 | Watch jobs | Deterministic watchers on JetStream/KV raise events; Hermes explains and proposes only when triggered | [agents-that-act.md](../research/agents-that-act.md) Rec. 4 |

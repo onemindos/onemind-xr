@@ -36,7 +36,7 @@ bucket. The entity type names below follow the Lattice lane (lattice-patterns.md
 |---|---|---|---|---|---|
 | `fleet` | `drone robot vehicle node edge` (`ent.drone.>` …) | `tel.fleet.>` | small | < 100 | 60 s |
 | `tak` | `person place` and TAK shapes as `zone` | `tak.cot.out`, `tak.cot.mesh.rx` | small | < 500 | CoT `stale` |
-| `zones` | `zone` | KV `geofences` | small | < 1,000 | none (`no_expiry`) |
+| `zones` | `zone` | KV `geofences` | small | < 1,000 | none (`pinned`) |
 | `hazards` | `hazard` | `intel.weather.*`, `intel.seismic.*`, `intel.fire.*`, `intel.disaster.*`, `intel.natural.*` | medium | < 5,000 | per source, up to 30 d |
 | `tracks` | `track` | `det.>` | medium | < 2,000 | 30 s (unverified) |
 | `space` | `satellite` | `intel.space.celestrak.tle` (propagated) | medium | 16 today, thousands later | 120 s, heartbeated |
