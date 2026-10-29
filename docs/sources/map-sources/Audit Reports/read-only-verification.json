@@ -1,0 +1,43 @@
+{
+  "collected_at": "2026-10-28T02:47:23.377813+00:00",
+  "head": "96fea4867b92696cea3f5905d147fa830167017e",
+  "status": "",
+  "parity": [
+    {
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/tak-projector.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/intel-scripts.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/feed-scripts.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/feeds.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/intel-feeds.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/sinks.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/scaledobject-sink-clickhouse.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "services/takserver/plugin-src/src/main/java/tak/server/plugins/NatsBridgePlugin.java",
+      "equal_to_cached_origin_main": true
+    }
+  ]
+}

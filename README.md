@@ -22,6 +22,7 @@ Status: **planning and setup.** No client code yet. Start with
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Milestones M0–M7 with exit criteria |
 | [docs/decisions/](docs/decisions/) | Decisions taken, including the owner defaults the run uses instead of asking (0004) |
 | [docs/research/](docs/research/) | Verified findings this plan rests on |
+| [docs/sources/](docs/sources/) | The 240-record OneMind source catalog and audit (catalog only, endpoints untested) |
 | [docs/OPEN-QUESTIONS.md](docs/OPEN-QUESTIONS.md) | What is not known yet |
 
 ## Related repositories

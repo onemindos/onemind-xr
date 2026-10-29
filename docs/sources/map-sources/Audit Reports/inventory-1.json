@@ -1,0 +1,3686 @@
+[
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/SO.md",
+    "bytes": 2655
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/migration-manifest.json",
+    "bytes": 245258
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/SO.base",
+    "bytes": 2206
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/03 Infrastructure.base",
+    "bytes": 1778
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/03 Infrastructure.md",
+    "bytes": 908
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Developer/Review for Execution Engine/Review for Execution Engine.md",
+    "bytes": 1901
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Developer/Review for Execution Engine/https - - - docs.restate.dev.md",
+    "bytes": 1273
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Developer/Review for Execution Engine/https - - - trigger.dev - docs - self-hosting - kubernetes.md",
+    "bytes": 1366
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Developer/Review for Execution Engine/https - - - hatchet.run.md",
+    "bytes": 1253
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Knowledge/RisingWave — NATS Streaming SQL Integration.md",
+    "bytes": 2111
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Knowledge/SQLite — OneMind Edge Database Standard.md",
+    "bytes": 3264
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Knowledge/QuestDB — High-Performance Time-Series Database.md",
+    "bytes": 3921
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Databases DB/Time Series & ML Training Datasets.md",
+    "bytes": 2540
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Databases DB/pg_durable — Durable Execution inside PostgreSQL.md",
+    "bytes": 4112
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Databases DB/PostGIS — Geospatial Extension for PostgreSQL.md",
+    "bytes": 3993
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Databases DB/ClickHouse — Real-Time Analytics Database.md",
+    "bytes": 5704
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Databases DB/Databases DB.base",
+    "bytes": 541
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Databases DB/PostgreSQL — Core Relational Database.md",
+    "bytes": 3769
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Databases DB/Databases DB.md",
+    "bytes": 893
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Databases/Databases DB/TimescaleDB — Time-Series PostgreSQL Extension.md",
+    "bytes": 6573
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Hardware/Hardware DB/Hak5 — Pen-Testing & AI-Capable Hardware.md",
+    "bytes": 3019
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Hardware/Hardware DB/Walter — ESP32-S3 Multi-Radio Cellular IoT Module.md",
+    "bytes": 16137
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Hardware/Hardware DB/KVM — Kernel-based Virtual Machine & KVM Switch.md",
+    "bytes": 3257
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Hardware/Hardware DB/Hardware DB.md",
+    "bytes": 884
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Hardware/Hardware DB/M5Stack — Modular IoT Hardware Platform.md",
+    "bytes": 3487
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Hardware/Hardware DB/Hardware DB.base",
+    "bytes": 539
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Hardware/Knowledge/Bambu Studio.md",
+    "bytes": 4985
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Networking/Ideas & Topics/Network - Cloudflare - Tailscale - Nginx or Caddy.md",
+    "bytes": 926
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Networking/Ideas & Topics/Network Infrastructure.md",
+    "bytes": 794
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Networking/Ideas & Topics/Universal Cloud Domain Access.md",
+    "bytes": 815
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Networking/DNS/DNS.md",
+    "bytes": 950
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Networking/DNS/Domains to Purchase.md",
+    "bytes": 1374
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Platform/Ideas & Topics/Workflow - Blueprint- Actions.md",
+    "bytes": 810
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Comms/Actions/Connect Meshtastic mesh to local Matrix - Pi node for full off-grid AI comms.md",
+    "bytes": 1468
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Comms/Actions/Design full NYC Meshtastic node layout.md",
+    "bytes": 1362
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Oukitel RT8 Rugged Tablet.md",
+    "bytes": 1545
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Panasonic Toughbook — Rugged Laptops & Tablets.md",
+    "bytes": 3811
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/stdgove USB-C Earpiece Headset for BaoFeng - ATAK.md",
+    "bytes": 1942
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Bambu Lab X1C.md",
+    "bytes": 667
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Samsung Galaxy Tab S10+ 5G.md",
+    "bytes": 1970
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Meta Quest 3.md",
+    "bytes": 2387
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/AR500 Testudo Gen 2 Plate Carrier + Level III+ Plates.md",
+    "bytes": 1705
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/TAK Server — Self-Hosted.md",
+    "bytes": 2149
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Toyota 4Runner 5th Gen TRD Off Road.md",
+    "bytes": 2227
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/RAM Mounts No-Drill Universal Laptop Mount.md",
+    "bytes": 1828
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Retevis Single Ear Acoustic Tube Headset (BaoFeng).md",
+    "bytes": 1628
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Carlinkit CPC200 TBox Plus.md",
+    "bytes": 2169
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Advanced Reset Technology (A.R.T.).md",
+    "bytes": 2532
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/BESTEK 2000W Car Power Inverter.md",
+    "bytes": 1826
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Motorola APX 900 (ATAK Radio).md",
+    "bytes": 1783
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Urban Operations Kit.md",
+    "bytes": 3879
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Samsung Galaxy Tab Active5 5G.md",
+    "bytes": 2002
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Samsung Galaxy Watch Ultra.md",
+    "bytes": 2169
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Shokz OpenComm2 2025.md",
+    "bytes": 2320
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/NexDock 14.md",
+    "bytes": 2023
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Gear DB.base",
+    "bytes": 797
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/BaoFeng UV-5R - BTECH UV-5X3.md",
+    "bytes": 1868
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Meshtastic Vehicle Node — LILYGO T-Beam.md",
+    "bytes": 2179
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/SureFire M600DF Scout + AN - PVS-14 NVG.md",
+    "bytes": 1887
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Goal Zero Yeti 1500X Power Station.md",
+    "bytes": 1862
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Getac — Rugged Laptops & Tablets.md",
+    "bytes": 3119
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Dual Ear Covert Acoustic Tube Earpiece (2-Pack).md",
+    "bytes": 1654
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Zero — Callsign & Persona.md",
+    "bytes": 2659
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Starlink Mini — Vehicle - Roam.md",
+    "bytes": 2114
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Zero Suit Prototype.md",
+    "bytes": 4527
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Vehicle Roof Antenna Kit (LTE + GPS + LoRa).md",
+    "bytes": 1955
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/SPECS AR Glasses — Wearable Heads-Up Display.md",
+    "bytes": 3876
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Retevis ETK007 Throat Mic + Finger PTT.md",
+    "bytes": 1675
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Panasonic Toughbook 55 (4G LTE).md",
+    "bytes": 2159
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/DJI Mini 4 Pro.md",
+    "bytes": 1867
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/Gear DB.md",
+    "bytes": 849
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/DJI Avata 2.md",
+    "bytes": 1743
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Gear/Gear DB/xSuit 5.0 Black.md",
+    "bytes": 1207
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/Galaxy Tab — Device Profile.md",
+    "bytes": 11036
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/MacBook Pro — Device Profile.md",
+    "bytes": 4824
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/Device Harmonization Framework.md",
+    "bytes": 11494
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/Dell All-in-One — Device Profile.md",
+    "bytes": 3529
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/Edge DB.base",
+    "bytes": 531
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/S24 Ultra — Operational Profile.md",
+    "bytes": 11898
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/Windows Laptop — Device Profile.md",
+    "bytes": 8509
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/iPad — Device Profile.md",
+    "bytes": 3117
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/Device Harmonization — Final Report.md",
+    "bytes": 39570
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Edge/Edge DB/Edge DB.md",
+    "bytes": 848
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/IoT/IoT DB/Home Assistant — Home Automation & IoT Control Platform.md",
+    "bytes": 10258
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/IoT/IoT DB/IoT DB.md",
+    "bytes": 855
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/IoT/IoT DB/FarmOS.md",
+    "bytes": 609
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/IoT/IoT DB/IoT DB.base",
+    "bytes": 529
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Integrations/Ideas & Topics/Realtime news (RSS FEED) or citizen w - alerts.md",
+    "bytes": 921
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/Encrypted Secrets — Move API keys to macOS Keychain.md",
+    "bytes": 1590
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/Give your Go app superpowers with an Embedded NATS Server.md",
+    "bytes": 1541
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/What is NATS(https - - - nats.synadia.com - ).md",
+    "bytes": 1095
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/EPIC Deploy LEGACY Consciousness Modules.md",
+    "bytes": 2663
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/Retry Queue + Dead Letter — Self-healing failed executions.md",
+    "bytes": 1767
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/NATS Cluster — Multi-node for zero downtime.md",
+    "bytes": 1635
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/Rate Limiter — Prevent runaway agents from burning quota.md",
+    "bytes": 1676
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/Test Multi-Location NATS System with Home Computers.md",
+    "bytes": 2602
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/Observability — Prometheus metrics + alerting.md",
+    "bytes": 1530
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/NATS Health Watchdog — Auto-restart SaaS worker on failure.md",
+    "bytes": 2067
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/Composio Exit Strategy — Adapter pattern abstraction.md",
+    "bytes": 1772
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/NATS.md",
+    "bytes": 4403
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/NATS Auth - ACL — Per-agent subject permissions.md",
+    "bytes": 1748
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/Ideas & Topics/What is NATS(https - - - nats.synadia.com - ) (1).md",
+    "bytes": 914
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/NATS/Actions/Test Multi-Location NATS System with Home Computers (1).md",
+    "bytes": 2417
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Ideas & Topics/Untitled.md",
+    "bytes": 632
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Ideas & Topics/Data backup & Recovery Management.md",
+    "bytes": 853
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Ideas & Topics/Backup Solutions.md",
+    "bytes": 884
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Ideas & Topics/infra management.md",
+    "bytes": 979
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Ideas & Topics/Onemind-Main - Infrastructure + Tools - Python - Docker.md",
+    "bytes": 958
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Ideas & Topics/Backups & Disaster Management (Daily & Weekly).md",
+    "bytes": 864
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Ideas & Topics/Cloud Management.md",
+    "bytes": 853
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Knowledge/OneMind — Full Deployment Plan.md",
+    "bytes": 19633
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Knowledge/OneMind Production Deployment Plan (2026-07-03).md",
+    "bytes": 42260
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Knowledge/Observability — Prometheus metrics + alerting (1).md",
+    "bytes": 1349
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Actions/Dual machine W - Load Balancing - Replace Sentinel and just have a dual system with self h.md",
+    "bytes": 1267
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Actions/Setup GitHub Backup System.md",
+    "bytes": 1070
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Infrastructure DB/OneMind Sovereign MediaMTX — Live Media Server.md",
+    "bytes": 3932
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Infrastructure DB/Infrastructure DB.md",
+    "bytes": 938
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Infrastructure DB/Infrastructure DB.base",
+    "bytes": 618
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Infrastructure DB/Kubernetes + NATS Deployment Topology.md",
+    "bytes": 2555
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Infrastructure DB/Kubernetes (K8s).md",
+    "bytes": 1744
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Infrastructure DB/OneMind Voice Stack — Murmur + Mumble Bridge.md",
+    "bytes": 6470
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Infrastructure DB/KubeSolo.md",
+    "bytes": 3743
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/Infrastructure/Infrastructure DB/omos-cloud — DOKS Cluster Live Reference.md",
+    "bytes": 29841
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/AI Agents/Actions/Deploy Omnipresent Mode for LEGACY.md",
+    "bytes": 1175
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/03 Infrastructure/AI Agents/Actions/EPIC Deploy LEGACY Consciousness Modules (1).md",
+    "bytes": 2482
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/01 The Fabric.base",
+    "bytes": 2262
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/01 The Fabric.md",
+    "bytes": 926
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Databases/Ideas & Topics/Files.md",
+    "bytes": 769
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Hardware/Ideas & Topics/Local Machines.md",
+    "bytes": 753
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Hardware/Ideas & Topics/Equipment.md",
+    "bytes": 884
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Robotics/Ideas & Topics/Robotics (The Fleet).md",
+    "bytes": 802
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Networking/Networking DB/Tailscale — Mesh Networking.md",
+    "bytes": 4282
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Networking/Networking DB/Networking DB.base",
+    "bytes": 539
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Networking/Networking DB/Networking DB.md",
+    "bytes": 887
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Networking/Knowledge/ePMP — Cambium Radio NATS Bridge (Research).md",
+    "bytes": 2484
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Networking/Knowledge/DDIL — Denied, Degraded, Intermittent, Limited.md",
+    "bytes": 6831
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Platform/Ideas & Topics/Digital Services (SAAS).md",
+    "bytes": 778
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Comms/Comms DB/MeshCore — Off-Grid Encrypted Mesh Comms.md",
+    "bytes": 5911
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Comms/Comms DB/Comms DB.base",
+    "bytes": 529
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Comms/Comms DB/GNSS — Global Navigation Satellite Systems Master Reference.md",
+    "bytes": 10436
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Comms/Comms DB/Comms DB.md",
+    "bytes": 842
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Comms/Comms DB/Meshtastic — LoRa Mesh Radio Platform.md",
+    "bytes": 6521
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Knowledge/OneMind OS — Recon 02 - Map - Globe Frontend Overlap.md",
+    "bytes": 4465
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Knowledge/MOBAC — Mobile Atlas Creator.md",
+    "bytes": 3262
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/KMZ Overlays/NYC Metro POI Overlay — Full Infrastructure.md",
+    "bytes": 21415
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/KMZ Overlays/KMZ Overlays.base",
+    "bytes": 1029
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/KMZ Overlays/KMZ Overlays.md",
+    "bytes": 875
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Geo DB.md",
+    "bytes": 973
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Elevation Data — DTED, SRTM, USGS & TAK Integration.md",
+    "bytes": 11499
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Vexcel — Aerial Imagery & Geospatial Data Platform.md",
+    "bytes": 5342
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Esri GIS — Enterprise GIS & ArcGIS Platform.md",
+    "bytes": 4183
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Cesium — 3D Geospatial Globe & Visualization Platform.md",
+    "bytes": 7160
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/SkyWatch — Satellite Imagery & Geospatial Data API.md",
+    "bytes": 7277
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/GIS & Mapping Sources — Public Data Catalog.md",
+    "bytes": 2481
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Geo DB.base",
+    "bytes": 589
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Remote Sensing & GIS Glossary — Earth Observation Terms.md",
+    "bytes": 16428
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/ArcGIS Online — SaaS Web GIS Platform.md",
+    "bytes": 3122
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/SkyWatch — Satellite Imagery & Geospatial Data Platform.md",
+    "bytes": 7829
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/CloudTAK Tiles (PMTiles).md",
+    "bytes": 996
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/ACLED Crisis Map.md",
+    "bytes": 971
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NYC Subway Lines.md",
+    "bytes": 1004
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Protomaps.md",
+    "bytes": 946
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Mapbox.md",
+    "bytes": 931
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Overpass API.md",
+    "bytes": 962
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/WMTS (OGC Standard).md",
+    "bytes": 972
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/FAA TFR Overlay.md",
+    "bytes": 932
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/DCD Data Center Map.md",
+    "bytes": 957
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/QGIS Desktop.md",
+    "bytes": 896
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Bing Maps.md",
+    "bytes": 925
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/HIFLD Fire Stations.md",
+    "bytes": 1074
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/PMTiles (Format - Spec).md",
+    "bytes": 998
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenStreetMap (Tile CDN).md",
+    "bytes": 989
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NJ Transit Rail.md",
+    "bytes": 942
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenWeatherMap Tiles.md",
+    "bytes": 999
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/LiveUAMap Overlay.md",
+    "bytes": 964
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/HIFLD EMS Stations.md",
+    "bytes": 1070
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Esri World Topo.md",
+    "bytes": 1022
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Google Maps.md",
+    "bytes": 924
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NASA FIRMS Fire Overlay.md",
+    "bytes": 1077
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/HIFLD Law Enforcement.md",
+    "bytes": 1091
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/EIA Power Plant Locations.md",
+    "bytes": 986
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/pg_featureserv.md",
+    "bytes": 972
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/ArcGIS Online.md",
+    "bytes": 999
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Heavens Above (Sat Tracks).md",
+    "bytes": 980
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Maputnik (Style Editor).md",
+    "bytes": 912
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Watchtower Globe.md",
+    "bytes": 1559
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Esri World Street Map.md",
+    "bytes": 1030
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Identity OSINT Layer.md",
+    "bytes": 1343
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Crypto Tracing Map.md",
+    "bytes": 1300
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/KiwiSDR Receiver Map.md",
+    "bytes": 959
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NOAA ENC (Nautical Charts).md",
+    "bytes": 996
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/ArcGIS World Imagery.md",
+    "bytes": 1065
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Flock Safety Camera Map.md",
+    "bytes": 984
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/PeeringDB Data Center Map.md",
+    "bytes": 992
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/MeshCore.md",
+    "bytes": 922
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Platform Overview.md",
+    "bytes": 1308
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NASA Eyes (3D Space).md",
+    "bytes": 912
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Map Layers.md",
+    "bytes": 862
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenSeaMap (Nautical Charts).md",
+    "bytes": 983
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Cesium ion.md",
+    "bytes": 952
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/QGIS Server (WMS - WFS).md",
+    "bytes": 1039
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/AIS Vessel Overlay.md",
+    "bytes": 1020
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/GeoServer (OGC).md",
+    "bytes": 918
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/MTA Map (NYC Transit).md",
+    "bytes": 958
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Martin (Vector Tiles).md",
+    "bytes": 1014
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/DeFlock — Crowdsourced ALPR - License Plate Reader Map.md",
+    "bytes": 5063
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/SafeComLink HF Map.md",
+    "bytes": 961
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/USGS Water Resources Map.md",
+    "bytes": 988
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Esri Imagery (World).md",
+    "bytes": 1052
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/WFS (OGC Standard).md",
+    "bytes": 952
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/WRI Global Power Plant DB.md",
+    "bytes": 1024
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Camera Globe (250k Cameras).md",
+    "bytes": 1440
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Meshtastic.md",
+    "bytes": 941
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/HIFLD Hospitals.md",
+    "bytes": 1057
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/FAA Sectional Charts.md",
+    "bytes": 928
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/IAEA PRIS (Global Reactors).md",
+    "bytes": 985
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/EPA Water Quality Map.md",
+    "bytes": 977
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Safecast Radiation Map.md",
+    "bytes": 970
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/IODA Internet Outage Map.md",
+    "bytes": 989
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Map Layers.base",
+    "bytes": 1201
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenCPN.md",
+    "bytes": 887
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — NetScan (Network Recon).md",
+    "bytes": 1415
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/WMS (OGC Standard).md",
+    "bytes": 964
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/TileServer GL.md",
+    "bytes": 1007
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Nominatim (Geocoding).md",
+    "bytes": 980
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenAIP (Aviation).md",
+    "bytes": 944
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/FEMA Flood Zones.md",
+    "bytes": 986
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Amtrak Rail Network.md",
+    "bytes": 992
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NIFC Fire Perimeters (Map).md",
+    "bytes": 1053
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Google Satellite (XYZ).md",
+    "bytes": 975
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/FlightAware Map.md",
+    "bytes": 943
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NRC Nuclear Reactor Map.md",
+    "bytes": 1015
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/MapServer (OGC).md",
+    "bytes": 912
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Windy Embed.md",
+    "bytes": 909
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Bing Satellite (XYZ).md",
+    "bytes": 981
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/EPA RadNet Map.md",
+    "bytes": 957
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenSky Network (Map).md",
+    "bytes": 992
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Cloudflare Radar Map.md",
+    "bytes": 966
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NWS Radar (MRMS).md",
+    "bytes": 991
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK hub.md",
+    "bytes": 934
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK CIV (Civilian) - ATAK MIL.md",
+    "bytes": 1313
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK ICU (Casualty Tracking).md",
+    "bytes": 1210
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK Server - Data Retention Plugin.md",
+    "bytes": 1258
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/goTenna TAK Plugin.md",
+    "bytes": 1213
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/Adsbcot - Aiscot - Pytak.md",
+    "bytes": 1404
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/GoTAK - OpenTAK Tracker.md",
+    "bytes": 1324
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - WASP.md",
+    "bytes": 1256
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/SkyFi (GoTAK Edition).md",
+    "bytes": 1487
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/OneMind ATAK Plugin (Fabric Bridge).md",
+    "bytes": 1317
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/SkyFi ATAK Plugin.md",
+    "bytes": 1174
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - SOOTHSAYER (CloudRF).md",
+    "bytes": 1282
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK Plugin Ecosystem.md",
+    "bytes": 579
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK Server - Authentication Plugin.md",
+    "bytes": 1237
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK Server - NATS Bridge Plugin.md",
+    "bytes": 1318
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/Gotak - Starsync.md",
+    "bytes": 1275
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/Starlink (TAK Terminal Integration).md",
+    "bytes": 1494
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/CloudTAK.md",
+    "bytes": 1334
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/FORGE Plugin Suite (TAK_OS).md",
+    "bytes": 1685
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/GoTAK TAK Feeds.md",
+    "bytes": 1449
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/omos-tak-projector.md",
+    "bytes": 1212
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - VNS.md",
+    "bytes": 1159
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/RAIZOR (TCCC Documentation).md",
+    "bytes": 1349
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/Untitled.md",
+    "bytes": 566
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/GoTAK - Repeaters Plugin.md",
+    "bytes": 1312
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/EVERYWHERE Comms TAK.md",
+    "bytes": 1242
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - Drone Hone.md",
+    "bytes": 1297
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/RIDAR (Remote ID + ADS-B cUAS).md",
+    "bytes": 1461
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/KrakenSDR (RF Direction Finding).md",
+    "bytes": 1549
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/Drone Spices (Tsukorok cUAS).md",
+    "bytes": 1451
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/HAIL (Health Awareness Intelligence & Logistics).md",
+    "bytes": 1857
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/CloudTAK Media (MediaMTX).md",
+    "bytes": 1385
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - GeoCam.md",
+    "bytes": 1269
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/OneMind CloudTAK Plugin - Watchtower View.md",
+    "bytes": 1329
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - ATOS.md",
+    "bytes": 1183
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/Meshtastic TAK Plugin (TAKOT).md",
+    "bytes": 1302
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAKCam.md",
+    "bytes": 1093
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/CloudTAK - Custom Layer Extension.md",
+    "bytes": 1285
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK Plugin Ecosystem.base",
+    "bytes": 1376
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/GoTAK - WARDEN (Managed TAK Server).md",
+    "bytes": 1459
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK Server - Video Server Plugin.md",
+    "bytes": 1294
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - goTenna.md",
+    "bytes": 1218
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - Somewear.md",
+    "bytes": 1229
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/iTAK.md",
+    "bytes": 1125
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK Server - Federation Plugin.md",
+    "bytes": 1283
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - UAS Tool.md",
+    "bytes": 1192
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK Map Packages (MBTILES - KMZIP).md",
+    "bytes": 1242
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - Data Sync.md",
+    "bytes": 1301
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/WinTAK.md",
+    "bytes": 1134
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/GoTAK Tactical VMS.md",
+    "bytes": 1470
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/Wintak VR - Vrtak.md",
+    "bytes": 1253
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Sensor Plugin (GeoCam).md",
+    "bytes": 1189
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - Vx TAK.md",
+    "bytes": 1287
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/GoTAK - Address Plugin.md",
+    "bytes": 1251
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK-Maps (40 Curated Map Sources).md",
+    "bytes": 1322
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/GoTAK - Satellites Plugin.md",
+    "bytes": 1320
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/tak-webview-cesium (3D TAK Globe).md",
+    "bytes": 1386
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/OTATAK (Over-the-Air TAK).md",
+    "bytes": 1438
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/ATAK Plugin - GRG Builder.md",
+    "bytes": 1238
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/Trackers (Personnel, Vehicle & Asset).md",
+    "bytes": 1495
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/RAVEN Relay (Off-Grid PLI - CoT Mesh).md",
+    "bytes": 1468
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/GoTAK - HAIL Plugin (GoTAK Edition).md",
+    "bytes": 1514
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/OneMind TAK Server Plugin - Intel Injector.md",
+    "bytes": 1351
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/TAK NATS Leaf Bridge.md",
+    "bytes": 1284
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/OneMind ATAK Plugin - Force Tracker.md",
+    "bytes": 1344
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK Plugin Ecosystem/CloudTAK - NATS Intel Feed Extension.md",
+    "bytes": 1307
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/TAK Server & Client Ecosystem — Reference Guide.md",
+    "bytes": 13468
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/CloudTAK API — dfpc-coe REST API Reference.md",
+    "bytes": 3977
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/TAK Integration in OneMind.md",
+    "bytes": 3450
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/TAK Architecture & Plugin Strategy.md",
+    "bytes": 2838
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/AO & POI — Area of Operation - Point of Interest.md",
+    "bytes": 4691
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/TAK DB.base",
+    "bytes": 533
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/TAK Server 5.7 Capabilities & Ecosystem.md",
+    "bytes": 3540
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/TAK Multicasting — Local Network SA Without a Server.md",
+    "bytes": 9896
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/TAK Plugin SDK — ATAK Development Guide.md",
+    "bytes": 5001
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/ATAK Expanding — ALPRs, Overlays & Open Source C2.md",
+    "bytes": 6064
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/Marti REST API — TAK Server API Reference.md",
+    "bytes": 7401
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/TAK Server API — Endpoint Overview.md",
+    "bytes": 4109
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/TAK DB.md",
+    "bytes": 509
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/TAK hub/TAK DB/DoD Mapping Platforms Reference.md",
+    "bytes": 2040
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/Knowledge/OneMind × CloudTAK — Master Strategy.md",
+    "bytes": 32178
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/Knowledge/OneMind ATAK Plugin Intelligence Report.md",
+    "bytes": 17417
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/Knowledge/OneMind TAK — COP Architecture & Infrastructure Reference.md",
+    "bytes": 8373
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/Knowledge/CivTAK.md",
+    "bytes": 3904
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/Knowledge/TAK CoT Feed Sources — OneMind OS.md",
+    "bytes": 18905
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops - Feed Systems.md",
+    "bytes": 881
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/Passkey Registration UI.md",
+    "bytes": 776
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/TAK Server 5.7 — ArgoCD Synced.md",
+    "bytes": 836
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-community — Multi-Tenant Admin.md",
+    "bytes": 823
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/OneTAK UI.md",
+    "bytes": 835
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops - Scheduling.md",
+    "bytes": 851
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/cloudtak-plugin-clickhouse.md",
+    "bytes": 859
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/New User Provisioning.md",
+    "bytes": 772
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-video — AI Video Wall Plugin.md",
+    "bytes": 798
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops — Operations Command Plugin.md",
+    "bytes": 914
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ai — Legacy Chat Plugin.md",
+    "bytes": 808
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/NATS Android SDK.md",
+    "bytes": 821
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-fabric — NATS Bus Health Plugin.md",
+    "bytes": 823
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/The Architecture - CloudTAK as OneMind OS.md",
+    "bytes": 8644
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/CloudTAK CI Pipeline.md",
+    "bytes": 824
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-buildings — Facility Overlay.md",
+    "bytes": 797
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops - Activity Log.md",
+    "bytes": 857
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/MediaMTX Video Broker.md",
+    "bytes": 758
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/PMTiles Basemap Integration.md",
+    "bytes": 769
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/Legacy ↔ CloudTAK GeoChat Bridge.md",
+    "bytes": 796
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/NATS Android — GitHub Packages Publish.md",
+    "bytes": 857
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops - Inbox.md",
+    "bytes": 833
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/OneTAK UI.base",
+    "bytes": 668
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/cloudtak-plugin-mumble.md",
+    "bytes": 850
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/AIS Ship Overlay (WorldMonitor).md",
+    "bytes": 774
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/CloudTAK onemindos.dev — Live.md",
+    "bytes": 795
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops - Projects.md",
+    "bytes": 857
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/Geofence + Alert Engine.md",
+    "bytes": 773
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/Legacy CoT Context Injection.md",
+    "bytes": 789
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops - Task Board.md",
+    "bytes": 864
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops - Task Engine.md",
+    "bytes": 879
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/ADS-B Aircraft Overlay (ShadowBroker).md",
+    "bytes": 798
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-intel — Intel Feeds Plugin.md",
+    "bytes": 807
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops - Notifications.md",
+    "bytes": 888
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/IoT/Knowledge/Devices & Entities.md",
+    "bytes": 1381
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Integrations/Integrations DB/Integrations DB.base",
+    "bytes": 543
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Integrations/Integrations DB/Integrations DB.md",
+    "bytes": 905
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Integrations/Integrations DB/Composio — Universal Tool & Integration Layer.md",
+    "bytes": 7140
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Integrations/Knowledge/Apache Flink — NATS Connector (synadia-io).md",
+    "bytes": 2417
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Integrations/Knowledge/Redpanda Connect — OneMind Universal Feed Engine (Technical Reference).md",
+    "bytes": 25551
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Integrations/Knowledge/Erlang NATS Client — OneMind Integration.md",
+    "bytes": 2021
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/Litestream — SQLite Replication via NATS Object Store.md",
+    "bytes": 2042
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/NATS 3-Node Cluster — One Mind Fabric.md",
+    "bytes": 9521
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/NATS as TAK Transport Layer — Architecture Decision Record.md",
+    "bytes": 12615
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/NEX — NATS Execution Engine.md",
+    "bytes": 2389
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/Bento - Wombat — NATS Bridge Layer.md",
+    "bytes": 2453
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/NATS Surveyor — Bus Health & Observability.md",
+    "bytes": 1896
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/NATS Ecosystem Map — Native Integrations for OneMind.md",
+    "bytes": 5362
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/Give your Go app superpowers with an Embedded NATS Server (1).md",
+    "bytes": 1360
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/OneMind OS — NATS Fabric Architecture v2.0.md",
+    "bytes": 34286
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Knowledge/OneMind OS — Recon 03 - NATS - Bridge - Telemetry.md",
+    "bytes": 4759
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Actions/NATS Cluster — Multi-node for zero downtime (1).md",
+    "bytes": 1454
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Actions/NATS Auth - ACL — Per-agent subject permissions (1).md",
+    "bytes": 1567
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/Actions/NATS Health Watchdog — Auto-restart SaaS worker on failure (1).md",
+    "bytes": 1886
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/NATS — The OneMind Nervous System.md",
+    "bytes": 11339
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/NATS Gaps & Domain Integration.md",
+    "bytes": 3343
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/What Synadia Makes — OneMind Relevance Guide.md",
+    "bytes": 3946
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/NATS DB.base",
+    "bytes": 527
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/SaaS Through NATS — Architecture.md",
+    "bytes": 3769
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/NEX — Architecture & Language Support.md",
+    "bytes": 3606
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/NATS DB.md",
+    "bytes": 833
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/OneMind Ecosystem Map — Native NATS Integrations.md",
+    "bytes": 4871
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/AWS Ground Station — NATS Integration.md",
+    "bytes": 2738
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/NATS/NATS DB/OneMind Stack Inventory & Integration Roadmap.md",
+    "bytes": 7744
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Core Docs/Ideas & Topics/Human.md",
+    "bytes": 768
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Ideas & Topics/Vehicles.md",
+    "bytes": 707
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Ideas & Topics/AI Agents.md",
+    "bytes": 710
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Ideas & Topics/Locations.md",
+    "bytes": 710
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Voice/Voice DB/Voice DB.md",
+    "bytes": 842
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Voice/Voice DB/Voice DB.base",
+    "bytes": 529
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Voice/Voice DB/OpenVoiceOS (OVOS) — Open Source Voice AI Platform.md",
+    "bytes": 9278
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Voice/Knowledge/One Mind Unified Voice Infrastructure.md",
+    "bytes": 13888
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Drones/Knowledge/Drones.md",
+    "bytes": 6113
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Infrastructure/Ideas & Topics/Cloud Machines.md",
+    "bytes": 759
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/04 Intelligence & Agents.md",
+    "bytes": 889
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/04 Intelligence & Agents.base",
+    "bytes": 986
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Machine Learning/Machine Learning DB/OneMind as a Sovereign Maven — Project Maven Architecture.md",
+    "bytes": 6777
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Machine Learning/Machine Learning DB/Machine Learning DB.md",
+    "bytes": 958
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Machine Learning/Machine Learning DB/OneMind AR HUD — Waveguide, Phone AR, ERV-40, Open-Source Glasses Architecture.md",
+    "bytes": 11290
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Machine Learning/Machine Learning DB/Machine Learning DB.base",
+    "bytes": 562
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Machine Learning/Machine Learning DB/OneMind Maven — Real Integration Architecture (Plug-and-Play).md",
+    "bytes": 7089
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Machine Learning/Machine Learning DB/OneMind TAK-ML Stack Blueprint — Full System Diagram.md",
+    "bytes": 10908
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Machine Learning/Machine Learning DB/TAK-ML × OneMind OS — Full Integration Analysis.md",
+    "bytes": 5361
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Knowledge/Darpa.md",
+    "bytes": 7959
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/Agriculture & Land Intelligence — Public Data Sources.md",
+    "bytes": 2543
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/Intel DB.base",
+    "bytes": 540
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/Climate, Environment & Weather Intelligence.md",
+    "bytes": 2448
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/Government Intelligence Feeds — Critical Infrastructure & Public Safety.md",
+    "bytes": 2421
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/OneMind Intel Pods — Live Intelligence Infrastructure.md",
+    "bytes": 2602
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/Intel Hub — OneMind Intelligence Catalog.md",
+    "bytes": 3153
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/Intel DB.md",
+    "bytes": 859
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/Remote Sensing & Satellite Imagery — Public Data Sources.md",
+    "bytes": 2693
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/Sovereign EagleEye — Through-Wall Sensor Fusion + TAK AR Overlay.md",
+    "bytes": 20317
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Intel/Intel DB/Open-Source Citizen Enterprise — Real-Time Incident Intelligence.md",
+    "bytes": 12958
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Developer/Tool Setup Queue/Set up Tools & APIs (see tools-registry.md).md",
+    "bytes": 1979
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Developer/Tool Setup Queue/Tool Setup Queue.md",
+    "bytes": 1124
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Hardware/Ideas & Topics/Assets (Hardware).md",
+    "bytes": 777
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Physical AI/Physical AI DB/OpenMind — OS for Humanoid Robots & Embodied AI.md",
+    "bytes": 6668
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Physical AI/Physical AI DB/Physical AI DB.md",
+    "bytes": 913
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Physical AI/Physical AI DB/DimOS — Agentic OS for Physical Space.md",
+    "bytes": 7965
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Physical AI/Physical AI DB/Physical AI DB.base",
+    "bytes": 552
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Platform/Actions/Implement Weekly Scorecard workflow.md",
+    "bytes": 1359
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Platform/Actions/Implement Evening Review automation.md",
+    "bytes": 1279
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/IoT/Ideas & Topics/Home-Assistant.md",
+    "bytes": 765
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Core Docs/Ideas & Topics/Command (Operations & Navigation).md",
+    "bytes": 824
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Core Docs/Ideas & Topics/Knowledge Management.md",
+    "bytes": 789
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Voice/Actions/EPIC Deploy LiveKit Voice Integration.md",
+    "bytes": 1155
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Infrastructure/Ideas & Topics/Telemetry (Monitoring).md",
+    "bytes": 798
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Infrastructure/Ideas & Topics/Backup & Recovery.md",
+    "bytes": 783
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/Infrastructure/Ideas & Topics/Cloud Management.md",
+    "bytes": 782
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Micro Agents.md",
+    "bytes": 15085
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Legacy-Edge (Daughter) - Hermes.md",
+    "bytes": 901
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Codex — OpenAI.md",
+    "bytes": 3247
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Eve.md",
+    "bytes": 8015
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Small Language Models.md",
+    "bytes": 3636
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Twelve Labs.md",
+    "bytes": 8266
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Mcp.md",
+    "bytes": 6575
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/AWS Bedrock.md",
+    "bytes": 3301
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Guardian.md",
+    "bytes": 4834
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/World Models.md",
+    "bytes": 2977
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/AI Agents DB.base",
+    "bytes": 816
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Ollama.md",
+    "bytes": 6804
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Sensor Agents.md",
+    "bytes": 8201
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Pi Agent.md",
+    "bytes": 3511
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Oracle.md",
+    "bytes": 3652
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/AI Agents DB.md",
+    "bytes": 896
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Vercel.md",
+    "bytes": 3968
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Haven.md",
+    "bytes": 3899
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Nvidia AI.md",
+    "bytes": 4300
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/OpenClaw.AI.md",
+    "bytes": 3268
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Hermes — Agent Harness.md",
+    "bytes": 3604
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Memory.md",
+    "bytes": 5977
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Notion Agents.md",
+    "bytes": 3755
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Skills.md",
+    "bytes": 5292
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Spartan.md",
+    "bytes": 3482
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Realtime Omnipresent System.md",
+    "bytes": 10980
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Legacy (Mother) - Hermes.md",
+    "bytes": 31257
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Hugging Face Unaligned - Jailbroken Models.md",
+    "bytes": 2695
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Qwen — Alibaba.md",
+    "bytes": 3407
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Moshi (Kyutai).md",
+    "bytes": 2669
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Claude Code.md",
+    "bytes": 4028
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Gemini.md",
+    "bytes": 3465
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/DigitalOcean AI.md",
+    "bytes": 2654
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Liquid AI — LFM.md",
+    "bytes": 3149
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Autonomous Logic — Proaction & Operations.md",
+    "bytes": 12744
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Perplexity.md",
+    "bytes": 2750
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/OpenCode.md",
+    "bytes": 2984
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Fly.io — Computers for AI Agents (Sprites).md",
+    "bytes": 8539
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Agent Plugins — Open Standard for Portable AI Agent Components.md",
+    "bytes": 3145
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Inkling — Thinking Machines Open Weights 975B MoE.md",
+    "bytes": 4120
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/GitHub Copilot.md",
+    "bytes": 3121
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Kimi CLI.md",
+    "bytes": 3020
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Google Gemma — Open Models.md",
+    "bytes": 2937
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Hermes — Execution Engine.md",
+    "bytes": 22931
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Eden.md",
+    "bytes": 3738
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Vision Agents.md",
+    "bytes": 6977
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/Groq — LPU Fast Inference.md",
+    "bytes": 2990
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/AI Agents DB/MoE, MoT & MoA — Mixture Architectures.md",
+    "bytes": 13491
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Intelligence (AI, Memory & Tools)/Create Pattern recognition skill.md",
+    "bytes": 1558
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Intelligence (AI, Memory & Tools)/create Correlation skill - replace exist.io(https - - - exist.io).md",
+    "bytes": 1666
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Intelligence (AI, Memory & Tools)/Intelligence (AI, Memory & Tools).md",
+    "bytes": 1612
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Ideas & Topics/Legacy AI.md",
+    "bytes": 756
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Knowledge/Hermes structure.md",
+    "bytes": 4631
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Actions/Implement PI Score calculation service.md",
+    "bytes": 1465
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Actions/Implement WI Score calculation service.md",
+    "bytes": 1443
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Actions/Implement LI Score calculation service.md",
+    "bytes": 1478
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Actions/Phase 1 OpenMind Heartbeat Loop.md",
+    "bytes": 1436
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/04 Intelligence & Agents/AI Agents/Actions/Create AGENT.MD documentation.md",
+    "bytes": 1145
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/00 Core.md",
+    "bytes": 568
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/00 Core.base",
+    "bytes": 1308
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Gpio.md",
+    "bytes": 942
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/EPA RadNet.md",
+    "bytes": 886
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USFS Fire Detection.md",
+    "bytes": 960
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AIStream.md",
+    "bytes": 917
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/CelesTrak TLE.md",
+    "bytes": 904
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Fabric Feeds.md",
+    "bytes": 882
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/MarineTraffic AIS.md",
+    "bytes": 986
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Airframes.io (ACARS - VDL).md",
+    "bytes": 975
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Safecast (Radiation).md",
+    "bytes": 912
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Adis.md",
+    "bytes": 950
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/IEA Oil & Energy Stats.md",
+    "bytes": 915
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GreyNoise.md",
+    "bytes": 925
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/PulsePoint (Fire - EMS CAD Dispatch).md",
+    "bytes": 1064
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Sae J2735 - V2X.md",
+    "bytes": 1002
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/EPA Water Quality Portal.md",
+    "bytes": 974
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/DCGS-AF (Air Force).md",
+    "bytes": 1045
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Mta Gtfs-rt.md",
+    "bytes": 949
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NOAA NWS Alerts.md",
+    "bytes": 933
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/EIA (Energy Info Admin).md",
+    "bytes": 923
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Hyperliquid (DeFi).md",
+    "bytes": 930
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/FlightAware AeroAPI.md",
+    "bytes": 987
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WWV (NIST Time).md",
+    "bytes": 950
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Ros 2 - Dds.md",
+    "bytes": 966
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/LiveUAMap.md",
+    "bytes": 933
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Watchtower (Global SA Globe).md",
+    "bytes": 1598
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Modbus.md",
+    "bytes": 909
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/RadiationNetwork.com.md",
+    "bytes": 961
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NWS CAP Alerts.md",
+    "bytes": 961
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Shodan InternetDB.md",
+    "bytes": 926
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Serial Port.md",
+    "bytes": 959
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Live News Streams (YouTube).md",
+    "bytes": 928
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/LiveUAMap (d98d18).md",
+    "bytes": 987
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/ADS-B Exchange.md",
+    "bytes": 973
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Copernicus - Sentinel.md",
+    "bytes": 921
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Username - Identity OSINT.md",
+    "bytes": 1498
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/CARTO Basemaps.md",
+    "bytes": 838
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Nominatim (OSM Geocoding).md",
+    "bytes": 925
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Reddit (Social OSINT).md",
+    "bytes": 918
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Camera Globe.md",
+    "bytes": 1421
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Telegram OSINT Channels.md",
+    "bytes": 951
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Broadcastify (Scanner Streams).md",
+    "bytes": 1011
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Windy API.md",
+    "bytes": 909
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Meshtastic Map.md",
+    "bytes": 938
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenAQ.md",
+    "bytes": 903
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USDA NASS Yields.md",
+    "bytes": 904
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenMHZ (Scanner Feeds).md",
+    "bytes": 935
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NOAA SWPC Space Weather.md",
+    "bytes": 942
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenWeatherMap Tiles.md",
+    "bytes": 937
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/UCDP (Uppsala Conflict Data).md",
+    "bytes": 992
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/EMSC Seismic Portal.md",
+    "bytes": 940
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WHO Disease Outbreaks.md",
+    "bytes": 968
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/ipapi.co.md",
+    "bytes": 864
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GeoFabrik OSM.md",
+    "bytes": 860
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/STANAG 4586 (UAS Control).md",
+    "bytes": 1002
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenSanctions.md",
+    "bytes": 955
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Asfinag (Austria CCTV).md",
+    "bytes": 924
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GPSJam.md",
+    "bytes": 877
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/US Treasury FiscalData.md",
+    "bytes": 952
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USGS Earthquakes.md",
+    "bytes": 939
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Nasa Firms.md",
+    "bytes": 980
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Eurostat.md",
+    "bytes": 931
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GlobalTuners.md",
+    "bytes": 930
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/IAEA Radiation Data.md",
+    "bytes": 990
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USGS NWIS (Water).md",
+    "bytes": 953
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Wikidata.md",
+    "bytes": 927
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Platform (nstarlive.com).md",
+    "bytes": 1506
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Nasa Eonet.md",
+    "bytes": 930
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WebSDR Network.md",
+    "bytes": 925
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/SATnogs.md",
+    "bytes": 890
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Kalshi (Prediction Markets).md",
+    "bytes": 953
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NOAA Weather.md",
+    "bytes": 951
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Flock Safety API.md",
+    "bytes": 965
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AviationStack.md",
+    "bytes": 914
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/airplanes.live.md",
+    "bytes": 901
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USPTO Patents.md",
+    "bytes": 899
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Yahoo Finance.md",
+    "bytes": 898
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/511 Ny.md",
+    "bytes": 896
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Wikipedia REST API.md",
+    "bytes": 934
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Caltrans - 511.md",
+    "bytes": 961
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WSDOT Traffic Cameras.md",
+    "bytes": 940
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Bluesky (Social OSINT).md",
+    "bytes": 935
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Esri World Imagery.md",
+    "bytes": 897
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GloFAS Flood Forecast.md",
+    "bytes": 975
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Faa Notam.md",
+    "bytes": 961
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Hifld.md",
+    "bytes": 903
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/BLS (Bureau of Labor).md",
+    "bytes": 912
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/KiwiSDR.md",
+    "bytes": 899
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/adsb.lol.md",
+    "bytes": 878
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/IODA (Georgia Tech).md",
+    "bytes": 923
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Usda Plants DB.md",
+    "bytes": 919
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GADM Boundaries.md",
+    "bytes": 838
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/MappingSupport.md",
+    "bytes": 852
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Datacenter Map.md",
+    "bytes": 951
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenWeatherMap.md",
+    "bytes": 935
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Gdacs.md",
+    "bytes": 949
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/INFORM Risk Index.md",
+    "bytes": 904
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NASA Earthdata.md",
+    "bytes": 891
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AbuseIPDB.md",
+    "bytes": 896
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Amtrak Train Tracking.md",
+    "bytes": 999
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Element84 Earth Search.md",
+    "bytes": 936
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/SkyWatch EarthCache.md",
+    "bytes": 919
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/APRS-IS Network.md",
+    "bytes": 918
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenSky Network.md",
+    "bytes": 975
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NYC 511 (Traffic).md",
+    "bytes": 959
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/511 NY Rideshare.md",
+    "bytes": 918
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/LiveUAMap (older version).md",
+    "bytes": 1173
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Finnhub.md",
+    "bytes": 939
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/ReliefWeb (UN OCHA).md",
+    "bytes": 924
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Al Jazeera RSS.md",
+    "bytes": 900
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Crypto Tracing.md",
+    "bytes": 1442
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Onvif.md",
+    "bytes": 909
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USAspending.gov.md",
+    "bytes": 894
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Link 16 - J-Series (JREAP).md",
+    "bytes": 1051
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Overpass API (OSM).md",
+    "bytes": 868
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Global Fishing Watch.md",
+    "bytes": 990
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NRC Event Notifications.md",
+    "bytes": 997
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AIS (MarineTraffic).md",
+    "bytes": 1020
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WRI Global Power Plant DB.md",
+    "bytes": 987
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/BBC World RSS.md",
+    "bytes": 911
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/FAA DroneZone (LAANC).md",
+    "bytes": 986
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/TfL (Transport for London).md",
+    "bytes": 950
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/IAEA Nuclear Events.md",
+    "bytes": 961
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AISStream.io.md",
+    "bytes": 947
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Shadowserver Foundation.md",
+    "bytes": 942
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Smithsonian GVP Volcanoes.md",
+    "bytes": 952
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Pytak - Adsbcot - Aiscot.md",
+    "bytes": 1013
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GSCPI (NY Fed).md",
+    "bytes": 905
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/CoinGecko.md",
+    "bytes": 908
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Trunk Recorder (P25 - SmartNet Radio).md",
+    "bytes": 1104
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Cisa Kev.md",
+    "bytes": 937
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/SpaceWeatherLive.md",
+    "bytes": 940
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/APRS (aprs2.net).md",
+    "bytes": 904
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenSeaMap.md",
+    "bytes": 931
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/UKMTO (UK Maritime Trade Ops).md",
+    "bytes": 984
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GTFS-RT Standard.md",
+    "bytes": 968
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/UN Comtrade.md",
+    "bytes": 896
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/abuse.ch (Feodo - URLhaus).md",
+    "bytes": 964
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/HF Radio - SafeComLink.md",
+    "bytes": 990
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Fabric Feeds.base",
+    "bytes": 1282
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Baltic Live Cam.md",
+    "bytes": 881
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Cloudflare Radar.md",
+    "bytes": 962
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Where the ISS at.md",
+    "bytes": 903
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Acled.md",
+    "bytes": 1009
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/PeeringDB.md",
+    "bytes": 915
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/FRED (St. Louis Fed).md",
+    "bytes": 956
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/UNHCR Population Data.md",
+    "bytes": 936
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/CitiBike GBFS API.md",
+    "bytes": 935
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/faster-whisper (Radio Transcription).md",
+    "bytes": 1037
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/ArcGIS Living Atlas.md",
+    "bytes": 919
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GDELT Project.md",
+    "bytes": 912
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NASA GIBS - MODIS Imagery.md",
+    "bytes": 970
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — NetScan.md",
+    "bytes": 1423
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/MAVLink.md",
+    "bytes": 925
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/SAM.gov (Federal Contracts).md",
+    "bytes": 976
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NC DOT Traffic Cameras.md",
+    "bytes": 966
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/DeepState Map.md",
+    "bytes": 903
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Tzeva Adom (Red Alert IL).md",
+    "bytes": 956
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Imf Sdmx - Weo.md",
+    "bytes": 939
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Faa Swim.md",
+    "bytes": 949
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Remote ID (ASTM F3411).md",
+    "bytes": 991
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Alternative.me Fear - Greed.md",
+    "bytes": 1002
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/MTA NYC (Transit).md",
+    "bytes": 959
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NIFC Fire Perimeters.md",
+    "bytes": 1031
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/Wear OS & watchOS — Platform Reference.md",
+    "bytes": 2884
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/GrapheneOS — Platform Reference.md",
+    "bytes": 2205
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/iOS & iPadOS — Platform Reference.md",
+    "bytes": 2333
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/Platform Registry — OS & Runtime Environments.md",
+    "bytes": 9425
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/Platform DB.md",
+    "bytes": 864
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/Linux — Platform Reference.md",
+    "bytes": 2594
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/Platform DB.base",
+    "bytes": 529
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/Windows — Platform Reference.md",
+    "bytes": 2244
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/Android (AOSP) — Platform Reference.md",
+    "bytes": 2149
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/Samsung One UI — Platform Reference.md",
+    "bytes": 2279
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Platform DB/macOS — Platform Reference.md",
+    "bytes": 2393
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Pillar 6 — Immersive Interfaces (2D - 3D - AR - VR - MR - XR).md",
+    "bytes": 2044
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Pillar 2 — AI-Augmented Operations.md",
+    "bytes": 1843
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/6 Waves — Build Discipline & Roadmap.md",
+    "bytes": 3138
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Pillar 3 — Autonomous Field Systems.md",
+    "bytes": 1708
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/1Intel — Intelligence of Everything.md",
+    "bytes": 6097
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/C2 → C5ISR & JADC2 — Command & Control Doctrine.md",
+    "bytes": 5414
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Pillar 1 — Sovereign Awareness.md",
+    "bytes": 1674
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/CopilotKit AG-UI — Legacy AI in CloudTAK.md",
+    "bytes": 7404
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Architecture DB.base",
+    "bytes": 537
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Architecture DB.md",
+    "bytes": 901
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/OneMind Architecture Reference.md",
+    "bytes": 4680
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/The Six Pillars — OneMind Capabilities Framework (INDEX).md",
+    "bytes": 7553
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Innerworld × Outerworld — Life & World Fusion Doctrine.md",
+    "bytes": 6406
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/RTTSA — Real-Time Tactical Situational Awareness.md",
+    "bytes": 5701
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Constellation Overwatch Integration.md",
+    "bytes": 3432
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Lattice OS — Anduril Universal Defense Platform.md",
+    "bytes": 6680
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Pillar 4 — ITOC (Intelligent Tactical Operations Command).md",
+    "bytes": 1657
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Pillar 5 — Omnipresent Autonomous System.md",
+    "bytes": 1626
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Palantir AIP — Enterprise LLM Platform Reference.md",
+    "bytes": 6292
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Unity 7 + Unreal Engine 5 — Cross-Engine Combination for TAK.md",
+    "bytes": 7439
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/OSSIM — OneMind Sovereign Simulation Foundation.md",
+    "bytes": 5544
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Maven OS — Palantir AI Targeting Stack.md",
+    "bytes": 5881
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Real-Time Perception Architecture (RTPA).md",
+    "bytes": 4461
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/OneMind V1 — System Architecture Bible.md",
+    "bytes": 7119
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Voice — NATS Subject Contract & ATAK Architecture.md",
+    "bytes": 5139
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Architecture DB/Brain2Qwerty — Meta BCI Research.md",
+    "bytes": 3786
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Ideas & Topics/OneMind Deployment and Agent Architecture (2026-07-03).md",
+    "bytes": 801
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Knowledge/OneMind OS — Recon 05 - NEX Workload Topology.md",
+    "bytes": 6624
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Knowledge/OneMind — The Unified Data Flow Pattern.md",
+    "bytes": 8476
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Knowledge/OneMind OS — Recon 04 - C2 - Mission - Fusion Overlap.md",
+    "bytes": 5941
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Knowledge/OneMind Topology — Four-Plane Infrastructure Map.md",
+    "bytes": 13167
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Knowledge/OneMind Feed Architecture - Before & After (Redpanda Connect).md",
+    "bytes": 32782
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Knowledge/OneMind OS — Recon 01 - Data Source Overlap.md",
+    "bytes": 6268
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Knowledge/OneMind Intelligence Fusion Architecture.md",
+    "bytes": 29110
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/security.md — OneMind Security Model.md",
+    "bytes": 1127
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/agents.md — Agent Architecture & Protocol.md",
+    "bytes": 1219
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/Core Docs DB.md",
+    "bytes": 873
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/design.md — OneMind Design Language & Principles.md",
+    "bytes": 1210
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/robotics.md — Robotics & Physical AI Integration.md",
+    "bytes": 1232
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/interfaces.md — OneMind Interface Registry.md",
+    "bytes": 8988
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/awareness.md — Situational Awareness Layer.md",
+    "bytes": 12322
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/Core Docs DB.base",
+    "bytes": 531
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/mission.md — Mission Operations Model.md",
+    "bytes": 1121
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/machine.md — Machine Intelligence Layer.md",
+    "bytes": 1224
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Core Docs DB/modes.md — OneMind Operating Modes.md",
+    "bytes": 7325
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Doctrine/Doctrine.md",
+    "bytes": 1562
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Doctrine/solar punk tactical theme.md",
+    "bytes": 1021
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Doctrine/hybrid productivity system.md",
+    "bytes": 1018
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Doctrine/Super intelligent productivity app for human optimization and performance.md",
+    "bytes": 1159
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Knowledge/OTS + ATOC — Operational Runbook.md",
+    "bytes": 22781
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Knowledge/OneMind — Wiring Guide.md",
+    "bytes": 11570
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Knowledge/ONE MIND — Doctrine.md",
+    "bytes": 93134
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Knowledge/OneMind — Master Inventory.md",
+    "bytes": 14135
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Platform Infrastructure - Tech Stack/LLM Concil - Perplexity.md",
+    "bytes": 1289
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Core Docs/Platform Infrastructure - Tech Stack/Platform Infrastructure - Tech Stack.md",
+    "bytes": 1147
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/02 Operations.md",
+    "bytes": 646
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/02 Operations.base",
+    "bytes": 788
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Platform/Ideas & Topics/Overdue Tasks & Bottlenecks.md",
+    "bytes": 796
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Platform/Ideas & Topics/Task Completion Rates.md",
+    "bytes": 780
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Platform/Ideas & Topics/Quick Capture.md",
+    "bytes": 756
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Platform/Ideas & Topics/Automations & Workflows.md",
+    "bytes": 784
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Comms/Actions/Matrix Central Communications Hub.md",
+    "bytes": 1809
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Locations/Locations DB/Lab.md",
+    "bytes": 1638
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Locations/Locations DB/War Room.md",
+    "bytes": 1633
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Locations/Locations DB/Office.md",
+    "bytes": 1392
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Locations/Locations DB/Main Home.md",
+    "bytes": 1689
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Locations/Locations DB/Locations DB.md",
+    "bytes": 884
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Locations/Locations DB/Locations DB.base",
+    "bytes": 537
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Dronecode SDK (MAVSDK).md",
+    "bytes": 4820
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Autel EVO Max 4T XE — TAK - ATAK UAS Platform Profile.md",
+    "bytes": 9237
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Reaper - Attack Drones.md",
+    "bytes": 3313
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Apex - Support Drone (Carries Payload).md",
+    "bytes": 2605
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/FLIR Black Recon — Vehicle-Organic UAS Profile.md",
+    "bytes": 5682
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/UAS — Unmanned Aircraft Systems (FAA).md",
+    "bytes": 6156
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Skydio X10 — TAK - ATAK UAS Platform Profile.md",
+    "bytes": 7964
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/QGroundControl (QGC).md",
+    "bytes": 3152
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Hive - Personal Drone Swarm.md",
+    "bytes": 2963
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/ArduPilot.md",
+    "bytes": 3233
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/eCalc — Flight Performance Calculator.md",
+    "bytes": 4546
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/CopterCAD — Frame Design Reference.md",
+    "bytes": 3373
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Drones DB.md",
+    "bytes": 858
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/QuadCalc — Virtual Assembly Validation.md",
+    "bytes": 3846
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Titan Dynamics — Open Source Drone Stack.md",
+    "bytes": 4870
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Sentinel - UAV Drones.md",
+    "bytes": 3259
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/UAS Forge — Component Sourcing Reference.md",
+    "bytes": 4833
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/MAVLink.md",
+    "bytes": 3881
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/Drones DB.base",
+    "bytes": 531
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Drones DB/PX4 Autopilot.md",
+    "bytes": 4275
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Knowledge/QGroundControl.md",
+    "bytes": 9165
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Drones/Knowledge/QGroundControl — Ground Control Station (GCS).md",
+    "bytes": 3033
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Vehicles/Vehicles DB/Vehicles DB.md",
+    "bytes": 875
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Vehicles/Vehicles DB/Overland AI — Autonomous Ground Vehicles & Autonomy Stack.md",
+    "bytes": 15919
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Vehicles/Vehicles DB/Vehicles DB.base",
+    "bytes": 535
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/02 Operations/Vehicles/Vehicles DB/Concept Command Van.md",
+    "bytes": 3142
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/05 Security.base",
+    "bytes": 966
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/05 Security.md",
+    "bytes": 513
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/1Password Watch Tower.md",
+    "bytes": 1148
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Yubi Keys.md",
+    "bytes": 1074
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Remove old 2FA entries for deleted accounts.md",
+    "bytes": 1380
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Account Management.md",
+    "bytes": 3667
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Financial Accounts.md",
+    "bytes": 1222
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Delete me Service.md",
+    "bytes": 1268
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Delete - close unused online accounts.md",
+    "bytes": 1320
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Google account - legacyplatform - delete or move.md",
+    "bytes": 1246
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Google account - zeusops email - delete or move.md",
+    "bytes": 1398
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Update weak or reused passwords.md",
+    "bytes": 1332
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Find a 1password Backup Solution.md",
+    "bytes": 1310
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Account Management/Audit password manager - identify unused accounts.md",
+    "bytes": 1402
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Ideas & Topics/Physical & Device Security.md",
+    "bytes": 863
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Ideas & Topics/Monitoring & Audits.md",
+    "bytes": 827
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Ideas & Topics/Zero Trust - the whole system.md",
+    "bytes": 799
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Ideas & Topics/Zero to hacker course.md",
+    "bytes": 850
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Knowledge/Encrypted Secrets — Move API keys to macOS Keychain (1).md",
+    "bytes": 1409
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Security DB/Authentication & Security — OneMind Auth Architecture.md",
+    "bytes": 16354
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Security DB/Security DB.md",
+    "bytes": 872
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/05 Security/Security/Security DB/Security DB.base",
+    "bytes": 533
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/07 Development.md",
+    "bytes": 714
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/07 Development.base",
+    "bytes": 1675
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Developer DB/Developer DB.base",
+    "bytes": 538
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Developer DB/ATAK AR & HUD — Situational Awareness Display Systems.md",
+    "bytes": 16770
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Developer DB/Developer DB.md",
+    "bytes": 884
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Developer DB/ORP vs OneMind — Hybrid Fusion Architecture Build Plan.md",
+    "bytes": 12441
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Create intelligence_scores database table and migrations.md",
+    "bytes": 1740
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Epic - Benji Feature Parity.md",
+    "bytes": 2811
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/02.2 Core Features.md",
+    "bytes": 9047
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Agricultural Drone Workflows (DJI Agras T40).md",
+    "bytes": 2576
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Planner API.md",
+    "bytes": 2034
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Habits System - Backend API.md",
+    "bytes": 2994
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Add Legacy actions - notifications, voice, automations, device control.md",
+    "bytes": 2257
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Layer 1 - Implement Protocol Sync API endpoints.md",
+    "bytes": 2301
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Time Blocks & Weekly Planner.md",
+    "bytes": 2714
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Intelligence Scores System (PI - LI - WI).md",
+    "bytes": 1550
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/MTA & Metro North Real-Time Transit Integration.md",
+    "bytes": 3475
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Add custom wakeword for Legacy via Home Assistant + universal use.md",
+    "bytes": 1747
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Fleet Integration - Mesh Backup for Drones - Robots - Sensors.md",
+    "bytes": 3557
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Review Balena for Edge - IoT Device Fleet Management.md",
+    "bytes": 3526
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Operating Rhythm System (A-Q-W-D).md",
+    "bytes": 2032
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Security Patrol Patterns with AI Threat Detection.md",
+    "bytes": 2770
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Implement Push Notifications via Firebase (Optional).md",
+    "bytes": 1979
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Goals System - Backend & UI.md",
+    "bytes": 2719
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Review XREAL AR Glasses Developer Documentation.md",
+    "bytes": 2908
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Command Center Dashboard.md",
+    "bytes": 1854
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Legacy Agent Tools - Life OS Integration.md",
+    "bytes": 3418
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Relationships Module (HP-32).md",
+    "bytes": 1887
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Set up CI - CD pipeline.md",
+    "bytes": 1561
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Configure Frigate NVR to Publish Events to NATS.md",
+    "bytes": 3292
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Smart glasses prototype.md",
+    "bytes": 1548
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/⌚ EPIC Complete ESP32 Watch Firmware.md",
+    "bytes": 2659
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Implement Cross-Pillar Metrics for OneMind Codex.md",
+    "bytes": 2905
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Implement Deep Linking for External Apps - Platforms.md",
+    "bytes": 3506
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Heritage Module (LE-54 - 56 - 57).md",
+    "bytes": 1694
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Create unified - api - integrations endpoint.md",
+    "bytes": 2003
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Design watch enclosure.md",
+    "bytes": 1487
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Family Module (LE-51 - 52 - 53).md",
+    "bytes": 2060
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Health Tracking - Hydration, Fasting, Medications.md",
+    "bytes": 3159
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Zeus DIY Drone - Build & Integration Guide.md",
+    "bytes": 2471
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Personal Brand Module (GE-75).md",
+    "bytes": 1591
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Connect TimescaleDB & PostgreSQL sync + NATS.md",
+    "bytes": 1713
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Database Schema - Life OS Tables.md",
+    "bytes": 3218
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Camera Vision Integration - Frigate + Vision LLM for Omnipresent Mode.md",
+    "bytes": 4166
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Home Management Module (LE-50).md",
+    "bytes": 1947
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Finance Module (HP-30).md",
+    "bytes": 2048
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Credit Restoration Automated Pipeline with Lob API.md",
+    "bytes": 3741
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Business Dashboard (GE-75-85).md",
+    "bytes": 1648
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Biometrics Dashboard (HP-27).md",
+    "bytes": 1907
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Glasses video streaming.md",
+    "bytes": 1340
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/02.5 Testing & QA.md",
+    "bytes": 3410
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Full FABRIC Fleet - Ground Robots + Aerial Drones.md",
+    "bytes": 3198
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Meshtastic Mesh Network Integration (Offline Resilience).md",
+    "bytes": 3507
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Routines System.md",
+    "bytes": 3256
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/OneMind Insights Engine.md",
+    "bytes": 1881
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Design & Build the Adaptive Decision Engine.md",
+    "bytes": 1728
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Pomodoro Timer.md",
+    "bytes": 2315
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Build ESP32 watch integration.md",
+    "bytes": 1584
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Meshtastic Starter Kit - Hardware Setup & Property Testing.md",
+    "bytes": 3558
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/02.2 Core Features/Evaluate monitoring platforms - Datadog vs New Relic vs Grafana Cloud vs Netdata.md",
+    "bytes": 3115
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Ideas & Topics/Software Development and Maintenance.md",
+    "bytes": 826
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Knowledge/turbovec.md",
+    "bytes": 2169
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Knowledge/Foxglove Studio.md",
+    "bytes": 7533
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Actions/Composio Exit Strategy — Adapter pattern abstraction (1).md",
+    "bytes": 1591
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Actions/Retry Queue + Dead Letter — Self-healing failed executions (1).md",
+    "bytes": 1586
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Developer/Actions/Rate Limiter — Prevent runaway agents from burning quota (1).md",
+    "bytes": 1495
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/DevOps/DevOps & CI - CD/Implement Datadog Observability Platform.md",
+    "bytes": 3312
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/DevOps/DevOps & CI - CD/DevOps & CI - CD.md",
+    "bytes": 1318
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Hardware/Ideas & Topics/Hardware Setup and Maintenance.md",
+    "bytes": 807
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Hardware/Knowledge/Biometrics Integration Sprint.md",
+    "bytes": 1291
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Hardware/Actions/Build NAS OR One Mind box - GPU.md",
+    "bytes": 946
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Networking/Ideas & Topics/Network Infrastructure.md",
+    "bytes": 785
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/OneMind Web (Platform Features).md",
+    "bytes": 5481
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Phase 1 Team System Verification.md",
+    "bytes": 1437
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Saas Apps.md",
+    "bytes": 1269
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Create Path Balance analytics.md",
+    "bytes": 1734
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/File System.md",
+    "bytes": 1276
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Phase 1 Backend Reorganization.md",
+    "bytes": 1394
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Databases - Data warehouse.md",
+    "bytes": 1356
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Phase 2 Production Deployment.md",
+    "bytes": 1685
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Create biometric_readings database table.md",
+    "bytes": 1760
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/MindDB.md",
+    "bytes": 1261
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Location Types for Onemind OS.md",
+    "bytes": 2101
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/ASCII Diagrams - Learn and document.md",
+    "bytes": 1524
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Organize the OneMind Media folder in downloads.md",
+    "bytes": 1453
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/OneMind Data - Unified Context engineering.md",
+    "bytes": 2621
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Current Task System Build.md",
+    "bytes": 1604
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Build own ledger with quantum ledger.md",
+    "bytes": 1475
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Family Compound.md",
+    "bytes": 1210
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Create Active Focus Mode widget.md",
+    "bytes": 1636
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Cabin.md",
+    "bytes": 1180
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Codex Template Best Practices - Website for Showcasing (Obsidian Publish).md",
+    "bytes": 1392
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Farm Hotel.md",
+    "bytes": 1195
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Vector store.md",
+    "bytes": 1279
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Phase 1 Agent System Verification.md",
+    "bytes": 1445
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Homestead.md",
+    "bytes": 1192
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Unstructured.md",
+    "bytes": 1279
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/OneMind Web (Platform Features)/Phase 1 Database Schema Migration.md",
+    "bytes": 1801
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/Automation & Workflows/Automated Email Workflows Setup.md",
+    "bytes": 1354
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Platform/Automation & Workflows/Automation & Workflows.md",
+    "bytes": 1070
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/IoT/Actions/Integrate Oura Ring API.md",
+    "bytes": 1224
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Ideas & Topics/Untitled.md",
+    "bytes": 626
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/07 Development/Creative Tools/Ideas & Topics/TL Draw.md",
+    "bytes": 744
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/06 Research.md",
+    "bytes": 768
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/06 Research.base",
+    "bytes": 845
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Machine Learning/Actions/Review AT Protocol documentation.md",
+    "bytes": 947
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Intel/Ideas & Topics/Source - The GitHub Blog(https - - - share.google - 3kTfJGlbOn2vzVVVH).md",
+    "bytes": 976
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Intel/Ideas & Topics/Counter intellegence - Military hardware, software,satilite.md",
+    "bytes": 882
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Intel/Knowledge/Bunker ai - super important.md",
+    "bytes": 1102
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Intel/Knowledge/Palantir TITAN Deep Research - DONE (see conversation).md",
+    "bytes": 2885
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Hardware/Ideas & Topics/Maixcam - AI camera devkit.md",
+    "bytes": 787
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Hardware/Actions/Order 2x Heltec V3 LoRa devices for initial range test (~$20 each).md",
+    "bytes": 1314
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Robotics/Ideas & Topics/Robots Meet Claude - Making Robots OpenClaw-ready with peaq Robotics SDK - peaq(https.md",
+    "bytes": 1301
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Robotics/Actions/Unitree Go2 - Quadruped Robot.md",
+    "bytes": 1918
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Robotics/Actions/Integrate Unitree Robot with OneMind OS via OpenMind OM1.md",
+    "bytes": 1088
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Robotics/Robotics DB/Robotics DB.md",
+    "bytes": 869
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Robotics/Robotics DB/Robotics DB.base",
+    "bytes": 533
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Robotics/Robotics DB/Eden - Unitree Go2.md",
+    "bytes": 782
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Networking/Actions/Research NYC LoRa coverage — office (5th floor) to street + home range test.md",
+    "bytes": 1226
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Platform/Actions/Evaluate Kestra for Future Complex Workflow Orchestration.md",
+    "bytes": 1096
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Platform/Actions/Review Habitica Integration for Future Consideration.md",
+    "bytes": 1302
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Comms/Knowledge/Off-Grid Communications Resilience Layer.md",
+    "bytes": 1703
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Comms/Actions/Check NYC Meshtastic mesh map — meshtastic.org - map.md",
+    "bytes": 1191
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/XR/Ideas & Topics/EAGLE EYE Helmet Research for legacy One Mind.md",
+    "bytes": 840
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/XR/Knowledge/OneMind OS — AR - VR Capabilities.md",
+    "bytes": 33951
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/XR/Knowledge/XR Taxonomy — AR - VR - MR - XR.md",
+    "bytes": 6312
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/XR/Knowledge/OneMind OS — Cesium + Unity 7 + XR Possibilities.md",
+    "bytes": 32442
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Voice/Actions/Research Sine-Wave Speech (SWS) for OneMind OS.md",
+    "bytes": 1819
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Drones/Ideas & Topics/Multi-Drone Fleet Architecture (OpenMind Structure).md",
+    "bytes": 940
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Creative Tools/Knowledge/TouchDesigner.md",
+    "bytes": 10302
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Creative Tools/Knowledge/MadMapper.md",
+    "bytes": 8513
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/06 Research/Creative Tools/Knowledge/Blender.md",
+    "bytes": 6833
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/Reference/Reference.md",
+    "bytes": 522
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/Reference/Reference.base",
+    "bytes": 1046
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/Reference/Robotics/Ideas & Topics/Best Simulator for ALL Robotics — Full Comparison.md",
+    "bytes": 1263
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/Reference/Core Docs/Ideas & Topics/53.md",
+    "bytes": 646
+  },
+  {
+    "path": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/Reference/Knowledge/Current Event Publishing Performance.md",
+    "bytes": 2283
+  }
+]

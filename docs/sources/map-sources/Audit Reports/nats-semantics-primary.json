@@ -1,0 +1,139 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/nats-io/nats.py/main/nats/src/nats/js/kv.py",
+    "matches": [
+      {
+        "start_line": 434,
+        "snippet": "        async def __anext__(self):\n            while True:\n                entry = await self._updates.get()\n                if isinstance(entry, StopIterSentinel):\n                    raise StopAsyncIteration\n                return entry\n\n    async def watchall(self, **kwargs) -> KeyWatcher:"
+      },
+      {
+        "start_line": 509,
+        "snippet": "    async def watch(\n        self,\n        keys,\n        headers_only=False,\n        include_history=False,\n        ignore_deletes=False,\n        meta_only=False,\n        inactive_threshold=None,"
+      },
+      {
+        "start_line": 549,
+        "snippet": "                        await watcher._updates.put(None)\n                        watcher._init_done = True\n                    return\n\n            # keys() uses this\n            if ignore_deletes and op in (KV_PURGE, KV_DEL):\n                if meta.num_pending == 0 and not watcher._init_done:\n                    await watcher._updates.put(None)"
+      },
+      {
+        "start_line": 556,
+        "snippet": "                    await watcher._updates.put(None)\n                    watcher._init_done = True\n                return\n\n            entry = KeyValue.Entry(\n                bucket=self._name,\n                key=msg.subject[len(self._pre) :],\n                value=msg.data,"
+      },
+      {
+        "start_line": 571,
+        "snippet": "            # When there are no more updates send an empty marker\n            # to signal that it is done, this will unblock iterators\n            if meta.num_pending == 0 and (not watcher._init_done):\n                await watcher._updates.put(None)\n                watcher._init_done = True\n\n        deliver_policy = None\n        if not include_history:"
+      },
+      {
+        "start_line": 574,
+        "snippet": "                await watcher._updates.put(None)\n                watcher._init_done = True\n\n        deliver_policy = None\n        if not include_history:\n            deliver_policy = api.DeliverPolicy.LAST_PER_SUBJECT\n\n        # Cleanup watchers after 5 minutes of inactivity by default."
+      },
+      {
+        "start_line": 609,
+        "snippet": "                await watcher._updates.put(None)\n                watcher._init_done = True\n        except Exception as err:\n            init_setup.cancel()\n            await watcher._sub.unsubscribe()\n            raise err\n\n        return watcher"
+      }
+    ]
+  },
+  {
+    "url": "https://raw.githubusercontent.com/nats-io/nats.py/v2.11.0/nats/js/kv.py",
+    "matches": [
+      {
+        "start_line": 381,
+        "snippet": "        async def __anext__(self):\n            entry = await self._updates.get()\n            if not entry:\n                raise StopAsyncIteration\n            else:\n                return entry\n\n    async def watchall(self, **kwargs) -> KeyWatcher:"
+      },
+      {
+        "start_line": 458,
+        "snippet": "    async def watch(\n        self,\n        keys,\n        headers_only=False,\n        include_history=False,\n        ignore_deletes=False,\n        meta_only=False,\n        inactive_threshold=None,"
+      },
+      {
+        "start_line": 490,
+        "snippet": "                            await watcher._updates.put(None)\n                            watcher._init_done = True\n                        return\n\n            entry = KeyValue.Entry(\n                bucket=self._name,\n                key=msg.subject[len(self._pre):],\n                value=msg.data,"
+      },
+      {
+        "start_line": 505,
+        "snippet": "            # When there are no more updates send an empty marker\n            # to signal that it is done, this will unblock iterators\n            if meta.num_pending == 0 and (not watcher._init_done):\n                await watcher._updates.put(None)\n                watcher._init_done = True\n\n        deliver_policy = None\n        if not include_history:"
+      },
+      {
+        "start_line": 508,
+        "snippet": "                await watcher._updates.put(None)\n                watcher._init_done = True\n\n        deliver_policy = None\n        if not include_history:\n            deliver_policy = api.DeliverPolicy.LAST_PER_SUBJECT\n\n        # Cleanup watchers after 5 minutes of inactivity by default."
+      },
+      {
+        "start_line": 542,
+        "snippet": "                await watcher._updates.put(None)\n                watcher._init_done = True\n        except Exception as err:\n            init_setup.cancel()\n            await watcher._sub.unsubscribe()\n            raise err\n\n        return watcher"
+      }
+    ]
+  },
+  {
+    "url": "https://docs.nats.io/nats-concepts/core-nats/pubsub",
+    "matches": [
+      {
+        "match": "acknowledg",
+        "snippet": "scribe system: a publisher publishes a message to a subject, and every subscriber interested in that subject receives a copy. There's no broker queue, no storage, and no acknowledgment. The message goes to whoever is listening right now, and it goes to nobody else. That single idea, subjects plus interest, is enough to build four communication patterns and the addressing they share. This chapter walks through them the way you'd discover them while writing real code: start with one publisher and one subscriber, then add addressing, replies, load balancing, and reply gathering, one page at a time. The chapter starts a step b"
+      },
+      {
+        "match": "at-most-once",
+        "snippet": "er-side subject mapping, connection lifecycle, and debugging delivery. Core NATS is ephemeral \u200b The one property to hold in your head for the whole chapter: core NATS is at-most-once . A message reaches every interested subscriber that's connected at the moment of publish, at most once. If a subscriber is offline, restarting, or not subscribed yet, it never sees that message. The server does not store it for later. That behavior is intentional. It keeps core NATS small and fast, and it's exactly right when each message is superseded by the next one, such as a live price, a current temperature, or a cache invalidation. When y"
+      },
+      {
+        "match": "at-most-once",
+        "snippet": ", the connect URL and handshake, connection names, and PING/PONG heartbeats Publish-subscribe Fire-and-forget publish, subscribing and unsubscribing, the interest graph, at-most-once delivery, and the 1 MB max payload Subjects & wildcards Dot-delimited subject hierarchies and the * and > subscriber wildcards Request-reply The _INBOX reply subject, timeouts, and the no-responders signal Queue groups Load balancing where each message goes to exactly one group member Scatter-gather Fan one request to many responders and gather the replies Message headers Key/value metadata in the NATS/1.0 format, setting and reading it, and the"
+      }
+    ]
+  },
+  {
+    "url": "https://docs.nats.io/nats-concepts/jetstream/consumers",
+    "matches": [
+      {
+        "match": "acknowledg",
+        "snippet": "test) 2.14 2.12 2.11 GitHub Slack Learn Develop Core NATS Services JetStream Your first stream Publishing Reading back the stream Filtering what you consume Delivery and acknowledgment Ack responses and redelivery Pull consumers in depth Scaling a consumer Ordered consumers Priority groups Pausing a consumer Shaping the stream Retention policies Altering stream state Surviving node loss Advanced publishing Mirrors and sources Reading messages directly Subject mapping and transforms Per-message TTL Stream and consumer policies Where to go next Resilient Clients Key-Value Store Object Store Operate Topologies Security Cluste"
+      },
+      {
+        "match": "acknowledg",
+        "snippet": "/bin/bash # Consume a continuous flow from the CLI. nats consumer next exits after # --timeout of quiet, so wrap it in a loop to keep going as new messages # land. --ack acknowledges each message as it is received. Ctrl-C stops # the loop. while true ; do nats consumer next ORDERS shipping --count 100 --ack --timeout 5s || sleep 1 done // Bind to the durable \"shipping\" consumer. const js = jetstream ( nc ) ; const c = await js . consumers . get ( \"ORDERS\" , \"shipping\" ) ; // consume() sets up a continuous flow: the library keeps pull requests open and // yields each order as soon as it lands in the stream. It runs until yo"
+      }
+    ]
+  },
+  {
+    "url": "https://docs.nats.io/nats-concepts/jetstream/model_deep_dive",
+    "matches": [
+      {
+        "match": "at-least-once",
+        "snippet": "e NATS delivers messages only to subscribers connected at the moment of publication - at most once, never replayed. JetStream adds a persistence layer on top, giving you at-least-once delivery - messages survive restarts and can be replayed. Core NATS already decouples publisher and subscriber from each other, where a publisher does not need to know about the subscriber. JetStream extends that decoupling to time - the two no longer need to be online at the same moment. For a runnable, step-by-step treatment, see the JetStream deep dive . How It Works \u200b JetStream introduces three pieces working together: A stream is a server-s"
+      },
+      {
+        "match": "acknowledg",
+        "snippet": "stream - the server tracks how far a client has progressed, so applications don't have to. A client is an application that connects to a consumer to receive messages and acknowledge them. A consumer can be shared by multiple clients to divide the work; each acknowledgment advances the consumer's position in the stream. Streams \u200b A stream is bound to one or more subject patterns. When a publisher sends a message to a matching subject, the server appends it to the stream and assigns it a sequence number. Streams are configurable for storage (memory or disk), retention (whether limits or consumer acks remove messages), replic"
+      },
+      {
+        "match": "acknowledg",
+        "snippet": "o. A client is an application that connects to a consumer to receive messages and acknowledge them. A consumer can be shared by multiple clients to divide the work; each acknowledgment advances the consumer's position in the stream. Streams \u200b A stream is bound to one or more subject patterns. When a publisher sends a message to a matching subject, the server appends it to the stream and assigns it a sequence number. Streams are configurable for storage (memory or disk), retention (whether limits or consumer acks remove messages), replication, and more. Consumers \u200b A consumer is a server-side, stateful view of a stream that"
+      },
+      {
+        "match": "acknowledg",
+        "snippet": "ntains that position so applications don't have to coordinate or remember it themselves. The application that connects to a consumer - the client - receives messages and acknowledges each one. An acknowledgment advances the consumer's cursor - if a message isn't acknowledged in time, the server redelivers it, which is what gives you at-least-once delivery. A consumer can be configured to start reading from the beginning of the stream, from the latest message, from a specific sequence number, or from a specific time. Putting It Together \u200b CLI JavaScript/TypeScript Go Python Java Rust C#/.NET C # Create a stream that capture"
+      },
+      {
+        "match": "acknowledg",
+        "snippet": "plications don't have to coordinate or remember it themselves. The application that connects to a consumer - the client - receives messages and acknowledges each one. An acknowledgment advances the consumer's cursor - if a message isn't acknowledged in time, the server redelivers it, which is what gives you at-least-once delivery. A consumer can be configured to start reading from the beginning of the stream, from the latest message, from a specific sequence number, or from a specific time. Putting It Together \u200b CLI JavaScript/TypeScript Go Python Java Rust C#/.NET C # Create a stream that captures any subject under `order"
+      },
+      {
+        "match": "acknowledg",
+        "snippet": "application that connects to a consumer - the client - receives messages and acknowledges each one. An acknowledgment advances the consumer's cursor - if a message isn't acknowledged in time, the server redelivers it, which is what gives you at-least-once delivery. A consumer can be configured to start reading from the beginning of the stream, from the latest message, from a specific sequence number, or from a specific time. Putting It Together \u200b CLI JavaScript/TypeScript Go Python Java Rust C#/.NET C # Create a stream that captures any subject under `orders.` nats stream add ORDERS --subjects \"orders.>\" --storage file --r"
+      },
+      {
+        "match": "at-least-once",
+        "snippet": " and acknowledges each one. An acknowledgment advances the consumer's cursor - if a message isn't acknowledged in time, the server redelivers it, which is what gives you at-least-once delivery. A consumer can be configured to start reading from the beginning of the stream, from the latest message, from a specific sequence number, or from a specific time. Putting It Together \u200b CLI JavaScript/TypeScript Go Python Java Rust C#/.NET C # Create a stream that captures any subject under `orders.` nats stream add ORDERS --subjects \"orders.>\" --storage file --retention limits --defaults # Publish a few orders nats pub orders.new \"Orde"
+      },
+      {
+        "match": "acknowledg",
+        "snippet": " durable pull consumer that delivers from the beginning of the stream nats consumer add ORDERS order-processor --pull --deliver all --ack explicit --defaults # Fetch and acknowledge the next batch of messages nats consumer next ORDERS order-processor --count 3 --ack // Create a stream that captures any subject under `orders.` const jsm = await jetstreamManager ( nc ) ; await jsm . streams . add ( { name : \"ORDERS\" , subjects : [ \"orders.>\" ] , storage : StorageType . File , } ) ; // Publish a few orders const js = jetstream ( nc ) ; await js . publish ( \"orders.new\" , \"Order #1001\" ) ; await js . publish ( \"orders.new\" , \""
+      },
+      {
+        "match": "acknowledg",
+        "snippet": "_name : \"order-processor\" , ack_policy : AckPolicy . Explicit , } ) ; const consumer = await js . consumers . get ( \"ORDERS\" , \"order-processor\" ) ; // Fetch a batch and acknowledge each message const messages = await consumer . fetch ( { max_messages : 3 , expires : 5000 } ) ; for await ( const msg of messages ) { console . log ( ` Received on ${ msg . subject } : ${ msg . string ( ) } ` ) ; msg . ack ( ) ; } // Create a stream that captures any subject under `orders.` stream , err := js . CreateStream ( ctx , jetstream . StreamConfig { Name : \"ORDERS\" , Subjects : [ ] string { \"orders.>\" } , Storage : jetstream . FileSto"
+      },
+      {
+        "match": "acknowledg",
+        "snippet": "x , jetstream . ConsumerConfig { Durable : \"order-processor\" , AckPolicy : jetstream . AckExplicitPolicy , } ) if err != nil { log . Fatal ( err ) } // Fetch a batch and acknowledge each message msgs , err := consumer . Fetch ( 3 ) if err != nil { log . Fatal ( err ) } for msg := range msgs . Messages ( ) { fmt . Printf ( \"Received on %s: %s\\n\" , msg . Subject ( ) , string ( msg . Data ( ) ) ) msg . Ack ( ) } # JetStream context js = jetstream . new ( nc ) # Create a stream that captures any subject under `orders.` stream = await js . create_stream ( name = \"ORDERS\" , subjects = [ \"orders.>\" ] , storage = \"file\" ) # Publis"
+      }
+    ]
+  }
+]

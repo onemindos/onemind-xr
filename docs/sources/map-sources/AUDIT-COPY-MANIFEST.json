@@ -1,0 +1,117 @@
+[
+  {
+    "path": "Audit Reports/MANIFEST.json",
+    "bytes": 3761,
+    "sha256": "86f15ccfc4f7d701de025c44932951b46d676ff87bbdb5cecce9fef00beb9631"
+  },
+  {
+    "path": "Audit Reports/README.md",
+    "bytes": 14119,
+    "sha256": "b19fb837bcb76de4cabc8d24c861997c9af16fa3263159339bad1f7fd66ae609"
+  },
+  {
+    "path": "Audit Reports/catalog-analysis.json",
+    "bytes": 1791106,
+    "sha256": "d6109908153389ba8fbace0598b3462c6f77eb1fe498b4b42bb3bcfe0c086ff2"
+  },
+  {
+    "path": "Audit Reports/catalog-analysis.md",
+    "bytes": 59743,
+    "sha256": "3aa9a4b12780c84e2e8d1ca1afbbf5002b9545d6b99adec1ae2ae2a03285b7c2"
+  },
+  {
+    "path": "Audit Reports/collect-1.json",
+    "bytes": 491367,
+    "sha256": "e54b2aa200b723371fe1dc395f76bee24aed0299a6d54cee3ed46a2d5856149d"
+  },
+  {
+    "path": "Audit Reports/implementation-audit.md",
+    "bytes": 21461,
+    "sha256": "00db22ed1f9744da46eca9333024fe6435b769168589941e7601f9d04a1e8c4f"
+  },
+  {
+    "path": "Audit Reports/implementation-evidence.json",
+    "bytes": 100468,
+    "sha256": "6455b0756df6079682c1af114598e96b5a3aa1f67266b9cfe2ba555c19a56072"
+  },
+  {
+    "path": "Audit Reports/implementation-sources.json",
+    "bytes": 169071,
+    "sha256": "256c30a18b7891af0407f3b9bfd345ceb1dbf35cf11b06cceb1e0bc92ea552cf"
+  },
+  {
+    "path": "Audit Reports/inventory-1.json",
+    "bytes": 146366,
+    "sha256": "ca3c864d14117915cf8c4db33627e080028a814ca62608361d95ce1288d9dd7b"
+  },
+  {
+    "path": "Audit Reports/main-control-scan.json",
+    "bytes": 94381,
+    "sha256": "b3f7c0d6f9ca208e4043695bc3ed8815774125f9088255d096e9e8db62ace550"
+  },
+  {
+    "path": "Audit Reports/main-provenance-sources.json",
+    "bytes": 11264,
+    "sha256": "c5a58b544c74ef928bb3104e87327b18671facf73f387ac5fbc27ef0c451b6f0"
+  },
+  {
+    "path": "Audit Reports/nats-semantics-primary.json",
+    "bytes": 15732,
+    "sha256": "9fcdcd7c66f97fe5f8d5acb825f430ed72b19c819e1af573fd6f2f5850b31072"
+  },
+  {
+    "path": "Audit Reports/parent-verification.json",
+    "bytes": 13738,
+    "sha256": "5ead742097ca9babf85e288d67db26bea841c14f349908d6129f5647f7a7cebc"
+  },
+  {
+    "path": "Audit Reports/provenance-control-scan.json",
+    "bytes": 90935,
+    "sha256": "05ff4ecaf6d70849b6fc946ecb9759c2d7f97a840add9a288dc9b91841691860"
+  },
+  {
+    "path": "Audit Reports/read-only-verification.json",
+    "bytes": 1151,
+    "sha256": "4fd3791d36d00f64991b0da47f9732b17b4e7ad15f2bdad9d40c7a97ce7d800b"
+  },
+  {
+    "path": "Audit Reports/secondary-route-sources.json",
+    "bytes": 36979,
+    "sha256": "af78d2eb8e19527ed92b65bfe135ad342fdbd706e414ee931c59ff92499b0248"
+  },
+  {
+    "path": "Audit Reports/source-catalog-240-records.csv",
+    "bytes": 192598,
+    "sha256": "dc165618a1247c77f296c8a4055c402b26d69b0809fdc36f64495b611cc68b07"
+  },
+  {
+    "path": "Audit Reports/vault-design-documents/OneMind Feed Architecture - Before & After (Redpanda Connect).md",
+    "bytes": 32782,
+    "sha256": "05b0635c0e1e54f37b4d818d5080911741e530610534338a5521140f53ab30bb"
+  },
+  {
+    "path": "Audit Reports/vault-design-documents/Redpanda Connect — OneMind Universal Feed Engine (Technical Reference).md",
+    "bytes": 25551,
+    "sha256": "2235f68cee4f5e4c46190cdec3d252532142d9c68a3e07b172e1c2a88c0f7554"
+  },
+  {
+    "path": "Audit Reports/vault-design-documents/TAK CoT Feed Sources — OneMind OS.md",
+    "bytes": 18905,
+    "sha256": "69004990228f0b9251f1c6b69dfd7e063f5b912e25663f6684b797576b64ddde"
+  },
+  {
+    "path": "Audit Reports/vault-design-documents/omos-intel — Intel Feeds Plugin.md",
+    "bytes": 807,
+    "sha256": "c986801591b876eb8c083a4f9a0692156a68eb4a850ed72d42ab71caf88104f6"
+  },
+  {
+    "path": "Audit Reports/vault-design-documents/omos-ops - Feed Systems.md",
+    "bytes": 881,
+    "sha256": "f1e9880c08f4e18259d20d6044ff44401fb5af01e03d2ebe25cb65659631816f"
+  },
+  {
+    "path": "feed-platform-audit-2026-10-28.zip",
+    "bytes": 438995,
+    "sha256": "8f9ed77e3f06549976aeee85d1f7e0022639b52ac8a715a991f612089ff6ec62"
+  }
+]

@@ -223,18 +223,40 @@ only. Copy designs, never code, documents, trademarks or branding.
    emergency standards (CAP alerts, EDXL). For each: whether OneMind adopts it and
    where.
 
-10. **Ingestion pipelines: replace or keep Redpanda Connect, and make them
-    bulletproof.** Today omos runs Redpanda Connect (`platform/data/redpanda-connect/`)
-    for four feeds, plus Python feeds (`platform/omos/intel-feeds.yaml`). Compare,
-    from primary sources and by building a small proof for the top two:
-    Redpanda Connect (check which connectors are Apache-2.0 and which sit under
-    another licence), its open forks (Bento, Wombat), Synadia/NATS-native
-    connector options, NEX-run collectors, and plain Go collectors on `nats.go`
-    with JetStream publish. Score each on: NATS/JetStream nativeness, licence,
-    one-binary edge deploy, config as code, and every item in the reliability
-    list below. Recommend one standard for every source (one seeder model, like
-    the intel dashboards, but on NATS), and plan the migration of every current
-    feed to it.
+10. **Ingestion platform for every kind of source.** The full source catalog is in
+    `onemind-xr/docs/sources/map-sources/`: 240 records (Fabric Feeds, Map
+    Layers, an audit with `Audit Reports/source-catalog-240-records.csv`, and
+    related design documents). None of the endpoints has been tested; 67 need an
+    API key, 5 a certificate, 3 OAuth2; 15 are paid. Its `declared_nats_pattern`
+    values (for example `fabric.intel.*`) are historical and **outside the locked
+    grammar**: map every source onto the grammar instead.
+    a. **Classify every record** into `docs/sources/SOURCE-REGISTRY.md` (and a
+       machine-readable `sources.yaml`): delivery mode (REST polling, long poll,
+       WebSocket or SSE stream, webhook push, MQTT, file or bulk download, RSS,
+       scraping, map tiles WMS/WMTS/XYZ, video), cadence, auth, rate limits and
+       quotas, licence and terms, cost, geometry type, and the OneMind layer and
+       grammar subject it maps to. Test each free endpoint with one polite
+       request and record the result. Never call a paid API.
+    b. **Route each kind to the right place.** Not everything belongs on the bus:
+       observations and events go to JetStream; latest state to KV; static
+       overlays to Object Store or PMTiles/GeoPackage; map tiles go straight to the
+       client through a caching tile proxy (never through NATS); video goes to
+       MediaMTX; reference documents go to Hermes's knowledge store.
+    c. **Pick the ingestion platform. It does not have to be NATS-native;** it has
+       to handle every delivery mode above, per-source rate limits and quotas,
+       scheduling, auth (API keys, OAuth2 refresh, certificates), retries and
+       state, and then deliver into JetStream reliably. Compare from primary
+       sources, and build a proof of the top two against ten representative
+       sources (at least one of each delivery mode): Redpanda Connect (check
+       which connectors are Apache-2.0), its forks Bento and Wombat, Apache NiFi,
+       Vector, Airbyte or Meltano for bulk sources, Temporal or a scheduler for
+       orchestration, NEX-run collectors, and plain Go collectors on `nats.go`.
+       A combination is allowed (for example one engine for streams and polling,
+       plus a scheduler for bulk). Score each on: every delivery mode, rate
+       limiting, licence, edge deploy as one binary or container, config as code,
+       JetStream delivery guarantees, and the reliability list below. Recommend
+       one standard and plan the migration of every current omos feed and every
+       catalog source to it, ordered by value to OneMind.
     **Reliability list (every pipeline must meet all of it, with a test for each):**
     - JetStream publish with server ack, retries with backoff, and `Nats-Msg-Id`
       dedup, so a restart or replay never duplicates an observation.

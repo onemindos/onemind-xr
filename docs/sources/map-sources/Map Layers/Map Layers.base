@@ -1,0 +1,53 @@
+filters:
+  and:
+    - file.inFolder("notion-transfer/so/01 The Fabric/Geo/Map Layers")
+    - file.ext == "md"
+    - kind != "host"
+    - kind != "index"
+    - kind != null
+formulas:
+  item: file.asLink(note.title)
+properties:
+  formula.item:
+    displayName: Item
+  note.kind:
+    displayName: "Kind"
+  note.notion_status:
+    displayName: "Status"
+  note.notion_projection:
+    displayName: "Projection"
+  note.notion_type:
+    displayName: "Type"
+  note.notion_format:
+    displayName: "Format"
+  note.notion_zoom_range:
+    displayName: "Zoom Range"
+  note.notion_auth:
+    displayName: "Auth"
+  note.notion_origin:
+    displayName: "Origin"
+  note.notion_endpoint_url:
+    displayName: "Endpoint Url"
+  note.notion_access:
+    displayName: "Access"
+  note.notion_clients:
+    displayName: "Clients"
+  note.notion_attribution:
+    displayName: "Attribution"
+views:
+  - type: table
+    name: All
+    order:
+      - formula.item
+      - kind
+      - notion_status
+      - notion_projection
+      - notion_type
+      - notion_format
+      - notion_zoom_range
+      - notion_auth
+      - notion_origin
+      - notion_endpoint_url
+      - notion_access
+      - notion_clients
+      - notion_attribution

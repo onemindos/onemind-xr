@@ -1,0 +1,56 @@
+filters:
+  and:
+    - file.inFolder("notion-transfer/so/00 Core/Platform/Fabric Feeds")
+    - file.ext == "md"
+    - kind != "host"
+    - kind != "index"
+    - kind != null
+formulas:
+  item: file.asLink(note.title)
+properties:
+  formula.item:
+    displayName: Item
+  note.kind:
+    displayName: "Kind"
+  note.notion_status:
+    displayName: "Status"
+  note.notion_data_format:
+    displayName: "Data Format"
+  note.source_url:
+    displayName: "Link"
+  note.notion_tak_integration:
+    displayName: "Tak Integration"
+  note.notion_auth:
+    displayName: "Auth"
+  note.notion_protocol:
+    displayName: "Protocol"
+  note.notion_access:
+    displayName: "Access"
+  note.notion_domain:
+    displayName: "Domain"
+  note.notion_nats_subject:
+    displayName: "Nats Subject"
+  note.notion_origin:
+    displayName: "Origin"
+  note.notion_rate_limit:
+    displayName: "Rate Limit"
+  note.notion_tags:
+    displayName: "Tags"
+views:
+  - type: table
+    name: All
+    order:
+      - formula.item
+      - kind
+      - notion_status
+      - notion_data_format
+      - source_url
+      - notion_tak_integration
+      - notion_auth
+      - notion_protocol
+      - notion_access
+      - notion_domain
+      - notion_nats_subject
+      - notion_origin
+      - notion_rate_limit
+      - notion_tags

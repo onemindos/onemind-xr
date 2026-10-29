@@ -1,0 +1,901 @@
+{
+  "schema_version": 1,
+  "scope": {
+    "repository": "/Users/zeus/omos",
+    "mode": "read-only source audit; no source execution, tests injecting data, git fetch/pull, writes, restarts, credential reads, kube access, or deployment",
+    "head": "96fea4867b92696cea3f5905d147fa830167017e",
+    "branch": "codex/owner-merge-prep-handoff",
+    "working_tree_status": "",
+    "cached_origin_main": "7082e87ca17f26e370212b58c1e14a078543d0e7",
+    "head_vs_cached_origin_main": {
+      "head_only": 0,
+      "origin_main_only": 189
+    },
+    "collected_at": "2026-10-28T02:47:23.377813+00:00",
+    "live_state_verified": false,
+    "context_docs_are_not_live_truth": true
+  },
+  "core_file_parity": [
+    {
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/tak-projector.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/intel-scripts.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/feed-scripts.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/feeds.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/intel-feeds.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/sinks.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "platform/omos/scaledobject-sink-clickhouse.yaml",
+      "equal_to_cached_origin_main": true
+    },
+    {
+      "path": "services/takserver/plugin-src/src/main/java/tak/server/plugins/NatsBridgePlugin.java",
+      "equal_to_cached_origin_main": true
+    }
+  ],
+  "feed_contracts": [
+    {
+      "id": "mta",
+      "runtime": "redpanda-connect",
+      "configured_start": true,
+      "subject": "tak.cot.inject",
+      "format": "CoT XML",
+      "poll_seconds": 30,
+      "notes": "Metro-North and LIRR in one pipeline; only pipeline argument actually started"
+    },
+    {
+      "id": "hazards",
+      "runtime": "redpanda-connect",
+      "configured_start": false,
+      "subject": "tak.cot.inject",
+      "format": "CoT XML",
+      "poll_seconds": 60,
+      "notes": "USGS + NWS definitions mounted but not named in streams launch args"
+    },
+    {
+      "id": "ships",
+      "runtime": "redpanda-connect",
+      "configured_start": false,
+      "subject": "tak.cot.inject",
+      "format": "CoT XML",
+      "notes": "AISstream websocket, world bounding box; key required by upstream subscription"
+    },
+    {
+      "id": "aircraft",
+      "runtime": "redpanda-connect",
+      "configured_start": false,
+      "subject": "tak.cot.inject",
+      "format": "CoT XML",
+      "poll_seconds": 15,
+      "notes": "OpenSky REST definition; username/password env declared but not wired into HTTP processor auth"
+    },
+    {
+      "id": "satellites",
+      "runtime": "feed-satellites",
+      "configured_start": true,
+      "subject": "tak.cot.inject",
+      "format": "CoT XML",
+      "poll_seconds": 30,
+      "notes": "CELESTRAK_GROUP=stations; in-process propagation, four-hour TLE refresh; not all satellite catalogs"
+    },
+    {
+      "id": "noaa",
+      "runtime": "feed-intel supervised module",
+      "configured_start": true,
+      "collection_default_enabled": true,
+      "subject": "intel.weather.noaa.alert.{state_lower}.{event_slug}",
+      "format": "top-level INTEL JSON",
+      "poll_seconds": 300,
+      "kv_bucket": "feed-config",
+      "kv_prefix": "feed.noaa.",
+      "config": {
+        "areas": "US"
+      },
+      "status_subject": "tel.feed.noaa.status",
+      "notes": "KV watcher stops after initial replay; source presence is not verified active collection"
+    },
+    {
+      "id": "usgs",
+      "runtime": "feed-intel supervised module",
+      "configured_start": true,
+      "collection_default_enabled": true,
+      "subject": "intel.seismic.usgs.{magnitude_bucket}.{clean_id}",
+      "format": "top-level INTEL JSON",
+      "poll_seconds": 60,
+      "kv_bucket": "feed-config",
+      "kv_prefix": "feed.usgs.",
+      "config": {
+        "min_magnitude": 2.5
+      },
+      "status_subject": "tel.feed.usgs.status",
+      "notes": "KV watcher stops after initial replay; source presence is not verified active collection"
+    },
+    {
+      "id": "acled",
+      "runtime": "feed-intel supervised module",
+      "configured_start": true,
+      "collection_default_enabled": true,
+      "subject": "intel.conflict.acled.{iso3}.{event_slug}",
+      "format": "top-level INTEL JSON",
+      "poll_seconds": 3600,
+      "kv_bucket": "feed-config",
+      "kv_prefix": "feed.acled.",
+      "config": {
+        "api_key": "required; no value read",
+        "email": "required; no value read",
+        "countries": ""
+      },
+      "status_subject": "tel.feed.acled.status",
+      "notes": "KV watcher stops after initial replay; source presence is not verified active collection"
+    },
+    {
+      "id": "firms",
+      "runtime": "feed-intel supervised module",
+      "configured_start": true,
+      "collection_default_enabled": true,
+      "subject": "intel.fire.nasa.firms.{region}",
+      "format": "top-level INTEL JSON",
+      "poll_seconds": 600,
+      "kv_bucket": "feed-config",
+      "kv_prefix": "feed.firms.",
+      "config": {
+        "api_key": "required; no value read",
+        "area": "world",
+        "days": 1
+      },
+      "status_subject": "tel.feed.firms.status",
+      "notes": "KV watcher stops after initial replay; source presence is not verified active collection"
+    },
+    {
+      "id": "gdacs",
+      "runtime": "feed-intel supervised module",
+      "configured_start": true,
+      "collection_default_enabled": true,
+      "subject": "intel.disaster.gdacs.{event_slug}.{event_id}",
+      "format": "top-level INTEL JSON",
+      "poll_seconds": 600,
+      "kv_bucket": "feed-config",
+      "kv_prefix": "feed.gdacs.",
+      "config": {},
+      "status_subject": "tel.feed.gdacs.status",
+      "notes": "KV watcher stops after initial replay; source presence is not verified active collection"
+    },
+    {
+      "id": "emsc",
+      "runtime": "feed-intel supervised module",
+      "configured_start": true,
+      "collection_default_enabled": true,
+      "subject": "intel.seismic.emsc.{magnitude_bucket}.{clean_id}",
+      "format": "top-level INTEL JSON",
+      "poll_seconds": 120,
+      "kv_bucket": "feed-config",
+      "kv_prefix": "feed.emsc.",
+      "config": {
+        "min_magnitude": 2.5
+      },
+      "status_subject": "tel.feed.emsc.status",
+      "notes": "KV watcher stops after initial replay; source presence is not verified active collection"
+    },
+    {
+      "id": "eonet",
+      "runtime": "feed-intel supervised module",
+      "configured_start": true,
+      "collection_default_enabled": true,
+      "subject": "intel.natural.nasa.eonet.{category_slug}.{clean_id}",
+      "format": "top-level INTEL JSON",
+      "poll_seconds": 300,
+      "kv_bucket": "feed-config",
+      "kv_prefix": "feed.eonet.",
+      "config": {},
+      "status_subject": "tel.feed.eonet.status",
+      "notes": "KV watcher stops after initial replay; source presence is not verified active collection"
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "priority": "high",
+      "finding": "Mac checkout is not main, but audited implementation files match cached origin/main. No live revision was verified.",
+      "evidence": [
+        "connect-launch",
+        "argo-omos",
+        "argo-connect"
+      ],
+      "kind": "verified provenance; live limitation"
+    },
+    {
+      "id": "F02",
+      "priority": "critical",
+      "finding": "All seven intel KV config watchers stop at initial replay completion. Runtime enable/config changes are not continuously applied by these loops.",
+      "evidence": [
+        "watch-noaa",
+        "watch-usgs",
+        "watch-acled",
+        "watch-firms",
+        "watch-gdacs",
+        "watch-emsc",
+        "watch-eonet"
+      ],
+      "kind": "static defect, confirmed against upstream KV marker contract; not live exercised"
+    },
+    {
+      "id": "F03",
+      "priority": "high",
+      "finding": "Only feed-mta.yaml is started by Connect; hazards/ships/aircraft definitions are not a running full catalog. Satellites covers stations only.",
+      "evidence": [
+        "connect-launch",
+        "satellite-launch"
+      ],
+      "kind": "verified desired launch configuration; not runtime state"
+    },
+    {
+      "id": "F04",
+      "priority": "critical",
+      "finding": "End-to-end durable delivery is not implemented: projector and direct feeds publish Core NATS CoT; TAK plugin is Core-only and has no persistence/replay acknowledgment. INTEL ACK follows Core publish, not TAK/client receipt.",
+      "evidence": [
+        "projector-handlers",
+        "plugin-core",
+        "plugin-inject",
+        "satellite-loop",
+        "connect-mta"
+      ],
+      "kind": "verified source contract + delivery consequence"
+    },
+    {
+      "id": "F05",
+      "priority": "critical",
+      "finding": "ClickHouse sink uses ack_policy none, buffers only in RAM, clears rows before HTTP, and explicitly discards batches on errors. It does not subscribe to raw tak.cot.> or evt.world.>.",
+      "evidence": [
+        "ch-loss-on-failure",
+        "ch-buffer-clear",
+        "ch-subscription"
+      ],
+      "kind": "verified source contract"
+    },
+    {
+      "id": "F06",
+      "priority": "high",
+      "finding": "Controls cover different layers and do not implement per-source end-to-end or per-client visibility: projector commands are global volatile Core commands; direct CoT sources bypass them; disabled INTEL messages are ACKed/dropped. No corresponding catalog UI/API found in scoped tracked-source scans.",
+      "evidence": [
+        "projector-controls",
+        "projector-handlers",
+        "connect-mta",
+        "satellite-loop"
+      ],
+      "kind": "verified control implementation plus scoped negative search"
+    },
+    {
+      "id": "F07",
+      "priority": "high",
+      "finding": "Projection has only a five-second per-UID entity time throttle; no movement delta, catalog AOI/type/rate budget, stale-input rejection, or source-scoped policy. INTEL has no corresponding throttle. Missing/offset timestamps fall back to now; absent intel expires becomes event timestamp +30 minutes, including old ACLED/FIRMS/USGS events.",
+      "evidence": [
+        "entity-contract",
+        "projector-handlers",
+        "intel-contract",
+        "acled-payload",
+        "firms-payload",
+        "usgs-payload"
+      ],
+      "kind": "static policies and consequences"
+    },
+    {
+      "id": "F08",
+      "priority": "high",
+      "finding": "Intel feeds use event-ID in-memory seen sets plus Nats-Msg-Id PubAck dedup; same-ID updates are suppressed. Six seen sets are not periodically reset/pruned; NOAA alone clears after six hours. CH initial LAST_PER_SUBJECT can miss historical events sharing a subject, particularly FIRMS region and NOAA state/event.",
+      "evidence": [
+        "noaa-control-startup",
+        "noaa-publish",
+        "usgs-publish",
+        "acled-publish",
+        "firms-publish",
+        "gdacs-publish",
+        "emsc-publish",
+        "eonet-publish",
+        "ch-subscription"
+      ],
+      "kind": "verified source + initial-consumer consequence"
+    },
+    {
+      "id": "F09",
+      "priority": "high",
+      "finding": "KV watchers log values including api_key/email configs; NATS/TLS and CoT tap disable server certificate verification; Python runtime deps install unpinned at boot. Actual secrets were not read.",
+      "evidence": [
+        "watch-acled",
+        "watch-firms",
+        "projector-launch",
+        "tap-tls",
+        "satellite-loop"
+      ],
+      "kind": "verified source security/reproducibility gap"
+    },
+    {
+      "id": "F10",
+      "priority": "medium",
+      "finding": "No direct feed-to-TAK TLS writer in inspected projector/feeds. cot-tap is the opposite direction, TAK TLS->Core NATS, with a placeholder Git ConfigMap requiring out-of-band replacement. Legacy Go bridge forwards commands via UDP.",
+      "evidence": [
+        "projector-handlers",
+        "tap-direction",
+        "tap-deployment",
+        "tap-target",
+        "tak-udp-alternative"
+      ],
+      "kind": "verified source scope; not claim no other external service exists"
+    },
+    {
+      "id": "F11",
+      "priority": "medium",
+      "finding": "Core status heartbeats are feed-process state, not server PubAck/TAK/client delivery status. HTTP errors commonly return zero without raising, so outer last_error may remain empty; heartbeat checks are inside polling loop and cannot guarantee the nominal thirty-second interval.",
+      "evidence": [
+        "noaa-status",
+        "noaa-poll-errors",
+        "noaa-control-startup"
+      ],
+      "kind": "static observability gap"
+    },
+    {
+      "id": "F12",
+      "priority": "high",
+      "finding": "Main-source stream/kv adoption differs from this checkout: feed-config CR is explicitly excluded, with historical app-created/R1 comments. Do not assume source replicas/history or comment surveys equal live state.",
+      "evidence": [
+        "main-kv-excluded",
+        "main-kv-context"
+      ],
+      "kind": "verified cached-main manifests; live state unverified"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "connect-launch",
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "ref": "HEAD",
+      "start_line": 505,
+      "end_line": 528,
+      "snippet": "---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: redpanda-connect\n  namespace: omos\n  labels:\n    app.kubernetes.io/name: redpanda-connect\n    app.kubernetes.io/part-of: omos-feeds\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: redpanda-connect\n  template:\n    metadata:\n      labels:\n        app.kubernetes.io/name: redpanda-connect\n        app.kubernetes.io/part-of: omos-feeds\n    spec:\n      containers:\n        - name: connect\n          image: redpandadata/connect@sha256:b462939a6d7c265df7d6584925a5070beabaf5bc84d35180219e247f438b64ac\n          args: [\"streams\", \"--chilled\", \"/config/pipelines/feed-mta.yaml\"]"
+    },
+    {
+      "id": "connect-mta",
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "ref": "HEAD",
+      "start_line": 27,
+      "end_line": 110,
+      "snippet": "    input:\n      generate:\n        interval: \"30s\"\n        mapping: 'root = \"\"'\n\n    pipeline:\n      processors:\n        - branch:\n            request_map: 'root = \"\"'\n            processors:\n              - http:\n                  url: \"https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/mnr%2Fgtfs-mnr\"\n                  verb: GET\n                  timeout: \"10s\"\n                  headers:\n                    User-Agent: \"OMOS-FeedEngine/1.0\"\n              - protobuf:\n                  operator: to_json\n                  message: \"transit_realtime.FeedMessage\"\n                  import_paths: [\"/proto/\"]\n              - mapping: |\n                  root = this.entity.filter(e -> e.exists(\"vehicle\") && e.vehicle.exists(\"position\")).map_each(e -> {\n                    \"uid\": \"MTA-MNR-%s\".format(e.vehicle.trip.trip_id.or(e.id)),\n                    \"callsign\": \"MNR-%s\".format(e.vehicle.trip.route_id.or(e.vehicle.trip.trip_id.or(\"?\"))),\n                    \"lat\": e.vehicle.position.latitude,\n                    \"lon\": e.vehicle.position.longitude,\n                    \"speed\": e.vehicle.position.speed.or(0),\n                    \"course\": e.vehicle.position.bearing.or(0),\n                    \"remarks\": \"MTA Metro-North route:%s trip:%s\".format(e.vehicle.trip.route_id.or(\"?\"), e.vehicle.trip.trip_id.or(\"?\")),\n                    \"feed\": \"MNR\"\n                  })\n            result_map: 'root.mnr = this'\n\n        - branch:\n            request_map: 'root = \"\"'\n            processors:\n              - http:\n                  url: \"https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/lirr%2Fgtfs-lirr\"\n                  verb: GET\n                  timeout: \"10s\"\n                  headers:\n                    User-Agent: \"OMOS-FeedEngine/1.0\"\n              - protobuf:\n                  operator: to_json\n                  message: \"transit_realtime.FeedMessage\"\n                  import_paths: [\"/proto/\"]\n              - mapping: |\n                  root = this.entity.filter(e -> e.exists(\"vehicle\") && e.vehicle.exists(\"position\")).map_each(e -> {\n                    \"uid\": \"MTA-LIRR-%s\".format(e.vehicle.trip.trip_id.or(e.id)),\n                    \"callsign\": \"LIRR-%s\".format(e.vehicle.trip.route_id.or(e.vehicle.trip.trip_id.or(\"?\"))),\n                    \"lat\": e.vehicle.position.latitude,\n                    \"lon\": e.vehicle.position.longitude,\n                    \"speed\": e.vehicle.position.speed.or(0),\n                    \"course\": e.vehicle.position.bearing.or(0),\n                    \"remarks\": \"MTA LIRR route:%s trip:%s\".format(e.vehicle.trip.route_id.or(\"?\"), e.vehicle.trip.trip_id.or(\"?\")),\n                    \"feed\": \"LIRR\"\n                  })\n            result_map: 'root.lirr = this'\n\n        - mapping: |\n            root = this.mnr.or([]).concat(this.lirr.or([]))\n\n        - unarchive:\n            format: json_array\n\n        - mapping: |\n            root = if this.lat == 0 || this.lon == 0 { deleted() } else { this }\n\n        - mapping: |\n            let ts = now().format_timestamp(\"2006-01-02T15:04:05.000Z\")\n            let stale = (now().ts_unix() + 120).ts_format(\"2006-01-02T15:04:05.000Z\")\n            let cs = this.callsign.replace_all(\"&\", \"&amp;\").replace_all(\"<\", \"&lt;\").replace_all(\"\\\"\", \"&quot;\")\n            root = \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\" ?>\\n<event version=\\\"2.0\\\" type=\\\"a-n-G-E-V-C-R\\\" uid=\\\"\" + this.uid + \"\\\" how=\\\"m-g\\\" time=\\\"\" + $ts + \"\\\" start=\\\"\" + $ts + \"\\\" stale=\\\"\" + $stale + \"\\\"><point lat=\\\"\" + this.lat.string() + \"\\\" lon=\\\"\" + this.lon.string() + \"\\\" hae=\\\"0\\\" ce=\\\"50\\\" le=\\\"50\\\"/><detail><contact callsign=\\\"\" + $cs + \"\\\"/><track speed=\\\"\" + this.speed.string() + \"\\\" course=\\\"\" + this.course.string() + \"\\\"/><remarks>\" + this.remarks + \"</remarks><marti><dest mission=\\\"Land\\\"/></marti></detail></event>\"\n\n    output:\n      nats:\n        urls: [\"nats://nats.nats.svc.cluster.local:4222\"]\n        subject: \"tak.cot.inject\"\n        auth:\n          user: \"${NATS_USER}\"\n          password: \"[REDACTED]\"\n        tls:\n          enabled: true\n          skip_cert_verify: true"
+    },
+    {
+      "id": "connect-hazards-dedup",
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "ref": "HEAD",
+      "start_line": 111,
+      "end_line": 120,
+      "snippet": "  feed-hazards.yaml: |\n    cache_resources:\n      - label: seen_hazards\n        memory:\n          ttl: 21600s\n          cap: 10000\n\n    input:\n      generate:\n        interval: \"60s\""
+    },
+    {
+      "id": "connect-hazards-end",
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "ref": "HEAD",
+      "start_line": 185,
+      "end_line": 219,
+      "snippet": "        - mapping: |\n            root = this.usgs.or([]).concat(this.nws.or([]))\n\n        - unarchive:\n            format: json_array\n\n        - dedupe:\n            cache: seen_hazards\n            key: '${!this.id}'\n\n        - mapping: |\n            let ts = now().format_timestamp(\"2006-01-02T15:04:05.000Z\")\n            let stale = (now().ts_unix() + this.stale_s.number()).ts_format(\"2006-01-02T15:04:05.000Z\")\n            let callsign = if this.source == \"USGS\" {\n              \"M\" + this.mag.format_number(1) + \" Earthquake\"\n            } else {\n              this.event\n            }\n            let remarks = if this.source == \"USGS\" {\n              \"M\" + this.mag.format_number(1) + \" \" + this.place + \" depth:\" + this.depth.format_number(1) + \"km\"\n            } else {\n              this.severity + \": \" + this.headline\n            }\n            root = \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\" ?>\\n<event version=\\\"2.0\\\" type=\\\"b-r-f-h-h\\\" uid=\\\"\" + this.uid + \"\\\" how=\\\"h-e\\\" time=\\\"\" + $ts + \"\\\" start=\\\"\" + $ts + \"\\\" stale=\\\"\" + $stale + \"\\\"><point lat=\\\"\" + this.lat.string() + \"\\\" lon=\\\"\" + this.lon.string() + \"\\\" hae=\\\"\" + this.hae + \"\\\" ce=\\\"9999999.0\\\" le=\\\"9999999.0\\\"/><detail><contact callsign=\\\"\" + $callsign + \"\\\"/><status readiness=\\\"false\\\"/><remarks>\" + $remarks + \"</remarks><marti><dest mission=\\\"Hazards\\\"/></marti></detail></event>\"\n\n    output:\n      nats:\n        urls: [\"nats://nats.nats.svc.cluster.local:4222\"]\n        subject: \"tak.cot.inject\"\n        auth:\n          user: \"${NATS_USER}\"\n          password: \"[REDACTED]\"\n        tls:\n          enabled: true\n          skip_cert_verify: true"
+    },
+    {
+      "id": "connect-ships",
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "ref": "HEAD",
+      "start_line": 220,
+      "end_line": 271,
+      "snippet": "  feed-ships.yaml: |\n    input:\n      websocket:\n        url: \"wss://stream.aisstream.io/v0/stream\"\n        open_message: '{\"APIKey\": \"${AISSTREAM_API_KEY}\", \"BoundingBoxes\": [[[-90, -180], [90, 180]]]}'\n        open_message_type: text\n        tls:\n          enabled: true\n\n    pipeline:\n      processors:\n        - mapping: |\n            let md = this.MetaData.or({})\n            let mmsi = $md.MMSI.or($md.UserID)\n            let lat = $md.latitude.or($md.Latitude)\n            let lon = $md.longitude.or($md.Longitude)\n            root = if $mmsi == null || $lat == null || $lon == null { deleted() } else {\n              let pr = this.Message.or({})\n              let pos = $pr.PositionReport.or($pr.StandardClassBPositionReport.or({}))\n              let sog = $pos.Sog.or(0)\n              let cog = $pos.Cog.or(0)\n              let sdata = $pr.ShipStaticData.or({})\n              let ship_name = $sdata.Name.or($md.ShipName.or(\"\")).string().trim()\n              let cs = if $ship_name == \"\" { $mmsi.string() } else { $ship_name.slice(0, 32).replace_all(\"&\", \"&amp;\").replace_all(\"<\", \"&lt;\").replace_all(\"\\\"\", \"&quot;\") }\n              let stype = $sdata.Type.Code.or(\"\").string()\n              {\n                \"uid\": \"AIS-\" + $mmsi.string(),\n                \"callsign\": $cs,\n                \"lat\": $lat,\n                \"lon\": $lon,\n                \"sog\": $sog,\n                \"cog\": $cog,\n                \"mmsi\": $mmsi,\n                \"stype\": $stype\n              }\n            }\n\n        - mapping: |\n            let ts = now().format_timestamp(\"2006-01-02T15:04:05.000Z\")\n            let stale = (now().ts_unix() + 300).ts_format(\"2006-01-02T15:04:05.000Z\")\n            root = \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\" ?>\\n<event version=\\\"2.0\\\" type=\\\"a-f-S-X-M\\\" uid=\\\"\" + this.uid + \"\\\" how=\\\"m-g\\\" time=\\\"\" + $ts + \"\\\" start=\\\"\" + $ts + \"\\\" stale=\\\"\" + $stale + \"\\\"><point lat=\\\"\" + this.lat.string() + \"\\\" lon=\\\"\" + this.lon.string() + \"\\\" hae=\\\"-10000\\\" ce=\\\"9999999.0\\\" le=\\\"9999999.0\\\"/><detail><contact callsign=\\\"\" + this.callsign + \"\\\"/><track speed=\\\"\" + this.sog.string() + \"\\\" course=\\\"\" + this.cog.string() + \"\\\"/><status readiness=\\\"false\\\"/><remarks>MMSI:\" + this.mmsi.string() + \" \" + this.stype + \"</remarks><marti><dest mission=\\\"Sea\\\"/></marti></detail></event>\"\n\n    output:\n      nats:\n        urls: [\"nats://nats.nats.svc.cluster.local:4222\"]\n        subject: \"tak.cot.inject\"\n        auth:\n          user: \"${NATS_USER}\"\n          password: \"[REDACTED]\"\n        tls:\n          enabled: true\n          skip_cert_verify: true"
+    },
+    {
+      "id": "connect-aircraft",
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "ref": "HEAD",
+      "start_line": 272,
+      "end_line": 333,
+      "snippet": "  feed-aircraft.yaml: |\n    input:\n      generate:\n        interval: \"15s\"\n        mapping: 'root = \"\"'\n\n    pipeline:\n      processors:\n        - branch:\n            request_map: 'root = \"\"'\n            processors:\n              - http:\n                  url: \"https://opensky-network.org/api/states/all\"\n                  verb: GET\n                  timeout: \"20s\"\n                  headers:\n                    User-Agent: \"omos-feed-aircraft/1.0\"\n              - mapping: |\n                  root = this.states.or([]).map_each(s ->\n                    let lon = s.index(5)\n                    let lat = s.index(6)\n                    if $lon == null || $lat == null { deleted() } else {\n                      let icao24 = s.index(0).or(\"\").string()\n                      let raw_cs = s.index(1).or(\"\").string().trim()\n                      let callsign = if $raw_cs == \"\" { $icao24.uppercase() } else { $raw_cs.replace_all(\"&\", \"&amp;\").replace_all(\"<\", \"&lt;\").replace_all(\"\\\"\", \"&quot;\") }\n                      let alt = s.index(7).or(0)\n                      let spd_kt = s.index(9).or(0) * 1.94384\n                      let trk = s.index(10).or(0)\n                      let country = s.index(2).or(\"\").string().replace_all(\"&\", \"&amp;\").replace_all(\"<\", \"&lt;\")\n                      {\n                        \"uid\": \"ADSB-\" + $icao24.uppercase(),\n                        \"callsign\": $callsign,\n                        \"lat\": $lat,\n                        \"lon\": $lon,\n                        \"alt\": $alt,\n                        \"spd_kt\": $spd_kt,\n                        \"trk\": $trk,\n                        \"icao24\": $icao24,\n                        \"country\": $country\n                      }\n                    }\n                  )\n            result_map: 'root = this'\n\n        - unarchive:\n            format: json_array\n\n        - mapping: |\n            let ts = now().format_timestamp(\"2006-01-02T15:04:05.000Z\")\n            let stale = (now().ts_unix() + 90).ts_format(\"2006-01-02T15:04:05.000Z\")\n            root = \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\" ?>\\n<event version=\\\"2.0\\\" type=\\\"a-f-A-M-F-Q\\\" uid=\\\"\" + this.uid + \"\\\" how=\\\"m-g\\\" time=\\\"\" + $ts + \"\\\" start=\\\"\" + $ts + \"\\\" stale=\\\"\" + $stale + \"\\\"><point lat=\\\"\" + this.lat.string() + \"\\\" lon=\\\"\" + this.lon.string() + \"\\\" hae=\\\"\" + this.alt.string() + \"\\\" ce=\\\"9999999.0\\\" le=\\\"9999999.0\\\"/><detail><contact callsign=\\\"\" + this.callsign + \"\\\"/><track speed=\\\"\" + this.spd_kt.format_number(1) + \"\\\" course=\\\"\" + this.trk.string() + \"\\\"/><status readiness=\\\"false\\\"/><remarks>ICAO:\" + this.icao24 + \" \" + this.country + \"</remarks><marti><dest mission=\\\"Air\\\"/></marti></detail></event>\"\n\n    output:\n      nats:\n        urls: [\"nats://nats.nats.svc.cluster.local:4222\"]\n        subject: \"tak.cot.inject\"\n        auth:\n          user: \"${NATS_USER}\"\n          password: \"[REDACTED]\"\n        tls:\n          enabled: true\n          skip_cert_verify: true"
+    },
+    {
+      "id": "satellite-launch",
+      "path": "platform/omos/feeds.yaml",
+      "ref": "HEAD",
+      "start_line": 24,
+      "end_line": 55,
+      "snippet": "  replicas: 1\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: feed-satellites\n  template:\n    metadata:\n      labels:\n        app.kubernetes.io/name: feed-satellites\n    spec:\n      containers:\n        - name: feed\n          image: python:3.12-alpine\n          command: [\"/bin/sh\", \"-c\"]\n          args:\n            - pip install nats-py aiohttp sgp4 --quiet && exec python3 /scripts/feed_satellites.py\n          env:\n            - name: NATS_URL\n              value: \"nats://nats.nats.svc.cluster.local:4222\"\n            - name: NATS_USER\n              valueFrom:\n                secretKeyRef:\n                  name: omos-nats-creds\n                  key: user\n            - name: NATS_PASSWORD\n              valueFrom:\n                secretKeyRef:\n                  name: omos-nats-creds\n                  key: password\n            - name: CELESTRAK_GROUP\n              value: \"stations\"\n            - name: PROPAGATE_INTERVAL\n              value: \"30\""
+    },
+    {
+      "id": "satellite-loop",
+      "path": "platform/omos/feed-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 103,
+      "end_line": 125,
+      "snippet": "    async def main():\n        tls = ssl.create_default_context(); tls.check_hostname = False; tls.verify_mode = ssl.CERT_NONE\n        nc = await nats.connect(servers=NATS_URL, user=NATS_USER, password=NATS_PASS, tls=tls)\n        LOG.info(\"NATS connected\")\n        async with aiohttp.ClientSession(headers={\"User-Agent\": \"omos-feed-sats/1.0\"}) as ses:\n            await load_tles(ses)\n            tle_t = 0\n            while True:\n                import time\n                if time.time() - tle_t > 3600 * 4:\n                    await load_tles(ses)\n                    tle_t = time.time()\n                now = datetime.now(timezone.utc)\n                published = 0\n                for sat in sats:\n                    cot = sat_to_cot(sat, now)\n                    if cot:\n                        await nc.publish(INJECT, cot)\n                        published += 1\n                LOG.info(f\"Satellites: published {published}/{len(sats)} positions\")\n                await asyncio.sleep(INTERVAL)\n\n    asyncio.run(main())"
+    },
+    {
+      "id": "satellite-cot",
+      "path": "platform/omos/feed-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 47,
+      "end_line": 73,
+      "snippet": "    def sat_to_cot(sat, now):\n        jd, fr = jday(now.year, now.month, now.day,\n                       now.hour, now.minute,\n                       now.second + now.microsecond / 1e6)\n        e, r, _ = sat.sgp4(jd, fr)\n        if e != 0 or r is None: return None\n        # GMST (simplified)\n        d = (jd - 2451545.0) + fr\n        gmst = math.radians((280.46061837 + 360.98564736629 * d) % 360)\n        lat, lon, alt_km = eci_to_geodetic(r, gmst)\n        uid = f\"SAT-{sat.satnum}\"\n        name = sat_names.get(sat.satnum, str(sat.satnum))\n        ts, st = now_str(), stale_str(INTERVAL * 3)\n        MARTI_BROADCAST = '<marti><dest mission=\"Air\"/></marti>'\n        xml = (\n            f'<event version=\"2.0\" type=\"a-f-A-M-F-Q\" uid=\"{uid}\" '\n            f'how=\"m-g\" time=\"{ts}\" start=\"{ts}\" stale=\"{st}\">'\n            f'<point lat=\"{lat:.4f}\" lon=\"{lon:.4f}\" hae=\"{alt_km*1000:.0f}\" ce=\"9999999.0\" le=\"9999999.0\"/>'\n            f'<detail>'\n            f'<contact callsign=\"{name}\"/>'\n            f'<status readiness=\"false\"/>'\n            f'<remarks>NORAD:{sat.satnum} group:{GROUP}</remarks>'\n            f'{MARTI_BROADCAST}'\n            f'<_flow-tags_ TAK-Server=\"SAT-Feed\" time=\"{ts}\"/>'\n            f'</detail></event>'\n        )\n        return XML_DECL + xml.encode()"
+    },
+    {
+      "id": "entity-contract",
+      "path": "platform/omos/tak-projector.yaml",
+      "ref": "HEAD",
+      "start_line": 153,
+      "end_line": 201,
+      "snippet": "    def parse_iso(s: str) -> datetime:\n        s = s.rstrip(\"Z\")\n        for fmt in (\"%Y-%m-%dT%H:%M:%S.%f\", \"%Y-%m-%dT%H:%M:%S\", \"%Y-%m-%d\"):\n            try:\n                return datetime.strptime(s, fmt).replace(tzinfo=timezone.utc)\n            except ValueError:\n                continue\n        return datetime.now(timezone.utc)\n\n    # \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    # Entity state \u2192 CoT (ent.*.*.state \u2014 ORP fused entities)\n    # \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    def entity_to_cot(entity: dict) -> tuple:\n        lat = safe_float(entity.get(\"lat\") or entity.get(\"latitude\"))\n        lon = safe_float(entity.get(\"lon\") or entity.get(\"longitude\"))\n        if lat is None or lon is None:\n            return None, None\n        if not (-90 <= lat <= 90 and -180 <= lon <= 180):\n            return None, None\n\n        entity_id   = entity.get(\"entity_id\") or str(uuid.uuid4())\n        entity_type = entity.get(\"entity_type\", \"default\")\n        props       = entity.get(\"properties\") or {}\n        ctype, stale_secs = cot_meta(entity_type)\n\n        callsign = str(\n            props.get(\"name\") or props.get(\"callsign\") or props.get(\"flight\") or\n            props.get(\"mmsi\") or props.get(\"icao_hex\") or props.get(\"tail\") or\n            entity_id\n        )[:64]\n\n        hae    = safe_float(props.get(\"altitude\") or props.get(\"hae\") or props.get(\"alt\"))\n        speed  = safe_float(props.get(\"speed\") or props.get(\"sog\") or props.get(\"velocity\"), 0.0)\n        course = safe_float(props.get(\"course\") or props.get(\"heading\") or props.get(\"cog\") or props.get(\"track\"), 0.0)\n        ce     = safe_float(props.get(\"ce\"))\n        le_val = safe_float(props.get(\"le\"))\n        conf   = safe_float(entity.get(\"confidence\"), 1.0)\n\n        uid = f\"OM.{entity_type}.{entity_id}\"\n        now = cot_time()\n\n        event = ET.Element(\"event\")\n        event.set(\"version\", \"2.0\")\n        event.set(\"type\",    ctype)\n        event.set(\"uid\",     uid)\n        event.set(\"how\",     \"m-g\")\n        event.set(\"time\",    now)\n        event.set(\"start\",   now)\n        event.set(\"stale\",   cot_time(stale_secs))"
+    },
+    {
+      "id": "entity-properties",
+      "path": "platform/omos/tak-projector.yaml",
+      "ref": "HEAD",
+      "start_line": 204,
+      "end_line": 226,
+      "snippet": "        point = ET.SubElement(event, \"point\")\n        point.set(\"lat\", f\"{lat:.6f}\")\n        point.set(\"lon\", f\"{lon:.6f}\")\n        point.set(\"hae\",  str(hae) if hae is not None else DEFAULT_COT_VAL)\n        point.set(\"ce\",   str(ce)  if ce  is not None else DEFAULT_COT_VAL)\n        point.set(\"le\",   str(le_val) if le_val is not None else DEFAULT_COT_VAL)\n\n        detail = ET.SubElement(event, \"detail\")\n        flow = ET.SubElement(detail, \"_flow-tags_\")\n        flow.set(\"omos-tak-projector\", now)\n        contact = ET.SubElement(detail, \"contact\")\n        contact.set(\"callsign\", callsign)\n        track_el = ET.SubElement(detail, \"track\")\n        track_el.set(\"speed\",  f\"{speed:.2f}\")\n        track_el.set(\"course\", f\"{course:.1f}\")\n        remarks = ET.SubElement(detail, \"remarks\")\n        remarks.text = f\"src=orp t={entity_type} conf={conf:.2f}\"\n        group = ET.SubElement(detail, \"__group\")\n        group.set(\"name\", TAK_GROUP)\n        group.set(\"role\", \"Team Member\")\n\n        cot_bytes = XML_DECLARATION + ET.tostring(event, encoding=\"unicode\").encode()\n        return uid, cot_bytes"
+    },
+    {
+      "id": "intel-contract",
+      "path": "platform/omos/tak-projector.yaml",
+      "ref": "HEAD",
+      "start_line": 231,
+      "end_line": 297,
+      "snippet": "    def intel_event_type_to_cot(entity_type: str, properties: dict) -> str:\n        if entity_type == \"earthquake\":\n            return \"a-f-G-E-V-Q\"\n        if entity_type == \"wildfire\":\n            return \"a-f-G-U-F-F\"\n        if entity_type == \"conflict_event\":\n            return \"a-h-G\"\n        if entity_type == \"weather_alert\":\n            event_name = properties.get(\"event\", \"\")\n            return WEATHER_COT_MAP.get(event_name, \"a-f-G-U-W\")\n        return \"a-f-G-U-O\"\n\n    def intel_to_cot(envelope: dict) -> tuple:\n        uid         = envelope.get(\"id\", \"unknown\")\n        entity_type = envelope.get(\"type\", \"\")\n        source      = envelope.get(\"source\", \"\")\n        lat         = safe_float(envelope.get(\"lat\"))\n        lon         = safe_float(envelope.get(\"lon\"))\n        timestamp   = envelope.get(\"timestamp\", \"\")\n        expires     = envelope.get(\"expires\", \"\")\n        properties  = envelope.get(\"properties\", {})\n\n        if lat is None or lon is None:\n            return None, None\n        if not (-90 <= lat <= 90 and -180 <= lon <= 180):\n            return None, None\n\n        cot_type = intel_event_type_to_cot(entity_type, properties)\n\n        ts_dt = parse_iso(timestamp) if timestamp else datetime.now(timezone.utc)\n        ex_dt = parse_iso(expires) if expires else ts_dt + timedelta(minutes=30)\n        now = cot_time()\n\n        headline = properties.get(\"headline\", properties.get(\"event\", entity_type))\n        remarks_text = f\"{headline}\\nSource: {source}\\nID: {uid}\"\n\n        event = ET.Element(\"event\")\n        event.set(\"version\", \"2.0\")\n        event.set(\"type\",    cot_type)\n        event.set(\"uid\",     f\"INTEL.{uid}\")\n        event.set(\"how\",     \"m-g\")\n        event.set(\"time\",    now)\n        event.set(\"start\",   ts_dt.strftime(W3C_DT))\n        event.set(\"stale\",   ex_dt.strftime(W3C_DT))\n\n        point = ET.SubElement(event, \"point\")\n        point.set(\"lat\", f\"{lat:.6f}\")\n        point.set(\"lon\", f\"{lon:.6f}\")\n        point.set(\"hae\", \"0\")\n        point.set(\"ce\",  DEFAULT_COT_VAL)\n        point.set(\"le\",  DEFAULT_COT_VAL)\n\n        detail = ET.SubElement(event, \"detail\")\n        flow = ET.SubElement(detail, \"_flow-tags_\")\n        flow.set(\"omos-tak-projector\", now)\n        contact = ET.SubElement(detail, \"contact\")\n        contact.set(\"callsign\", str(headline)[:64])\n        remarks = ET.SubElement(detail, \"remarks\")\n        remarks.text = remarks_text\n        color = ET.SubElement(detail, \"color\")\n        color.set(\"argb\", \"-65536\")\n        group = ET.SubElement(detail, \"__group\")\n        group.set(\"name\", TAK_GROUP)\n        group.set(\"role\", \"Team Member\")\n\n        cot_bytes = XML_DECLARATION + ET.tostring(event, encoding=\"unicode\").encode()\n        return f\"INTEL.{uid}\", cot_bytes"
+    },
+    {
+      "id": "projector-handlers",
+      "path": "platform/omos/tak-projector.yaml",
+      "ref": "HEAD",
+      "start_line": 342,
+      "end_line": 399,
+      "snippet": "        # --- Entity state handler (core NATS subscription) ---\n        async def entity_handler(msg):\n            nonlocal ent_published, skipped\n            if not _enabled:\n                return\n            try:\n                entity = json.loads(msg.data.decode())\n            except Exception:\n                skipped += 1\n                return\n\n            uid, cot_bytes = entity_to_cot(entity)\n            if cot_bytes is None:\n                skipped += 1\n                return\n\n            now_ts = time.monotonic()\n            if now_ts - last_pub.get(uid, 0) < MIN_INTERVAL:\n                return\n            last_pub[uid] = now_ts\n\n            if ent_published % 10000 == 0 and ent_published > 0:\n                cutoff = now_ts - MIN_INTERVAL * 10\n                for k in [k for k, v in last_pub.items() if v < cutoff]:\n                    del last_pub[k]\n\n            await nc.publish(INJECT_SUBJ, cot_bytes)\n            ent_published += 1\n            if ent_published <= 5 or ent_published % 500 == 0:\n                LOG.info(\"ENT CoT #%d %s/%s \u2192 %s\",\n                         ent_published, entity.get(\"entity_type\", \"?\"),\n                         entity.get(\"entity_id\", \"?\"), INJECT_SUBJ)\n\n        # --- Intel event handler (JetStream durable consumer) ---\n        async def intel_handler(msg):\n            nonlocal intel_published, skipped\n            if not _enabled:\n                await msg.ack()\n                return\n            try:\n                envelope = json.loads(msg.data.decode())\n            except Exception:\n                skipped += 1\n                await msg.ack()\n                return\n\n            uid, cot_bytes = intel_to_cot(envelope)\n            if cot_bytes is None:\n                skipped += 1\n                await msg.ack()\n                return\n\n            await nc.publish(INJECT_SUBJ, cot_bytes)\n            intel_published += 1\n            if intel_published <= 5 or intel_published % 100 == 0:\n                LOG.info(\"INTEL CoT #%d %s \u2192 %s\",\n                         intel_published, envelope.get(\"type\", \"?\"), INJECT_SUBJ)\n            await msg.ack()"
+    },
+    {
+      "id": "projector-controls",
+      "path": "platform/omos/tak-projector.yaml",
+      "ref": "HEAD",
+      "start_line": 401,
+      "end_line": 433,
+      "snippet": "        # --- Control handlers ---\n        async def handle_disable(msg):\n            global _enabled\n            _enabled = False\n            LOG.info(\"projector DISABLED via cmd.projector.disable\")\n\n        async def handle_enable(msg):\n            global _enabled\n            _enabled = True\n            LOG.info(\"projector ENABLED via cmd.projector.enable\")\n\n        await nc.subscribe(\"cmd.projector.disable\", cb=handle_disable)\n        await nc.subscribe(\"cmd.projector.enable\",  cb=handle_enable)\n\n        # Subscribe: entity states (core NATS \u2014 no JetStream)\n        await nc.subscribe(\"ent.*.*.state\", cb=entity_handler)\n        LOG.info(\"subscribed: ent.*.*.state (core NATS)\")\n\n        # Subscribe: intel events (JetStream durable consumer)\n        js = nc.jetstream()\n        await js.subscribe(\n            \"intel.>\",\n            durable=\"sink-tak\",\n            cb=intel_handler,\n            deliver_policy=nats.js.api.DeliverPolicy.NEW,\n        )\n        LOG.info(\"subscribed: intel.> (JetStream durable=sink-tak)\")\n\n        try:\n            while True:\n                await asyncio.sleep(60)\n                LOG.info(\"heartbeat ent=%d intel=%d skipped=%d uids=%d enabled=%s\",\n                         ent_published, intel_published, skipped, len(last_pub), _enabled)"
+    },
+    {
+      "id": "projector-launch",
+      "path": "platform/omos/tak-projector.yaml",
+      "ref": "HEAD",
+      "start_line": 463,
+      "end_line": 488,
+      "snippet": "    spec:\n      containers:\n        - name: projector\n          image: python:3.12-alpine\n          command: [\"/bin/sh\", \"-c\"]\n          args:\n            - pip install --no-cache-dir --quiet nats-py && exec python /app/projector.py\n          env:\n            - name: NATS_URL\n              value: \"nats://nats.nats.svc.cluster.local:4222\"\n            - name: NATS_USER\n              valueFrom:\n                secretKeyRef:\n                  name: omos-nats-creds\n                  key: user\n            - name: NATS_PASSWORD\n              valueFrom:\n                secretKeyRef:\n                  name: omos-nats-creds\n                  key: password\n            - name: TAK_INJECT_SUBJECT\n              value: \"tak.cot.inject\"\n            - name: TAK_GROUP\n              value: \"__ANON__\"\n            - name: MIN_INTERVAL_SEC\n              value: \"5\""
+    },
+    {
+      "id": "intel-deployment",
+      "path": "platform/omos/intel-feeds.yaml",
+      "ref": "HEAD",
+      "start_line": 1,
+      "end_line": 45,
+      "snippet": "# =============================================================================\n# OMOS Intel Feeds \u2014 world intelligence data \u2192 NATS INTEL stream\n#\n# Single Deployment running all 7 intel feeds as supervised asyncio tasks.\n# Each feed has independent restart logic \u2014 one crash does not affect others.\n#\n# Feeds:\n#   noaa   \u2014 NOAA NWS weather alerts     \u2192 intel.weather.noaa.alert.*\n#   usgs   \u2014 USGS earthquakes            \u2192 intel.seismic.usgs.*\n#   acled  \u2014 Armed conflict events       \u2192 intel.conflict.acled.*\n#   firms  \u2014 NASA FIRMS active fires     \u2192 intel.fire.nasa.firms.*\n#   gdacs  \u2014 GDACS global disasters      \u2192 intel.disaster.gdacs.*\n#   emsc   \u2014 EMSC European seismic       \u2192 intel.seismic.emsc.*\n#   eonet  \u2014 NASA EONET natural events   \u2192 intel.natural.nasa.eonet.*\n#\n# All feed config (poll intervals, API keys, filters) is read from\n# the NATS KV bucket `feed-config` at runtime.\n#\n# Enable/disable a feed: nats kv put feed-config feed.{id}.enabled false\n# =============================================================================\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: feed-intel\n  namespace: omos\n  labels:\n    app.kubernetes.io/name: feed-intel\n    app.kubernetes.io/part-of: omos-feeds-intel\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: feed-intel\n  template:\n    metadata:\n      labels:\n        app.kubernetes.io/name: feed-intel\n        app.kubernetes.io/part-of: omos-feeds-intel\n    spec:\n      containers:\n        - name: feeds\n          image: python:3.12-alpine\n          command: [\"/bin/sh\", \"-c\"]\n          args:\n            - pip install --no-cache-dir --quiet nats-py aiohttp && exec python3 /scripts/feed_intel_runner.py"
+    },
+    {
+      "id": "runner",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 2015,
+      "end_line": 2063,
+      "snippet": "    FEEDS = [\n        \"feed_intel_noaa\",\n        \"feed_intel_usgs\",\n        \"feed_intel_acled\",\n        \"feed_intel_firms\",\n        \"feed_intel_gdacs\",\n        \"feed_intel_emsc\",\n        \"feed_intel_eonet\",\n    ]\n\n    RESTART_DELAY = 15  # seconds between crash restarts\n\n    def load_module(name):\n        path = f\"/scripts/{name}.py\"\n        spec = importlib.util.spec_from_file_location(name, path)\n        mod = importlib.util.module_from_spec(spec)\n        sys.modules[name] = mod\n        spec.loader.exec_module(mod)\n        return mod\n\n    async def supervised(name, mod):\n        while True:\n            try:\n                LOG.info(\"[%s] starting\", name)\n                await mod.main()\n                LOG.warning(\"[%s] main() returned unexpectedly, restarting in %ds\",\n                            name, RESTART_DELAY)\n            except asyncio.CancelledError:\n                LOG.info(\"[%s] cancelled\", name)\n                raise\n            except Exception as exc:\n                LOG.error(\"[%s] crashed: %s \u2014 restarting in %ds\",\n                          name, exc, RESTART_DELAY)\n            await asyncio.sleep(RESTART_DELAY)\n\n    async def main():\n        LOG.info(\"feed-intel-runner starting %d feeds\", len(FEEDS))\n        modules = {}\n        for name in FEEDS:\n            try:\n                modules[name] = load_module(name)\n                LOG.info(\"  loaded %s\", name)\n            except Exception as exc:\n                LOG.error(\"  failed to load %s: %s \u2014 skipping\", name, exc)\n\n        tasks = [\n            asyncio.create_task(supervised(name, mod), name=name)\n            for name, mod in modules.items()\n        ]"
+    },
+    {
+      "id": "watch-noaa",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 346,
+      "end_line": 367,
+      "snippet": "    async def watch_config(kv, config: dict, feed_id: str):\n        try:\n            watcher = await kv.watch(f\"feed.{feed_id}.*\", include_history=True)\n            async for entry in watcher:\n                if entry is None:\n                    break\n                key = entry.key.split(\".\")[-1]  # last segment\n                val = entry.value.decode() if entry.value else \"\"\n                config[key] = val\n                LOG.info(f\"KV config update: feed.{feed_id}.{key}={val!r}\")\n        except Exception as e:\n            LOG.error(f\"KV watcher error: {e}\")\n\n    def get_config(config: dict) -> tuple[bool, int, list[str]]:\n        enabled       = config.get(\"enabled\", \"true\").lower() != \"false\"\n        poll_interval = int(config.get(\"poll_interval\", \"300\") or \"300\")\n        areas_raw     = config.get(\"areas\", \"US\") or \"US\"\n        areas         = [a.strip() for a in areas_raw.split(\",\") if a.strip()]\n        return enabled, poll_interval, areas\n\n    # ---------------------------------------------------------------------------\n    # Status heartbeat"
+    },
+    {
+      "id": "watch-usgs",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 644,
+      "end_line": 665,
+      "snippet": "    async def watch_config(kv, config: dict, feed_id: str):\n        try:\n            watcher = await kv.watch(f\"feed.{feed_id}.*\", include_history=True)\n            async for entry in watcher:\n                if entry is None:\n                    break\n                key = entry.key.split(\".\")[-1]\n                val = entry.value.decode() if entry.value else \"\"\n                config[key] = val\n                LOG.info(f\"KV config update: feed.{feed_id}.{key}={val!r}\")\n        except Exception as e:\n            LOG.error(f\"KV watcher error: {e}\")\n\n    def get_config(config: dict) -> tuple[bool, int, float]:\n        enabled       = config.get(\"enabled\", \"true\").lower() != \"false\"\n        poll_interval = int(config.get(\"poll_interval\", \"60\") or \"60\")\n        min_magnitude = float(config.get(\"min_magnitude\", \"2.5\") or \"2.5\")\n        return enabled, poll_interval, min_magnitude\n\n    # ---------------------------------------------------------------------------\n    # Status heartbeat\n    # ---------------------------------------------------------------------------"
+    },
+    {
+      "id": "watch-acled",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 875,
+      "end_line": 896,
+      "snippet": "    async def watch_config(kv, config: dict, feed_id: str):\n        try:\n            watcher = await kv.watch(f\"feed.{feed_id}.*\", include_history=True)\n            async for entry in watcher:\n                if entry is None:\n                    break\n                key = entry.key.split(\".\")[-1]\n                val = entry.value.decode() if entry.value else \"\"\n                config[key] = val\n                LOG.info(f\"KV config update: feed.{feed_id}.{key}={val!r}\")\n        except Exception as e:\n            LOG.error(f\"KV watcher error: {e}\")\n\n    def get_config(config: dict) -> tuple[bool, int, str, str, str]:\n        enabled       = config.get(\"enabled\", \"true\").lower() != \"false\"\n        poll_interval = int(config.get(\"poll_interval\", \"3600\") or \"3600\")\n        api_key       = config.get(\"api_key\", \"\")\n        email         = config.get(\"email\", \"\")\n        countries     = config.get(\"countries\", \"\")\n        return enabled, poll_interval, api_key, email, countries\n\n    # ---------------------------------------------------------------------------"
+    },
+    {
+      "id": "watch-firms",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1116,
+      "end_line": 1137,
+      "snippet": "    async def watch_config(kv, config: dict, feed_id: str):\n        try:\n            watcher = await kv.watch(f\"feed.{feed_id}.*\", include_history=True)\n            async for entry in watcher:\n                if entry is None:\n                    break\n                key = entry.key.split(\".\")[-1]\n                val = entry.value.decode() if entry.value else \"\"\n                config[key] = val\n                LOG.info(f\"KV config update: feed.{feed_id}.{key}={val!r}\")\n        except Exception as e:\n            LOG.error(f\"KV watcher error: {e}\")\n\n    def get_config(config: dict) -> tuple[bool, int, str, str, int]:\n        enabled       = config.get(\"enabled\", \"true\").lower() != \"false\"\n        poll_interval = int(config.get(\"poll_interval\", \"600\") or \"600\")\n        api_key       = config.get(\"api_key\", \"\")\n        area          = config.get(\"area\", \"world\") or \"world\"\n        days          = int(config.get(\"days\", \"1\") or \"1\")\n        return enabled, poll_interval, api_key, area, days\n\n    # ---------------------------------------------------------------------------"
+    },
+    {
+      "id": "watch-gdacs",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1393,
+      "end_line": 1414,
+      "snippet": "    async def watch_config(kv, config: dict, feed_id: str):\n        try:\n            watcher = await kv.watch(f\"feed.{feed_id}.*\", include_history=True)\n            async for entry in watcher:\n                if entry is None:\n                    break\n                key = entry.key.split(\".\")[-1]\n                val = entry.value.decode() if entry.value else \"\"\n                config[key] = val\n                LOG.info(f\"KV config update: feed.{feed_id}.{key}={val!r}\")\n        except Exception as e:\n            LOG.error(f\"KV watcher error: {e}\")\n\n    def get_config(config: dict) -> tuple[bool, int]:\n        enabled       = config.get(\"enabled\", \"true\").lower() != \"false\"\n        poll_interval = int(config.get(\"poll_interval\", \"600\") or \"600\")\n        return enabled, poll_interval\n\n    async def publish_status(nc, state: dict):\n        payload = json.dumps({\n            \"feed_id\":        FEED_ID,\n            \"enabled\":        state[\"enabled\"],"
+    },
+    {
+      "id": "watch-emsc",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1609,
+      "end_line": 1630,
+      "snippet": "    async def watch_config(kv, config: dict, feed_id: str):\n        try:\n            watcher = await kv.watch(f\"feed.{feed_id}.*\", include_history=True)\n            async for entry in watcher:\n                if entry is None:\n                    break\n                key = entry.key.split(\".\")[-1]\n                val = entry.value.decode() if entry.value else \"\"\n                config[key] = val\n                LOG.info(f\"KV config update: feed.{feed_id}.{key}={val!r}\")\n        except Exception as e:\n            LOG.error(f\"KV watcher error: {e}\")\n\n    def get_config(config: dict) -> tuple[bool, int, float]:\n        enabled       = config.get(\"enabled\", \"true\").lower() != \"false\"\n        poll_interval = int(config.get(\"poll_interval\", \"120\") or \"120\")\n        min_magnitude = float(config.get(\"min_magnitude\", \"2.5\") or \"2.5\")\n        return enabled, poll_interval, min_magnitude\n\n    async def publish_status(nc, state: dict):\n        payload = json.dumps({\n            \"feed_id\":        FEED_ID,"
+    },
+    {
+      "id": "watch-eonet",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1825,
+      "end_line": 1846,
+      "snippet": "    async def watch_config(kv, config: dict, feed_id: str):\n        try:\n            watcher = await kv.watch(f\"feed.{feed_id}.*\", include_history=True)\n            async for entry in watcher:\n                if entry is None:\n                    break\n                key = entry.key.split(\".\")[-1]\n                val = entry.value.decode() if entry.value else \"\"\n                config[key] = val\n                LOG.info(f\"KV config update: feed.{feed_id}.{key}={val!r}\")\n        except Exception as e:\n            LOG.error(f\"KV watcher error: {e}\")\n\n    def get_config(config: dict) -> tuple[bool, int]:\n        enabled       = config.get(\"enabled\", \"true\").lower() != \"false\"\n        poll_interval = int(config.get(\"poll_interval\", \"300\") or \"300\")\n        return enabled, poll_interval\n\n    async def publish_status(nc, state: dict):\n        payload = json.dumps({\n            \"feed_id\":        FEED_ID,\n            \"enabled\":        state[\"enabled\"],"
+    },
+    {
+      "id": "noaa-status",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 368,
+      "end_line": 382,
+      "snippet": "    # ---------------------------------------------------------------------------\n    async def publish_status(nc, state: dict):\n        payload = json.dumps({\n            \"feed_id\":        FEED_ID,\n            \"enabled\":        state[\"enabled\"],\n            \"poll_interval\":  state[\"poll_interval\"],\n            \"last_poll_ts\":   state[\"last_poll_ts\"],\n            \"last_poll_msgs\": state[\"last_poll_msgs\"],\n            \"last_error\":     state[\"last_error\"],\n            \"total_msgs\":     state[\"total_msgs\"],\n        }).encode()\n        try:\n            await nc.publish(f\"tel.feed.{FEED_ID}.status\", payload)\n        except Exception as e:\n            LOG.warning(f\"Status publish error: {e}\")"
+    },
+    {
+      "id": "noaa-poll-errors",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 490,
+      "end_line": 515,
+      "snippet": "    async def poll(session: aiohttp.ClientSession, js, seen: set, areas: list[str]) -> int:\n        params: dict[str, str] = {\"status\": \"actual\"}\n        if areas and areas != [\"US\"]:\n            params[\"area\"] = \",\".join(areas)\n        url = f\"{NOAA_BASE}/alerts/active\"\n        try:\n            async with session.get(\n                url,\n                params=params,\n                headers={\"Accept\": \"application/geo+json\", \"User-Agent\": \"omos-feed-intel-noaa/1.0\"},\n                timeout=aiohttp.ClientTimeout(total=30),\n            ) as r:\n                if r.status != 200:\n                    LOG.warning(f\"NOAA HTTP {r.status}\")\n                    return 0\n                data = await r.json(content_type=None)\n        except Exception as e:\n            LOG.error(f\"NOAA fetch error: {e}\")\n            return 0\n\n        features  = data.get(\"features\", [])\n        published = 0\n        for feat in features:\n            alert_id = feat.get(\"id\", \"\")\n            if not alert_id or alert_id in seen:\n                continue"
+    },
+    {
+      "id": "noaa-publish",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 514,
+      "end_line": 530,
+      "snippet": "            if not alert_id or alert_id in seen:\n                continue\n            props      = feat.get(\"properties\", {})\n            event_type = props.get(\"event\", \"alert\")\n            affected   = props.get(\"affectedZones\") or []\n            state = extract_state_from_zones([z.split(\"/\")[-1] for z in affected]) if affected else \"XX\"\n            if state == \"XX\":\n                m = re.search(r\"\\b([A-Z]{2})\\b\", props.get(\"areaDesc\", \"\"))\n                if m and m.group(1) in STATE_CENTROIDS:\n                    state = m.group(1)\n            lat, lon = await resolve_geometry(session, feat, state)\n            subject  = build_subject(state, event_type)\n            payload  = build_payload(feat, lat, lon)\n            try:\n                hdrs = {\"Nats-Msg-Id\": alert_id}\n                await js.publish(subject, json.dumps(payload).encode(), headers=hdrs)\n                seen.add(alert_id)"
+    },
+    {
+      "id": "noaa-control-startup",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 554,
+      "end_line": 608,
+      "snippet": "        # Load KV config\n        kv = await js.key_value(\"feed-config\")\n        config: dict = {}\n        # Start watcher as background task (loads history first, then watches)\n        asyncio.ensure_future(watch_config(kv, config, FEED_ID))\n        # Brief yield to let include_history populate config before first poll\n        await asyncio.sleep(0.5)\n\n        state = {\n            \"enabled\":        True,\n            \"poll_interval\":  300,\n            \"last_poll_ts\":   \"\",\n            \"last_poll_msgs\": 0,\n            \"last_error\":     \"\",\n            \"total_msgs\":     0,\n        }\n\n        seen: set[str] = set()\n        seen_reset_at  = time.monotonic()\n        last_status_at = time.monotonic()\n\n        async with aiohttp.ClientSession() as session:\n            while True:\n                enabled, poll_interval, areas = get_config(config)\n                state[\"enabled\"]       = enabled\n                state[\"poll_interval\"] = poll_interval\n\n                # Heartbeat status\n                now_mono = time.monotonic()\n                if now_mono - last_status_at >= STATUS_INTERVAL:\n                    await publish_status(nc, state)\n                    last_status_at = now_mono\n\n                if not enabled:\n                    await asyncio.sleep(min(poll_interval, 10))\n                    continue\n\n                if now_mono - seen_reset_at > SEEN_RESET_S:\n                    LOG.info(f\"Clearing dedup set (had {len(seen)} entries)\")\n                    seen.clear()\n                    seen_reset_at = time.monotonic()\n\n                state[\"last_error\"] = \"\"\n                try:\n                    n = await poll(session, js, seen, areas)\n                    state[\"last_poll_msgs\"] = n\n                    state[\"total_msgs\"]    += n\n                    state[\"last_poll_ts\"]   = now_iso()\n                except Exception as e:\n                    state[\"last_error\"] = str(e)\n                    LOG.error(f\"Poll error: {e}\")\n\n                await publish_status(nc, state)\n                last_status_at = time.monotonic()\n                await asyncio.sleep(poll_interval)"
+    },
+    {
+      "id": "usgs-payload",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 701,
+      "end_line": 733,
+      "snippet": "    def build_payload(feat: dict) -> dict:\n        props  = feat.get(\"properties\", {})\n        coords = feat[\"geometry\"][\"coordinates\"]\n        lon, lat, depth = coords[0], coords[1], coords[2]\n        mag = props.get(\"mag\") or 0.0\n        return {\n            \"id\":        feat[\"id\"],\n            \"type\":      \"earthquake\",\n            \"source\":    \"usgs\",\n            \"lat\":       round(lat, 6),\n            \"lon\":       round(lon, 6),\n            \"timestamp\": ms_to_iso(props.get(\"time\")),\n            \"expires\":   \"\",\n            \"properties\": {\n                \"magnitude\":      mag,\n                \"magnitude_type\": props.get(\"magType\", \"\"),\n                \"depth_km\":       round(depth, 2),\n                \"place\":          props.get(\"place\", \"\"),\n                \"status\":         props.get(\"status\", \"\"),\n                \"tsunami\":        bool(props.get(\"tsunami\")),\n                \"felt\":           props.get(\"felt\"),\n                \"cdi\":            props.get(\"cdi\"),\n                \"mmi\":            props.get(\"mmi\"),\n                \"alert\":          props.get(\"alert\"),\n                \"sig\":            props.get(\"sig\"),\n                \"net\":            props.get(\"net\", \"\"),\n                \"url\":            props.get(\"url\", \"\"),\n            },\n            \"geometry\": {\n                \"type\":        \"Point\",\n                \"coordinates\": [round(lon, 6), round(lat, 6)],\n            },\n        }"
+    },
+    {
+      "id": "usgs-publish",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 756,
+      "end_line": 772,
+      "snippet": "            if not fid or fid in seen:\n                continue\n            props = feat.get(\"properties\", {})\n            mag   = props.get(\"mag\")\n            if mag is None or mag < min_magnitude:\n                continue\n            if not feat.get(\"geometry\") or not feat[\"geometry\"].get(\"coordinates\"):\n                continue\n            bucket  = magnitude_bucket(mag)\n            cid     = clean_id(fid)\n            subject = f\"intel.seismic.usgs.{bucket}.{cid}\"\n            payload = build_payload(feat)\n            try:\n                hdrs = {\"Nats-Msg-Id\": fid}\n                await js.publish(subject, json.dumps(payload).encode(), headers=hdrs)\n                seen.add(fid)\n                published += 1"
+    },
+    {
+      "id": "acled-payload",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 921,
+      "end_line": 955,
+      "snippet": "        try:\n            lat = float(row.get(\"latitude\", 0) or 0)\n            lon = float(row.get(\"longitude\", 0) or 0)\n        except (ValueError, TypeError):\n            lat, lon = 0.0, 0.0\n        event_date = row.get(\"event_date\", \"\")\n        timestamp  = f\"{event_date}T00:00:00Z\" if event_date else now_iso()\n        return {\n            \"id\":        str(row.get(\"data_id\", \"\")),\n            \"type\":      \"conflict_event\",\n            \"source\":    \"acled\",\n            \"lat\":       round(lat, 6),\n            \"lon\":       round(lon, 6),\n            \"timestamp\": timestamp,\n            \"expires\":   \"\",\n            \"properties\": {\n                \"event_type\":     row.get(\"event_type\", \"\"),\n                \"sub_event_type\": row.get(\"sub_event_type\", \"\"),\n                \"actor1\":         row.get(\"actor1\", \"\"),\n                \"actor2\":         row.get(\"actor2\", \"\"),\n                \"country\":        row.get(\"country\", \"\"),\n                \"iso3\":           row.get(\"iso3\", \"\"),\n                \"location\":       row.get(\"location\", \"\"),\n                \"admin1\":         row.get(\"admin1\", \"\"),\n                \"admin2\":         row.get(\"admin2\", \"\"),\n                \"fatalities\":     int(row.get(\"fatalities\", 0) or 0),\n                \"notes\":          (row.get(\"notes\") or \"\")[:500],\n                \"source\":         row.get(\"source\", \"\"),\n                \"source_scale\":   row.get(\"source_scale\", \"\"),\n            },\n            \"geometry\": {\n                \"type\":        \"Point\",\n                \"coordinates\": [round(lon, 6), round(lat, 6)],\n            },\n        }"
+    },
+    {
+      "id": "acled-key-gate",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1054,
+      "end_line": 1067,
+      "snippet": "                if now_mono - last_status_at >= STATUS_INTERVAL:\n                    await publish_status(nc, state)\n                    last_status_at = now_mono\n\n                # Skip poll if disabled or credentials missing\n                if not enabled or not api_key or not email:\n                    if not api_key or not email:\n                        LOG.debug(\"ACLED api_key/email not set in KV \u2014 skipping poll\")\n                    await asyncio.sleep(min(poll_interval, 30))\n                    continue\n\n                state[\"last_error\"] = \"\"\n                try:\n                    n = await poll(session, js, seen, api_key, email, countries)"
+    },
+    {
+      "id": "acled-publish",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 995,
+      "end_line": 1008,
+      "snippet": "        published = 0\n        for row in rows:\n            data_id = str(row.get(\"data_id\", \"\"))\n            if not data_id or data_id in seen:\n                continue\n            iso3       = (row.get(\"iso3\") or \"XXX\").lower()\n            event_type = row.get(\"event_type\", \"event\")\n            subject    = f\"intel.conflict.acled.{iso3}.{slugify(event_type)}\"\n            payload    = build_payload(row)\n            try:\n                hdrs = {\"Nats-Msg-Id\": f\"acled-{data_id}\"}\n                await js.publish(subject, json.dumps(payload).encode(), headers=hdrs)\n                seen.add(data_id)\n                published += 1"
+    },
+    {
+      "id": "firms-payload",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1184,
+      "end_line": 1211,
+      "snippet": "    def build_payload(row: dict, lat: float, lon: float, dedup_key: str) -> dict:\n        return {\n            \"id\":        dedup_key,\n            \"type\":      \"wildfire\",\n            \"source\":    \"nasa_firms\",\n            \"lat\":       round(lat, 6),\n            \"lon\":       round(lon, 6),\n            \"timestamp\": row_timestamp(row),\n            \"expires\":   \"\",\n            \"properties\": {\n                \"brightness\":    _float(row.get(\"bright_ti4\")),\n                \"brightness_t5\": _float(row.get(\"bright_ti5\")),\n                \"frp\":           _float(row.get(\"frp\")),\n                \"confidence\":    row.get(\"confidence\", \"\"),\n                \"satellite\":     row.get(\"satellite\", \"\"),\n                \"instrument\":    row.get(\"instrument\", \"VIIRS\"),\n                \"scan\":          _float(row.get(\"scan\")),\n                \"track\":         _float(row.get(\"track\")),\n                \"acq_date\":      row.get(\"acq_date\", \"\"),\n                \"acq_time\":      row.get(\"acq_time\", \"\"),\n                \"version\":       row.get(\"version\", \"\"),\n                \"daynight\":      row.get(\"daynight\", \"\"),\n            },\n            \"geometry\": {\n                \"type\":        \"Point\",\n                \"coordinates\": [round(lon, 6), round(lat, 6)],\n            },\n        }"
+    },
+    {
+      "id": "firms-publish",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1249,
+      "end_line": 1260,
+      "snippet": "                continue\n            dedup_key = row_dedup_key(row)\n            if dedup_key in seen:\n                continue\n            payload = build_payload(row, lat, lon, dedup_key)\n            try:\n                hdrs = {\"Nats-Msg-Id\": dedup_key}\n                await js.publish(subject, json.dumps(payload).encode(), headers=hdrs)\n                seen.add(dedup_key)\n                published += 1\n            except Exception as e:\n                LOG.error(f\"NATS publish error {subject}: {e}\")"
+    },
+    {
+      "id": "firms-key-gate",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1309,
+      "end_line": 1320,
+      "snippet": "                if not enabled or not api_key:\n                    if not api_key:\n                        LOG.debug(\"FIRMS api_key not set in KV \u2014 skipping poll\")\n                    await asyncio.sleep(min(poll_interval, 30))\n                    continue\n\n                region  = slugify(area)\n                subject = f\"intel.fire.nasa.firms.{region}\"\n\n                state[\"last_error\"] = \"\"\n                try:\n                    n = await poll(session, js, seen, api_key, area, days, subject)"
+    },
+    {
+      "id": "gdacs-publish",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1479,
+      "end_line": 1501,
+      "snippet": "            payload = {\n                \"id\":        f\"gdacs-{event_type}-{event_id}\",\n                \"type\":      intel_type,\n                \"source\":    \"gdacs\",\n                \"lat\":       lat,\n                \"lon\":       lon,\n                \"timestamp\": timestamp,\n                \"expires\":   \"\",\n                \"properties\": {\n                    \"headline\":    headline,\n                    \"event_type\":  event_type,\n                    \"alert_level\": alert_level,\n                    \"country\":     country,\n                    \"severity\":    severity,\n                    \"url\":         url,\n                },\n            }\n            subject = f\"intel.disaster.gdacs.{alert_slug}.{event_id}\"\n            try:\n                hdrs = {\"Nats-Msg-Id\": dedup_key}\n                await js.publish(subject, json.dumps(payload).encode(), headers=hdrs)\n                seen.add(dedup_key)\n                published += 1"
+    },
+    {
+      "id": "emsc-publish",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1686,
+      "end_line": 1710,
+      "snippet": "            subject  = f\"intel.seismic.emsc.{bucket}.{clean_id}\"\n\n            payload = {\n                \"id\":        f\"emsc-{clean_id}\",\n                \"type\":      \"earthquake\",\n                \"source\":    \"emsc\",\n                \"lat\":       round(lat, 6),\n                \"lon\":       round(lon, 6),\n                \"timestamp\": ts,\n                \"expires\":   \"\",\n                \"properties\": {\n                    \"magnitude\":      mag,\n                    \"magnitude_type\": mag_type,\n                    \"depth_km\":       round(depth, 2),\n                    \"place\":          region,\n                    \"region\":         region,\n                    \"url\":            f\"https://www.seismicportal.eu/eventdetails.html?unid={fid}\",\n                },\n            }\n            try:\n                hdrs = {\"Nats-Msg-Id\": f\"emsc-{clean_id}\"}\n                await js.publish(subject, json.dumps(payload).encode(), headers=hdrs)\n                seen.add(fid)\n                published += 1\n                LOG.debug(f\"Published {subject} mag={mag}\")"
+    },
+    {
+      "id": "eonet-publish",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 1872,
+      "end_line": 1923,
+      "snippet": "        for event in events:\n            eid   = event.get(\"id\", \"\")\n            title = event.get(\"title\", \"\")\n            if not eid or eid in seen:\n                continue\n\n            categories = event.get(\"categories\", [])\n            category   = categories[0].get(\"title\", \"Unknown\") if categories else \"Unknown\"\n            intel_type = CATEGORY_TYPE_MAP.get(category, \"disaster\")\n            cat_slug   = slugify(category)\n\n            sources   = event.get(\"sources\", [])\n            source_url = sources[0].get(\"url\", \"\") if sources else \"\"\n\n            geometries = event.get(\"geometry\", [])\n            lat, lon   = 0.0, 0.0\n            timestamp  = now_iso()\n            if geometries:\n                geom = geometries[-1]\n                coords = geom.get(\"coordinates\", [0.0, 0.0])\n                try:\n                    lon = float(coords[0])\n                    lat = float(coords[1])\n                except (TypeError, ValueError, IndexError):\n                    pass\n                ts_raw = geom.get(\"date\", \"\")\n                try:\n                    timestamp = datetime.fromisoformat(ts_raw.replace(\"Z\", \"+00:00\")).strftime(\"%Y-%m-%dT%H:%M:%SZ\")\n                except Exception:\n                    pass\n\n            clean_eid = re.sub(r\"[^a-zA-Z0-9_-]\", \"-\", eid)\n            subject   = f\"intel.natural.nasa.eonet.{cat_slug}.{clean_eid}\"\n            payload   = {\n                \"id\":        f\"eonet-{clean_eid}\",\n                \"type\":      intel_type,\n                \"source\":    \"nasa-eonet\",\n                \"lat\":       round(lat, 6),\n                \"lon\":       round(lon, 6),\n                \"timestamp\": timestamp,\n                \"expires\":   \"\",\n                \"properties\": {\n                    \"headline\":   title,\n                    \"category\":   category,\n                    \"source_url\": source_url,\n                    \"closed\":     event.get(\"closed\") or \"\",\n                },\n            }\n            try:\n                hdrs = {\"Nats-Msg-Id\": f\"eonet-{clean_eid}\"}\n                await js.publish(subject, json.dumps(payload).encode(), headers=hdrs)\n                seen.add(eid)"
+    },
+    {
+      "id": "ch-extraction",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 69,
+      "end_line": 109,
+      "snippet": "    def extract_fields(subject: str, payload: dict) -> dict:\n        tokens = subject.split(\".\")\n\n        # entity_id\n        entity_id = (\n            payload.get(\"id\")\n            or payload.get(\"entity_id\")\n            or (tokens[-1] if tokens else \"unknown\")\n        )\n\n        # entity_type \u2014 subject token index 2 (e.g. intel.{domain}.{source}.{type} \u2192 tokens[3])\n        # For ent.{entity_type}.{entity_id}.state \u2192 tokens[1]\n        if tokens and tokens[0] == \"ent\" and len(tokens) >= 2:\n            entity_type = payload.get(\"type\") or payload.get(\"entity_type\") or tokens[1]\n        else:\n            entity_type = (\n                payload.get(\"type\")\n                or payload.get(\"entity_type\")\n                or (tokens[2] if len(tokens) > 2 else \"unknown\")\n            )\n\n        # source \u2014 payload.source or subject token 1\n        source = payload.get(\"source\") or (tokens[1] if len(tokens) > 1 else \"unknown\")\n\n        # lat/lon \u2014 direct fields or GeoJSON geometry\n        lat = _safe_float(payload.get(\"lat\"))\n        lon = _safe_float(payload.get(\"lon\"))\n        if lat is None or lon is None:\n            geom = payload.get(\"geometry\") or {}\n            coords = geom.get(\"coordinates\")\n            if isinstance(coords, (list, tuple)) and len(coords) >= 2:\n                lon = _safe_float(coords[0])\n                lat = _safe_float(coords[1])\n\n        return {\n            \"entity_id\":   str(entity_id),\n            \"entity_type\": str(entity_type),\n            \"source\":      str(source),\n            \"lat\":         lat,\n            \"lon\":         lon,\n        }"
+    },
+    {
+      "id": "ch-loss-on-failure",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 116,
+      "end_line": 136,
+      "snippet": "    def flush_to_clickhouse(batch: list[dict]) -> None:\n        body = \"\\n\".join(json.dumps(row) for row in batch).encode(\"utf-8\")\n        req = urllib.request.Request(\n            CH_URL,\n            data=body,\n            method=\"POST\",\n            headers={\n                \"Content-Type\": \"application/x-ndjson\",\n                \"X-ClickHouse-User\": CH_USER,\n                \"X-ClickHouse-Key\":  CH_PASSWORD,\n            },\n        )\n        try:\n            with urllib.request.urlopen(req, timeout=10) as resp:\n                status = resp.status\n            LOG.info(\"flushed batch=%d status=%d\", len(batch), status)\n        except urllib.error.HTTPError as exc:\n            body_text = exc.read(512).decode(\"utf-8\", errors=\"replace\")\n            LOG.error(\"ClickHouse HTTP %d \u2014 batch discarded: %s\", exc.code, body_text)\n        except Exception as exc:\n            LOG.error(\"ClickHouse unavailable \u2014 batch discarded: %s\", exc)"
+    },
+    {
+      "id": "ch-buffer-clear",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 143,
+      "end_line": 167,
+      "snippet": "    class Batcher:\n        def __init__(self) -> None:\n            self._rows: list[dict] = []\n            self._deadline: float = time.monotonic() + BATCH_SECS\n            self._lock = asyncio.Lock()\n\n        async def add(self, row: dict) -> None:\n            async with self._lock:\n                self._rows.append(row)\n                should_flush = (\n                    len(self._rows) >= BATCH_MAX\n                    or time.monotonic() >= self._deadline\n                )\n                if should_flush:\n                    await self._flush_locked()\n\n        async def _flush_locked(self) -> None:\n            if not self._rows:\n                self._deadline = time.monotonic() + BATCH_SECS\n                return\n            batch, self._rows = self._rows, []\n            self._deadline = time.monotonic() + BATCH_SECS\n            # Run blocking HTTP call in a thread so we don't block the event loop\n            loop = asyncio.get_event_loop()\n            await loop.run_in_executor(None, flush_to_clickhouse, batch)"
+    },
+    {
+      "id": "ch-handler",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 183,
+      "end_line": 210,
+      "snippet": "    def make_handler(batcher: Batcher):\n        async def handler(msg) -> None:\n            subject = msg.subject\n            try:\n                payload = json.loads(msg.data.decode(\"utf-8\"))\n            except Exception as exc:\n                LOG.warning(\"JSON parse error on %s \u2014 skipping: %s\", subject, exc)\n                return\n\n            fields = extract_fields(subject, payload)\n            now_iso = datetime.now(timezone.utc).strftime(\"%Y-%m-%d %H:%M:%S.%f\")[:-3]\n\n            row: dict = {\n                \"timestamp\":   now_iso,\n                \"subject\":     subject,\n                \"entity_id\":   fields[\"entity_id\"],\n                \"entity_type\": fields[\"entity_type\"],\n                \"source\":      fields[\"source\"],\n                \"payload\":     msg.data.decode(\"utf-8\"),\n            }\n            if fields[\"lat\"] is not None:\n                row[\"lat\"] = fields[\"lat\"]\n            if fields[\"lon\"] is not None:\n                row[\"lon\"] = fields[\"lon\"]\n\n            await batcher.add(row)\n\n        return handler"
+    },
+    {
+      "id": "ch-subscription",
+      "path": "platform/omos/intel-scripts.yaml",
+      "ref": "HEAD",
+      "start_line": 244,
+      "end_line": 262,
+      "snippet": "        # JetStream push consumer \u2014 durable, deliver to _INBOX.sink-ch\n        consumer_cfg = ConsumerConfig(\n            durable_name=\"sink-clickhouse\",\n            deliver_subject=\"_INBOX.sink-ch\",\n            deliver_policy=DeliverPolicy.LAST_PER_SUBJECT,\n            filter_subject=\"intel.>\",\n            ack_policy=\"none\",\n        )\n        js_sub = await js.subscribe(\n            \"intel.>\",\n            config=consumer_cfg,\n            cb=handler,\n            manual_ack=True,\n        )\n        LOG.info(\"JetStream push consumer subscribed to intel.>  (durable=sink-clickhouse)\")\n\n        # Core NATS subscription \u2014 ent.*.*.state (KV mirrors)\n        core_sub = await nc.subscribe(\"ent.*.*.state\", cb=handler)\n        LOG.info(\"core NATS subscribed to ent.*.*.state\")"
+    },
+    {
+      "id": "ch-deployment",
+      "path": "platform/omos/sinks.yaml",
+      "ref": "HEAD",
+      "start_line": 21,
+      "end_line": 25,
+      "snippet": "        - name: sink\n          image: python:3.12-alpine\n          command: [\"/bin/sh\", \"-c\"]\n          args:\n            - pip install --no-cache-dir --quiet nats-py && exec python3 /scripts/sink_clickhouse.py"
+    },
+    {
+      "id": "ch-keda",
+      "path": "platform/omos/scaledobject-sink-clickhouse.yaml",
+      "ref": "HEAD",
+      "start_line": 1,
+      "end_line": 40,
+      "snippet": "# KEDA ScaledObject for sink-clickhouse, driven by the INTEL/sink-clickhouse JetStream consumer lag.\n#\n# OBSERVE-ONLY on purpose: min 1 / max 1 keeps the Deployment at exactly one replica, same as\n# the Deployment's own `replicas: 1`, so Argo CD and KEDA do not fight. What this buys today is\n# proof that KEDA can read the NATS monitoring endpoint and see the consumer lag (check\n# `kubectl -n omos get scaledobject,hpa`). See docs/operations/keda-scalers.md before changing it.\n#\n# Why not scale to zero:\n#   * sink-clickhouse also holds a core-NATS subscription (ent.*.*.state). Core NATS is not\n#     durable, so every message published while the pod is at 0 is lost.\n#   * It is a push consumer with no deliver group; a second replica cannot bind, so max is 1.\n#   * INTEL carries constant traffic (consumer last_active within seconds), so there is no idle\n#     window to save, and the sink writes to onemind.events (\"NEVER DROP\").\napiVersion: keda.sh/v1alpha1\nkind: ScaledObject\nmetadata:\n  name: sink-clickhouse\n  namespace: omos\n  labels:\n    app.kubernetes.io/name: sink-clickhouse\n    app.kubernetes.io/part-of: omos-platform\nspec:\n  scaleTargetRef:\n    name: sink-clickhouse\n  minReplicaCount: 1\n  maxReplicaCount: 1\n  pollingInterval: 30\n  triggers:\n    - type: nats-jetstream\n      metadata:\n        # Headless service so KEDA can reach each server (nats-0/1/2.nats-headless) and find\n        # the consumer leader; /jsz on a follower does not report authoritative lag.\n        natsServerMonitoringEndpoint: nats-headless.nats.svc.cluster.local:8222\n        account: ONEMIND\n        stream: INTEL\n        consumer: sink-clickhouse\n        # lag = num_pending + num_ack_pending\n        lagThreshold: \"100\"\n        activationLagThreshold: \"1\"\n        useHttps: \"false\""
+    },
+    {
+      "id": "plugin-inject",
+      "path": "services/takserver/plugin-src/src/main/java/tak/server/plugins/NatsBridgePlugin.java",
+      "ref": "HEAD",
+      "start_line": 98,
+      "end_line": 111,
+      "snippet": "    private void onNatsMessage(io.nats.client.Message natsMsg) {\n        try {\n            String cotXml = new String(natsMsg.getData(), StandardCharsets.UTF_8);\n            logger.debug(\"NATS\u2192TAK [{}]: {}\", consumerSubject, cotXml.substring(0, Math.min(120, cotXml.length())));\n\n            Message takMessage = getConverter().cotStringToDataMessage(\n                cotXml,\n                groups,\n                Integer.toString(System.identityHashCode(this))\n            );\n            send(takMessage);\n        } catch (Exception e) {\n            logger.error(\"Error injecting NATS message into TAK\", e);\n        }"
+    },
+    {
+      "id": "plugin-core",
+      "path": "services/takserver/plugin-src/src/main/java/tak/server/plugins/NatsBridgePlugin.java",
+      "ref": "HEAD",
+      "start_line": 116,
+      "end_line": 137,
+      "snippet": "    @Override\n    public void start() {\n        logger.info(\"NatsBridgePlugin starting \u2014 connecting to {}\", natsUrl);\n        try {\n            Options options = new Options.Builder()\n                .server(natsUrl)\n                .maxReconnects(-1)          // reconnect forever\n                .reconnectWait(java.time.Duration.ofSeconds(2))\n                .connectionName(\"takserver-nats-bridge\")\n                .build();\n\n            natsConnection = Nats.connect(options);\n            logger.info(\"NatsBridgePlugin connected to NATS\");\n\n            // Subscribe to inbound CoT subject\n            natsDispatcher = natsConnection.createDispatcher(this::onNatsMessage);\n            natsDispatcher.subscribe(consumerSubject);\n            logger.info(\"NatsBridgePlugin subscribed to NATS subject: {}\", consumerSubject);\n\n        } catch (Exception e) {\n            logger.error(\"NatsBridgePlugin failed to connect to NATS at {}\", natsUrl, e);\n        }"
+    },
+    {
+      "id": "plugin-config",
+      "path": "services/takserver/plugin-src/src/main/resources/plugin-config.yaml",
+      "ref": "HEAD",
+      "start_line": 1,
+      "end_line": 5,
+      "snippet": "natsUrl: nats://localhost:4222\nnatsConsumerSubject: tak.cot.inject\nnatsProducerSubject: tak.cot.out\ngroups:\n  - __ANON__"
+    },
+    {
+      "id": "tak-leaf",
+      "path": "platform/takserver/deploy/tak-nats-leaf.yaml",
+      "ref": "HEAD",
+      "start_line": 1,
+      "end_line": 8,
+      "snippet": "# OneMind TAK NATS leaf node.\n# The nats-bridge plugin connects to this leaf in plaintext (in-cluster only).\n# The leaf holds the ONEMIND leaf credentials + bus CA and remotes up to the\n# DOKS bus leafnode port (7422) over TLS. Plugin stays creds-free and portable:\n# same plugin config works on Mac / DOKS / edge \u2014 only the leaf's remote changes.\n#\n# Secret `tak-nats-leaf` (leaf.conf + ca.crt) is created out-of-band (contains the\n# leaf_tak password) \u2014 see DEPLOY-RUNBOOK.md. Never committed."
+    },
+    {
+      "id": "tap-tls",
+      "path": "services/takserver/cot-tap/tap.py",
+      "ref": "HEAD",
+      "start_line": 51,
+      "end_line": 60,
+      "snippet": "def build_ssl_context() -> ssl.SSLContext:\n    ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)\n    if VERIFY_SERVER and os.path.exists(TAK_CA):\n        ctx.load_verify_locations(cafile=TAK_CA)\n        ctx.check_hostname = False\n        ctx.verify_mode = ssl.CERT_REQUIRED\n    else:\n        ctx.check_hostname = False\n        ctx.verify_mode = ssl.CERT_NONE\n    ctx.load_cert_chain(certfile=TAK_CERT, keyfile=TAK_KEY)"
+    },
+    {
+      "id": "tap-direction",
+      "path": "services/takserver/cot-tap/tap.py",
+      "ref": "HEAD",
+      "start_line": 80,
+      "end_line": 111,
+      "snippet": "async def stream_tak(nc):\n    ssl_ctx = build_ssl_context()\n    reader, writer = await asyncio.open_connection(TAK_HOST, TAK_PORT, ssl=ssl_ctx)\n    LOG.info(\"TLS connected to TAK %s:%s\", TAK_HOST, TAK_PORT)\n    buf = b\"\"\n    count = 0\n    try:\n        while True:\n            chunk = await reader.read(8192)\n            if not chunk:\n                LOG.warning(\"TAK stream closed by server\")\n                break\n            buf += chunk\n            # frame on </event>\n            while True:\n                idx = buf.find(EVENT_END)\n                if idx == -1:\n                    break\n                end = idx + len(EVENT_END)\n                raw = buf[:end]\n                buf = buf[end:]\n                start = raw.find(b\"<event\")\n                if start == -1:\n                    continue\n                event = raw[start:]\n                try:\n                    await nc.publish(NATS_SUBJECT, event)\n                    count += 1\n                    if count <= 5 or count % 50 == 0:\n                        LOG.info(\"published CoT #%d (%d bytes) to %s\", count, len(event), NATS_SUBJECT)\n                except Exception as e:\n                    LOG.error(\"NATS publish failed: %s\", e)"
+    },
+    {
+      "id": "tap-deployment",
+      "path": "services/takserver/cot-tap/deployment.yaml",
+      "ref": "HEAD",
+      "start_line": 13,
+      "end_line": 15,
+      "snippet": "  tap.py: |\n    # placeholder \u2014 overwritten by: kubectl create configmap cot-tap-script --from-file=tap.py\n    # (kept in git as tak-cluster/cot-tap/tap.py; apply with kustomize/kubectl replace)"
+    },
+    {
+      "id": "tap-target",
+      "path": "services/takserver/cot-tap/deployment.yaml",
+      "ref": "HEAD",
+      "start_line": 41,
+      "end_line": 56,
+      "snippet": "            - name: TAK_HOST\n              value: \"takserver-messaging-service\"\n            - name: TAK_PORT\n              value: \"8089\"\n            - name: TAK_CERT\n              value: \"/certs/tap.pem\"\n            - name: TAK_KEY\n              value: \"/certs/tap.key\"\n            - name: TAK_CA\n              value: \"/certs/ca.pem\"\n            - name: NATS_URL\n              value: \"nats://tak-nats-leaf:4222\"\n            - name: NATS_SUBJECT\n              value: \"tak.cot.out\"\n            - name: VERIFY_SERVER\n              value: \"false\""
+    },
+    {
+      "id": "tak-udp-alternative",
+      "path": "services/bridge/bridges/tak/main.go",
+      "ref": "HEAD",
+      "start_line": 373,
+      "end_line": 398,
+      "snippet": "\t// \u2500\u2500 NATS command subscriber (omos.field.*.command \u2192 TAK server) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n\tcmdSubject := \"omos.field.*.command\"\n\ttakServerAddr := fmt.Sprintf(\"%s:%d\", cfg.serverHost, cfg.serverPort)\n\traddr, err := net.ResolveUDPAddr(\"udp4\", takServerAddr)\n\tif err != nil {\n\t\tlog.Fatalf(\"[%s] resolve TAK server addr %s: %v\", cfg.bridgeName, takServerAddr, err)\n\t}\n\n\tsub, err := nc.Subscribe(cmdSubject, func(msg *nats.Msg) {\n\t\tcotXML := buildCommandCoT(msg.Data)\n\n\t\tudpConn, err := net.DialUDP(\"udp4\", nil, raddr)\n\t\tif err != nil {\n\t\t\tlog.Printf(\"[%s] dial TAK server %s: %v\", cfg.bridgeName, takServerAddr, err)\n\t\t\tpublishError(fmt.Sprintf(\"dial tak server: %v\", err))\n\t\t\treturn\n\t\t}\n\t\tdefer udpConn.Close()\n\n\t\tif _, err := udpConn.Write(cotXML); err != nil {\n\t\t\tlog.Printf(\"[%s] send command to TAK server: %v\", cfg.bridgeName, err)\n\t\t\tpublishError(fmt.Sprintf(\"send cmd to tak: %v\", err))\n\t\t\treturn\n\t\t}\n\t\tlog.Printf(\"[%s] forwarded command from subject %s \u2192 TAK %s\", cfg.bridgeName, msg.Subject, takServerAddr)\n\t})"
+    },
+    {
+      "id": "argo-omos",
+      "path": "platform/argocd/platform-omos.yaml",
+      "ref": "HEAD",
+      "start_line": 32,
+      "end_line": 53,
+      "snippet": "  source:\n    repoURL: https://github.com/onemindos/omos.git\n    targetRevision: main\n    path: platform/omos\n    directory:\n      recurse: false\n      exclude: \"*.secret*,*.env\"\n  destination:\n    server: https://kubernetes.default.svc\n    namespace: omos\n  syncPolicy:\n    automated:\n      prune: true\n      selfHeal: true\n    syncOptions:\n      - CreateNamespace=true\n  ignoreDifferences:\n    - group: apps\n      kind: Deployment\n      jsonPointers:\n        - /spec/template/metadata/annotations\n        - /spec/template/spec/containers/0/resources"
+    },
+    {
+      "id": "argo-connect",
+      "path": "platform/argocd/platform-redpanda-connect.yaml",
+      "ref": "HEAD",
+      "start_line": 34,
+      "end_line": 47,
+      "snippet": "  source:\n    repoURL: https://github.com/onemindos/omos.git\n    targetRevision: main\n    path: platform/data/redpanda-connect\n    directory:\n      recurse: false\n      exclude: \"*.proto,pipelines/\"\n  destination:\n    server: https://kubernetes.default.svc\n    namespace: omos\n  syncPolicy:\n    automated:\n      prune: true\n      selfHeal: true"
+    },
+    {
+      "id": "main-kv-excluded",
+      "path": "platform/argocd/platform-nats-streams.yaml",
+      "ref": "refs/remotes/origin/main",
+      "start_line": 19,
+      "end_line": 46,
+      "snippet": "# - kv-feed-config.yaml is excluded: the live bucket was created by an app (R1)\n#   and has no CR. Adopting it needs the full live config first (see that file).\n# \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\napiVersion: argoproj.io/v1alpha1\nkind: Application\nmetadata:\n  name: platform-nats-streams\n  namespace: argocd\n  annotations:\n    argocd.argoproj.io/sync-wave: \"2\"\nspec:\n  project: default\n  source:\n    repoURL: https://github.com/onemindos/omos.git\n    targetRevision: main\n    path: platform/nats/streams\n    directory:\n      recurse: false\n      exclude: \"kv-feed-config.yaml\"\n  destination:\n    server: https://kubernetes.default.svc\n    namespace: nats\n  syncPolicy:\n    automated:\n      prune: false\n      selfHeal: true\n    syncOptions:\n      - ServerSideApply=true"
+    },
+    {
+      "id": "main-kv-context",
+      "path": "platform/nats/streams/kv-feed-config.yaml",
+      "ref": "refs/remotes/origin/main",
+      "start_line": 1,
+      "end_line": 24,
+      "snippet": "# NOT APPLIED: excluded from platform-nats-streams (platform/argocd/platform-nats-streams.yaml).\n#\n# The live bucket KV_feed-config was created by an application, not by this CR, and\n# there is no live KeyValue CR for it. It is R1 (Raft group S-R1F-*, leader nats-2, per\n# surveyor on 2026-10-27). If this CR were applied, NACK would call UpdateKeyValue with\n# the full config below and change the live bucket in place. Apps that create the\n# bucket with their own config could then fail with \"stream name already in use with a\n# different configuration\".\n#\n# replicas matches live (1). history: 10 and the other unset fields (ttl, maxBytes) are\n# NOT verified against the live bucket. Before removing the exclusion, run\n# `nats kv info feed-config` and make this spec match it exactly. Move to R3 in a\n# separate change after that, as one deliberate edit of `replicas`.\napiVersion: jetstream.nats.io/v1beta2\nkind: KeyValue\nmetadata:\n  name: kv-feed-config\n  namespace: nats\nspec:\n  bucket: feed-config\n  storage: file\n  replicas: 1\n  history: 10\n  preventDelete: true"
+    },
+    {
+      "id": "main-intel-stream",
+      "path": "platform/nats/streams/intel.yaml",
+      "ref": "refs/remotes/origin/main",
+      "start_line": 8,
+      "end_line": 18,
+      "snippet": "spec:\n  name: INTEL\n  subjects:\n    - \"intel.>\"\n  storage: file\n  replicas: 3\n  retention: limits\n  discard: old\n  maxAge: 2160h\n  duplicateWindow: 2m\n  preventDelete: true"
+    },
+    {
+      "id": "main-cot-stream",
+      "path": "platform/nats/streams/cot.yaml",
+      "ref": "refs/remotes/origin/main",
+      "start_line": 8,
+      "end_line": 18,
+      "snippet": "spec:\n  name: COT\n  subjects:\n    - \"tak.cot.>\"\n  storage: file\n  replicas: 3\n  retention: limits\n  discard: old\n  maxAge: 720h\n  duplicateWindow: 2m\n  preventDelete: true"
+    },
+    {
+      "id": "main-world-stream",
+      "path": "platform/nats/streams/world.yaml",
+      "ref": "refs/remotes/origin/main",
+      "start_line": 8,
+      "end_line": 19,
+      "snippet": "spec:\n  name: WORLD\n  subjects:\n    - \"evt.world.>\"\n  storage: file\n  replicas: 3\n  retention: limits\n  discard: old\n  maxAge: 24h\n  maxBytes: 2000000000\n  duplicateWindow: 2m\n  preventDelete: true"
+    }
+  ],
+  "negative_search": {
+    "checkout_candidates": 1323,
+    "checkout_hits": 40,
+    "main_candidates": 1396,
+    "main_hits": 45,
+    "main_hit_files": [
+      "CLAUDE.md",
+      "platform/argocd/platform-nats-streams.yaml",
+      "platform/install.sh",
+      "platform/nats/streams/kv-feed-config.yaml",
+      "platform/omos/intel-feeds.yaml",
+      "platform/omos/intel-scripts.yaml",
+      "platform/omos/tak-projector.yaml"
+    ],
+    "patterns": [
+      "feed[._-]config|feeds?.{0,20}(?:toggle|enable|disable)|(?:toggle|enable|disable).{0,20}feeds?|cmd\\.projector|tel\\.feed",
+      "feed[._-]config|feeds?.{0,20}(?:toggle|enable|disable)|(?:toggle|enable|disable).{0,20}feeds?|cmd\\.projector|tel\\.feed"
+    ],
+    "exclusions": "hidden files/worktrees; docs directory; credential/secret/env/key/cert/lock paths; external repositories and live installed software not searched",
+    "limitation": "negative search does not prove absence of out-of-repo UI/services"
+  },
+  "public_semantics_support_file": "nats-semantics-primary.json",
+  "source_snapshots": [
+    "implementation-sources.json",
+    "secondary-route-sources.json",
+    "main-provenance-sources.json",
+    "main-control-scan.json"
+  ],
+  "unverified": [
+    "live Argo source and sync revisions",
+    "live workload args/replicas and installed code/digests",
+    "live NATS streams/KV state/account permissions",
+    "source authentication availability and source API success",
+    "TAK plugin loaded/configured/connected",
+    "TAK receipt and EUD map visibility",
+    "runtime UI/control behavior"
+  ]
+}

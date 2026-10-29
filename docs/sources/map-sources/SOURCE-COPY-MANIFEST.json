@@ -1,0 +1,1601 @@
+{
+  "destination": "/Users/zeus/Desktop/OneMind Map Sources",
+  "originals_preserved": true,
+  "counts": {
+    "main_fabric_feeds": 160,
+    "older_feed_copy": 1,
+    "map_layers": 79
+  },
+  "files": [
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Architecture/Knowledge/OneMind Feed Architecture - Before & After (Redpanda Connect).md",
+      "destination": "Related Documents/00 Core/Architecture/Knowledge/OneMind Feed Architecture - Before & After (Redpanda Connect).md",
+      "bytes": 32782,
+      "sha256": "05b0635c0e1e54f37b4d818d5080911741e530610534338a5521140f53ab30bb"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/511 NY Rideshare.md",
+      "destination": "Fabric Feeds/511 NY Rideshare.md",
+      "bytes": 918,
+      "sha256": "a5aa5e8f13ee3290fdb90708b12ea086c3a9bd19f0d9d824b216e116a163a939"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/511 Ny.md",
+      "destination": "Fabric Feeds/511 Ny.md",
+      "bytes": 896,
+      "sha256": "e324ba2ee1d56ba9ce44b06a293b2ad46f7db48d85fd03b9e127ab0ce368acd2"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/ADS-B Exchange.md",
+      "destination": "Fabric Feeds/ADS-B Exchange.md",
+      "bytes": 973,
+      "sha256": "4bca10f5583c8d9b27c2014fa609a87c7ee56b035d3ef338b0efd733cc47814e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AIS (MarineTraffic).md",
+      "destination": "Fabric Feeds/AIS (MarineTraffic).md",
+      "bytes": 1020,
+      "sha256": "a9099b4914f8bedcb03435cd999c0672cb4c5233df9bbe39310be75970b89a5b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AISStream.io.md",
+      "destination": "Fabric Feeds/AISStream.io.md",
+      "bytes": 947,
+      "sha256": "d6d7c1c5afd17772ebb2b18eed14c6dc41064f36f3a174d0ff0b3462ae217a54"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AIStream.md",
+      "destination": "Fabric Feeds/AIStream.md",
+      "bytes": 917,
+      "sha256": "52f30dd99efdae8a7c28d4f0ced6d4c2f7a91c957179583219074db3e0c9c796"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/APRS (aprs2.net).md",
+      "destination": "Fabric Feeds/APRS (aprs2.net).md",
+      "bytes": 904,
+      "sha256": "853f2f9c8ef99af0240132db987dcfbc939f0527c3ac3c27698e9dbc1b138ae7"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/APRS-IS Network.md",
+      "destination": "Fabric Feeds/APRS-IS Network.md",
+      "bytes": 918,
+      "sha256": "050a54587c2e887a9a854b4c61c0fdec67e30338ad486174e1eddbc249d258c1"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AbuseIPDB.md",
+      "destination": "Fabric Feeds/AbuseIPDB.md",
+      "bytes": 896,
+      "sha256": "9f2c7eb313ff84142342108f5b5a99cb068105816a71fa72546d0baead6a8ecc"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Acled.md",
+      "destination": "Fabric Feeds/Acled.md",
+      "bytes": 1009,
+      "sha256": "317ac98e666687a7723a530d6dcf26895cd08d41e6f51a8ccecab794761b692b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Adis.md",
+      "destination": "Fabric Feeds/Adis.md",
+      "bytes": 950,
+      "sha256": "f43a999b395596dbd5be3138298abdbfc06d9ffa1ed3395ee6fcac24f3f053ae"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Airframes.io (ACARS - VDL).md",
+      "destination": "Fabric Feeds/Airframes.io (ACARS - VDL).md",
+      "bytes": 975,
+      "sha256": "dd774a68156bcbf1f99cbb4bd35b345ffce335a1f4ee75e2d6468b590eba7ebf"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Al Jazeera RSS.md",
+      "destination": "Fabric Feeds/Al Jazeera RSS.md",
+      "bytes": 900,
+      "sha256": "96954c3ef956a47417b0cbf9677497d5f786c37c39f449e4c38f75e122649079"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Alternative.me Fear - Greed.md",
+      "destination": "Fabric Feeds/Alternative.me Fear - Greed.md",
+      "bytes": 1002,
+      "sha256": "1832beadcf336d1832a0b358e481a6d6806377790e4431d5e5a4219fd7cfad74"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Amtrak Train Tracking.md",
+      "destination": "Fabric Feeds/Amtrak Train Tracking.md",
+      "bytes": 999,
+      "sha256": "38a02ead8d07598effe556e48c6ab38d8b8462468943b470f6a7e2e0caaf503f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/ArcGIS Living Atlas.md",
+      "destination": "Fabric Feeds/ArcGIS Living Atlas.md",
+      "bytes": 919,
+      "sha256": "8a3a5334a7d415088140978158712b60bf9f96d9971189a0c84e05343a0133a4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Asfinag (Austria CCTV).md",
+      "destination": "Fabric Feeds/Asfinag (Austria CCTV).md",
+      "bytes": 924,
+      "sha256": "34553eb61c6643fbe0452c816516be6366f11f61bf8a2b7c0d69fc39beea5679"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/AviationStack.md",
+      "destination": "Fabric Feeds/AviationStack.md",
+      "bytes": 914,
+      "sha256": "aafe4e689db402c377fd7486a8eccc1f2e43e2103cd0d2236f3c3cbdb6ee12f1"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/BBC World RSS.md",
+      "destination": "Fabric Feeds/BBC World RSS.md",
+      "bytes": 911,
+      "sha256": "6fbebdddd4b7553e8e11814beb1d79a7868dd3f1b464782934ff76e04617d1b7"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/BLS (Bureau of Labor).md",
+      "destination": "Fabric Feeds/BLS (Bureau of Labor).md",
+      "bytes": 912,
+      "sha256": "d1d9cecdc94940a01fcfd85cfebc4fbcf444ffbae05c2637dcf0caa24c50c27c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Baltic Live Cam.md",
+      "destination": "Fabric Feeds/Baltic Live Cam.md",
+      "bytes": 881,
+      "sha256": "e3b15104380710371c59803512068737d88fcaad405426c47c3ba7262e09359b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Bluesky (Social OSINT).md",
+      "destination": "Fabric Feeds/Bluesky (Social OSINT).md",
+      "bytes": 935,
+      "sha256": "f8257abc865a037a24436e1746a4c4f190831dd38153712e7d9f5f2f492c5d71"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Broadcastify (Scanner Streams).md",
+      "destination": "Fabric Feeds/Broadcastify (Scanner Streams).md",
+      "bytes": 1011,
+      "sha256": "3f655aae709f645232bbd2d360a9ccb39f58a5c0b0cb57cb2273895bbc4a9bcd"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/CARTO Basemaps.md",
+      "destination": "Fabric Feeds/CARTO Basemaps.md",
+      "bytes": 838,
+      "sha256": "857aa56e64d288b5d79299553d4585848d936144647e708c66cdb4b201874043"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Caltrans - 511.md",
+      "destination": "Fabric Feeds/Caltrans - 511.md",
+      "bytes": 961,
+      "sha256": "dd0b45d2e8d6dadfb2f2f874eaad8aea0c84436689a77b120f83b586855a1a39"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/CelesTrak TLE.md",
+      "destination": "Fabric Feeds/CelesTrak TLE.md",
+      "bytes": 904,
+      "sha256": "db4769aa4eef72bc7ff29cfcdb4d6fbf6f296a8f727ddf14190327eb9ebc8f87"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Cisa Kev.md",
+      "destination": "Fabric Feeds/Cisa Kev.md",
+      "bytes": 937,
+      "sha256": "4c53e57c4f25217ea6a4450748c4edf1fd7fa8b40004299da62fac7dbce67c0c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/CitiBike GBFS API.md",
+      "destination": "Fabric Feeds/CitiBike GBFS API.md",
+      "bytes": 935,
+      "sha256": "9aa7e249e5c4af4c396c9a6e202990616586d5b71a7c793e9f69ee8687be5555"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Cloudflare Radar.md",
+      "destination": "Fabric Feeds/Cloudflare Radar.md",
+      "bytes": 962,
+      "sha256": "ba8c30ae12b1e8072fd94b5d59a9d71cdb66598a6d87feebfcacd4e5ad9cd070"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/CoinGecko.md",
+      "destination": "Fabric Feeds/CoinGecko.md",
+      "bytes": 908,
+      "sha256": "dfff9301281b5f79de30b9ce307b8648ff772a96f87da8ee818edde436f17525"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Copernicus - Sentinel.md",
+      "destination": "Fabric Feeds/Copernicus - Sentinel.md",
+      "bytes": 921,
+      "sha256": "4988269cd7b296b94dd16b1d82f68ca3083d0ad285e4516821dcc3a044bc5e7d"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/DCGS-AF (Air Force).md",
+      "destination": "Fabric Feeds/DCGS-AF (Air Force).md",
+      "bytes": 1045,
+      "sha256": "80b98cfa44044cece2b6b88e82a0594cb0594d5c1dcfba137154a941aec81cf0"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Datacenter Map.md",
+      "destination": "Fabric Feeds/Datacenter Map.md",
+      "bytes": 951,
+      "sha256": "d8b48a6caa1d30f9c0747d122cbc6398b490809ba8b16da8a74e0b0255989fe6"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/DeepState Map.md",
+      "destination": "Fabric Feeds/DeepState Map.md",
+      "bytes": 903,
+      "sha256": "4f44feaf82900be55c8b7503d3bc3e0246d7b3f1c65d8234d61e30bde94c9c9e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/EIA (Energy Info Admin).md",
+      "destination": "Fabric Feeds/EIA (Energy Info Admin).md",
+      "bytes": 923,
+      "sha256": "bd79f13396e1aefa5d02c697f23fea9c555bef169ffbd29ab89aef2dde588bd0"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/EMSC Seismic Portal.md",
+      "destination": "Fabric Feeds/EMSC Seismic Portal.md",
+      "bytes": 940,
+      "sha256": "d82a647d3e5e6368b4e662c10905c3212937641cd7f41f0ef87b7ed5fe4f433d"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/EPA RadNet.md",
+      "destination": "Fabric Feeds/EPA RadNet.md",
+      "bytes": 886,
+      "sha256": "56de804600f67797bd94755ea728c2fcdc187c0b96eac892a77bb61bb3d7c5c8"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/EPA Water Quality Portal.md",
+      "destination": "Fabric Feeds/EPA Water Quality Portal.md",
+      "bytes": 974,
+      "sha256": "ebd0f7a2c4e9dc0e06a9a6dbbca27f1ea6b5b8d31ccc207d020bc2f4b63dec66"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Element84 Earth Search.md",
+      "destination": "Fabric Feeds/Element84 Earth Search.md",
+      "bytes": 936,
+      "sha256": "4e42be8650201ad16aff9452bf289b6e1ddc923e1803b84cf2382a08d4bb7ff3"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Esri World Imagery.md",
+      "destination": "Fabric Feeds/Esri World Imagery.md",
+      "bytes": 897,
+      "sha256": "6fdaca725ae81c21ac1a9d659434d538d84d6df66aa1854fe7ae7404fc6b2238"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Eurostat.md",
+      "destination": "Fabric Feeds/Eurostat.md",
+      "bytes": 931,
+      "sha256": "7870479bc9adb090fbf7b58a9a37afb8ad5d73bbe85bdb1b904218462e70bb08"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/FAA DroneZone (LAANC).md",
+      "destination": "Fabric Feeds/FAA DroneZone (LAANC).md",
+      "bytes": 986,
+      "sha256": "72c186acd178caf75360ae1985d34a9c4253c9ffb75bbf0b426b6ecf28394901"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/FRED (St. Louis Fed).md",
+      "destination": "Fabric Feeds/FRED (St. Louis Fed).md",
+      "bytes": 956,
+      "sha256": "9e3592052bf570fcde5c43914114e68458547ea5eb28e7e6ec20cbb240c463b8"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Faa Notam.md",
+      "destination": "Fabric Feeds/Faa Notam.md",
+      "bytes": 961,
+      "sha256": "f65ddedeafd82247ce569fe803f27d24b5dd40013adee4b658616815a1a6d80f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Faa Swim.md",
+      "destination": "Fabric Feeds/Faa Swim.md",
+      "bytes": 949,
+      "sha256": "5eab688c545731027ea98ec4288c12bd4e1e08e080c519c24c1af4f8d1a064ab"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Fabric Feeds.base",
+      "destination": "Fabric Feeds/Fabric Feeds.base",
+      "bytes": 1282,
+      "sha256": "6356b1c1608b4112c9eb87a00db7dbf0502f94bcde65374d8c9bd9787450cd17"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Fabric Feeds.md",
+      "destination": "Fabric Feeds/Fabric Feeds.md",
+      "bytes": 882,
+      "sha256": "4b9453f51523fd696e67e797522c8b78f615d1be68e5ba575ab2e4f0e2fcf884"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Finnhub.md",
+      "destination": "Fabric Feeds/Finnhub.md",
+      "bytes": 939,
+      "sha256": "b541c6fb0d771f51ca3a7c4636a0939e406bfc5fb25a3dc23a1690d318001fc0"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/FlightAware AeroAPI.md",
+      "destination": "Fabric Feeds/FlightAware AeroAPI.md",
+      "bytes": 987,
+      "sha256": "3279413996b82165706bc4b2b3b61fc2371a94d8da6b7ab17fd5157478c5f716"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Flock Safety API.md",
+      "destination": "Fabric Feeds/Flock Safety API.md",
+      "bytes": 965,
+      "sha256": "b9d7cc84ce700d99634e0782cfedfd0f554981697169c95f3c29f061cd19f5a3"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GADM Boundaries.md",
+      "destination": "Fabric Feeds/GADM Boundaries.md",
+      "bytes": 838,
+      "sha256": "d210cd47bebf379c5a0d64ab027dbe9db7fe6cfeacdc8432e55e9456f7ca622b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GDELT Project.md",
+      "destination": "Fabric Feeds/GDELT Project.md",
+      "bytes": 912,
+      "sha256": "5436108ea71a046c5e1caed58301d7c663b370e5370c64df76b92dc1384012ff"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GPSJam.md",
+      "destination": "Fabric Feeds/GPSJam.md",
+      "bytes": 877,
+      "sha256": "082935393809832ae7926be451bb3443231bfc3832f216d646f9e6b7a16e497e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GSCPI (NY Fed).md",
+      "destination": "Fabric Feeds/GSCPI (NY Fed).md",
+      "bytes": 905,
+      "sha256": "b6595f03346362ee8a5c8ee70006d640fae57ea99bcd1db9e8c6f9f9deb253f7"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GTFS-RT Standard.md",
+      "destination": "Fabric Feeds/GTFS-RT Standard.md",
+      "bytes": 968,
+      "sha256": "aee3c62583e1280b6b58e2e133936ca36794eb3f9bff705398badc0b9bfa81d7"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Gdacs.md",
+      "destination": "Fabric Feeds/Gdacs.md",
+      "bytes": 949,
+      "sha256": "ca5880052183f577fbb951d24dd65c542f973cb34484fd177fb89c59fee44d80"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GeoFabrik OSM.md",
+      "destination": "Fabric Feeds/GeoFabrik OSM.md",
+      "bytes": 860,
+      "sha256": "ace9089ca8cd04f36fce89a8d3505d1ec631104d503f1dc9a0ee672b8b7a5426"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GloFAS Flood Forecast.md",
+      "destination": "Fabric Feeds/GloFAS Flood Forecast.md",
+      "bytes": 975,
+      "sha256": "87ead94023d9158799d6c19f6a405e0328ca407e6077b02217593af9ab344e5c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Global Fishing Watch.md",
+      "destination": "Fabric Feeds/Global Fishing Watch.md",
+      "bytes": 990,
+      "sha256": "e159ff7c61f817b600d23e6744dc6f52a3bac005bf90260471d78af908beb0be"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GlobalTuners.md",
+      "destination": "Fabric Feeds/GlobalTuners.md",
+      "bytes": 930,
+      "sha256": "aa920189a29a60d07f806dc0bcc060f4a0f3190b52e37e1c5212828b6e973ec1"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Gpio.md",
+      "destination": "Fabric Feeds/Gpio.md",
+      "bytes": 942,
+      "sha256": "5e8bb9295f219342fc8cf9096b3a550a1f9c29da832db0bbdab533f951ea15d6"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/GreyNoise.md",
+      "destination": "Fabric Feeds/GreyNoise.md",
+      "bytes": 925,
+      "sha256": "940e06af34eed003140c7f1ff26e4fc875a7a5fd11a3fb61b59ea118e618d5d0"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/HF Radio - SafeComLink.md",
+      "destination": "Fabric Feeds/HF Radio - SafeComLink.md",
+      "bytes": 990,
+      "sha256": "b8a3395a39b54a4f00efeb1f2b64aec718a0c12a72d711b9232f3ebfac2b3eb3"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Hifld.md",
+      "destination": "Fabric Feeds/Hifld.md",
+      "bytes": 903,
+      "sha256": "2922b0c8908d1b717ed1bf9bd074a749b4bbf0db08c90194e21626a38e4b9c4d"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Hyperliquid (DeFi).md",
+      "destination": "Fabric Feeds/Hyperliquid (DeFi).md",
+      "bytes": 930,
+      "sha256": "fcd90fddf184e252ad2f96f57d70a75db02b12b7fa2b956f8a0bea6a07713289"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/IAEA Nuclear Events.md",
+      "destination": "Fabric Feeds/IAEA Nuclear Events.md",
+      "bytes": 961,
+      "sha256": "3f6d7f4d6b82cd2c88305df47c6da2877bf26655539a68a839182b8f92a7098e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/IAEA Radiation Data.md",
+      "destination": "Fabric Feeds/IAEA Radiation Data.md",
+      "bytes": 990,
+      "sha256": "8559a5c75b55ab0d372504cf9c62b2a82f9fc20a845aec49a26760906e4d93d2"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/IEA Oil & Energy Stats.md",
+      "destination": "Fabric Feeds/IEA Oil & Energy Stats.md",
+      "bytes": 915,
+      "sha256": "4041bf29d3b44fbdb1b5066a82ed25b67a0dcf3f14f183ddb009e18366580ad8"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/INFORM Risk Index.md",
+      "destination": "Fabric Feeds/INFORM Risk Index.md",
+      "bytes": 904,
+      "sha256": "b39d0fea5a3d79006689129d950c916a475528af574aeed2255b968668d3cd45"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/IODA (Georgia Tech).md",
+      "destination": "Fabric Feeds/IODA (Georgia Tech).md",
+      "bytes": 923,
+      "sha256": "f2a229128d9526e8632f0d9b2e6f1600d2634a33c56fff5be06d6cf42021951e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Imf Sdmx - Weo.md",
+      "destination": "Fabric Feeds/Imf Sdmx - Weo.md",
+      "bytes": 939,
+      "sha256": "11e264bc71693e754c1a7cd073127e21528215bff1a30f09f6d03c253daad714"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Kalshi (Prediction Markets).md",
+      "destination": "Fabric Feeds/Kalshi (Prediction Markets).md",
+      "bytes": 953,
+      "sha256": "1d8e26bab9ee6c755d46aa4173a211e14b3cbaa5b950152f668cc6840248ba0b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/KiwiSDR.md",
+      "destination": "Fabric Feeds/KiwiSDR.md",
+      "bytes": 899,
+      "sha256": "c07b568b4355db6b6fba538b5f59c61a08f70e9bb609dd061704b2c5bf6829f0"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Link 16 - J-Series (JREAP).md",
+      "destination": "Fabric Feeds/Link 16 - J-Series (JREAP).md",
+      "bytes": 1051,
+      "sha256": "0ae187fd452cc7eae7f2c79961c644f3a2bd6b8527ded50f2955b1d0398ca56f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Live News Streams (YouTube).md",
+      "destination": "Fabric Feeds/Live News Streams (YouTube).md",
+      "bytes": 928,
+      "sha256": "2de823265924559394299883b49bba8cc9d17a8073ac9a1900bcea87507ce099"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/LiveUAMap (d98d18).md",
+      "destination": "Fabric Feeds/LiveUAMap (d98d18).md",
+      "bytes": 987,
+      "sha256": "6778405c613fd104af1452256ae69e0075408f2cfdadfc3d9ed5867bd6ec7bcf"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/LiveUAMap (older version).md",
+      "destination": "Fabric Feeds/LiveUAMap (older version).md",
+      "bytes": 1173,
+      "sha256": "73c03856683c646125824eb1ec8b2bdf3bf9202646241ae4ce42d8a60fd7684a"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/LiveUAMap.md",
+      "destination": "Fabric Feeds/LiveUAMap.md",
+      "bytes": 933,
+      "sha256": "3993c87b3f0c1c2924d5973c8fa79c7fd16bf03290fb08ddf8a8c208b8187ce5"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/MAVLink.md",
+      "destination": "Fabric Feeds/MAVLink.md",
+      "bytes": 925,
+      "sha256": "0042d633d52c03af705d71ac6407488a33bc75ab4e325e3b0a9048d85bc06861"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/MTA NYC (Transit).md",
+      "destination": "Fabric Feeds/MTA NYC (Transit).md",
+      "bytes": 959,
+      "sha256": "8d3e4b526ac37c02d5d38a5be739cf2393f38dc81ce216586a51316093d5cfc5"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/MappingSupport.md",
+      "destination": "Fabric Feeds/MappingSupport.md",
+      "bytes": 852,
+      "sha256": "1b476d7da09c580c07344beabcc6c8dd015e3074e7bb82d3bd42b13ce5cee9ef"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/MarineTraffic AIS.md",
+      "destination": "Fabric Feeds/MarineTraffic AIS.md",
+      "bytes": 986,
+      "sha256": "23ea67ca9b74c2dcd5b1007112893918ef853d5f65c4341455cc8eaa74afd32e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Meshtastic Map.md",
+      "destination": "Fabric Feeds/Meshtastic Map.md",
+      "bytes": 938,
+      "sha256": "1fd8095067588e6aa4e8f8aa766cf1b8be375337e8cdc0b603cf8cb63e69ae89"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Modbus.md",
+      "destination": "Fabric Feeds/Modbus.md",
+      "bytes": 909,
+      "sha256": "006919fa511e8697a08f285c20d49e1d1eac21ac6419813fc202686079d05152"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Mta Gtfs-rt.md",
+      "destination": "Fabric Feeds/Mta Gtfs-rt.md",
+      "bytes": 949,
+      "sha256": "4af307f4737d00a922c4fd27a9b610e28fccde05918cad9ac1de8ba52414ec83"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NASA Earthdata.md",
+      "destination": "Fabric Feeds/NASA Earthdata.md",
+      "bytes": 891,
+      "sha256": "3a92448587c3a264bc52db814fa8a477cf646e71799331deb40ec7609cc552ca"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NASA GIBS - MODIS Imagery.md",
+      "destination": "Fabric Feeds/NASA GIBS - MODIS Imagery.md",
+      "bytes": 970,
+      "sha256": "7f7c196ea1a18f2e58ce5897f4646842ecd4241320ed6d9bebbbdd5f2268173c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NC DOT Traffic Cameras.md",
+      "destination": "Fabric Feeds/NC DOT Traffic Cameras.md",
+      "bytes": 966,
+      "sha256": "10d107cce87f474b541f8e28d421dd3367ebe34ee4979972d7be9373ae370808"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NIFC Fire Perimeters.md",
+      "destination": "Fabric Feeds/NIFC Fire Perimeters.md",
+      "bytes": 1031,
+      "sha256": "93668945c5fb481d286b45771ec35ff028bfd556c97c774fa4a7bacc6eb1691c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NOAA NWS Alerts.md",
+      "destination": "Fabric Feeds/NOAA NWS Alerts.md",
+      "bytes": 933,
+      "sha256": "2b067638d02d71a915c532ee1d606110ff985f4c024f299a9d6ab80c29c00354"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NOAA SWPC Space Weather.md",
+      "destination": "Fabric Feeds/NOAA SWPC Space Weather.md",
+      "bytes": 942,
+      "sha256": "4973632a78dfd5ae369fdbb058f0f4a66f0dbf06c858c1bb0a82cadf571f3231"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NOAA Weather.md",
+      "destination": "Fabric Feeds/NOAA Weather.md",
+      "bytes": 951,
+      "sha256": "8bded03143e339582a7a48e6aa71a9abadd3f2d8ee50cbd413246088407ae747"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NRC Event Notifications.md",
+      "destination": "Fabric Feeds/NRC Event Notifications.md",
+      "bytes": 997,
+      "sha256": "4d0343b3522c56bae15d77549581ea5aaaae80ad6e1424c669a5f426d74a9ed5"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NWS CAP Alerts.md",
+      "destination": "Fabric Feeds/NWS CAP Alerts.md",
+      "bytes": 961,
+      "sha256": "ffc0070c95117be43d32cdf2da6a86460bb5e38ef7a338c297b6afd4a8c2fcd7"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/NYC 511 (Traffic).md",
+      "destination": "Fabric Feeds/NYC 511 (Traffic).md",
+      "bytes": 959,
+      "sha256": "3601a8c577d784a4526390539b2509b2b829839e3b4ce2903070b536da54e6a3"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Nasa Eonet.md",
+      "destination": "Fabric Feeds/Nasa Eonet.md",
+      "bytes": 930,
+      "sha256": "f70b4e25d25d5d99dffe61f5bc31dfc786bbb4e7d7dd9272006f80116c84e45b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Nasa Firms.md",
+      "destination": "Fabric Feeds/Nasa Firms.md",
+      "bytes": 980,
+      "sha256": "3ebd83566aabd9b2ca25e010d380a293162ec721d0108807643e473b8a65bc5d"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Nominatim (OSM Geocoding).md",
+      "destination": "Fabric Feeds/Nominatim (OSM Geocoding).md",
+      "bytes": 925,
+      "sha256": "900e7b01f1d2fdbff0b82f332b34ec33f64e733d1a88f5641317b3012d3ea7a9"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Camera Globe.md",
+      "destination": "Fabric Feeds/North Star — Camera Globe.md",
+      "bytes": 1421,
+      "sha256": "b0ff792fa4ee582402c4371b6c2b6c013104ee708950ebac59d3d45aac15e9d4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Crypto Tracing.md",
+      "destination": "Fabric Feeds/North Star — Crypto Tracing.md",
+      "bytes": 1442,
+      "sha256": "ea5f063cfd06fb3c497736fa0b5cee0a61229f0c87da1a2322046f419ea8385a"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — NetScan.md",
+      "destination": "Fabric Feeds/North Star — NetScan.md",
+      "bytes": 1423,
+      "sha256": "5167dd0172b15bd063a65fe5eceb4c237647765d74dd2d314f79ea60db30042e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Platform (nstarlive.com).md",
+      "destination": "Fabric Feeds/North Star — Platform (nstarlive.com).md",
+      "bytes": 1506,
+      "sha256": "73d9b21eb56afe4214672234941c6efcb20f25c4bb406a3a9e40dfa512aaa0ca"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Username - Identity OSINT.md",
+      "destination": "Fabric Feeds/North Star — Username - Identity OSINT.md",
+      "bytes": 1498,
+      "sha256": "aa2d1d0de5d538f4ae8f9e9217a0247cd55d00e746e0b68e50a51496b0ed1a77"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/North Star — Watchtower (Global SA Globe).md",
+      "destination": "Fabric Feeds/North Star — Watchtower (Global SA Globe).md",
+      "bytes": 1598,
+      "sha256": "ee5b5ef9b6deb23284d58a71b566c16fe19f9cc2faef6b87bee3838c89296884"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Onvif.md",
+      "destination": "Fabric Feeds/Onvif.md",
+      "bytes": 909,
+      "sha256": "47328fccbbc01baac8329f8d2bfab4b7d33c9f542f03d5249109456fd0f7072c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenAQ.md",
+      "destination": "Fabric Feeds/OpenAQ.md",
+      "bytes": 903,
+      "sha256": "d349a37e0aad4fb05fac74eb0cd5b2c45901390f65f3ea94df58c2f17ffcc44c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenMHZ (Scanner Feeds).md",
+      "destination": "Fabric Feeds/OpenMHZ (Scanner Feeds).md",
+      "bytes": 935,
+      "sha256": "2e4f2ffb58535e02ea663d6e5484386df536ce20bd55857dc6e5218273c5c337"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenSanctions.md",
+      "destination": "Fabric Feeds/OpenSanctions.md",
+      "bytes": 955,
+      "sha256": "bb2c23dd0ac4d6154d0d83f54752eccceec28918b1aebd5cd7e8749ea4e5dfaa"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenSeaMap.md",
+      "destination": "Fabric Feeds/OpenSeaMap.md",
+      "bytes": 931,
+      "sha256": "53d1da23c5ded092932a69ae1aed09fa6db3b8517215310a0c00ddd65eba2099"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenSky Network.md",
+      "destination": "Fabric Feeds/OpenSky Network.md",
+      "bytes": 975,
+      "sha256": "b00634b82f407b1a58c73af230e4edb4685ceeeb3a778389506d8b87808b8103"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenWeatherMap Tiles.md",
+      "destination": "Fabric Feeds/OpenWeatherMap Tiles.md",
+      "bytes": 937,
+      "sha256": "e22b1f2e1223738b3e0e14f80344062289e6411545b9ab5dac54ee75728a86ec"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/OpenWeatherMap.md",
+      "destination": "Fabric Feeds/OpenWeatherMap.md",
+      "bytes": 935,
+      "sha256": "81984bb91a63d4eec614b248933bccd21b7ecd9f33e0ab83393cfb6c21bcb52b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Overpass API (OSM).md",
+      "destination": "Fabric Feeds/Overpass API (OSM).md",
+      "bytes": 868,
+      "sha256": "f77731dc30eeed8a32cf2e68e448e879af4a6f87ff80f1763e89f00e11d14ca0"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/PeeringDB.md",
+      "destination": "Fabric Feeds/PeeringDB.md",
+      "bytes": 915,
+      "sha256": "afd490daee01f30f803f9f69ab91fc7a0e718acc4867d16fbcaeb474b104449b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/PulsePoint (Fire - EMS CAD Dispatch).md",
+      "destination": "Fabric Feeds/PulsePoint (Fire - EMS CAD Dispatch).md",
+      "bytes": 1064,
+      "sha256": "ed3b2b9966f349a356335bdeb0bd7ad4213ce297c67a1ab7518173e265723cf3"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Pytak - Adsbcot - Aiscot.md",
+      "destination": "Fabric Feeds/Pytak - Adsbcot - Aiscot.md",
+      "bytes": 1013,
+      "sha256": "ab9e232dc6e05440834cdd6a43068bfe51ccd6dee654cb677ed224d472c979d4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/RadiationNetwork.com.md",
+      "destination": "Fabric Feeds/RadiationNetwork.com.md",
+      "bytes": 961,
+      "sha256": "10d62760234e2b1b0070db187542e7326bb0e6ceb0d651e5d5f0ecb93ec4457d"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Reddit (Social OSINT).md",
+      "destination": "Fabric Feeds/Reddit (Social OSINT).md",
+      "bytes": 918,
+      "sha256": "1c990a17a293bcc411aa928ee4e00a98aa7c83b4e0fc88c83d050cebdeb5ff7e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/ReliefWeb (UN OCHA).md",
+      "destination": "Fabric Feeds/ReliefWeb (UN OCHA).md",
+      "bytes": 924,
+      "sha256": "29df21eb9d209d8a3583b6ca7f563411900dff1e4fac70272c3abf5f5cce6be7"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Remote ID (ASTM F3411).md",
+      "destination": "Fabric Feeds/Remote ID (ASTM F3411).md",
+      "bytes": 991,
+      "sha256": "a5b63695236a16a51f05e993f09c451104acf69112a3f9257cb7f26b8a29e222"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Ros 2 - Dds.md",
+      "destination": "Fabric Feeds/Ros 2 - Dds.md",
+      "bytes": 966,
+      "sha256": "0a5042dce15eb2dd53cf2221651ad73ace1302907169587368642925f5dc9ec3"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/SAM.gov (Federal Contracts).md",
+      "destination": "Fabric Feeds/SAM.gov (Federal Contracts).md",
+      "bytes": 976,
+      "sha256": "42fa170632a2b64b3efefeb36654355877316cbda2af36a12a74f25fc92b159d"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/SATnogs.md",
+      "destination": "Fabric Feeds/SATnogs.md",
+      "bytes": 890,
+      "sha256": "b629fc9085552be53f8b1fc9216d4bc399819c96fc4695fc837a52f81cd6d2c3"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/STANAG 4586 (UAS Control).md",
+      "destination": "Fabric Feeds/STANAG 4586 (UAS Control).md",
+      "bytes": 1002,
+      "sha256": "530b0a05246217bc8c1e1839c0e94f1128e0168bf34664e50496e6ef07f80a79"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Sae J2735 - V2X.md",
+      "destination": "Fabric Feeds/Sae J2735 - V2X.md",
+      "bytes": 1002,
+      "sha256": "33488c8bcbdaf39d2913430a56593d79b1ffd6fc22c567492b370015bad6a3e2"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Safecast (Radiation).md",
+      "destination": "Fabric Feeds/Safecast (Radiation).md",
+      "bytes": 912,
+      "sha256": "8321f08eb30b73597432722f1200ea8b35c614c42dad2b89216e32e3c0239e77"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Serial Port.md",
+      "destination": "Fabric Feeds/Serial Port.md",
+      "bytes": 959,
+      "sha256": "151e7c145e82812cd5e11b2198f0c1568e89ec59525679147b020f4828848d1d"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Shadowserver Foundation.md",
+      "destination": "Fabric Feeds/Shadowserver Foundation.md",
+      "bytes": 942,
+      "sha256": "48b4486d6ff3cadbed5bed8456664625469ace7859fa9278aa436fd9a6144514"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Shodan InternetDB.md",
+      "destination": "Fabric Feeds/Shodan InternetDB.md",
+      "bytes": 926,
+      "sha256": "8ed2cb93511bbdb469f45fc9a525fa28780bd02e929003e8080d2bc7d258ec63"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/SkyWatch EarthCache.md",
+      "destination": "Fabric Feeds/SkyWatch EarthCache.md",
+      "bytes": 919,
+      "sha256": "7fc0e274e586b965b194da8f71154d232c876ce3781352d1d372ade0a61b607a"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Smithsonian GVP Volcanoes.md",
+      "destination": "Fabric Feeds/Smithsonian GVP Volcanoes.md",
+      "bytes": 952,
+      "sha256": "0a383a5c0d7c27eeb86084fe5826037e83a019f6c24d2b34be33e45229ce7aec"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/SpaceWeatherLive.md",
+      "destination": "Fabric Feeds/SpaceWeatherLive.md",
+      "bytes": 940,
+      "sha256": "2a91f0b1069eef0339ad562ce42b674a006feb6a65e69cca297726f420365665"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Telegram OSINT Channels.md",
+      "destination": "Fabric Feeds/Telegram OSINT Channels.md",
+      "bytes": 951,
+      "sha256": "ba17b5702030ec8ef18bc549cd6760a1c2ad43b90da6224ed6236a2c7aaa65b1"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/TfL (Transport for London).md",
+      "destination": "Fabric Feeds/TfL (Transport for London).md",
+      "bytes": 950,
+      "sha256": "463dd8de08a7f4a12d36b08913d5c219296e0d4bae9da18fbd3e25e308592a4e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Trunk Recorder (P25 - SmartNet Radio).md",
+      "destination": "Fabric Feeds/Trunk Recorder (P25 - SmartNet Radio).md",
+      "bytes": 1104,
+      "sha256": "ab36b71cb68fd0a4c6b70d5c07a812ae7a663f5f64ab0eec946382b0b01a1375"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Tzeva Adom (Red Alert IL).md",
+      "destination": "Fabric Feeds/Tzeva Adom (Red Alert IL).md",
+      "bytes": 956,
+      "sha256": "d437386aea3f326b9d10091d03aebdf8fde022fa93898c49bcfdcd5c1804a7d4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/UCDP (Uppsala Conflict Data).md",
+      "destination": "Fabric Feeds/UCDP (Uppsala Conflict Data).md",
+      "bytes": 992,
+      "sha256": "18de0cfbe2c784ec6f155d8ed78d41a8b1bbff87831dabf8e85372226c2576cd"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/UKMTO (UK Maritime Trade Ops).md",
+      "destination": "Fabric Feeds/UKMTO (UK Maritime Trade Ops).md",
+      "bytes": 984,
+      "sha256": "b64f5adcca0435b92a549b842a0543ddb291ea8b0dd8d84abc6cc7a2b47224bc"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/UN Comtrade.md",
+      "destination": "Fabric Feeds/UN Comtrade.md",
+      "bytes": 896,
+      "sha256": "2697536c0e09546fc42432b1d54273f5c4097c87fc291fe30f12b0d4eb9a3b15"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/UNHCR Population Data.md",
+      "destination": "Fabric Feeds/UNHCR Population Data.md",
+      "bytes": 936,
+      "sha256": "e5e880f82817ec0929e1357b30ca9ee299ef49e9ffc238d06816298fb746b576"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/US Treasury FiscalData.md",
+      "destination": "Fabric Feeds/US Treasury FiscalData.md",
+      "bytes": 952,
+      "sha256": "1bdd52d930007aba62847e7069a4a7e923e19a98906bdf7c3c84deef0413d40e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USAspending.gov.md",
+      "destination": "Fabric Feeds/USAspending.gov.md",
+      "bytes": 894,
+      "sha256": "45f91693c3924c56bcaf249f4187e5c649d334a34f3f6ca0bcc493a902cbbedd"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USDA NASS Yields.md",
+      "destination": "Fabric Feeds/USDA NASS Yields.md",
+      "bytes": 904,
+      "sha256": "90cea11571f91679f69a0a54ba0440b3e03d4faab7fad94a63c6ce4dd2076ba9"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USFS Fire Detection.md",
+      "destination": "Fabric Feeds/USFS Fire Detection.md",
+      "bytes": 960,
+      "sha256": "a95625811991d65908c2cb590b79731eaa6cc116254ebf624fd05ed1c41c136f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USGS Earthquakes.md",
+      "destination": "Fabric Feeds/USGS Earthquakes.md",
+      "bytes": 939,
+      "sha256": "327705558a6093639db221d8f91c2c1296444e6ed0f4e02a4510df2f614955df"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USGS NWIS (Water).md",
+      "destination": "Fabric Feeds/USGS NWIS (Water).md",
+      "bytes": 953,
+      "sha256": "ad1af6a7da7c07ca50ef09035a827077a042175fdee4625db930496dc7d80810"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/USPTO Patents.md",
+      "destination": "Fabric Feeds/USPTO Patents.md",
+      "bytes": 899,
+      "sha256": "a2b33cbd2536756633feae6c74e296fd8091cb9ae2e8607337e58e24f12d0680"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Usda Plants DB.md",
+      "destination": "Fabric Feeds/Usda Plants DB.md",
+      "bytes": 919,
+      "sha256": "25efb41ba331b4e065c0872ccee1c6734964086b300b16c2eb20c5de71960c4f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WHO Disease Outbreaks.md",
+      "destination": "Fabric Feeds/WHO Disease Outbreaks.md",
+      "bytes": 968,
+      "sha256": "7bab9dac82b46bbe0989ea6ce85fb5f4e2e8ebec63fa2a3abed188acb540e148"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WRI Global Power Plant DB.md",
+      "destination": "Fabric Feeds/WRI Global Power Plant DB.md",
+      "bytes": 987,
+      "sha256": "bd8014f819bb51094c13b8e8c2164be45287bfd0ba3abfc293ed390b9fa6a96c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WSDOT Traffic Cameras.md",
+      "destination": "Fabric Feeds/WSDOT Traffic Cameras.md",
+      "bytes": 940,
+      "sha256": "417dba8b4d8808a325471ec353307325ed968e5f26b3b3f690c0017368472451"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WWV (NIST Time).md",
+      "destination": "Fabric Feeds/WWV (NIST Time).md",
+      "bytes": 950,
+      "sha256": "65f2da37d03923b95510877ef09ceb83fab95e7407df2f29625e2b76921e587c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/WebSDR Network.md",
+      "destination": "Fabric Feeds/WebSDR Network.md",
+      "bytes": 925,
+      "sha256": "354ffed77a9ef341981c58efd1f9f868e9bb9151b40b18511c6a6ff0adcbdd8b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Where the ISS at.md",
+      "destination": "Fabric Feeds/Where the ISS at.md",
+      "bytes": 903,
+      "sha256": "2a44bee131b09f77f6c06b1af79bbeb40ccee865e4af4a03f0093ab2d678ec4b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Wikidata.md",
+      "destination": "Fabric Feeds/Wikidata.md",
+      "bytes": 927,
+      "sha256": "8b90f53be451bb0b9a23953d98c20034d7fcc2dc2e394de2dfba4a61998589b5"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Wikipedia REST API.md",
+      "destination": "Fabric Feeds/Wikipedia REST API.md",
+      "bytes": 934,
+      "sha256": "8e2b47d67cc3a7577a6eb413c2da49c394eb6b64d5c720a8d8df8c287df89825"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Windy API.md",
+      "destination": "Fabric Feeds/Windy API.md",
+      "bytes": 909,
+      "sha256": "924cfe50f47bd52b9a793472ca9aa8ccc1fd4e4d7eda15cc7e84f7afd41b7c00"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/Yahoo Finance.md",
+      "destination": "Fabric Feeds/Yahoo Finance.md",
+      "bytes": 898,
+      "sha256": "784fe71b473764634e6d6ae0104a2809b8cb031ccc840ca7fe8408858dfce67f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/abuse.ch (Feodo - URLhaus).md",
+      "destination": "Fabric Feeds/abuse.ch (Feodo - URLhaus).md",
+      "bytes": 964,
+      "sha256": "141040a859aaea9f5b211359225322aeadaebb1106765a9dc000f92955cb4491"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/adsb.lol.md",
+      "destination": "Fabric Feeds/adsb.lol.md",
+      "bytes": 878,
+      "sha256": "e7e19d2eaa1c4afbf9cbc22aae76736cd8a53afac1cf74fa19785985b1ef9889"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/airplanes.live.md",
+      "destination": "Fabric Feeds/airplanes.live.md",
+      "bytes": 901,
+      "sha256": "14fe1c74851eacd7d7f0fbf608049b0b28f438bb897c82e8dd05776126f88dfb"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/faster-whisper (Radio Transcription).md",
+      "destination": "Fabric Feeds/faster-whisper (Radio Transcription).md",
+      "bytes": 1037,
+      "sha256": "564eb08355675412cb5605232684b717f0b6a2e0cfc2d29658756b576b4efb7e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/00 Core/Platform/Fabric Feeds/ipapi.co.md",
+      "destination": "Fabric Feeds/ipapi.co.md",
+      "bytes": 864,
+      "sha256": "16e14a3cf27545c1e7c91f3e65d7620c81488f2855ea6e3e4cb506f10a8f930b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/ArcGIS Online — SaaS Web GIS Platform.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/ArcGIS Online — SaaS Web GIS Platform.md",
+      "bytes": 3122,
+      "sha256": "a07e78b6c9504b68c075359d749ec61de178a3534b2ee39872b8d984421f004b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Cesium — 3D Geospatial Globe & Visualization Platform.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/Cesium — 3D Geospatial Globe & Visualization Platform.md",
+      "bytes": 7160,
+      "sha256": "d1d57ed681a0610472876c30567650cdeb57060b24c13dd3cf352b6f70cb3656"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Elevation Data — DTED, SRTM, USGS & TAK Integration.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/Elevation Data — DTED, SRTM, USGS & TAK Integration.md",
+      "bytes": 11499,
+      "sha256": "2cda33469e23e45207b8dcb0c6319fbc20c114c1c3d24107bb027fe382dc97f8"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Esri GIS — Enterprise GIS & ArcGIS Platform.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/Esri GIS — Enterprise GIS & ArcGIS Platform.md",
+      "bytes": 4183,
+      "sha256": "94d31fc10f16c9207dd7026d03b7ffe8532f20500bd932b91c6b18b1e0b5ed49"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/GIS & Mapping Sources — Public Data Catalog.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/GIS & Mapping Sources — Public Data Catalog.md",
+      "bytes": 2481,
+      "sha256": "79ab80b2e999c273fe88982a9aba964646a3d9b40e24223d9478a4863393e141"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Geo DB.base",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/Geo DB.base",
+      "bytes": 589,
+      "sha256": "73ede7ff41973322f8a683545467255d13d59ca08e9cb1d4f31f6e5af2a9c852"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Geo DB.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/Geo DB.md",
+      "bytes": 973,
+      "sha256": "1fc8d15e2ad67404e9ee098f0774cb63afe37f4b14be149ad7792e3ff32cf06e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Remote Sensing & GIS Glossary — Earth Observation Terms.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/Remote Sensing & GIS Glossary — Earth Observation Terms.md",
+      "bytes": 16428,
+      "sha256": "c8e6baf0820d6420541f1f8597bf60fbbe6634d0fdfaa780b4920b354e2bf860"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/SkyWatch — Satellite Imagery & Geospatial Data API.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/SkyWatch — Satellite Imagery & Geospatial Data API.md",
+      "bytes": 7277,
+      "sha256": "ad892a58b4719937c203060eb151db18a88997210c2004886676e2e4a3fe5ada"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/SkyWatch — Satellite Imagery & Geospatial Data Platform.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/SkyWatch — Satellite Imagery & Geospatial Data Platform.md",
+      "bytes": 7829,
+      "sha256": "bbdb35a8ef5242033c566f97e5121d5af60a786383767089fd4c7240d38d95ba"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Geo DB/Vexcel — Aerial Imagery & Geospatial Data Platform.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Geo DB/Vexcel — Aerial Imagery & Geospatial Data Platform.md",
+      "bytes": 5342,
+      "sha256": "8d6a56aadaceea7ddf241e1f2be595058965cdfda116a71daec218ab404fa996"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/KMZ Overlays/KMZ Overlays.base",
+      "destination": "Related Documents/01 The Fabric/Geo/KMZ Overlays/KMZ Overlays.base",
+      "bytes": 1029,
+      "sha256": "02760343c9535527a62a0d7635348345fedd3b7b1d2b127310dac8d1a736e776"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/KMZ Overlays/KMZ Overlays.md",
+      "destination": "Related Documents/01 The Fabric/Geo/KMZ Overlays/KMZ Overlays.md",
+      "bytes": 875,
+      "sha256": "c2620171783680d8f880e57276b06ca9fbe442322107a848a7454145abff5aec"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/KMZ Overlays/NYC Metro POI Overlay — Full Infrastructure.md",
+      "destination": "Related Documents/01 The Fabric/Geo/KMZ Overlays/NYC Metro POI Overlay — Full Infrastructure.md",
+      "bytes": 21415,
+      "sha256": "63d6da1df2ab36d72314e61099307f63f1fa895c50ec07e3628e692a3666029b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Knowledge/MOBAC — Mobile Atlas Creator.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Knowledge/MOBAC — Mobile Atlas Creator.md",
+      "bytes": 3262,
+      "sha256": "37f831370dd43d5bd1e3557645cdf17dd2c08e0dc23280447646276514449f68"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Knowledge/OneMind OS — Recon 02 - Map - Globe Frontend Overlap.md",
+      "destination": "Related Documents/01 The Fabric/Geo/Knowledge/OneMind OS — Recon 02 - Map - Globe Frontend Overlap.md",
+      "bytes": 4465,
+      "sha256": "9e5a3cc7927a08682538a64e0a11dab9bd3e18e10866a90d35ceb4a1692313db"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/ACLED Crisis Map.md",
+      "destination": "Map Layers/ACLED Crisis Map.md",
+      "bytes": 971,
+      "sha256": "633db420ca588b4817b7930a20c7fafa3aab27ec76daa9c13f95fbb422157a3f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/AIS Vessel Overlay.md",
+      "destination": "Map Layers/AIS Vessel Overlay.md",
+      "bytes": 1020,
+      "sha256": "d8f0127ca0aa548f028b548fce169f9f015dbf192fdcd7493aead84a7ec46ef0"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Amtrak Rail Network.md",
+      "destination": "Map Layers/Amtrak Rail Network.md",
+      "bytes": 992,
+      "sha256": "29b651252e9af4d80d7fe1be33fe8f177cabe12e2efa654d132501b3d8a59a8f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/ArcGIS Online.md",
+      "destination": "Map Layers/ArcGIS Online.md",
+      "bytes": 999,
+      "sha256": "a37612ab11f10d0ce6c6e07947f7d74a8f4b6803979aea8a4191a4200eba25b6"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/ArcGIS World Imagery.md",
+      "destination": "Map Layers/ArcGIS World Imagery.md",
+      "bytes": 1065,
+      "sha256": "b7c4b9dd5cfcfcde3eb4aaa57a57a45119257d5d09f80cb626d62de9f0571a64"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Bing Maps.md",
+      "destination": "Map Layers/Bing Maps.md",
+      "bytes": 925,
+      "sha256": "f66dce3b00c1ec5961e2dcb141c04afc135228b25541375ada87f315a467de68"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Bing Satellite (XYZ).md",
+      "destination": "Map Layers/Bing Satellite (XYZ).md",
+      "bytes": 981,
+      "sha256": "e78affdefe5a010f07eec0611adc8475bc9c62e885885a00f00397cd8ba5408c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Cesium ion.md",
+      "destination": "Map Layers/Cesium ion.md",
+      "bytes": 952,
+      "sha256": "4be9b974eec6b03c888e1df9d9bb51c89f0f7624079fb7eacf276b1bed675a1b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/CloudTAK Tiles (PMTiles).md",
+      "destination": "Map Layers/CloudTAK Tiles (PMTiles).md",
+      "bytes": 996,
+      "sha256": "23b50d21c8f8cd6fce32095468484761602685816845bcd410833843a4475246"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Cloudflare Radar Map.md",
+      "destination": "Map Layers/Cloudflare Radar Map.md",
+      "bytes": 966,
+      "sha256": "8a2eba13d226fb7dbf8e06cace22f74d28346e1640133c21139c19715532aef2"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/DCD Data Center Map.md",
+      "destination": "Map Layers/DCD Data Center Map.md",
+      "bytes": 957,
+      "sha256": "059937b969dacb23e0a5431860ece6649062c05e73cac6792368de8aa503b688"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/DeFlock — Crowdsourced ALPR - License Plate Reader Map.md",
+      "destination": "Map Layers/DeFlock — Crowdsourced ALPR - License Plate Reader Map.md",
+      "bytes": 5063,
+      "sha256": "8b38dc7d86df14350d6b68a091923ed0d3170c1f292c0433671ca7f27f428aee"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/EIA Power Plant Locations.md",
+      "destination": "Map Layers/EIA Power Plant Locations.md",
+      "bytes": 986,
+      "sha256": "e13e616821a415053f4dd2e07c674c829386a6374e1b1c39f01ca8f5ec916680"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/EPA RadNet Map.md",
+      "destination": "Map Layers/EPA RadNet Map.md",
+      "bytes": 957,
+      "sha256": "0760a2e8e7733869d9804be68b729bfeb8260901e1bfb416cbfdb3a0235881ff"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/EPA Water Quality Map.md",
+      "destination": "Map Layers/EPA Water Quality Map.md",
+      "bytes": 977,
+      "sha256": "7070f67a6ee0c71bc129994157a277457fc95a78c66b48b287fe8fb6bfda01e4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Esri Imagery (World).md",
+      "destination": "Map Layers/Esri Imagery (World).md",
+      "bytes": 1052,
+      "sha256": "d78523a6bb8d9f4ae50c295f09858393f3b1a1ccaa012914acda3047fe736815"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Esri World Street Map.md",
+      "destination": "Map Layers/Esri World Street Map.md",
+      "bytes": 1030,
+      "sha256": "3377853367c50fe151f6849bf2fd239edf1549aa5b0cd932c7d66cb1578aad45"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Esri World Topo.md",
+      "destination": "Map Layers/Esri World Topo.md",
+      "bytes": 1022,
+      "sha256": "00747ce33b730382a0611fe44db34babbda5e998be43b3f0f4dd3f1aad12ec19"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/FAA Sectional Charts.md",
+      "destination": "Map Layers/FAA Sectional Charts.md",
+      "bytes": 928,
+      "sha256": "2e444b66aeb1d667e5175f40927899e49e4dbd582331b6dcfcc9683f3056a71e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/FAA TFR Overlay.md",
+      "destination": "Map Layers/FAA TFR Overlay.md",
+      "bytes": 932,
+      "sha256": "9655715f573aaaa4a433008c4d5d6f946bfa642622d3cd16d327de11e9b11130"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/FEMA Flood Zones.md",
+      "destination": "Map Layers/FEMA Flood Zones.md",
+      "bytes": 986,
+      "sha256": "c84f8fcfe2e06bb59b3c3a2200e661d451ed201464cafd79d41af197dad00e30"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/FlightAware Map.md",
+      "destination": "Map Layers/FlightAware Map.md",
+      "bytes": 943,
+      "sha256": "8349d5d955a2c16cb23880fbd89a22e2fa54c8eed04ee1ef727c9f5b31357ca1"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Flock Safety Camera Map.md",
+      "destination": "Map Layers/Flock Safety Camera Map.md",
+      "bytes": 984,
+      "sha256": "bfc7f7e3c54d5c912b0183f2b86b767f518d04ac7ebe10202f62e92951bd36de"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/GeoServer (OGC).md",
+      "destination": "Map Layers/GeoServer (OGC).md",
+      "bytes": 918,
+      "sha256": "bdc312418d1d075ceda0f0b63c049bc2e7d740af5d071666ea596e282a34a9a6"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Google Maps.md",
+      "destination": "Map Layers/Google Maps.md",
+      "bytes": 924,
+      "sha256": "542ec85ed55001c69fe7c7f488f2878500d53fbc63a512333990bcc20243cd9b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Google Satellite (XYZ).md",
+      "destination": "Map Layers/Google Satellite (XYZ).md",
+      "bytes": 975,
+      "sha256": "13d6d2e143befd922ca3f4eab59fe51f2ea62fcc0bcfc86106afba9c628ca331"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/HIFLD EMS Stations.md",
+      "destination": "Map Layers/HIFLD EMS Stations.md",
+      "bytes": 1070,
+      "sha256": "6e4fa0097614bf75066a5e5c907b28e77c4bfdd25b5593afeb5ed0298b5a58d5"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/HIFLD Fire Stations.md",
+      "destination": "Map Layers/HIFLD Fire Stations.md",
+      "bytes": 1074,
+      "sha256": "a3036dde70cc2c63fd3d2497de1d47c6fe4ce5407cff08399ab3c24a998b77af"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/HIFLD Hospitals.md",
+      "destination": "Map Layers/HIFLD Hospitals.md",
+      "bytes": 1057,
+      "sha256": "5b923a4d8aeafa72c146331c175f63f45666182e6d8e7fe93a43667568094d70"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/HIFLD Law Enforcement.md",
+      "destination": "Map Layers/HIFLD Law Enforcement.md",
+      "bytes": 1091,
+      "sha256": "33b1b0e914e3b3bb84a88c9c067ad041fcb9f132699d9f5677d8b5f639755b26"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Heavens Above (Sat Tracks).md",
+      "destination": "Map Layers/Heavens Above (Sat Tracks).md",
+      "bytes": 980,
+      "sha256": "5a82ba2ee08bf4840543c845d28b87e678dd6eccf6efc283a69e9c077e71903f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/IAEA PRIS (Global Reactors).md",
+      "destination": "Map Layers/IAEA PRIS (Global Reactors).md",
+      "bytes": 985,
+      "sha256": "f6d8eee2a6892020a04f55c13f365cad53b5322e72fdc76e090333966e06d2e9"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/IODA Internet Outage Map.md",
+      "destination": "Map Layers/IODA Internet Outage Map.md",
+      "bytes": 989,
+      "sha256": "3cad7b3fbd05fd6405b01a8f0162a19ec006f8db825aa3cf0b39e302cfc71211"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/KiwiSDR Receiver Map.md",
+      "destination": "Map Layers/KiwiSDR Receiver Map.md",
+      "bytes": 959,
+      "sha256": "d4c5b9e53851d58c90f1977080b5041fb02c1c53c14f858312f4804a5c881cd4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/LiveUAMap Overlay.md",
+      "destination": "Map Layers/LiveUAMap Overlay.md",
+      "bytes": 964,
+      "sha256": "55e37ab2545a896fd5dace14ca04f41eb952be4440681fc1343407ecacf40e93"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/MTA Map (NYC Transit).md",
+      "destination": "Map Layers/MTA Map (NYC Transit).md",
+      "bytes": 958,
+      "sha256": "e221fa3abc5ee884df07eaa002b6a40df183033faaf15de703f2921160460345"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Map Layers.base",
+      "destination": "Map Layers/Map Layers.base",
+      "bytes": 1201,
+      "sha256": "7a016040acb1ab26b82405ebb942da8469ca218b4ab82893c90714e9dbda9064"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Map Layers.md",
+      "destination": "Map Layers/Map Layers.md",
+      "bytes": 862,
+      "sha256": "6acbdf81af2d1e633bb16eb1fd04baa0ddec6f1569133dc409cdfc4ec08008a5"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/MapServer (OGC).md",
+      "destination": "Map Layers/MapServer (OGC).md",
+      "bytes": 912,
+      "sha256": "c9a2ec197e05c855e4e380efa43cb1a2205d6b81aaf1be45d4b2076821aba647"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Mapbox.md",
+      "destination": "Map Layers/Mapbox.md",
+      "bytes": 931,
+      "sha256": "a6f420f7be097f3ea1e2a1a9dab75437b0aa47fca10257ec316ed4e7cf0bb475"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Maputnik (Style Editor).md",
+      "destination": "Map Layers/Maputnik (Style Editor).md",
+      "bytes": 912,
+      "sha256": "08af6bb52cdbd822be0f5652768f322c91824e447eb93735f4cf4de38952e71d"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Martin (Vector Tiles).md",
+      "destination": "Map Layers/Martin (Vector Tiles).md",
+      "bytes": 1014,
+      "sha256": "fbf58648690514ac9b47049191f29c5ae0111edbb55df95e6597e1eae260b2a4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/MeshCore.md",
+      "destination": "Map Layers/MeshCore.md",
+      "bytes": 922,
+      "sha256": "2ef19dda7bb02275857fc650902e55c2b0070a2860afe6574c053607d45b5a78"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Meshtastic.md",
+      "destination": "Map Layers/Meshtastic.md",
+      "bytes": 941,
+      "sha256": "e84cb49c966cb8a3be7cb09afe3841a333988aa1f11775774562217c0c2cc67c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NASA Eyes (3D Space).md",
+      "destination": "Map Layers/NASA Eyes (3D Space).md",
+      "bytes": 912,
+      "sha256": "d92c95989b99ba0f8fe4fab86add130ad9bbb151b89ed66ec78075519228e8ee"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NASA FIRMS Fire Overlay.md",
+      "destination": "Map Layers/NASA FIRMS Fire Overlay.md",
+      "bytes": 1077,
+      "sha256": "2c241946af739b5b11a10f78eb40e835198540de8c0aa2cf6592cec7cf5349c2"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NIFC Fire Perimeters (Map).md",
+      "destination": "Map Layers/NIFC Fire Perimeters (Map).md",
+      "bytes": 1053,
+      "sha256": "158c4de866708c6b9c5eb9e4fe0c957642088b326fa5a66fe6da9aeb2261c15a"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NJ Transit Rail.md",
+      "destination": "Map Layers/NJ Transit Rail.md",
+      "bytes": 942,
+      "sha256": "11bb6ddf8efd9d1ae7b2f19c18938943942273238379eb2eec18a410a46c8867"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NOAA ENC (Nautical Charts).md",
+      "destination": "Map Layers/NOAA ENC (Nautical Charts).md",
+      "bytes": 996,
+      "sha256": "5d98b91bb7d7f64b252e58cd475e4d75233008cd160f1f0c77635c423623b0fb"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NRC Nuclear Reactor Map.md",
+      "destination": "Map Layers/NRC Nuclear Reactor Map.md",
+      "bytes": 1015,
+      "sha256": "6201a39ec4bf6f4fec36cce95930e4557627dda0e38d518dee3f938be9ae5634"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NWS Radar (MRMS).md",
+      "destination": "Map Layers/NWS Radar (MRMS).md",
+      "bytes": 991,
+      "sha256": "06a5fba07cf02014a86cf1d4bcef4eee3ea82649b1a6ec5f95e5800b04d7130c"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/NYC Subway Lines.md",
+      "destination": "Map Layers/NYC Subway Lines.md",
+      "bytes": 1004,
+      "sha256": "6498f3b22bc4cced2c534e75e284253e42e384811c404115e1d783e6b7d34be3"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Nominatim (Geocoding).md",
+      "destination": "Map Layers/Nominatim (Geocoding).md",
+      "bytes": 980,
+      "sha256": "4d1ee029efe29b21f566b96ba42f7d18b0d8d7936969a48a40b91465ce256f51"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Camera Globe (250k Cameras).md",
+      "destination": "Map Layers/North Star — Camera Globe (250k Cameras).md",
+      "bytes": 1440,
+      "sha256": "c8a7fc821bdc232d8b2185e472acf5b87181f5fb64a85a9ad18d4f58fdc5a767"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Crypto Tracing Map.md",
+      "destination": "Map Layers/North Star — Crypto Tracing Map.md",
+      "bytes": 1300,
+      "sha256": "618798b0a9eb1133f625268486fc5fe80cd5384e00027d68bf437b2dcd5737c9"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Identity OSINT Layer.md",
+      "destination": "Map Layers/North Star — Identity OSINT Layer.md",
+      "bytes": 1343,
+      "sha256": "333317ab317cad60c90001c0fc0fb62d9152958d0a2d6d300973b88e537d06ec"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — NetScan (Network Recon).md",
+      "destination": "Map Layers/North Star — NetScan (Network Recon).md",
+      "bytes": 1415,
+      "sha256": "dc048839d1139a0a91d0ca86d080cfc3cc3c589b1c8927edb70b0f45b5a8a397"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Platform Overview.md",
+      "destination": "Map Layers/North Star — Platform Overview.md",
+      "bytes": 1308,
+      "sha256": "290c8e706e5d1991a20b9f5c1841f1d2f190234f0ac6b3fee07aa754d7132297"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/North Star — Watchtower Globe.md",
+      "destination": "Map Layers/North Star — Watchtower Globe.md",
+      "bytes": 1559,
+      "sha256": "e103269d313d216df3572a7305432aa09c167b5b15cf9a4bd3fc2eb765a9fc83"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenAIP (Aviation).md",
+      "destination": "Map Layers/OpenAIP (Aviation).md",
+      "bytes": 944,
+      "sha256": "9df764dd14700b8ad13c1801ea67449e8941308ae193a358c212542390a538ae"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenCPN.md",
+      "destination": "Map Layers/OpenCPN.md",
+      "bytes": 887,
+      "sha256": "07fe603fdb907961ca6e58f5af0ae0d7df288623fd18e0b6a03d0ea624fdd174"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenSeaMap (Nautical Charts).md",
+      "destination": "Map Layers/OpenSeaMap (Nautical Charts).md",
+      "bytes": 983,
+      "sha256": "070f45c7a24e8c9eddbd462497fee83e116809f5166e38c747bb3f87c831c529"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenSky Network (Map).md",
+      "destination": "Map Layers/OpenSky Network (Map).md",
+      "bytes": 992,
+      "sha256": "d1e70c87de5c154db10cded6d3a336edc999c3d9fa065479783e1d6cec716d8f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenStreetMap (Tile CDN).md",
+      "destination": "Map Layers/OpenStreetMap (Tile CDN).md",
+      "bytes": 989,
+      "sha256": "fe8b1c0ba6b569476c1e92568b9bcdaf5cca460446a123bc20743d71ff99a079"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/OpenWeatherMap Tiles.md",
+      "destination": "Map Layers/OpenWeatherMap Tiles.md",
+      "bytes": 999,
+      "sha256": "ca381e12e7c8a3f6c993850e4a17afdf08183e54f8ceeed073db37e0613d6323"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Overpass API.md",
+      "destination": "Map Layers/Overpass API.md",
+      "bytes": 962,
+      "sha256": "5fb92b6661cb27e6cbc78a5f842142ffb6ae0b7c9f1b70447590abb92f9c73f4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/PMTiles (Format - Spec).md",
+      "destination": "Map Layers/PMTiles (Format - Spec).md",
+      "bytes": 998,
+      "sha256": "ce1f30688cd1d8d0e60b10a760f62a8d89f801995a694e33b9b6904f74d8b45f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/PeeringDB Data Center Map.md",
+      "destination": "Map Layers/PeeringDB Data Center Map.md",
+      "bytes": 992,
+      "sha256": "53568574f49402e51d55169fa6a6fe6a499edc41006e251dcccb3e62a3f18e03"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Protomaps.md",
+      "destination": "Map Layers/Protomaps.md",
+      "bytes": 946,
+      "sha256": "339be9ea773aeed6945fcf39f91c0ee20fdf37e7405bf36b8b872d3a8bb9f578"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/QGIS Desktop.md",
+      "destination": "Map Layers/QGIS Desktop.md",
+      "bytes": 896,
+      "sha256": "f882eece729c391d347bd6e88e7cc2a5534607ede1bc62b499204753eda053c1"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/QGIS Server (WMS - WFS).md",
+      "destination": "Map Layers/QGIS Server (WMS - WFS).md",
+      "bytes": 1039,
+      "sha256": "9d56a11cb2e03db8e4ed19de753975e1addde262e2c6f95719143439215fc68b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/SafeComLink HF Map.md",
+      "destination": "Map Layers/SafeComLink HF Map.md",
+      "bytes": 961,
+      "sha256": "aa155bca892983e1afae650065167362b988db4d513e3799d28f93d32d1843dd"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Safecast Radiation Map.md",
+      "destination": "Map Layers/Safecast Radiation Map.md",
+      "bytes": 970,
+      "sha256": "bdde6c32c3ce4bcd7e39d3ead6d29a1e588070635ea4b82ebcb416d77940daf2"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/TileServer GL.md",
+      "destination": "Map Layers/TileServer GL.md",
+      "bytes": 1007,
+      "sha256": "90ee6c8d2114d9c9be6f700ec32940085c6f5bb4026ea0784cbb5b542cb0c7cc"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/USGS Water Resources Map.md",
+      "destination": "Map Layers/USGS Water Resources Map.md",
+      "bytes": 988,
+      "sha256": "bdecf8edf1bd94c628a840abb29223081a66b55bce95df1519695f534dd2b5b4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/WFS (OGC Standard).md",
+      "destination": "Map Layers/WFS (OGC Standard).md",
+      "bytes": 952,
+      "sha256": "b9a17ea53299789279e17937bb77405830639bd8ae8efb632eae7e9d9067a126"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/WMS (OGC Standard).md",
+      "destination": "Map Layers/WMS (OGC Standard).md",
+      "bytes": 964,
+      "sha256": "c8e9a4e0e6e045ce37801b686469d6a5e411069124daf9594d158577290e038f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/WMTS (OGC Standard).md",
+      "destination": "Map Layers/WMTS (OGC Standard).md",
+      "bytes": 972,
+      "sha256": "32a51b5bb1bc1264770dea7945e225deeb0208e091c59eec0bfa720cb4b6518b"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/WRI Global Power Plant DB.md",
+      "destination": "Map Layers/WRI Global Power Plant DB.md",
+      "bytes": 1024,
+      "sha256": "712a69a2f2d62ae232b746d0d94a46044df97086d98dc5a30a3a5861c0c24b7e"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/Windy Embed.md",
+      "destination": "Map Layers/Windy Embed.md",
+      "bytes": 909,
+      "sha256": "9b789038d76f18dadf29cb0c53ce2c2ed0bade7d8cda1f976ab376f66cf282f4"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Geo/Map Layers/pg_featureserv.md",
+      "destination": "Map Layers/pg_featureserv.md",
+      "bytes": 972,
+      "sha256": "1f69388cb70d5380f391c92b9e62a2f1cf849fa27ee97e87f74c389d6797f85f"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/Integrations/Knowledge/Redpanda Connect — OneMind Universal Feed Engine (Technical Reference).md",
+      "destination": "Related Documents/01 The Fabric/Integrations/Knowledge/Redpanda Connect — OneMind Universal Feed Engine (Technical Reference).md",
+      "bytes": 25551,
+      "sha256": "2235f68cee4f5e4c46190cdec3d252532142d9c68a3e07b172e1c2a88c0f7554"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/Knowledge/TAK CoT Feed Sources — OneMind OS.md",
+      "destination": "Related Documents/01 The Fabric/TAK/Knowledge/TAK CoT Feed Sources — OneMind OS.md",
+      "bytes": 18905,
+      "sha256": "69004990228f0b9251f1c6b69dfd7e063f5b912e25663f6684b797576b64ddde"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-intel — Intel Feeds Plugin.md",
+      "destination": "Related Documents/01 The Fabric/TAK/OneTAK UI/omos-intel — Intel Feeds Plugin.md",
+      "bytes": 807,
+      "sha256": "c986801591b876eb8c083a4f9a0692156a68eb4a850ed72d42ab71caf88104f6"
+    },
+    {
+      "source": "/Users/zeus/OneMind - 10-23-26/notion-transfer/so/01 The Fabric/TAK/OneTAK UI/omos-ops - Feed Systems.md",
+      "destination": "Related Documents/01 The Fabric/TAK/OneTAK UI/omos-ops - Feed Systems.md",
+      "bytes": 881,
+      "sha256": "f1e9880c08f4e18259d20d6044ff44401fb5af01e03d2ebe25cb65659631816f"
+    }
+  ]
+}

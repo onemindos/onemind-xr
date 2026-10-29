@@ -1,0 +1,29 @@
+filters:
+  and:
+    - file.inFolder("notion-transfer/so/01 The Fabric/Geo/Geo DB")
+    - file.ext == "md"
+    - kind != "host"
+    - kind != "index"
+    - kind != null
+formulas:
+  item: file.asLink(note.title)
+properties:
+  formula.item:
+    displayName: Item
+  note.kind:
+    displayName: "Kind"
+  note.notion_status:
+    displayName: "Status"
+  note.notion_tags:
+    displayName: "Tags"
+  note.notion_category:
+    displayName: "Category"
+views:
+  - type: table
+    name: All
+    order:
+      - formula.item
+      - kind
+      - notion_status
+      - notion_tags
+      - notion_category

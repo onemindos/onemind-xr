@@ -1,0 +1,134 @@
+{
+  "head": "96fea4867b92696cea3f5905d147fa830167017e",
+  "cached_main": "7082e87ca17f26e370212b58c1e14a078543d0e7",
+  "status": "",
+  "sources": [
+    {
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "sha256": "49ac2e60f4328351b8e4f4a5d5dd294196b30441982914dbb6ffeeb45b3d68ef",
+      "equal_to_cached_main": true
+    },
+    {
+      "path": "platform/omos/tak-projector.yaml",
+      "sha256": "69ffa8b193e75b03df04a2f020f8979430d9146f845f6f3cc7f579291f694ad8",
+      "equal_to_cached_main": true
+    },
+    {
+      "path": "platform/omos/intel-scripts.yaml",
+      "sha256": "581111dbab04404535b78d2c12a4531f5b8549d5db35f7f8329639f506e8b959",
+      "equal_to_cached_main": true
+    },
+    {
+      "path": "platform/omos/feed-scripts.yaml",
+      "sha256": "07d43a58e0b962270cc432e5e83a24b91a84b4e02593a9cb915c72226e10f7a6",
+      "equal_to_cached_main": true
+    },
+    {
+      "path": "platform/omos/feeds.yaml",
+      "sha256": "8ce7a1bb3f2ddc69813ba47bc08c4a3a33560224ab9e0b6d3c31f1c8fb9df32b",
+      "equal_to_cached_main": true
+    },
+    {
+      "path": "platform/omos/intel-feeds.yaml",
+      "sha256": "97e73910fcec0aa945bfb2d4d375cd87a5fddf68dcad241352113ebb62335ccc",
+      "equal_to_cached_main": true
+    },
+    {
+      "path": "platform/omos/sinks.yaml",
+      "sha256": "03b1682a23ec3e29b74ff446c030a2b6d3a6da0d1663d61b208fe07bcf47d6be",
+      "equal_to_cached_main": true
+    },
+    {
+      "path": "platform/omos/scaledobject-sink-clickhouse.yaml",
+      "sha256": "f81c993db3297097a298cad5d9d2d1774148a5a3916edc1944703fed38ed99d4",
+      "equal_to_cached_main": true
+    },
+    {
+      "path": "services/takserver/plugin-src/src/main/java/tak/server/plugins/NatsBridgePlugin.java",
+      "sha256": "312140284218ef98081336d114e5db6058fe3e201123128d982bc1ed16ce41a3",
+      "equal_to_cached_main": true
+    }
+  ],
+  "excerpts": [
+    {
+      "id": "connect-launch",
+      "path": "platform/data/redpanda-connect/deployment.yaml",
+      "start_line": 505,
+      "end_line": 528,
+      "snippet": "---\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: redpanda-connect\n  namespace: omos\n  labels:\n    app.kubernetes.io/name: redpanda-connect\n    app.kubernetes.io/part-of: omos-feeds\nspec:\n  replicas: 1\n  selector:\n    matchLabels:\n      app.kubernetes.io/name: redpanda-connect\n  template:\n    metadata:\n      labels:\n        app.kubernetes.io/name: redpanda-connect\n        app.kubernetes.io/part-of: omos-feeds\n    spec:\n      containers:\n        - name: connect\n          image: redpandadata/connect@sha256:b462939a6d7c265df7d6584925a5070beabaf5bc84d35180219e247f438b64ac\n          args: [\"streams\", \"--chilled\", \"/config/pipelines/feed-mta.yaml\"]"
+    },
+    {
+      "id": "projector-handlers",
+      "path": "platform/omos/tak-projector.yaml",
+      "start_line": 342,
+      "end_line": 399,
+      "snippet": "        # --- Entity state handler (core NATS subscription) ---\n        async def entity_handler(msg):\n            nonlocal ent_published, skipped\n            if not _enabled:\n                return\n            try:\n                entity = json.loads(msg.data.decode())\n            except Exception:\n                skipped += 1\n                return\n\n            uid, cot_bytes = entity_to_cot(entity)\n            if cot_bytes is None:\n                skipped += 1\n                return\n\n            now_ts = time.monotonic()\n            if now_ts - last_pub.get(uid, 0) < MIN_INTERVAL:\n                return\n            last_pub[uid] = now_ts\n\n            if ent_published % 10000 == 0 and ent_published > 0:\n                cutoff = now_ts - MIN_INTERVAL * 10\n                for k in [k for k, v in last_pub.items() if v < cutoff]:\n                    del last_pub[k]\n\n            await nc.publish(INJECT_SUBJ, cot_bytes)\n            ent_published += 1\n            if ent_published <= 5 or ent_published % 500 == 0:\n                LOG.info(\"ENT CoT #%d %s/%s → %s\",\n                         ent_published, entity.get(\"entity_type\", \"?\"),\n                         entity.get(\"entity_id\", \"?\"), INJECT_SUBJ)\n\n        # --- Intel event handler (JetStream durable consumer) ---\n        async def intel_handler(msg):\n            nonlocal intel_published, skipped\n            if not _enabled:\n                await msg.ack()\n                return\n            try:\n                envelope = json.loads(msg.data.decode())\n            except Exception:\n                skipped += 1\n                await msg.ack()\n                return\n\n            uid, cot_bytes = intel_to_cot(envelope)\n            if cot_bytes is None:\n                skipped += 1\n                await msg.ack()\n                return\n\n            await nc.publish(INJECT_SUBJ, cot_bytes)\n            intel_published += 1\n            if intel_published <= 5 or intel_published % 100 == 0:\n                LOG.info(\"INTEL CoT #%d %s → %s\",\n                         intel_published, envelope.get(\"type\", \"?\"), INJECT_SUBJ)\n            await msg.ack()"
+    },
+    {
+      "id": "projector-controls",
+      "path": "platform/omos/tak-projector.yaml",
+      "start_line": 401,
+      "end_line": 433,
+      "snippet": "        # --- Control handlers ---\n        async def handle_disable(msg):\n            global _enabled\n            _enabled = False\n            LOG.info(\"projector DISABLED via cmd.projector.disable\")\n\n        async def handle_enable(msg):\n            global _enabled\n            _enabled = True\n            LOG.info(\"projector ENABLED via cmd.projector.enable\")\n\n        await nc.subscribe(\"cmd.projector.disable\", cb=handle_disable)\n        await nc.subscribe(\"cmd.projector.enable\",  cb=handle_enable)\n\n        # Subscribe: entity states (core NATS — no JetStream)\n        await nc.subscribe(\"ent.*.*.state\", cb=entity_handler)\n        LOG.info(\"subscribed: ent.*.*.state (core NATS)\")\n\n        # Subscribe: intel events (JetStream durable consumer)\n        js = nc.jetstream()\n        await js.subscribe(\n            \"intel.>\",\n            durable=\"sink-tak\",\n            cb=intel_handler,\n            deliver_policy=nats.js.api.DeliverPolicy.NEW,\n        )\n        LOG.info(\"subscribed: intel.> (JetStream durable=sink-tak)\")\n\n        try:\n            while True:\n                await asyncio.sleep(60)\n                LOG.info(\"heartbeat ent=%d intel=%d skipped=%d uids=%d enabled=%s\",\n                         ent_published, intel_published, skipped, len(last_pub), _enabled)"
+    },
+    {
+      "id": "watch-noaa",
+      "path": "platform/omos/intel-scripts.yaml",
+      "start_line": 346,
+      "end_line": 367,
+      "snippet": "    async def watch_config(kv, config: dict, feed_id: str):\n        try:\n            watcher = await kv.watch(f\"feed.{feed_id}.*\", include_history=True)\n            async for entry in watcher:\n                if entry is None:\n                    break\n                key = entry.key.split(\".\")[-1]  # last segment\n                val = entry.value.decode() if entry.value else \"\"\n                config[key] = val\n                LOG.info(f\"KV config update: feed.{feed_id}.{key}={val!r}\")\n        except Exception as e:\n            LOG.error(f\"KV watcher error: {e}\")\n\n    def get_config(config: dict) -> tuple[bool, int, list[str]]:\n        enabled       = config.get(\"enabled\", \"true\").lower() != \"false\"\n        poll_interval = int(config.get(\"poll_interval\", \"300\") or \"300\")\n        areas_raw     = config.get(\"areas\", \"US\") or \"US\"\n        areas         = [a.strip() for a in areas_raw.split(\",\") if a.strip()]\n        return enabled, poll_interval, areas\n\n    # ---------------------------------------------------------------------------\n    # Status heartbeat"
+    },
+    {
+      "id": "ch-loss-on-failure",
+      "path": "platform/omos/intel-scripts.yaml",
+      "start_line": 116,
+      "end_line": 136,
+      "snippet": "    def flush_to_clickhouse(batch: list[dict]) -> None:\n        body = \"\\n\".join(json.dumps(row) for row in batch).encode(\"utf-8\")\n        req = urllib.request.Request(\n            CH_URL,\n            data=body,\n            method=\"POST\",\n            headers={\n                \"Content-Type\": \"application/x-ndjson\",\n                \"X-ClickHouse-User\": CH_USER,\n                \"X-ClickHouse-Key\":  CH_PASSWORD,\n            },\n        )\n        try:\n            with urllib.request.urlopen(req, timeout=10) as resp:\n                status = resp.status\n            LOG.info(\"flushed batch=%d status=%d\", len(batch), status)\n        except urllib.error.HTTPError as exc:\n            body_text = exc.read(512).decode(\"utf-8\", errors=\"replace\")\n            LOG.error(\"ClickHouse HTTP %d — batch discarded: %s\", exc.code, body_text)\n        except Exception as exc:\n            LOG.error(\"ClickHouse unavailable — batch discarded: %s\", exc)"
+    },
+    {
+      "id": "ch-buffer-clear",
+      "path": "platform/omos/intel-scripts.yaml",
+      "start_line": 143,
+      "end_line": 167,
+      "snippet": "    class Batcher:\n        def __init__(self) -> None:\n            self._rows: list[dict] = []\n            self._deadline: float = time.monotonic() + BATCH_SECS\n            self._lock = asyncio.Lock()\n\n        async def add(self, row: dict) -> None:\n            async with self._lock:\n                self._rows.append(row)\n                should_flush = (\n                    len(self._rows) >= BATCH_MAX\n                    or time.monotonic() >= self._deadline\n                )\n                if should_flush:\n                    await self._flush_locked()\n\n        async def _flush_locked(self) -> None:\n            if not self._rows:\n                self._deadline = time.monotonic() + BATCH_SECS\n                return\n            batch, self._rows = self._rows, []\n            self._deadline = time.monotonic() + BATCH_SECS\n            # Run blocking HTTP call in a thread so we don't block the event loop\n            loop = asyncio.get_event_loop()\n            await loop.run_in_executor(None, flush_to_clickhouse, batch)"
+    },
+    {
+      "id": "ch-subscription",
+      "path": "platform/omos/intel-scripts.yaml",
+      "start_line": 244,
+      "end_line": 262,
+      "snippet": "        # JetStream push consumer — durable, deliver to _INBOX.sink-ch\n        consumer_cfg = ConsumerConfig(\n            durable_name=\"sink-clickhouse\",\n            deliver_subject=\"_INBOX.sink-ch\",\n            deliver_policy=DeliverPolicy.LAST_PER_SUBJECT,\n            filter_subject=\"intel.>\",\n            ack_policy=\"none\",\n        )\n        js_sub = await js.subscribe(\n            \"intel.>\",\n            config=consumer_cfg,\n            cb=handler,\n            manual_ack=True,\n        )\n        LOG.info(\"JetStream push consumer subscribed to intel.>  (durable=sink-clickhouse)\")\n\n        # Core NATS subscription — ent.*.*.state (KV mirrors)\n        core_sub = await nc.subscribe(\"ent.*.*.state\", cb=handler)\n        LOG.info(\"core NATS subscribed to ent.*.*.state\")"
+    },
+    {
+      "id": "plugin-inject",
+      "path": "services/takserver/plugin-src/src/main/java/tak/server/plugins/NatsBridgePlugin.java",
+      "start_line": 98,
+      "end_line": 111,
+      "snippet": "    private void onNatsMessage(io.nats.client.Message natsMsg) {\n        try {\n            String cotXml = new String(natsMsg.getData(), StandardCharsets.UTF_8);\n            logger.debug(\"NATS→TAK [{}]: {}\", consumerSubject, cotXml.substring(0, Math.min(120, cotXml.length())));\n\n            Message takMessage = getConverter().cotStringToDataMessage(\n                cotXml,\n                groups,\n                Integer.toString(System.identityHashCode(this))\n            );\n            send(takMessage);\n        } catch (Exception e) {\n            logger.error(\"Error injecting NATS message into TAK\", e);\n        }"
+    },
+    {
+      "id": "plugin-core",
+      "path": "services/takserver/plugin-src/src/main/java/tak/server/plugins/NatsBridgePlugin.java",
+      "start_line": 116,
+      "end_line": 137,
+      "snippet": "    @Override\n    public void start() {\n        logger.info(\"NatsBridgePlugin starting — connecting to {}\", natsUrl);\n        try {\n            Options options = new Options.Builder()\n                .server(natsUrl)\n                .maxReconnects(-1)          // reconnect forever\n                .reconnectWait(java.time.Duration.ofSeconds(2))\n                .connectionName(\"takserver-nats-bridge\")\n                .build();\n\n            natsConnection = Nats.connect(options);\n            logger.info(\"NatsBridgePlugin connected to NATS\");\n\n            // Subscribe to inbound CoT subject\n            natsDispatcher = natsConnection.createDispatcher(this::onNatsMessage);\n            natsDispatcher.subscribe(consumerSubject);\n            logger.info(\"NatsBridgePlugin subscribed to NATS subject: {}\", consumerSubject);\n\n        } catch (Exception e) {\n            logger.error(\"NatsBridgePlugin failed to connect to NATS at {}\", natsUrl, e);\n        }"
+    }
+  ],
+  "catalog_verification": {
+    "records": 240,
+    "counts": {
+      "Fabric Feeds": 161,
+      "Map Layers": 79
+    },
+    "all_raw_contents_and_hashes_match": true,
+    "all_property_lines_match": true,
+    "main_feed_database": 160,
+    "preserved_top_level_copy": 1
+  },
+  "source_range_verification": {
+    "verified_key_ranges": 9,
+    "source_files_rechecked_on_mac": 9,
+    "all_match_delegated_snapshots": true,
+    "deployed_revision_verified": false
+  }
+}

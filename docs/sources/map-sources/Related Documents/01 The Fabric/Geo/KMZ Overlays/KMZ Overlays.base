@@ -1,0 +1,44 @@
+filters:
+  and:
+    - file.inFolder("notion-transfer/so/01 The Fabric/Geo/KMZ Overlays")
+    - file.ext == "md"
+    - kind != "host"
+    - kind != "index"
+    - kind != null
+formulas:
+  item: file.asLink(note.title)
+properties:
+  formula.item:
+    displayName: Item
+  note.kind:
+    displayName: "Kind"
+  note.notion_status:
+    displayName: "Status"
+  note.notion_coverage_area:
+    displayName: "Coverage Area"
+  note.notion_layer_groups:
+    displayName: "Layer Groups"
+  note.notion_data_source:
+    displayName: "Data Source"
+  note.notion_build_date:
+    displayName: "Build Date"
+  note.notion_poi_count:
+    displayName: "Poi Count"
+  note.notion_file_size:
+    displayName: "File Size"
+  note.notion_script:
+    displayName: "Script"
+views:
+  - type: table
+    name: All
+    order:
+      - formula.item
+      - kind
+      - notion_status
+      - notion_coverage_area
+      - notion_layer_groups
+      - notion_data_source
+      - notion_build_date
+      - notion_poi_count
+      - notion_file_size
+      - notion_script
