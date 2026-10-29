@@ -1,0 +1,24 @@
+# Read-only diagnosis transcript, 2026-10-29T11:59:35Z, context do-nyc3-omos-cloud
+$ kubectl -n takserver get pod -l app=takserver-plugins -o jsonpath={imageID,startTime}
+ghcr.io/onemindos/takserver-base@sha256:f4824fba65a23efa9ebf946040509591b90823ab2b118b1e272c6cf55337d694 2026-10-18T11:24:42Z
+$ kubectl -n takserver logs deploy/takserver-plugins | head -1
+NOTE: Picked up JDK_JAVA_OPTIONS: -Dloader.path=WEB-INF/lib-provided,WEB-INF/lib,WEB-INF/classes -Dio.netty.tmpdir=/opt/tak -Djava.io.tmpdir=/opt/tak -Dio.netty.native.workdir=/opt/tak -Djava.net.preferIPv4Stack=true -Djava.security.egd=file:/dev/./urandom -DIGNITE_UPDATE_NOTIFIER=false -DIGNITE_QUIET=true -Djdk.tls.client.protocols=TLSv1.2 
+$ kubectl -n takserver logs deploy/takserver-plugins | wc -l
+     379
+$ ... | grep -ci natsbridge
+0
+$ ... | grep -E "PluginLoader|PluginMessenger|Starting PluginService"
+2026-10-18-11:27:35.265 [main] t.s.plugins.service.PluginService - Starting PluginService v5.8-RELEASE-69 using Java 17.0.20 with PID 1 (/opt/tak/takserver-pm.jar started by root in /opt/tak)
+2026-10-18-11:28:10.237 [main] t.s.p.messaging.PluginMessenger - create PluginMessenger
+2026-10-18-11:28:11.644 [main] t.s.p.manager.loader.PluginLoader - starting PluginLoader
+2026-10-18-11:28:11.800 [main] t.s.p.messaging.PluginMessenger - starting PluginMessenger
+$ kubectl -n takserver get deploy cot-tap
+Error from server (NotFound): deployments.apps "cot-tap" not found
+$ curl -I GHCR manifests (gh token) for plugins-5.8-onemind / plugins-upstream-5.8-onemind
+HTTP/2 403 for both (no read:packages scope): digest sha256:f4824fba... not mappable to a tag
+$ kubectl get nodes -L onemind.io/compute-role
+NAME                           STATUS   ROLES    AGE   VERSION   COMPUTE-ROLE
+onemind-ecosystem-cpu-3rhwrp   Ready    <none>   10d   v1.36.5   ecosystem
+onemind-hub-core-v2-3rtf47     Ready    <none>   11d   v1.36.5   
+onemind-hub-core-v2-3rtf4m     Ready    <none>   11d   v1.36.5   
+onemind-hub-core-v2-3rtf4q     Ready    <none>   11d   v1.36.5   

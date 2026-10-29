@@ -1,0 +1,47 @@
+{
+  "config": {
+    "name": "WORLD",
+    "subjects": [
+      "evt.world.\u003e"
+    ],
+    "retention": "limits",
+    "max_consumers": -1,
+    "max_msgs_per_subject": -1,
+    "max_msgs": -1,
+    "max_bytes": -1,
+    "max_age": 86400000000000,
+    "max_msg_size": -1,
+    "storage": "file",
+    "discard": "old",
+    "num_replicas": 1,
+    "duplicate_window": 120000000000,
+    "sealed": false,
+    "deny_delete": false,
+    "deny_purge": false,
+    "allow_rollup_hdrs": false,
+    "allow_direct": true,
+    "mirror_direct": false,
+    "metadata": {
+      "_nats.level": "5",
+      "_nats.req.level": "0",
+      "_nats.ver": "2.15.2"
+    },
+    "consumer_limits": {}
+  },
+  "created": "2026-10-29T11:49:08.766769Z",
+  "state": {
+    "messages": 24,
+    "bytes": 11438,
+    "first_seq": 1,
+    "first_ts": "2026-10-29T11:49:10.614054Z",
+    "last_seq": 24,
+    "last_ts": "2026-10-29T11:49:10.614466Z",
+    "num_subjects": 24,
+    "consumer_count": 0
+  },
+  "cluster": {
+    "leader": "NAH3JIS5AJDZDX4NDCC2KB6GERTL6LYAR7VBEMIXBJBKV7KLOCSNOTHX"
+  },
+  "ts": "2026-10-29T11:49:20.957235Z"
+}
+

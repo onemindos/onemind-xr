@@ -1,0 +1,25 @@
+# omos CI-equivalent checks on the committed branch feat/nats-identities (99c9b460), 2026-10-29T12:15:10Z
+## yamllint (repo .yamllint.yml)
+rc=0
+## scripts/validate_changed_yaml.py
+Changed YAML gate passed (5 files checked)
+rc=0
+## scripts/validate_manifests.py on changed YAML
+No changed plain manifests to validate
+rc=0
+## scripts/check_onemind_mcp_coverage.py
+All 57 Git-declared Argo Applications mapped to MCP access dispositions
+rc=0
+## gitleaks dir (CI mode: .gitleaks.toml + baseline, exit-code 1)
+[90m8:15AM[0m [32mINF[0m [1mscanned ~12877744 bytes (12.88 MB) in 4.4s[0m
+[90m8:15AM[0m [32mINF[0m [1mno leaks found[0m
+rc=0
+## gitleaks git (commits in this change)
+[90m8:15AM[0m [32mINF[0m [1mscanned ~187501 bytes (187.50 KB) in 82.3ms[0m
+[90m8:15AM[0m [32mINF[0m [1mno leaks found[0m
+rc=0
+## scripts/nats_identities.py check
+ok: 17 users, 4 accounts, invariants hold, values file current
+rc=0
+## gofmt / go vet (permtest)
+rc=0

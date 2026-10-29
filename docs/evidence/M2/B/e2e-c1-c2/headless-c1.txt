@@ -1,0 +1,39 @@
+[headless] connected to ws://127.0.0.1:64879 (server 2.15.2)
+[headless] SEEN tak-android-c1e2e0d9f2494 in layer tak at 30.267200,-97.743100 callsign=C1-EUD type=a-f-G-U-C seq=1 after 1045 ms
+[headless] INSPECTOR tak-android-c1e2e0d9f2494
+    Identity    entity_id                tak-android-c1e2e0d9f2494
+    Identity    entity_type              person
+    Identity    callsign                 C1-EUD
+    Identity    cot_type                 a-f-G-U-C
+    Identity    disposition              friendly
+    Identity    simulated                no
+    Identity    alias cot_uid            ANDROID-c1e2e0d9f2494
+    Identity    alias tak_callsign       C1-EUD
+    State       lifecycle                active
+    State       seq                      1
+    State       updated                  0.1 s ago
+    State       expires in               299.9 s
+    Position    lat, lon                 30.267200, -97.743100
+    Position    hae m                    150.0
+    Position    course, speed            90 deg, 1.5 m/s
+    Position    ce, le m (1-sigma)       9.9, 9.9
+    Confidence  confidence               0.532
+    Confidence  source_prior             0.800
+    Confidence  track_quality            0.330
+    Confidence  corroboration            0.800
+    Sources     source 1                 tak-mesh (cot)
+    Sources     source 1 subject         tak.cot.mesh.rx
+    Sources     source 1 stream/seq      COT #1
+    Sources     source 1 last seen       0.0 s ago
+    Provenance  primary                  tak-mesh
+    Provenance  how                      h-e
+    Marking     tlp                      AMBER+STRICT
+    History     fixes kept               1
+    History     oldest                   0.1 s ago at 30.26720, -97.74310
+    Raw CoT     from                     COT #1 (tak.cot.mesh.rx)
+[headless] RAW COT tak-android-c1e2e0d9f2494
+<event version="2.0" uid="ANDROID-c1e2e0d9f2494" type="a-f-G-U-C" how="h-e" time="2026-10-29T12:38:47.380Z" start="2026-10-29T12:38:47.380Z" stale="2026-10-29T12:43:47.380Z"><point lat="30.2672" lon="-97.7431" hae="150" ce="9.9" le="9999999"/><detail><uid Droid="C1-EUD" /><contact endpoint="127.0.0.1:4242:tcp" callsign="C1-EUD"/><__group name="Cyan" role="Team Member"/><status battery="88"/><takv device="PIXEL" platform="ATAK-CIV" os="34" version="5.6.0.12"/><track speed="1.5" course="90"/></detail></event>
+[headless] layer tak path=direct state=live entities=1 snapshots=1 batches=0 err=
+[headless] layer tak path=direct state=live entities=1 snapshots=1 batches=0 err=
+[headless] final layer tak: 1 entities (added 1, updated 0, removed 0, expired 0, ignored older 0), last snapshot 15 ms
+[headless] final tak tak-android-c1e2e0d9f2494 C1-EUD 30.267200,-97.743100 seq=1

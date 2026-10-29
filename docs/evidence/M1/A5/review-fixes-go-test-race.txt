@@ -1,0 +1,57 @@
+?   	github.com/onemindos/omos/services/layer/cmd/layer-service	[no test files]
+    acceptance_test.go:58: snapshot: 10000 items in 6 chunks, 280.437583ms, ent_seq 10000, manifest count 10000
+--- PASS: TestA5OneRead (3.59s)
+    acceptance_test.go:122: zoom 3: mode cells, 16 cells, 50000 vessels counted
+    acceptance_test.go:139: zoom 10, 50 km bbox: mode entities, 302 vessels (expected 302), truncated false
+    acceptance_test.go:162: zone_id zone-home: 55 vessels (expected 55)
+    acceptance_test.go:189: KV sea.cells.z2: 16 cells, 573 bytes, 50000 vessels
+    acceptance_test.go:189: KV sea.cells.z4: 160 cells, 4870 bytes, 50000 vessels
+    acceptance_test.go:189: KV sea.cells.z6: 2304 cells, 68719 bytes, 50000 vessels
+--- PASS: TestA5AOICellsAndVessels (13.86s)
+    acceptance_test.go:225: manifest vanished 2.2s after stop (bucket TTL 2s); client badge "layer down"
+--- PASS: TestA5LayerDown (2.32s)
+    acceptance_test.go:292: limit_s 2: feed-b stopped -> degraded after 2.01s; feed-a stopped -> stale after 2s; feeds [{Source:feed-a FetchedAt:0xc00750ed38 Count:12 LastError:<nil> Stale:true} {Source:feed-b FetchedAt:0xc00750ed58 Count:12 LastError:<nil> Stale:true}]
+--- PASS: TestA5StaleFeed (4.48s)
+    acceptance_test.go:355: CLIENT import with share:false: snapshot, watch and list all refused with forbidden
+--- PASS: TestA5ImportWithoutShare (0.12s)
+    acceptance_test.go:406: CLIENT bob (team-b): 2500 items in 2 chunks; alice (team-a, org): 2502 items in 2 chunks
+    acceptance_test.go:442: cross-account watches over 25 s (lease 10 s, response_threshold 15s): alice 100 batches, 0 resnapshots []; bob 41 batches, 0 resnapshots []
+--- PASS: TestA5Releasability (26.65s)
+    acceptance_test.go:517: 200 msg/s for 6 s, client joined at 2 s: 271 entities match the stream reference; 42 batches; resnapshots 0 []
+--- PASS: TestA5NoGap (7.10s)
+    acceptance_test.go:559: dropped batch 3: client re-snapshotted 1 time(s) [gap: batch 4 after 2] and converged
+    acceptance_test.go:575: watch from_seq 401 after ~200 changes with a 50-change window: {"v":1,"error":"resnapshot","detail":"from_seq is outside the replay window","last":true}
+--- PASS: TestA5ResyncAfterGap (4.53s)
+    acceptance_test.go:636: watch path: both removed 220ms after expiry (reasons map[sim-air1:expired sim-air2:expired]); direct path: MaxAge marker 0s after expiry
+--- PASS: TestA5Expiry (3.94s)
+    acceptance_test.go:726: AOI A 529 vessels -> AOI B 484 vessels: 408 exit ops, 363 enter ops, none outside B
+--- PASS: TestA5AOIMove (0.97s)
+    acceptance_test.go:905: 50,000-vessel burst, max_rate_hz 4, 13 watches: AOI entities watch 4492 vessels in 50 batches, max 45613 bytes, max 140 ops, min gap 244ms; cells watch 0 46 batches, max 5274 bytes, max 1 ops, min gap 253ms; 8 world entity watches ended with too_many; max queued ops 109; peak watch memory 0.8 MiB (budget 128 MiB); peak test-process heap 131.8 MiB (before 10.7 MiB)
+--- PASS: TestA5Backpressure (13.48s)
+    acceptance_test.go:953: service killed; client gave up the watch 3.06s after the last batch (dead time 3s): [dead watch: no batch for 3s]
+--- PASS: TestA5DeadWatch (4.83s)
+    acceptance_test.go:1001: site-mac stopped reporting; fleet-state key gone after 3s (site timeout 2 s, bucket TTL 1 s; 30 s in the CR)
+--- PASS: TestA5FleetState (3.44s)
+    acceptance_test.go:1027: lease held: {"holder":"one","expires_ms":1793276909395}
+    acceptance_test.go:1031: standby took over 20ms after the holder stopped
+--- PASS: TestA5SingleWriter (1.13s)
+    acceptance_test.go:1064: fields full: 600 entities of ~3429 bytes in 4 chunks, largest 522206 bytes, server max_payload 1048576
+--- PASS: TestA5PagingFullFields (0.54s)
+--- PASS: TestWatchCap (0.06s)
+--- PASS: TestWatchBudget (0.49s)
+--- PASS: TestCellOpsDoNotAccumulate (1.19s)
+--- PASS: TestSiteSeenBounded (0.00s)
+--- PASS: TestResolveImportWithoutShare (0.00s)
+--- PASS: TestDefaultLayersValid (0.00s)
+--- PASS: TestCellZoom (0.00s)
+--- PASS: TestAreas (0.00s)
+--- PASS: TestTileXY (0.00s)
+--- PASS: TestCanSee (0.00s)
+--- PASS: TestFreshness (0.00s)
+--- PASS: TestChunkAll (0.09s)
+--- PASS: TestEncodeCellsDropsOversizeZoom (0.01s)
+--- PASS: TestReplayWindow (0.00s)
+--- PASS: TestParseEntityMapping (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/layer/internal/layer	94.192s
+?   	github.com/onemindos/omos/services/layer/internal/layerclient	[no test files]

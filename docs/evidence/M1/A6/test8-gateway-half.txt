@@ -1,0 +1,6 @@
+# §12 test 8 gateway half (CP-2): TestInjectAllowed on origin/feat/tak-mesh-gateway @ bef11eb1 (#551, run read-only, not edited)
+=== RUN   TestInjectAllowed
+--- PASS: TestInjectAllowed (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/tak	0.318s
+End-to-end MESH_TO_TAK_SERVER false/true checks: onemind-xr docs/evidence/M1/A7/EVIDENCE.md rows for §12 test 8 (checks 2, 8, 8b).

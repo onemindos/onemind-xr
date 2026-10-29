@@ -1,0 +1,21 @@
+== reviewer run Thu Oct 29 11:48:44 UTC 2026
+................            [100%]
+16 passed, 45 subtests passed in 7.89s
+== validate_changed_yaml
+Changed YAML gate passed (1 files checked)
+== validate_manifests
+Summary: 1471 resources found in 524 files - Valid: 841, Invalid: 0, Errors: 0, Skipped: 630
+kubeconform: validating 524 manifest file(s)
+== yamllint
+rc=0
+== gitleaks
+[90m7:48AM[0m [32mINF[0m [1m5 commits scanned.[0m
+[90m7:48AM[0m [32mINF[0m [1mscanned ~26114 bytes (26.11 KB) in 61.1ms[0m
+[90m7:48AM[0m [32mINF[0m [1mno leaks found[0m
+
+== reviewer check: CMD discard:new vs core subscribers (disposable nats-server 127.0.0.1:14987, temp store, deleted after)
+stream CMDT subjects cmd.> discard new max_bytes 400; core `nats sub 'cmd.>'` running; 5 publishes to cmd.fleet.drone.sim-x1.hold
+result: stream stored 2 messages (3 refused, max bytes), core subscriber received all 5 (payload-number-1..5)
+=> a refused CMD publish is still delivered to core subscribers (e.g. #554 bridge stubs subscribe cmd.fleet.drone.* on core).
+== live (read-only): NACK CRD v1beta2 has allowDirect, maxMsgsPerSubject, maxBytes, discard; live jsz matches Git before change; no subject overlap with det.> or tel.feed.>; reserved_storage 2001048576, max_storage 48318382080.
+== PR CI (gh pr checks 555): Lint & Validate, kubeconform, Helm render, gitleaks all SUCCESS.

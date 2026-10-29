@@ -1,0 +1,104 @@
+=== RUN   TestStreamFramingRoundTrip
+--- PASS: TestStreamFramingRoundTrip (0.00s)
+=== RUN   TestStreamFramingRejectsBadInput
+--- PASS: TestStreamFramingRejectsBadInput (0.00s)
+=== RUN   TestXMLReaderSplitsEvents
+--- PASS: TestXMLReaderSplitsEvents (0.00s)
+=== RUN   TestXMLReaderBoundsBuffer
+--- PASS: TestXMLReaderBoundsBuffer (0.01s)
+=== RUN   TestNegotiationParsing
+--- PASS: TestNegotiationParsing (0.00s)
+=== RUN   TestControlTypes
+--- PASS: TestControlTypes (0.00s)
+=== RUN   TestEchoFilter
+--- PASS: TestEchoFilter (0.00s)
+=== RUN   TestDedupIDStable
+--- PASS: TestDedupIDStable (0.00s)
+=== RUN   TestLoadConfigRequiresCertAndCA
+--- PASS: TestLoadConfigRequiresCertAndCA (0.00s)
+=== RUN   TestClientXMLStream
+2026/10/29 07:58:36 tak-client: connected to 127.0.0.1:56226 (TLS TLS 1.3)
+--- PASS: TestClientXMLStream (0.06s)
+=== RUN   TestClientNegotiatesV1
+2026/10/29 07:58:36 tak-client: connected to 127.0.0.1:56230 (TLS TLS 1.3)
+2026/10/29 07:58:36 tak-client: TAK Server version 5.8-RELEASE-69-test
+2026/10/29 07:58:36 tak-client: server offered TAK Protocol v1; requested it
+2026/10/29 07:58:36 tak-client: switched to TAK Protocol v1 streaming
+--- PASS: TestClientNegotiatesV1 (0.08s)
+=== RUN   TestClientStaysXMLWhenDeclinedOrDisabled
+=== RUN   TestClientStaysXMLWhenDeclinedOrDisabled/declined
+2026/10/29 07:58:36 tak-client: connected to 127.0.0.1:56233 (TLS TLS 1.3)
+2026/10/29 07:58:36 tak-client: TAK Server version 5.8-RELEASE-69-test
+2026/10/29 07:58:36 tak-client: server offered TAK Protocol v1; requested it
+2026/10/29 07:58:36 tak-client: server declined TAK Protocol v1; staying on XML
+=== RUN   TestClientStaysXMLWhenDeclinedOrDisabled/TAK_PROTOCOL=xml
+2026/10/29 07:58:36 tak-client: connected to 127.0.0.1:56238 (TLS TLS 1.3)
+2026/10/29 07:58:36 tak-client: TAK Server version 5.8-RELEASE-69-test
+--- PASS: TestClientStaysXMLWhenDeclinedOrDisabled (0.21s)
+    --- PASS: TestClientStaysXMLWhenDeclinedOrDisabled/declined (0.18s)
+    --- PASS: TestClientStaysXMLWhenDeclinedOrDisabled/TAK_PROTOCOL=xml (0.03s)
+=== RUN   TestClientNegotiationTimeoutFallsBackToXML
+2026/10/29 07:58:36 tak-client: connected to 127.0.0.1:56241 (TLS TLS 1.3)
+2026/10/29 07:58:36 tak-client: TAK Server version 5.8-RELEASE-69-test
+2026/10/29 07:58:36 tak-client: server offered TAK Protocol v1; requested it
+2026/10/29 07:58:37 tak-client: session to 127.0.0.1:56241 ended: no t-x-takp-r within the negotiation timeout; reconnecting on XML
+2026/10/29 07:58:37 tak-client: connected to 127.0.0.1:56241 (TLS TLS 1.3)
+2026/10/29 07:58:37 tak-client: TAK Server version 5.8-RELEASE-69-test
+--- PASS: TestClientNegotiationTimeoutFallsBackToXML (0.89s)
+=== RUN   TestClientKeepAliveAndReset
+=== RUN   TestClientKeepAliveAndReset/ping_answered_keeps_the_stream
+2026/10/29 07:58:37 tak-client: connected to 127.0.0.1:56254 (TLS TLS 1.3)
+=== RUN   TestClientKeepAliveAndReset/silent_server_is_reset
+2026/10/29 07:58:40 tak-client: connected to 127.0.0.1:56293 (TLS TLS 1.3)
+2026/10/29 07:58:40 tak-client: session to 127.0.0.1:56293 ended: nothing received for 1s; resetting connection
+2026/10/29 07:58:40 tak-client: connected to 127.0.0.1:56293 (TLS TLS 1.3)
+--- PASS: TestClientKeepAliveAndReset (3.30s)
+    --- PASS: TestClientKeepAliveAndReset/ping_answered_keeps_the_stream (2.73s)
+    --- PASS: TestClientKeepAliveAndReset/silent_server_is_reset (0.56s)
+=== RUN   TestClientReconnectsAfterServerDrop
+2026/10/29 07:58:40 tak-client: connected to 127.0.0.1:56306 (TLS TLS 1.3)
+2026/10/29 07:58:40 tak-client: session to 127.0.0.1:56306 ended: TAK Server closed the stream
+2026/10/29 07:58:40 tak-client: connected to 127.0.0.1:56306 (TLS TLS 1.3)
+--- PASS: TestClientReconnectsAfterServerDrop (0.09s)
+=== RUN   TestClientTLSVerification
+=== RUN   TestClientTLSVerification/server_from_an_unknown_CA_is_refused
+=== RUN   TestClientTLSVerification/hostname_is_checked_when_TAK_SERVER_NAME_is_set
+2026/10/29 07:58:40 tak-client: connected to 127.0.0.1:56311 (TLS TLS 1.3)
+=== RUN   TestClientTLSVerification/client_without_a_TAK_certificate_is_refused_by_the_server
+2026/10/29 07:58:40 tak-client: connected to 127.0.0.1:56311 (TLS TLS 1.3)
+--- PASS: TestClientTLSVerification (0.05s)
+    --- PASS: TestClientTLSVerification/server_from_an_unknown_CA_is_refused (0.01s)
+    --- PASS: TestClientTLSVerification/hostname_is_checked_when_TAK_SERVER_NAME_is_set (0.03s)
+    --- PASS: TestClientTLSVerification/client_without_a_TAK_certificate_is_refused_by_the_server (0.01s)
+=== RUN   TestInjectQueueBoundedAndAged
+--- PASS: TestInjectQueueBoundedAndAged (0.00s)
+=== RUN   TestBridgeEndToEnd
+=== RUN   TestBridgeEndToEnd/xml
+2026/10/29 07:58:40 tak-client: connected to 127.0.0.1:56322 (TLS TLS 1.3)
+2026/10/29 07:58:40 tak-client: injecting from tak.cot.inject (queue tak-cot-inject)
+=== RUN   TestBridgeEndToEnd/takproto-v1
+2026/10/29 07:58:41 tak-client: connected to 127.0.0.1:56341 (TLS TLS 1.3)
+2026/10/29 07:58:41 tak-client: injecting from tak.cot.inject (queue tak-cot-inject)
+2026/10/29 07:58:41 tak-client: TAK Server version 5.8-RELEASE-69-test
+2026/10/29 07:58:41 tak-client: server offered TAK Protocol v1; requested it
+2026/10/29 07:58:41 tak-client: switched to TAK Protocol v1 streaming
+--- PASS: TestBridgeEndToEnd (1.48s)
+    --- PASS: TestBridgeEndToEnd/xml (0.73s)
+    --- PASS: TestBridgeEndToEnd/takproto-v1 (0.75s)
+=== RUN   TestInjectQueueSharedWithPlugin
+2026/10/29 07:58:42 tak-client: connected to 127.0.0.1:56356 (TLS TLS 1.3)
+2026/10/29 07:58:42 tak-client: injecting from tak.cot.inject (queue tak-cot-inject)
+    integration_test.go:246: queue split: tak-client 17, plugin 23
+2026/10/29 07:58:42 tak-client: session to 127.0.0.1:56356 ended: TAK Server closed the stream
+2026/10/29 07:58:42 tak-client: session to 127.0.0.1:56356 ended: dial: dial tcp 127.0.0.1:56356: connect: connection refused
+--- PASS: TestInjectQueueSharedWithPlugin (0.42s)
+=== RUN   TestInjectValidation
+2026/10/29 07:58:42 tak-client: connected to 127.0.0.1:56371 (TLS TLS 1.3)
+2026/10/29 07:58:42 tak-client: injecting from tak.cot.inject (queue tak-cot-inject)
+--- PASS: TestInjectValidation (0.27s)
+=== RUN   TestNATSRestartDuringStream
+2026/10/29 07:58:43 tak-client: connected to 127.0.0.1:56383 (TLS TLS 1.3)
+2026/10/29 07:58:43 tak-client: injecting from tak.cot.inject (queue tak-cot-inject)
+--- PASS: TestNATSRestartDuringStream (1.40s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/tak-client	9.643s

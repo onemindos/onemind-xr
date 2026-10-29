@@ -1,0 +1,26 @@
+J1: build-machine check of the commands in OWNER-STEPS.md that do not need the owner's LAN
+(2026-10-29). Loopback ports replaced the LAN listeners; the password was a random test value
+in an environment variable, never written to a file.
+
+1. nats-server 2.15.2 with `authorization { user: l0, password: $L0_NATS_PASSWORD }` (password
+   from the environment) and `websocket { ..., no_tls: true }`:
+   no-auth: refused: Authorization Violation
+   wrong pass: refused: Authorization Violation
+   right pass: connected 127.0.0.1:19299
+   [INF] Listening for websocket clients on ws://127.0.0.1:19299
+   [INF] Server is ready
+
+2. Fixture with credentials (`NATS_PASSWORD` env, `--user l0`):
+   fixture: mode=entity publishing to ws://127.0.0.1:19299 (Ctrl-C to stop)
+
+3. MediaMTX v1.21.3 with the OWNER-STEPS config (addresses on loopback test ports):
+   INF configuration loaded from .../mediamtx.yml
+   INF [RTSP] started with listeners on 127.0.0.1:18599 (TCP/RTSP)
+   INF [HLS] started with listener on 127.0.0.1:18598 (TCP/HTTP)
+   INF [WebRTC] started with listeners on 127.0.0.1:18597 (TCP/HTTP), 127.0.0.1:18596 (UDP/ICE)
+   INF [MoQ] started with listeners on :8892 (TCP/HTTP2), :8892 (UDP/HTTP3), :8893 (UDP/QUIC)
+   -> MoQ is on by default and binds all interfaces, so `moq: false` was added to the
+      OWNER-STEPS config after this check.
+
+Not checkable here: the phone, the Mac's Wi-Fi address, the macOS firewall prompts, iOS Safari
+WHEP/HLS behaviour.

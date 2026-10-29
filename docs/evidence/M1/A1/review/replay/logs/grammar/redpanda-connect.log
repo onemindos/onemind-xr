@@ -1,0 +1,13 @@
+time="2026-10-29T07:55:00-04:00" level=info msg="Running without a main config file" @service=redpanda-connect benthos_version=4.115.1
+time="2026-10-29T07:55:00-04:00" level=info msg="Successfully loaded Redpanda license" @service=redpanda-connect expires_at="2036-10-26T07:55:00-04:00" license_org="" license_type=open_source
+time="2026-10-29T07:55:00-04:00" level=info msg="Listening for HTTP requests at: http://0.0.0.0:4195" @service=redpanda-connect
+time="2026-10-29T07:55:00-04:00" level=info msg="Input type generate is now active" @service=redpanda-connect label="" path=root.input stream=feed-satellites-grammar
+time="2026-10-29T07:55:00-04:00" level=info msg="Output type nats_jetstream is now active" @service=redpanda-connect label="" path=root.output.switch.cases.2.output stream=feed-satellites-grammar
+time="2026-10-29T07:55:00-04:00" level=info msg="Output type nats is now active" @service=redpanda-connect label="" path=root.output.switch.cases.0.output stream=feed-satellites-grammar
+time="2026-10-29T07:55:00-04:00" level=info msg="Output type nats_jetstream is now active" @service=redpanda-connect label="" path=root.output.switch.cases.1.output stream=feed-satellites-grammar
+time="2026-10-29T07:55:00-04:00" level=info msg="Launching Redpanda Connect in streams mode, use CTRL+C to close" @service=redpanda-connect
+time="2026-10-29T07:55:00-04:00" level=info msg="Input type generate is now active" @service=redpanda-connect label="" path=root.input stream=feed-mta-grammar
+time="2026-10-29T07:55:00-04:00" level=info msg="Output type nats_jetstream is now active" @service=redpanda-connect label="" path=root.output.switch.cases.2.output stream=feed-mta-grammar
+time="2026-10-29T07:55:00-04:00" level=info msg="Output type nats_jetstream is now active" @service=redpanda-connect label="" path=root.output.switch.cases.1.output stream=feed-mta-grammar
+time="2026-10-29T07:55:00-04:00" level=info msg="Output type nats is now active" @service=redpanda-connect label="" path=root.output.switch.cases.0.output stream=feed-mta-grammar
+time="2026-10-29T07:55:10-04:00" level=info msg="Received SIGTERM, the service is closing" @service=redpanda-connect
