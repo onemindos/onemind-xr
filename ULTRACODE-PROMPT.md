@@ -104,7 +104,7 @@ the **acceptance platform**, and you cannot reach them. So:
    SealedSecrets, a `docs/STACK.md` row. The hub-core node pool is
    memory-saturated, so new workloads target the ecosystem pool. Leave omos PRs
    assigned to other harnesses (omos `CLAUDE.md`) alone.
-4. **No secrets in Git**, not even test values. Tokens come from the macOS keychain
+4. **No secrets in Git**, not even test values. Tokens come from the OS keychain
    or the environment.
 5. **Licences:** onemind-xr is GPL-3.0. Port VR-TAK and ATAK-CIV code with
    attribution; reuse MIT code (gods-eye-view, osiris) with its notice; never copy
