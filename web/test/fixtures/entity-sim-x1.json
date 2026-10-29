@@ -1,0 +1,202 @@
+{
+  "uid": "sim-x1",
+  "type": "fleet.drone",
+  "lat": 30.2672,
+  "lon": -97.7431,
+  "hae": 152.4,
+  "course": 90,
+  "speed": 12.5,
+  "callsign": "SIM-X1",
+  "stale": 60,
+  "t": 1793275200000,
+  "meta": {
+    "battery_pct": 82,
+    "mode": "AUTO",
+    "link_rssi": -67,
+    "mission_id": "msn-01jbx7a0000000000000000000",
+    "node_id": "build-mac"
+  },
+  "entity_id": "sim-x1",
+  "entity_type": "drone",
+  "confidence": 0.97,
+  "properties": {
+    "callsign": "SIM-X1",
+    "altitude": 152.4,
+    "speed": 12.5,
+    "course": 90,
+    "ce": 5.0,
+    "le": 3.0
+  },
+  "v": 1,
+  "seq": 42,
+  "live": true,
+  "lifecycle": "active",
+  "created_t": 1793275100000,
+  "expiry_t": 1793275260000,
+  "pinned": false,
+  "kind": "multirotor",
+  "template": "asset",
+  "traits": [
+    "locatable",
+    "trackable",
+    "taskable",
+    "observable"
+  ],
+  "disposition": "friendly",
+  "environment": "air",
+  "cot_type": "a-f-A-M-H-Q",
+  "aliases": {
+    "name": "SIM-X1",
+    "ids": [
+      {
+        "type": "mavlink_sysid",
+        "id": "1"
+      },
+      {
+        "type": "cot_uid",
+        "id": "sim-x1"
+      }
+    ]
+  },
+  "location": {
+    "lat": 30.2672,
+    "lon": -97.7431,
+    "hae_m": 152.4,
+    "agl_m": 40.0,
+    "course_deg": 90,
+    "speed_mps": 12.5,
+    "vel_enu_mps": [
+      12.5,
+      0,
+      0
+    ],
+    "attitude_q": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "measured_t": 1793275200000
+  },
+  "uncertainty": {
+    "ce_m": 5.0,
+    "le_m": 3.0,
+    "pos_enu_cov": [
+      25,
+      0,
+      0,
+      25,
+      0,
+      9
+    ],
+    "vel_enu_cov": null,
+    "error_ellipse": null
+  },
+  "geo": null,
+  "status": {
+    "activity": "orbit",
+    "role": "overwatch",
+    "mode": "AUTO"
+  },
+  "health": {
+    "connection": "online",
+    "overall": "healthy",
+    "battery_pct": 82,
+    "link_rssi": -67,
+    "components": [
+      {
+        "id": "gps",
+        "health": "healthy"
+      }
+    ],
+    "alerts": []
+  },
+  "sensors": [
+    {
+      "id": "cam0",
+      "type": "camera",
+      "state": "operational",
+      "fov": {
+        "h_deg": 82,
+        "v_deg": 52,
+        "az_deg": 90,
+        "el_deg": -30,
+        "range_m": 300
+      }
+    }
+  ],
+  "capabilities": [
+    "onemind.task.goto.v1",
+    "onemind.task.orbit.v1",
+    "onemind.task.rtl.v1",
+    "onemind.task.land.v1",
+    "onemind.task.observe.v1"
+  ],
+  "current_task": {
+    "task_id": "tsk-01jbx7k2m9q4r8s6t0v2w4y6z8",
+    "state": "executing"
+  },
+  "tracked": null,
+  "correlation": null,
+  "relationships": [
+    {
+      "id": "rel-1",
+      "type": "member_of",
+      "to": "team.team-cyan",
+      "since_t": 1793275000000,
+      "source": "registry"
+    }
+  ],
+  "media": [
+    {
+      "kind": "video",
+      "url": "rtsp://127.0.0.1:8554/sim-x1",
+      "role": "primary"
+    }
+  ],
+  "route": null,
+  "indicators": {
+    "simulated": true,
+    "exercise": false,
+    "emergency": false,
+    "starred": false,
+    "egress_tak": true
+  },
+  "marking": {
+    "tlp": "AMBER+STRICT",
+    "releasable_to": [
+      "homestead"
+    ]
+  },
+  "cot_security": null,
+  "provenance": {
+    "primary": "bridge-mavlink",
+    "how": "m-s",
+    "source_t": 1793275200000
+  },
+  "sources": [
+    {
+      "integration": "bridge-mavlink",
+      "source_id": "sysid-1",
+      "data_type": "mavlink",
+      "subject": "tel.fleet.drone.sim-x1.position",
+      "stream": "TEL",
+      "seq": 118220,
+      "first_seen_t": 1793275100000,
+      "last_seen_t": 1793275200000,
+      "source_t": 1793275200000,
+      "components": [
+        "location",
+        "health",
+        "status"
+      ]
+    }
+  ],
+  "confidence_parts": {
+    "source_prior": 0.95,
+    "track_quality": 1.0,
+    "corroboration": 0.95
+  },
+  "conflicts": [],
+  "overrides": []
+}
