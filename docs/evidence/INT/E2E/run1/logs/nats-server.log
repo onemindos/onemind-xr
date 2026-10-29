@@ -1,0 +1,38 @@
+[66750] 2026/10/29 12:20:48.561627 [INF] Starting nats-server
+[66750] 2026/10/29 12:20:48.561765 [INF]   Version:  2.15.2
+[66750] 2026/10/29 12:20:48.561772 [INF]   Git:      [5a815f1]
+[66750] 2026/10/29 12:20:48.561777 [INF]   Name:     NDBNYM6YLAIQGVJFW2RDXKKCKPBCBKKHNT5I7XZ7Z5JCMZIRWU2QA6YC
+[66750] 2026/10/29 12:20:48.561784 [INF]   Node:     jRTXo5ih
+[66750] 2026/10/29 12:20:48.561788 [INF]   ID:       NDBNYM6YLAIQGVJFW2RDXKKCKPBCBKKHNT5I7XZ7Z5JCMZIRWU2QA6YC
+[66750] 2026/10/29 12:20:48.561795 [WRN] Plaintext passwords detected, use nkeys or bcrypt
+[66750] 2026/10/29 12:20:48.561807 [INF] Using configuration file: /Users/danielcarku/Desktop/work/.run/tmp-e2e/run/nats.conf (sha256:da9d24c67ae45c276d5325297797f72acb5751bb1e524f1e97bfa47b61f0d7a0)
+[66750] 2026/10/29 12:20:48.561988 [INF] Starting JetStream
+[66750] 2026/10/29 12:20:48.562175 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[66750] 2026/10/29 12:20:48.562267 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[66750] 2026/10/29 12:20:48.562272 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[66750] 2026/10/29 12:20:48.562277 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[66750] 2026/10/29 12:20:48.562281 [INF] 
+[66750] 2026/10/29 12:20:48.562287 [INF]          https://docs.nats.io/jetstream
+[66750] 2026/10/29 12:20:48.562292 [INF] 
+[66750] 2026/10/29 12:20:48.562296 [INF] ---------------- JETSTREAM ----------------
+[66750] 2026/10/29 12:20:48.562301 [INF]   Strict:          true
+[66750] 2026/10/29 12:20:48.562310 [INF]   Max Memory:      256.00 MB
+[66750] 2026/10/29 12:20:48.562315 [INF]   Max Storage:     64.00 GB
+[66750] 2026/10/29 12:20:48.562319 [INF]   Store Directory: "/Users/danielcarku/Desktop/work/.run/tmp-e2e/run/js/jetstream"
+[66750] 2026/10/29 12:20:48.562323 [INF]   API Level:       5
+[66750] 2026/10/29 12:20:48.562326 [INF] -------------------------------------------
+[66750] 2026/10/29 12:20:48.562946 [INF] Took 943.834µs to start JetStream
+[66750] 2026/10/29 12:20:48.563016 [INF] Listening for websocket clients on ws://127.0.0.1:60679
+[66750] 2026/10/29 12:20:48.563023 [WRN] Websocket not configured with TLS. DO NOT USE IN PRODUCTION!
+[66750] 2026/10/29 12:20:48.563064 [INF] Listening for client connections on 127.0.0.1:60678
+[66750] 2026/10/29 12:20:48.563073 [INF] Server is ready
+[66750] 2026/10/29 12:20:50.669804 [ERR] 127.0.0.1:60769 - cid:103 - "v1.53.1:go:policy-service" - "ONEMIND/user:policy" - Subscription Violation - Subject "evt.map.geofence.*", SID 15
+[66750] 2026/10/29 12:21:38.434556 [ERR] 127.0.0.1:61564 - cid:201 - "v1.53.1:go:e2e-hermes" - "AGENTS/user:hermes" - Publish Violation - Subject "svc.policy.task.confirm"
+[66750] 2026/10/29 12:21:40.437002 [ERR] 127.0.0.1:61564 - cid:201 - "v1.53.1:go:e2e-hermes" - "AGENTS/user:hermes" - Publish Violation - Subject "svc.policy.command.confirm"
+[66750] 2026/10/29 12:24:05.312511 [ERR] 127.0.0.1:64109 - wid:498 - "v3.4.0:nats.ws:onemind-l0-web" - "CLIENT/user:zeus" - Subscription Violation - Subject "ent.alert.*.state", SID 16
+[66750] 2026/10/29 12:24:46.897214 [ERR] 127.0.0.1:64839 - wid:582 - "v3.4.0:nats.ws:onemind-l0-web" - "CLIENT/user:zeus" - Subscription Violation - Subject "ent.alert.*.state", SID 16
+[66750] 2026/10/29 12:26:33.159907 [INF] Trapped "interrupt" signal
+[66750] 2026/10/29 12:26:33.211340 [INF] Initiating Shutdown...
+[66750] 2026/10/29 12:26:33.211366 [INF] Initiating JetStream Shutdown...
+[66750] 2026/10/29 12:26:33.308428 [INF] JetStream Shutdown
+[66750] 2026/10/29 12:26:33.308587 [INF] Server Exiting..

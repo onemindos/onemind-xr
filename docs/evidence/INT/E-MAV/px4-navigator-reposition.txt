@@ -1,0 +1,51 @@
+			} else if (cmd.command == vehicle_command_s::VEHICLE_CMD_DO_REPOSITION
+				   && _vstatus.arming_state == vehicle_status_s::ARMING_STATE_ARMED
+				   && (((uint32_t)cmd.param2 & 1) != 0
+				       || _vstatus.nav_state == vehicle_status_s::NAVIGATION_STATE_AUTO_LOITER)) {
+				// Only apply the reposition setpoint when armed and either a mode switch into Hold was requested
+				// (CHANGE_MODE flag) or we're already in Hold. Otherwise a later switch into Hold could execute a
+				// stale setpoint (loiter.cpp applies it within a 500ms window).
+
+				// Wait for vehicle_status before handling the next command, otherwise the setpoint could be overwritten
+				_wait_for_vehicle_status_timestamp = hrt_absolute_time();
+
+				vehicle_global_position_s position_setpoint{};
+
+				if (PX4_ISFINITE(cmd.param5) && PX4_ISFINITE(cmd.param6)) {
+					position_setpoint.lat = cmd.param5;
+					position_setpoint.lon = cmd.param6;
+
+				} else {
+					position_setpoint.lat = get_global_position()->lat;
+					position_setpoint.lon = get_global_position()->lon;
+				}
+
+				position_setpoint.alt = PX4_ISFINITE(cmd.param7) ? cmd.param7 : get_global_position()->alt;
+
+				if (geofence_allows_position(position_setpoint)) {
+					position_setpoint_triplet_s *rep = get_reposition_triplet();
+					position_setpoint_triplet_s *curr = get_position_setpoint_triplet();
+
+					// store current position as previous position and goal as next
+					rep->previous.yaw = get_local_position()->heading;
+					rep->previous.lat = get_global_position()->lat;
+					rep->previous.lon = get_global_position()->lon;
+					rep->previous.alt = get_global_position()->alt;
+
+
+					rep->current.type = position_setpoint_s::SETPOINT_TYPE_LOITER;
+
+					bool only_alt_change_requested = false;
+
+					// If no argument for ground speed, use default value.
+					if (cmd.param1 <= 0 || !PX4_ISFINITE(cmd.param1)) {
+						// on entering Loiter mode, reset speed setpoint to default
+						if (_navigation_mode != &_loiter) {
+							rep->current.cruising_speed = -1.f;
+
+						} else {
+							rep->current.cruising_speed = get_cruising_speed();
+						}
+
+					} else {
+						rep->current.cruising_speed = cmd.param1;

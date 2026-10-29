@@ -1,0 +1,290 @@
+--- E2E/harness/main.go	2026-10-29 12:32:22
++++ E2E-2/harness/main.go	2026-10-29 13:07:05
+@@ -30,8 +30,7 @@
+ 
+ var (
+ 	RUN  = "/Users/danielcarku/Desktop/work/.run/tmp-e2e/run"
+-	EV   = envOr("E2E_EV", "/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/INT/E2E")
+-	DEV  = os.Getenv("E2E_DEV") == "1"
++	EV   = envOr("E2E_EV", "/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/INT/E2E-2")
+ 	BIN  = "/Users/danielcarku/Desktop/work/.run/tmp-e2e/bin"
+ 	SRC  = "/Users/danielcarku/Desktop/work/.run/tmp-e2e/src"
+ 	PY   = "/Users/danielcarku/Desktop/work/.tools/py/bin/python"
+@@ -145,25 +144,37 @@
+ // ---------- harness ----------
+ 
+ type H struct {
+-	url   string
+-	ws    string
+-	pw    map[string]string
+-	conns map[string]*nats.Conn
+-	procs []*exec.Cmd
+-	names []string
+-	r     *recorder
+-	res   []map[string]any
+-	bugs  []string
++	hermesURL string
++	amu       sync.Mutex
++	asyncErrs []string
++	url       string
++	ws        string
++	pw        map[string]string
++	conns     map[string]*nats.Conn
++	procs     []*exec.Cmd
++	names     []string
++	r         *recorder
++	res       []map[string]any
++	bugs      []string
+ }
+ 
+ func (h *H) conn(user string) *nats.Conn {
+ 	if c, ok := h.conns[user]; ok {
+ 		return c
+ 	}
+-	c, err := nats.Connect(h.url, nats.UserInfo(user, h.pw[user]), nats.Name("e2e-"+user),
++	url, opts := h.url, []nats.Option{nats.UserInfo(user, h.pw[user])}
++	if user == "hermes" {
++		// E2E-2: hermes is LEAFNODE only (A19); the scripted agent talks to its stand-in sidecar
++		// on loopback without credentials, the pod's route (IDENTITIES.md "Local and stand-in Hermes").
++		url, opts = h.hermesURL, nil
++	}
++	c, err := nats.Connect(url, append(opts, nats.Name("e2e-"+user),
+ 		nats.ErrorHandler(func(_ *nats.Conn, s *nats.Subscription, err error) {
+ 			h.r.note("nats-async-error", map[string]any{"user": user, "err": err.Error()})
+-		}))
++			h.amu.Lock()
++			h.asyncErrs = append(h.asyncErrs, user+": "+err.Error())
++			h.amu.Unlock()
++		}))...)
+ 	if err != nil {
+ 		panic(fmt.Sprintf("connect %s: %v", user, err))
+ 	}
+@@ -377,8 +388,8 @@
+ 	}()
+ 
+ 	// ---- nats-server ----
+-	port, wsPort := freePort("tcp"), freePort("tcp")
+-	out, err := exec.Command(PY, "/Users/danielcarku/Desktop/work/.run/tmp-e2e/harness/mkconf.py", RUN, fmt.Sprint(port), fmt.Sprint(wsPort), map[bool]string{true: "dev", false: "plain"}[DEV]).CombinedOutput()
++	port, wsPort, leafPort := freePort("tcp"), freePort("tcp"), freePort("tcp")
++	out, err := exec.Command(PY, "/Users/danielcarku/Desktop/work/.run/tmp-e2e/harness/mkconf.py", RUN, fmt.Sprint(port), fmt.Sprint(wsPort), fmt.Sprint(leafPort)).CombinedOutput()
+ 	h.r.note("step", map[string]any{"mkconf": string(out)})
+ 	must(err)
+ 	b, _ = os.ReadFile(filepath.Join(RUN, "passwords.json"))
+@@ -398,6 +409,30 @@
+ 	}
+ 	admin := h.conn("onemind") // legacy shared user, stage B deny lists apply
+ 
++	// ---- Hermes stand-in sidecar (feat/nats-identities leaf-conf, plain, loopback) ----
++	hcPort, hcHTTP := freePort("tcp"), freePort("tcp")
++	hconf := filepath.Join(RUN, "hermes-standin.conf")
++	out, err = exec.Command(PY, filepath.Join(SRC, "nats-identities/scripts/nats_identities.py"), "leaf-conf", "--user", "hermes",
++		"--passwords", filepath.Join(RUN, "passwords.json"), "--out", hconf, "--remote", fmt.Sprintf("127.0.0.1:%d", leafPort),
++		"--plain", "--port", fmt.Sprint(hcPort), "--http-port", fmt.Sprint(hcHTTP)).CombinedOutput()
++	h.r.note("step", map[string]any{"hermes-leaf-conf": string(out)})
++	must(err)
++	h.start("hermes-sidecar", nil, NATS, "-c", hconf)
++	h.hermesURL = fmt.Sprintf("nats://127.0.0.1:%d", hcPort)
++	if !waitFor(10*time.Second, func() bool {
++		r, err := http.Get(fmt.Sprintf("http://127.0.0.1:%d/leafz", hcHTTP))
++		if err != nil {
++			return false
++		}
++		var lz map[string]any
++		_ = json.NewDecoder(r.Body).Decode(&lz)
++		r.Body.Close()
++		n, _ := lz["leafnodes"].(float64)
++		return n >= 1
++	}) {
++		panic("hermes stand-in sidecar did not connect to the hub leafnode listener")
++	}
++
+ 	// ---- streams and buckets from the CRs ----
+ 	var streams []struct {
+ 		Kind   string         `json:"kind"`
+@@ -518,9 +553,9 @@
+ 		"POLICY_PUBKEYS=e2e="+base64.StdEncoding.EncodeToString(pub), "SIG_REQUIRED=true",
+ 		fmt.Sprintf(`GEOFENCE_JSON={"keep_in":[{"id":"sim-range","circle":{"lat":%f,"lon":%f,"radius_m":2000}}],"max_hae_m":300}`, HOME[0], HOME[1])),
+ 		filepath.Join(BIN, "bridge-mavlink"))
+-	h.start("entity", append(nenv("entity"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["entity"]), "START_LOOKBACK=0"), filepath.Join(BIN, "entity"))
++	h.start("entity", append(nenv("entity"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["entity"]), "START_LOOKBACK=0", "OWN_RELEASABLE_TO=homestead"), filepath.Join(BIN, "entity"))
+ 	h.start("layer", append(nenv("layer"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["layer"]), "PRINCIPALS_FILE="+lprPath), filepath.Join(BIN, "layer"))
+-	h.start("projector", append(nenv("projector-gated"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["projector"]), "PROJECTOR_TARGET=server", "TAK_RELEASE_GROUPS="+map[bool]string{true: "homestead", false: ""}[DEV]), filepath.Join(BIN, "projector"))
++	h.start("projector", append(nenv("projector-gated"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["projector"]), "PROJECTOR_TARGET=server", "TAK_RELEASE_GROUPS=homestead"), filepath.Join(BIN, "projector")) // deployment.yaml value (A6-P15)
+ 	h.start("geofence", append(nenv("geofence"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["geofence"]), "POLICY_KEYS_DIR="+keysDir, "TICK=1s"), filepath.Join(BIN, "geofence"))
+ 	h.start("mission", append(nenv("mission"), fmt.Sprintf("HEALTH_ADDR=127.0.0.1:%d", hp["mission"]), "MISSION_PRINCIPALS_FILE="+prPath,
+ 		"MISSION_SWEEP_EVERY=200ms", "MISSION_ARRIVAL=true", "MISSION_ARRIVAL_RADIUS_M=25"), filepath.Join(BIN, "mission"))
+@@ -559,6 +594,7 @@
+ 	h.step4()
+ 	h.step5()
+ 	h.step6()
++	h.reflight()
+ 	h.step7()
+ 	h.invariant()
+ 
+@@ -795,43 +831,6 @@
+ 
+ func (h *H) step3() {
+ 	h.guard("3 projector", func() {
+-		if DEV {
+-			// Probe: a copy of the latest sim-x1 record as sim-x9 with releasable_to [homestead]
+-			// (entity.md section 4 example), published as the entity user, to show the projector
+-			// path works once the marking is right. Not the real entity service's output.
+-			e := h.lastEnt("ent.drone.sim-x1.state")
+-			if e != nil {
+-				cp := map[string]any{}
+-				b, _ := json.Marshal(e)
+-				_ = json.Unmarshal(b, &cp)
+-				cp["entity_id"] = "sim-x9"
+-				cp["seq"] = 1
+-				cp["marking"] = map[string]any{"tlp": "AMBER+STRICT", "releasable_to": []string{"homestead"}}
+-				now := time.Now().UnixMilli()
+-				for _, k := range []string{"t", "source_t", "observed_t", "updated_t"} {
+-					if _, ok := cp[k]; ok {
+-						cp[k] = now
+-					}
+-				}
+-				if _, ok := cp["expiry_t"]; ok {
+-					cp["expiry_t"] = now + 120000
+-				}
+-				pb, _ := json.Marshal(cp)
+-				_ = h.conn("entity").Publish("ent.drone.sim-x9.state", pb)
+-				_ = h.conn("entity").Flush()
+-				h.r.note("probe", map[string]any{"published": "ent.drone.sim-x9.state", "record": cp})
+-			}
+-			okp := waitFor(20*time.Second, func() bool {
+-				return len(h.r.find("tak.cot.inject", func(m rec) bool { return strings.Contains(string(m.Raw), "sim-x9") })) > 0
+-			})
+-			var raw string
+-			for _, m := range h.r.find("tak.cot.inject", func(m rec) bool { return strings.Contains(string(m.Raw), "sim-x9") }) {
+-				raw = string(m.Raw)
+-				break
+-			}
+-			h.r.note("check", map[string]any{"probe_projected": okp, "probe_cot": raw})
+-			h.result("3b probe: correctly marked sim-x9 record is projected (TAK_RELEASE_GROUPS=homestead)", map[bool]string{true: "pass", false: "fail"}[okp], fmt.Sprintf("projected=%v cot=%.600s", okp, raw), nil)
+-		}
+ 		ok := waitFor(30*time.Second, func() bool {
+ 			return len(h.r.find("tak.cot.inject", func(m rec) bool { return strings.Contains(string(m.Raw), "sim-x1") })) > 0
+ 		})
+@@ -954,7 +953,16 @@
+ 		// Agent confirm: through its own account (server must refuse), both endpoint families.
+ 		_, errA := h.conn("hermes").Request("svc.policy.task.confirm", []byte(fmt.Sprintf(`{"v":1,"action_id":%q,"params_hash":%q,"decision":"approve"}`, act, p["params_hash"])), 2*time.Second)
+ 		_, errB := h.conn("hermes").Request("svc.policy.command.confirm", []byte(fmt.Sprintf(`{"v":1,"action_id":%q,"params_hash":%q,"decision":"approve"}`, act, p["params_hash"])), 2*time.Second)
+-		agentRefused := errA != nil && errB != nil
++		time.Sleep(300 * time.Millisecond)
++		var viol []string
++		h.amu.Lock()
++		for _, e := range h.asyncErrs {
++			if strings.HasPrefix(e, "hermes: ") && strings.Contains(e, "svc.policy.") && strings.Contains(e, ".confirm") {
++				viol = append(viol, e)
++			}
++		}
++		h.amu.Unlock()
++		agentRefused := errA != nil && errB != nil && len(viol) >= 2
+ 		get, _ := h.req("zeus", "svc.policy.action.get", map[string]any{"v": 1, "action_id": act})
+ 		c, err := h.req("zeus", "svc.policy.task.confirm", map[string]any{"v": 1, "action_id": act, "params_hash": p["params_hash"], "decision": "approve"})
+ 		if err != nil {
+@@ -1029,8 +1037,8 @@
+ 			res = "fail"
+ 		}
+ 		h.result("5 mission + task goto via policy; agent confirm refused; human confirm accepted; bridge verifies; drone flies; mission-state; audit", res,
+-			fmt.Sprintf("mission %s create events %v; task %s action %s: hermes propose=awaiting_confirmation, fleet cmds before confirm=%d, hermes confirm (task: %v; command: %v), zeus confirm=%v; action events %v; cmd approval=%s; bridge outcomes %v; bridge task reports %v; KV mission-state final=%s; task facts %v; mission facts %v; drone %.0f m from goal. problems: %v",
+-				msn, h.r.actionEvents(mc), tsk, act, early, errA, errB, c["status"], ev, trunc(dget(cmd, "approval")), outcomes, taskReports, trunc(st), facts(tsk), facts(msn), dist, why),
++			fmt.Sprintf("mission %s create events %v; task %s action %s: hermes propose=awaiting_confirmation, fleet cmds before confirm=%d, hermes confirm (task: %v; command: %v; sidecar violations %v), zeus confirm=%v; action events %v; cmd approval=%s; bridge outcomes %v; bridge task reports %v; KV mission-state final=%s; task facts %v; mission facts %v; drone %.0f m from goal. problems: %v",
++				msn, h.r.actionEvents(mc), tsk, act, early, errA, errB, viol, c["status"], ev, trunc(dget(cmd, "approval")), outcomes, taskReports, trunc(st), facts(tsk), facts(msn), dist, why),
+ 			map[string]any{"action_get_before_confirm": get})
+ 	})
+ }
+@@ -1104,16 +1112,41 @@
+ 		res := "pass"
+ 		detail := fmt.Sprintf("pending task action %s (status %v while estop ran); estop %s propose->confirm %.0f ms, events %v, cmd.fleet.drone.sim-x1.estop published=%v, bridge outcomes %v, mavlink %v",
+ 			pend, dget(pg, "action", "status"), eid, float64(lat.Milliseconds()), ev, !cmdAt.IsZero(), outcomes, mav)
+-		if cmdAt.IsZero() || !contains(outcomes, "acknowledged") {
++		// The vehicle must actually stop: entity shows disarmed and the pending task never dispatched.
++		var armed any
++		okDisarm := waitFor(10*time.Second, func() bool {
++			armed = dget(h.lastEnt("ent.drone.sim-x1.state"), "meta", "armed")
++			return armed == false
++		})
++		pendCmds := len(h.r.find("cmd.fleet.", func(m rec) bool { return dget(m.Data, "action_id") == pend }))
++		pst := dget(pg, "action", "status")
++		detail += fmt.Sprintf("; entity meta.armed after estop=%v; fleet cmds for the pending task=%d", armed, pendCmds)
++		if cmdAt.IsZero() || !contains(outcomes, "acknowledged") || !contains(ev, "executed") || !okDisarm || pendCmds != 0 || pst != "awaiting_confirmation" {
+ 			res = "fail"
+-		} else if !contains(ev, "executed") {
+-			res = "fail"
+-			detail += "; estop reached the vehicle but did not execute (see bugs: the scripted sim answers MAV_CMD_DO_FLIGHTTERMINATION with UNSUPPORTED)"
+ 		}
+ 		h.result("6 estop works while a task is pending", res, detail, nil)
+ 	})
+ }
+ 
++// reflight: after a successful estop the sim is on the ground, disarmed. Arm and take off
++// again (A4, zeus+alice) so the browser step sees a flying drone.
++func (h *H) reflight() {
++	h.guard("reflight", func() {
++		arm, _, err := h.approve("zeus", actionReq("asset.arm", "drone", "sim-x1", map[string]any{}), "zeus", "alice")
++		if err != nil {
++			panic(err)
++		}
++		okArm := waitFor(20*time.Second, func() bool { return contains(h.r.actionEvents(arm), "executed") })
++		tko, _, err := h.approve("zeus", actionReq("asset.takeoff", "drone", "sim-x1", map[string]any{"hae_m": 60.0}), "zeus", "alice")
++		if err != nil {
++			panic(err)
++		}
++		okTko := waitFor(20*time.Second, func() bool { return contains(h.r.actionEvents(tko), "executed") })
++		h.result("reflight after estop: arm+takeoff (A4, zeus+alice)", map[bool]string{true: "pass", false: "fail"}[okArm && okTko],
++			fmt.Sprintf("arm %v; takeoff %v", h.r.actionEvents(arm), h.r.actionEvents(tko)), nil)
++	})
++}
++
+ // ---------- step 7: stop-line verb rejected by name ----------
+ 
+ func (h *H) step7() {
+--- E2E/harness/mkconf.py	2026-10-29 12:30:02
++++ E2E-2/harness/mkconf.py	2026-10-29 13:07:05
+@@ -6,10 +6,11 @@
+   - NACK Stream/KeyValue CRs from feat/stream-caps (base), feat/entity-service (ENT,
+     kv-entity-correlation) and feat/ingest-framework (kv-ingest-*), replicas forced to 1.
+ 
+-Test-only deviations from the A19 file (documented in the evidence):
+-  - user `alice` (CLIENT) = copy of `zeus` with its own password: A4 actions need two humans.
+-  - `hermes` allowed STANDARD connections (A19 grants LEAFNODE only via its pod sidecar).
+-Usage: mkconf.py RUNDIR NATS_PORT WS_PORT
++E2E-2: no deviations from the A19 render. accounts.json comes from
++`nats_identities.py conf --stage B --test-users` (adds the branch's test_only second human,
++alice). hermes stays LEAFNODE only and connects through its stand-in sidecar
++(`leaf-conf --remote --plain`), so the hub gets a leafnode listener on 127.0.0.1.
++Usage: mkconf.py RUNDIR NATS_PORT WS_PORT LEAF_PORT
+ """
+ import copy, json, re, secrets, sys
+ from pathlib import Path
+@@ -20,27 +21,14 @@
+ acc = json.loads((run / "accounts.json").read_text())
+ pw = json.loads((run / "passwords.json").read_text())
+ 
+-client = acc["accounts"]["CLIENT"]["users"]
+-zeus = next(u for u in client if u["user"] == "zeus")
+-alice = copy.deepcopy(zeus); alice["user"] = "alice"
+-pw.setdefault("alice", secrets.token_urlsafe(24)); alice["password"] = pw["alice"]
+-client.append(alice)
+-for u in acc["accounts"]["AGENTS"]["users"]:
+-    if u["user"] == "hermes":
+-        u["allowed_connection_types"] = ["STANDARD"]
+-(run / "passwords.json").write_text(json.dumps(pw))
+-if len(sys.argv) > 4 and sys.argv[4] == "dev":
+-    # Run-2 workaround for the A19 gap found in run 1: policy closes zone actions on
+-    # evt.map.geofence.{created|updated|deleted|refused} but has no subscribe grant for it.
+-    for u in acc["accounts"]["ONEMIND"]["users"]:
+-        if u["user"] == "policy":
+-            u["permissions"]["subscribe"]["allow"].append("evt.map.geofence.>")
++leaf = int(sys.argv[4])
+ 
+ conf = {
+     "listen": f"127.0.0.1:{port}",
+     "http": "127.0.0.1:0",
+     "jetstream": {"store_dir": str(run / "js"), "max_mem": 268435456, "max_file": 68719476736},
+     "websocket": {"listen": f"127.0.0.1:{ws}", "no_tls": True},
++    "leafnodes": {"host": "127.0.0.1", "port": leaf},
+     **acc,
+ }
+ (run / "nats.conf").write_text(json.dumps(conf, indent=1))

@@ -1,0 +1,177 @@
+?   	github.com/onemindos/omos/services/entity/cmd/entity-service	[no test files]
+=== RUN   TestEveryFixtureParsesOrSkipsOnPurpose
+--- PASS: TestEveryFixtureParsesOrSkipsOnPurpose (0.01s)
+=== RUN   TestCoTAircraftFromFeed
+--- PASS: TestCoTAircraftFromFeed (0.00s)
+=== RUN   TestCoTEchoFilter
+--- PASS: TestCoTEchoFilter (0.00s)
+=== RUN   TestCoTEUDIsPersonAndHostileFlagged
+--- PASS: TestCoTEUDIsPersonAndHostileFlagged (0.00s)
+=== RUN   TestCoTRejectsGarbage
+--- PASS: TestCoTRejectsGarbage (0.00s)
+=== RUN   TestWorldMilitaryIsOutOfScope
+--- PASS: TestWorldMilitaryIsOutOfScope (0.00s)
+=== RUN   TestFleetStatusHasNoPosition
+--- PASS: TestFleetStatusHasNoPosition (0.00s)
+=== RUN   TestIntelUSGS
+--- PASS: TestIntelUSGS (0.00s)
+=== RUN   TestDetPersonIsTrack
+--- PASS: TestDetPersonIsTrack (0.00s)
+=== RUN   TestMavlinkStatusGivesDroneTaskTypes
+--- PASS: TestMavlinkStatusGivesDroneTaskTypes (0.00s)
+=== RUN   TestRosStatusGivesRobotTaskTypes
+--- PASS: TestRosStatusGivesRobotTaskTypes (0.00s)
+=== RUN   TestClassBoundsAdvertisedVerbs
+--- PASS: TestClassBoundsAdvertisedVerbs (0.00s)
+=== RUN   TestNoCapabilitiesWithoutSimIDOrAdvertisement
+--- PASS: TestNoCapabilitiesWithoutSimIDOrAdvertisement (0.00s)
+=== RUN   TestFeedsAndCotNeverGetCapabilities
+--- PASS: TestFeedsAndCotNeverGetCapabilities (0.01s)
+=== RUN   TestBridgeConnectionIsHonoured
+--- PASS: TestBridgeConnectionIsHonoured (0.00s)
+=== RUN   TestEnvelopeGolden
+    envelope_test.go:145: envelope golden: map[entity:6 error:1 skip:22]
+--- PASS: TestEnvelopeGolden (0.03s)
+=== RUN   TestEnvelopeFieldMapping
+--- PASS: TestEnvelopeFieldMapping (0.00s)
+=== RUN   TestEnvelopeRejects
+--- PASS: TestEnvelopeRejects (0.00s)
+=== RUN   TestWorldRail
+--- PASS: TestWorldRail (0.00s)
+=== RUN   TestIntelEchoPrefix
+--- PASS: TestIntelEchoPrefix (0.00s)
+=== RUN   TestTLEPropagates
+--- PASS: TestTLEPropagates (0.00s)
+=== RUN   TestTLERejects
+--- PASS: TestTLERejects (0.00s)
+=== RUN   TestNWSLegacyAndEnvelopeSameID
+--- PASS: TestNWSLegacyAndEnvelopeSameID (0.00s)
+=== RUN   TestSourceAliases
+--- PASS: TestSourceAliases (0.00s)
+=== RUN   TestEnvelopeEventTime
+--- PASS: TestEnvelopeEventTime (0.00s)
+=== RUN   TestNativeID
+--- PASS: TestNativeID (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/adapt	1.356s
+=== RUN   TestGoldenReplay
+--- PASS: TestGoldenReplay (0.64s)
+=== RUN   TestRestartNeverDuplicates
+--- PASS: TestRestartNeverDuplicates (6.06s)
+=== RUN   TestLeaseSingleActive
+--- PASS: TestLeaseSingleActive (1.29s)
+=== RUN   TestRPC
+--- PASS: TestRPC (0.24s)
+=== RUN   TestKeepOrbitCap
+--- PASS: TestKeepOrbitCap (0.00s)
+=== RUN   TestSatellitePropagation
+    orbit_test.go:103: 4 records before restart, 3 after; all within 5 km of SGP4
+--- PASS: TestSatellitePropagation (5.22s)
+=== RUN   TestQueryPagesLargeResult
+    review_test.go:98: 1200 entities in 2 pages, largest reply 898533 bytes, max_payload 1048576
+--- PASS: TestQueryPagesLargeResult (1.59s)
+=== RUN   TestDeadLetterIsAckedOrInputRedelivered
+    review_test.go:149: dead letter stored once after SYS returned: {"disposition":"hostile","entity_type":"person","integration":"tak-server","reason":"sl9_person_hostile","seq":1,"service":"entity-service","source_id":"ANDROID-hostile1","stream":"COT","subject":"tak.cot.out","t":1793291902249}
+--- PASS: TestDeadLetterIsAckedOrInputRedelivered (2.73s)
+=== RUN   TestFinalRecordDeletedWhenTTLOff
+--- PASS: TestFinalRecordDeletedWhenTTLOff (0.59s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/bus	19.914s
+=== RUN   TestSimDroneAndRobotAdvertiseCapabilities
+--- PASS: TestSimDroneAndRobotAdvertiseCapabilities (0.02s)
+=== RUN   TestCapabilityAndConnectionChangesPublish
+--- PASS: TestCapabilityAndConnectionChangesPublish (0.00s)
+=== RUN   TestNoCapabilitiesForNonSimFeedsOrCot
+--- PASS: TestNoCapabilitiesForNonSimFeedsOrCot (0.01s)
+=== RUN   TestRestoreKeepsCapabilities
+--- PASS: TestRestoreKeepsCapabilities (0.00s)
+=== RUN   TestOwnSimFleetAssetReleasableTo
+--- PASS: TestOwnSimFleetAssetReleasableTo (0.00s)
+=== RUN   TestOwnReleasableToConfigurable
+--- PASS: TestOwnReleasableToConfigurable (0.00s)
+=== RUN   TestReleasableToNeverWidenedForFeeds
+--- PASS: TestReleasableToNeverWidenedForFeeds (0.01s)
+=== RUN   TestFleetCotTypeFromClass
+--- PASS: TestFleetCotTypeFromClass (0.00s)
+=== RUN   TestConnectionOfflineWhenStale
+--- PASS: TestConnectionOfflineWhenStale (0.00s)
+=== RUN   TestSameAircraftTwoFeedsIsOneEntityWithTwoSources
+--- PASS: TestSameAircraftTwoFeedsIsOneEntityWithTwoSources (0.01s)
+=== RUN   TestShipUpdatesInPlace
+--- PASS: TestShipUpdatesInPlace (0.00s)
+=== RUN   TestOlderSourceTimeIsDroppedAndCounted
+--- PASS: TestOlderSourceTimeIsDroppedAndCounted (0.00s)
+=== RUN   TestFutureSourceTimeIsReplacedByReceiveTime
+--- PASS: TestFutureSourceTimeIsReplacedByReceiveTime (0.00s)
+=== RUN   TestPersonHostileIsRejected
+--- PASS: TestPersonHostileIsRejected (0.01s)
+=== RUN   TestHostileAssetBecomesSuspiciousWithConflict
+--- PASS: TestHostileAssetBecomesSuspiciousWithConflict (0.00s)
+=== RUN   TestCameraPersonDetectionIsATrackNeverAPerson
+--- PASS: TestCameraPersonDetectionIsATrackNeverAPerson (0.00s)
+=== RUN   TestTentativeDetectionsAreNotPublished
+--- PASS: TestTentativeDetectionsAreNotPublished (0.00s)
+=== RUN   TestChangeOnlyPublishAndHeartbeat
+--- PASS: TestChangeOnlyPublishAndHeartbeat (0.00s)
+=== RUN   TestLifecycleStaleLostExpired
+--- PASS: TestLifecycleStaleLostExpired (0.00s)
+=== RUN   TestDuplicateMMSISplitsInsteadOfAveraging
+--- PASS: TestDuplicateMMSISplitsInsteadOfAveraging (0.01s)
+=== RUN   TestSimDroneMergesTelemetryAndMeshCoT
+--- PASS: TestSimDroneMergesTelemetryAndMeshCoT (0.01s)
+=== RUN   TestRestoreContinuesSeqAndDropsRedelivery
+--- PASS: TestRestoreContinuesSeqAndDropsRedelivery (0.02s)
+=== RUN   TestConfidencePartsAreBoundedAndExplained
+--- PASS: TestConfidencePartsAreBoundedAndExplained (0.01s)
+=== RUN   TestHumanAssertionBeatsSensorForCallsign
+--- PASS: TestHumanAssertionBeatsSensorForCallsign (0.00s)
+=== RUN   TestCoreModeSeqStartsAtWallClock
+--- PASS: TestCoreModeSeqStartsAtWallClock (0.00s)
+=== RUN   TestSameSysidTwoSimDronesAreTwoEntities
+--- PASS: TestSameSysidTwoSimDronesAreTwoEntities (0.00s)
+=== RUN   TestSameCallsignTwoEUDsAreTwoEntities
+--- PASS: TestSameCallsignTwoEUDsAreTwoEntities (0.00s)
+=== RUN   TestFailedFinalPublishIsRetried
+--- PASS: TestFailedFinalPublishIsRetried (0.00s)
+=== RUN   TestReappearanceSupersedesUnackedFinal
+--- PASS: TestReappearanceSupersedesUnackedFinal (0.00s)
+=== RUN   TestRestoreKeepsSourceTier
+--- PASS: TestRestoreKeepsSourceTier (0.00s)
+=== RUN   TestFleetUIDGetsFleetPrefix
+--- PASS: TestFleetUIDGetsFleetPrefix (0.00s)
+=== RUN   TestQueryPagesWithCursor
+--- PASS: TestQueryPagesWithCursor (0.00s)
+=== RUN   TestEveryPublishedRecordValidates
+--- PASS: TestEveryPublishedRecordValidates (0.07s)
+=== RUN   TestSchemaRejectsHostilePerson
+--- PASS: TestSchemaRejectsHostilePerson (0.02s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/engine	1.985s
+=== RUN   TestCVTracksStraightLine
+--- PASS: TestCVTracksStraightLine (0.00s)
+=== RUN   TestCVRejectsOutOfOrder
+--- PASS: TestCVRejectsOutOfOrder (0.00s)
+=== RUN   TestVelocityMeasurementInitialises
+--- PASS: TestVelocityMeasurementInitialises (0.00s)
+=== RUN   TestMahalanobisGate
+--- PASS: TestMahalanobisGate (0.00s)
+=== RUN   TestDistance
+--- PASS: TestDistance (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/fusion	2.031s
+=== RUN   TestMakeID
+--- PASS: TestMakeID (0.00s)
+=== RUN   TestResolverPrecedence
+--- PASS: TestResolverPrecedence (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/identity	2.250s
+?   	github.com/onemindos/omos/services/entity/internal/model	[no test files]
+=== RUN   TestMatchesIndependentSGP4
+    orbit_test.go:100: 95 positions compared, worst 3-D difference 3.7 m
+--- PASS: TestMatchesIndependentSGP4 (0.01s)
+=== RUN   TestParseRejectsBadTLEWithoutExiting
+--- PASS: TestParseRejectsBadTLEWithoutExiting (0.00s)
+=== RUN   TestEpochAndTruncation
+--- PASS: TestEpochAndTruncation (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/orbit	2.456s

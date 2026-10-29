@@ -1,0 +1,23 @@
+# KV geofences records written by services/geofence, read by the real parsers of
+# projector (PR #563, d346ee2e) and policy (PR #554, 66900872); scratch copies, test files not committed anywhere
+=== RUN   TestD1GeofenceRecords
+    d1compat_test.go:31: projector home-keepin kind=keep_in active=true contains(30.27,-97.74)=true
+    d1compat_test.go:31: projector barn-keepout kind=keep_out active=true contains(30.27,-97.7401)=true
+    d1compat_test.go:31: projector road-aoi kind=aoi active=true contains(30.2705,-97.745)=true
+    d1compat_test.go:31: projector two-fields kind=aoi active=true contains(30.262,-97.748)=true
+    d1compat_test.go:31: projector two-fields kind=aoi active=true contains(30.262,-97.735)=false
+    d1compat_test.go:41: projector: 6 zones read, 5 active AOI areas
+--- PASS: TestD1GeofenceRecords (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/projector/internal/projector	0.326s
+=== RUN   TestD1GeofenceRecords
+    d1compat_test.go:28: policy barn-keepout kind=keep_out shape=circle live=true applies_to=[]
+    d1compat_test.go:28: policy barn-keepout kind=keep_out shape=circle live=false applies_to=[]
+    d1compat_test.go:28: policy home-keepin kind=keep_in shape=polygon live=true applies_to=[sim-x1]
+    d1compat_test.go:28: policy pond-hazard kind=hazard shape=polygon live=true applies_to=[]
+    d1compat_test.go:22: policy ignores road-aoi (not a movement constraint it can read)
+    d1compat_test.go:22: policy ignores two-fields (not a movement constraint it can read)
+    d1compat_test.go:40: policy: 4 zones read; goto checks as expected
+--- PASS: TestD1GeofenceRecords (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/policy/internal/policy	0.387s

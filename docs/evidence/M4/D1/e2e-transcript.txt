@@ -1,0 +1,61 @@
+14:04:58.740  streams ENT CMD MISSION EVT TEL COT WORLD SYS and KV geofences mission-state entity-correlation created; test policy key written
+NOTE: the MAVLink sim is a scratch copy of onemind-xr scripts/sim/mavlink_sim_drone.py that starts armed and airborne (one-line diff in this evidence dir), because arm and takeoff are asset commands that need the real policy service and a human confirm, which this run does not fake.
+== phase 1: AOI drives what TAK receives (D1)
+14:05:01.771  CHAIN OK: MAVLink sim -> bridge -> tel.fleet -> entity service -> ent.drone.sim-x1.state (seq 13, 30.26851,-97.74275)
+14:05:17.775  TAK (tak.cot.inject) before the AOI, 12 s: map[]
+14:05:17.778  PUBLISH cmd.map.geofence.north-aoi.create (signed=true, command id 311ca1b3-b8a5-4292-9faa-504883515038)
+14:05:18.785  RESULT evt.map.geofence.created {"v":1,"zone_id":"north-aoi","verb":"create","outcome":"created","revision":1,"action_id":"act-311ca1b3","command_id":"311ca1b3-b8a5-4292-9faa-504883515038","actor":"user:zeus"}
+14:05:30.786  TAK (tak.cot.inject) after the AOI, 12 s: map[OM.aircraft.icao-e2e001:2]
+14:05:30.786  PASS D1: drawing the AOI made TAK receive OM.aircraft.icao-e2e001 (0 before, 2 after)
+== phase 2: sim-x1 leaves the keep-in (D6)
+14:05:30.802  PUBLISH cmd.map.geofence.home.create (signed=true, command id fc3314a1-828c-47a0-8817-5a6c056e559b)
+14:05:31.810  RESULT evt.map.geofence.created {"v":1,"zone_id":"home","verb":"create","outcome":"created","revision":2,"action_id":"act-fc3314a1","command_id":"fc3314a1-828c-47a0-8817-5a6c056e559b","actor":"user:zeus"}
+14:05:32.816  ALERT evt.so.alert.raised {"v":1,"alert_id":"alr-gf-home-sim-x1","alert_kind":"geofence","level":"warning","state":"open","about":{"entity_type":"drone","entity_id":"sim-x1"},"zone_id":"home","zone_kind":"keep_in","reason":"left_keep_in","message":"SIM-X1 is outside keep-in zone Home keep-in (west of the orbit centre + 48 m)","raised_by":"omos-geofence","opened_t":1793282730803,"updated_t":1793282730803,"seq":1,"location":{"lat":30.266084,"lon":-97.742223,"hae":33.13},"simulated":true}
+14:05:33.319  PASS D6: sim-x1 (MAVLink sim through bridge and entity service) left the keep-in and raised an alert
+== restart the geofence service while the alert is open
+ready
+== phase 3: after the restart
+14:05:38.195  ALERT evt.so.alert.resolved {"v":1,"alert_id":"alr-gf-home-sim-x1","alert_kind":"geofence","level":"warning","state":"resolved","about":{"entity_type":"drone","entity_id":"sim-x1"},"zone_id":"home","zone_kind":"keep_in","reason":"returned","message":"SIM-X1 is outside keep-in zone Home keep-in (west of the orbit centre + 48 m)","raised_by":"omos-geofence","opened_t":1793282730803,"updated_t":1793282737178,"resolved_t":1793282737178,"seq":2,"location":{"lat":30.266084,"lon":-97.742223,"hae":33.13},"simulated":true}
+14:06:22.441  ALERT evt.so.alert.raised {"v":1,"alert_id":"alr-gf-home-sim-x1","alert_kind":"geofence","level":"warning","state":"open","about":{"entity_type":"drone","entity_id":"sim-x1"},"zone_id":"home","zone_kind":"keep_in","reason":"left_keep_in","message":"SIM-X1 is outside keep-in zone Home keep-in (west of the orbit centre + 48 m)","raised_by":"omos-geofence","opened_t":1793282781729,"updated_t":1793282781729,"seq":3,"location":{"lat":30.2684701,"lon":-97.742575,"hae":33.13},"simulated":true}
+14:06:22.441  PASS: after the restart the service kept the open alert, resolved it on re-entry and raised the next one
+== phase 4: feed outage (D6)
+14:06:22.453  PUBLISH tel.feed.e2e-nws.status stale=false lastError=<nil>
+14:06:24.456  PUBLISH tel.feed.e2e-nws.status stale=false lastError=<nil>
+14:06:26.460  PUBLISH tel.feed.e2e-nws.status stale=false lastError=<nil>
+14:06:28.461  PUBLISH tel.feed.e2e-nws.status stale=true lastError=HTTP 503 from api.weather.gov
+14:06:29.466  ALERT evt.so.alert.raised {"v":1,"alert_id":"alr-feed-e2e-nws","alert_kind":"feed_outage","level":"warning","state":"open","about":{"feed":"e2e-nws"},"reason":"stale","message":"feed e2e-nws is stale: HTTP 503 from api.weather.gov","raised_by":"omos-geofence","opened_t":1793282788461,"updated_t":1793282788461,"seq":1,"simulated":false}
+14:06:29.467  PUBLISH tel.feed.e2e-nws.status stale=false lastError=<nil>
+14:06:30.470  ALERT evt.so.alert.resolved {"v":1,"alert_id":"alr-feed-e2e-nws","alert_kind":"feed_outage","level":"warning","state":"resolved","about":{"feed":"e2e-nws"},"reason":"fresh","message":"feed e2e-nws is stale: HTTP 503 from api.weather.gov","raised_by":"omos-geofence","opened_t":1793282788461,"updated_t":1793282789467,"resolved_t":1793282789467,"seq":2,"simulated":false}
+14:06:30.470  collector goes silent (FEED_SILENCE=20s)
+14:06:50.832  ALERT evt.so.alert.raised {"v":1,"alert_id":"alr-feed-e2e-nws","alert_kind":"feed_outage","level":"warning","state":"open","about":{"feed":"e2e-nws"},"reason":"silent","message":"feed e2e-nws sent no status for 21s","raised_by":"omos-geofence","opened_t":1793282810181,"updated_t":1793282810181,"seq":3,"simulated":false}
+14:06:50.832  PASS D6: a stale feed and a silent feed each raised an alert
+== phase 5: unsigned zone write refused
+14:06:50.842  PUBLISH cmd.map.geofence.rogue.create (signed=false, command id 3a1da489-76c6-4d9f-a327-d5b457962cd4)
+14:06:51.848  RESULT evt.map.geofence.refused {"v":1,"zone_id":"rogue","verb":"create","outcome":"refused","code":"unsigned","message":"zone writes need a policy-signed command (zone.* actions, level A2): unsigned","action_id":"act-3a1da489","command_id":"3a1da489-76c6-4d9f-a327-d5b457962cd4"}
+14:06:51.849  PASS: a direct (unsigned) cmd.map.geofence publish, as Hermes or a client could send, was refused and wrote nothing
+== verify invariants over the whole run
+14:06:54.373  verify: 3 crossings, 7 alert facts, open now map[alr-feed-e2e-nws:true]
+14:06:54.373  PASS invariants: crossings alternate per (zone, entity); no alert raised twice while open (across the restart)
+== geofence service metrics
+omos_geofence_alert_raised 3
+omos_geofence_alert_resolved 3
+omos_geofence_alerts_open 1
+omos_geofence_cmd_refused 1
+omos_geofence_crossing_enter 2
+omos_geofence_crossing_exit 1
+omos_geofence_entities 2
+omos_geofence_entity_records 369
+omos_geofence_feed_status 5
+omos_geofence_published 9
+omos_geofence_restored_alerts 1
+omos_geofence_zone_set 2
+omos_geofence_zones 2
+== geofence service log (zone commands, restore)
+{"time":"2026-10-29T10:04:59.050508-04:00","level":"INFO","msg":"restored","crossings":0,"alert_facts":0,"alerts_open":0}
+{"time":"2026-10-29T10:04:59.0523-04:00","level":"INFO","msg":"geofence service ready","zones":0,"entities":0,"alerts_open":0,"signature_required":true,"keys":["policy-e2e"]}
+{"time":"2026-10-29T10:05:17.781269-04:00","level":"INFO","msg":"zone command","zone":"north-aoi","verb":"create","outcome":"created","code":"","action_id":"act-311ca1b3","command_id":"311ca1b3-b8a5-4292-9faa-504883515038","actor":"user:zeus"}
+{"time":"2026-10-29T10:05:30.803371-04:00","level":"INFO","msg":"zone command","zone":"home","verb":"create","outcome":"created","code":"","action_id":"act-fc3314a1","command_id":"fc3314a1-828c-47a0-8817-5a6c056e559b","actor":"user:zeus"}
+{"time":"2026-10-29T10:05:37.176495-04:00","level":"INFO","msg":"restored","crossings":0,"alert_facts":1,"alerts_open":1}
+{"time":"2026-10-29T10:05:37.178374-04:00","level":"INFO","msg":"geofence service ready","zones":2,"entities":2,"alerts_open":0,"signature_required":true,"keys":["policy-e2e"]}
+{"time":"2026-10-29T10:06:50.843083-04:00","level":"INFO","msg":"zone command","zone":"rogue","verb":"create","outcome":"refused","code":"unsigned","action_id":"act-3a1da489","command_id":"3a1da489-76c6-4d9f-a327-d5b457962cd4","actor":""}
+E2E PASS

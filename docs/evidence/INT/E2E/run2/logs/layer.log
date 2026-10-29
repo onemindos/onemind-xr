@@ -1,0 +1,3 @@
+{"time":"2026-10-29T12:27:13.878812-04:00","level":"INFO","msg":"waiting for lease","bucket":"world-state","key":"_lease.layer-service","holder":"Daniels-MacBook-Pro.local-68406"}
+{"time":"2026-10-29T12:27:13.879477-04:00","level":"INFO","msg":"lease acquired"}
+{"time":"2026-10-29T12:27:13.882196-04:00","level":"INFO","msg":"caught up with ENT","ent_seq":0}

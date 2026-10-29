@@ -1,0 +1,91 @@
+# K2 transcript: the real video-registry binary, disposable nats-server :24333, MediaMTX v1.21.3 running platform/onetak/media/mediamtx.yml (addresses overridden, recording off), ffmpeg testsrc2 as sim-x1's camera — 2026-10-29T11:57:29Z
+# script: work/.run/tmp-k/binary-run.sh (throwaway passwords from openssl rand, never printed)
+KV OVERWATCH_VIDEO created on the disposable server (the NACK CR does this in the cluster)
+--- before publishing: video-registry select ent.drone.sim-x1.state
+{"error":"not_found"}
+exit=2
+--- while sim-x1's camera publishes: video-registry select ent.drone.sim-x1.state
+{
+    "record": {
+        "v": 1,
+        "stream_id": "drone/sim-x1",
+        "entity_type": "drone",
+        "entity_id": "sim-x1",
+        "entity_subject": "ent.drone.sim-x1.state",
+        "live": true,
+        "source_type": "rtspSession",
+        "tracks": [
+            "H264"
+        ],
+        "codec": "H264",
+        "width": 640,
+        "height": 360,
+        "klv": false,
+        "latency_class": "tactical",
+        "latency_by_transport": {
+            "whep": "control",
+            "rtsp": "tactical",
+            "srt": "tactical",
+            "hls": "situational"
+        },
+        "urls": {
+            "rtsp": "rtsp://127.0.0.1:28554/drone/sim-x1",
+            "hls": "http://127.0.0.1:28888/drone/sim-x1/index.m3u8",
+            "whep": "http://127.0.0.1:28889/drone/sim-x1/whep",
+            "srt": "srt://127.0.0.1:28890?streamid=read:drone/sim-x1",
+            "playback": "http://127.0.0.1:29996/list?path=drone/sim-x1"
+        },
+        "permissions": {
+            "publish": [
+                "edge-home",
+                "mavlink-bridge"
+            ],
+            "read": [
+                "onemind-client",
+                "tak-viewer",
+                "takml"
+            ],
+            "playback": [
+                "onemind-client"
+            ]
+        },
+        "recording": {
+            "enabled": true,
+            "format": "fmp4",
+            "retention": "168h"
+        },
+        "media": {
+            "kind": "video",
+            "url": "rtsp://127.0.0.1:28554/drone/sim-x1",
+            "role": "primary",
+            "stream_id": "drone/sim-x1"
+        },
+        "ready_since": "2026-10-29T11:57:07.504046Z",
+        "last_seen": "2026-10-29T11:57:08.266789Z",
+        "updated_at": "2026-10-29T11:57:08.266789Z",
+        "origin": "hub",
+        "seq": 1
+    }
+}
+exit=0
+--- kv get OVERWATCH_VIDEO drone.sim-x1 (key and live flag)
+ent.drone.sim-x1.state live= True hls= http://127.0.0.1:28888/drone/sim-x1/index.m3u8
+--- /readyz and /metrics
+ok
+video_registry_polls_total 3
+video_registry_poll_errors_total 0
+video_registry_kv_puts_total 1
+video_registry_events_total 1
+video_registry_rejected_paths_total 0
+video_registry_rpc_total 2
+--- after the camera stopped
+live= False reason= publisher_stopped
+--- events seen on evt.video.> (nats sub)
+[#1] Received on "evt.video.sim-x1.online"
+{"v":1,"event":"online","stream_id":"drone/sim-x1","entity_type":"drone","entity_id":"sim-x1","entity_subject":"ent.drone.sim-x1.state","origin":"hub"}
+[#2] Received on "evt.video.sim-x1.offline"
+{"v":1,"event":"offline","stream_id":"drone/sim-x1","entity_type":"drone","entity_id":"sim-x1","entity_subject":"ent.drone.sim-x1.state","reason":"publisher_stopped","origin":"hub"}
+--- registry log
+{"time":"2026-10-29T07:57:06.262834-04:00","level":"INFO","msg":"video-registry started","bucket":"OVERWATCH_VIDEO"}
+{"time":"2026-10-29T07:57:08.267217-04:00","level":"INFO","msg":"stream online","stream":"drone/sim-x1","entity":"ent.drone.sim-x1.state"}
+{"time":"2026-10-29T07:57:16.267193-04:00","level":"INFO","msg":"stream offline","stream":"drone/sim-x1","entity":"ent.drone.sim-x1.state"}

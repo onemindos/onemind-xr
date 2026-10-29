@@ -1,0 +1,30 @@
+[99224] 2026/10/29 07:49:08.684041 [INF] Starting nats-server
+[99224] 2026/10/29 07:49:08.684183 [INF]   Version:  2.15.2
+[99224] 2026/10/29 07:49:08.684194 [INF]   Git:      [5a815f1]
+[99224] 2026/10/29 07:49:08.684199 [INF]   Name:     NAH3JIS5AJDZDX4NDCC2KB6GERTL6LYAR7VBEMIXBJBKV7KLOCSNOTHX
+[99224] 2026/10/29 07:49:08.684204 [INF]   Node:     FfZCg2dn
+[99224] 2026/10/29 07:49:08.684208 [INF]   ID:       NAH3JIS5AJDZDX4NDCC2KB6GERTL6LYAR7VBEMIXBJBKV7KLOCSNOTHX
+[99224] 2026/10/29 07:49:08.684215 [WRN] Plaintext passwords detected, use nkeys or bcrypt
+[99224] 2026/10/29 07:49:08.684436 [INF] Starting JetStream
+[99224] 2026/10/29 07:49:08.684804 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[99224] 2026/10/29 07:49:08.684814 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[99224] 2026/10/29 07:49:08.684820 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[99224] 2026/10/29 07:49:08.684824 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[99224] 2026/10/29 07:49:08.684830 [INF] 
+[99224] 2026/10/29 07:49:08.684835 [INF]          https://docs.nats.io/jetstream
+[99224] 2026/10/29 07:49:08.684840 [INF] 
+[99224] 2026/10/29 07:49:08.684843 [INF] ---------------- JETSTREAM ----------------
+[99224] 2026/10/29 07:49:08.684847 [INF]   Strict:          true
+[99224] 2026/10/29 07:49:08.684857 [INF]   Max Memory:      24.00 GB
+[99224] 2026/10/29 07:49:08.684861 [INF]   Max Storage:     15.93 GB
+[99224] 2026/10/29 07:49:08.684865 [INF]   Store Directory: "/Users/danielcarku/Desktop/work/.run/tmp-a1/t/feed-replay.BWNk59/store/jetstream"
+[99224] 2026/10/29 07:49:08.684873 [INF]   API Level:       5
+[99224] 2026/10/29 07:49:08.684876 [INF] -------------------------------------------
+[99224] 2026/10/29 07:49:08.685252 [INF] Took 786.042µs to start JetStream
+[99224] 2026/10/29 07:49:08.685331 [INF] Listening for client connections on 127.0.0.1:53292
+[99224] 2026/10/29 07:49:08.685346 [INF] Server is ready
+[99224] 2026/10/29 07:49:27.223990 [INF] Trapped "terminated" signal
+[99224] 2026/10/29 07:49:27.224089 [INF] Initiating Shutdown...
+[99224] 2026/10/29 07:49:27.224114 [INF] Initiating JetStream Shutdown...
+[99224] 2026/10/29 07:49:27.224969 [INF] JetStream Shutdown
+[99224] 2026/10/29 07:49:27.225043 [INF] Server Exiting..

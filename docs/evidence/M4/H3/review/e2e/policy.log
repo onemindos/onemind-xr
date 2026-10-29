@@ -1,0 +1,9 @@
+{"time":"2026-10-29T09:47:32.416696-04:00","level":"INFO","msg":"policy service ready","authz":"local","signed":true}
+{"time":"2026-10-29T09:47:33.301743-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.robot.sim-tb1.goto","command_id":"b7cd3c0d-307e-428c-9883-f6a0727ad40b","action_id":"act-01m63ymyhk95pedrkr7yk944cb"}
+{"time":"2026-10-29T09:47:38.095767-04:00","level":"INFO","msg":"confirm refused","action_id":"act-01m63yn37ekdngr9gmnph44vrt","code":"agent_cannot_confirm","by":"agent:hermes/zeus/legacy"}
+{"time":"2026-10-29T09:47:38.70109-04:00","level":"WARN","msg":"outcome for mismatched command dropped","subject":"evt.robot.sim-tb1.command","action_id":"act-01m63ymyhk95pedrkr7yk944cb"}
+{"time":"2026-10-29T09:47:38.804985-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.robot.sim-tb1.goto","command_id":"4fcc5f27-bb90-44b7-b20b-e79dc46f67b5","action_id":"act-01m63yn3xk3bq3gc9bgtsvhahf"}
+{"time":"2026-10-29T09:47:38.907415-04:00","level":"INFO","msg":"denied","action_id":"act-01m63yn40v6fxp9c2qmht7jrqz","action_type":"asset.goto","code":"precondition_failed","by":"user:zeus"}
+{"time":"2026-10-29T09:47:38.908174-04:00","level":"INFO","msg":"denied","action_id":"act-01m63yn40vh63nt1ynd5bqj9cx","action_type":"asset.goto","code":"not_simulated","by":"user:zeus"}
+{"time":"2026-10-29T09:47:38.90992-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.robot.sim-tb1.estop","command_id":"806a233d-c989-461d-a761-932c9e33c1af","action_id":"act-01m63yn40ww4qvd7j6s8qxvrz5"}
+{"time":"2026-10-29T09:47:39.013741-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.robot.sim-tb1.goto","command_id":"44d9739c-2efc-4049-888c-f106c64ce9c3","action_id":"act-01m63yn444svr304sz9vsv2xey"}

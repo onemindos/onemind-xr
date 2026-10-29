@@ -1,0 +1,39 @@
+# K6 plugin manifests — 2026-10-29T11:57:29Z
+$ python scripts/validate_plugin_manifests.py
+ok   services/plugins/examples/drone-orbit/onemind-plugin.yaml (org.onemindos.action.drone-orbit 0.1.0, kinds action)
+ok   services/plugins/examples/sim-x1-camera/onemind-plugin.yaml (org.onemindos.video.sim-x1-camera 0.1.0, kinds video)
+ok   services/plugins/examples/usgs-quakes/onemind-plugin.yaml (org.onemindos.layer.usgs-quakes 0.1.0, kinds source,layer)
+ok   services/plugins/examples/video-lookup/onemind-plugin.yaml (org.onemindos.skill.video-lookup 0.1.0, kinds skill)
+exit=0
+$ python scripts/validate_plugin_manifests.py scripts/tests/fixtures/plugins/missing-block/onemind-plugin.yaml   (must fail)
+FAIL scripts/tests/fixtures/plugins/missing-block/onemind-plugin.yaml
+  - schema: licence: 'AGPL-3.0-only' is not one of ['MIT', 'Apache-2.0', 'BSD-2-Clause', 'BSD-3-Clause', 'ISC', 'MPL-2.0', 'GPL-3.0-only', 'GPL-3.0-or-later', 'CC0-1.0']
+  - schema: action/confirm: 'human' was expected
+exit=1
+$ python scripts/validate_plugin_manifests.py scripts/tests/fixtures/plugins/off-grammar/onemind-plugin.yaml   (must fail)
+FAIL scripts/tests/fixtures/plugins/off-grammar/onemind-plugin.yaml
+  - bus.publishes: 'fabric.intel.quakes' is off-grammar: root 'fabric' is not in the locked grammar (tel det evt cmd intel ent svc agents tak)
+  - bus.publishes: 'intel.quakes.usgs' is off-grammar: 3 tokens; the grammar is intel.{domain}.{source}.{type}
+exit=1
+$ python scripts/validate_plugin_manifests.py scripts/tests/fixtures/plugins/reserved-writer/onemind-plugin.yaml   (must fail)
+FAIL scripts/tests/fixtures/plugins/reserved-writer/onemind-plugin.yaml
+  - bus.publishes: 'ent.quake.*.state' is reserved: ent.* has one writer, the entity service
+  - bus.publishes: 'cmd.fleet.drone.*.goto' is reserved: cmd.* is published only by the policy service after policy, audit and human confirm
+exit=1
+$ python -m unittest scripts/tests/test_plugin_manifests.py -v
+test_every_example_is_valid (scripts.tests.test_plugin_manifests.Examples.test_every_example_is_valid) ... ok
+test_usgs_layer_needs_no_core_change (scripts.tests.test_plugin_manifests.Examples.test_usgs_layer_needs_no_core_change) ... ok
+test_cli_exit_code (scripts.tests.test_plugin_manifests.Fixtures.test_cli_exit_code) ... ok
+test_kind_without_block (scripts.tests.test_plugin_manifests.Fixtures.test_kind_without_block) ... ok
+test_off_grammar_fails (scripts.tests.test_plugin_manifests.Fixtures.test_off_grammar_fails) ... ok
+test_real_drone_action_refused (scripts.tests.test_plugin_manifests.Fixtures.test_real_drone_action_refused) ... ok
+test_reserved_writers_fail (scripts.tests.test_plugin_manifests.Fixtures.test_reserved_writers_fail) ... ok
+test_unsafe_action_fails (scripts.tests.test_plugin_manifests.Fixtures.test_unsafe_action_fails) ... ok
+test_covers (scripts.tests.test_plugin_manifests.Grammar.test_covers) ... ok
+test_off_grammar (scripts.tests.test_plugin_manifests.Grammar.test_off_grammar) ... ok
+test_on_grammar (scripts.tests.test_plugin_manifests.Grammar.test_on_grammar) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.261s
+
+OK

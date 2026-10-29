@@ -1,0 +1,4 @@
+ok: 5 roles fit the CLIENT account; none publishes cmd.*/ent.*/inject, newcomer and viewer never confirm
+rc=0
+ok: 5 roles fit the CLIENT account; none publishes cmd.*/ent.*/inject, newcomer and viewer never confirm
+rc=0

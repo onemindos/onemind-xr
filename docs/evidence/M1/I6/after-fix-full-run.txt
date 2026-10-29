@@ -1,0 +1,69 @@
+# services/policy on feat/agent-eval-redteam, 2026-10-29T11:43:25Z, go version go1.27.3 darwin/arm64
+$ go vet ./...
+vet: ok
+$ REDTEAM_REPORT=... go test -race -count=1 -v ./...
+?   	github.com/onemindos/omos/services/policy/cmd/policy	[no test files]
+    redteam_test.go:367: POL-20 residual: forged same-account proposal recorded as map[id:user:zeus kind:user] (actor_verified=true); it waits for a human
+    redteam_test.go:822: audit completeness: 161 replies checked, 0 missing; invariant: 10 cmd.fleet commands, 9 human-approved actions, 197 audit events
+--- PASS: TestRedTeam (14.90s)
+    --- PASS: TestRedTeam/RT01 (0.28s)
+    --- PASS: TestRedTeam/RT02 (1.07s)
+    --- PASS: TestRedTeam/RT03 (0.13s)
+    --- PASS: TestRedTeam/RT04 (0.14s)
+    --- PASS: TestRedTeam/RT05 (0.19s)
+    --- PASS: TestRedTeam/RT06 (0.31s)
+    --- PASS: TestRedTeam/RT07 (2.56s)
+    --- PASS: TestRedTeam/RT08 (1.37s)
+    --- PASS: TestRedTeam/RT09 (0.78s)
+    --- PASS: TestRedTeam/RT10 (0.20s)
+    --- PASS: TestRedTeam/RT11 (0.38s)
+    --- PASS: TestRedTeam/RT12 (0.23s)
+    --- PASS: TestRedTeam/RT13 (0.19s)
+    --- PASS: TestRedTeam/RT15 (6.93s)
+    redteam_test.go:919: flood: 200 answered; schema_invalid audits 120; agent open 10, limited 30
+--- PASS: TestRedTeamFlooding (1.38s)
+    --- PASS: TestRedTeamFlooding/RT14 (1.28s)
+    redteam_test.go:975: schemas clean outside the baseline (3 baseline hits); seeded schema detected: [actions/asset.engage.v1.schema.json:1: engage: {"$schema":"https://json-schema.org/draft/2020-12/schema","title":"asset.engage v1","type":"object", actions/asset.engage.v1.schema.json:2: t-k-: "properties":{"target_priority":{"type":"integer"},"cot_type":{"const":"t-k-d"},"mode":{"enum":["Strike","hold"]}}} actions/asset.engage.v1.schema.json:2: strike: "properties":{"target_priority":{"type":"integer"},"cot_type":{"const":"t-k-d"},"mode":{"enum":["Strike","hold"]}}}]
+--- PASS: TestForbiddenNames (0.08s)
+    --- PASS: TestForbiddenNames/RT16 (0.08s)
+--- PASS: TestTextStopLine (0.00s)
+    review_test.go:51: estop proposed and confirmed in 5.851208ms while the task confirm waited (TaskCreateTimeout 400ms)
+--- PASS: TestStopNotBlockedByTaskWait (0.52s)
+--- PASS: TestActionsCloseAndAreDropped (0.35s)
+--- PASS: TestUnevaluableGeofenceFailsClosed (0.11s)
+=== NAME  TestPolicyService
+    service_test.go:652: invariant checked: 6 cmd.fleet commands, 8 human-approved actions, CMD stream holds 9 messages, 96 audit events
+--- PASS: TestPolicyService (7.47s)
+    --- PASS: TestPolicyService/human_goto:_propose_waits,_confirm_dispatches_one_signed_command,_outcomes_audited (0.03s)
+    --- PASS: TestPolicyService/agent_proposes_but_can_never_confirm (3.02s)
+    --- PASS: TestPolicyService/agent_without_a_human_on_behalf_of_is_refused (0.00s)
+    --- PASS: TestPolicyService/stop-line_verbs_are_rejected_by_name_and_nothing_reaches_cmd.fleet (0.06s)
+    --- PASS: TestPolicyService/unknown_verbs_are_refused_(closed_allowlist) (0.00s)
+    --- PASS: TestPolicyService/approval_levels_A1_A2_A3_A4_A5 (0.02s)
+    --- PASS: TestPolicyService/approvals_are_bound_to_action_id_and_params_hash (0.02s)
+    --- PASS: TestPolicyService/a_replayed_approval_is_refused_and_sends_nothing (0.12s)
+    --- PASS: TestPolicyService/an_unconfirmed_action_expires_and_cannot_be_confirmed_later (0.04s)
+    --- PASS: TestPolicyService/no_replay_to_offline_assets (0.13s)
+    --- PASS: TestPolicyService/no_acknowledgement_fails_the_action (0.10s)
+    --- PASS: TestPolicyService/simulated_only,_schema,_capability,_person_targets,_geofence (0.02s)
+    --- PASS: TestPolicyService/authorization:_unauthorized_human,_unknown_identity,_idempotency (0.02s)
+    --- PASS: TestPolicyService/same-account_callers_are_unverified_and_cannot_confirm (3.05s)
+    --- PASS: TestPolicyService/a_forged_Nats-Request-Info_header_is_replaced_by_the_server (0.05s)
+    --- PASS: TestPolicyService/tasks:_assign_dispatches_create_then_the_asset_command;_missing_task_record_stops_it (0.43s)
+    --- PASS: TestPolicyService/action.get:_agents_read_only_their_own_actions (0.01s)
+    --- PASS: TestPolicyService/svc.policy.check_answers_tuple_checks_and_dry_runs (0.00s)
+    --- PASS: TestPolicyService/OpenFGA_unreachable:_every_proposal_is_denied_policy_unavailable_and_logged (0.03s)
+    --- PASS: TestPolicyService/server_permissions:_clients_and_agents_cannot_publish_cmd.fleet (0.01s)
+--- PASS: TestCanonicalizeRFC8785 (0.00s)
+--- PASS: TestParamsHashIgnoresKeyOrder (0.00s)
+--- PASS: TestStopLine (0.00s)
+--- PASS: TestApprovalLevels (0.00s)
+--- PASS: TestSchemasCoverCatalogue (0.03s)
+--- PASS: TestGeofence (0.00s)
+--- PASS: TestAuditLimiter (0.00s)
+--- PASS: TestModelTypeRestrictions (0.00s)
+--- PASS: TestModelDSLMatchesJSON (0.00s)
+--- PASS: TestIDsAndDirectory (0.00s)
+--- PASS: TestSweepDropsOldFinishedActions (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/policy/internal/policy	26.330s

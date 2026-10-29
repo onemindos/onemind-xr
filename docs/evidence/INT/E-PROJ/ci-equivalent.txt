@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/Users/danielcarku/Desktop/work/.tools/py/bin/yamllint", line 10, in <module>
+    sys.exit(run())
+             ^^^^^
+  File "/Users/danielcarku/Desktop/work/.tools/py/lib/python3.12/site-packages/yamllint/cli.py", line 197, in run
+    conf = YamlLintConfig(file=args.config_file)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/danielcarku/Desktop/work/.tools/py/lib/python3.12/site-packages/yamllint/config.py", line 41, in __init__
+    with open(file, mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '.yamllint'
+yamllint=0
+Changed YAML gate passed (1 files checked)
+changed_yaml=0
+Summary: 1 resource found in 1 file - Valid: 1, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)
+manifests=0
+
+[90m12:36PM[0m [32mINF[0m [1mscanned ~6612 bytes (6.61 KB) in 20.2ms[0m
+[90m12:36PM[0m [32mINF[0m [1mno leaks found[0m
+gitleaks=0
+yamllint(.yamllint.yml)=0
+
+== GitHub checks on #563 at 345eb7f5 (stacked on feat/layer-service, so quality.yml does not run; the checks above are its local equivalent)
+image	skipping	0	https://github.com/onemindos/omos/actions/runs/40913245597/job/123588034228	
+test	pass	2m32s	https://github.com/onemindos/omos/actions/runs/40913245597/job/123586553354	

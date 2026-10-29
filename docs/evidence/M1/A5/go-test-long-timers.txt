@@ -1,0 +1,14 @@
+# A5_LONG=1 go test -count=1 -v -run 'TestA5LayerDown|TestA5DeadWatch' (contract timers: world-state TTL 5m, heartbeat 10s, dead watch 30s) 2026-10-29T11:59:51Z
+=== RUN   TestA5LayerDown
+    acceptance_test.go:225: manifest vanished 5m0s after stop (bucket TTL 5m0s); client badge "layer down"
+--- PASS: TestA5LayerDown (300.08s)
+=== RUN   TestA5DeadWatch
+    acceptance_test.go:828: service killed; client gave up the watch 20.08s after the last batch (dead time 30s): [inbox error]
+    acceptance_test.go:830: detection too late or wrong reason (20.082100458s, [inbox error])
+--- FAIL: TestA5DeadWatch (30.19s)
+FAIL
+FAIL	github.com/onemindos/omos/services/layer/internal/layer	330.554s
+FAIL
+
+# Note: TestA5DeadWatch above failed only on the reason label ("inbox error" = ErrNoResponders on the renew at 20 s, inside the 30 s limit).
+# The reference client was fixed (commit "test(layer): reference client treats no responders ..."); rerun passes: go-test-long-deadwatch.txt

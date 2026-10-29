@@ -1,0 +1,17 @@
+## yamllint platform/omos/layer
+yamllint clean
+## validate_changed_yaml (base origin/feat/entity-service)
+Changed YAML gate passed (1 files checked)
+## validate_manifests
+Summary: 2 resources found in 1 file - Valid: 2, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)
+## gitleaks on PR commits
+[90m8:29AM[0m [32mINF[0m [1m4 commits scanned.[0m
+[90m8:29AM[0m [32mINF[0m [1mscanned ~216220 bytes (216.22 KB) in 74.4ms[0m
+[90m8:29AM[0m [32mINF[0m [1mno leaks found[0m
+## go vet / gofmt
+go: downloading github.com/nats-io/nats.go v1.55.0
+go: downloading github.com/nats-io/nkeys v0.4.16
+go: downloading github.com/klauspost/compress v1.20.0
+go: downloading golang.org/x/crypto v0.57.0
+vet+gofmt clean

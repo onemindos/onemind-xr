@@ -1,0 +1,11 @@
+# J1 Playwright e2e, chromium only (Chrome for Testing headless shell 156.0.8078.4), 2026-10-29T12:26:22Z
+$ L0_ONLINE=1 L0_EVIDENCE_DIR=/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/M3/J1/screens npx playwright test
+
+Running 4 tests using 1 worker
+
+  ✓  1 e2e/l0.spec.ts:66:3 › desktop, interim path (svc.entity.query + ent.*.*.state) › entities, alerts, detail with provenance, WHEP video, removal, expiry, mission tier (25.9s)
+  ✓  2 e2e/l0.spec.ts:147:3 › phone, svc.layer path (snapshot + watch), LL-HLS video › mission tier and alerts on a phone-sized screen; detail and HLS video (25.8s)
+  ✓  3 e2e/l0.spec.ts:206:3 › core-only path (no services answer) › renders from core ent.*.*.state alone (2.3s)
+  ✓  4 e2e/l0.spec.ts:233:3 › open imagery and terrain (online, opt-in) › OSM imagery with terrarium terrain loads without a Cesium ion token (7.9s)
+
+  4 passed (1.1m)

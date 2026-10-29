@@ -1,0 +1,43 @@
+Combined tree: this branch + ent.yaml, kv-entity-correlation.yaml (#552) + kv-ingest-locks.yaml, kv-ingest-state.yaml (#553), copied temporarily
+test_caps_fit_one_node (scripts.tests.test_gitops_stream_caps.StreamCapContracts.test_caps_fit_one_node) ... ok
+test_cmd_alert_threshold_tracks_cap (scripts.tests.test_gitops_stream_caps.StreamCapContracts.test_cmd_alert_threshold_tracks_cap) ... ok
+test_design_targets (scripts.tests.test_gitops_stream_caps.StreamCapContracts.test_design_targets) ... ok
+test_duplicate_window_fits_max_age (scripts.tests.test_gitops_stream_caps.StreamCapContracts.test_duplicate_window_fits_max_age) ... ok
+test_every_stream_has_a_byte_cap (scripts.tests.test_gitops_stream_caps.StreamCapContracts.test_every_stream_has_a_byte_cap) ... ok
+test_every_stream_keeps_safety_settings (scripts.tests.test_gitops_stream_caps.StreamCapContracts.test_every_stream_keeps_safety_settings) ... ok
+test_cmd_discard_new_refuses_when_full (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_cmd_discard_new_refuses_when_full) ... ok
+test_cmd_update_from_old_to_new_discard (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_cmd_update_from_old_to_new_discard) ... ok
+test_cot_byte_cap_discards_oldest (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_cot_byte_cap_discards_oldest) ... ok
+test_cot_max_age_ages_out (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_cot_max_age_ages_out) ... ok
+test_cot_shorter_max_age_on_update_removes_older_data (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_cot_shorter_max_age_on_update_removes_older_data) ... ok
+test_det_captures_detections (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_det_captures_detections) ... ok
+test_every_cr_creates_with_its_limits (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_every_cr_creates_with_its_limits) ... ok
+test_intel_one_hour_dedup (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_intel_one_hour_dedup) ... ok
+test_smaller_byte_cap_on_update_truncates (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_smaller_byte_cap_on_update_truncates) ... ok
+test_tel_per_subject_history_and_direct_get (scripts.tests.test_gitops_stream_caps.StreamCapEngine.test_tel_per_subject_history_and_direct_get) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 7.802s
+
+OK
+  CMD 8 KiB cap: accepted=7 refused err_code=10077 description='maximum bytes exceeded' first_seq=1
+  COT 64 KiB cap after 200 x 1 KiB: messages=61 bytes=65148 first_seq=140
+  COT after max_age shrink: messages=5 first_seq=51
+  AGENTS   max_age=    604800s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+  CMD      max_age=  31536000s max_bytes=  536870912 discard=new per_subject=-1 direct=False
+  COT      max_age=    259200s max_bytes= 3221225472 discard=old per_subject=-1 direct=False
+  DET      max_age=    604800s max_bytes= 2147483648 discard=old per_subject=-1 direct=False
+  ENT      max_age=    604800s max_bytes= 1073741824 discard=old per_subject=1 direct=True
+  ENV      max_age=   2592000s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+  EVT      max_age=   7776000s max_bytes= 2147483648 discard=old per_subject=-1 direct=False
+  GEO      max_age=    604800s max_bytes=  536870912 discard=old per_subject=-1 direct=False
+  INTEL    max_age=   7776000s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+  MISSION  max_age=   7776000s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+  SAAS     max_age=   7776000s max_bytes=  536870912 discard=old per_subject=-1 direct=False
+  SYS      max_age=    604800s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+  TEL      max_age=    259200s max_bytes= 4294967296 discard=old per_subject=2000 direct=True
+  VOICE    max_age=   2592000s max_bytes=  536870912 discard=old per_subject=-1 direct=False
+  WORLD    max_age=     86400s max_bytes= 2000000000 discard=old per_subject=-1 direct=False
+  ZEUS     max_age=  31536000s max_bytes=  536870912 discard=old per_subject=-1 direct=False
+  INTEL after max_bytes shrink to 32 KiB: messages=30 bytes=32280
+streams 16: 21.36 GiB; KV caps set: 0.134 GiB; + objects 9 + KV budget 2 = 32.36 GiB of 43.14 GiB usable (45 GiB - reserved)

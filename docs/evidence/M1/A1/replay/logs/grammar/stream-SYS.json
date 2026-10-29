@@ -1,0 +1,47 @@
+{
+  "config": {
+    "name": "SYS",
+    "subjects": [
+      "evt.sys.\u003e"
+    ],
+    "retention": "limits",
+    "max_consumers": -1,
+    "max_msgs_per_subject": -1,
+    "max_msgs": -1,
+    "max_bytes": -1,
+    "max_age": 86400000000000,
+    "max_msg_size": -1,
+    "storage": "file",
+    "discard": "old",
+    "num_replicas": 1,
+    "duplicate_window": 120000000000,
+    "sealed": false,
+    "deny_delete": false,
+    "deny_purge": false,
+    "allow_rollup_hdrs": false,
+    "allow_direct": true,
+    "mirror_direct": false,
+    "metadata": {
+      "_nats.level": "5",
+      "_nats.req.level": "0",
+      "_nats.ver": "2.15.2"
+    },
+    "consumer_limits": {}
+  },
+  "created": "2026-10-29T11:49:08.816206Z",
+  "state": {
+    "messages": 8,
+    "bytes": 3384,
+    "first_seq": 1,
+    "first_ts": "2026-10-29T11:49:10.602215Z",
+    "last_seq": 8,
+    "last_ts": "2026-10-29T11:49:19.601163Z",
+    "num_subjects": 2,
+    "consumer_count": 0
+  },
+  "cluster": {
+    "leader": "NAH3JIS5AJDZDX4NDCC2KB6GERTL6LYAR7VBEMIXBJBKV7KLOCSNOTHX"
+  },
+  "ts": "2026-10-29T11:49:21.00068Z"
+}
+

@@ -1,0 +1,25 @@
+ .../2026-10-29-entity-service-ent-stream.md        |  15 +
+ services/entity/README.md                          |  21 +-
+ services/entity/cmd/entity-service/main.go         |   1 +
+ services/entity/go.mod                             |   2 +
+ services/entity/go.sum                             |  10 +
+ services/entity/internal/adapt/cot.go              |   9 +-
+ services/entity/internal/adapt/envelope_test.go    | 277 +++++++
+ services/entity/internal/adapt/geo.go              |  22 +
+ services/entity/internal/adapt/intel.go            | 223 +++++-
+ services/entity/internal/bus/orbit_test.go         | 110 +++
+ services/entity/internal/bus/service.go            |  76 +-
+ services/entity/internal/model/model.go            |   6 +
+ services/entity/internal/orbit/orbit.go            | 243 ++++++
+ services/entity/internal/orbit/orbit_test.go       | 156 ++++
+ services/entity/internal/orbit/testdata/README.md  |   8 +
+ .../internal/orbit/testdata/gen_reference.py       |  53 ++
+ .../entity/internal/orbit/testdata/reference.json  | 818 +++++++++++++++++++++
+ .../entity/internal/orbit/testdata/stations.tle    |  51 ++
+ services/entity/testdata/fixtures/ingest/README.md |  15 +
+ .../fixtures/ingest/geojson-usgs.golden.json       |  28 +
+ .../ingest/nws-active-2026-10-29-next.golden.json  | 612 +++++++++++++++
+ .../ingest/nws-active-2026-10-29.golden.json       | 714 ++++++++++++++++++
+ .../fixtures/ingest/nws-malformed.golden.json      | 202 +++++
+ .../entity/testdata/golden/intel-envelope.json     | 309 ++++++++
+ 24 files changed, 3961 insertions(+), 20 deletions(-)

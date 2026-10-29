@@ -1,0 +1,4 @@
+{"time":"2026-10-29T11:25:42.11787-04:00","level":"INFO","msg":"waiting for lease","bucket":"entity-correlation","key":"lease.entity-service","holder":"Daniels-MacBook-Pro.local-46112"}
+{"time":"2026-10-29T11:25:42.118444-04:00","level":"INFO","msg":"lease acquired"}
+{"time":"2026-10-29T11:25:42.11914-04:00","level":"INFO","msg":"restored entities","count":0}
+{"time":"2026-10-29T11:25:42.125007-04:00","level":"WARN","msg":"input stream missing; skipped","stream":"DET","err":"nats: API error: code=404 err_code=10059 description=stream not found"}

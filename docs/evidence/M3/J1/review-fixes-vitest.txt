@@ -1,0 +1,77 @@
+# J1 review fixes, 2026-10-29T12:41:31Z, worktree j1-web
+dist/assets/index-weQBo7Kx.js   4,932.33 kB │ gzip: 1,352.98 kB
+
+✓ built in 762ms
+
+ RUN  v4.1.12 /Users/danielcarku/Desktop/work/wt/j1-web/web
+
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > applies the contract example and keeps the full record 1ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > ignores a record whose seq is not greater than the one held 0ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > removes on live:false and never resurrects from an older copy 0ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > expires entities when now passes expiry_t (core subscribers see no markers) 1ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > drops a record that is already expired on arrival 0ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > keeps pinned entities (expiry_t null) forever 0ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > marks stale when now - t > stale 0ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > replaceLayer removes entities missing from a new snapshot 0ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > an AOI exit followed by enter with the same seq re-adds the entity 0ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > counts invalid records and never applies them 0ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > batch() emits one change for many mutations 1ms
+ ✓ test/unit/store.test.ts > EntityStore merge rules (entity.md §5, layer-delta.md §2.2) > attachFull does not replace a newer record with an older full one 0ms
+ ✓ test/unit/store.test.ts > EntityStore: layer cap and older full records (review fixes) > refuses new entities beyond a layer cap and keeps updating held ones 0ms
+ ✓ test/unit/store.test.ts > EntityStore: layer cap and older full records (review fixes) > marks the full record older when a render upsert with a higher seq arrives 0ms
+ ✓ test/unit/logic.test.ts > normalize (entity.md §4 to layer-snapshot.md §4) > maps the contract example to the render subset 2ms
+ ✓ test/unit/logic.test.ts > normalize (entity.md §4 to layer-snapshot.md §4) > passes a render entity through unchanged 0ms
+ ✓ test/unit/logic.test.ts > normalize (entity.md §4 to layer-snapshot.md §4) > uses uid when entity_id is missing and falls back to the id as callsign 0ms
+ ✓ test/unit/logic.test.ts > normalize (entity.md §4 to layer-snapshot.md §4) > does not draw non-located records (lat 0, lon 0 without locatable) 0ms
+ ✓ test/unit/logic.test.ts > normalize (entity.md §4 to layer-snapshot.md §4) > applies the defence-in-depth marking check (entity.md §8) 0ms
+ ✓ test/unit/logic.test.ts > mission tier (FEATURES A6 rule as a view filter) > point in polygon and circle 0ms
+ ✓ test/unit/logic.test.ts > mission tier (FEATURES A6 rule as a view filter) > tasked or inside an AOI is mission tier; outside and untasked is not 0ms
+ ✓ test/unit/logic.test.ts > alerts > reads alert entities (top level, then properties) and hides resolved ones 0ms
+ ✓ test/unit/logic.test.ts > alerts > lifts health.alerts[] and geofence events; sorts warning first 1ms
+ ✓ test/unit/logic.test.ts > video URLs from media[] (MediaMTX, never NATS) > derives WHEP and LL-HLS and rewrites loopback to the page host 0ms
+ ✓ test/unit/logic.test.ts > video URLs from media[] (MediaMTX, never NATS) > keeps a non-loopback host and honours override bases 0ms
+ ✓ test/unit/logic.test.ts > video URLs from media[] (MediaMTX, never NATS) > returns null without a usable video entry 0ms
+ ✓ test/unit/logic.test.ts > video URLs from media[] (MediaMTX, never NATS) > brackets an IPv6 page host 0ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: svc.layer path (layer-snapshot.md §3.1, layer-delta.md §2) > assembles a multi-part snapshot, watches from ent_seq + 1 and applies ops 6ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: svc.layer path (layer-snapshot.md §3.1, layer-delta.md §2) > re-snapshots when a batch counter skips (gap) 24ms
+ ✓ test/unit/video.test.ts > VideoPlayer: overlapping play() calls > selecting A then B quickly plays only B, with a single live Hls instance 130ms
+ ✓ test/unit/video.test.ts > VideoPlayer: overlapping play() calls > a newer play() during A's HLS startup destroys A's Hls and never reports A 108ms
+ ✓ test/unit/video.test.ts > VideoPlayer: overlapping play() calls > stop() while a play is in flight (entity removed) plays nothing 38ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "core" > chooses the expected contract path 1ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: svc.layer path (layer-snapshot.md §3.1, layer-delta.md §2) > re-snapshots when no batch or heartbeat arrives within the dead-watch time 203ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: svc.layer path (layer-snapshot.md §3.1, layer-delta.md §2) > renews the lease at half of lease_s with the same watch_id 133ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: svc.layer path (layer-snapshot.md §3.1, layer-delta.md §2) > asks large layers for an AOI and the render subset 1ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: interim and core paths (entity.md §8) > falls back to svc.entity.query (paged by cursor) plus core ent.* when no layer service answers 2ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: interim and core paths (entity.md §8) > uses core subscriptions only when no service answers at all 0ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: interim and core paths (entity.md §8) > an error reply from the layer service falls back to the interim path 0ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: interim and core paths (entity.md §8) > filters large layers to the AOI on the interim path 1ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: interim and core paths (entity.md §8) > never publishes ent.* or cmd.* (entity.md §2) 0ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: large layers stay AOI-bounded (layer-snapshot.md §1, FEATURES A14) > cells mode at wide zoom: zoom in, keep the watch, never subscribe to raw ent.* 1ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: large layers stay AOI-bounded (layer-snapshot.md §1, FEATURES A14) > aoi_required (or any service error) keeps a large layer on the layer path and retries 121ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: large layers stay AOI-bounded (layer-snapshot.md §1, FEATURES A14) > with no layer responders, refuses raw ent.* until the AOI is bounded, then caps the store 28ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: large layers stay AOI-bounded (layer-snapshot.md §1, FEATURES A14) > handles a view across the antimeridian (west > east) 3ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: stop() is honoured mid-flight (review fixes) > a stop during a re-snapshot opens no new watch and renews nothing 253ms
+ ✓ test/unit/layerclient.test.ts > LayerFeed: stop() is honoured mid-flight (review fixes) > a stop during the interim query loop applies no further pages 1ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "core" > receives sim-x1 per entity.md and follows its seq upward 796ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "core" > tracks the moving track and has the AOI zone and the alert 1204ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "core" > removes sim-r1 on its final live:false record 2022ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "core" > expires sim-e1 from expiry_t without any further message 1ms
+ ↓ test/integration/bus.test.ts > bus integration, fixture mode "core" > serves the full record through svc.entity.get
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "entity" > chooses the expected contract path 0ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "entity" > receives sim-x1 per entity.md and follows its seq upward 724ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "entity" > tracks the moving track and has the AOI zone and the alert 1201ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "entity" > removes sim-r1 on its final live:false record 1804ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "entity" > expires sim-e1 from expiry_t without any further message 1ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "entity" > serves the full record through svc.entity.get 3ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "layer" > chooses the expected contract path 0ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "layer" > receives sim-x1 per entity.md and follows its seq upward 724ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "layer" > tracks the moving track and has the AOI zone and the alert 1202ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "layer" > removes sim-r1 on its final live:false record 1803ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "layer" > expires sim-e1 from expiry_t without any further message 0ms
+ ✓ test/integration/bus.test.ts > bus integration, fixture mode "layer" > serves the full record through svc.entity.get 1ms
+
+ Test Files  5 passed (5)
+      Tests  63 passed | 1 skipped (64)
+   Start at  08:41:34
+   Duration  12.82s (transform 339ms, setup 0ms, import 457ms, tests 13.62s, environment 0ms)
+

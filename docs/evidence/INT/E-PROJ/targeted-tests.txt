@@ -1,0 +1,11 @@
+?   	github.com/onemindos/omos/services/projector/cmd/tak-projector	[no test files]
+=== RUN   TestAcceptance3Marking
+    harness_test.go:318: TAK_RELEASE_GROUPS empty: CLEAR sent, AMBER+STRICT[homestead] and RED not sent (map[OM.drone.sim-clear:1])
+    harness_test.go:318: TAK_RELEASE_GROUPS=homestead: AMBER+STRICT[homestead] sent with marking headers, RED never; marking tightened to RED -> removal
+--- PASS: TestAcceptance3Marking (4.18s)
+=== RUN   TestMarkingGate
+--- PASS: TestMarkingGate (0.00s)
+=== RUN   TestReleaseGroupsHomesteadFromEnv
+--- PASS: TestReleaseGroupsHomesteadFromEnv (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/projector/internal/projector	5.621s

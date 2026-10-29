@@ -1,0 +1,6 @@
+2026/10/29 10:05:13 [m4ue] starting v0.4.0: mesh 239.2.3.1:62838, NATS nats://127.0.0.1:62836
+2026/10/29 10:05:13 [m4ue] mesh 239.2.3.1:62838, chat , transmit interface lo0
+2026/10/29 10:05:13 [m4ue] directed messages on TCP :62837
+2026/10/29 10:05:13 [m4ue] ready: tak.cot.mesh.tx -> mesh, mesh -> tak.cot.mesh.rx
+2026/10/29 10:05:13 [m4ue] direct decode from 127.0.0.1:62853: xml decode: EOF
+2026/10/29 10:05:21 [m4ue] received terminated, shutting down

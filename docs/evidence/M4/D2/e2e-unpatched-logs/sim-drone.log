@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/danielcarku/Desktop/work/onemind-xr/scripts/sim/mavlink_sim_drone.py", line 119, in <module>
+    main()
+  File "/Users/danielcarku/Desktop/work/onemind-xr/scripts/sim/mavlink_sim_drone.py", line 115, in main
+    time.sleep(0.1)
+KeyboardInterrupt

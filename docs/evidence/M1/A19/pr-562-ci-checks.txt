@@ -1,0 +1,8 @@
+# gh pr checks 562 (2026-10-29T12:48:57Z), head ef097723
+Helm render check	pass	1m24s	https://github.com/onemindos/omos/actions/runs/40875631272/job/123453592503	
+Kubernetes manifest schema (kubeconform)	pass	6s	https://github.com/onemindos/omos/actions/runs/40875631272/job/123453592834	
+Lint & Validate	pass	22s	https://github.com/onemindos/omos/actions/runs/40875631272/job/123453593190	
+Secret scan (gitleaks)	pass	9s	https://github.com/onemindos/omos/actions/runs/40875631272/job/123453593054	
+test	pass	6s	https://github.com/onemindos/omos/actions/runs/40875631088/job/123455857344	
+
+# history: runs 40871705723 and 40874076837 of test-nats-identities.yml failed when the zeus-v2 runner container was OOMKilled (exit 137, 1Gi limit) while compiling nats-server; Go tests moved out of CI (commit ef097723).

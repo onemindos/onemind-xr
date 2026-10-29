@@ -1,0 +1,94 @@
+# Referenced proposal files with subjects blocks, checked with this branch's checker (strict)
+streams on this checkout: 14 (AGENTS, CMD, COT, ENV, EVT, GEO, INTEL, MISSION, SAAS, SYS, TEL, VOICE, WORLD, ZEUS)
+location	tag	subject	grammar	stored	notes
+../../.run/tmp-reg/d1.md:219	proposed	evt.map.geofence.{created|updated|deleted|refused}	G:evt	stored-today=MISSION
+../../.run/tmp-reg/d1.md:220	proposed	evt.so.alert.{raised|updated|resolved}	G:evt	stored-today=EVT
+../../.run/tmp-reg/d1.md:221	proposed	svc.geofence.alerts	G:svc	stored-today=none
+../../.run/tmp-reg/d1.md:222	current	evt.map.geofence.{id}.{enter|exit}	D9.1:evt-geofence	stored-today=MISSION
+../../.run/tmp-reg/d1.md:223	current	evt.map.geofence.{id}	G:evt	stored-today=MISSION
+../../.run/tmp-reg/d1.md:224	current	cmd.map.geofence.{id}.{create|update|remove}	D9.1:map-geofence	stored-today=CMD
+../../.run/tmp-reg/d1.md:225	current	cmd.map.geofence.{id}.{verb}	D9.1:map-geofence	stored-today=CMD
+../../.run/tmp-reg/d1.md:226	interim	cmd.map.geofence.{id}.delete	D9.1:map-geofence	stored-today=CMD
+../../.run/tmp-reg/d1.md:227	current	cmd.map.annotation.{id}.{verb}	D9.1:map-annotation	stored-today=CMD
+../../.run/tmp-reg/d1.md:228	current	cmd.entity.{id}.{acknowledge|resolve}	G:cmd	stored-today=CMD
+../../.run/tmp-reg/d1.md:229	current	evt.so.action.{event}	G:evt	stored-today=EVT
+../../.run/tmp-reg/d1.md:230	current	evt.so.task.created	G:evt	stored-today=EVT
+../../.run/tmp-reg/d1.md:231	current	evt.{domain}.{entity}.{event}	G:evt	stored-today=EVT,GEO,MISSION,SYS,WORLD
+../../.run/tmp-reg/d1.md:232	current	evt.so.alert.raised	G:evt	stored-today=EVT
+../../.run/tmp-reg/d1.md:233	alternative	evt.entity.{zone_id}.{event}	G:evt	stored-today=none
+../../.run/tmp-reg/d1.md:234	alternative	evt.entity.{entity_id}.alert	G:evt	stored-today=none
+../../.run/tmp-reg/d1.md:235	alternative	ent.alert.{id}.state	G:ent	stored-today=none
+../../.run/tmp-reg/d1.md:236	alternative	ent.zone.{id}.state	G:ent	stored-today=none
+../../.run/tmp-reg/d1.md:237	filter	cmd.map.geofence.>	G:cmd,D9.1:map-geofence	stored-today=CMD
+../../.run/tmp-reg/d1.md:238	filter	cmd.map.geofence.*	G:cmd	stored-today=CMD
+../../.run/tmp-reg/d1.md:239	filter	cmd.map.>	G:cmd,D9.1:map-geofence,D9.1:map-annotation	stored-today=CMD
+../../.run/tmp-reg/d1.md:240	filter	evt.map.>	G:evt,D9.1:evt-geofence	stored-today=MISSION
+../../.run/tmp-reg/d1.md:241	filter	evt.so.>	G:evt	stored-today=EVT
+../../.run/tmp-reg/d1.md:242	filter	evt.so.action.*	G:evt	stored-today=EVT
+../../.run/tmp-reg/d1.md:243	filter	evt.so.alert.>	G:evt	stored-today=EVT
+../../.run/tmp-reg/d1.md:244	filter	evt.so.alert.*	G:evt	stored-today=EVT
+../../.run/tmp-reg/d1.md:245	filter	ent.*.*.state	G:ent	stored-today=none
+../../.run/tmp-reg/d1.md:246	filter	ent.>	G:ent	stored-today=none
+../../.run/tmp-reg/d1.md:247	filter	tel.feed.*.status	G:tel	stored-today=none
+../../.run/tmp-reg/i1.md:43	current	tak.cot.inject	G:tak-inject,G:tak-cot	stored-today=COT
+../../.run/tmp-reg/i1.md:44	current	tak.cot.mesh.tx	G:tak-cot	stored-today=COT
+../../.run/tmp-reg/i1.md:45	alternative	svc.cot.send	G:svc	stored-today=none
+../../.run/tmp-reg/i1.md:68	current	tak.cot.out	G:tak-cot	stored-today=COT
+../../.run/tmp-reg/i1.md:69	current	tak.cot.mesh.rx	G:tak-cot	stored-today=COT
+../../.run/tmp-reg/i1.md:70	current	agents.prompt.{agent}.{owner}.{name}	G:agents	stored-today=none
+../../.run/tmp-reg/i1.md:91	proposed	evt.entity.{entity_id}.alert	G:evt	stored-today=none
+../../.run/tmp-reg/i1.md:92	current	evt.map.geofence.{id}.{enter|exit}	D9.1:evt-geofence	stored-today=MISSION
+../../.run/tmp-reg/i1.md:93	filter	evt.entity.>	G:evt	stored-today=none
+../../.run/tmp-reg/i1.md:94	filter	evt.entity.*.alert	G:evt	stored-today=none
+../../.run/tmp-reg/i1.md:95	current	ent.alert.{entity_id}.state	G:ent	stored-today=none
+../../.run/tmp-reg/i1.md:112	proposed	evt.so.brief.published	G:evt	stored-today=EVT
+../../.run/tmp-reg/i1.md:113	filter	evt.so.>	G:evt	stored-today=EVT
+../../.run/tmp-reg/i1.md:114	current	evt.so.action.*	G:evt	stored-today=EVT
+../../.run/tmp-reg/i1.md:115	proposed	svc.brief.generate	G:svc	stored-today=none
+../../.run/tmp-reg/i1.md:116	proposed	svc.brief.latest	G:svc	stored-today=none
+../../.run/tmp-reg/i1.md:117	current	svc.entity.query	G:svc	stored-today=none
+../../.run/tmp-reg/i1.md:118	current	tel.feed.{source}.status	G:tel	stored-today=none
+../../.run/tmp-reg/i1.md:119	filter	tel.feed.>	G:tel	stored-today=none
+../../.run/tmp-reg/i1.md:120	alternative	evt.brief.{aoi}.published	G:evt	stored-today=none
+../../.run/tmp-reg/i1.md:148	proposed	tel.fleet.agent.{id}.position	D9.1:tel-fleet	stored-today=TEL
+../../.run/tmp-reg/i1.md:149	current	agents.hb.{agent}.{owner}.{name}	G:agents	stored-today=AGENTS
+../../.run/tmp-reg/i1.md:150	current	ent.agent.{entity_id}.state	G:ent	stored-today=none
+../../.run/tmp-reg/i1.md:206	current	svc.policy.task.propose	G:svc	stored-today=none
+../../.run/tmp-reg/i1.md:207	action	task.assign	OFF-GRAMMAR	stored-today=none
+../../.run/tmp-reg/i1.md:208	legacy	svc.policy.*.confirm	G:svc	stored-today=none
+../../.run/tmp-reg/i1.md:209	legacy	cmd.>	G:cmd,D9.1:cmd-fleet,D9.1:map-geofence,D9.1:map-annotation	stored-today=CMD
+../../.run/tmp-reg/i1.md:221	alternative	cmd.watch.{id}.{create|delete}	G:cmd	stored-today=CMD
+../../.run/tmp-reg/i2.md:24	current	svc.entity.get	G:svc	stored-today=none
+../../.run/tmp-reg/i2.md:25	current	svc.entity.query	G:svc	stored-today=none
+../../.run/tmp-reg/i2.md:26	current	svc.layer.list	G:svc	stored-today=none
+../../.run/tmp-reg/i2.md:27	current	svc.layer.meta	G:svc	stored-today=none
+../../.run/tmp-reg/i2.md:28	current	svc.layer.snapshot	G:svc	stored-today=none
+../../.run/tmp-reg/i2.md:29	current	svc.policy.command.propose	G:svc	stored-today=none
+../../.run/tmp-reg/i2.md:30	current	svc.policy.task.propose	G:svc	stored-today=none
+../../.run/tmp-reg/i2.md:31	current	svc.policy.action.get	G:svc	stored-today=none
+../../.run/tmp-reg/i2.md:32	current	cmd.map.viewport.set	G:cmd	stored-today=CMD
+../../.run/tmp-reg/i2.md:33	current	cmd.map.filter.set	G:cmd	stored-today=CMD
+../../.run/tmp-reg/i2.md:34	current	cmd.map.highlight.{uid}	G:cmd	stored-today=CMD
+../../.run/tmp-reg/i2.md:35	current	cmd.map.annotation.{id}.{verb}	D9.1:map-annotation	stored-today=CMD
+../../.run/tmp-reg/ue-block.md:2	proposed	svc.tak.mission.list	G:svc	stored-today=none
+../../.run/tmp-reg/ue-block.md:3	proposed	svc.tak.mission.get	G:svc	stored-today=none
+../../.run/tmp-reg/ue-block.md:4	proposed	svc.tak.mission.changes	G:svc	stored-today=none
+../../.run/tmp-reg/ue-block.md:5	proposed	svc.tak.mission.logs	G:svc	stored-today=none
+../../.run/tmp-reg/ue-block.md:6	proposed	svc.tak.mission.subscribe	G:svc	stored-today=none
+../../.run/tmp-reg/ue-block.md:7	proposed	svc.tak.mission.unsubscribe	G:svc	stored-today=none
+../../.run/tmp-reg/ue-block.md:8	proposed	svc.tak.mission.content.put	G:svc	stored-today=none
+../../.run/tmp-reg/ue-block.md:9	proposed	evt.mission.{tak-token}.changed	G:evt	stored-today=MISSION
+
+subjects checked: 77 (proposed 16, interim 1, current 35, filter 15, legacy 2, alternative 7, action 1); off-grammar (legacy, alternative or action only): 1
+ERROR ../../.run/tmp-reg/i2.md:7: subject svc.{service}.{endpoint} is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:19: subject cmd.map.* is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:42: subject svc.layer.* is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:45: subject svc.entity.* is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:59: subject cmd.map.> is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:63: subject cmd.map.> is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:73: subject cmd.> is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:76: subject cmd.map.> is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:82: subject cmd.map.* is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:89: subject cmd.map.* is not listed in a subjects block
+ERROR ../../.run/tmp-reg/i2.md:92: subject cmd.map.> is not listed in a subjects block
+result: FAIL (11 errors)
