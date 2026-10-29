@@ -1,0 +1,168 @@
+{
+ "aliases": {
+  "ids": [
+   {
+    "id": "sim-x1",
+    "type": "sim"
+   },
+   {
+    "id": "sim-x1",
+    "type": "cot_uid"
+   },
+   {
+    "id": "1",
+    "type": "mavlink_sysid"
+   }
+  ],
+  "name": "SIM-X1"
+ },
+ "callsign": "SIM-X1",
+ "confidence": 0.9875,
+ "confidence_parts": {
+  "corroboration": 0.99,
+  "source_prior": 0.95,
+  "track_quality": 0.995
+ },
+ "correlation": null,
+ "cot_security": null,
+ "cot_type": "a-f-A-M-H-Q",
+ "course": 90,
+ "created_t": 1793275260000,
+ "current_task": null,
+ "disposition": "friendly",
+ "entity_id": "sim-x1",
+ "entity_type": "drone",
+ "environment": "air",
+ "expiry_t": 1793275297000,
+ "geo": null,
+ "hae": 152.4,
+ "health": {
+  "battery_pct": 79,
+  "connection": "online",
+  "link_rssi": -66
+ },
+ "indicators": {
+  "egress_tak": true,
+  "emergency": false,
+  "exercise": false,
+  "simulated": true,
+  "starred": false
+ },
+ "kind": "multirotor",
+ "lat": 30.2672,
+ "lifecycle": "active",
+ "live": true,
+ "location": {
+  "course_deg": 90,
+  "hae_m": 152.4,
+  "lat": 30.2672,
+  "lon": -97.7417,
+  "measured_t": 1793275237000,
+  "speed_mps": 12.5,
+  "vel_enu_mps": [
+   12.5,
+   0,
+   0
+  ]
+ },
+ "lon": -97.7417,
+ "marking": {
+  "releasable_to": [],
+  "tlp": "AMBER+STRICT"
+ },
+ "meta": {
+  "battery_pct": 79,
+  "link_rssi": -66,
+  "mavlink_sysid": 1,
+  "mode": "AUTO",
+  "node_id": "build-mac"
+ },
+ "pinned": false,
+ "properties": {
+  "altitude": 152.4,
+  "callsign": "SIM-X1",
+  "ce": 5,
+  "course": 90,
+  "le": 3,
+  "speed": 12.5
+ },
+ "provenance": {
+  "how": "m-s",
+  "primary": "tak-mesh",
+  "source_t": 1793275237000
+ },
+ "relationships": [],
+ "route": null,
+ "seq": 5,
+ "sources": [
+  {
+   "components": [
+    "health",
+    "status"
+   ],
+   "data_type": "geo",
+   "first_seen_t": 1793275260000,
+   "integration": "fleet-drone-build-mac",
+   "last_seen_t": 1793275260000,
+   "seq": 4,
+   "source_id": "sim-x1",
+   "source_t": 1793275236000,
+   "stream": "TEL",
+   "subject": "tel.fleet.drone.sim-x1.status",
+   "tier": "self_report"
+  },
+  {
+   "components": [
+    "location"
+   ],
+   "data_type": "cot",
+   "first_seen_t": 1793275260000,
+   "integration": "tak-mesh",
+   "last_seen_t": 1793275260000,
+   "seq": 15,
+   "source_id": "sim-x1",
+   "source_t": 1793275237000,
+   "stream": "COT",
+   "subject": "tak.cot.mesh.rx",
+   "tier": "self_report"
+  }
+ ],
+ "speed": 12.5,
+ "stale": 60,
+ "status": {
+  "mode": "AUTO"
+ },
+ "t": 1793275237000,
+ "template": "asset",
+ "tracked": null,
+ "traits": [
+  "locatable",
+  "trackable",
+  "taskable",
+  "observable"
+ ],
+ "type": "fleet.drone",
+ "uid": "sim-x1",
+ "uncertainty": {
+  "ce_m": 5,
+  "error_ellipse": null,
+  "le_m": 3,
+  "pos_enu_cov": [
+   25,
+   0,
+   0,
+   25,
+   0,
+   9
+  ],
+  "vel_enu_cov": [
+   1,
+   0,
+   0,
+   1,
+   0,
+   0
+  ]
+ },
+ "v": 1
+}

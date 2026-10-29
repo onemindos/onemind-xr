@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.2.0",
+	"FriendlyName": "OneMindLayers",
+	"Description": "Layers as snapshot plus delta over the bus (contracts layer-snapshot.md, layer-delta.md); toggling subscribes and unsubscribes. Feature B4.",
+	"Category": "OneMind",
+	"CreatedBy": "OneMind (onemindos)",
+	"CreatedByURL": "https://github.com/onemindos/onemind-xr",
+	"CanContainContent": false,
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "OneMindLayers",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [ "Mac", "Win64", "Linux", "Android" ]
+		}
+	],
+	"Plugins": [ { "Name": "OneMindBus", "Enabled": true }, { "Name": "OneMindCore", "Enabled": true }, { "Name": "CesiumForUnreal", "Enabled": true } ]
+}

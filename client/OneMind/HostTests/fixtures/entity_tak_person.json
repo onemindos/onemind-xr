@@ -1,0 +1,140 @@
+{
+ "aliases": {
+  "ids": [
+   {
+    "id": "ANDROID-a1b2c3d4e5f6",
+    "type": "cot_uid"
+   },
+   {
+    "id": "CYAN-1",
+    "type": "tak_callsign"
+   }
+  ],
+  "name": "CYAN-1"
+ },
+ "callsign": "CYAN-1",
+ "confidence": 0.7473,
+ "confidence_parts": {
+  "corroboration": 0.9,
+  "source_prior": 0.9,
+  "track_quality": 0.6606
+ },
+ "correlation": null,
+ "cot_security": null,
+ "cot_type": "a-f-G-U-C",
+ "course": 59.9,
+ "created_t": 1793275260000,
+ "current_task": null,
+ "disposition": "friendly",
+ "entity_id": "tak-android-a1b2c3d4e5f6",
+ "entity_type": "person",
+ "environment": "land",
+ "expiry_t": 1793275593000,
+ "geo": null,
+ "hae": 210.5,
+ "health": {
+  "battery_pct": 88
+ },
+ "indicators": {
+  "egress_tak": false,
+  "emergency": false,
+  "exercise": false,
+  "simulated": false,
+  "starred": false
+ },
+ "lat": 30.2676697,
+ "lifecycle": "active",
+ "live": true,
+ "location": {
+  "course_deg": 59.9,
+  "hae_m": 210.5,
+  "lat": 30.2676697,
+  "lon": -97.7425607,
+  "measured_t": 1793275233000,
+  "speed_mps": 1.03,
+  "vel_enu_mps": [
+   0.893,
+   0.517,
+   0
+  ]
+ },
+ "lon": -97.7425607,
+ "marking": {
+  "releasable_to": [],
+  "tlp": "AMBER+STRICT"
+ },
+ "meta": {
+  "team": "Cyan"
+ },
+ "pinned": false,
+ "properties": {
+  "altitude": 210.5,
+  "callsign": "CYAN-1",
+  "ce": 9.12,
+  "course": 59.9,
+  "le": 9.9,
+  "speed": 1.03
+ },
+ "provenance": {
+  "how": "m-g",
+  "primary": "tak-server",
+  "source_t": 1793275233000
+ },
+ "relationships": [],
+ "route": null,
+ "seq": 2,
+ "sources": [
+  {
+   "components": [
+    "location"
+   ],
+   "data_type": "cot",
+   "first_seen_t": 1793275260000,
+   "integration": "tak-server",
+   "last_seen_t": 1793275260000,
+   "seq": 12,
+   "source_id": "ANDROID-a1b2c3d4e5f6",
+   "source_t": 1793275233000,
+   "stream": "COT",
+   "subject": "tak.cot.out",
+   "tier": "self_report"
+  }
+ ],
+ "speed": 1.03,
+ "stale": 360,
+ "status": {
+  "activity": "",
+  "mode": "",
+  "role": "Team Member"
+ },
+ "t": 1793275233000,
+ "template": "asset",
+ "tracked": null,
+ "traits": [
+  "locatable"
+ ],
+ "type": "tak.atak",
+ "uid": "tak-android-a1b2c3d4e5f6",
+ "uncertainty": {
+  "ce_m": 9.12,
+  "error_ellipse": null,
+  "le_m": 9.9,
+  "pos_enu_cov": [
+   83.141,
+   0,
+   0,
+   83.141,
+   0,
+   98.01
+  ],
+  "vel_enu_cov": [
+   0.6473,
+   0,
+   0,
+   0.6473,
+   0,
+   0
+  ]
+ },
+ "v": 1
+}

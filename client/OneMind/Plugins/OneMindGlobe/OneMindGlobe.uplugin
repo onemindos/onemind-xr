@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.2.0",
+	"FriendlyName": "OneMindGlobe",
+	"Description": "Cesium for Unreal globe with open terrain and imagery, no Cesium ion token required (decision 0004 #4); offline request cache. Feature B2.",
+	"Category": "OneMind",
+	"CreatedBy": "OneMind (onemindos)",
+	"CreatedByURL": "https://github.com/onemindos/onemind-xr",
+	"CanContainContent": false,
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "OneMindGlobe",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [ "Mac", "Win64", "Linux", "Android" ]
+		}
+	],
+	"Plugins": [ { "Name": "CesiumForUnreal", "Enabled": true }, { "Name": "OneMindCore", "Enabled": true } ]
+}

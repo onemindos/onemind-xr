@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.2.0",
+	"FriendlyName": "OneMindBus",
+	"Description": "OneMind bus: NATS over WebSocket from C++ through the engine WebSockets module (spike S5 fallback); subscribe, KV get/watch, request/reply, reconnect. Feature B3.",
+	"Category": "OneMind",
+	"CreatedBy": "OneMind (onemindos)",
+	"CreatedByURL": "https://github.com/onemindos/onemind-xr",
+	"CanContainContent": false,
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "OneMindBus",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [ "Mac", "Win64", "Linux", "Android" ]
+		}
+	],
+	"Plugins": [ { "Name": "OneMindCore", "Enabled": true } ]
+}

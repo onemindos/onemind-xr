@@ -1,0 +1,28 @@
+#!/bin/bash
+# 10,000-entity client-core check on the build machine: a disposable nats-server, the
+# synthetic load (Tools/entity_load.py, 10,000 sim-load-* drones moving at 1 Hz into ENT)
+# and the headless client core on the fleet layer (direct ENT path) over WebSocket.
+# Proves the bus and core side of B4/B5; the 60 fps render check is the owner's (S1 Mac).
+# Usage: load_10k.sh <headless-binary> <work-dir>
+set -euo pipefail
+HEADLESS=$1; RUN=$2
+TOOLS=/Users/danielcarku/Desktop/work/.tools
+HERE=$(cd "$(dirname "$0")" && pwd)
+rm -rf "$RUN"; mkdir -p "$RUN/js"
+free_port() { "$TOOLS/py/bin/python" -I -c 'import socket;s=socket.socket();s.bind(("127.0.0.1",0));print(s.getsockname()[1])'; }
+P=$(free_port); W=$(free_port)
+cat > "$RUN/nats.conf" <<CONF
+listen: 127.0.0.1:$P
+jetstream { store_dir: "$RUN/js", max_file_store: 2GB, max_memory_store: 256MB }
+websocket { listen: "127.0.0.1:$W", no_tls: true }
+CONF
+"$TOOLS/bin/nats-server" -c "$RUN/nats.conf" > "$RUN/server.log" 2>&1 & SRV=$!
+trap 'kill $SRV 2>/dev/null; wait $SRV 2>/dev/null; rm -rf "$RUN/js"' EXIT
+sleep 1
+echo "\$ entity_load.py --count 10000 --rate 1 --duration 20  (background)"
+"$TOOLS/py/bin/python" -I "$HERE/../../Tools/entity_load.py" --url "nats://127.0.0.1:$P" --count 10000 --rate 1 --duration 20 > "$RUN/load.log" 2>&1 & LOAD=$!
+sleep 3
+echo "\$ onemind_headless --layer fleet:drone,robot,vehicle,node:direct --duration 15"
+"$HEADLESS" --url "ws://127.0.0.1:$W" --layer fleet:drone,robot,vehicle,node:direct --duration 15 --print-every 3 | grep -v '^\[headless\] final fleet '
+wait $LOAD || true
+echo "--- entity_load.py"; cat "$RUN/load.log"

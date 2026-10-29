@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.2.0",
+	"FriendlyName": "OneMindCoT",
+	"Description": "Cursor-on-Target in the client: VR-TAK VH_COT event model port, CoT builders, sending through svc.cot.send. Feature C2.",
+	"Category": "OneMind",
+	"CreatedBy": "OneMind (onemindos)",
+	"CreatedByURL": "https://github.com/onemindos/onemind-xr",
+	"CanContainContent": false,
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "OneMindCoT",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [ "Mac", "Win64", "Linux", "Android" ]
+		}
+	],
+	"Plugins": [ { "Name": "OneMindBus", "Enabled": true }, { "Name": "OneMindCore", "Enabled": true } ]
+}

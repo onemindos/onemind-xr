@@ -1,0 +1,26 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "5.8",
+	"Category": "",
+	"Description": "OneMind: 3D, TAK-native operating picture on Unreal Engine 5.8 with Cesium for Unreal (decision 0004 #14, #16).",
+	"Modules": [
+		{
+			"Name": "OneMind",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [ "Engine", "CoreUObject" ]
+		}
+	],
+	"Plugins": [
+		{ "Name": "CesiumForUnreal", "Enabled": true, "MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/87b0d05800a545d49bf858ef3458c4f7" },
+		{ "Name": "OneMindCore", "Enabled": true },
+		{ "Name": "OneMindBus", "Enabled": true },
+		{ "Name": "OneMindGlobe", "Enabled": true },
+		{ "Name": "OneMindLayers", "Enabled": true },
+		{ "Name": "OneMindEntities", "Enabled": true },
+		{ "Name": "OneMindCoT", "Enabled": true },
+		{ "Name": "PixelStreaming2", "Enabled": false },
+		{ "Name": "OpenXR", "Enabled": false }
+	],
+	"TargetPlatforms": [ "Mac", "Windows", "Linux", "Android" ]
+}

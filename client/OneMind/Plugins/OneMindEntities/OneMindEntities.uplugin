@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.2.0",
+	"FriendlyName": "OneMindEntities",
+	"Description": "Batched entity rendering (icons far, instanced models mid, actors near, clusters, horizon culling) and the entity inspector. Features B5, B6, C1.",
+	"Category": "OneMind",
+	"CreatedBy": "OneMind (onemindos)",
+	"CreatedByURL": "https://github.com/onemindos/onemind-xr",
+	"CanContainContent": false,
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "OneMindEntities",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [ "Mac", "Win64", "Linux", "Android" ]
+		}
+	],
+	"Plugins": [ { "Name": "OneMindLayers", "Enabled": true }, { "Name": "OneMindBus", "Enabled": true }, { "Name": "OneMindCore", "Enabled": true }, { "Name": "CesiumForUnreal", "Enabled": true } ]
+}
