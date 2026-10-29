@@ -9,7 +9,7 @@ parallel once M0 is done.
 | **M0** | Research and contracts | both | — | Research reports in `docs/research/`; contracts in `docs/contracts/` for entities, layer snapshots, layer deltas, missions/tasks, asset commands, CoT projection; spikes S1–S4 run and decisions 0002–0003 updated |
 | **M1** | Spine | omos | A0–A7, H1, H2, H6, H9, I4 | Feeds on grammar subjects; entities in KV; projector AOI filter live; mesh gateway on the Mac; SITL drone as entity and on ATAK. All as omos PRs. |
 | **M2** | Client on the Mac | xr | B1–B6, C1, C2, F1 | Packaged macOS app: globe, five live layers, TAK users, markers sent to ATAK, 10k entities at 60 fps |
-| **M3** | Web | xr (+ omos if a GPU node) | F2 or F3, J1 | A browser on another device controls the client; a phone shows the L0 view |
+| **M3** | Web | xr (+ omos if a GPU node) | F2 or F3, J1, K1–K4, K6 | A browser on another device controls the client; a phone shows the L0 view |
 | **M4** | Act | both | D1–D6, H3, H4, I1–I3, J2 | Draw an AOI, create a mission, task a SITL drone, Hermes proposes and a human confirms; ATAK sees all of it |
 | **M5** | Twin and headset | both | E1, E2, F4, H7, J3 | Homestead 3D tiles from a real drone flight; drone video panel; the client in the Quest Pro; rehearsal in sim |
 | **M6** | The leap | both | C3–C6, E3–E5, F5, F6, H5, H8, I5, B7–B10 | Commo in the client, swarm search, detection to entities, multi-user, Windows and Linux builds |

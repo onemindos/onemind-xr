@@ -1,17 +1,26 @@
 # Ultracode run prompt
 
-Before starting:
+## For the person starting the run
 
-1. On the build machine (any machine with Claude Code; the owner's Mac is not
-   required), put both repos side by side and start Claude Code in `work/`:
+1. Accept the GitHub invites to `onemindos/onemind-xr` and `onemindos/omos`.
+2. Make a folder `work/` and clone both repos into it:
    ```
-   work/
-     onemind-xr/   git clone git@github.com:onemindos/onemind-xr.git
-     omos/         git clone git@github.com:onemindos/omos.git
+   git clone git@github.com:onemindos/onemind-xr.git
+   git clone git@github.com:onemindos/omos.git
    ```
-2. Grant what you can from [`docs/ACCESS.md`](docs/ACCESS.md). Anything missing is
-   handled by the fallbacks in decision 0004; the run will not stop to ask.
-3. Paste everything below the line.
+3. Set the machine up so the run is never interrupted:
+   - plugged in, on a stable connection, with sleep turned off (macOS:
+     `caffeinate -dimsu` in a spare terminal);
+   - at least 200 GB free disk;
+   - Claude Code set so it does not stop for permission prompts. Either allowlist
+     the tools it needs, or use a permission mode that auto-accepts. Do that only
+     on a machine or VM you are comfortable giving it, because the prompt tells
+     it to install tools.
+4. Start Claude Code inside `work/` and paste everything below the line as the
+   first message. It begins with a pre-flight phase that installs and checks
+   everything it needs, then runs without asking questions. Progress is in
+   `onemind-xr/docs/STATUS.md`; if the session ever stops, start a new one in
+   `work/` and say: "Resume the OneMind run from onemind-xr/docs/STATUS.md."
 
 ---
 
@@ -122,6 +131,33 @@ the **acceptance platform**, and you cannot reach them. So:
    credentials exist), so client lanes keep moving.
 10. **No spending:** create, buy or resize nothing that costs money.
 
+# Phase 0 — Pre-flight: make sure nothing can interrupt the run
+
+Before any research, make this run self-sufficient. Write the results to
+`onemind-xr/docs/PREFLIGHT.md`.
+
+1. **Tools:** check, and install where missing (user-level installs; no paid
+   tools): Git, GitHub CLI (authenticated), Go, Node and npm, Python 3 with venv,
+   Docker, the `nats` CLI and `nats-server`, `kubectl`, `jq`, `ffmpeg`, MediaMTX,
+   PX4 or ArduPilot SITL dependencies, and Unreal Engine 5.8 (record whether it
+   is installed; if it is not, keep Unreal work to source code and plugin files
+   that compile once the engine exists, and put the engine install in the owner
+   checklist).
+2. **Access:** test each grant in `docs/ACCESS.md` (GitHub push to both repos,
+   cluster read, NATS, TAK, Tailscale). Record what works. For anything that
+   fails, switch to its decision 0004 fallback now, not mid-run.
+3. **Resources:** free disk (Unreal needs about 150 GB), memory, GPU. Plan builds
+   so they cannot fill the disk.
+4. **Local stack:** start a local `nats-server` with JetStream, a local MediaMTX,
+   and one SITL drone. Prove each with a command. These run for the whole session.
+5. **Long-run safety:** commit and push work at least after every finished
+   feature, so nothing is lost if the session stops. Keep `docs/STATUS.md`
+   current so a new session can resume from it. If the session restarts, read
+   `STATUS.md` and `PREFLIGHT.md` first and continue where it stopped.
+6. **No interruptions:** do not ask questions (decision 0004 answers them). Do not
+   wait on anything outside this machine. When one lane is blocked, record it and
+   move to another lane.
+
 # Phase 1 — Deep research, design and contracts (M0)
 
 **Use full scale.** Give each lane below its own research agents (split big lanes
@@ -225,18 +261,38 @@ only. Copy designs, never code, documents, trademarks or branding.
     Run a chaos test that kills NATS, an upstream and a collector during load,
     and save the results as evidence.
 
+11. **Video and plugins.**
+    *Video:* omos already runs MediaMTX in `platform/onetak/` (and CloudTAK shows
+    it "Not connected"). Research and design the full video path: ingest (RTSP,
+    RTMP, SRT, WebRTC/WHIP, HLS) from drones, owned cameras and public cameras;
+    MediaMTX configuration, auth and recording; drone video with MISB KLV metadata
+    (STANAG 4609) so the frame footprint and sensor point are known; how TAK
+    Server and ATAK handle video feeds (video URLs in CoT, the TAK video
+    connection manager) so every TAK user sees the same streams; playback inside
+    Unreal on macOS and in the headset (WebRTC or HLS); video draped on the 3D
+    twin; low-latency targets per use. Video metadata and stream registry go on
+    the bus (entities and KV); video itself stays in MediaMTX, never on NATS.
+    *Plugins:* design the OneMind extension model so new sources, layers, tools,
+    actions and agent skills are plugins, not core changes: a plugin manifest,
+    a source plugin (collector to the pipeline standard), a layer plugin
+    (snapshot plus delta plus a renderer and style), an action plugin (a typed
+    command with policy), and a Hermes skill plugin. Cover Unreal plugins in the
+    client, collectors in omos, and ATAK plugins that bring OneMind into ATAK.
+    Learn from the worldwideview plugin SDK and gods-eye-view layer modules
+    (design only for worldwideview), the ATAK plugin SDK and VR-TAK `VH_Plugins`.
+
 ### How the leaders do it
 
-11. **Palantir:** the Foundry ontology (object types, link types, properties,
+12. **Palantir:** the Foundry ontology (object types, link types, properties,
     actions, functions, writeback), Gotham's operational picture, AIP (LLMs that
     act through ontology actions with permissions and human approval), Apollo
     (continuous deployment to cloud, edge and disconnected sites), Maven Smart
     System. Output: the OneMind equivalent of each, built on NATS and TAK.
-12. **Anduril Lattice:** the entity model (components, provenance, aliases,
+13. **Anduril Lattice:** the entity model (components, provenance, aliases,
     expiry), tasking and the autonomy loop, sensor fusion, mesh networking, and
     the public Lattice SDK and developer docs. Output: a OneMind entity and task
     model at least as complete, mapped to `ent.*`, `cmd.*` and `evt.*` and to CoT.
-13. **JADC2 and CJADC2:** strategy documents, Sense / Make Sense / Act, data
+14. **JADC2 and CJADC2:** strategy documents, Sense / Make Sense / Act, data
     fabric, mission partner environments, zero trust, DDIL (denied, disrupted,
     intermittent and limited) operations. Output: how each JADC2 capability maps
     to a civilian OneMind capability (homestead, neighbourhood, response team), and
@@ -244,20 +300,20 @@ only. Copy designs, never code, documents, trademarks or branding.
 
 ### Make Sense and Act
 
-14. **Fusion and tracking:** entity resolution across feeds, multi-target
+15. **Fusion and tracking:** entity resolution across feeds, multi-target
     tracking (Kalman, IMM, JPDA, MHT), track-to-track correlation, confidence and
     provenance, handling stale and conflicting data. Recommend the entity
     service's algorithm and the libraries to use.
-15. **AI agents that act:** Hermes over the ontology: tool design, retrieval over
+16. **AI agents that act:** Hermes over the ontology: tool design, retrieval over
     entities and history, planning, watch jobs, multi-agent coordination,
     policy (OpenFGA or equivalent), audit, human-in-the-loop approval levels,
     evaluation and red-teaming of agent actions. Cover the existing omos
     `services/onemind-core` (Synadia Agent Protocol) and `platform/hermes`.
-16. **Security and trust:** zero trust across sites, mTLS and certificates, NATS
+17. **Security and trust:** zero trust across sites, mTLS and certificates, NATS
     accounts, ABAC, CoT `access`/`caveat`/`releasableTo` fields, data
     classification and sharing between groups, supply-chain security, threat
     model for a C2 platform (including a compromised agent or node).
-17. **Edge and disconnected operations:** Apollo-style deployment to the Mac,
+18. **Edge and disconnected operations:** Apollo-style deployment to the Mac,
     the home server and field kits; offline tiles and maps; store-and-forward;
     conflict resolution on reconnect; low-bandwidth links (radios, goTenna,
     Starlink); power and hardware tiers (Jetson, Pi, laptop).
@@ -300,7 +356,7 @@ Parallel lanes in separate worktrees, one writer per set of files:
 |---|---|---|---|
 | A — Spine | omos | A0 migrate every feed to the pipeline standard from the ingestion-pipelines research lane, meeting its full reliability list with tests and the chaos test; A1 fix the feeds, A2–A3 feed registry and health, A4 entity service, A5 layer snapshots, A6 projector AOI filter, A7 mesh gateway PR (LAN test with ATAK goes to the owner checklist), H1–H2 MAVLink + SITL, H6 safety, H9 robotics CoT profile, I4 policy and audit. One focused PR per feature, each with tests | After Phase 1 |
 | B — Client | onemind-xr | B1–B6, C1–C2, F1: the UE project (macOS-ready), `OneMindBus`, `OneMindGlobe`, `OneMindLayers`, `OneMindEntities`, `OneMindCoT`; 10,000 entities at 60 fps | After Phase 1 |
-| C — Surfaces | onemind-xr | F2/F3 web streaming or fallback, J1 L0 light web client, J3 adaptive quality | After B shows a globe |
+| C — Surfaces and video | both | K1–K6 video and plugins, F2/F3 web streaming or fallback, J1 L0 light web client, J3 adaptive quality | After B shows a globe |
 | D — Act | both | D1–D6 AOIs, missions, tasking, asset commands, Hermes panel and tools, alerts; H3–H4 ROS 2 and tasking; I1–I3 agents; J2 role modes | After A6 and B |
 | E — Twin and XR | both | E1–E2 WebODM to 3D Tiles and drone video, F4 Quest Pro, H7 simulation and rehearsal | After D |
 | F — Leap | both | C3–C6 TAK contact, Commo in the client, data packages, voice; E3–E5; F5–F6 Windows, Linux, multi-user; H5 swarm; H8 detection; I5 multi-agent; B7–B10; G1–G3 | After D |

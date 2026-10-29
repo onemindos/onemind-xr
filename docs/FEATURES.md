@@ -131,6 +131,17 @@ The same system serves every level. Lower levels get less rendering, never less 
 | J4 | Accessibility: keyboard-only, screen-reader labels on panels, colour-blind palettes | P2 | Audit checklist passes |
 | J5 | Localization of UI strings | P3 | One second language |
 
+## K. Video and plugins
+
+| ID | Feature | P | Where | Acceptance test |
+|---|---|---|---|---|
+| K1 | Video ingest through MediaMTX (`platform/onetak`): RTSP, RTMP, SRT, WebRTC/WHIP, HLS out; auth per stream; recording with retention | P0 | omos | A SITL or ffmpeg test stream plays in a browser and is recorded |
+| K2 | Stream registry: every stream is linked to an entity (drone, camera) with its URL, codec, latency class and permissions, on the bus | P0 | omos | Selecting a drone entity shows its live stream |
+| K3 | Video in TAK: stream URLs in CoT so ATAK and VR-TAK users open the same feeds | P1 | omos projector | ATAK opens the drone stream from its marker |
+| K4 | Video in the client: panels on macOS and in the headset, tied to their entity | P1 | xr | Panel follows the drone, under 1 s latency on the LAN |
+| K5 | KLV metadata: frame footprint and sensor point drawn on the twin; video draped on terrain | P2 | both | Footprint matches the drone's camera view |
+| K6 | Plugin model: manifest plus source, layer, action and Hermes-skill plugin types, documented with one example each | P1 | both | A new layer ships as a plugin with no core change |
+
 ## G. Operations
 
 | ID | Feature | P | Acceptance test |
