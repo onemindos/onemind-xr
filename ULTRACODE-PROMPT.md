@@ -8,15 +8,7 @@
    git clone git@github.com:onemindos/onemind-xr.git
    git clone git@github.com:onemindos/omos.git
    ```
-3. Set the machine up so the run is never interrupted:
-   - plugged in, on a stable connection, with sleep turned off (macOS:
-     `caffeinate -dimsu` in a spare terminal);
-   - at least 200 GB free disk;
-   - Claude Code set so it does not stop for permission prompts. Either allowlist
-     the tools it needs, or use a permission mode that auto-accepts. Do that only
-     on a machine or VM you are comfortable giving it, because the prompt tells
-     it to install tools.
-4. Start Claude Code inside `work/` and paste everything below the line as the
+3. Start Claude Code inside `work/` and paste everything below the line as the
    first message. It begins with a pre-flight phase that installs and checks
    everything it needs, then runs without asking questions. Progress is in
    `onemind-xr/docs/STATUS.md`; if the session ever stops, start a new one in
@@ -136,13 +128,18 @@ the **acceptance platform**, and you cannot reach them. So:
 Before any research, make this run self-sufficient. Write the results to
 `onemind-xr/docs/PREFLIGHT.md`.
 
-1. **Tools:** check, and install where missing (user-level installs; no paid
-   tools): Git, GitHub CLI (authenticated), Go, Node and npm, Python 3 with venv,
-   Docker, the `nats` CLI and `nats-server`, `kubectl`, `jq`, `ffmpeg`, MediaMTX,
-   PX4 or ArduPilot SITL dependencies, and Unreal Engine 5.8 (record whether it
-   is installed; if it is not, keep Unreal work to source code and plugin files
-   that compile once the engine exists, and put the engine install in the owner
-   checklist).
+1. **Tools, without changing the host machine.** This is someone else's machine.
+   Do not change system settings, do not use `sudo` or an admin password, do not
+   install system-wide packages, and do not touch anything outside `work/`.
+   Check what is already installed (Git, GitHub CLI, Go, Node, Python, Docker,
+   `kubectl`, Unreal Engine 5.8). Anything missing goes **inside
+   `work/.tools/`** as user-space downloads (official release binaries, Python
+   venvs, Node packages, Go modules): the `nats` CLI and `nats-server`, MediaMTX,
+   `ffmpeg`, `jq`, SITL tools. If Docker is available, prefer containers for
+   services. If something cannot be installed without admin rights (for example
+   Unreal Engine or Docker itself), do not ask; keep that work to source code
+   that builds once it exists, and put it in the owner checklist. Record every
+   install in `PREFLIGHT.md` so it can be removed by deleting `work/.tools/`.
 2. **Access:** test each grant in `docs/ACCESS.md` (GitHub push to both repos,
    cluster read, NATS, TAK, Tailscale). Record what works. For anything that
    fails, switch to its decision 0004 fallback now, not mid-run.
