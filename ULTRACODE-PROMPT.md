@@ -2,7 +2,8 @@
 
 Before starting:
 
-1. On the owner's Mac, put both repos side by side and start Claude Code in `work/`:
+1. On the build machine (any machine with Claude Code; the owner's Mac is not
+   required), put both repos side by side and start Claude Code in `work/`:
    ```
    work/
      onemind-xr/   git clone git@github.com:onemindos/onemind-xr.git
@@ -48,6 +49,29 @@ Read before acting:
   `services/bridge/bridges/tak` (multicast SA, directed TCP, TAK Protocol v1). It has
   no PR yet; opening and finishing that PR is yours (feature A7).
 
+# Where this runs
+
+You are on a **build machine that is not the owner's Mac**. The owner's Apple
+Silicon Mac, the Meta Quest Pro and the ATAK devices on the owner's Wi-Fi are
+the **acceptance platform**, and you cannot reach them. So:
+
+- Build and test everything you can here: omos services, contracts, the Unreal
+  project and plugins, web clients, simulators. If this machine is a Mac, package
+  the macOS app here. If not, build for this platform and keep the project
+  macOS-ready: no platform-only APIs without a macOS path, and
+  `Mac` in every plugin's `PlatformAllowList`.
+- Replace LAN multicast with what works here: the mesh gateway's own multicast
+  tests, a second gateway or a scripted mesh peer on this machine, and
+  ATAK-compatible test messages from the `takproto` Python package.
+- Everything that needs the owner's hardware goes into
+  `onemind-xr/docs/OWNER-CHECKLIST.md` as exact, copy-paste steps with the
+  expected result: S1 (packaged app on the Mac), S2 (Pixel Streaming from the Mac),
+  S3 (Quest Pro), the LAN mesh test with ATAK, and each milestone's on-Mac
+  acceptance. Mark those features **built, awaiting owner check**, not done.
+- Make the owner's part one command where you can: a `scripts/` setup script for
+  the Mac (install checks, build, package, run), and a script that runs the mesh
+  gateway and a local NATS server on the Mac.
+
 # Facts already verified (don't re-research these; build on them)
 
 - VR-TAK is GPL-3.0, an engine fork of UE 5.3.2 (10,081 patched engine files), with
@@ -90,10 +114,12 @@ Read before acting:
 7. **Evidence:** a feature is done only when its acceptance test in
    `docs/FEATURES.md` passes and the proof (test output, screenshot, screen
    recording, transcript) is in `onemind-xr/docs/evidence/<milestone>/`.
-8. **Mac first:** nothing counts as done until it runs on this Mac.
-9. **Never wait on a merge:** run unmerged omos services locally from their branches
-   against a local NATS server (or a leaf to the cluster if credentials exist), so
-   client lanes keep moving.
+8. **Mac is the acceptance platform:** a feature is done when it passes here
+   and its on-Mac check is written in `docs/OWNER-CHECKLIST.md`. Never mark a
+   Mac-only check as passed.
+9. **Never wait on a merge:** run unmerged omos services locally on this machine
+   from their branches against a local NATS server (or a leaf to the cluster if
+   credentials exist), so client lanes keep moving.
 10. **No spending:** create, buy or resize nothing that costs money.
 
 # Phase 1 — Research and contracts (M0)
@@ -111,8 +137,10 @@ sources, verified facts, risks and a recommendation.
    NatsBridgePlugin and cot-tap, the mesh gateway, the ATAK plugin SDK. Run spike S4.
 3. **VR-TAK porting map:** each plugin's function, its engine-patch dependencies, and
    port cost.
-4. **Unreal platform:** run spikes S1 (UE + Cesium on this Mac), S2 (Pixel Streaming 2
-   from the Mac), S3 (Quest Pro) and S5 (NATS client in Unreal). Large-entity
+4. **Unreal platform:** run S1 (UE + Cesium) and S5 (NATS client in Unreal) on
+   this machine; S2 (Pixel Streaming 2) here if it has a GPU. Research S2 on macOS
+   and S3 (Quest Pro DK94EC) from docs and issue trackers, then write their
+   on-Mac and on-headset steps into `docs/OWNER-CHECKLIST.md`. Large-entity
    rendering options (HISM, Niagara, Mass).
 5. **Drones, robots, agents:** PX4/ArduPilot SITL, MAVLink, ROS 2 to NATS (Zenoh or
    rosbridge), CoT types and detail for UAVs and UGVs, swarm tasking, onboard
@@ -139,8 +167,8 @@ Parallel lanes in separate worktrees, one writer per set of files:
 
 | Lane | Repo | Scope (feature IDs) | Starts |
 |---|---|---|---|
-| A — Spine | omos | A1 fix the feeds, A2–A3 feed registry and health, A4 entity service, A5 layer snapshots, A6 projector AOI filter, A7 mesh gateway PR and LAN test with ATAK, H1–H2 MAVLink + SITL, H6 safety, H9 robotics CoT profile, I4 policy and audit. One focused PR per feature, each with tests | After Phase 1 |
-| B — Client | onemind-xr | B1–B6, C1–C2, F1: the UE project on the Mac, `OneMindBus`, `OneMindGlobe`, `OneMindLayers`, `OneMindEntities`, `OneMindCoT`; 10,000 entities at 60 fps | After Phase 1 |
+| A — Spine | omos | A1 fix the feeds, A2–A3 feed registry and health, A4 entity service, A5 layer snapshots, A6 projector AOI filter, A7 mesh gateway PR (LAN test with ATAK goes to the owner checklist), H1–H2 MAVLink + SITL, H6 safety, H9 robotics CoT profile, I4 policy and audit. One focused PR per feature, each with tests | After Phase 1 |
+| B — Client | onemind-xr | B1–B6, C1–C2, F1: the UE project (macOS-ready), `OneMindBus`, `OneMindGlobe`, `OneMindLayers`, `OneMindEntities`, `OneMindCoT`; 10,000 entities at 60 fps | After Phase 1 |
 | C — Surfaces | onemind-xr | F2/F3 web streaming or fallback, J1 L0 light web client, J3 adaptive quality | After B shows a globe |
 | D — Act | both | D1–D6 AOIs, missions, tasking, asset commands, Hermes panel and tools, alerts; H3–H4 ROS 2 and tasking; I1–I3 agents; J2 role modes | After A6 and B |
 | E — Twin and XR | both | E1–E2 WebODM to 3D Tiles and drone video, F4 Quest Pro, H7 simulation and rehearsal | After D |
@@ -155,6 +183,9 @@ findings before marking it done.
 - Keep `onemind-xr/docs/STATUS.md` current: each milestone and feature, its state
   (done with an evidence link, in progress, or blocked with the exact cause), and
   the omos PR links.
-- **Final report:** what is proven on this Mac; which omos PRs are open and in what
+- Keep `onemind-xr/docs/OWNER-CHECKLIST.md` current and ordered, so the owner can
+  run it top to bottom on the Mac, the headset and the LAN.
+- **Final report:** what is proven on the build machine; what awaits the owner's
+  checklist; which omos PRs are open and in what
   order to merge them; which decision 0004 fallbacks were used and why; what access
   was missing; and what is left, in priority order.

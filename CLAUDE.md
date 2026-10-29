@@ -58,5 +58,6 @@ before any design or code work.
   instancing (HISM or Niagara), never one actor per entity.
 - Pin every dependency: engine version, Cesium for Unreal release, NATS client
   library and commit SHAs.
-- macOS first. Every feature must run on the owner's Apple Silicon Mac before it
-  counts as done. Other platforms come after.
+- macOS is the acceptance platform. Builds may happen elsewhere, but every
+  feature must keep a macOS path, and its on-Mac check goes in
+  `docs/OWNER-CHECKLIST.md`. Other platforms come after.

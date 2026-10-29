@@ -48,7 +48,15 @@ A dedicated NATS user for the run (sealed into omos, or issued to the local leaf
 | Tailscale: a tagged node (for example `tag:onemind-agent`) with ACLs to `tak.tail717ba0.ts.net` (8089, 8443), the `omos-nats` leaf port 7422, and the read-only admin UIs (Grafana viewer, Argo) | Reach TAK, the bus and dashboards |
 | LAN access on the owner's Mac | Mesh gateway multicast with ATAK devices |
 
-## Local machine (the owner's Mac)
+## Build machine (where the run happens)
+
+| Item | Why |
+|---|---|
+| Claude Code, Git, Go, Node, Python, Docker, the `nats` CLI | omos services, SITL drones, tests |
+| Unreal Engine 5.8 (Epic account) and about 150 GB free disk; a GPU if possible | Build the client; a Mac build machine can package the macOS app directly |
+| Tailscale node and the cluster and NATS grants above | Reach the bus, TAK Server and dashboards |
+
+## Owner's Mac (acceptance, run by the owner from `docs/OWNER-CHECKLIST.md`)
 
 | Item | Why |
 |---|---|
@@ -58,6 +66,6 @@ A dedicated NATS user for the run (sealed into omos, or issued to the local leaf
 | Go, Node, Python, the `nats` CLI, Docker | omos services, SITL drones, tests |
 | An ATAK phone or tablet on the same Wi-Fi | Mesh and TAK tests |
 
-The session should run **on the owner's Mac**, because the Mac-only steps (packaging,
-streaming, the headset, LAN mesh) can only be proven there. If it runs elsewhere,
-those steps become checklists for the owner.
+The run happens on the build machine. Mac-only steps (packaging on the owner's Mac,
+streaming from it, the headset, the LAN mesh with ATAK) become exact steps in
+`docs/OWNER-CHECKLIST.md`, which the owner runs.
