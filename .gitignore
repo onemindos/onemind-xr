@@ -1,0 +1,16 @@
+.DS_Store
+*.env
+.env*
+!.env.example
+# Unreal
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+*.sln
+*.xcworkspace
+# Builds
+build/
+dist/
+node_modules/
