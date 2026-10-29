@@ -30,6 +30,16 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "OneMind|Inspector")
 	void ClearSelection();
 
+	/** "layer/entity_id" of the selection, or "". */
+	const FString& GetSelectedId() const { return SelectedId; }
+
+	/** The Act panel (bottom left): TAK status, contacts and chat, the task confirm dialog,
+	 *  the open mission (pushed by the player controller each frame). The intelligence-gaps
+	 *  panel (B20) is read from the layer subsystem and shown above it. */
+	void SetActText(const FString& Text) { ActText = Text; }
+	void SetShowGaps(bool bShow) { bShowGaps = bShow; }
+	FText GetActText() const;
+
 	FText GetStatusText() const;
 	FText GetInspectorText() const;
 	FText GetAttributionText() const;
@@ -39,6 +49,8 @@ private:
 	FString SelectedId;
 	FString InspectorText;
 	FString RawCot;
+	FString ActText;
+	bool bShowGaps = true;
 
 	// Frame timing for the status line (B1/B4 read fps here: no `stat` console needed).
 	// Sampled when the status text is evaluated, which Slate does once per painted frame.

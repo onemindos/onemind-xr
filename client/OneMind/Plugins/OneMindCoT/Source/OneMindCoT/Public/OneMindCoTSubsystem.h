@@ -38,6 +38,44 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "OneMind|CoT")
 	FString SendChat(const FString& Text, const FString& Room = TEXT(""));
 
+	// --- Drawing and tactical graphics (B11) -------------------------------------------
+	// Each shape goes to svc.cot.send as kind "shape" (Docs/svc-cot-send.md) and, when the
+	// client is connected to TAK Server itself (C3), also over its own stream. Layouts:
+	// OneMindCore/Drawing.h. Colours are ARGB 0xAARRGGBB as integers (4294967040 = opaque yellow); FillArgb 0 = no fill.
+
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	FString SendPoint(double Lat, double Lon, const FString& Label);
+
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	FString SendLine(const TArray<FVector2D>& LatLonPoints, const FString& Label, int64 StrokeArgb = 4294967295);
+
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	FString SendPolygon(const TArray<FVector2D>& LatLonRing, const FString& Label, int64 StrokeArgb = 4294967040, int64 FillArgb = 1090518784);
+
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	FString SendRectangle(FVector2D CornerLatLon1, FVector2D CornerLatLon2, const FString& Label, int64 StrokeArgb = 4294967040, int64 FillArgb = 0);
+
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	FString SendCircle(double Lat, double Lon, double RadiusMeters, const FString& Label, int64 StrokeArgb = 4294967040, int64 FillArgb = 0);
+
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	FString SendSector(double Lat, double Lon, double RadiusMeters, double FromBearingDeg, double ToBearingDeg, const FString& Label);
+
+	/** One ring per radius, sharing the centre. Returns the first uid. */
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	FString SendRangeRings(double Lat, double Lon, const TArray<double>& RadiiMeters, const FString& Label);
+
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	FString SendRangeBearing(FVector2D FromLatLon, FVector2D ToLatLon, const FString& Label);
+
+	/** Buffer around a point (one vertex) or a line, sent as a polygon. */
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	FString SendBuffer(const TArray<FVector2D>& LatLonPoints, double DistanceMeters, const FString& Label);
+
+	/** Lasso: ids of the given candidates inside the ring (local, nothing is sent). */
+	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")
+	TArray<FString> LassoSelect(const TArray<FVector2D>& LatLonRing, const TArray<FString>& Ids, const TArray<FVector2D>& LatLons) const;
+
 	UPROPERTY(BlueprintAssignable, Category = "OneMind|CoT")
 	FOnOneMindCotSent OnSent;
 };

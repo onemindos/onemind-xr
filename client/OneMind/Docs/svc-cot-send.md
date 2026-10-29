@@ -27,7 +27,7 @@ Subject: `svc.cot.send` (grammar `svc.{service}.{endpoint}`; listed in
 | Field | Rule |
 |---|---|
 | `v` | `1` |
-| `kind` | `marker` (CoT atom), `spi` (`b-m-p-s-p-i`), `route` (`b-m-r`), `geofence` (`u-d-f`), `chat` (`b-t-f`) |
+| `kind` | `marker` (CoT atom), `spi` (`b-m-p-s-p-i`), `route` (`b-m-r`), `geofence` (`u-d-f`), `chat` (`b-t-f`), `shape` (B11 drawing: `b-m-p-s-m`, `u-d-f`, `u-d-r`, `u-d-c-c`, `u-r-b-c-c`, `u-rb-a`; layouts in `OneMindCore/Drawing.h`, added 2026-10-29 by lane UE, M4) |
 | `targets` | subset of `server` (projector publishes `tak.cot.inject`) and `mesh` (site projector publishes `tak.cot.mesh.tx`) |
 | `client_id` | the sending client instance (also in the uid) |
 | `client_ref` | idempotency key; the client sends the CoT uid. A projector that has seen it within the stale time answers the stored reply instead of sending again |

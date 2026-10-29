@@ -60,6 +60,17 @@ std::string Show(const A& a, const B& b) {
 
 #define EXPECT_TRUE(x) omtest::Report(static_cast<bool>(x), #x, __FILE__, __LINE__)
 #define EXPECT_FALSE(x) omtest::Report(!static_cast<bool>(x), "!(" #x ")", __FILE__, __LINE__)
-#define EXPECT_EQ(a, b) omtest::Report((a) == (b), #a " == " #b, __FILE__, __LINE__, omtest::Show((a), (b)))
-#define EXPECT_NEAR(a, b, eps) \
-  omtest::Report(std::fabs((a) - (b)) <= (eps), #a " ~= " #b, __FILE__, __LINE__, omtest::Show((a), (b)))
+// Each argument is evaluated once (a call with side effects, such as a send, runs once).
+#define EXPECT_EQ(a, b)                                                                          \
+  do {                                                                                           \
+    auto&& om_a_ = (a);                                                                          \
+    auto&& om_b_ = (b);                                                                          \
+    omtest::Report(om_a_ == om_b_, #a " == " #b, __FILE__, __LINE__, omtest::Show(om_a_, om_b_)); \
+  } while (0)
+#define EXPECT_NEAR(a, b, eps)                                                                    \
+  do {                                                                                            \
+    auto&& om_a_ = (a);                                                                           \
+    auto&& om_b_ = (b);                                                                           \
+    omtest::Report(std::fabs(om_a_ - om_b_) <= (eps), #a " ~= " #b, __FILE__, __LINE__,           \
+                   omtest::Show(om_a_, om_b_));                                                   \
+  } while (0)

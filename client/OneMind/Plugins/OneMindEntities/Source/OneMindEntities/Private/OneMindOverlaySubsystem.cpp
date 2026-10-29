@@ -47,6 +47,17 @@ void UOneMindOverlaySubsystem::OnWorldBeginPlay(UWorld& InWorld)
 				]
 			]
 		]
+		+ SOverlay::Slot().HAlign(HAlign_Left).VAlign(VAlign_Bottom).Padding(12.f, 12.f, 12.f, 40.f)
+		[
+			SNew(SBox).MaxDesiredWidth(640.f)
+			[
+				SNew(SBorder).BorderBackgroundColor(Panel).Padding(8.f)
+				[
+					SNew(STextBlock).Text(Bind(&UOneMindOverlaySubsystem::GetActText)).AutoWrapText(true)
+						.ColorAndOpacity(FLinearColor::White)
+				]
+			]
+		]
 		+ SOverlay::Slot().HAlign(HAlign_Right).VAlign(VAlign_Bottom).Padding(8.f)
 		[
 			SNew(STextBlock).Text(Bind(&UOneMindOverlaySubsystem::GetAttributionText)).ColorAndOpacity(FLinearColor(1.f, 1.f, 1.f, 0.8f))
@@ -62,6 +73,16 @@ void UOneMindOverlaySubsystem::Deinitialize()
 	}
 	Overlay.Reset();
 	Super::Deinitialize();
+}
+
+FText UOneMindOverlaySubsystem::GetActText() const
+{
+	FString S;
+	UOneMindLayerSubsystem* L = bShowGaps && GetWorld() ? GetWorld()->GetSubsystem<UOneMindLayerSubsystem>() : nullptr;
+	if (L) S += L->GetGapsText();
+	S += ActText;
+	S.TrimEndInline();
+	return FText::FromString(S);
 }
 
 FText UOneMindOverlaySubsystem::GetStatusText() const

@@ -19,6 +19,7 @@
 		{ "Name": "OneMindLayers", "Enabled": true },
 		{ "Name": "OneMindEntities", "Enabled": true },
 		{ "Name": "OneMindCoT", "Enabled": true },
+		{ "Name": "OneMindMission", "Enabled": true },
 		{ "Name": "PixelStreaming2", "Enabled": false },
 		{ "Name": "OpenXR", "Enabled": false }
 	],

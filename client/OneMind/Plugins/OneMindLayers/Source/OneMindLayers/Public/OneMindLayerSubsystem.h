@@ -9,7 +9,10 @@
 #include "CoreMinimal.h"
 #include "Subsystems/WorldSubsystem.h"
 
+#include "OneMindCore/FeedGaps.h"
 #include "OneMindCore/Layers.h"
+
+#include <memory>
 
 #include "OneMindLayerSubsystem.generated.h"
 
@@ -29,6 +32,21 @@ struct FOneMindLayerStatus
 	/** Manifest freshness badge: fresh | degraded | stale | down | unknown (layer-snapshot.md §5). */
 	UPROPERTY(BlueprintReadOnly, Category = "OneMind|Layers") FString Freshness;
 	UPROPERTY(BlueprintReadOnly, Category = "OneMind|Layers") FString LastError;
+};
+
+USTRUCT(BlueprintType)
+struct FOneMindFeedGap
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadOnly, Category = "OneMind|Gaps") FString Source;
+	/** stale | failed | missing */
+	UPROPERTY(BlueprintReadOnly, Category = "OneMind|Gaps") FString Status;
+	UPROPERTY(BlueprintReadOnly, Category = "OneMind|Gaps") FString Reason;
+	UPROPERTY(BlueprintReadOnly, Category = "OneMind|Gaps") float AgeSeconds = -1.f;
+	/** Layers and alert kinds this feed weakens. */
+	UPROPERTY(BlueprintReadOnly, Category = "OneMind|Gaps") TArray<FString> Layers;
+	UPROPERTY(BlueprintReadOnly, Category = "OneMind|Gaps") TArray<FString> Alerts;
 };
 
 UCLASS()
@@ -61,9 +79,21 @@ public:
 	/** Core access for renderers (C++ only). */
 	om::LayerManager* GetManager() const;
 
+	/** Intelligence gaps (B20): every feed that is stale, failing or missing, worst first. */
+	UFUNCTION(BlueprintPure, Category = "OneMind|Gaps")
+	TArray<FOneMindFeedGap> GetGaps() const;
+
+	/** Panel text for the overlay ("" when every known feed is fresh). */
+	FString GetGapsText() const;
+
 private:
 	void RegisterCatalogue();
 	void UpdateAoiFromCamera();
+	void StartGaps();
+
+	std::unique_ptr<om::FeedGaps> Gaps;
+	int64 FeedStatusSid = 0;
+	int32 ManifestWatch = 0;
 
 	TWeakObjectPtr<UOneMindBusSubsystem> Bus;
 	TArray<FString> LayerIds;
