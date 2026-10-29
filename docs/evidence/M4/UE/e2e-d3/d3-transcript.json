@@ -1,0 +1,226 @@
+[
+ {
+  "client": {
+   "action_id": "act-01m63zcd9gt11mc47ecws9fdh5",
+   "denial_code": "",
+   "denial_message": "",
+   "error": "",
+   "ev": "proposed",
+   "level": "A3",
+   "local_hash": "sha256:201ed473999f6482e9e85866aba958489643a7c757e17789e4943e5cd9f7adac",
+   "params": {
+    "hae_m": 120,
+    "lat": 30.2751235,
+    "lon": -97.7398765
+   },
+   "params_hash": "sha256:201ed473999f6482e9e85866aba958489643a7c757e17789e4943e5cd9f7adac",
+   "status": "awaiting_confirmation"
+  }
+ },
+ {
+  "client": {
+   "action_id": "act-01m63zcd9gt11mc47ecws9fdh5",
+   "denial_code": "",
+   "denial_message": "",
+   "error": "",
+   "ev": "dialog",
+   "level": "A3",
+   "local_hash": "sha256:201ed473999f6482e9e85866aba958489643a7c757e17789e4943e5cd9f7adac",
+   "params": {
+    "hae_m": 120,
+    "lat": 30.2751235,
+    "lon": -97.7398765
+   },
+   "params_hash": "sha256:201ed473999f6482e9e85866aba958489643a7c757e17789e4943e5cd9f7adac",
+   "status": "awaiting_confirmation"
+  }
+ },
+ {
+  "client": {
+   "code": "",
+   "command_id": "",
+   "ev": "audit",
+   "event": "proposed"
+  }
+ },
+ {
+  "client": {
+   "code": "",
+   "command_id": "",
+   "ev": "audit",
+   "event": "approved"
+  }
+ },
+ {
+  "client": {
+   "action_id": "act-01m63zcd9gt11mc47ecws9fdh5",
+   "denial_code": "",
+   "denial_message": "",
+   "error": "",
+   "ev": "confirmed",
+   "level": "A3",
+   "local_hash": "sha256:201ed473999f6482e9e85866aba958489643a7c757e17789e4943e5cd9f7adac",
+   "params": {
+    "hae_m": 120,
+    "lat": 30.2751235,
+    "lon": -97.7398765
+   },
+   "params_hash": "sha256:201ed473999f6482e9e85866aba958489643a7c757e17789e4943e5cd9f7adac",
+   "status": "dispatched"
+  }
+ },
+ {
+  "client": {
+   "code": "",
+   "command_id": "c2a4c2c2-ab73-42f4-8751-87f8ff63d54f",
+   "ev": "audit",
+   "event": "dispatched"
+  }
+ },
+ {
+  "client": {
+   "code": "",
+   "command_id": "c2a4c2c2-ab73-42f4-8751-87f8ff63d54f",
+   "ev": "audit",
+   "event": "acknowledged"
+  }
+ },
+ {
+  "client": {
+   "code": "",
+   "command_id": "c2a4c2c2-ab73-42f4-8751-87f8ff63d54f",
+   "ev": "audit",
+   "event": "executed"
+  }
+ },
+ {
+  "client": {
+   "action_id": "act-01m63zcd9gt11mc47ecws9fdh5",
+   "ev": "final",
+   "status": "executed"
+  }
+ },
+ {
+  "client": {
+   "action_id": "act-01m63zcf38w21dkbdqz330yat4",
+   "denial_code": "precondition_failed",
+   "denial_message": "point violates a geofence",
+   "error": "precondition_failed",
+   "ev": "proposed",
+   "level": "A3",
+   "local_hash": "sha256:9932e57ed54b1f0dfb21a81b5ba298b4f6ef69fb1985873cfbe61a46dff84b00",
+   "params": {
+    "hae_m": 120,
+    "lat": 30.3,
+    "lon": -97.7
+   },
+   "params_hash": "sha256:9932e57ed54b1f0dfb21a81b5ba298b4f6ef69fb1985873cfbe61a46dff84b00",
+   "status": "denied"
+  }
+ },
+ {
+  "client": {
+   "code": "precondition_failed",
+   "command_id": "",
+   "ev": "audit",
+   "event": "denied"
+  }
+ },
+ {
+  "client": {
+   "action_id": "act-01m63zcf38w21dkbdqz330yat4",
+   "ev": "final",
+   "status": "denied"
+  }
+ },
+ {
+  "client": {
+   "action_id": "act-01m63zcf46fzatzg0b61yhp38j",
+   "denial_code": "",
+   "denial_message": "",
+   "error": "",
+   "ev": "proposed",
+   "level": "A3",
+   "local_hash": "sha256:19e6e396b4823f429c95c7932aca228050ba6c639297e6ef5e49ffd591b3de6f",
+   "params": {
+    "hae_m": 100,
+    "lat": 30.271,
+    "lon": -97.741
+   },
+   "params_hash": "sha256:19e6e396b4823f429c95c7932aca228050ba6c639297e6ef5e49ffd591b3de6f",
+   "status": "awaiting_confirmation"
+  }
+ },
+ {
+  "client": {
+   "action_id": "act-01m63zcf46fzatzg0b61yhp38j",
+   "denial_code": "",
+   "denial_message": "",
+   "error": "",
+   "ev": "dialog",
+   "level": "A3",
+   "local_hash": "sha256:19e6e396b4823f429c95c7932aca228050ba6c639297e6ef5e49ffd591b3de6f",
+   "params": {
+    "hae_m": 100,
+    "lat": 30.271,
+    "lon": -97.741
+   },
+   "params_hash": "sha256:19e6e396b4823f429c95c7932aca228050ba6c639297e6ef5e49ffd591b3de6f",
+   "status": "awaiting_confirmation"
+  }
+ },
+ {
+  "client": {
+   "code": "",
+   "command_id": "",
+   "ev": "audit",
+   "event": "proposed"
+  }
+ },
+ {
+  "client": {
+   "action_id": "act-01m63zcf46fzatzg0b61yhp38j",
+   "denial_code": "rejected_by_human",
+   "denial_message": "wrong drone",
+   "error": "rejected_by_human",
+   "ev": "confirmed",
+   "level": "A3",
+   "local_hash": "sha256:19e6e396b4823f429c95c7932aca228050ba6c639297e6ef5e49ffd591b3de6f",
+   "params": {
+    "hae_m": 100,
+    "lat": 30.271,
+    "lon": -97.741
+   },
+   "params_hash": "sha256:19e6e396b4823f429c95c7932aca228050ba6c639297e6ef5e49ffd591b3de6f",
+   "status": "rejected"
+  }
+ },
+ {
+  "client": {
+   "code": "rejected_by_human",
+   "command_id": "",
+   "ev": "audit",
+   "event": "rejected"
+  }
+ },
+ {
+  "client": {
+   "action_id": "act-01m63zcf46fzatzg0b61yhp38j",
+   "ev": "final",
+   "status": "rejected"
+  }
+ },
+ {
+  "raw_propose_non_sim": {
+   "action_id": "act-01m63zcfe7f9a1eha5ky2tswd5",
+   "status": "denied",
+   "level": "A3",
+   "params_hash": "sha256:f93053389e8b4a323274a79f966f650d7b6c82fbe4ce5f584ab979160556bd3e",
+   "approvals_needed": 0,
+   "denial": {
+    "code": "not_simulated",
+    "message": "only simulated assets (sim-*) can be commanded in this run"
+   }
+  }
+ }
+]

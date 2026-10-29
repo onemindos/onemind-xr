@@ -1,0 +1,5 @@
+{"ev": "goal", "accepted": true, "x": 1.2, "y": 0.6, "frame": "map", "goal_id": "244681bb0b73a95d03ff9ef8ebcc579d", "t": 1793281902.727}
+{"ev": "cmd_vel", "lx": 0.0, "az": 0.0, "t": 1793281908.13}
+{"ev": "cmd_vel", "lx": 0.0, "az": 0.0, "t": 1793281908.13}
+{"ev": "cmd_vel", "lx": 0.0, "az": 0.0, "t": 1793281908.13}
+{"ev": "cancel", "canceled": 0, "t": 1793281908.13}

@@ -1,0 +1,29 @@
+# review-fix round, commit 13f0ebbb, 2026-10-29T13:48:10Z
+go vet: ok
+=== RUN   TestEnvelopeGolden
+    envelope_test.go:145: envelope golden: map[entity:6 error:1 skip:22]
+--- PASS: TestEnvelopeGolden (0.03s)
+=== RUN   TestNWSLegacyAndEnvelopeSameID
+--- PASS: TestNWSLegacyAndEnvelopeSameID (0.00s)
+=== RUN   TestSourceAliases
+--- PASS: TestSourceAliases (0.00s)
+=== RUN   TestEnvelopeEventTime
+--- PASS: TestEnvelopeEventTime (0.00s)
+=== RUN   TestNativeID
+--- PASS: TestNativeID (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/adapt	1.281s
+=== RUN   TestKeepOrbitCap
+--- PASS: TestKeepOrbitCap (0.00s)
+=== RUN   TestSatellitePropagation
+--- PASS: TestSatellitePropagation (5.38s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/bus	6.832s
+?   	github.com/onemindos/omos/services/entity/cmd/entity-service	[no test files]
+ok  	github.com/onemindos/omos/services/entity/internal/adapt	1.305s
+ok  	github.com/onemindos/omos/services/entity/internal/bus	19.943s
+ok  	github.com/onemindos/omos/services/entity/internal/engine	1.845s
+ok  	github.com/onemindos/omos/services/entity/internal/fusion	2.343s
+ok  	github.com/onemindos/omos/services/entity/internal/identity	1.897s
+?   	github.com/onemindos/omos/services/entity/internal/model	[no test files]
+ok  	github.com/onemindos/omos/services/entity/internal/orbit	2.151s

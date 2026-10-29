@@ -1,0 +1,33 @@
+streams on this checkout: 14 (AGENTS, CMD, COT, ENV, EVT, GEO, INTEL, MISSION, SAAS, SYS, TEL, VOICE, WORLD, ZEUS)
+location	tag	subject	grammar	stored	notes
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:43	current	tak.cot.inject	G:tak-inject,G:tak-cot	stored-today=COT
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:44	current	tak.cot.mesh.tx	G:tak-cot	stored-today=COT
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:45	alternative	svc.cot.send	G:svc	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:68	current	tak.cot.out	G:tak-cot	stored-today=COT
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:69	current	tak.cot.mesh.rx	G:tak-cot	stored-today=COT
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:70	current	agents.prompt.{agent}.{owner}.{name}	G:agents	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:91	proposed	evt.entity.{entity_id}.alert	G:evt	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:92	current	evt.map.geofence.{id}.{enter|exit}	D9.1:evt-geofence	stored-today=MISSION
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:93	filter	evt.entity.>	G:evt	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:94	filter	evt.entity.*.alert	G:evt	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:95	current	ent.alert.{entity_id}.state	G:ent	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:112	proposed	evt.so.brief.published	G:evt	stored-today=EVT
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:113	filter	evt.so.>	G:evt	stored-today=EVT
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:114	current	evt.so.action.*	G:evt	stored-today=EVT
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:115	proposed	svc.brief.generate	G:svc	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:116	proposed	svc.brief.latest	G:svc	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:117	current	svc.entity.query	G:svc	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:118	current	tel.feed.{source}.status	G:tel	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:119	filter	tel.feed.>	G:tel	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:120	alternative	evt.brief.{aoi}.published	G:evt	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:142	proposed	tel.fleet.agent.{id}.position	D9.1:tel-fleet	stored-today=TEL
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:143	current	agents.hb.{agent}.{owner}.{name}	G:agents	stored-today=AGENTS
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:144	current	ent.agent.{entity_id}.state	G:ent	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:200	current	svc.policy.task.propose	G:svc	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:201	action	task.assign	OFF-GRAMMAR	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:202	legacy	svc.policy.*.confirm	G:svc	stored-today=none
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:203	legacy	cmd.>	G:cmd,D9.1:cmd-fleet,D9.1:map-geofence,D9.1:map-annotation	stored-today=CMD
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md:215	alternative	cmd.watch.{id}.{create|delete}	G:cmd	stored-today=CMD
+
+subjects checked: 28 (proposed 5, interim 0, current 13, filter 4, legacy 2, alternative 3, action 1); off-grammar (legacy, alternative or action only): 1
+result: PASS (0 errors)

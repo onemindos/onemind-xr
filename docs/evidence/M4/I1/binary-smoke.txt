@@ -1,0 +1,91 @@
+# smoke: omos-agentops binary, shipped ConfigMap watches.yaml, disposable nats-server, 2026-10-29T13:47:28Z
+## startup log
+{"time":"2026-10-29T09:47:25.917159-04:00","level":"INFO","msg":"watch runner","jobs":4,"file":"/Users/danielcarku/Desktop/work/.run/tmp-i1/smoke/watches.yaml"}
+{"time":"2026-10-29T09:47:25.917504-04:00","level":"INFO","msg":"agentops ready","components":"presence,chat,watch,brief","models":3}
+{"time":"2026-10-29T09:47:25.917584-04:00","level":"INFO","msg":"watch inputs","ent_filters":["ent.drone.*.state","ent.robot.*.state"],"ent_stream":false}
+{"time":"2026-10-29T09:47:25.917589-04:00","level":"WARN","msg":"geofences bucket unavailable; zone watches wait","err":"nats: bucket not found"}
+## svc.brief.generate (no entity service, Hermes and local model unreachable)
+{
+ "brief_id": "brf-01m63ymt9symha8xf8kq5g24v7",
+ "model": {
+  "used": "stub",
+  "local": true,
+  "offline": true,
+  "degraded": true,
+  "attempts": [
+   {
+    "model": "agent:agents.prompt.hermes.zeus.legacy",
+    "ok": false,
+    "error": "agent not reachable (no responders)",
+    "ms": 0
+   },
+   {
+    "model": "openai-compat:qwen2.5:7b-instruct",
+    "ok": false,
+    "error": "Post \"http://127.0.0.1:9/chat/completions\": dial tcp 127.0.0.1:9: connect: connection refused",
+    "ms": 0
+   },
+   {
+    "model": "stub",
+    "ok": true,
+    "ms": 0
+   }
+  ]
+ },
+ "validation": {
+  "cited": 0,
+  "unknown_removed": [],
+  "gaps_named": true,
+  "repaired": false
+ },
+ "inputs": {
+  "entity_query": "svc.entity.query",
+  "entity_error": "nats: no responders available for request",
+  "entities_read": 0,
+  "truncated": false
+ },
+ "gaps": [
+  {
+   "source": "nws-alerts",
+   "reason": "silent",
+   "detail": "never reported (expected, limit 5m0s)"
+  }
+ ]
+}
+Brief for Test box at 2026-10-29T13:47:28Z (offline fallback, deterministic summary).
+Picture: 0 entities in the area ().
+Open alerts: none.
+Intelligence gaps:
+- feed nws-alerts: silent: never reported (expected, limit 5m0s)
+
+## TEL subjects (in-process agents onemind-watch and onemind-brief on the map)
+╭───────────────────────────────────────────────────────────────╮
+│                    2 Subjects in stream TEL                   │
+├───────────────────────────────────────────────────────┬───────┤
+│ Subject                                               │ Count │
+├───────────────────────────────────────────────────────┼───────┤
+│ tel.fleet.agent.agent-onemind-watch-zeus-hub.position │ 1     │
+│ tel.fleet.agent.agent-onemind-brief-zeus-hub.position │ 3     │
+╰───────────────────────────────────────────────────────┴───────╯
+
+## /metrics
+agentops_brief_offline_total 1
+agentops_brief_repaired_total 0
+agentops_brief_total 1
+agentops_brief_unknown_ids_total 0
+agentops_chat_agent_errors_total 0
+agentops_chat_forwarded_total 0
+agentops_chat_rate_limited_total 0
+agentops_chat_received_total 0
+agentops_chat_replied_total 0
+agentops_chat_reply_disabled_total 0
+agentops_publish_core_total 0
+agentops_publish_failures_total 0
+agentops_publish_stored_total 6
+agentops_watch_alerts_total 0
+agentops_watch_geofence_events_total 0
+agentops_watch_llm_limited_total 0
+agentops_watch_model_failed_total 0
+agentops_watch_propose_denied_total 0
+agentops_watch_propose_errors_total 0
+agentops_watch_proposed_total 0

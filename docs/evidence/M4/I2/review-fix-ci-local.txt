@@ -1,0 +1,22 @@
+ docs/proposals/2026-10-29-hermes-bus-tools-i2.md   | 16 ++++-
+ platform/hermes/agent/plugins/README.md            |  2 +-
+ .../hermes/agent/plugins/onemind-bus/README.md     | 24 ++++---
+ .../hermes/agent/plugins/onemind-bus/__init__.py   | 10 ++-
+ platform/hermes/agent/plugins/onemind-bus/bus.py   |  3 +
+ .../agent/plugins/onemind-bus/tests/conftest.py    |  9 ++-
+ .../onemind-bus/tests/test_policy_integration.py   | 24 +++++++
+ .../agent/plugins/onemind-bus/tests/test_tools.py  | 84 +++++++++++++++++++++-
+ platform/hermes/agent/plugins/onemind-bus/tools.py | 64 ++++++++++++++---
+ 9 files changed, 208 insertions(+), 28 deletions(-)
+/Users/danielcarku/Desktop/work/.tools/py/bin/python: No module named pyflakes
+compile-ok
+yamllint-ok
+Changed YAML gate passed (0 files checked)
+No changed plain manifests to validate
+gitleaks
+[90m9:52AM[0m [32mINF[0m [1m3 commits scanned.[0m
+[90m9:52AM[0m [32mINF[0m [1mscanned ~153989 bytes (153.99 KB) in 78.1ms[0m
+[90m9:52AM[0m [32mINF[0m [1mno leaks found[0m
+[90m9:52AM[0m [32mINF[0m [1mscanned ~13130616 bytes (13.13 MB) in 3.78s[0m
+[90m9:52AM[0m [33mWRN[0m [1mleaks found: 9[0m
+Note: the 'leaks found: 9' line is a whole-tree 'gitleaks dir' run (the 9 pre-existing .gitleaks-baseline.json hits); scans of only the changed paths and of the PR commits found no leaks.

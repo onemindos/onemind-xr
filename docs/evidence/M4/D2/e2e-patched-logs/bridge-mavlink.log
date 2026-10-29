@@ -1,0 +1,11 @@
+2026/10/29 09:48:36.259100 [bridge-mavlink] NATS connected: nats://127.0.0.1:60106
+2026/10/29 09:48:36.264358 [bridge-mavlink] MAVLink endpoint udpserver:127.0.0.1:55997, vehicle sysid 1, out V2
+2026/10/29 09:48:36.265196 [bridge-mavlink] subscribed cmd.fleet.drone.sim-x1.>; publishing tel.fleet.drone.sim-x1.position, tel.fleet.drone.sim-x1.status, evt.drone.sim-x1.command
+2026/10/29 09:48:36.268455 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:56654
+2026/10/29 09:48:37.343359 [bridge-mavlink] command e1bf8bcc-9195-4b2d-b46a-5ccd47bc821e arm outcome=acknowledged code= 
+2026/10/29 09:48:37.419031 [bridge-mavlink] command e1bf8bcc-9195-4b2d-b46a-5ccd47bc821e arm outcome=executed code= 
+2026/10/29 09:48:37.449795 [bridge-mavlink] command db0c2b69-f471-4b8d-8775-84ce5aa4d156 takeoff outcome=acknowledged code= 
+2026/10/29 09:48:37.525572 [bridge-mavlink] command db0c2b69-f471-4b8d-8775-84ce5aa4d156 takeoff outcome=executed code= 
+2026/10/29 09:48:40.227837 [bridge-mavlink] command 2b83fdb3-2933-48b1-8c7f-3027470d4932 goto outcome=acknowledged code= 
+2026/10/29 09:48:40.243231 [bridge-mavlink] command 2b83fdb3-2933-48b1-8c7f-3027470d4932 goto outcome=executed code= 
+2026/10/29 09:49:21.809547 [bridge-mavlink] shutting down

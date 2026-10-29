@@ -1,0 +1,27 @@
+JCS / params_hash golden values, printed by the omos policy service's own canonicaliser
+(services/policy/internal/policy/jcs.go, branch feat/policy-service, PR #554) on the build
+machine with Go 1.27.3 darwin/arm64, 2026-10-29. The client test JcsMatchesPolicyService
+(client/OneMind/HostTests/tests/unit_act.cpp) asserts the same values from om::JcsNumber,
+om::JcsCanonical and om::ParamsHash.
+
+Program: jcs.go copied into a scratch package main (not committed), plus:
+  ParamsHash("asset.goto", 1, Target{"drone","sim-x1"}, {"lat":30.269,"lon":-97.742,"hae_m":160,"speed_mps":8})
+  ParamsHash("asset.goto", 1, Target{"drone","sim-x1"}, {"lat":30.2672123,"lon":-97.7431456,"hae_m":120.5})
+  Canonicalize("[n]") for each n below, and one object.
+
+Output:
+goto sha256:c4ed3a928fc7e83d514db2fea28aeb3024cf88c3960485898aa246e4bdbe4db0
+goto2 sha256:2df2f2a2c9c2cb8096858c53c6d3c2c8e127fc7779424c9616efdece383eada3
+num 1e21 [1e+21]
+num 1e-7 [1e-7]
+num 0.1 [0.1]
+num 123456789012345680000 [123456789012345680000]
+num -0.000001 [-0.000001]
+num 5e-324 [5e-324]
+num 1.7976931348623157e308 [1.7976931348623157e+308]
+num 30.2690 [30.269]
+num -97.742 [-97.742]
+num 100 [100]
+num 1e20 [100000000000000000000]
+num 0.0000001234 [1.234e-7]
+obj {"a":[true,null,{"z":2,"é":1}],"b":"\u0001\"x\n"}

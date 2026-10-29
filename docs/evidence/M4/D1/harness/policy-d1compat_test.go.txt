@@ -1,0 +1,41 @@
+package policy
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+// D1 compatibility: the policy service reads keep-in/keep-out records as evaluable zones
+// and enforces them on a goto point.
+func TestD1GeofenceRecords(t *testing.T) {
+	b, err := os.ReadFile(os.Getenv("D1_RECORDS"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var recs map[string]json.RawMessage
+	_ = json.Unmarshal(b, &recs)
+	var zones []Zone
+	for k, v := range recs {
+		z, ok := ParseZone(k, v)
+		if !ok {
+			t.Logf("policy ignores %s (not a movement constraint it can read)", k)
+			continue
+		}
+		if z.Unevaluable {
+			t.Errorf("policy marks %s unevaluable: %s", k, z.Problem)
+		}
+		t.Logf("policy %s kind=%s shape=%s live=%v applies_to=%v", z.ID, z.Kind, z.Shape, z.Live, z.AppliesTo)
+		zones = append(zones, z)
+	}
+	if v := CheckPoint(zones, "sim-x1", 30.27, -97.745); v != "" {
+		t.Errorf("point inside home keep-in denied: %s", v)
+	}
+	if v := CheckPoint(zones, "sim-x1", 30.30, -97.745); v != "keep_in" {
+		t.Errorf("point outside home keep-in: %q, want keep_in", v)
+	}
+	if v := CheckPoint(zones, "sim-x2", 30.27, -97.7401); v != "keep_out" {
+		t.Errorf("point in barn keep-out: %q, want keep_out", v)
+	}
+	t.Logf("policy: %d zones read; goto checks as expected", len(zones))
+}

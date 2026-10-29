@@ -1,0 +1,32 @@
+[93531] 2026/10/29 09:47:31.975526 [INF] Starting nats-server
+[93531] 2026/10/29 09:47:31.975636 [INF]   Version:  2.15.2
+[93531] 2026/10/29 09:47:31.975645 [INF]   Git:      [5a815f1]
+[93531] 2026/10/29 09:47:31.975650 [INF]   Name:     NAFPL2E7FFLL6ZG5NMZU7OXUKT3TX6EANUBBDYXPWD2I3NZ7Q56QLHEH
+[93531] 2026/10/29 09:47:31.975654 [INF]   Node:     2L4x9ajg
+[93531] 2026/10/29 09:47:31.975658 [INF]   ID:       NAFPL2E7FFLL6ZG5NMZU7OXUKT3TX6EANUBBDYXPWD2I3NZ7Q56QLHEH
+[93531] 2026/10/29 09:47:31.975664 [WRN] Plaintext passwords detected, use nkeys or bcrypt
+[93531] 2026/10/29 09:47:31.975677 [INF] Using configuration file: /var/folders/qh/6x88kkv16qb85hbhcyb56mp40000gn/T/h3-e2e-0vfh0n2p/nats.conf (sha256:3af3f43c1823098dbf93e5075998da01157553ffeb55f7876b49d655556d0dae)
+[93531] 2026/10/29 09:47:31.975891 [INF] Starting JetStream
+[93531] 2026/10/29 09:47:31.976092 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[93531] 2026/10/29 09:47:31.976099 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[93531] 2026/10/29 09:47:31.976103 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[93531] 2026/10/29 09:47:31.976107 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[93531] 2026/10/29 09:47:31.976111 [INF] 
+[93531] 2026/10/29 09:47:31.976115 [INF]          https://docs.nats.io/jetstream
+[93531] 2026/10/29 09:47:31.976118 [INF] 
+[93531] 2026/10/29 09:47:31.976121 [INF] ---------------- JETSTREAM ----------------
+[93531] 2026/10/29 09:47:31.976124 [INF]   Strict:          true
+[93531] 2026/10/29 09:47:31.976134 [INF]   Max Memory:      64.00 MB
+[93531] 2026/10/29 09:47:31.976139 [INF]   Max Storage:     256.00 MB
+[93531] 2026/10/29 09:47:31.976143 [INF]   Store Directory: "/var/folders/qh/6x88kkv16qb85hbhcyb56mp40000gn/T/h3-e2e-0vfh0n2p/js/jetstream"
+[93531] 2026/10/29 09:47:31.976150 [INF]   API Level:       5
+[93531] 2026/10/29 09:47:31.976153 [INF] -------------------------------------------
+[93531] 2026/10/29 09:47:31.976613 [INF] Took 706.458µs to start JetStream
+[93531] 2026/10/29 09:47:31.976686 [INF] Listening for client connections on 127.0.0.1:58343
+[93531] 2026/10/29 09:47:31.976696 [INF] Server is ready
+[93531] 2026/10/29 09:47:38.096095 [ERR] 127.0.0.1:58354 - cid:24 - "v2.16.0:python3" - "CLIENT/user:zeus" - Publish Violation - Subject "cmd.fleet.robot.sim-tb1.goto"
+[93531] 2026/10/29 09:47:39.151996 [INF] Trapped "terminated" signal
+[93531] 2026/10/29 09:47:39.152070 [INF] Initiating Shutdown...
+[93531] 2026/10/29 09:47:39.152086 [INF] Initiating JetStream Shutdown...
+[93531] 2026/10/29 09:47:39.153263 [INF] JetStream Shutdown
+[93531] 2026/10/29 09:47:39.153305 [INF] Server Exiting..

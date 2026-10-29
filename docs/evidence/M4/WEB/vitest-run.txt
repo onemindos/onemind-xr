@@ -1,0 +1,9 @@
+
+ RUN  v4.1.12 /Users/danielcarku/Desktop/work/wt/m4-web/web
+
+
+ Test Files  6 passed (6)
+      Tests  98 passed | 1 skipped (99)
+   Start at  11:06:36
+   Duration  12.81s (transform 570ms, setup 0ms, import 728ms, tests 13.60s, environment 0ms)
+
