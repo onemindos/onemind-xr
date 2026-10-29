@@ -27,5 +27,6 @@ why in this file, and continues.
 | 13 | Real hardware | Simulated assets only (`sim-*`). No command to a real drone, robot or vehicle in this run | — |
 | 14 | Engine version | Newest Unreal Engine 5.x that the current Cesium for Unreal supports, builds on the build machine and keeps a macOS target (target 5.8) | Next older supported pair |
 | 15 | Licence conflicts | Never copy AGPL (worldmonitor) or Elastic (worldwideview) code; write it from scratch | — |
+| 18 | Pipeline technology | Whatever research lane 17 scores best, as long as it is open source, NATS/JetStream-native or close to it, and meets the full reliability list. Migrate feeds one at a time, each with its own PR, keeping the old pipeline running until the new one is proven | Keep Redpanda Connect and harden it to the reliability list |
 | 16 | Naming | App: **OneMind**. Plugins: `OneMind*`. Bundle id: `org.onemindos.onemind` | — |
 | 17 | The run is on a machine other than the owner's Mac | Build and test on the build machine; write every Mac, headset and LAN step into `docs/OWNER-CHECKLIST.md` with expected results; mark those features "built, awaiting owner check" | — |

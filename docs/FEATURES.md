@@ -9,6 +9,7 @@ acceptance test passed, with evidence, before it counts as done.
 
 | ID | Feature | P | Where | Acceptance test |
 |---|---|---|---|---|
+| A0 | **Pipeline standard.** One collector model for every source (Redpanda Connect, a fork, NATS-native or Go, chosen by research lane 17). Every pipeline has: acked JetStream publish with `Nats-Msg-Id` dedup, a single owner per source, schema validation with a dead-letter subject, rate limits and terms of use, freshness alerts, stream limits, fixtures-based golden tests, metrics, logs and traces | P0 | omos `platform/data`, `services/` | Chaos test (kill NATS, an upstream and a collector under load) loses no data, duplicates nothing, and alerts on the stale feed |
 | A1 | **Fix the feeds.** Redpanda Connect pipelines (feed-mta, feed-hazards, feed-ships, feed-aircraft) publish normalized observations to `intel.*` / `tel.*` instead of straight CoT on `tak.cot.inject`. | P0 | omos `platform/data/redpanda-connect` | `nats sub` shows each feed on grammar subjects; nothing from these feeds lands on `tak.cot.inject` |
 | A2 | Feed registry: one record per feed (source, licence, cadence, layer, freshness limit) in a KV bucket or a Git file | P0 | omos | Every running feed has a record; health shows stale feeds |
 | A3 | Per-feed health: `fetchedAt`, record count, last error, on a status subject | P0 | omos | A stopped feed shows as stale within its limit |

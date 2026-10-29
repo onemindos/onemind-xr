@@ -7,7 +7,7 @@ parallel once M0 is done.
 | M | Name | Repo | Features | Exit criteria |
 |---|---|---|---|---|
 | **M0** | Research and contracts | both | — | Research reports in `docs/research/`; contracts in `docs/contracts/` for entities, layer snapshots, layer deltas, missions/tasks, asset commands, CoT projection; spikes S1–S4 run and decisions 0002–0003 updated |
-| **M1** | Spine | omos | A1–A7, H1, H2, H6, H9, I4 | Feeds on grammar subjects; entities in KV; projector AOI filter live; mesh gateway on the Mac; SITL drone as entity and on ATAK. All as omos PRs. |
+| **M1** | Spine | omos | A0–A7, H1, H2, H6, H9, I4 | Feeds on grammar subjects; entities in KV; projector AOI filter live; mesh gateway on the Mac; SITL drone as entity and on ATAK. All as omos PRs. |
 | **M2** | Client on the Mac | xr | B1–B6, C1, C2, F1 | Packaged macOS app: globe, five live layers, TAK users, markers sent to ATAK, 10k entities at 60 fps |
 | **M3** | Web | xr (+ omos if a GPU node) | F2 or F3, J1 | A browser on another device controls the client; a phone shows the L0 view |
 | **M4** | Act | both | D1–D6, H3, H4, I1–I3, J2 | Draw an AOI, create a mission, task a SITL drone, Hermes proposes and a human confirms; ATAK sees all of it |
