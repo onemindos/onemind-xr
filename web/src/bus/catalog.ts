@@ -2,6 +2,9 @@
 // docs/contracts/layer-snapshot.md §1 (marked provisional there). The `alerts` layer is a
 // client-side grouping of `ent.alert.*` (docs/design/ONTOLOGY.md §3, alert row); the layer service
 // does not list it yet, so it is marked `clientDefined` until the layer catalog includes it.
+// A CLIENT user (omos #562) may not subscribe `ent.*`, so this layer stays empty for it; open
+// alerts reach every client from the geofence and alert service instead (bus/alertfeed.ts:
+// `svc.geofence.alerts` + `evt.so.alert.*`), whatever this layer's toggle says.
 
 export type Tier = "small" | "medium" | "large" | "static";
 

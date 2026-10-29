@@ -1,9 +1,12 @@
-// OneMind L0 light web client (FEATURES J1). A view and an input device only: it reads the bus
-// over NATS WebSocket and never publishes `ent.*` or `cmd.*` (entity.md §2; CLAUDE.md rule 3).
+// OneMind L0 light web client (FEATURES J1, plus the M4 Act features in ui/act.ts). A view and an
+// input device: it reads the bus over NATS WebSocket and never publishes `ent.*` or `cmd.fleet.*`
+// (entity.md §2; CLAUDE.md rule 3). Its only `cmd.*` publish is `cmd.map.geofence.*`
+// (asset-command.md §2: clients publish `cmd.map.>`); asset commands go through policy.
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "./styles.css";
 import { wsconnect, type NatsConnection, type Subscription } from "@nats-io/nats-core";
-import { alertFromEntity, alertFromGeofence, alertsFromHealth, sortAlerts, type AlertItem } from "./bus/alerts";
+import { AlertFeed } from "./bus/alertfeed";
+import { alertFromEntity, alertFromGeofence, alertFromService, alertsFromHealth, dedupeAgainstService, sortAlerts, type AlertItem } from "./bus/alerts";
 import { DEFAULT_LAYERS, type LayerDef } from "./bus/catalog";
 import { getEntity, LayerFeed, type FeedStatus } from "./bus/layerclient";
 import { inMissionTier, isMissionZone } from "./bus/missiontier";
@@ -12,6 +15,7 @@ import { EntityStore, type EntityRecord } from "./bus/store";
 import type { Entity } from "./bus/types";
 import { playbackUrls } from "./bus/videourl";
 import { loadCredentials, readConfig, saveCredentials } from "./config";
+import { Act } from "./ui/act";
 import { h } from "./ui/dom";
 import { Globe } from "./ui/globe";
 import { renderAlerts, renderDetail, renderEntityList, renderLayers } from "./ui/panels";
@@ -27,6 +31,8 @@ const feedStatus = new Map<string, FeedStatus>();
 const geofenceAlerts = new Map<string, AlertItem>();
 let nc: NatsConnection | null = null;
 let geofenceSub: Subscription | null = null;
+/** Open alerts of the geofence and alert service (#569): svc.geofence.alerts + evt.so.alert.*. */
+let alertFeed: AlertFeed | null = null;
 /** Bumped on every connect(): a superseded attempt (or its retry timer) must not touch `nc`. */
 let connectGen = 0;
 let retryTimer: ReturnType<typeof setTimeout> | undefined;
@@ -38,6 +44,22 @@ let dirtyGlobe = true;
 let dirtyPanels = true;
 
 const globe = new Globe($("globe"), cfg, (id) => select(id, false));
+const act = new Act({
+  store,
+  globe,
+  feedStatus,
+  enabledLayers: () => [...enabled],
+  setLayer: (id, on) => {
+    if (enabled.has(id) !== on) toggleLayer(id, on);
+  },
+  selected: () => selected,
+  select: (id, fly) => select(id, fly),
+  showTab: (name) => showTab(name),
+  natsUser: () => loadCredentials().user ?? "",
+  onAlertsChanged: () => {
+    dirtyPanels = true;
+  },
+});
 const player = new VideoPlayer($("video") as HTMLVideoElement, (s) => {
   $("video-state").textContent = s.message;
   $("video-panel").dataset.transport = s.transport;
@@ -121,14 +143,28 @@ function renderPanels(): void {
   const vis = visibleState(zones).filter((v) => v.listed);
 
   // Alerts: open alert entities, health alerts of visible entities, recent geofence crossings.
-  const alerts: AlertItem[] = [...geofenceAlerts.values()];
+  const derived: AlertItem[] = [...geofenceAlerts.values()];
   for (const v of vis) {
     const a = alertFromEntity(v.rec);
-    if (a) alerts.push(a);
-    alerts.push(...alertsFromHealth(v.rec));
+    if (a) derived.push(a);
+    derived.push(...alertsFromHealth(v.rec));
   }
-  const sorted = sortAlerts(alerts);
-  $("tab-alerts").replaceChildren(renderAlerts(sorted, (id) => select(id, true)));
+  // FEATURES D6: stale own assets and feed outages (B20) join the alert stream.
+  derived.push(...act.extraAlerts(vis.map((v) => ({ rec: v.rec, stale: v.stale }))));
+  // The geofence and alert service's open alerts (#569), minus any about an entity this viewer's
+  // marking hides; client-derived duplicates of them are dropped.
+  const service: AlertItem[] = [];
+  for (const sa of alertFeed?.alerts() ?? []) {
+    const about = sa.about?.entity_id ? store.get(sa.about.entity_id) : undefined;
+    if (about && !viewerMaySee(about.full?.marking, cfg.viewerGroups)) continue;
+    const a = alertFromService(sa);
+    if (a) service.push(a);
+  }
+  const alerts = [...dedupeAgainstService(derived, service), ...service];
+  const fs = alertFeed?.status;
+  $("tab-alerts").dataset.alertService = fs ? `${fs.snapshot}/${fs.live}` : "off";
+  const sorted = sortAlerts(alerts.filter((x) => !act.isDismissed(x.key)));
+  $("tab-alerts").replaceChildren(renderAlerts(sorted, (id) => select(id, true), (key) => act.dismiss(key)));
   $("alert-count").textContent = String(sorted.length);
   $("alert-chip").dataset.level = sorted[0]?.level ?? "none";
 
@@ -262,6 +298,9 @@ async function connect(url: string): Promise<void> {
   feeds.clear();
   geofenceSub?.unsubscribe();
   geofenceSub = null;
+  alertFeed?.stop();
+  alertFeed = null;
+  act.detach();
   const old = nc;
   nc = null;
   if (old) await old.close().catch(() => undefined);
@@ -299,9 +338,20 @@ async function connect(url: string): Promise<void> {
     }
   })();
   for (const def of DEFAULT_LAYERS) if (enabled.has(def.id)) startFeed(def);
+  act.attach(conn);
+  alertFeed = new AlertFeed(conn, {
+    onChange: () => {
+      dirtyPanels = true;
+    },
+  });
+  alertFeed.start();
   // Geofence crossings (omos docs/NATS-DOCTRINE.md: evt.map.geofence.{id}.{enter|exit}).
   geofenceSub = conn.subscribe("evt.map.geofence.*.*", {
     callback: (_e, m) => {
+      // A refused subscription arrives here with an empty message (omos #562 CLIENT users may
+      // not subscribe evt.map.>); touching it would throw in nats-core's read loop and stop the
+      // whole connection.
+      if (_e) return;
       let body: unknown = null;
       try {
         body = m.json();
@@ -380,6 +430,12 @@ Object.assign(window, {
     get connected() {
       return !!nc && !nc.isClosed();
     },
+    act,
+    get alertFeed() {
+      return alertFeed;
+    },
+    toScreen: (lon: number, lat: number) => globe.toScreen(lon, lat),
+    flyTo: (lon: number, lat: number, height: number) => globe.flyTo(lon, lat, height, 0),
     h,
   },
 });

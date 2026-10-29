@@ -17,14 +17,14 @@ only: it never publishes `ent.*` or `cmd.*` (entity.md §2; onemind-xr `CLAUDE.m
 | Entities, removal and expiry | `seq` rule (older or equal ignored), `live: false` removes, `expiry_t` expires (core subscribers never see delete markers), `stale` dims, tombstones stop a late copy resurrecting a removed entity (`src/bus/store.ts`) | entity.md §5, §8; layer-delta.md §2.2, §3 |
 | Marking check | defence in depth: records whose `marking` the viewer may not see are not drawn (`?groups=`, default `homestead`) | entity.md §8 |
 | Mission tier | view filter: tasked, or inside an AOI or geofence zone (FEATURES A6 rule) | FEATURES A6, J1 |
-| Alerts | `ent.alert.*` entities, entity `health.alerts[]`, and `evt.map.geofence.{id}.{enter\|exit}` | ONTOLOGY.md §3; omos NATS-DOCTRINE |
+| Alerts | open alerts of the omos geofence and alert service (#569): `svc.geofence.alerts` for the open set, then live `evt.so.alert.{raised\|updated\|resolved}` (polled when the subscription is refused; nothing shown when the snapshot is refused, as for the J2 newcomer role). Also entity `health.alerts[]`, `evt.map.geofence.{id}.{enter\|exit}`, stale assets and feed gaps, minus what the service already reports, and `ent.alert.*` entities where a user may read `ent.*` (a CLIENT user may not, omos #562) | omos #569 README, alert.v1 schema; #562 A19-P11; ONTOLOGY.md §3 |
 | Entity detail with provenance | full record from the feed or `svc.entity.get`; shows `provenance`, `sources[]`, `confidence_parts`, `conflicts` | entity.md §4.1, §8 |
 | Video panel | from the entity's `media[]` (MediaMTX URL, never NATS): WHEP first, LL-HLS second (hls.js 1.7.3, or native HLS on iOS Safari). A loopback host is replaced by the page's host so a phone on the LAN reaches the Mac | entity.md §4.1 `media`; video-and-plugins.md |
 | Phone layout | globe on top, tabbed bottom sheet, 44 px touch targets, no horizontal scroll | J1 acceptance |
 
 Subjects it reads: `ent.{drone,robot,vehicle,node,track,zone,alert,person,place,hazard,event,aircraft,vessel}.*.state`
-(only on the interim and core paths), `evt.map.geofence.*.*`. Requests it sends: `svc.layer.snapshot`,
-`svc.layer.watch`, `svc.layer.unwatch`, `svc.entity.query`, `svc.entity.get`. All are existing
+(only on the interim and core paths), `evt.map.geofence.*.*`, `evt.so.alert.>`. Requests it sends: `svc.layer.snapshot`,
+`svc.layer.watch`, `svc.layer.unwatch`, `svc.entity.query`, `svc.entity.get`, `svc.geofence.alerts`. All are existing
 grammar patterns (omos `CLAUDE.md`); no new subject is introduced.
 
 ## Run it
@@ -73,6 +73,52 @@ through `NATS_SERVER_BIN`, `MEDIAMTX_BIN`, `FFMPEG_BIN`, `work/.tools/bin` or `P
 The e2e browser runs with `--in-process-gpu` because the separate GPU process hangs on the build
 machine ([webgl-probe.txt](../docs/evidence/M3/J1/webgl-probe.txt)).
 
+## Act features (M4: D1, D3, B11, B20, D4, D6, J2, C8)
+
+The Act panels live in `src/act/` (logic, unit tested) and `src/ui/act.ts`, `src/ui/overlay.ts`
+(DOM and Cesium). The client still never publishes `cmd.fleet.*` or `ent.*`.
+
+| Feature | What the operator does | Bus (all existing grammar) |
+|---|---|---|
+| D1 AOIs and geofences | Draw an area, pick a kind (`aoi`, `keep_in`, `keep_out`, `hazard`, `control_area`), then Share as zone, Update zone or Remove zone. Every one opens the confirm dialog (A2, one human). It warns when a change creates a keep-in or keep-out, or loosens or removes one. The zone exists only once a human approves | `svc.policy.command.propose` with `zone.create\|update\|remove` (ONTOLOGY §6.2), target `{entity_type: zone, entity_id}`, params per omos #569 `zone.{verb}.v1` (`name`, `geo{shape, kind, coords, radius_m?}`, `watch`). `geo.shape` is `polygon` or `circle` only, because the policy service treats any other keep-in or keep-out shape as unevaluable. The policy service signs the approved command onto `cmd.map.geofence.{id}.{verb}`; the client publishes no `cmd.*` subject |
+| D3 click to task | Select a `sim-*` asset, Go to point, click the map. The confirm dialog shows the exact parameters, the `params_hash`, the level and the deadline. Confirm stays off until the action type, target and parameters have arrived (from the propose reply or `svc.policy.action.get`). It also stays off while the client checks the hash (JCS + SHA-256 of what it shows, where Web Crypto exists), and on a mismatch. Reject (with a reason) needs only the hash. Status updates live in Tasks and Detail | `svc.policy.command.propose`, `svc.policy.command.confirm`, `svc.policy.action.get` (polled), `evt.so.action.>` when the connection may subscribe |
+| B11 drawing | Point, label, line, polygon, rectangle, circle, sector, range rings, range and bearing, lasso select, buffer; measurements on the map; CoT export (copy or download) | none until shared; CoT types per cot-projection.md §5.5 (`src/act/cot.ts` header) |
+| B20 intelligence gaps | Gaps tab: stale, failing, silent or never-fetched feeds and down layers, each naming the layers and alerts it weakens | `tel.feed.*.status` (omos #553 shape) when permitted; layer manifests' `freshness` otherwise |
+| D4 Hermes | Ask about the map; the question goes with the selection, viewport, layers, visible entities (≤ 50), zones and gaps. Hermes' highlights and annotations show on the map; its proposals appear as pending confirms | request (single reply or chunks) on `agents.prompt.hermes.zeus.legacy` (`?hermes=` to change); renders `cmd.map.highlight\|annotation\|viewport\|filter` |
+| D6 alerts | Alerts tab adds stale own assets and feed outages to J1's geofence crossings and alert entities; Dismiss hides one for this viewer | as above |
+| J2 role modes | Mode: Newcomer (view, chat, Hermes), Observer (+ draw, share zones), Operator (+ asset commands, confirm). Operator only takes effect when a policy dry run says the user operates the asset | `svc.policy.check` with `{v, action}` (dry run of `asset.estop`, which skips asset preconditions, so the answer is authorization only) |
+| C8 contacts and chat | Chat tab: TAK contacts, channels (TAK groups), All Chat Rooms, group and direct rooms; send GeoChat | reads CoT XML on `tak.cot.out` and `tak.cot.mesh.rx` when permitted; sends `svc.cot.send` (structured body, the projector builds the CoT) |
+
+A `CLIENT` account user in the omos #562 layout may subscribe only `cmd.map.>` and `_INBOX.>`:
+the client then falls back to polling (`svc.policy.action.get`, layer manifests) and the Tasks
+tab shows which subscriptions were refused. Chat and direct feed status need the owner proposals
+in [`docs/evidence/M4/WEB/OWNER-PROPOSALS.md`](../docs/evidence/M4/WEB/OWNER-PROPOSALS.md).
+
+### Act tests
+
+```bash
+npx vitest run test/unit/act.test.ts      # geodesy, drawings, CoT, policy tracker, roles, gaps, Hermes, chat
+npx playwright test e2e/act.spec.ts       # the Act stack below, in headless Chromium
+```
+
+`e2e/act.spec.ts` runs against `test/standins/stack.ts`: a disposable nats-server with `ONEMIND`,
+`CLIENT` and `AGENTS` accounts and random per-run passwords; the **real policy service** (omos
+#554, built from `$OMOS_POLICY_DIR`, default `work/wt/i4-policy`) with its OpenFGA model and a
+per-run tuples file; the **real MAVLink bridge** (omos #550, `$OMOS_BRIDGE_DIR`, default
+`work/wt/h2-mavlink`) with an Ed25519 key per run and signatures required; and the scripted drone
+`sim-x1`. Setup arms and takes off through policy with two humans (A4), never around it.
+The policy binary is built from a temp copy with `test/standins/policy-zone-actions.patch`
+applied: owner proposal D1-P4 of omos #569 (the `zone.*` catalogue entries), which #554 does not
+carry yet. Its schema dir adds #569's `zone.*.v1` schemas (`test/fixtures/schemas/actions`). One
+user, `carol`, has exactly the omos #562 CLIENT permissions (subscribe `cmd.map.>` and `_INBOX.>`
+only), so the polling path is tested too.
+Stand-ins, in test fixtures only: entity (omos #552 sets no `capabilities`, so the real policy
+would deny every goto `not_capable`); the KV `geofences` writer and geofence watcher, which like
+omos #569 apply only commands with a valid policy signature, a future `expires_at` and
+`approval.status: approved`; feed heartbeats; a scripted Hermes (no model API may be called here), `svc.cot.send` (not
+built anywhere) and a scripted ATAK peer. The spec is skipped with the reason when Go, the omos
+worktrees or pymavlink are missing (`POLICY_BIN`, `BRIDGE_BIN`, `PYTHON`, `SIM_DRONE` override).
+
 ## Pins and licences
 
 | Package | Version | Licence |
@@ -97,7 +143,7 @@ No code was copied from worldmonitor (AGPL-3.0), CloudTAK (AGPL-3.0) or worldwid
 2.0). Design ideas only: primitive collections instead of one Cesium Entity per object, render
 loop that sleeps when nothing changes (competitive-matrix.md).
 
-## Known gaps (not in J1)
+## Known gaps
 
 - Density cells (`mode: "cells"`) for large layers at wide zoom are not drawn. The client always
   asks a large layer for entities inside the view AOI; when the layer service answers with cells
@@ -113,4 +159,8 @@ loop that sleeps when nothing changes (competitive-matrix.md).
 - Benchmark gate G4 (≥ 57.6 fps, cold start ≤ 1.86 s) is not measured here; the headless
   SwiftShader browser is not representative.
 - Contract gaps found while building are listed as owner proposals in
-  [`docs/evidence/M3/J1/OWNER-PROPOSALS.md`](../docs/evidence/M3/J1/OWNER-PROPOSALS.md).
+  [`docs/evidence/M3/J1/OWNER-PROPOSALS.md`](../docs/evidence/M3/J1/OWNER-PROPOSALS.md) and
+  [`docs/evidence/M4/WEB/OWNER-PROPOSALS.md`](../docs/evidence/M4/WEB/OWNER-PROPOSALS.md).
+- Act: alert acknowledgement through policy (`alert.acknowledge`) is not offered (Dismiss is
+  local); missions (D2), voice for Hermes, and drawings persisted on the bus (entity.create is
+  not in the policy catalogue) are not built. Drawings live in the page until shared.

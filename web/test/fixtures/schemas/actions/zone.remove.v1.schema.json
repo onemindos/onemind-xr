@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.onemindos.local/actions/zone.remove/v1",
+  "title": "zone.remove v1 parameters",
+  "description": "Remove a zone (A2). Executes as cmd.map.geofence.{id}.remove; the geofence service also accepts the verb delete. Parameters of an ActionRequest (onemind-xr docs/contracts/asset-command.md section 6.1); the policy service copies them into the data of cmd.map.geofence.{id}.{verb} after approval and the geofence service (services/geofence) applies them to KV geofences. Unknown fields are refused.",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "reason": {
+      "type": "string",
+      "maxLength": 500
+    }
+  }
+}

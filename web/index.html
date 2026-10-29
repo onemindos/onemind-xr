@@ -18,6 +18,10 @@
         Alerts <span id="alert-count">0</span>
       </button>
       <span class="spacer"></span>
+      <label class="role-pick">Mode
+        <select id="role" data-testid="role" aria-label="Role mode"></select>
+      </label>
+      <span id="role-chip" class="chip role-chip" data-testid="role-chip" data-role="newcomer">newcomer</span>
       <button id="mission-toggle" class="btn" type="button" aria-pressed="false" data-testid="mission-toggle">
         Mission tier: off
       </button>
@@ -30,18 +34,58 @@
           <button role="tab" type="button" data-tab="alerts" aria-selected="true">Alerts</button>
           <button role="tab" type="button" data-tab="entities">Entities <span id="entity-count" class="muted">0</span></button>
           <button role="tab" type="button" data-tab="detail" data-testid="tab-detail">Detail</button>
+          <button role="tab" type="button" data-tab="tasks" data-testid="tab-tasks">Tasks <span id="task-count" class="muted">0</span></button>
+          <button role="tab" type="button" data-tab="draw" data-testid="tab-draw" data-needs="draw">Draw</button>
+          <button role="tab" type="button" data-tab="gaps" data-testid="tab-gaps">Gaps <span id="gap-count" class="muted">0</span></button>
+          <button role="tab" type="button" data-tab="hermes" data-testid="tab-hermes">Hermes</button>
+          <button role="tab" type="button" data-tab="chat" data-testid="tab-chat">Chat</button>
           <button role="tab" type="button" data-tab="layers">Layers</button>
           <button role="tab" type="button" data-tab="conn">Connection</button>
         </nav>
         <section id="tab-alerts" role="tabpanel" class="panel" aria-label="Alerts"></section>
         <section id="tab-entities" role="tabpanel" class="panel" aria-label="Entities" hidden></section>
         <section id="tab-detail" role="tabpanel" class="panel" aria-label="Detail" hidden>
+          <div id="detail-actions"></div>
           <div id="detail-body"></div>
           <div id="video-panel" class="video-panel" data-testid="video-panel" data-transport="none">
             <h3>Video</h3>
             <video id="video" muted playsinline autoplay data-testid="video"></video>
             <p id="video-state" class="muted">Select an entity with video.</p>
           </div>
+        </section>
+        <section id="tab-tasks" role="tabpanel" class="panel" aria-label="Tasks" hidden></section>
+        <section id="tab-draw" role="tabpanel" class="panel" aria-label="Draw" hidden>
+          <div id="draw-static">
+            <label class="inline">Label <input id="draw-label" placeholder="optional name" data-testid="draw-label" maxlength="60" /></label>
+          </div>
+          <div id="draw-dynamic"></div>
+        </section>
+        <section id="tab-gaps" role="tabpanel" class="panel" aria-label="Intelligence gaps" hidden></section>
+        <section id="tab-hermes" role="tabpanel" class="panel hermes" aria-label="Hermes" hidden>
+          <ul id="hermes-log" class="hermes-log" data-testid="hermes-log" aria-live="polite"></ul>
+          <p id="hermes-context" class="muted small" data-testid="hermes-context"></p>
+          <form id="hermes-form" class="hermes-form">
+            <textarea id="hermes-input" rows="2" placeholder="Ask Hermes about the map, e.g. What's moving near the north field?" data-testid="hermes-input" aria-label="Question for Hermes"></textarea>
+            <div class="row">
+              <button id="hermes-send" class="btn primary" type="submit" data-testid="hermes-send">Ask</button>
+              <button id="hermes-clear" class="btn" type="button" data-testid="hermes-clear">Clear highlights</button>
+            </div>
+          </form>
+        </section>
+        <section id="tab-chat" role="tabpanel" class="panel chat" aria-label="Chat" hidden>
+          <div class="row">
+            <label>Channel <select id="chat-channel" data-testid="chat-channel"></select></label>
+            <label>Callsign <input id="chat-callsign" class="num" placeholder="WEB" maxlength="24" data-testid="chat-callsign" /></label>
+          </div>
+          <div id="chat-rooms" class="rooms" data-testid="chat-rooms"></div>
+          <h3 id="chat-room-name" class="room-name"></h3>
+          <ul id="chat-messages" class="messages" data-testid="chat-messages" aria-live="polite"></ul>
+          <form id="chat-form" class="row">
+            <input id="chat-input" placeholder="Message" maxlength="1000" data-testid="chat-input" aria-label="Chat message" />
+            <button class="btn primary" type="submit" data-testid="chat-send">Send</button>
+          </form>
+          <h3>Contacts</h3>
+          <ul id="chat-contacts" class="contacts" data-testid="chat-contacts"></ul>
         </section>
         <section id="tab-layers" role="tabpanel" class="panel" aria-label="Layers" hidden></section>
         <section id="tab-conn" role="tabpanel" class="panel" aria-label="Connection" hidden>
@@ -58,6 +102,17 @@
         </section>
       </aside>
     </main>
+    <dialog id="confirm-dialog" class="dialog" data-testid="confirm-dialog" aria-labelledby="confirm-title">
+      <h2 id="confirm-title">Confirm action</h2>
+      <p class="muted">You are approving exactly these values. The policy service checks the hash, signs the command and records your approval.</p>
+      <div id="confirm-body"></div>
+      <label>Reason (required to reject) <input id="confirm-reason" data-testid="confirm-reason" maxlength="500" /></label>
+      <div class="row">
+        <button id="confirm-approve" class="btn primary" type="button" data-testid="confirm-approve">Confirm</button>
+        <button id="confirm-reject" class="btn danger" type="button" data-testid="confirm-reject">Reject</button>
+        <button id="confirm-close" class="btn" type="button" data-testid="confirm-close">Close</button>
+      </div>
+    </dialog>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

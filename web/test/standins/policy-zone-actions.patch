@@ -1,0 +1,71 @@
+Test-only patch to the policy service of omos #554 (feat/policy-service), applied to a temp copy
+by test/standins/stack.ts before it builds the binary. It is owner proposal D1-P4 from omos #569
+(docs/proposals/2026-10-29-geofence-alert-service.md): the zone.create|update|remove catalogue
+entries (A2), dispatch on cmd.map.geofence.{id}.{verb}, and results on evt.map.geofence.*.
+Nothing here ships; drop it once #554 carries D1-P4.
+
+diff -ru a/internal/policy/catalogue.go b/internal/policy/catalogue.go
+--- a/internal/policy/catalogue.go	2026-10-29 10:38:09
++++ b/internal/policy/catalogue.go	2026-10-29 10:38:21
+@@ -49,6 +49,7 @@
+ 	execTask    = "task"    // cmd.mission.{tsk}.create then optional cmd.fleet
+ 	execAbort   = "abort"   // cmd.mission.{tsk}.abort then optional cmd.fleet hold
+ 	execRefused = "refused" // A5: never runs
++	execMap     = "map"     // cmd.map.geofence.{id}.{verb} (D1-P4, omos #569)
+ )
+ 
+ // ActionSpec is one entry of the closed catalogue. Anything not in the catalogue is refused.
+@@ -127,6 +128,12 @@
+ 	Catalogue["task.abort"] = ActionSpec{Name: "task.abort", Family: FamilyTask, Level: A3, Versions: []int{1},
+ 		Targets: append([]string{"person", "team", "agent"}, assetClasses...), Exec: execAbort}
+ 
++	// Zones (ONTOLOGY.md section 6.2, A2): applied by the geofence service (omos #569, D1-P4).
++	for _, v := range []string{"create", "update", "remove"} {
++		Catalogue["zone."+v] = ActionSpec{Name: "zone." + v, Family: FamilyCommand, Level: A2,
++			Versions: []int{1}, Targets: []string{"zone"}, Exec: execMap, Verb: v}
++	}
++
+ 	// A5 examples: named so a request is answered with a clear refusal, never executed.
+ 	for _, n := range []string{"system.credentials", "system.cluster_write", "system.foundation_change"} {
+ 		Catalogue[n] = ActionSpec{Name: n, Family: FamilyCommand, Level: A5, Versions: []int{1}, Exec: execRefused}
+@@ -238,6 +245,8 @@
+ 		return "cmd.entity." + id + "." + verb, nil
+ 	case execMission, execTask, execAbort:
+ 		return "cmd.mission." + id + "." + verb, nil
++	case execMap:
++		return "cmd.map.geofence." + id + "." + verb, nil
+ 	}
+ 	return "", fmt.Errorf("no subject for exec %q", exec)
+ }
+diff -ru a/internal/policy/service.go b/internal/policy/service.go
+--- a/internal/policy/service.go	2026-10-29 10:38:09
++++ b/internal/policy/service.go	2026-10-29 10:38:21
+@@ -210,6 +210,8 @@
+ 		{"evt.mission.*.created", s.handleCreated, false},
+ 		{"evt.mission.>", s.handleResult, false},
+ 		{"evt.entity.>", s.handleResult, false},
++		// Geofence command results (omos #569 D1-P2): evt.map.geofence.{created|updated|deleted|refused}.
++		{"evt.map.geofence.*", s.handleResult, false},
+ 	}
+ 	for _, x := range hs {
+ 		var sub *nats.Subscription
+@@ -948,7 +950,7 @@
+ 	switch spec.Exec {
+ 	case execFleet:
+ 		s.sendFleet(a, spec.Verb, a.Params, "", causation)
+-	case execEntity, execMission:
++	case execEntity, execMission, execMap:
+ 		subj, err := commandSubject(spec.Exec, "", a.Target.EntityID, spec.Verb)
+ 		if err != nil {
+ 			s.fail(a, deny(CodeSchemaInvalid, err.Error()))
+@@ -1288,7 +1290,9 @@
+ 	e.op.Lock()
+ 	defer e.op.Unlock()
+ 	a := s.load(e)
+-	if !a.awaitingResult() || (parts[2] != a.Target.EntityID && parts[2] != a.TaskID) {
++	// A geofence result names the zone in data, not in the subject (omos #569 D1-P2).
++	mapResult := parts[1] == "map" && parts[2] == "geofence"
++	if !a.awaitingResult() || (!mapResult && parts[2] != a.Target.EntityID && parts[2] != a.TaskID) {
+ 		return
+ 	}
+ 	var d *Denial

@@ -102,3 +102,75 @@ table.sources th, table.sources td { text-align: left; border-bottom: 1px solid 
   .kv { grid-template-columns: 104px 1fr; }
   .globe .cesium-widget-credits { font-size: 9px; }
 }
+
+/* ---- M4 Act features ---------------------------------------------------------------------- */
+.small { font-size: 12px; }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.btn.primary { background: #0c4a6e; border-color: var(--accent); }
+.btn.danger { background: #450a0a; border-color: var(--warn); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.globe .tapping canvas, .globe.tapping canvas { cursor: crosshair; }
+.role-pick { display: flex; gap: 4px; align-items: center; font-size: 12px; color: var(--muted); }
+.role-pick select, .panel select { font: inherit; color: var(--text); background: #0e1628; border: 1px solid var(--line); border-radius: 6px; min-height: 36px; padding: 4px 6px; }
+.role-chip[data-role="operator"] { border-color: var(--accent); color: var(--accent); }
+.role-chip[data-role="observer"] { border-color: #a78bfa; color: #c4b5fd; }
+.actions { display: grid; gap: 8px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.task-status { margin: 0; font-weight: 600; }
+.st-executed, .task.st-executed .pill { color: #86efac; }
+.st-denied, .st-failed, .st-refused, .st-rejected, .st-expired { color: #fca5a5; }
+.st-awaiting_confirmation { color: var(--caution); }
+.pill { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #1e293b; }
+.deny { color: #fca5a5; margin: 2px 0; }
+ul.tasks, ul.gaps, ul.drawings, .hermes-log, .messages, .contacts { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.task, .gap, .drawing { display: grid; gap: 4px; padding: 8px; border-radius: 8px; background: #0e1628; border: 1px solid var(--line); }
+.task code { font-size: 11px; }
+.gap { border-left: 4px solid var(--caution); }
+.gap.r-error, .gap.r-layer_down { border-left-color: var(--warn); }
+.tools { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.btn.tool { padding: 4px 10px; min-height: 36px; font-size: 13px; }
+.hint { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 8px; border: 1px dashed var(--caution); border-radius: 8px; margin: 8px 0; }
+.inline { display: flex; gap: 6px; align-items: center; margin: 6px 0; }
+.inline input, .num, #chat-input, .panel textarea { font: inherit; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--line); background: #0e1628; color: var(--text); min-height: 36px; }
+.num { width: 90px; }
+.drawing.sel { border-color: #a78bfa; }
+.drawing-actions { display: grid; gap: 6px; margin-top: 4px; }
+textarea.cot { width: 100%; font: 11px ui-monospace, Menlo, monospace; }
+.lasso { padding: 8px; border: 1px solid var(--line); border-radius: 8px; margin: 6px 0; }
+.hermes { display: flex; flex-direction: column; gap: 8px; }
+.hermes-log { max-height: 46vh; overflow-y: auto; }
+.hl { display: grid; gap: 2px; padding: 8px; border-radius: 8px; background: #0e1628; }
+.hl .who { font-size: 11px; font-weight: 700; color: var(--muted); }
+.hl.from-hermes { border-left: 3px solid var(--accent); }
+.hl.from-map { border-left: 3px solid #f0abfc; font-size: 12px; }
+.hl.from-error { border-left: 3px solid var(--warn); }
+.hermes-form { display: grid; gap: 6px; }
+.hermes-form textarea { width: 100%; resize: vertical; }
+.rooms { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
+.room { border: 1px solid var(--line); background: #0e1628; border-radius: 999px; padding: 4px 10px; min-height: 32px; cursor: pointer; }
+.room.sel { border-color: var(--accent); }
+.room-name { margin: 6px 0; font-size: 14px; color: var(--accent); }
+.messages { max-height: 36vh; overflow-y: auto; margin-bottom: 6px; }
+.msg { display: grid; gap: 2px; padding: 6px 8px; border-radius: 8px; background: #0e1628; }
+.msg.mine { background: #0c2a44; }
+.msg .who { font-size: 11px; font-weight: 700; color: var(--muted); }
+#chat-form input { flex: 1; min-width: 0; }
+.dialog { background: var(--panel); color: var(--text); border: 1px solid var(--accent); border-radius: 12px; padding: 16px; width: min(560px, calc(100vw - 32px)); }
+.dialog::backdrop { background: rgb(0 0 0 / 0.55); }
+.dialog h2 { margin: 0 0 6px; font-size: 18px; }
+.dialog label { display: grid; gap: 4px; margin: 10px 0; }
+.dialog input { font: inherit; padding: 8px; border-radius: 6px; border: 1px solid var(--line); background: #0e1628; color: var(--text); }
+.dialog dd { font: 12px ui-monospace, Menlo, monospace; }
+.badge.agent { background: #7c2d12; display: inline-block; }
+.dismiss { font-size: 12px; color: var(--muted); font-weight: 400; }
+[data-needs][hidden] { display: none !important; }
+@media (max-width: 720px) {
+  .role-pick span, .role-chip { max-width: 30vw; }
+  .tools .btn.tool { flex: 1 0 30%; }
+}
+/* Ten tabs: keep grid tracks from growing to the tab bar's min-content width (it scrolls). */
+body { grid-template-columns: minmax(0, 1fr); }
+.layout { grid-template-columns: minmax(0, 1fr) 380px; }
+.side, .bar { min-width: 0; }
+@media (max-width: 720px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+}
