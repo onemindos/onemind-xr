@@ -20,7 +20,7 @@ parallel once M0 is done.
 | ID | Question | Pass | If it fails (decision 0004) |
 |---|---|---|---|
 | S1 | Does UE 5.8 + Cesium for Unreal (current release) build and run on the owner's Mac? | Packaged app shows the globe | Pin the newest working pair and record why |
-| S2 | Does Pixel Streaming 2 stream from the Mac to a browser on the LAN? | Live picture and input < 150 ms | Decision 0002 falls back to a Linux GPU host, plus the L0 web client |
+| S2 | Does Pixel Streaming 2 stream from the Mac to a browser on the LAN? | Live picture and input < 150 ms | The L0 web client becomes the web path; a Linux GPU host is documented, not provisioned (decision 0004 #1) |
 | S3 | Can the client reach the Quest Pro? (a) standalone Android/OpenXR build, (b) streamed from a PC, (c) WebXR in the headset browser | Globe plus one layer at the headset's frame rate | Pick the best working option in decision 0003 |
 | S4 | Does Commo (atak-civ `commoncommo`) build for macOS arm64? | Library links and joins the mesh | Keep the omos mesh gateway as the mesh path; C4 waits |
 | S5 | Which NATS C client works inside Unreal on macOS (nats.c, or a thin wrapper)? | KV read and subscribe from a plugin | Use WebSocket NATS from C++ |

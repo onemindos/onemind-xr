@@ -23,9 +23,9 @@ why in this file, and continues.
 | 9 | Repo visibility | `onemind-xr` stays private | — |
 | 10 | Merges | Merge freely in `onemind-xr` after review. In omos, open PRs only; the owner merges | Keep building on unmerged omos branches locally (below) |
 | 11 | Unmerged omos work | Run omos services locally on the build machine (local NATS server, or a leaf to the cluster when credentials exist) from their branches, so client work never waits for a merge | — |
-| 12 | Missing access or credentials (Cesium token, TAK certificate, NATS user, cluster) | Use the local fallback: local NATS, mock TAK via the mesh gateway and ATAK on the LAN, open tiles. Never ask; list what is missing in the final report | — |
+| 12 | Missing access or credentials (Cesium token, TAK certificate, NATS user, cluster) | Use the local fallback: local NATS, the mesh gateway with a scripted mesh peer and `takproto` test messages in place of ATAK, open tiles. Never ask; list what is missing in the final report | — |
 | 13 | Real hardware | Simulated assets only (`sim-*`). No command to a real drone, robot or vehicle in this run | — |
-| 14 | Engine version | Newest Unreal Engine 5.x that the current Cesium for Unreal supports and that builds on the Mac (target 5.8) | Next older supported pair |
+| 14 | Engine version | Newest Unreal Engine 5.x that the current Cesium for Unreal supports, builds on the build machine and keeps a macOS target (target 5.8) | Next older supported pair |
 | 15 | Licence conflicts | Never copy AGPL (worldmonitor) or Elastic (worldwideview) code; write it from scratch | — |
 | 16 | Naming | App: **OneMind**. Plugins: `OneMind*`. Bundle id: `org.onemindos.onemind` | — |
 | 17 | The run is on a machine other than the owner's Mac | Build and test on the build machine; write every Mac, headset and LAN step into `docs/OWNER-CHECKLIST.md` with expected results; mark those features "built, awaiting owner check" | — |
