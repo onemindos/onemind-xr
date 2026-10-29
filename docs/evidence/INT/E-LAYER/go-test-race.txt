@@ -1,0 +1,98 @@
+?   	github.com/onemindos/omos/services/layer/cmd/layer-service	[no test files]
+=== RUN   TestA5OneRead
+    acceptance_test.go:58: snapshot: 10000 items in 6 chunks, 283.787666ms, ent_seq 10000, manifest count 10000
+--- PASS: TestA5OneRead (3.64s)
+=== RUN   TestA5AOICellsAndVessels
+    acceptance_test.go:122: zoom 3: mode cells, 16 cells, 50000 vessels counted
+    acceptance_test.go:139: zoom 10, 50 km bbox: mode entities, 302 vessels (expected 302), truncated false
+    acceptance_test.go:162: zone_id zone-home: 55 vessels (expected 55)
+    acceptance_test.go:189: KV sea.cells.z2: 16 cells, 573 bytes, 50000 vessels
+    acceptance_test.go:189: KV sea.cells.z4: 160 cells, 4870 bytes, 50000 vessels
+    acceptance_test.go:189: KV sea.cells.z6: 2304 cells, 68719 bytes, 50000 vessels
+--- PASS: TestA5AOICellsAndVessels (13.58s)
+=== RUN   TestA5LayerDown
+    acceptance_test.go:225: manifest vanished 2.2s after stop (bucket TTL 2s); client badge "layer down"
+--- PASS: TestA5LayerDown (2.33s)
+=== RUN   TestA5StaleFeed
+    acceptance_test.go:292: limit_s 2: feed-b stopped -> degraded after 2s; feed-a stopped -> stale after 2s; feeds [{Source:feed-a FetchedAt:0xc006a95318 Count:12 LastError:<nil> Stale:true} {Source:feed-b FetchedAt:0xc006a95358 Count:12 LastError:<nil> Stale:true}]
+--- PASS: TestA5StaleFeed (4.48s)
+=== RUN   TestA5ImportWithoutShare
+    acceptance_test.go:355: CLIENT import with share:false: snapshot, watch and list all refused with forbidden
+--- PASS: TestA5ImportWithoutShare (0.12s)
+=== RUN   TestA5Releasability
+    acceptance_test.go:406: CLIENT bob (team-b): 2500 items in 2 chunks; alice (team-a, org): 2502 items in 2 chunks
+    acceptance_test.go:442: cross-account watches over 25 s (lease 10 s, response_threshold 15s): alice 100 batches, 0 resnapshots []; bob 41 batches, 0 resnapshots []
+--- PASS: TestA5Releasability (26.64s)
+=== RUN   TestA5NoGap
+    acceptance_test.go:517: 200 msg/s for 6 s, client joined at 2 s: 270 entities match the stream reference; 43 batches; resnapshots 0 []
+--- PASS: TestA5NoGap (7.12s)
+=== RUN   TestA5ResyncAfterGap
+    acceptance_test.go:559: dropped batch 3: client re-snapshotted 1 time(s) [gap: batch 4 after 2] and converged
+    acceptance_test.go:575: watch from_seq 401 after ~200 changes with a 50-change window: {"v":1,"error":"resnapshot","detail":"from_seq is outside the replay window","last":true}
+--- PASS: TestA5ResyncAfterGap (4.54s)
+=== RUN   TestA5Expiry
+    acceptance_test.go:636: watch path: both removed 210ms after expiry (reasons map[sim-air1:expired sim-air2:expired]); direct path: MaxAge marker 0s after expiry
+--- PASS: TestA5Expiry (3.93s)
+=== RUN   TestA5AOIMove
+    acceptance_test.go:726: AOI A 529 vessels -> AOI B 484 vessels: 408 exit ops, 363 enter ops, none outside B
+--- PASS: TestA5AOIMove (0.97s)
+=== RUN   TestA5Backpressure
+    acceptance_test.go:905: 50,000-vessel burst, max_rate_hz 4, 13 watches: AOI entities watch 4492 vessels in 62 batches, max 45305 bytes, max 139 ops, min gap 246ms; cells watch 0 56 batches, max 5304 bytes, max 1 ops, min gap 248ms; 8 world entity watches ended with too_many; max queued ops 89; peak watch memory 0.8 MiB (budget 128 MiB); peak test-process heap 136.5 MiB (before 10.7 MiB)
+--- PASS: TestA5Backpressure (17.27s)
+=== RUN   TestA5DeadWatch
+    acceptance_test.go:953: service killed; client gave up the watch 3.05s after the last batch (dead time 3s): [dead watch: no batch for 3s]
+--- PASS: TestA5DeadWatch (4.84s)
+=== RUN   TestA5FleetState
+    acceptance_test.go:1001: site-mac stopped reporting; fleet-state key gone after 3s (site timeout 2 s, bucket TTL 1 s; 30 s in the CR)
+--- PASS: TestA5FleetState (3.44s)
+=== RUN   TestA5SingleWriter
+    acceptance_test.go:1027: lease held: {"holder":"one","expires_ms":1793292018035}
+    acceptance_test.go:1031: standby took over 20ms after the holder stopped
+--- PASS: TestA5SingleWriter (1.15s)
+=== RUN   TestA5PagingFullFields
+    acceptance_test.go:1064: fields full: 600 entities of ~3441 bytes in 4 chunks, largest 522351 bytes, server max_payload 1048576
+--- PASS: TestA5PagingFullFields (0.52s)
+=== RUN   TestWatchCap
+--- PASS: TestWatchCap (0.06s)
+=== RUN   TestWatchBudget
+--- PASS: TestWatchBudget (0.50s)
+=== RUN   TestCellOpsDoNotAccumulate
+--- PASS: TestCellOpsDoNotAccumulate (1.20s)
+=== RUN   TestSiteSeenBounded
+--- PASS: TestSiteSeenBounded (0.00s)
+=== RUN   TestResolveImportWithoutShare
+--- PASS: TestResolveImportWithoutShare (0.00s)
+=== RUN   TestDefaultLayersPlaceEntityServiceRecords
+--- PASS: TestDefaultLayersPlaceEntityServiceRecords (0.02s)
+=== RUN   TestQualifiesAndValidate
+--- PASS: TestQualifiesAndValidate (0.00s)
+=== RUN   TestA5OntologyLayersOnBus
+    ontology_test.go:215: snapshot fleet: [sim-r1 sim-x1]
+    ontology_test.go:215: snapshot tak: [tak-android-a1b2c3d4e5f6 tak-pbe3cesvp2esvfbrw3eze2we2h]
+    ontology_test.go:215: snapshot hazards: [emsc-20261029_0001 noaa-j4yqrxihy3cjsuswvrwidyxpfb usgs-us7000abcd]
+    ontology_test.go:215: snapshot space: [norad-25544]
+    ontology_test.go:215: snapshot transit: [gtfs-lirr-go103_25_2611 gtfs-mnr-1234_5678]
+--- PASS: TestA5OntologyLayersOnBus (0.14s)
+=== RUN   TestDefaultLayersValid
+--- PASS: TestDefaultLayersValid (0.00s)
+=== RUN   TestCellZoom
+--- PASS: TestCellZoom (0.00s)
+=== RUN   TestAreas
+--- PASS: TestAreas (0.00s)
+=== RUN   TestTileXY
+--- PASS: TestTileXY (0.00s)
+=== RUN   TestCanSee
+--- PASS: TestCanSee (0.00s)
+=== RUN   TestFreshness
+--- PASS: TestFreshness (0.00s)
+=== RUN   TestChunkAll
+--- PASS: TestChunkAll (0.09s)
+=== RUN   TestEncodeCellsDropsOversizeZoom
+--- PASS: TestEncodeCellsDropsOversizeZoom (0.01s)
+=== RUN   TestReplayWindow
+--- PASS: TestReplayWindow (0.00s)
+=== RUN   TestParseEntityMapping
+--- PASS: TestParseEntityMapping (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/layer/internal/layer	97.888s
+?   	github.com/onemindos/omos/services/layer/internal/layerclient	[no test files]

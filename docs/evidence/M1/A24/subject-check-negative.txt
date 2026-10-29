@@ -1,0 +1,33 @@
+## negative fixture: /Users/danielcarku/Desktop/work/.run/tmp-a24/bad.md
+# Negative fixture (not committed)
+Uses `tel.sim-x1.drone.position` and `cmd.projector.stop` without listing the second.
+
+```subjects
+proposed  tel.sim-x1.drone.position
+interim   cmd.projector.disable
+proposed  cmd.fleet.drone.sim-x1.intercept
+proposed  cmd.fleet.drone.sim-x1.launch
+current   intel.weather.noaa.alert.{state}.{event}
+bogus     evt.x.y.z
+```
+
+## checker output
+streams on this checkout: 14 (AGENTS, CMD, COT, ENV, EVT, GEO, INTEL, MISSION, SAAS, SYS, TEL, VOICE, WORLD, ZEUS)
+location	tag	subject	grammar	stored	notes
+../../.run/tmp-a24/bad.md:5	proposed	tel.sim-x1.drone.position	G:tel	stored-today=none
+../../.run/tmp-a24/bad.md:6	interim	cmd.projector.disable	OFF-GRAMMAR	stored-today=CMD
+../../.run/tmp-a24/bad.md:7	proposed	cmd.fleet.drone.sim-x1.intercept	D9.1:cmd-fleet	stored-today=CMD	stop-line word ['intercept']
+../../.run/tmp-a24/bad.md:8	proposed	cmd.fleet.drone.sim-x1.launch	D9.1:cmd-fleet	stored-today=CMD
+../../.run/tmp-a24/bad.md:9	current	intel.weather.noaa.alert.{state}.{event}	OFF-GRAMMAR	stored-today=INTEL
+
+subjects checked: 5 (proposed 3, interim 1, current 1, filter 0, legacy 0, alternative 0, action 0); off-grammar (legacy, alternative or action only): 2
+ERROR ../../.run/tmp-a24/bad.md:5: tel token two sim-x1 is not a class (BUS-P1)
+ERROR ../../.run/tmp-a24/bad.md:6: interim subject cmd.projector.disable matches no grammar pattern
+ERROR ../../.run/tmp-a24/bad.md:7: proposed subject cmd.fleet.drone.sim-x1.intercept has stop-line word ['intercept']
+ERROR ../../.run/tmp-a24/bad.md:7: verb(s) ['intercept'] not in SL5
+ERROR ../../.run/tmp-a24/bad.md:8: verb(s) ['launch'] not in SL5
+ERROR ../../.run/tmp-a24/bad.md:9: current subject intel.weather.noaa.alert.{state}.{event} matches no grammar pattern
+ERROR ../../.run/tmp-a24/bad.md:10: bad subjects line 'bogus     evt.x.y.z'
+ERROR ../../.run/tmp-a24/bad.md:2: subject cmd.projector.stop is not listed in a subjects block
+result: FAIL (8 errors)
+rc=1 (expected 1)

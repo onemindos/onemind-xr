@@ -1,0 +1,4 @@
+36c36
+<     armed, airborne, alt, battery = False, False, 0.0, 100.0
+---
+>     armed, airborne, alt, battery = True, True, 60.0, 100.0  # E2E COPY: starts airborne (arm/takeoff need policy + human confirm)

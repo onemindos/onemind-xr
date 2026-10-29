@@ -1,0 +1,8 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-9.2.0, pluggy-1.7.0 -- /Users/danielcarku/Desktop/work/.run/tmp-h3/venv/bin/python
+rootdir: /Users/danielcarku/Desktop/work/wt/h3-ros2/services/bridge/bridges/ros2
+collecting ... collected 1 item
+
+tests/e2e/test_e2e.py::test_h3_end_to_end PASSED                         [100%]
+
+============================== 1 passed in 7.05s ===============================

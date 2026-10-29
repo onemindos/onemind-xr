@@ -1,0 +1,16 @@
+PASS policy service builds from feat/policy-service 66900872
+PASS policy service ready (local authz, fail-closed checks on)
+PASS 1 proposal waits for a human (awaiting_confirmation, A3)
+PASS 1 client hash equals the policy service's params_hash
+PASS 1 no cmd.fleet.> before the human confirmed
+PASS 2 exactly one cmd.fleet.drone.sim-x1.goto after confirm
+PASS 2 command carries the clicked point and the approved hash
+PASS 2 client followed the audit trail to executed
+PASS 2 audit on evt.so.action.* in order
+PASS 3 goto into the keep-out zone is denied (precondition_failed)
+PASS 3 nothing dispatched
+PASS 4 a human rejection ends the action
+PASS 4 nothing dispatched
+PASS 5 policy denies a non-sim id with not_simulated
+PASS 6 the client's user cannot publish cmd.fleet.> (server permissions violation)
+15/15 checks passed

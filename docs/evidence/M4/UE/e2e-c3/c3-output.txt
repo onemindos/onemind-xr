@@ -1,0 +1,33 @@
+PASS A mesh gateway builds from feat/tak-mesh-gateway bef11eb1
+PASS A[v1] all 13 directed sends succeeded
+PASS A[v1] client SA (contact card) on tak.cot.mesh.rx
+PASS A[v1] delivered as directed TCP, Tak-Proto 1
+PASS A[v1] chat reached the bus
+PASS A[v1] all 11 shapes reached the bus
+PASS A[v1] chat from the bus delivered to the client's own endpoint
+PASS A[xml] all 13 directed sends succeeded
+PASS A[xml] client SA (contact card) on tak.cot.mesh.rx
+PASS A[xml] delivered as directed TCP, Tak-Proto 0
+PASS A[xml] chat reached the bus
+PASS A[xml] all 11 shapes reached the bus
+PASS A[xml] chat from the bus delivered to the client's own endpoint
+PASS B enrollment succeeded (tls/config + signClient/v2)
+PASS B CSR subject is CN=<user> plus the server's nameEntries, signature valid
+PASS B clientUid passed to signClient/v2
+PASS B private key written owner-only (0600)
+PASS B wrong TAK password is refused
+PASS B enrollment refuses a server its CA does not trust
+PASS C1 mutual TLS with the enrolled certificate (server sees CN=omclient)
+PASS C1 TAK Protocol v1 negotiated (takp-q answered, client in v1)
+PASS C1 server version read from the offer
+PASS C1 client is a TAK contact: its SA reached the server with callsign and stcp endpoint
+PASS C1 server's user shows in the client's contact list
+PASS C1 chat server -> client
+PASS C1 chat client -> server (direct, marti dest BRAVO)
+PASS C1 keep-alive pings sent and answered
+PASS C1 every shape decoded by the peer (v1) with the drawn geometry (11/11)
+PASS C2 XML-only server: no negotiation, client stays on XML
+PASS C2 switching channel changes what is visible (BRAVO hidden under Red, still known)
+PASS C3 a certificate from another CA is refused (server never accepts a session or an event)
+PASS C4 the client refuses a server signed by an unknown CA
+32/32 checks passed

@@ -1,0 +1,51 @@
+## base 62e3d22bc05814178c2d531e77a9fa4a228f6f3a head 0cf3d346112341dc385c62e1e8637a8901d355d6
+## validate_changed_yaml
+Changed YAML gate passed (15 files checked)
+rc=0
+## validate_manifests (kubeconform strict, changed)
+Summary: 14 resources found in 14 files - Valid: 14, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 14 manifest file(s)
+rc=0
+## kubeconform strict on all stream CRs + rules
+Summary: 41 resources found in 41 files - Valid: 41, Invalid: 0, Errors: 0, Skipped: 0
+rc=0
+## check_onemind_mcp_coverage
+All 57 Git-declared Argo Applications mapped to MCP access dispositions
+rc=0
+## promtool check rules
+Checking /Users/danielcarku/Desktop/work/.run/tmp-a22/rules.yaml
+  SUCCESS: 20 rules found
+
+rc=0
+## gitleaks
+[90m7:38AM[0m [32mINF[0m [1m5 commits scanned.[0m
+[90m7:38AM[0m [32mINF[0m [1mscanned ~26114 bytes (26.11 KB) in 66ms[0m
+[90m7:38AM[0m [32mINF[0m [1mno leaks found[0m
+rc=0
+[90m7:38AM[0m [32mINF[0m [1mscanned ~13172368 bytes (13.17 MB) in 3.75s[0m
+[90m7:38AM[0m [33mWRN[0m [1mleaks found: 9[0m
+rc=1
+## shellcheck: no shell files changed
+docs/proposals/2026-10-29-stream-caps.md
+platform/monitoring/prometheus-rules-onemind.yaml
+platform/nats/streams/agents.yaml
+platform/nats/streams/cmd.yaml
+platform/nats/streams/cot.yaml
+platform/nats/streams/det.yaml
+platform/nats/streams/env.yaml
+platform/nats/streams/evt.yaml
+platform/nats/streams/geo.yaml
+platform/nats/streams/intel.yaml
+platform/nats/streams/mission.yaml
+platform/nats/streams/saas.yaml
+platform/nats/streams/sys.yaml
+platform/nats/streams/tel.yaml
+platform/nats/streams/voice.yaml
+platform/nats/streams/zeus.yaml
+scripts/tests/test_gitops_stream_caps.py
+## gitleaks dir note
+The 9 findings above come from a whole-tree dir scan (gitleaks dir takes one path). They are the
+nine pre-existing baseline hits recorded in .gitleaks-baseline.json (docs/infra/CONSTELLATION-OVERWATCH.md,
+docs/references/ai/orp.md, infra/edge/takserver/deploy/docs/enrollment.md x2, platform/hermes/agent/SECRETS.md x2,
+platform/monitoring/deployment.yaml, services/om_presence.py x2). Per-path scans of every file this PR
+touches: 0 findings. Branch-commit scan: no leaks found.

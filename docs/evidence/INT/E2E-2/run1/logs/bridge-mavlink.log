@@ -1,0 +1,21 @@
+2026/10/29 13:01:22.553420 [bridge-mavlink] NATS connected: nats://127.0.0.1:55599
+2026/10/29 13:01:22.558679 [bridge-mavlink] MAVLink endpoint udpserver:127.0.0.1:57507, vehicle sysid 1, out V2
+2026/10/29 13:01:22.558846 [bridge-mavlink] subscribed cmd.fleet.drone.sim-x1.>; publishing tel.fleet.drone.sim-x1.position, tel.fleet.drone.sim-x1.status, evt.drone.sim-x1.command
+2026/10/29 13:01:22.650530 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:58441
+2026/10/29 13:01:24.807798 [bridge-mavlink] command 6ea0e576-2717-40e0-992f-c1d2402d2779 arm outcome=acknowledged code= 
+2026/10/29 13:01:24.891804 [bridge-mavlink] command 6ea0e576-2717-40e0-992f-c1d2402d2779 arm outcome=executed code= 
+2026/10/29 13:01:24.912138 [bridge-mavlink] command 318df362-bd53-4635-aad2-e1477a59af43 takeoff outcome=acknowledged code= 
+2026/10/29 13:01:25.002515 [bridge-mavlink] command 318df362-bd53-4635-aad2-e1477a59af43 takeoff outcome=executed code= 
+2026/10/29 13:01:27.754100 [bridge-mavlink] command eac739ed-a8d6-421f-b610-73f36e4fadd0 goto outcome=acknowledged code= 
+2026/10/29 13:01:27.786686 [bridge-mavlink] command eac739ed-a8d6-421f-b610-73f36e4fadd0 goto outcome=executed code= 
+2026/10/29 13:01:49.040698 [bridge-mavlink] command cb588fe6-e7d8-4ab2-9302-7384b6e4e5c9 goto outcome=acknowledged code= 
+2026/10/29 13:01:49.120209 [bridge-mavlink] command cb588fe6-e7d8-4ab2-9302-7384b6e4e5c9 goto outcome=executed code= 
+2026/10/29 13:02:37.250263 [bridge-mavlink] command 1ab8f360-c69a-4e6c-8642-d00e3bdff464 estop outcome=acknowledged code= 
+2026/10/29 13:02:37.327986 [bridge-mavlink] command 1ab8f360-c69a-4e6c-8642-d00e3bdff464 estop outcome=executed code= 
+2026/10/29 13:02:38.688823 [bridge-mavlink] command 1142cceb-f09e-49ef-9a9f-fc36b9f9f594 arm outcome=acknowledged code= 
+2026/10/29 13:02:38.711002 [bridge-mavlink] command 1142cceb-f09e-49ef-9a9f-fc36b9f9f594 arm outcome=executed code= 
+2026/10/29 13:02:38.802346 [bridge-mavlink] command e8045260-03b6-436b-86e6-c65327e32f2c takeoff outcome=acknowledged code= 
+2026/10/29 13:02:38.820556 [bridge-mavlink] command e8045260-03b6-436b-86e6-c65327e32f2c takeoff outcome=executed code= 
+2026/10/29 13:03:11.870410 [bridge-mavlink] command 856dd6d9-4070-4f2c-b6a4-1b0bf369d517 goto outcome=acknowledged code= 
+2026/10/29 13:03:11.934696 [bridge-mavlink] command 856dd6d9-4070-4f2c-b6a4-1b0bf369d517 goto outcome=executed code= 
+2026/10/29 13:05:46.615583 [bridge-mavlink] shutting down

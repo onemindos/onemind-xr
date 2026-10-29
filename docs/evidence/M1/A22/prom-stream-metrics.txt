@@ -1,0 +1,8 @@
+grafana_process_virtual_memory_max_bytes
+nats_stream_consumer_count
+nats_stream_first_seq
+nats_stream_last_seq
+nats_stream_subject_count
+nats_stream_total_bytes
+nats_stream_total_messages
+process_virtual_memory_max_bytes

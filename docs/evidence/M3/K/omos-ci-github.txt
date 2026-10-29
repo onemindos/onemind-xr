@@ -1,0 +1,40 @@
+# GitHub CI on PR #559 (head 3d7b1f51) — 2026-10-29T12:02:00Z
+image	skipping	0	https://github.com/onemindos/omos/actions/runs/40869565291/job/123433900724	
+Helm render check	pass	42s	https://github.com/onemindos/omos/actions/runs/40869564947/job/123432858173	
+Kubernetes manifest schema (kubeconform)	pass	7s	https://github.com/onemindos/omos/actions/runs/40869564947/job/123432858171	
+Lint & Validate	pass	24s	https://github.com/onemindos/omos/actions/runs/40869564947/job/123432858079	
+Secret scan (gitleaks)	pass	9s	https://github.com/onemindos/omos/actions/runs/40869564947/job/123432858419	
+preflight	pass	35s	https://github.com/onemindos/omos/actions/runs/40869565026/job/123432858679	
+test	pass	2m15s	https://github.com/onemindos/omos/actions/runs/40869565291/job/123432859115	
+test-and-image	pass	17s	https://github.com/onemindos/omos/actions/runs/40869565026/job/123432858409	
+acceptance	skipping	0	https://github.com/onemindos/omos/actions/runs/40869565026/job/123432860247	
+
+# build-video-registry 'test' job (ubuntu, MediaMTX v1.21.3 checksum-verified, apt ffmpeg, nats-server v2.14.9):
+test	Test (race)	2026-10-29T12:01:13.5766467Z     e2e_test.go:118: PASS anonymous RTSP publish to drone/sim-x1: refused (401)
+test	Test (race)	2026-10-29T12:01:13.5767942Z     e2e_test.go:119: PASS reader identity onemind-client publishing: refused (401)
+test	Test (race)	2026-10-29T12:01:13.5769494Z     e2e_test.go:120: PASS mavlink-bridge publishing to configured path cam/gate-north (outside its grant): refused (401)
+test	Test (race)	2026-10-29T12:01:13.5771117Z     e2e_test.go:121: PASS mavlink-bridge publishing a non-sim drone drone/x47 (no such path): refused (400)
+test	Test (race)	2026-10-29T12:01:13.5773981Z     e2e_test.go:151: PASS evt.video.sim-x1.online after 0.6s: {V:1 Event:online StreamID:drone/sim-x1 EntityType:drone EntityID:sim-x1 EntitySubject:ent.drone.sim-x1.state Reason: TS:2026-10-29 12:00:43.962581038 +0000 UTC Origin:hub}
+test	Test (race)	2026-10-29T12:01:13.5775635Z     e2e_test.go:159: PASS svc.registry.video.get ent.drone.sim-x1.state ->
+test	Test (race)	2026-10-29T12:01:13.5799942Z     e2e_test.go:171: PASS anonymous RTSP read refused (401)
+test	Test (race)	2026-10-29T12:01:13.5801016Z     e2e_test.go:181: PASS tak-viewer RTSP read: h264,640,360
+test	Test (race)	2026-10-29T12:01:13.5801549Z     e2e_test.go:187: PASS anonymous HLS read refused (401 after the cookie check)
+test	Test (race)	2026-10-29T12:01:13.5802103Z     e2e_test.go:207: PASS LL-HLS media playlist (5 EXT-X-PART lines)
+test	Test (race)	2026-10-29T12:01:13.5802721Z     e2e_test.go:216: PASS decoded a frame of sim-x1 over HLS from the registry URL (45302 bytes)
+test	Test (race)	2026-10-29T12:01:13.5803807Z     e2e_test.go:242: PASS recording segments appeared: [2026-10-29_12-00-43-585429_Z.mp4 2026-10-29_12-00-45-402306_Z.mp4 2026-10-29_12-00-47-307036_Z.mp4 2026-10-29_12-00-49-212081_Z.mp4]
+test	Test (race)	2026-10-29T12:01:13.5805421Z     e2e_test.go:244: PASS playback /list for onemind-client: [{"start":"2026-10-29T12:00:43.585429Z","duration":7.626652,"url":"http://127.0.0.1:45937/get?duration=7.626652\u0026path=drone%2Fsim-x1\u0026start=2026-10-29T12%3A00%3A43.585429Z"}]
+test	Test (race)	2026-10-29T12:01:13.5807612Z     e2e_test.go:251: PASS recordings rolled: 2026-10-29_12-00-43-585429_Z.mp4 deleted after retention, now [2026-10-29_12-00-54-995534_Z.mp4 2026-10-29_12-00-56-995534_Z.mp4 2026-10-29_12-00-58-995534_Z.mp4 2026-10-29_12-01-00-995534_Z.mp4 2026-10-29_12-01-02-995534_Z.mp4]
+test	Test (race)	2026-10-29T12:01:13.5809552Z     e2e_test.go:264: PASS evt.video.sim-x1.offline: {V:1 Event:offline StreamID:drone/sim-x1 EntityType:drone EntityID:sim-x1 EntitySubject:ent.drone.sim-x1.state Reason:publisher_stopped TS:2026-10-29 12:01:09.460795504 +0000 UTC Origin:hub}
+test	Test (race)	2026-10-29T12:01:13.5810533Z --- PASS: TestE2EMediaMTX (30.78s)
+test	Test (race)	2026-10-29T12:01:13.5811100Z --- PASS: TestRegistryLifecycle (2.47s)
+test	Test (race)	2026-10-29T12:01:13.5811829Z --- PASS: TestRestartMarksVanishedStreamsOffline (0.37s)
+test	Test (race)	2026-10-29T12:01:13.5812473Z --- PASS: TestMissingBucketFails (0.05s)
+test	Test (race)	2026-10-29T12:01:13.5813248Z --- PASS: TestParsePath (0.00s)
+test	Test (race)	2026-10-29T12:01:13.5813794Z --- PASS: TestParseEntityRef (0.00s)
+test	Test (race)	2026-10-29T12:01:13.5814344Z --- PASS: TestNoAnonymousAccess (0.00s)
+test	Test (race)	2026-10-29T12:01:13.5814963Z --- PASS: TestPermissionsAndRecording (0.00s)
+test	Test (race)	2026-10-29T12:01:13.5815616Z --- PASS: TestDeploymentEnvMatchesUsers (0.01s)
+test	Test (race)	2026-10-29T12:01:13.5816319Z --- PASS: TestBuildRecord (0.00s)
+test	Test (race)	2026-10-29T12:01:13.5818082Z --- PASS: TestVideoURLHygiene (0.00s)
+test	Test (race)	2026-10-29T12:01:13.5818584Z --- PASS: TestCheck (0.00s)
+test	Test (race)	2026-10-29T12:01:13.5819025Z --- PASS: TestFeed (0.00s)

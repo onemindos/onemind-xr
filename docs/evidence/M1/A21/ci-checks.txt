@@ -1,0 +1,11 @@
+# gh pr checks 560 -R onemindos/omos (2026-10-29T12:05:30Z), head f8fa0657
+Kubernetes manifest schema (kubeconform)	pass	6s	https://github.com/onemindos/omos/actions/runs/40870156639/job/123434849928	
+Secret scan (gitleaks)	pass	8s	https://github.com/onemindos/omos/actions/runs/40870156639/job/123434849256	
+image	skipping	0	https://github.com/onemindos/omos/actions/runs/40870156506/job/123435449603	
+Helm render check	pass	42s	https://github.com/onemindos/omos/actions/runs/40870156639/job/123434849430	
+Lint & Validate	pass	24s	https://github.com/onemindos/omos/actions/runs/40870156639/job/123434849604	
+preflight	pass	36s	https://github.com/onemindos/omos/actions/runs/40870156427/job/123434848223	
+test	pass	1m17s	https://github.com/onemindos/omos/actions/runs/40870156506/job/123434848726	
+test	pass	45s	https://github.com/onemindos/omos/actions/runs/40870156561/job/123434849263	
+test-and-image	pass	17s	https://github.com/onemindos/omos/actions/runs/40870156427/job/123434848831	
+acceptance	skipping	0	https://github.com/onemindos/omos/actions/runs/40870156427/job/123434849816	

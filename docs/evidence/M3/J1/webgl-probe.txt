@@ -1,0 +1,18 @@
+J1 WebGL probe on the build machine (2026-10-29), Playwright 1.64.0, Chrome for Testing
+headless shell 156.0.8078.4 (chromium-headless-shell v1248), macOS arm64.
+
+Test: create a WebGL2 context on a 256x256 canvas, clear to red, readPixels(0,0,1,1).
+Each line is one browser launch with the listed flags; 10 s timeout per evaluate.
+
+(no flags)                                                        => TIMEOUT webgl
+--enable-unsafe-swiftshader --use-angle=swiftshader               => TIMEOUT webgl
+--disable-gpu                                                     => TIMEOUT webgl
+--in-process-gpu --use-angle=swiftshader --enable-unsafe-swiftshader => WebKit WebGL | 255,0,0,255
+--disable-gpu-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader => TIMEOUT webgl
+--use-gl=angle --use-angle=metal                                  => TIMEOUT webgl
+--use-angle=swiftshader-webgl                                     => TIMEOUT webgl
+
+Conclusion: the separate GPU process never answers on this machine (the renderer blocks on the
+first WebGL call), so the end-to-end tests run with an in-process SwiftShader GPU
+(web/playwright.config.ts). This is a property of this build machine's environment, not of the
+client: on the owner's Mac a normal browser uses the Metal-backed GPU process (OWNER-STEPS.md).

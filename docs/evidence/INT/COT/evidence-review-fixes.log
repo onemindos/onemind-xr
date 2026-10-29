@@ -1,0 +1,41 @@
+2026-10-29T15:48:25Z TestAcceptance2AOI: 2,000 aircraft, AOI around 20: 20 distinct OM.aircraft uids on tak.cot.inject (all inside), first 20 within 42ms
+2026-10-29T15:48:27Z TestAcceptance2AOI: restart with AOI in place: 20 uids projected again from ENT
+2026-10-29T15:48:35Z TestAcceptance2AOI: AOI deleted: 20 removals, last one 3.03s after delete (limit 8s = grace 3s + 5 s); 0 messages in the next 5 s
+2026-10-29T15:48:37Z TestAcceptance3Marking: TAK_RELEASE_GROUPS empty: CLEAR sent, AMBER+STRICT[homestead] and RED not sent (map[OM.drone.sim-clear:1])
+2026-10-29T15:48:39Z TestAcceptance3Marking: TAK_RELEASE_GROUPS=homestead: AMBER+STRICT[homestead] sent with marking headers, RED never; marking tightened to RED -> removal
+2026-10-29T15:48:43Z TestAcceptance4PeopleNeverProjected: person-class tracks, person and station entities inside the AOI over 4 s of updates: 0 CoT on tak.cot.inject and tak.cot.mesh.tx; control aircraft sent 1/1
+2026-10-29T15:48:45Z TestAcceptanceEgressTAK: egress_tak=false inside an AOI: not sent; egress_tak turned off: removal
+2026-10-29T15:48:47Z TestAcceptanceMissionTier: task target projected outside any AOI; active mission's aoi zone projects the aircraft inside it
+2026-10-29T15:48:59Z TestAcceptance6Rate: sim-x1 at 10 Hz for 12 s (~120 updates): 13 on tak.cot.inject (min gap 1s, max 1 per s), 3 on tak.cot.mesh.tx (min gap 5.02s, max 1 per 5 s)
+2026-10-29T15:49:15Z TestAcceptance6Rate: 5,000 aircraft in an AOI: 598 msgs on tak.cot.inject in 14s, max 50 in any one-second window by CoT send time (ceiling 50); 500 live uids incl. sim-x1 (cap 500), 49 replaced by nearer ones with a removal (cap order, section 3.3)
+2026-10-29T15:49:21Z TestAcceptance5EchoAndTasking: echo: projector output fed back on tak.cot.out and tak.cot.mesh.rx (and a relayed copy with the flow tag): ENT subjects 1 -> 1, only OM.drone.sim-x1 on tak.cot.inject
+2026-10-29T15:49:23Z TestAcceptance5EchoAndTasking: stop-line 8: t-k-d on tak.cot.out and t-e-x on tak.cot.mesh.rx -> 0 ENT entities, 0 mission-state keys, 0 cmd.> and 0 svc.policy.> messages; projector logged 2 refusals
+2026-10-29T15:49:25Z TestAcceptance5EchoAndTasking: test 8 (projector half): mesh PLI -> ent.person.tak-android-a6test01 (tlp AMBER+STRICT, egress_tak false); 0 messages for it on tak.cot.inject
+2026-10-29T15:49:25Z TestSendIntegrationHub: web geochat: ok uid=GeoChat.OM-WEB-zeus.All Chat Rooms.2b913af74a2d targets=[server] skipped=[mesh]
+2026-10-29T15:49:25Z TestSendIntegrationHub: unreal marker: ok uid=onemind-headless-1-UiErQFEk targets=[server] skipped=[mesh]
+2026-10-29T15:49:25Z TestSendIntegrationHub: unreal route: ok uid=onemind-headless-4-Rr12Ss34 targets=[server] skipped=[mesh]
+2026-10-29T15:49:25Z TestSendIntegrationHub: unreal geofence: ok uid=onemind-headless-5-Gg12Hh34 targets=[server] skipped=[mesh]
+2026-10-29T15:49:25Z TestSendIntegrationHub: unreal chat: ok uid=GeoChat.onemind-headless.All Chat Rooms.onemind-headless-2-Ab3dEf9h targets=[server] skipped=[mesh]
+2026-10-29T15:49:25Z TestSendIntegrationHub: unreal M4 shape ring: ok uid=onemind-mac-24-R1ng0001.r1 targets=[server] skipped=[]
+2026-10-29T15:49:25Z TestSendIntegrationHub: unreal M4 shape rb: ok uid=onemind-mac-25-RngB0001 targets=[server] skipped=[]
+2026-10-29T15:49:25Z TestSendIntegrationHub: unreal M4 shape line: ok uid=onemind-mac-22-L1ne0001 targets=[server] skipped=[]
+2026-10-29T15:49:25Z TestSendIntegrationHub: replay of client_ref onemind-headless-1-UiErQFEk: stored reply, no second publish
+2026-10-29T15:49:25Z TestSendIntegrationHub: OM. uid impersonation: refused forbidden (<event uid> names a reserved uid (OM., INTEL.) "forbidden")
+2026-10-29T15:49:25Z TestSendIntegrationHub: INTEL. uid impersonation: refused forbidden (<event uid> names a reserved uid (OM., INTEL.) "forbidden")
+2026-10-29T15:49:25Z TestSendIntegrationHub: EUD PLI (person-track data): refused forbidden (<uid> is person-track data (an EUD position report); clients may not send it "forbidden")
+2026-10-29T15:49:25Z TestSendIntegrationHub: web sender impersonation (carol as OM-WEB-zeus): refused forbidden ({"code":"forbidden","message":"sender.uid \"OM-WEB-zeus\" is not bound to the calling user"})
+2026-10-29T15:49:25Z TestSendIntegrationHub: marking RED: refused forbidden (marking gate: "RED" is not releasable to TAK "forbidden")
+2026-10-29T15:49:25Z TestSendIntegrationHub: marking AMBER without releasable_to: refused forbidden (marking gate: "AMBER" is not releasable to TAK "forbidden")
+2026-10-29T15:49:25Z TestSendIntegrationHub: marking AMBER releasable to homestead (TAK_RELEASE_GROUPS): ok uid=onemind-headless-8-Amb2 targets=[server] skipped=[]
+2026-10-29T15:49:25Z TestSendIntegrationHub: mesh-only send to the hub projector: refused target_failed (this projector serves only target server "target_failed")
+2026-10-29T15:49:25Z TestSendIntegrationHub: same-account caller (no Nats-Request-Info): refused forbidden ({"code":"forbidden","message":"caller identity not verified: send through the CLIENT account's svc.cot.send import"})
+2026-10-29T15:49:25Z TestSendIntegrationHub: own-account caller with a hand-written Nats-Request-Info naming its own account: refused forbidden
+2026-10-29T15:49:25Z TestSendIntegrationHub: AGENTS caller (no import): no responders
+2026-10-29T15:49:25Z TestSendIntegrationHub: zeus after carol is limited: ok uid=GeoChat.OM-WEB-zeus.Cyan.57b574ec6986 targets=[server] skipped=[]
+2026-10-29T15:49:25Z TestSendIntegrationHub: per-identity rate limit (6/min, burst 25): carol 24 ok then 6 rate_limited; zeus unaffected
+2026-10-29T15:49:25Z TestSendIntegrationHub: cmd.projector.disable: svc.cot.send refused forbidden (G1)
+2026-10-29T15:49:26Z TestSendIntegrationHub: single writer: 34 publishes on tak.cot.inject = 34 ok replies; counters ok=34 forbidden=9 rate_limited=6 target_failed=1 replayed=1
+2026-10-29T15:49:26Z TestSendIntegrationMeshAndCeiling: site projector: GeoChat direct message core-published on tak.cot.mesh.tx with Tak-Dest-Uid (CP-3), skipped server
+2026-10-29T15:49:26Z TestSendIntegrationMeshAndCeiling: client ceiling COT_SEND_MAX_PER_SEC=3: 2 ok, 6 rate_limited in one burst; nothing on tak.cot.inject
+2026-10-29T15:49:26Z TestSendForgedRequestInfo/without_bus_control: KNOWN GAP (A6-P13): own-account user forging Nats-Request-Info acc=CLIENT user=zeus without the bus deny: accepted=true, forged publishes=1; COT_SEND_ENABLED defaults to false until the deny is applied
+2026-10-29T15:49:28Z TestSendForgedRequestInfo/with_bus_control: A6-P13 bus control (legacy ONEMIND user publish deny svc.cot.>): forged acc=CLIENT header refused at the server, 0 forged publishes; real CLIENT caller still served

@@ -1,0 +1,25 @@
+# omos CI-equivalent checks on feat/mediamtx-video 3d7b1f51 vs origin/main 62e3d22b — 2026-10-29T11:58:10Z
+$ python scripts/validate_changed_yaml.py
+Changed YAML gate passed (18 files checked)
+exit=0
+$ python scripts/validate_manifests.py
+Summary: 6 resources found in 6 files - Valid: 6, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 6 manifest file(s)
+exit=0
+$ kubectl kustomize platform/onetak/media | kubeconform -strict
+Summary: 6 resources found parsing stdin - Valid: 6, Invalid: 0, Errors: 0, Skipped: 0
+exit=0
+$ python scripts/check_onemind_mcp_coverage.py
+All 58 Git-declared Argo Applications mapped to MCP access dispositions
+exit=0
+$ python scripts/validate_plugin_manifests.py
+ok   services/plugins/examples/video-lookup/onemind-plugin.yaml (org.onemindos.skill.video-lookup 0.1.0, kinds skill)
+exit=0
+$ shellcheck -S error infra/edge/mac-media/edge-media.sh
+exit=0
+$ gitleaks dir (baseline-aware)
+7:58AM INF no leaks found
+exit=0
+$ gitleaks git origin/main..HEAD
+7:58AM INF no leaks found
+exit=0

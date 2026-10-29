@@ -1,0 +1,30 @@
+[6694] 2026/10/29 07:54:59.047023 [INF] Starting nats-server
+[6694] 2026/10/29 07:54:59.047138 [INF]   Version:  2.15.2
+[6694] 2026/10/29 07:54:59.047150 [INF]   Git:      [5a815f1]
+[6694] 2026/10/29 07:54:59.047155 [INF]   Name:     NBYKL2NV4XSGD3KNOMSQTO54RFZI4K64SADE2DCX5FWWINXCUXQ3ZF5Z
+[6694] 2026/10/29 07:54:59.047160 [INF]   Node:     Xp7UzzfF
+[6694] 2026/10/29 07:54:59.047164 [INF]   ID:       NBYKL2NV4XSGD3KNOMSQTO54RFZI4K64SADE2DCX5FWWINXCUXQ3ZF5Z
+[6694] 2026/10/29 07:54:59.047173 [WRN] Plaintext passwords detected, use nkeys or bcrypt
+[6694] 2026/10/29 07:54:59.047377 [INF] Starting JetStream
+[6694] 2026/10/29 07:54:59.047689 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[6694] 2026/10/29 07:54:59.047703 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[6694] 2026/10/29 07:54:59.047707 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[6694] 2026/10/29 07:54:59.047711 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[6694] 2026/10/29 07:54:59.047715 [INF] 
+[6694] 2026/10/29 07:54:59.047718 [INF]          https://docs.nats.io/jetstream
+[6694] 2026/10/29 07:54:59.047721 [INF] 
+[6694] 2026/10/29 07:54:59.047725 [INF] ---------------- JETSTREAM ----------------
+[6694] 2026/10/29 07:54:59.047728 [INF]   Strict:          true
+[6694] 2026/10/29 07:54:59.047732 [INF]   Max Memory:      24.00 GB
+[6694] 2026/10/29 07:54:59.047735 [INF]   Max Storage:     15.78 GB
+[6694] 2026/10/29 07:54:59.047738 [INF]   Store Directory: "/Users/danielcarku/Desktop/work/.run/tmp-a1-review/feed-replay.MMwZ1O/store/jetstream"
+[6694] 2026/10/29 07:54:59.047746 [INF]   API Level:       5
+[6694] 2026/10/29 07:54:59.047749 [INF] -------------------------------------------
+[6694] 2026/10/29 07:54:59.048115 [INF] Took 725.292µs to start JetStream
+[6694] 2026/10/29 07:54:59.048205 [INF] Listening for client connections on 127.0.0.1:54273
+[6694] 2026/10/29 07:54:59.048215 [INF] Server is ready
+[6694] 2026/10/29 07:55:17.629296 [INF] Trapped "terminated" signal
+[6694] 2026/10/29 07:55:17.629413 [INF] Initiating Shutdown...
+[6694] 2026/10/29 07:55:17.629427 [INF] Initiating JetStream Shutdown...
+[6694] 2026/10/29 07:55:17.630425 [INF] JetStream Shutdown
+[6694] 2026/10/29 07:55:17.630491 [INF] Server Exiting..

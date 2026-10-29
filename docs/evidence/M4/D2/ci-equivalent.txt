@@ -1,0 +1,36 @@
+# CI-equivalent checks, omos feat/mission-service 9381d186 (single commit), 2026-10-29T13:46:11Z
+== yamllint on every YAML file this PR adds or changes
+ok
+== validate_changed_yaml.py
+Changed YAML gate passed (6 files checked)
+== check_onemind_mcp_coverage.py
+All 58 Git-declared Argo Applications mapped to MCP access dispositions
+== validate_manifests.py (changed, kubeconform strict)
+Summary: 4 resources found in 4 files - Valid: 4, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 4 manifest file(s)
+exit=0
+== validate_helm_renders.py (changed)
+No Helm-affecting changes to render
+== test_gitops*.py
+Ran 168 tests in 14.930s
+
+OK (skipped=15)
+== shellcheck services/mission/test/e2e.sh
+ok
+== gitleaks (commits origin/main..HEAD)
+[90m9:46AM[0m [32mINF[0m [1mno leaks found[0m
+== gitleaks dir (working tree, baseline)
+[90m9:46AM[0m [32mINF[0m [1mno leaks found[0m
+== full-tree yamllint platform/ docs/: pre-existing errors only in files this PR does not touch (platform/matrix, platform/onetak, platform/data, ...)
+
+== GitHub CI on PR #568 @ac90b787 (2026-10-29T13:58:41Z)
+(first run @31a3c06b failed TestDispatchedBeforeCreate: test waited on KV state, not on the fact; fixed in ac90b787, verified locally with -count=10)
+Helm render check	pass	41s	https://github.com/onemindos/omos/actions/runs/40886360532/job/123491026519	
+Kubernetes manifest schema (kubeconform)	pass	6s	https://github.com/onemindos/omos/actions/runs/40886360532/job/123491026353	
+Lint & Validate	pass	23s	https://github.com/onemindos/omos/actions/runs/40886360532/job/123491026657	
+Secret scan (gitleaks)	pass	8s	https://github.com/onemindos/omos/actions/runs/40886360532/job/123491025911	
+image	skipping	0	https://github.com/onemindos/omos/actions/runs/40886360548/job/123491974481	
+preflight	pass	38s	https://github.com/onemindos/omos/actions/runs/40886360499/job/123491025792	
+test	pass	1m38s	https://github.com/onemindos/omos/actions/runs/40886360548/job/123491025667	
+test-and-image	pass	16s	https://github.com/onemindos/omos/actions/runs/40886360499/job/123491025014	
+acceptance	skipping	0	https://github.com/onemindos/omos/actions/runs/40886360499/job/123491028133	

@@ -1,0 +1,110 @@
+# video-registry: go vet + go test -race -count=1 -v ./... — 2026-10-29T11:55:54Z
+# go go1.27.3, nats-server nats-server: v2.15.2, MediaMTX v1.21.3, ffmpeg 8.1.1 (Homebrew)
+go vet: ok
+?   	github.com/onemindos/omos/services/video-registry/cmd/video-registry	[no test files]
+=== RUN   TestE2EMediaMTX
+    e2e_test.go:118: PASS anonymous RTSP publish to drone/sim-x1: refused (401)
+    e2e_test.go:119: PASS reader identity onemind-client publishing: refused (401)
+    e2e_test.go:120: PASS mavlink-bridge publishing to configured path cam/gate-north (outside its grant): refused (401)
+    e2e_test.go:121: PASS mavlink-bridge publishing a non-sim drone drone/x47 (no such path): refused (400)
+    e2e_test.go:151: PASS evt.video.sim-x1.online after 0.6s: {V:1 Event:online StreamID:drone/sim-x1 EntityType:drone EntityID:sim-x1 EntitySubject:ent.drone.sim-x1.state Reason: TS:2026-10-29 11:56:00.617752 +0000 UTC Origin:hub}
+    e2e_test.go:159: PASS svc.registry.video.get ent.drone.sim-x1.state ->
+        {
+          "v": 1,
+          "stream_id": "drone/sim-x1",
+          "entity_type": "drone",
+          "entity_id": "sim-x1",
+          "entity_subject": "ent.drone.sim-x1.state",
+          "live": true,
+          "source_type": "rtspSession",
+          "tracks": [
+            "H264"
+          ],
+          "codec": "H264",
+          "width": 640,
+          "height": 360,
+          "klv": false,
+          "latency_class": "tactical",
+          "latency_by_transport": {
+            "whep": "control",
+            "rtsp": "tactical",
+            "srt": "tactical",
+            "hls": "situational"
+          },
+          "urls": {
+            "rtsp": "rtsp://127.0.0.1:54491/drone/sim-x1",
+            "hls": "http://127.0.0.1:54492/drone/sim-x1/index.m3u8",
+            "whep": "http://127.0.0.1:54493/drone/sim-x1/whep",
+            "srt": "srt://127.0.0.1:57922?streamid=read:drone/sim-x1",
+            "playback": "http://127.0.0.1:54496/list?path=drone/sim-x1"
+          },
+          "permissions": {
+            "publish": [
+              "edge-home",
+              "mavlink-bridge"
+            ],
+            "read": [
+              "onemind-client",
+              "tak-viewer",
+              "takml"
+            ],
+            "playback": [
+              "onemind-client"
+            ]
+          },
+          "recording": {
+            "enabled": true,
+            "format": "fmp4",
+            "retention": "8s"
+          },
+          "media": {
+            "kind": "video",
+            "url": "rtsp://127.0.0.1:54491/drone/sim-x1",
+            "role": "primary",
+            "stream_id": "drone/sim-x1"
+          },
+          "ready_since": "2026-10-29T11:56:00.148857Z",
+          "last_seen": "2026-10-29T11:56:00.61611Z",
+          "updated_at": "2026-10-29T11:56:00.61611Z",
+          "origin": "hub",
+          "seq": 1
+        }
+    e2e_test.go:171: PASS anonymous RTSP read refused (401)
+    e2e_test.go:176: PASS publisher identity mavlink-bridge cannot read (401)
+    e2e_test.go:181: PASS tak-viewer RTSP read: h264,640,360
+    e2e_test.go:187: PASS anonymous HLS read refused (401 after the cookie check)
+    e2e_test.go:207: PASS LL-HLS media playlist (5 EXT-X-PART lines)
+    e2e_test.go:216: PASS decoded a frame of sim-x1 over HLS from the registry URL (44851 bytes)
+    e2e_test.go:242: PASS recording segments appeared: [2026-10-29_07-56-00-149746_-0400.mp4 2026-10-29_07-56-01-643954_-0400.mp4 2026-10-29_07-56-03-643459_-0400.mp4 2026-10-29_07-56-05-643459_-0400.mp4]
+    e2e_test.go:244: PASS playback /list for onemind-client: [{"start":"2026-10-29T07:56:00.149746-04:00","duration":6.493713,"url":"http://127.0.0.1:54496/get?duration=6.493713\u0026path=drone%2Fsim-x1\u0026start=2026-10-29T07%3A56%3A00.149746-04%3A00"}]
+    e2e_test.go:251: PASS recordings rolled: 2026-10-29_07-56-00-149746_-0400.mp4 deleted after retention, now [2026-10-29_07-56-11-643459_-0400.mp4 2026-10-29_07-56-13-643459_-0400.mp4 2026-10-29_07-56-15-643459_-0400.mp4 2026-10-29_07-56-17-643396_-0400.mp4 2026-10-29_07-56-19-643396_-0400.mp4]
+    e2e_test.go:264: PASS evt.video.sim-x1.offline: {V:1 Event:offline StreamID:drone/sim-x1 EntityType:drone EntityID:sim-x1 EntitySubject:ent.drone.sim-x1.state Reason:publisher_stopped TS:2026-10-29 11:56:26.117329 +0000 UTC Origin:hub}
+--- PASS: TestE2EMediaMTX (31.03s)
+=== RUN   TestRegistryLifecycle
+--- PASS: TestRegistryLifecycle (2.47s)
+=== RUN   TestRestartMarksVanishedStreamsOffline
+--- PASS: TestRestartMarksVanishedStreamsOffline (0.38s)
+=== RUN   TestMissingBucketFails
+--- PASS: TestMissingBucketFails (0.06s)
+=== RUN   TestParsePath
+--- PASS: TestParsePath (0.00s)
+=== RUN   TestParseEntityRef
+--- PASS: TestParseEntityRef (0.00s)
+=== RUN   TestNoAnonymousAccess
+--- PASS: TestNoAnonymousAccess (0.00s)
+=== RUN   TestPermissionsAndRecording
+--- PASS: TestPermissionsAndRecording (0.00s)
+=== RUN   TestDeploymentEnvMatchesUsers
+--- PASS: TestDeploymentEnvMatchesUsers (0.01s)
+=== RUN   TestBuildRecord
+--- PASS: TestBuildRecord (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/video-registry/internal/registry	35.537s
+=== RUN   TestVideoURLHygiene
+--- PASS: TestVideoURLHygiene (0.00s)
+=== RUN   TestCheck
+--- PASS: TestCheck (0.00s)
+=== RUN   TestFeed
+--- PASS: TestFeed (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/video-registry/internal/takvideo	1.277s

@@ -1,0 +1,32 @@
+# commit 996acfc568153f67286e4ccc19275d017f92cd97, base HEAD^
+$ yamllint -c .github/yamllint* or default
+(eval):3: no matches found: .github/*yamllint*
+platform/omos/entity/deployment.yaml
+  1:81      warning  line too long (90 > 80 characters)  (line-length)
+  2:81      warning  line too long (90 > 80 characters)  (line-length)
+  3:81      warning  line too long (92 > 80 characters)  (line-length)
+  6:81      warning  line too long (88 > 80 characters)  (line-length)
+  7:81      warning  line too long (84 > 80 characters)  (line-length)
+  8:81      warning  line too long (94 > 80 characters)  (line-length)
+  9:81      warning  line too long (82 > 80 characters)  (line-length)
+  10:81     warning  line too long (93 > 80 characters)  (line-length)
+  11:81     warning  line too long (89 > 80 characters)  (line-length)
+  14:81     warning  line too long (91 > 80 characters)  (line-length)
+  38:81     warning  line too long (97 > 80 characters)  (line-length)
+  39:81     warning  line too long (87 > 80 characters)  (line-length)
+  51:81     warning  line too long (89 > 80 characters)  (line-length)
+  75:81     warning  line too long (82 > 80 characters)  (line-length)
+
+rc=0
+$ python scripts/validate_changed_yaml.py
+Changed YAML gate passed (1 files checked)
+rc=0
+$ python scripts/validate_manifests.py
+Summary: 1 resource found in 1 file - Valid: 1, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)
+rc=0
+$ go vet ./... && go test -race (full output in go-test-race.txt): PASS
+$ gitleaks git --log-opts=HEAD^..HEAD
+[90m12:39PM[0m [32mINF[0m [1mscanned ~10079 bytes (10.08 KB) in 55.2ms[0m
+[90m12:39PM[0m [32mINF[0m [1mno leaks found[0m
+rc=0

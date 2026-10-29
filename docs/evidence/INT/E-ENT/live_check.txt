@@ -1,0 +1,20 @@
+# E-ENT live check 2026-10-29T16:39:00Z
+$ nats pub tel.fleet.drone.sim-x1.position (stale 3 s, meta.connection online)
+## fresh
+{"entity_id": "sim-x1", "lifecycle": "active", "cot_type": "a-f-A-M-H-Q", "marking": {"tlp": "AMBER+STRICT", "releasable_to": ["homestead"]}, "health": {"battery_pct": 80, "connection": "online"}}
+{"entity_id": "sim-tb1", "lifecycle": "active", "cot_type": "a-f-G-E-V", "marking": {"tlp": "AMBER+STRICT", "releasable_to": ["homestead"]}, "health": {"connection": "online"}}
+{"entity_id": "fleet-x47", "lifecycle": "active", "cot_type": "a-f-A-M-F-Q", "marking": {"tlp": "AMBER", "releasable_to": []}, "health": {"connection": "online"}}
+## ENT headers for sim-x1
+  OneMind-Marking: AMBER+STRICT
+  OneMind-Releasable-To: homestead
+  OneMind-Schema: entity.v1
+## after 4 s of silence (stale=3 s)
+{"entity_id": "sim-x1", "lifecycle": "stale", "cot_type": "a-f-A-M-H-Q", "marking": {"tlp": "AMBER+STRICT", "releasable_to": ["homestead"]}, "health": {"battery_pct": 80, "connection": "offline"}}
+## unknown id: nats req svc.entity.get {"entity_id":"nope"}
+12:39:05 Received with rtt 369.625µs
+12:39:05 Nats-Service-Error-Code: 404
+12:39:05 Nats-Service-Error: entity not found
+12:39:05 
+{"detail":"entity nope not found","error":"not_found","v":1}
+
+

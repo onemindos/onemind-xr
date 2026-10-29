@@ -1,0 +1,13 @@
+E-LAYER: whole-loop bug 4 fix on omos feat/layer-service (#561, stacked on #552)
+Commit: 0bcd36a5be3ed379588dccfadbbc1b88bbe5dcd1
+Change: default layers matched to the ONTOLOGY types/kinds #552 emits (hazards=event by kind or
+intel/world hazard source subject; space=vehicle kind satellite; transit=vehicle kind train;
+fleet excludes satellite/train; rf=sensor kinds aprs/meshtastic/rf, no emitter yet).
+New Def/manifest fields: kinds, source_subjects, exclude_kinds.
+Fixtures: #552 golden entities.json (73823045) + NWS ent.event record from INT/E2E/run2.
+go-test-race.txt: go vet + go test -race -count=1 -v ./... (33 tests pass).
+gh-pr-checks.txt: GitHub CI on the PR (test pass; image job skipped on PRs).
+Local: gitleaks protect --staged clean; validate_changed_yaml.py passed (no YAML changed).
+Follow-up for the orchestrator: onemind-xr docs/contracts/layer-snapshot.md section 1 still lists
+hazard/satellite/train/station types; update to this mapping and the additive manifest fields.
+#563 (projector AOI, stacked on #561) was not touched and needs the new #561 tip merged in by its owner.

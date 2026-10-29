@@ -1,0 +1,43 @@
+JUnit version 4.13.2
+..........[1620] 2026/10/29 07:51:02.224056 [INF] Starting nats-server
+[pool-3-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin NATS nats: connection opened
+[pool-3-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin subscribed to tak.cot.inject (queue tak-cot-inject)
+[takserver-nats-bridge:3] WARN tak.server.plugins.NatsLink - NatsBridgePlugin refused tak.cot.inject message: not a CoT event
+[takserver-nats-bridge:3] WARN tak.server.plugins.NatsLink - NatsBridgePlugin refused tak.cot.inject message: stream control type t-x-takp-q
+[takserver-nats-bridge:3] WARN tak.server.plugins.NatsLink - NatsBridgePlugin refused tak.cot.inject message: more than one CoT event in one message
+[pool-3-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin NATS nats: connection closed
+[main] INFO tak.server.plugins.NatsLink - NatsBridgePlugin v1.1.0 status nats=CLOSED injected=20 injectRejected=3 injectFailed=0 forwarded=1 forwardDropped=0
+.[1623] 2026/10/29 07:51:02.714688 [INF] Starting nats-server
+[pool-7-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin NATS nats: connection opened
+[pool-7-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin subscribed to tak.cot.inject (queue tak-cot-inject)
+[takserver-nats-bridge:3] ERROR tak.server.plugins.NatsLink - NatsBridgePlugin could not inject CoT into TAK
+java.lang.IllegalStateException: TAK send failed
+	at tak.server.plugins.NatsLinkTest.lambda$injectorFailureIsCountedNotFatal$7(NatsLinkTest.java:157)
+	at tak.server.plugins.NatsLink.onInject(NatsLink.java:123)
+	at tak.server.plugins.NatsLink.lambda$onConnectionEvent$3(NatsLink.java:96)
+	at io.nats.client.impl.NatsDispatcher.run(NatsDispatcher.java:104)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+[pool-7-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin NATS nats: connection closed
+[main] INFO tak.server.plugins.NatsLink - NatsBridgePlugin v1.1.0 status nats=CLOSED injected=1 injectRejected=0 injectFailed=1 forwarded=0 forwardDropped=0
+.[1636] 2026/10/29 07:51:02.796421 [INF] Starting nats-server
+Oct 29, 2026 7:51:02 AM io.nats.client.impl.ErrorListenerLoggerImpl exceptionOccurred
+SEVERE: exceptionOccurred, Exception: java.net.ConnectException: Connection refused
+[pool-9-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin NATS nats: connection disconnected
+Oct 29, 2026 7:51:02 AM io.nats.client.impl.ErrorListenerLoggerImpl exceptionOccurred
+SEVERE: exceptionOccurred, Exception: java.net.ConnectException: Connection refused
+[pool-9-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin NATS nats: connection disconnected
+[pool-9-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin NATS nats: connection reconnected
+[pool-9-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin subscribed to tak.cot.inject (queue tak-cot-inject)
+[pool-9-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin NATS nats: subscriptions re-established
+[pool-9-thread-1] INFO tak.server.plugins.NatsLink - NatsBridgePlugin NATS nats: connection closed
+[main] INFO tak.server.plugins.NatsLink - NatsBridgePlugin v1.1.0 status nats=CLOSED injected=1 injectRejected=0 injectFailed=0 forwarded=0 forwardDropped=1
+
+Time: 2.831
+
+OK (12 tests)
+
+exit=0

@@ -1,0 +1,15 @@
+ .../2026-10-29-mission-service-owner-proposals.md  |  7 ++--
+ platform/mission/README.md                         |  4 +-
+ services/mission/README.md                         |  5 ++-
+ services/mission/e2e/e2e_test.go                   | 49 ++++++++--------------
+ services/mission/test/e2e.sh                       |  7 ----
+ .../interop/policy-task-fleet-params-hash.patch    | 28 -------------
+ 6 files changed, 26 insertions(+), 74 deletions(-)
+Changed YAML gate passed (1 files checked)
+shellcheck ok
+gitleaks dir services/mission:
+12:36PM INF no leaks found
+gitleaks dir platform/mission:
+12:36PM INF no leaks found
+gitleaks dir docs/proposals/2026-10-29-mission-service-owner-proposals.md:
+12:36PM INF no leaks found

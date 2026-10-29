@@ -1,0 +1,362 @@
+=== RUN   TestStageBMatrix
+=== RUN   TestStageBMatrix/policy
+    permissions_test.go:162: PASS ALLOW pub  policy               cmd.fleet.drone.sim-x1.goto              delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  policy               cmd.mission.m1.create                    delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  policy               evt.so.action.approved                   delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  policy               svc.entity.get                           delivered to entity
+    permissions_test.go:162: PASS ALLOW pub  policy               $KV.geofences.z1                         delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  policy               tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:172: PASS DENY  pub  policy               ent.drone.sim-x1.state                   server: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+    permissions_test.go:172: PASS DENY  pub  policy               intel.weather.noaa.alert                 server: nats: permissions violation: Permissions Violation for Publish to "intel.weather.noaa.alert"
+    permissions_test.go:172: PASS DENY  pub  policy               _INBOX.spoof                             server: nats: permissions violation: Permissions Violation for Publish to "_INBOX.spoof"
+    permissions_test.go:172: PASS DENY  pub  policy               agents.prompt.hermes.zeus.legacy         server: nats: permissions violation: Permissions Violation for Publish to "agents.prompt.hermes.zeus.legacy"
+    permissions_test.go:172: PASS DENY  pub  policy               $JS.API.STREAM.CREATE.X                  server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.CREATE.X"
+    permissions_test.go:172: PASS DENY  pub  policy               $KV.entity-correlation.k                 server: nats: permissions violation: Permissions Violation for Publish to "$KV.entity-correlation.k"
+    permissions_test.go:175: PASS ALLOW sub  policy               svc.policy.>                             no violation
+    permissions_test.go:175: PASS ALLOW sub  policy               evt.drone.>                              no violation
+    permissions_test.go:175: PASS ALLOW sub  policy               evt.mission.>                            no violation
+    permissions_test.go:175: PASS ALLOW sub  policy               _INBOX.>                                 no violation
+    permissions_test.go:178: PASS DENY  sub  policy               tel.>                                    server: nats: permissions violation: Permissions Violation for Subscription to "tel.>"
+    permissions_test.go:178: PASS DENY  sub  policy               intel.>                                  server: nats: permissions violation: Permissions Violation for Subscription to "intel.>"
+    permissions_test.go:178: PASS DENY  sub  policy               cmd.>                                    server: nats: permissions violation: Permissions Violation for Subscription to "cmd.>"
+    permissions_test.go:178: PASS DENY  sub  policy               svc.entity.>                             server: nats: permissions violation: Permissions Violation for Subscription to "svc.entity.>"
+=== RUN   TestStageBMatrix/entity
+    permissions_test.go:162: PASS ALLOW pub  entity               ent.drone.sim-x1.state                   delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  entity               evt.entity.e1.created                    delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  entity               evt.sys.entity.rejected                  delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  entity               $KV.entity-correlation.k                 delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  entity               cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:172: PASS DENY  pub  entity               cmd.entity.e1.override                   server: nats: permissions violation: Permissions Violation for Publish to "cmd.entity.e1.override"
+    permissions_test.go:172: PASS DENY  pub  entity               tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:172: PASS DENY  pub  entity               evt.so.action.approved                   server: nats: permissions violation: Permissions Violation for Publish to "evt.so.action.approved"
+    permissions_test.go:172: PASS DENY  pub  entity               intel.a.b.c                              server: nats: permissions violation: Permissions Violation for Publish to "intel.a.b.c"
+    permissions_test.go:172: PASS DENY  pub  entity               svc.policy.command.confirm               server: nats: permissions violation: Permissions Violation for Publish to "svc.policy.command.confirm"
+    permissions_test.go:172: PASS DENY  pub  entity               _INBOX.spoof                             server: nats: permissions violation: Permissions Violation for Publish to "_INBOX.spoof"
+    permissions_test.go:172: PASS DENY  pub  entity               $JS.API.STREAM.CREATE.X                  server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.CREATE.X"
+    permissions_test.go:175: PASS ALLOW sub  entity               svc.entity.>                             no violation
+    permissions_test.go:175: PASS ALLOW sub  entity               cmd.entity.>                             no violation
+    permissions_test.go:175: PASS ALLOW sub  entity               _INBOX.>                                 no violation
+    permissions_test.go:175: PASS ALLOW sub  entity               $SRV.PING                                no violation
+    permissions_test.go:175: PASS ALLOW sub  entity               $SRV.INFO.entity                         no violation
+    permissions_test.go:175: PASS ALLOW sub  entity               $SRV.STATS.entity.abc123                 no violation
+    permissions_test.go:178: PASS DENY  sub  entity               svc.policy.>                             server: nats: permissions violation: Permissions Violation for Subscription to "svc.policy.>"
+    permissions_test.go:178: PASS DENY  sub  entity               tak.cot.>                                server: nats: permissions violation: Permissions Violation for Subscription to "tak.cot.>"
+    permissions_test.go:178: PASS DENY  sub  entity               cmd.fleet.>                              server: nats: permissions violation: Permissions Violation for Subscription to "cmd.fleet.>"
+    permissions_test.go:178: PASS DENY  sub  entity               $SRV.PING.policy                         server: nats: permissions violation: Permissions Violation for Subscription to "$SRV.PING.policy"
+=== RUN   TestStageBMatrix/ingest
+    permissions_test.go:162: PASS ALLOW pub  ingest               intel.weather.noaa.alert                 delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  ingest               evt.world.sea.mmsi-367000001             delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  ingest               tel.feed.nws-alerts.status               delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  ingest               evt.sys.nws-alerts.rejected              delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  ingest               $KV.ingest-locks.nws-alerts              delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  ingest               ent.ship.mmsi-1.state                    server: nats: permissions violation: Permissions Violation for Publish to "ent.ship.mmsi-1.state"
+    permissions_test.go:172: PASS DENY  pub  ingest               cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:172: PASS DENY  pub  ingest               tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:172: PASS DENY  pub  ingest               evt.so.action.approved                   server: nats: permissions violation: Permissions Violation for Publish to "evt.so.action.approved"
+    permissions_test.go:172: PASS DENY  pub  ingest               svc.policy.command.propose               server: nats: permissions violation: Permissions Violation for Publish to "svc.policy.command.propose"
+    permissions_test.go:172: PASS DENY  pub  ingest               tel.fleet.drone.sim-x1.position          server: nats: permissions violation: Permissions Violation for Publish to "tel.fleet.drone.sim-x1.position"
+    permissions_test.go:172: PASS DENY  pub  ingest               $KV.feed-config.nws                      server: nats: permissions violation: Permissions Violation for Publish to "$KV.feed-config.nws"
+    permissions_test.go:172: PASS DENY  pub  ingest               $JS.API.STREAM.DELETE.INTEL              server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.DELETE.INTEL"
+    permissions_test.go:175: PASS ALLOW sub  ingest               _INBOX.>                                 no violation
+    permissions_test.go:178: PASS DENY  sub  ingest               intel.>                                  server: nats: permissions violation: Permissions Violation for Subscription to "intel.>"
+    permissions_test.go:178: PASS DENY  sub  ingest               svc.policy.>                             server: nats: permissions violation: Permissions Violation for Subscription to "svc.policy.>"
+    permissions_test.go:178: PASS DENY  sub  ingest               cmd.>                                    server: nats: permissions violation: Permissions Violation for Subscription to "cmd.>"
+=== RUN   TestStageBMatrix/layer
+    permissions_test.go:162: PASS ALLOW pub  layer                $KV.world-state.air                      delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  layer                $KV.fleet-state.sim-x1                   delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  layer                ent.drone.sim-x1.state                   server: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+    permissions_test.go:172: PASS DENY  pub  layer                cmd.map.view.fly                         server: nats: permissions violation: Permissions Violation for Publish to "cmd.map.view.fly"
+    permissions_test.go:172: PASS DENY  pub  layer                tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:172: PASS DENY  pub  layer                svc.layer.snapshot                       server: nats: permissions violation: Permissions Violation for Publish to "svc.layer.snapshot"
+    permissions_test.go:172: PASS DENY  pub  layer                $JS.API.STREAM.MSG.DELETE.ENT            server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.MSG.DELETE.ENT"
+    permissions_test.go:175: PASS ALLOW sub  layer                svc.layer.>                              no violation
+    permissions_test.go:175: PASS ALLOW sub  layer                tel.feed.>                               no violation
+    permissions_test.go:175: PASS ALLOW sub  layer                _INBOX.>                                 no violation
+    permissions_test.go:178: PASS DENY  sub  layer                svc.policy.>                             server: nats: permissions violation: Permissions Violation for Subscription to "svc.policy.>"
+    permissions_test.go:178: PASS DENY  sub  layer                cmd.>                                    server: nats: permissions violation: Permissions Violation for Subscription to "cmd.>"
+    permissions_test.go:178: PASS DENY  sub  layer                intel.>                                  server: nats: permissions violation: Permissions Violation for Subscription to "intel.>"
+=== RUN   TestStageBMatrix/projector
+    permissions_test.go:162: PASS ALLOW pub  projector            tak.cot.inject                           delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  projector            tak.cot.mesh.tx                          delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  projector            cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:172: PASS DENY  pub  projector            ent.drone.sim-x1.state                   server: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+    permissions_test.go:172: PASS DENY  pub  projector            tak.cot.out                              server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.out"
+    permissions_test.go:172: PASS DENY  pub  projector            $KV.geofences.z1                         server: nats: permissions violation: Permissions Violation for Publish to "$KV.geofences.z1"
+    permissions_test.go:175: PASS ALLOW sub  projector            svc.cot.send                             no violation
+    permissions_test.go:175: PASS ALLOW sub  projector            ent.*.*.state                            no violation
+    permissions_test.go:175: PASS ALLOW sub  projector            cmd.projector.disable                    no violation
+    permissions_test.go:175: PASS ALLOW sub  projector            _INBOX.>                                 no violation
+    permissions_test.go:178: PASS DENY  sub  projector            svc.policy.>                             server: nats: permissions violation: Permissions Violation for Subscription to "svc.policy.>"
+    permissions_test.go:178: PASS DENY  sub  projector            cmd.>                                    server: nats: permissions violation: Permissions Violation for Subscription to "cmd.>"
+    permissions_test.go:178: PASS DENY  sub  projector            cmd.fleet.>                              server: nats: permissions violation: Permissions Violation for Subscription to "cmd.fleet.>"
+=== RUN   TestStageBMatrix/tak-client
+    permissions_test.go:162: PASS ALLOW pub  tak-client           tak.cot.out                              delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  tak-client           tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:172: PASS DENY  pub  tak-client           cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:172: PASS DENY  pub  tak-client           ent.drone.sim-x1.state                   server: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+    permissions_test.go:172: PASS DENY  pub  tak-client           tak.cot.mesh.rx                          server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.mesh.rx"
+    permissions_test.go:175: PASS ALLOW sub  tak-client           _INBOX.>                                 no violation
+    permissions_test.go:178: PASS DENY  sub  tak-client           tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Subscription to "tak.cot.inject"
+    permissions_test.go:178: PASS DENY  sub  tak-client           tak.cot.>                                server: nats: permissions violation: Permissions Violation for Subscription to "tak.cot.>"
+=== RUN   TestStageBMatrix/bridge-mavlink-home
+    permissions_test.go:162: PASS ALLOW pub  bridge-mavlink-home  tel.fleet.drone.sim-x1.position          delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  bridge-mavlink-home  tel.fleet.drone.sim-x1.status            delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  bridge-mavlink-home  evt.drone.sim-x1.command                 delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  bridge-mavlink-home  tel.fleet.drone.sim-x2.position          server: nats: permissions violation: Permissions Violation for Publish to "tel.fleet.drone.sim-x2.position"
+    permissions_test.go:172: PASS DENY  pub  bridge-mavlink-home  evt.drone.sim-x2.command                 server: nats: permissions violation: Permissions Violation for Publish to "evt.drone.sim-x2.command"
+    permissions_test.go:172: PASS DENY  pub  bridge-mavlink-home  cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:172: PASS DENY  pub  bridge-mavlink-home  ent.drone.sim-x1.state                   server: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+    permissions_test.go:172: PASS DENY  pub  bridge-mavlink-home  tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:175: PASS ALLOW sub  bridge-mavlink-home  cmd.fleet.drone.sim-x1.>                 no violation
+    permissions_test.go:175: PASS ALLOW sub  bridge-mavlink-home  _INBOX.>                                 no violation
+    permissions_test.go:178: PASS DENY  sub  bridge-mavlink-home  cmd.fleet.drone.sim-x2.>                 server: nats: permissions violation: Permissions Violation for Subscription to "cmd.fleet.drone.sim-x2.>"
+    permissions_test.go:178: PASS DENY  sub  bridge-mavlink-home  cmd.fleet.>                              server: nats: permissions violation: Permissions Violation for Subscription to "cmd.fleet.>"
+    permissions_test.go:178: PASS DENY  sub  bridge-mavlink-home  cmd.>                                    server: nats: permissions violation: Permissions Violation for Subscription to "cmd.>"
+=== RUN   TestStageBMatrix/mesh-gateway
+    permissions_test.go:162: PASS ALLOW pub  mesh-gateway         tak.cot.mesh.rx                          delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  mesh-gateway         tel.fleet.edge.tak-mesh.status           delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  mesh-gateway         tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:172: PASS DENY  pub  mesh-gateway         tak.cot.mesh.tx                          server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.mesh.tx"
+    permissions_test.go:172: PASS DENY  pub  mesh-gateway         tel.fleet.edge.other.status              server: nats: permissions violation: Permissions Violation for Publish to "tel.fleet.edge.other.status"
+    permissions_test.go:172: PASS DENY  pub  mesh-gateway         cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:175: PASS ALLOW sub  mesh-gateway         tak.cot.mesh.tx                          no violation
+    permissions_test.go:175: PASS ALLOW sub  mesh-gateway         _INBOX.>                                 no violation
+    permissions_test.go:178: PASS DENY  sub  mesh-gateway         tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Subscription to "tak.cot.inject"
+    permissions_test.go:178: PASS DENY  sub  mesh-gateway         tak.cot.mesh.rx                          server: nats: permissions violation: Permissions Violation for Subscription to "tak.cot.mesh.rx"
+=== RUN   TestStageBMatrix/agent-fabric
+    permissions_test.go:162: PASS ALLOW pub  agent-fabric         agents.prompt.claude.zeus.x              delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  agent-fabric         $SRV.PING                                delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  agent-fabric         cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:172: PASS DENY  pub  agent-fabric         cmd.map.view.fly                         server: nats: permissions violation: Permissions Violation for Publish to "cmd.map.view.fly"
+    permissions_test.go:172: PASS DENY  pub  agent-fabric         tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:172: PASS DENY  pub  agent-fabric         svc.policy.command.confirm               server: nats: permissions violation: Permissions Violation for Publish to "svc.policy.command.confirm"
+    permissions_test.go:175: PASS ALLOW sub  agent-fabric         agents.>                                 no violation
+    permissions_test.go:175: PASS ALLOW sub  agent-fabric         _INBOX.>                                 no violation
+    permissions_test.go:178: PASS DENY  sub  agent-fabric         cmd.>                                    server: nats: permissions violation: Permissions Violation for Subscription to "cmd.>"
+    permissions_test.go:178: PASS DENY  sub  agent-fabric         intel.>                                  server: nats: permissions violation: Permissions Violation for Subscription to "intel.>"
+=== RUN   TestStageBMatrix/zeus
+    permissions_test.go:162: PASS ALLOW pub  zeus                 svc.policy.command.propose               delivered to policy
+    permissions_test.go:162: PASS ALLOW pub  zeus                 svc.policy.command.confirm               delivered to policy
+    permissions_test.go:162: PASS ALLOW pub  zeus                 svc.entity.get                           delivered to entity
+    permissions_test.go:162: PASS ALLOW pub  zeus                 svc.layer.snapshot                       delivered to layer
+    permissions_test.go:162: PASS ALLOW pub  zeus                 svc.cot.send                             delivered to projector
+    permissions_test.go:162: PASS ALLOW pub  zeus                 cmd.map.view.fly                         delivered to zeus
+    permissions_test.go:172: PASS DENY  pub  zeus                 cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:172: PASS DENY  pub  zeus                 cmd.fleet.drone.sim-x1.land              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.land"
+    permissions_test.go:172: PASS DENY  pub  zeus                 ent.drone.sim-x1.state                   server: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+    permissions_test.go:172: PASS DENY  pub  zeus                 ent.aircraft.icao-a1b2c3.state           server: nats: permissions violation: Permissions Violation for Publish to "ent.aircraft.icao-a1b2c3.state"
+    permissions_test.go:172: PASS DENY  pub  zeus                 tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:172: PASS DENY  pub  zeus                 intel.a.b.c                              server: nats: permissions violation: Permissions Violation for Publish to "intel.a.b.c"
+    permissions_test.go:172: PASS DENY  pub  zeus                 evt.so.action.approved                   server: nats: permissions violation: Permissions Violation for Publish to "evt.so.action.approved"
+    permissions_test.go:172: PASS DENY  pub  zeus                 $JS.API.INFO                             server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.INFO"
+    permissions_test.go:172: PASS DENY  pub  zeus                 $KV.geofences.z1                         server: nats: permissions violation: Permissions Violation for Publish to "$KV.geofences.z1"
+    permissions_test.go:175: PASS ALLOW sub  zeus                 cmd.map.>                                no violation
+    permissions_test.go:175: PASS ALLOW sub  zeus                 _INBOX.>                                 no violation
+    permissions_test.go:178: PASS DENY  sub  zeus                 tel.>                                    server: nats: permissions violation: Permissions Violation for Subscription to "tel.>"
+    permissions_test.go:178: PASS DENY  sub  zeus                 intel.>                                  server: nats: permissions violation: Permissions Violation for Subscription to "intel.>"
+    permissions_test.go:178: PASS DENY  sub  zeus                 ent.>                                    server: nats: permissions violation: Permissions Violation for Subscription to "ent.>"
+    permissions_test.go:178: PASS DENY  sub  zeus                 cmd.fleet.>                              server: nats: permissions violation: Permissions Violation for Subscription to "cmd.fleet.>"
+    permissions_test.go:178: PASS DENY  sub  zeus                 >                                        server: nats: permissions violation: Permissions Violation for Subscription to ">"
+=== RUN   TestStageBMatrix/onemind
+    permissions_test.go:162: PASS ALLOW pub  onemind              intel.legacy.x.y                         delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  onemind              tel.drone.x47.position                   delivered to onemind
+    permissions_test.go:162: PASS ALLOW pub  onemind              evt.world.air.icao-1                     delivered to onemind
+    permissions_test.go:172: PASS DENY  pub  onemind              cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:172: PASS DENY  pub  onemind              cmd.drone.x47.land                       server: nats: permissions violation: Permissions Violation for Publish to "cmd.drone.x47.land"
+    permissions_test.go:172: PASS DENY  pub  onemind              tak.cot.inject                           server: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+    permissions_test.go:172: PASS DENY  pub  onemind              ent.drone.sim-x1.state                   server: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+    permissions_test.go:172: PASS DENY  pub  onemind              evt.so.action.approved                   server: nats: permissions violation: Permissions Violation for Publish to "evt.so.action.approved"
+    permissions_test.go:172: PASS DENY  pub  onemind              svc.policy.command.confirm               server: nats: permissions violation: Permissions Violation for Publish to "svc.policy.command.confirm"
+    permissions_test.go:175: PASS ALLOW sub  onemind              intel.>                                  no violation
+    permissions_test.go:175: PASS ALLOW sub  onemind              tel.>                                    no violation
+    permissions_test.go:178: PASS DENY  sub  onemind              svc.policy.>                             server: nats: permissions violation: Permissions Violation for Subscription to "svc.policy.>"
+    permissions_test.go:178: PASS DENY  sub  onemind              svc.entity.>                             server: nats: permissions violation: Permissions Violation for Subscription to "svc.entity.>"
+    permissions_test.go:178: PASS DENY  sub  onemind              svc.layer.>                              server: nats: permissions violation: Permissions Violation for Subscription to "svc.layer.>"
+    permissions_test.go:178: PASS DENY  sub  onemind              svc.cot.send                             server: nats: permissions violation: Permissions Violation for Subscription to "svc.cot.send"
+--- PASS: TestStageBMatrix (19.08s)
+    --- PASS: TestStageBMatrix/policy (2.23s)
+    --- PASS: TestStageBMatrix/entity (2.72s)
+    --- PASS: TestStageBMatrix/ingest (2.35s)
+    --- PASS: TestStageBMatrix/layer (1.41s)
+    --- PASS: TestStageBMatrix/projector (1.76s)
+    --- PASS: TestStageBMatrix/tak-client (1.05s)
+    --- PASS: TestStageBMatrix/bridge-mavlink-home (1.78s)
+    --- PASS: TestStageBMatrix/mesh-gateway (1.44s)
+    --- PASS: TestStageBMatrix/agent-fabric (1.45s)
+    --- PASS: TestStageBMatrix/zeus (1.51s)
+    --- PASS: TestStageBMatrix/onemind (1.08s)
+=== RUN   TestClientCannotCommandOrForgeEntities
+    permissions_test.go:193: PASS DENY  pub  zeus                 cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:194: PASS DENY  pub  zeus                 cmd.fleet.drone.sim-x1.takeoff           server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.takeoff"
+    permissions_test.go:195: PASS DENY  pub  zeus                 ent.drone.sim-x1.state                   server: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+    permissions_test.go:207: PASS ENT stream holds 0 messages after the denied client publishes
+    permissions_test.go:212: PASS CMD stream holds 0 messages after the denied client publishes
+    permissions_test.go:218: PASS CLIENT JetStream AccountInfo refused: context deadline exceeded
+--- PASS: TestClientCannotCommandOrForgeEntities (5.68s)
+=== RUN   TestJetStreamGrants
+=== RUN   TestJetStreamGrants/entity
+    permissions_test.go:263: PASS ALLOW js   entity: stream info COT
+    permissions_test.go:265: PASS ALLOW js   entity: durable consumer entity-svc-cot on COT
+    permissions_test.go:267: PASS ALLOW js   entity: fetch from COT
+    permissions_test.go:270: PASS ALLOW js   entity: ack COT message
+    permissions_test.go:277: PASS ALLOW js   entity: acked publish into ENT
+    permissions_test.go:279: PASS ALLOW js   entity: delete ENT message by sequence
+    permissions_test.go:281: PASS ALLOW js   entity: ordered consumer on ENT (restore)
+    permissions_test.go:283: PASS ALLOW js   entity: bind KV entity-correlation
+    permissions_test.go:285: PASS ALLOW js   entity: KV put entity-correlation
+    permissions_test.go:287: PASS ALLOW js   entity: KV get entity-correlation
+    permissions_test.go:290: PASS DENY  js   entity: create stream -> server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.CREATE.EVIL"
+    permissions_test.go:292: PASS DENY  js   entity: stream info CMD -> server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.INFO.CMD"
+    permissions_test.go:294: PASS DENY  js   entity: bind KV geofences -> server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.INFO.KV_geofences"
+=== RUN   TestJetStreamGrants/ingest
+    permissions_test.go:301: PASS ALLOW js   ingest: acked publish into INTEL with Nats-Msg-Id
+    permissions_test.go:303: PASS ALLOW js   ingest: bind KV ingest-locks
+    permissions_test.go:305: PASS ALLOW js   ingest: KV create (lease) ingest-locks
+    permissions_test.go:307: PASS ALLOW js   ingest: bind KV ingest-state
+    permissions_test.go:309: PASS ALLOW js   ingest: KV put ingest-state
+    permissions_test.go:311: PASS ALLOW js   ingest: bind KV feed-config (read)
+    permissions_test.go:313: PASS ALLOW js   ingest: KV get feed-config
+    permissions_test.go:315: PASS DENY  js   ingest: KV put feed-config -> server: nats: permissions violation: Permissions Violation for Publish to "$KV.feed-config.nws"
+    permissions_test.go:317: PASS DENY  js   ingest: delete stream INTEL -> server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.DELETE.INTEL"
+    permissions_test.go:319: PASS DENY  js   ingest: create KV bucket -> server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.CREATE.KV_evil"
+=== RUN   TestJetStreamGrants/policy
+    permissions_test.go:326: PASS ALLOW js   policy: acked publish into CMD
+    permissions_test.go:328: PASS ALLOW js   policy: acked publish into EVT
+    permissions_test.go:330: PASS ALLOW js   policy: bind KV geofences
+    permissions_test.go:332: PASS ALLOW js   policy: KV watch geofences
+    permissions_test.go:338: PASS ALLOW js   policy: watch delivered geofences entry
+    permissions_test.go:344: PASS ALLOW js   policy: KV put geofences
+    permissions_test.go:346: PASS ALLOW js   policy: bind KV mission-state
+    permissions_test.go:348: PASS ALLOW js   policy: KV put mission-state
+    permissions_test.go:350: PASS DENY  js   policy: stream info ENT -> server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.INFO.ENT"
+=== RUN   TestJetStreamGrants/projector
+    permissions_test.go:357: PASS ALLOW js   projector: stream info INTEL
+    permissions_test.go:359: PASS ALLOW js   projector: durable consumer sink-tak on INTEL
+    permissions_test.go:361: PASS ALLOW js   projector: stream lookup by subject (nats-py js.subscribe)
+    permissions_test.go:363: PASS ALLOW js   projector: bind KV geofences (read)
+    permissions_test.go:365: PASS ALLOW js   projector: KV get geofences
+    permissions_test.go:367: PASS DENY  js   projector: KV put geofences -> server: nats: permissions violation: Permissions Violation for Publish to "$KV.geofences.zone-x"
+=== RUN   TestJetStreamGrants/layer
+    permissions_test.go:374: PASS ALLOW js   layer: ordered consumer on ENT (snapshot path)
+    permissions_test.go:376: PASS ALLOW js   layer: bind KV world-state
+    permissions_test.go:378: PASS ALLOW js   layer: KV put world-state
+    permissions_test.go:381: PASS DENY  js   layer: delete ENT message -> server: nats: permissions violation: Permissions Violation for Publish to "$JS.API.STREAM.MSG.DELETE.ENT"
+--- PASS: TestJetStreamGrants (27.14s)
+    --- PASS: TestJetStreamGrants/entity (9.01s)
+    --- PASS: TestJetStreamGrants/ingest (9.01s)
+    --- PASS: TestJetStreamGrants/policy (3.01s)
+    --- PASS: TestJetStreamGrants/projector (3.00s)
+    --- PASS: TestJetStreamGrants/layer (3.00s)
+=== RUN   TestCrossAccountRequests
+    permissions_test.go:415: PASS CLIENT zeus -> svc.policy.command.propose: policy saw server-set identity acc=CLIENT user=zeus (forged header replaced)
+    permissions_test.go:420: PASS CLIENT zeus -> svc.policy.command.confirm reaches the policy service (humans may confirm): {"start":"2026-10-29T09:01:11.302905-04:00","host":"127.0.0.1","id":8,"acc":"CLIENT","user":"zeus","name":"permtest-zeus","lang":"go","ver":"1.53.1","rtt":296833,"server":"hub","kind":"Client","client_type":"nats"}|svc.policy.command.confirm
+    permissions_test.go:425: PASS DENY  pub  onemind              svc.policy.command.confirm               server: nats: permissions violation: Permissions Violation for Publish to "svc.policy.command.confirm"
+    permissions_test.go:451: PASS CLIENT zeus <- svc.layer.watch: 5 streamed responses through the import (layer has no _INBOX publish grant)
+    permissions_test.go:455: PASS DENY  pub  ingest               _INBOX.Mjc9ao271yu3njNA7cJJae            server: nats: permissions violation: Permissions Violation for Publish to "_INBOX.Mjc9ao271yu3njNA7cJJae"
+--- PASS: TestCrossAccountRequests (0.23s)
+=== RUN   TestHermesLeaf
+    permissions_test.go:474: PASS hermes leaf connected to the hub (account AGENTS)
+    permissions_test.go:514: PASS DENY  leaf-pub hermes            cmd.fleet.drone.sim-x1.goto              client: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"; sidecar log: [53548] 2026/10/29 09:01:11.951693 [ERR] 127.0.0.1:56236 - cid:7 - "v1.53.1:go:permtest-leafclient-hermes-agent" - "OMOS/user:local" - Publish Violation - Subject "cmd.fleet.drone.sim-x1.goto"; not delivered (bridge-mavlink-home listening)
+    permissions_test.go:515: PASS DENY  leaf-pub hermes            cmd.fleet.drone.sim-x1.land              client: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.land"; sidecar log: [53548] 2026/10/29 09:01:12.857020 [ERR] 127.0.0.1:56236 - cid:7 - "v1.53.1:go:permtest-leafclient-hermes-agent" - "OMOS/user:local" - Publish Violation - Subject "cmd.fleet.drone.sim-x1.land"; not delivered (bridge-mavlink-home listening)
+    permissions_test.go:516: PASS DENY  leaf-pub hermes            tak.cot.inject                           client: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"; sidecar log: [53548] 2026/10/29 09:01:13.765534 [ERR] 127.0.0.1:56236 - cid:7 - "v1.53.1:go:permtest-leafclient-hermes-agent" - "OMOS/user:local" - Publish Violation - Subject "tak.cot.inject"; not delivered (tak-plugin listening)
+    permissions_test.go:517: PASS DENY  leaf-pub hermes            cmd.ha.light.on                          client: nats: permissions violation: Permissions Violation for Publish to "cmd.ha.light.on"; sidecar log: [53548] 2026/10/29 09:01:14.672265 [ERR] 127.0.0.1:56236 - cid:7 - "v1.53.1:go:permtest-leafclient-hermes-agent" - "OMOS/user:local" - Publish Violation - Subject "cmd.ha.light.on"; not delivered (onemind listening)
+    permissions_test.go:518: PASS DENY  leaf-pub hermes            cmd.mission.m1.create                    client: nats: permissions violation: Permissions Violation for Publish to "cmd.mission.m1.create"; sidecar log: [53548] 2026/10/29 09:01:15.575278 [ERR] 127.0.0.1:56236 - cid:7 - "v1.53.1:go:permtest-leafclient-hermes-agent" - "OMOS/user:local" - Publish Violation - Subject "cmd.mission.m1.create"; not delivered (onemind listening)
+    permissions_test.go:519: PASS DENY  leaf-pub hermes            ent.drone.sim-x1.state                   client: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"; sidecar log: [53548] 2026/10/29 09:01:16.481748 [ERR] 127.0.0.1:56236 - cid:7 - "v1.53.1:go:permtest-leafclient-hermes-agent" - "OMOS/user:local" - Publish Violation - Subject "ent.drone.sim-x1.state"; not delivered (onemind listening)
+    permissions_test.go:520: PASS DENY  leaf-pub hermes            evt.so.action.approved                   client: nats: permissions violation: Permissions Violation for Publish to "evt.so.action.approved"; sidecar log: [53548] 2026/10/29 09:01:17.390150 [ERR] 127.0.0.1:56236 - cid:7 - "v1.53.1:go:permtest-leafclient-hermes-agent" - "OMOS/user:local" - Publish Violation - Subject "evt.so.action.approved"; not delivered (onemind listening)
+    permissions_test.go:522: PASS DENY  leaf-sub hermes-agent      intel.weather.noaa.alert                 from hub onemind filtered
+    permissions_test.go:526: PASS DENY  leaf-sub hermes            intel.weather.noaa.alert                 client: nats: permissions violation: Permissions Violation for Subscription to "intel.weather.noaa.alert"
+    permissions_test.go:522: PASS DENY  leaf-sub hermes-agent      tel.drone.x47.position                   from hub onemind filtered
+    permissions_test.go:526: PASS DENY  leaf-sub hermes            tel.drone.x47.position                   client: nats: permissions violation: Permissions Violation for Subscription to "tel.drone.x47.position"
+    permissions_test.go:522: PASS DENY  leaf-sub hermes-agent      tak.cot.out                              from hub onemind filtered
+    permissions_test.go:526: PASS DENY  leaf-sub hermes            tak.cot.out                              client: nats: permissions violation: Permissions Violation for Subscription to "tak.cot.out"
+    permissions_test.go:538: PASS hermes leaf and agent connection still up after the denied publishes (refused at the sidecar, no disconnect)
+    permissions_test.go:554: PASS hermes -> svc.policy.command.propose answered; policy saw Nats-Request-Info {"start":"2026-10-29T13:01:11.642522Z","host":"127.0.0.1","id":7,"acc":"AGENTS","user":"hermes","name":"leaf-hermes","ver":"2.14.2","rtt":318000,"server":"leaf-hermes","kind":"Leafnode"}
+    permissions_test.go:558: PASS policy sees Hermes as account AGENTS (policy maps every AGENTS identity to kind agent)
+    permissions_test.go:564: PASS DENY  hermes -> svc.policy.command.confirm: nats: timeout; client: nats: permissions violation: Permissions Violation for Publish to "svc.policy.command.confirm"
+    permissions_test.go:569: PASS DENY  hermes -> svc.policy.task.confirm: nats: timeout
+    permissions_test.go:575: PASS policy service received no confirm from hermes
+    permissions_test.go:589: PASS ALLOW hermes -> svc.entity.get answered
+    permissions_test.go:593: PASS ALLOW hermes -> svc.layer.list answered
+    permissions_test.go:597: PASS DENY  hermes -> svc.layer.snapshot: nats: timeout
+    permissions_test.go:612: PASS ALLOW hermes cmd.map.view.fly delivered to CLIENT zeus (stream export AGENTS -> CLIENT)
+    permissions_test.go:616: PASS ALLOW hermes agents.hb.hermes.zeus.legacy delivered to ONEMIND (stream export AGENTS -> ONEMIND)
+    permissions_test.go:630: PASS ALLOW agent-fabric (ONEMIND) -> agents.prompt.hermes.zeus.legacy: pong {"start":"2026-10-29T09:01:23.306402-04:00","host":"127.0.0.1","id":15,"acc":"ONEMIND","user":"agent-fabric","name":"permtest-agent-fabric","lang":"go","ver":"1.53.1","rtt":1442041,"server":"hub","kind":"Client","client_type":"nats"}
+    permissions_test.go:635: PASS ALLOW zeus (CLIENT) -> agents.prompt.hermes.zeus.legacy: pong {"start":"2026-10-29T09:01:11.748182-04:00","host":"127.0.0.1","id":11,"acc":"CLIENT","user":"zeus","name":"permtest-zeus","lang":"go","ver":"1.53.1","rtt":281000,"server":"hub","kind":"Client","client_type":"nats"}
+    permissions_test.go:640: PASS ALLOW onemind -> svc.bridge.status served by hermes
+    permissions_test.go:644: PASS ALLOW agent-fabric -> $SRV.PING.agents served by hermes
+    permissions_test.go:645: hub log lines mentioning Violation: []
+    permissions_test.go:646: hermes sidecar log lines mentioning Violation: ["[53548] 2026/10/29 09:01:11.951693 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"cmd.fleet.drone.sim-x1.goto\"" "[53548] 2026/10/29 09:01:12.857020 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"cmd.fleet.drone.sim-x1.land\"" "[53548] 2026/10/29 09:01:13.765534 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"tak.cot.inject\"" "[53548] 2026/10/29 09:01:14.672265 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"cmd.ha.light.on\"" "[53548] 2026/10/29 09:01:15.575278 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"cmd.mission.m1.create\"" "[53548] 2026/10/29 09:01:16.481748 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"ent.drone.sim-x1.state\"" "[53548] 2026/10/29 09:01:17.390150 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"evt.so.action.approved\"" "[53548] 2026/10/29 09:01:18.093284 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Subscription Violation - Subject \"intel.weather.noaa.alert\", SID 1" "[53548] 2026/10/29 09:01:18.748196 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Subscription Violation - Subject \"tel.drone.x47.position\", SID 2" "[53548] 2026/10/29 09:01:19.403524 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Subscription Violation - Subject \"tak.cot.out\", SID 3" "[53548] 2026/10/29 09:01:20.274699 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"svc.policy.command.confirm\"" "[53548] 2026/10/29 09:01:20.975997 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"svc.policy.task.confirm\"" "[53548] 2026/10/29 09:01:22.092724 [ERR] 127.0.0.1:56236 - cid:7 - \"v1.53.1:go:permtest-leafclient-hermes-agent\" - \"OMOS/user:local\" - Publish Violation - Subject \"svc.layer.snapshot\""]
+--- PASS: TestHermesLeaf (11.86s)
+=== RUN   TestLeafUsers
+=== RUN   TestLeafUsers/leaf-tak
+    permissions_test.go:663: PASS ALLOW leaf-sub tak-plugin        tak.cot.inject                           from hub projector
+    permissions_test.go:664: PASS ALLOW leaf-pub tak-plugin        tak.cot.out                              delivered to hub onemind
+    permissions_test.go:665: PASS DENY  leaf-pub tak-plugin        cmd.fleet.drone.sim-x1.goto              not delivered to hub bridge-mavlink-home
+    permissions_test.go:666: PASS DENY  leaf-pub tak-plugin        ent.drone.sim-x1.state                   not delivered to hub onemind
+    permissions_test.go:667: PASS DENY  leaf-pub tak-plugin        tak.cot.inject                           not delivered to hub onemind
+    permissions_test.go:668: PASS DENY  leaf-sub tak-plugin        intel.weather.noaa.alert                 from hub onemind filtered
+    permissions_test.go:669: PASS DENY  leaf-sub tak-plugin        cmd.fleet.drone.sim-x1.goto              from hub policy filtered
+=== RUN   TestLeafUsers/leaf-site-mac
+    permissions_test.go:679: PASS ALLOW leaf-sub mac-bridges       cmd.fleet.drone.sim-x1.goto              from hub policy
+    permissions_test.go:680: PASS DENY  leaf-sub mac-bridges       cmd.fleet.drone.sim-x2.goto              from hub policy filtered
+    permissions_test.go:681: PASS ALLOW leaf-sub mac-bridges       tak.cot.mesh.tx                          from hub projector
+    permissions_test.go:682: PASS DENY  leaf-sub mac-bridges       tak.cot.inject                           from hub projector filtered
+    permissions_test.go:683: PASS ALLOW leaf-pub mac-bridges       tel.fleet.drone.sim-x1.position          delivered to hub onemind
+    permissions_test.go:684: PASS DENY  leaf-pub mac-bridges       tel.fleet.drone.sim-x2.position          not delivered to hub onemind
+    permissions_test.go:685: PASS ALLOW leaf-pub mac-bridges       evt.drone.sim-x1.command                 delivered to hub onemind
+    permissions_test.go:686: PASS ALLOW leaf-pub mac-bridges       tak.cot.mesh.rx                          delivered to hub onemind
+    permissions_test.go:687: PASS DENY  leaf-pub mac-bridges       tak.cot.inject                           not delivered to hub onemind
+    permissions_test.go:688: PASS DENY  leaf-pub mac-bridges       cmd.fleet.drone.sim-x1.goto              not delivered to hub onemind
+    permissions_test.go:695: PASS ALLOW leaf-site-mac: acked JetStream publish tak.cot.mesh.rx into COT through the leaf
+--- PASS: TestLeafUsers (7.59s)
+    --- PASS: TestLeafUsers/leaf-tak (3.45s)
+    --- PASS: TestLeafUsers/leaf-site-mac (4.01s)
+=== RUN   TestConnectionTypes
+    permissions_test.go:707: PASS DENY  conn hermes               as STANDARD client: nats: Authorization Violation
+    permissions_test.go:707: PASS DENY  conn leaf-tak             as STANDARD client: nats: Authorization Violation
+    permissions_test.go:707: PASS DENY  conn leaf-site-mac        as STANDARD client: nats: Authorization Violation
+    permissions_test.go:707: PASS DENY  conn leaf_tak             as STANDARD client: nats: Authorization Violation
+    permissions_test.go:714: PASS DENY  conn policy               over WebSocket: nats: Authorization Violation
+    permissions_test.go:714: PASS DENY  conn entity               over WebSocket: nats: Authorization Violation
+    permissions_test.go:714: PASS DENY  conn ingest               over WebSocket: nats: Authorization Violation
+    permissions_test.go:722: PASS ALLOW conn zeus                 over WebSocket
+    permissions_test.go:724: PASS DENY  pub  zeus                 cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:725: PASS DENY  pub  zeus                 ent.drone.sim-x1.state                   server: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+    permissions_test.go:722: PASS ALLOW conn agent-fabric         over WebSocket
+    permissions_test.go:731: PASS DENY  conn policy with a wrong password: nats: Authorization Violation
+    permissions_test.go:741: PASS DENY  leaf onemind              cannot log in as a leaf node: (no log line)
+    permissions_test.go:741: PASS DENY  leaf sys                  cannot log in as a leaf node: (no log line)
+    permissions_test.go:741: PASS DENY  leaf monitor              cannot log in as a leaf node: (no log line)
+    permissions_test.go:747: PASS ALLOW conn onemind              as STANDARD client
+    permissions_test.go:747: PASS ALLOW conn sys                  as STANDARD client
+    permissions_test.go:752: PASS ALLOW conn onemind              over WebSocket (ws.onemindos.dev clients keep working)
+--- PASS: TestConnectionTypes (3.92s)
+=== RUN   TestStageA1Additive
+    permissions_test.go:761: PASS ALLOW pub  onemind              cmd.fleet.drone.sim-x1.goto              delivered to bridge-mavlink-home
+    permissions_test.go:762: NOTE stage A1 still lets the shared onemind user publish commands; stage B closes it
+    permissions_test.go:764: PASS DENY  pub  zeus                 cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:766: PASS DENY  pub  ingest               cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:771: PASS A1: leaf_tak still connects through leafnodes.authorization
+    permissions_test.go:777: PASS A1: new leaf user leaf-tak is refused while leafnodes.authorization exists (A2 needed): [53606] 2026/10/29 09:01:35.598492 [ERR] 127.0.0.1:56752 - lid:12 - authentication error - User "leaf-tak"
+--- PASS: TestStageA1Additive (2.31s)
+=== RUN   TestActivationAndRollback
+    permissions_test.go:801: PASS live-like config: onemind and the leaf_tak leaf connected
+    permissions_test.go:807: PASS reload live -> A1 accepted
+    permissions_test.go:811: PASS A1 reload kept the leaf_tak leaf and the onemind connection
+    permissions_test.go:815: PASS A1: new user policy logs in
+    permissions_test.go:822: PASS reload A1 -> A2 refused as expected: [53624] 2026/10/29 09:01:37.401851 [ERR] Failed to reload server configuration: config reload not supported for LeafNode: field "Users": old=[0x3a33a92c3380], new=[]
+    permissions_test.go:826: PASS refused reload left the server running on the A1 config
+    permissions_test.go:835: PASS A2 restart: leaf_tak leaf reconnected as an ONEMIND account user
+    permissions_test.go:840: PASS A2: new leaf user leaf-tak connects
+    permissions_test.go:843: PASS ALLOW pub  onemind              cmd.fleet.drone.sim-x1.goto              delivered to bridge-mavlink-home
+    permissions_test.go:849: PASS reload A2 -> B accepted
+    permissions_test.go:851: PASS DENY  pub  onemind              cmd.fleet.drone.sim-x1.goto              server: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+    permissions_test.go:852: PASS B applied to the open onemind connection without a reconnect
+    permissions_test.go:860: PASS ALLOW pub  onemind              cmd.fleet.drone.sim-x1.goto              delivered to bridge-mavlink-home
+    permissions_test.go:861: PASS rollback B -> A2 by reload restores the shared user
+    permissions_test.go:871: PASS rollback A2 -> live needs a restart; after it the leaf_tak leaf reconnects
+    permissions_test.go:875: PASS after rollback the new users are gone (policy refused)
+--- PASS: TestActivationAndRollback (1.97s)
+PASS
+permtest: 302 permission checks passed in this run (nats-server nats-server: v2.14.2, external binary)
+ok  	github.com/onemindos/omos/platform/nats/identities/permtest	81.142s

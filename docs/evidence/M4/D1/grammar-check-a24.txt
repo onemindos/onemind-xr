@@ -1,0 +1,34 @@
+streams on this checkout: 14 (AGENTS, CMD, COT, ENV, EVT, GEO, INTEL, MISSION, SAAS, SYS, TEL, VOICE, WORLD, ZEUS)
+location	tag	subject	grammar	stored	notes
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:219	proposed	evt.map.geofence.{created|updated|deleted|refused}	G:evt	stored-today=MISSION
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:220	proposed	evt.so.alert.{raised|updated|resolved}	G:evt	stored-today=EVT
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:221	proposed	svc.geofence.alerts	G:svc	stored-today=none
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:222	current	evt.map.geofence.{id}.{enter|exit}	D9.1:evt-geofence	stored-today=MISSION
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:223	current	evt.map.geofence.{id}	G:evt	stored-today=MISSION
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:224	current	cmd.map.geofence.{id}.{create|update|remove}	D9.1:map-geofence	stored-today=CMD
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:225	current	cmd.map.geofence.{id}.{verb}	D9.1:map-geofence	stored-today=CMD
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:226	interim	cmd.map.geofence.{id}.delete	D9.1:map-geofence	stored-today=CMD
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:227	current	cmd.map.annotation.{id}.{verb}	D9.1:map-annotation	stored-today=CMD
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:228	current	cmd.entity.{id}.{acknowledge|resolve}	G:cmd	stored-today=CMD
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:229	current	evt.so.action.{event}	G:evt	stored-today=EVT
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:230	current	evt.so.task.created	G:evt	stored-today=EVT
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:231	current	evt.{domain}.{entity}.{event}	G:evt	stored-today=EVT,GEO,MISSION,SYS,WORLD
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:232	current	evt.so.alert.raised	G:evt	stored-today=EVT
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:233	alternative	evt.entity.{zone_id}.{event}	G:evt	stored-today=none
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:234	alternative	evt.entity.{entity_id}.alert	G:evt	stored-today=none
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:235	alternative	ent.alert.{id}.state	G:ent	stored-today=none
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:236	alternative	ent.zone.{id}.state	G:ent	stored-today=none
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:237	filter	cmd.map.geofence.>	G:cmd,D9.1:map-geofence	stored-today=CMD
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:238	filter	cmd.map.geofence.*	G:cmd	stored-today=CMD
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:239	filter	cmd.map.>	G:cmd,D9.1:map-geofence,D9.1:map-annotation	stored-today=CMD
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:240	filter	evt.map.>	G:evt,D9.1:evt-geofence	stored-today=MISSION
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:241	filter	evt.so.>	G:evt	stored-today=EVT
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:242	filter	evt.so.action.*	G:evt	stored-today=EVT
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:243	filter	evt.so.alert.>	G:evt	stored-today=EVT
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:244	filter	evt.so.alert.*	G:evt	stored-today=EVT
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:245	filter	ent.*.*.state	G:ent	stored-today=none
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:246	filter	ent.>	G:ent	stored-today=none
+../d1-geofence/docs/proposals/2026-10-29-geofence-alert-service.md:247	filter	tel.feed.*.status	G:tel	stored-today=none
+
+subjects checked: 29 (proposed 3, interim 1, current 10, filter 11, legacy 0, alternative 4, action 0); off-grammar (legacy, alternative or action only): 0
+result: PASS (0 errors)

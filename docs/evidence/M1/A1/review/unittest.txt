@@ -1,0 +1,13 @@
+test_aircraft_and_ships_stay_off (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_aircraft_and_ships_stay_off) ... ok
+test_duplicate_feed_hazards_is_removed (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_duplicate_feed_hazards_is_removed) ... ok
+test_each_pipeline_runs_in_at_most_one_deployment (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_each_pipeline_runs_in_at_most_one_deployment) ... ok
+test_grammar_deployment_is_a_reviewed_switch (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_grammar_deployment_is_a_reviewed_switch) ... ok
+test_grammar_pipelines_publish_only_grammar_subjects (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_grammar_pipelines_publish_only_grammar_subjects) ... ok
+test_legacy_cot_outputs_go_off_only_after_the_new_path_runs (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_legacy_cot_outputs_go_off_only_after_the_new_path_runs)
+Stage order from CUTOVER.md: never turn a legacy CoT output off while its grammar ... ok
+test_reference_copies_match_the_configmap (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_reference_copies_match_the_configmap) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.038s
+
+OK
