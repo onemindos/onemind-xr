@@ -27,5 +27,7 @@ cmake --build "$OUT/build-asan" -j8 2>&1 | grep -E 'error' ;
 "$OUT/build-asan/om_unit_tests" | tail -1 || rc=1
 "$OUT/build-asan/om_integration_tests" | tail -1 || rc=1
 echo "== 10,000-entity load (client core)"; "$HERE/scripts/load_10k.sh" "$B/onemind_headless" "$OUT/load10k" | grep -E "final layer|state=live" | tail -2 || rc=1
+echo "== 10,000-entity load with the camera AOI of the default start (Austin, 8 km): a small direct layer keeps all"
+"$HERE/scripts/load_10k.sh" "$B/onemind_headless" "$OUT/load10k-camera" --camera-aoi -97.7931,30.2240,-97.6931,30.3104 | grep -E "final layer|state=live" | tail -2 || rc=1
 echo "== C1/C2 end to end"; "$TOOLS/py/bin/python" -I "$HERE/scripts/e2e_c1_c2.py" "$B/onemind_headless" "$OMOS" "$OUT/e2e" | grep -E 'PASS|FAIL|checks passed' || rc=1
 exit $rc

@@ -60,6 +60,11 @@ struct OM_CORE_API NatsOptions {
   /// Publishes made while disconnected are buffered up to this many bytes, then dropped.
   size_t reconnect_buffer_bytes = 4u * 1024u * 1024u;
   int default_request_timeout_ms = 5000;
+  /// Cap on bytes received but not yet dispatched (transport queue plus parsed messages
+  /// held back by Poll's max_msgs budget). Past it the client acts as a slow consumer:
+  /// it closes the connection and reconnects, and layers re-snapshot (their reconnect
+  /// path). Protects memory when the game thread stalls while a large layer streams.
+  size_t max_pending_bytes = 64u * 1024u * 1024u;
 };
 
 enum class ConnState { Idle, Connecting, Connected, Disconnected, Closed };
@@ -68,7 +73,7 @@ class OM_CORE_API NatsClient : public ITransport::Listener {
  public:
   using MsgHandler = std::function<void(const NatsMsg&)>;
   /// Called with a reply message, or with msg == nullptr and an error
-  /// ("timeout", "no_responders", "disconnected", "cancelled").
+  /// ("timeout", "no_responders", "disconnected", "cancelled", "bad_request").
   /// Return true when no further replies are wanted (request-many terminator).
   using ReplyHandler = std::function<bool(const NatsMsg* msg, const std::string& error)>;
   enum class ConnEvent { Connected, Reconnected, Disconnected };
@@ -116,6 +121,7 @@ class OM_CORE_API NatsClient : public ITransport::Listener {
     uint64_t msgs_in = 0, bytes_in = 0, msgs_out = 0, bytes_out = 0;
     uint64_t connects = 0, reconnects = 0, disconnects = 0, dropped_while_disconnected = 0;
     uint64_t protocol_errors = 0;
+    uint64_t slow_consumer_closes = 0;  // connections closed for max_pending_bytes
   };
   const Stats& stats() const { return stats_; }
 
@@ -151,6 +157,10 @@ class OM_CORE_API NatsClient : public ITransport::Listener {
   void EnsureRespMux();
   void FailAllRequests(const std::string& why);
   void Emit(ConnEvent e);
+  void ClearOps();
+  void ClearEventsLocked();
+  void SlowConsumerClose(TimeMs now);
+  static size_t OpBytes(const NatsOp& op);
 
   std::shared_ptr<ITransport> transport_;
   NatsOptions opts_;
@@ -161,9 +171,12 @@ class OM_CORE_API NatsClient : public ITransport::Listener {
   std::string last_error_;
   NatsParser parser_;
   std::deque<NatsOp> ops_;
+  size_t ops_bytes_ = 0;  // payload + header bytes held in ops_
 
   std::mutex ev_mu_;
   std::deque<Event> events_;
+  size_t events_bytes_ = 0;      // guarded by ev_mu_
+  bool events_overflow_ = false;  // guarded by ev_mu_
 
   std::map<int64_t, Sub> subs_;
   int64_t next_sid_ = 1;

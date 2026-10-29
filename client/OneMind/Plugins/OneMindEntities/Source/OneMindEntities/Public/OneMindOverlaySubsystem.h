@@ -39,4 +39,11 @@ private:
 	FString SelectedId;
 	FString InspectorText;
 	FString RawCot;
+
+	// Frame timing for the status line (B1/B4 read fps here: no `stat` console needed).
+	// Sampled when the status text is evaluated, which Slate does once per painted frame.
+	mutable double PerfWindowStart = 0.0;
+	mutable double PerfWorstMs = 0.0;
+	mutable double PerfShownWorstMs = 0.0;
+	FString GetPerfLine() const;
 };

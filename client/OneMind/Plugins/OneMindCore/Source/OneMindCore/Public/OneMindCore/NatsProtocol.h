@@ -22,9 +22,17 @@ struct OM_CORE_API NatsHeaders {
   /// Case-sensitive lookup first, then case-insensitive (servers use canonical case).
   const std::string* Get(const std::string& key) const;
   std::string GetOr(const std::string& key, const std::string& def = std::string()) const;
-  void Add(const std::string& key, const std::string& value) { kv.emplace_back(key, value); }
+  /// Adds a header. Returns false (and adds nothing) if the key or value is invalid
+  /// (ValidKey / ValidValue): no header injection from caller-supplied text.
+  bool Add(const std::string& key, const std::string& value);
+  /// Key: printable ASCII (33..126) without ':'. Value: no CR, LF or NUL.
+  static bool ValidKey(const std::string& key);
+  static bool ValidValue(const std::string& value);
+  /// Every key, value and the status description are valid.
+  bool Valid() const;
 
   static bool Parse(const std::string& block, NatsHeaders& out);
+  /// The header block. Returns "" if !Valid() (kv may be filled directly).
   std::string Serialize() const;
 };
 
@@ -60,6 +68,7 @@ class OM_CORE_API NatsParser {
 namespace nats_proto {
 OM_CORE_API std::string Connect(const std::string& json);
 OM_CORE_API std::string Pub(const std::string& subject, const std::string& reply, const std::string& data);
+/// Returns "" if the headers are invalid (NatsHeaders::Valid); the caller must not send.
 OM_CORE_API std::string HPub(const std::string& subject, const std::string& reply, const NatsHeaders& h,
                              const std::string& data);
 OM_CORE_API std::string Sub(const std::string& subject, const std::string& queue, int64_t sid);

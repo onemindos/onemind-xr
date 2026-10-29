@@ -391,12 +391,43 @@ void LayerSession::SetAoi(const Aoi& aoi, int zoom, TimeMs now) {
   spec_.aoi = aoi;
   spec_.zoom = zoom;
   if (state_ == LayerState::Off) return;
-  if (spec_.path == LayerPath::Watch && state_ == LayerState::Live && !stats_.watch_id.empty()) {
-    Renew(now);  // same watch_id, new aoi/zoom: the service answers with enter/exit ops
-  } else if (spec_.path == LayerPath::Watch) {
-    Resnapshot("aoi changed", now);
+  switch (spec_.path) {
+    case LayerPath::Watch:
+      if (state_ == LayerState::Live && !stats_.watch_id.empty()) {
+        Renew(now);  // same watch_id, new aoi/zoom: the service answers with enter/exit ops
+      } else {
+        Resnapshot("aoi changed", now);
+      }
+      break;
+    case LayerPath::Direct:
+      // Client-side AOI (layer-delta.md §1): entities that left are dropped now; entities
+      // that entered are only in ENT, so the ordered consumers restart at last_per_subject.
+      PruneOutsideAoi(now);
+      stats_.resnapshots++;
+      StartDirect(now, true);
+      break;
+    case LayerPath::Core:
+      PruneOutsideAoi(now);
+      stats_.resnapshots++;
+      gen_++;  // ignore pages of the query for the old box
+      // Snapshotting, not Resyncing: Tick re-sends the query in Resyncing.
+      state_ = LayerState::Snapshotting;
+      snap_started_ = WallClockMs();
+      QueryPage(std::string(), now);
+      break;
   }
-  // Direct and core paths filter by AOI on the client (layer-delta.md §1); nothing to do.
+}
+
+void LayerSession::PruneOutsideAoi(TimeMs now) {
+  if (!spec_.aoi.has_bbox) return;
+  const Aoi& a = spec_.aoi;
+  std::vector<std::string> drop;
+  for (size_t i = 0; i < store_.size(); ++i) {
+    if (!store_.locatables()[i]) continue;
+    double lat = store_.lats()[i], lon = store_.lons()[i];
+    if (lat < a.lat0 || lat > a.lat1 || lon < a.lon0 || lon > a.lon1) drop.push_back(store_.ids()[i]);
+  }
+  for (const auto& id : drop) store_.Remove(id, RemoveReason::LeftAoi, now);
 }
 
 void LayerSession::OnEntityRecord(const std::string& subject, const NatsMsg& m, const std::string& marker, TimeMs now) {
@@ -419,9 +450,10 @@ void LayerSession::OnEntityRecord(const std::string& subject, const NatsMsg& m, 
   if (record_sink_) record_sink_(j);
 }
 
-void LayerSession::StartDirect(TimeMs now) {
-  state_ = LayerState::Snapshotting;
+void LayerSession::StartDirect(TimeMs now, bool resync) {
+  state_ = resync ? LayerState::Resyncing : LayerState::Snapshotting;
   snap_started_ = WallClockMs();
+  for (auto& c : consumers_) c->Stop();
   consumers_.clear();
   auto caught = std::make_shared<size_t>(0);
   size_t total = spec_.entity_types.size();
@@ -574,7 +606,7 @@ bool LayerManager::Toggle(const std::string& id, bool on, TimeMs now) {
   if (on) {
     if (it != sessions_.end()) return true;
     LayerSpec spec = sit->second;
-    if (zoom_ >= 0) {
+    if (zoom_ >= 0 && spec.UsesCameraAoi()) {
       spec.aoi = aoi_;
       spec.zoom = zoom_;
     }
@@ -604,7 +636,10 @@ void LayerManager::SetAoi(const Aoi& aoi, int zoom, TimeMs now) {
   }
   aoi_ = aoi;
   zoom_ = zoom;
-  for (auto& kv : sessions_) kv.second->SetAoi(aoi, zoom, now);
+  // Only layers that follow the camera get it (LayerSpec::UsesCameraAoi): direct/core
+  // small and medium layers keep the whole layer whatever the view.
+  for (auto& kv : sessions_)
+    if (kv.second->spec().UsesCameraAoi()) kv.second->SetAoi(aoi, zoom, now);
 }
 
 void LayerManager::Tick(TimeMs now) {

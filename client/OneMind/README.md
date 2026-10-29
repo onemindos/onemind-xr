@@ -41,7 +41,9 @@ Every plugin lists `Mac`, `Win64`, `Linux` and `Android` in `PlatformAllowList`.
 The client is a view and an input device; the bus is the authority (repo rule 3). Each layer loads
 a snapshot and then applies deltas (layer contracts); the Mac, as a trusted site client next to its
 own leaf, reads small layers straight from `ENT` with an ordered consumer, and large layers through
-the layer service with an AOI. The client never publishes `ent.*`, `cmd.*` or `tak.cot.*`: CoT goes
+the layer service with an AOI. The camera AOI applies only to watch-path and large layers
+(`LayerSpec::UsesCameraAoi`): small and medium direct/core layers load whole and the renderer
+culls them (layer-snapshot.md §1 tier rules). The client never publishes `ent.*`, `cmd.*` or `tak.cot.*`: CoT goes
 out only through `svc.cot.send` to the projector, asset commands only through policy.
 
 Transport: NATS over WebSocket from C++ (ROADMAP S5 fallback). The nats.c TCP transport named in
@@ -61,6 +63,9 @@ Needs CMake 3.20+, a C++17 compiler, `nats-server` 2.11+ (per-message TTL and de
 ## Build and run on the Mac
 
 `Tools/mac/build-and-run.sh` and `docs/evidence/M2/B/OWNER-STEPS.md` (S1, S5, 10,000 entities, C1, C2, F1).
+The script packages **Development** by default (console, logs and trace for the owner checks);
+`package-shipping` builds Shipping for the F1 install check only. The overlay's first line shows
+fps, average and worst frame time, so the frame-rate checks do not need `stat`.
 
 ## Verified vs not verified
 

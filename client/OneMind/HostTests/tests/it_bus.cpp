@@ -286,3 +286,83 @@ TEST(it_layer_off_means_no_subscription_on_the_server) {
   EXPECT_EQ(jsz.i64("consumers", -1), 0);  // ordered consumers deleted on toggle off
   core.Stop();
 }
+
+// Review finding (B4/C1): the camera AOI must not empty direct small/medium layers, and a
+// layer that does filter by the camera on the client must reload entities on a pan.
+TEST(it_direct_layers_camera_aoi_small_keeps_all_large_reloads_on_pan) {
+  NatsServer srv("aoi");
+  EXPECT_TRUE(srv.Start());
+  Client pub(srv.ws_url(), "it-entity-service-stand-in");
+  EXPECT_TRUE(PollUntil({pub.nc.get()}, [&] { return pub.nc->connected(); }, 5000));
+  CreateEntStream(*pub.nc);
+  TimeMs now0 = WallClockMs();
+  auto rec = [&](const std::string& type, const std::string& id, double lat, double lon, int seq = 1) {
+    return std::string("{\"entity_id\":\"") + id + "\",\"entity_type\":\"" + type + "\",\"uid\":\"" + id +
+           "\",\"lat\":" + std::to_string(lat) + ",\"lon\":" + std::to_string(lon) +
+           ",\"seq\":" + std::to_string(seq) + ",\"live\":true,\"t\":" + std::to_string(now0) + ",\"stale\":60,\"expiry_t\":" +
+           std::to_string(now0 + 600000) + ",\"indicators\":{\"simulated\":true},\"traits\":[\"locatable\"]}";
+  };
+  // 400 drones and 400 aircraft on a 20 x 20 grid, 0.05 degrees apart, around Austin.
+  for (int i = 0; i < 400; ++i) {
+    double lat = 30.0 + (i % 20) * 0.05, lon = -98.2 + (i / 20) * 0.05;
+    pub.nc->Publish("ent.drone.sim-d" + std::to_string(i) + ".state", rec("drone", "sim-d" + std::to_string(i), lat, lon));
+    pub.nc->Publish("ent.aircraft.sim-a" + std::to_string(i) + ".state",
+                    rec("aircraft", "sim-a" + std::to_string(i), lat, lon));
+  }
+  PollUntil({pub.nc.get()}, [] { return false; }, 300);
+
+  ClientConfig cc;
+  cc.nats.urls = {srv.ws_url()};
+  LayerSpec small, large;
+  small.id = "fleet";
+  small.entity_types = {"drone"};
+  small.path = LayerPath::Direct;
+  small.tier = "small";
+  large.id = "air-direct";
+  large.entity_types = {"aircraft"};
+  large.path = LayerPath::Direct;
+  large.tier = "large";
+  cc.layers = {small, large};
+  ClientCore core(std::make_shared<omhost::PosixWsTransport>(), cc);
+  core.Start(WallClockMs());
+  auto tick = [&](TimeMs now) { core.Tick(now); };
+  EXPECT_TRUE(PollUntil({pub.nc.get()}, [&] { return core.nats().connected(); }, 5000, tick));
+  // A camera-sized box (what UpdateAoiFromCamera computes at 8 km) over the grid's corner,
+  // set before the layers start, as the Unreal subsystem does.
+  auto count_in = [](const EntityStore& st, const Aoi& a) {
+    size_t n = 0;
+    for (size_t i = 0; i < st.size(); ++i)
+      if (st.lats()[i] >= a.lat0 && st.lats()[i] <= a.lat1 && st.lons()[i] >= a.lon0 && st.lons()[i] <= a.lon1) n++;
+    return n;
+  };
+  Aoi view1 = Aoi::Bbox(-98.22, 29.98, -98.03, 30.17);  // 4 x 4 grid points
+  core.layers().SetAoi(view1, 12, WallClockMs());
+  core.layers().Toggle("fleet", true, WallClockMs());
+  core.layers().Toggle("air-direct", true, WallClockMs());
+  LayerSession* fs = core.layers().Get("fleet");
+  LayerSession* as = core.layers().Get("air-direct");
+  EXPECT_TRUE(PollUntil({pub.nc.get()}, [&] { return fs->state() == LayerState::Live && as->state() == LayerState::Live; },
+                        10000, tick));
+  EXPECT_EQ(fs->store().size(), 400u);  // small layer: whole layer, camera ignored
+  EXPECT_EQ(as->store().size(), 16u);   // large layer: camera box only
+  EXPECT_FALSE(fs->spec().aoi.has_bbox);
+  // Pan to the opposite corner (more than 10 % of the box: the manager applies it).
+  Aoi view2 = Aoi::Bbox(-97.57, 30.73, -97.38, 30.92);
+  core.layers().SetAoi(view2, 12, WallClockMs());
+  EXPECT_TRUE(PollUntil({pub.nc.get()}, [&] {
+    return as->state() == LayerState::Live && as->store().size() == 16u && count_in(as->store(), view2) == 16u;
+  }, 10000, tick));
+  std::printf("    after pan: large direct layer %zu entities (%zu in the new view), small layer %zu\n",
+              as->store().size(), count_in(as->store(), view2), fs->store().size());
+  EXPECT_EQ(count_in(as->store(), view2), 16u);
+  EXPECT_EQ(count_in(as->store(), view1), 0u);
+  EXPECT_EQ(fs->store().size(), 400u);
+  // Pan back: the entities dropped by the first pan reload without waiting for an update.
+  core.layers().SetAoi(view1, 12, WallClockMs());
+  EXPECT_TRUE(PollUntil({pub.nc.get()}, [&] { return count_in(as->store(), view1) == 16u; }, 10000, tick));
+  EXPECT_EQ(as->store().size(), 16u);
+  // A small-layer entity far outside every view still updates.
+  pub.nc->Publish("ent.drone.sim-d399.state", rec("drone", "sim-d399", 31.5, -96.0, 2));
+  EXPECT_TRUE(PollUntil({pub.nc.get()}, [&] { return fs->store().SeqOf("sim-d399") == 2; }, 5000, tick));
+  core.Stop();
+}

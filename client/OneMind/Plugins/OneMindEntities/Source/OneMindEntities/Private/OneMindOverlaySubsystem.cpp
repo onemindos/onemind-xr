@@ -5,6 +5,9 @@
 #include "Engine/GameInstance.h"
 #include "Engine/GameViewportClient.h"
 #include "EngineUtils.h"
+#include "HAL/PlatformTime.h"
+#include "Misc/App.h"
+#include "UnrealEngine.h"  // GAverageFPS, GAverageMS (engine-wide, every build configuration)
 #include "OneMindBusSubsystem.h"
 #include "OneMindCore/ClientCore.h"
 #include "OneMindEntityRenderer.h"
@@ -65,7 +68,7 @@ FText UOneMindOverlaySubsystem::GetStatusText() const
 {
 	UWorld* World = GetWorld();
 	if (!World) return FText();
-	FString S;
+	FString S = GetPerfLine() + TEXT("\n");
 	UGameInstance* GI = World->GetGameInstance();
 	if (UOneMindBusSubsystem* Bus = GI ? GI->GetSubsystem<UOneMindBusSubsystem>() : nullptr)
 	{
@@ -87,6 +90,23 @@ FText UOneMindOverlaySubsystem::GetStatusText() const
 	}
 	S += TEXT("keys: 1-9 toggle layer | left click select | M send marker at cursor | Esc clear");
 	return FText::FromString(S);
+}
+
+FString UOneMindOverlaySubsystem::GetPerfLine() const
+{
+	// Worst frame over a rolling 5 s window, so a hitch when a layer loads is visible.
+	const double Now = FPlatformTime::Seconds();
+	const double FrameMs = FApp::GetDeltaTime() * 1000.0;
+	if (PerfWindowStart == 0.0) PerfWindowStart = Now;
+	PerfWorstMs = FMath::Max(PerfWorstMs, FrameMs);
+	if (Now - PerfWindowStart >= 5.0)
+	{
+		PerfShownWorstMs = PerfWorstMs;
+		PerfWorstMs = 0.0;
+		PerfWindowStart = Now;
+	}
+	return FString::Printf(TEXT("fps %.1f | frame %.2f ms avg | worst %.2f ms (last 5 s)"), GAverageFPS, GAverageMS,
+		PerfShownWorstMs > 0.0 ? PerfShownWorstMs : PerfWorstMs);
 }
 
 void UOneMindOverlaySubsystem::SelectEntity(const FString& LayerAndId)

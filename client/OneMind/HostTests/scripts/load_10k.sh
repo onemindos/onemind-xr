@@ -3,9 +3,9 @@
 # synthetic load (Tools/entity_load.py, 10,000 sim-load-* drones moving at 1 Hz into ENT)
 # and the headless client core on the fleet layer (direct ENT path) over WebSocket.
 # Proves the bus and core side of B4/B5; the 60 fps render check is the owner's (S1 Mac).
-# Usage: load_10k.sh <headless-binary> <work-dir>
+# Usage: load_10k.sh <headless-binary> <work-dir> [extra headless args, e.g. --camera-aoi ...]
 set -euo pipefail
-HEADLESS=$1; RUN=$2
+HEADLESS=$1; RUN=$2; shift 2
 TOOLS=/Users/danielcarku/Desktop/work/.tools
 HERE=$(cd "$(dirname "$0")" && pwd)
 rm -rf "$RUN"; mkdir -p "$RUN/js"
@@ -22,7 +22,7 @@ sleep 1
 echo "\$ entity_load.py --count 10000 --rate 1 --duration 20  (background)"
 "$TOOLS/py/bin/python" -I "$HERE/../../Tools/entity_load.py" --url "nats://127.0.0.1:$P" --count 10000 --rate 1 --duration 20 > "$RUN/load.log" 2>&1 & LOAD=$!
 sleep 3
-echo "\$ onemind_headless --layer fleet:drone,robot,vehicle,node:direct --duration 15"
-"$HEADLESS" --url "ws://127.0.0.1:$W" --layer fleet:drone,robot,vehicle,node:direct --duration 15 --print-every 3 | grep -v '^\[headless\] final fleet '
+echo "\$ onemind_headless --layer fleet:drone,robot,vehicle,node:direct --duration 15 $*"
+"$HEADLESS" --url "ws://127.0.0.1:$W" --layer fleet:drone,robot,vehicle,node:direct --duration 15 --print-every 3 "$@" | grep -v '^\[headless\] final fleet '
 wait $LOAD || true
 echo "--- entity_load.py"; cat "$RUN/load.log"

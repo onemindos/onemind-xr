@@ -137,8 +137,21 @@ void AOneMindEntityRenderer::Rebuild()
 		return Frame * FRotator(-90.0, Yaw, 0.0).Quaternion();       // cone apex along the course
 	};
 
-	auto Draw = [&](const FString& LayerId, const om::EntityStore& Store) {
+	// The selection ("layer/entity_id") is resolved to one index per layer per rebuild, so
+	// the per-entity loop builds no strings (10,000 entities at 15 Hz).
+	std::string SelLayer, SelEntity;
+	{
+		FString L, E;
+		if (Selected.Split(TEXT("/"), &L, &E))
+		{
+			SelLayer = TCHAR_TO_UTF8(*L);
+			SelEntity = TCHAR_TO_UTF8(*E);
+		}
+	}
+
+	auto Draw = [&](const std::string& LayerId, const om::EntityStore& Store) {
 		const om::RenderPlan Plan = om::PlanRender(Store, CamLlh.Y, CamLlh.X, CamLlh.Z, Cfg);
+		const int64 SelIndex = (!SelEntity.empty() && LayerId == SelLayer) ? static_cast<int64>(Store.IndexOf(SelEntity)) : -1;
 		const auto& Lats = Store.lats();
 		const auto& Lons = Store.lons();
 		const auto& Haes = Store.haes();
@@ -153,9 +166,12 @@ void AOneMindEntityRenderer::Rebuild()
 			const double H = (Haes[i] > -1000.0 && Haes[i] < 1.0e6 && Haes[i] != -1.0) ? Haes[i] : 0.0;
 			const FVector P = ToWorld(Lons[i], Lats[i], H);
 			const double DistM = FVector::Dist(P, CamWorld) / 100.0;
-			const FString Id = LayerId + TEXT("/") + UTF8_TO_TCHAR(Store.ids()[i].c_str());
+			const bool bSelected = static_cast<int64>(i) == SelIndex;
 			if (B == om::Band::Icon)
 			{
+				// Far band: instanced spheres scaled with distance (constant screen size).
+				// FEATURES B5 names Niagara icons; this is the interim (proposal B-P8 in
+				// docs/evidence/M2/B/EVIDENCE.md), Niagara sprites are the follow-up.
 				++Icons;
 				const double D = FMath::Max(1.0, DistM * IconAngularSize);
 				Batches.FindOrAdd(OneMindRender::KeyFor(B, Classes[i])).Add(FTransform(FQuat::Identity, P, FVector(D)));
@@ -171,9 +187,9 @@ void AOneMindEntityRenderer::Rebuild()
 				const std::string& Cs = Store.callsigns()[i];
 				Near.Add({FTransform(Heading(P, Courses[i]), P, FVector(4.0)),
 					Cs.empty() ? FString(UTF8_TO_TCHAR(Store.ids()[i].c_str())) : FString(UTF8_TO_TCHAR(Cs.c_str())),
-					Id == Selected, Store.IsStale(i, Now)});
+					bSelected, Store.IsStale(i, Now)});
 			}
-			if (Id == Selected)
+			if (bSelected)
 			{
 				const double D = FMath::Max(2.0, DistM * IconAngularSize * 2.5);
 				Batches.FindOrAdd(OneMindRender::SelectionKey).Add(FTransform(FQuat::Identity, P, FVector(D, D, D * 0.1)));
@@ -193,10 +209,10 @@ void AOneMindEntityRenderer::Rebuild()
 	{
 		for (const std::string& Id : Manager->Ids())
 		{
-			if (om::LayerSession* L = Manager->Get(Id)) Draw(UTF8_TO_TCHAR(Id.c_str()), L->store());
+			if (om::LayerSession* L = Manager->Get(Id)) Draw(Id, L->store());
 		}
 	}
-	if (Bus) Draw(TEXT("probe"), Bus->GetProbeStore());
+	if (Bus) Draw(std::string("probe"), Bus->GetProbeStore());
 
 	// Apply: one bulk update per instanced component.
 	TSet<int32> Used;

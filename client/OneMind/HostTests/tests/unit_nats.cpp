@@ -303,3 +303,95 @@ TEST(nats_client_fatal_err_and_unsubscribe) {
   nc.Poll(2);
   EXPECT_FALSE(nc.connected());
 }
+
+TEST(nats_headers_reject_crlf_and_colon) {
+  NatsHeaders h;
+  EXPECT_TRUE(h.Add("Nats-Msg-Id", "sim-x1:7"));  // ':' is fine in a value
+  EXPECT_FALSE(h.Add("Bad:Key", "v"));
+  EXPECT_FALSE(h.Add("Bad Key", "v"));
+  EXPECT_FALSE(h.Add("", "v"));
+  EXPECT_FALSE(h.Add("X-Note", "a\r\nInjected: yes"));
+  EXPECT_FALSE(h.Add("X-Note", "a\nb"));
+  EXPECT_EQ(h.kv.size(), 1u);
+  EXPECT_TRUE(h.Valid());
+  EXPECT_FALSE(nats_proto::HPub("a", "", h, "{}").empty());
+  // Filled directly, bypassing Add: framing refuses.
+  NatsHeaders raw;
+  raw.kv.emplace_back("X-Note", "a\r\n\r\nPUB evil 1");
+  EXPECT_FALSE(raw.Valid());
+  EXPECT_TRUE(raw.Serialize().empty());
+  EXPECT_TRUE(nats_proto::HPub("a", "", raw, "{}").empty());
+  NatsHeaders raw2;
+  raw2.kv.emplace_back("Evil:Key", "v");
+  EXPECT_TRUE(nats_proto::HPub("a", "", raw2, "{}").empty());
+  // NatsClient refuses to publish them.
+  auto t = std::make_shared<FakeTransport>();
+  NatsClient nc(t, NatsOptions());
+  nc.Start(0);
+  t->ServerAccept();
+  nc.Poll(0);
+  EXPECT_TRUE(nc.connected());
+  t->sent.clear();
+  EXPECT_FALSE(nc.Publish("evt.test.client.x", "{}", std::string(), &raw));
+  EXPECT_TRUE(t->sent.empty());
+  std::string err;
+  EXPECT_EQ(nc.Request("svc.x", "{}", [&](const NatsMsg*, const std::string& e) {
+    err = e;
+    return true;
+  }, 1000, false, &raw), 0u);
+  EXPECT_EQ(err, std::string("bad_request"));
+}
+
+TEST(nats_client_slow_consumer_cap_closes_and_reconnects) {
+  auto t = std::make_shared<FakeTransport>();
+  NatsOptions o;
+  o.max_pending_bytes = 64 * 1024;
+  o.reconnect_wait_min_ms = 100;
+  o.reconnect_wait_max_ms = 100;
+  NatsClient nc(t, o);
+  TimeMs now = 0;
+  nc.Start(now);
+  int got = 0;
+  int64_t sid = nc.Subscribe("ent.air.*.state", [&](const NatsMsg&) { got++; });
+  t->ServerAccept();
+  nc.Poll(now);
+  EXPECT_TRUE(nc.connected());
+  std::string body(1000, 'x');
+  auto msg = [&](int i) {
+    return "MSG ent.air.a" + std::to_string(i) + ".state " + std::to_string(sid) + " 1000\r\n" + body + "\r\n";
+  };
+  // (1) Parsed but held back by the per-frame budget: ops_ grows past the cap.
+  for (int i = 0; i < 40; ++i) t->Inject(msg(i));
+  nc.Poll(now += 1, 10);
+  EXPECT_EQ(got, 10);
+  EXPECT_TRUE(nc.connected());
+  for (int round = 0; round < 3 && nc.connected(); ++round) {
+    for (int i = 0; i < 40; ++i) t->Inject(msg(i));
+    nc.Poll(now += 1, 10);
+  }
+  EXPECT_FALSE(nc.connected());
+  EXPECT_EQ(nc.stats().slow_consumer_closes, 1u);
+  EXPECT_TRUE(nc.last_error().find("slow consumer") == 0);
+  int before = got;
+  nc.Poll(now += 1);  // nothing from the dead connection is dispatched
+  EXPECT_EQ(got, before);
+  // Reconnects.
+  nc.Poll(now += 500);
+  t->ServerAccept();
+  nc.Poll(now += 1);
+  EXPECT_TRUE(nc.connected());
+  EXPECT_EQ(nc.stats().reconnects, 1u);
+  // (2) Game thread stalled: the transport queue itself passes the cap.
+  for (int i = 0; i < 100; ++i) t->Inject(msg(i));  // ~100 KB, never polled in between
+  nc.Poll(now += 1);
+  EXPECT_FALSE(nc.connected());
+  EXPECT_EQ(nc.stats().slow_consumer_closes, 2u);
+  nc.Poll(now += 500);
+  t->ServerAccept();
+  nc.Poll(now += 1);
+  EXPECT_TRUE(nc.connected());
+  t->Inject(msg(1));
+  int b2 = got;
+  nc.Poll(now += 1);
+  EXPECT_EQ(got, b2 + 1);
+}

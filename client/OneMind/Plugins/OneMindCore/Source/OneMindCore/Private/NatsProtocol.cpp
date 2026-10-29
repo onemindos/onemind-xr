@@ -87,7 +87,34 @@ bool NatsHeaders::Parse(const std::string& block, NatsHeaders& out) {
   return true;
 }
 
+bool NatsHeaders::ValidKey(const std::string& key) {
+  if (key.empty()) return false;
+  for (char ch : key) {
+    unsigned char c = static_cast<unsigned char>(ch);
+    if (c < 33 || c > 126 || c == ':') return false;
+  }
+  return true;
+}
+
+bool NatsHeaders::ValidValue(const std::string& value) {
+  return value.find_first_of(std::string("\r\n\0", 3)) == std::string::npos;
+}
+
+bool NatsHeaders::Add(const std::string& key, const std::string& value) {
+  if (!ValidKey(key) || !ValidValue(value)) return false;
+  kv.emplace_back(key, value);
+  return true;
+}
+
+bool NatsHeaders::Valid() const {
+  if (!ValidValue(description)) return false;
+  for (const auto& p : kv)
+    if (!ValidKey(p.first) || !ValidValue(p.second)) return false;
+  return true;
+}
+
 std::string NatsHeaders::Serialize() const {
+  if (!Valid()) return std::string();
   std::string s = "NATS/1.0";
   if (status) {
     s += " " + std::to_string(status);
@@ -198,6 +225,7 @@ std::string Pub(const std::string& subject, const std::string& reply, const std:
 std::string HPub(const std::string& subject, const std::string& reply, const NatsHeaders& h,
                  const std::string& data) {
   std::string hb = h.Serialize();
+  if (hb.empty()) return std::string();  // invalid headers: refuse to frame
   std::string s = "HPUB " + subject;
   if (!reply.empty()) s += " " + reply;
   s += " " + std::to_string(hb.size()) + " " + std::to_string(hb.size() + data.size()) + "\r\n";

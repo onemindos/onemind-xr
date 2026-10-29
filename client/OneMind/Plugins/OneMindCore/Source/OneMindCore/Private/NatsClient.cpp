@@ -31,7 +31,39 @@ void NatsClient::OnTransportOpen() {
 
 void NatsClient::OnTransportData(const char* data, size_t len) {
   std::lock_guard<std::mutex> lock(ev_mu_);
+  // Past the cap, stop queueing: Poll closes this connection as a slow consumer. Data
+  // after the dropped chunk is useless (the byte stream has a hole), so drop it all.
+  if (events_overflow_) return;
+  if (events_bytes_ + len > opts_.max_pending_bytes) {
+    events_overflow_ = true;
+    return;
+  }
+  events_bytes_ += len;
   events_.push_back(Event{Event::Kind::Data, std::string(data, len)});
+}
+
+void NatsClient::ClearEventsLocked() {
+  events_.clear();
+  events_bytes_ = 0;
+  events_overflow_ = false;
+}
+
+void NatsClient::ClearOps() {
+  ops_.clear();
+  ops_bytes_ = 0;
+}
+
+size_t NatsClient::OpBytes(const NatsOp& op) {
+  size_t n = op.text.size() + op.msg.data.size() + op.msg.subject.size() + op.msg.reply.size();
+  for (const auto& kv : op.msg.headers.kv) n += kv.first.size() + kv.second.size();
+  return n;
+}
+
+void NatsClient::SlowConsumerClose(TimeMs now) {
+  stats_.slow_consumer_closes++;
+  OnClosed("slow consumer: more than " + std::to_string(opts_.max_pending_bytes) +
+               " bytes received and not yet processed",
+           now);
 }
 
 void NatsClient::OnTransportClosed(const std::string& reason) {
@@ -52,7 +84,7 @@ void NatsClient::Stop() {
   transport_->Close();
   {
     std::lock_guard<std::mutex> lock(ev_mu_);
-    events_.clear();
+    ClearEventsLocked();
   }
   bool was = state_ == ConnState::Connected;
   state_ = ConnState::Closed;
@@ -66,7 +98,7 @@ void NatsClient::TryConnect(TimeMs now) {
   attempt_++;
   got_info_ = false;
   parser_.Reset();
-  ops_.clear();
+  ClearOps();
   state_ = ConnState::Connecting;
   connect_deadline_ = now + opts_.connect_timeout_ms;
   if (!transport_->Open(url)) {
@@ -105,7 +137,7 @@ void NatsClient::OnClosed(const std::string& reason, TimeMs now) {
   {
     // Events still queued belong to the connection that just ended.
     std::lock_guard<std::mutex> lock(ev_mu_);
-    events_.clear();
+    ClearEventsLocked();
   }
   state_ = ConnState::Disconnected;
   pings_out_ = 0;
@@ -234,9 +266,20 @@ void NatsClient::DispatchMsg(const NatsMsg& m) {
 size_t NatsClient::Poll(TimeMs now, size_t max_msgs) {
   now_ = now;
   std::deque<Event> evs;
+  bool overflow = false;
   {
     std::lock_guard<std::mutex> lock(ev_mu_);
     evs.swap(events_);
+    events_bytes_ = 0;
+    overflow = events_overflow_;
+    events_overflow_ = false;
+  }
+  if (overflow && (state_ == ConnState::Connecting || state_ == ConnState::Connected)) {
+    // The transport queue hit the cap and dropped data: this connection's stream is
+    // broken. Everything queued belongs to it.
+    evs.clear();
+    SlowConsumerClose(now);
+    ClearOps();
   }
   for (auto& e : evs) {
     if (state_ == ConnState::Closed) break;
@@ -257,13 +300,17 @@ size_t NatsClient::Poll(TimeMs now, size_t max_msgs) {
           OnClosed("protocol error: " + err, now);
           break;
         }
-        for (auto& op : parsed) ops_.push_back(std::move(op));
+        for (auto& op : parsed) {
+          ops_bytes_ += OpBytes(op);
+          ops_.push_back(std::move(op));
+        }
+        if (ops_bytes_ > opts_.max_pending_bytes) SlowConsumerClose(now);
         break;
       }
     }
     if (state_ == ConnState::Disconnected) {
       // Anything still queued belongs to the dead connection.
-      ops_.clear();
+      ClearOps();
     }
   }
   size_t dispatched = 0;
@@ -271,6 +318,8 @@ size_t NatsClient::Poll(TimeMs now, size_t max_msgs) {
     if (ops_.front().kind == NatsOp::Kind::Msg && dispatched >= max_msgs) break;
     NatsOp op = std::move(ops_.front());
     ops_.pop_front();
+    size_t b = OpBytes(op);
+    ops_bytes_ = ops_bytes_ > b ? ops_bytes_ - b : 0;
     if (op.kind == NatsOp::Kind::Msg) ++dispatched;
     HandleOp(op, now);
   }
@@ -335,6 +384,7 @@ bool NatsClient::Publish(const std::string& subject, const std::string& data, co
   if (!nats_proto::ValidSubject(subject, false)) return false;
   std::string bytes = headers && !headers->empty() ? nats_proto::HPub(subject, reply, *headers, data)
                                                    : nats_proto::Pub(subject, reply, data);
+  if (bytes.empty()) return false;  // invalid headers (CR/LF or ':' in a key)
   stats_.msgs_out++;
   if (state_ == ConnState::Connected) {
     Send(bytes);
@@ -366,7 +416,7 @@ uint64_t NatsClient::Request(const std::string& subject, const std::string& data
     ReplyHandler h = it->second.handler;
     pending_.erase(it);
     req_ids_.erase(id);
-    h(nullptr, "bad_subject");
+    h(nullptr, "bad_request");  // invalid subject or headers
     return 0;
   }
   return id;

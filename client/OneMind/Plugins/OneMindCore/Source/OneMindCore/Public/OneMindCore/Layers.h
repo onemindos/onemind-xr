@@ -50,6 +50,13 @@ struct OM_CORE_API LayerSpec {
   int max_rate_hz = 4;
   std::string ent_stream = "ENT";
   std::string style;  // renderer style key, e.g. "air.default.v1"
+
+  /// Whether the camera AOI (LayerManager::SetAoi) applies to this layer. Watch-path
+  /// layers pass it to the layer service; large layers on any path need it. Direct and
+  /// core small/medium/static layers load whole and cull on the GPU (layer-snapshot.md
+  /// §1 tier rules), so the camera never filters them. An AOI set in the spec itself
+  /// (config) still applies to every path.
+  bool UsesCameraAoi() const { return path == LayerPath::Watch || tier == "large"; }
 };
 
 /// Layer manifest (KV world-state `{layer}.meta`, layer-snapshot.md §2).
@@ -76,8 +83,9 @@ class OM_CORE_API LayerSession {
   void Start(TimeMs now);
   void Stop();
   void Tick(TimeMs now);
-  /// Changes the area of interest (watch path: renews the watch with the new AOI so the
-  /// service sends enter/exit; snapshot is re-requested on the other paths).
+  /// Changes the area of interest. Watch path: renews the watch with the new AOI so the
+  /// service sends enter/exit. Direct/core paths (client-side AOI filter): drops what is
+  /// now outside and re-runs the snapshot so entities that came back into view reload.
   void SetAoi(const Aoi& aoi, int zoom, TimeMs now);
 
   const LayerSpec& spec() const { return spec_; }
@@ -112,7 +120,8 @@ class OM_CORE_API LayerSession {
   void ApplyOps(const Json& ops, TimeMs now);
   void Resnapshot(const std::string& why, TimeMs now);
   void Fail(const std::string& why, TimeMs now);
-  void StartDirect(TimeMs now);
+  void StartDirect(TimeMs now, bool resync = false);
+  void PruneOutsideAoi(TimeMs now);
   void StartCore(TimeMs now);
   void QueryPage(const std::string& cursor, TimeMs now);
   void OnEntityRecord(const std::string& subject, const NatsMsg& m, const std::string& marker, TimeMs now);

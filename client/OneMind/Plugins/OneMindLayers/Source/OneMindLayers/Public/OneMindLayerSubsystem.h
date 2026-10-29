@@ -1,7 +1,8 @@
 // Registers the layer catalogue with the client core and exposes layer toggles. Toggling a
 // layer on starts its snapshot plus delta session; off stops it and drops every
 // subscription, watch and consumer it held (B4 acceptance: "a layer off means no
-// subscription"). Keeps each layer's AOI in step with the camera.
+// subscription"). Keeps the AOI of watch-path and large layers in step with the camera;
+// small/medium direct and core layers ignore it (om::LayerSpec::UsesCameraAoi).
 // SPDX-License-Identifier: GPL-3.0-or-later
 #pragma once
 

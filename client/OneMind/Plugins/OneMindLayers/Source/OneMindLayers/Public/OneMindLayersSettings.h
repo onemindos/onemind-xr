@@ -24,7 +24,7 @@ public:
 	UPROPERTY(config, EditAnywhere, Category = "Layers")
 	TArray<FString> DefaultOn;
 
-	/** Seconds between AOI updates from the camera (large layers need an AOI). */
+	/** Seconds between AOI updates from the camera (watch-path and large layers only). */
 	UPROPERTY(config, EditAnywhere, Category = "Layers", meta = (ClampMin = "0.5"))
 	float AoiUpdateSeconds = 2.0f;
 };

@@ -33,8 +33,9 @@ std::vector<std::string> Split(const std::string& s, char sep) {
 
 void Usage() {
   std::printf(
-      "usage: onemind_headless [--url ws://host:port] [--layer id:type1,type2:watch|direct|core]...\n"
-      "                        [--aoi lon0,lat0,lon1,lat1] [--kv bucket:keyfilter] [--duration s]\n"
+      "usage: onemind_headless [--url ws://host:port] [--layer id:type1,type2:watch|direct|core[:tier]]...\n"
+      "                        [--aoi lon0,lat0,lon1,lat1 (spec AOI, every path)]\n"
+      "                        [--camera-aoi lon0,lat0,lon1,lat1 (camera AOI)] [--kv bucket:keyfilter] [--duration s]\n"
       "                        [--expect entity_id] [--expect-gone entity_id] [--inspect entity_id]\n"
       "                        [--send-marker lat,lon,callsign] [--send-chat text] [--print-every s]\n"
       "  NATS_USER / NATS_PASSWORD are read from the environment (never from Git).\n");
@@ -48,7 +49,7 @@ int main(int argc, char** argv) {
   std::vector<std::string> layer_ids;
   double duration_s = 10, print_every = 2;
   std::string expect, expect_gone, inspect, marker, chat;
-  om::Aoi aoi;
+  om::Aoi aoi, camera_aoi;
   for (int i = 1; i < argc; ++i) {
     std::string a = argv[i];
     auto next = [&]() -> std::string { return i + 1 < argc ? argv[++i] : std::string(); };
@@ -61,11 +62,17 @@ int main(int argc, char** argv) {
       s.title = parts[0];
       s.entity_types = Split(parts[1], ',');
       if (parts.size() > 2) om::ParseLayerPath(parts[2], s.path);
+      if (parts.size() > 3) s.tier = parts[3];
       cfg.layers.push_back(s);
       layer_ids.push_back(s.id);
     } else if (a == "--aoi") {
       auto v = Split(next(), ',');
       if (v.size() == 4) aoi = om::Aoi::Bbox(std::atof(v[0].c_str()), std::atof(v[1].c_str()), std::atof(v[2].c_str()), std::atof(v[3].c_str()));
+    } else if (a == "--camera-aoi") {
+      // What UOneMindLayerSubsystem::UpdateAoiFromCamera does: LayerManager::SetAoi, which
+      // only layers with LayerSpec::UsesCameraAoi() follow.
+      auto v = Split(next(), ',');
+      if (v.size() == 4) camera_aoi = om::Aoi::Bbox(std::atof(v[0].c_str()), std::atof(v[1].c_str()), std::atof(v[2].c_str()), std::atof(v[3].c_str()));
     } else if (a == "--kv") {
       auto parts = Split(next(), ':');
       if (parts.size() == 2) cfg.kv_watches[parts[0]] = parts[1];
@@ -98,6 +105,7 @@ int main(int argc, char** argv) {
       layers_on = true;
       std::printf("[headless] connected to %s (server %s)\n", cfg.nats.urls[0].c_str(),
                   core.nats().server_info().str("version").c_str());
+      if (camera_aoi.has_bbox) core.layers().SetAoi(camera_aoi, 12, now);
       for (const auto& id : layer_ids) core.layers().Toggle(id, true, now);
     }
     for (const auto& id : layer_ids) {
