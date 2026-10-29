@@ -1,0 +1,288 @@
+{
+  "bugs": null,
+  "steps": [
+    {
+      "detail": "tel subjects [tel.fleet.drone.sim-x1.position tel.fleet.drone.sim-x1.status]; ent.drone.sim-x1.state capabilities=[onemind.task.goto.v1 onemind.task.rtl.v1 onemind.task.land.v1] health=map[battery_pct:100 connection:online link_rssi:-1] simulated=true",
+      "entity_sample": {
+        "aliases": {
+          "ids": [
+            {
+              "id": "sim-x1",
+              "type": "sim"
+            }
+          ],
+          "name": "SIM-X1"
+        },
+        "callsign": "SIM-X1",
+        "capabilities": [
+          "onemind.task.goto.v1",
+          "onemind.task.rtl.v1",
+          "onemind.task.land.v1"
+        ],
+        "confidence": 0.9482,
+        "confidence_parts": {
+          "corroboration": 0.95,
+          "source_prior": 0.95,
+          "track_quality": 0.9962
+        },
+        "correlation": null,
+        "cot_security": null,
+        "course": 0,
+        "created_t": 1793291234095,
+        "current_task": null,
+        "disposition": "friendly",
+        "entity_id": "sim-x1",
+        "entity_type": "drone",
+        "environment": "air",
+        "expiry_t": 1793291294882,
+        "geo": null,
+        "hae": -26.87,
+        "health": {
+          "battery_pct": 100,
+          "connection": "online",
+          "link_rssi": -1
+        },
+        "indicators": {
+          "egress_tak": true,
+          "emergency": false,
+          "exercise": false,
+          "simulated": true,
+          "starred": false
+        },
+        "kind": "multirotor",
+        "lat": 30.2672,
+        "lifecycle": "active",
+        "live": true,
+        "location": {
+          "course_deg": 0,
+          "hae_m": -26.87,
+          "lat": 30.2672,
+          "lon": -97.7431,
+          "measured_t": 1793291234863,
+          "speed_mps": 0,
+          "vel_enu_mps": [
+            0,
+            0,
+            0
+          ]
+        },
+        "lon": -97.7431,
+        "marking": {
+          "releasable_to": [],
+          "tlp": "AMBER+STRICT"
+        },
+        "meta": {
+          "alt_msl_m": 0,
+          "armed": false,
+          "autopilot": "ARDUPILOTMEGA",
+          "battery_pct": 100,
+          "climb_mps": 0,
+          "commands_accepted": "goto,rtl,land,arm,disarm,estop,takeoff",
+          "connection": "online",
+          "geoid_undulation_m": -26.87,
+          "hae_source": "egm96",
+          "heading_deg": 90,
+          "kind": "multirotor",
+          "last_heartbeat_t": 1793291234002,
+          "link_rssi": -1,
+          "mav_sysid": 1,
+          "mav_type": "QUADROTOR",
+          "mavlink_version": 3,
+          "mode": "STABILIZE",
+          "position_age_ms": 18,
+          "relative_alt_m": 0,
+          "simulated": true,
+          "source": "bridge-mavlink",
+          "system_status": "STANDBY",
+          "voltage_v": 15.8
+        },
+        "pinned": false,
+        "properties": {
+          "altitude": -26.87,
+          "callsign": "SIM-X1",
+          "ce": 3.85,
+          "course": 0,
+          "le": 5,
+          "speed": 0
+        },
+        "provenance": {
+          "how": "m-s",
+          "primary": "fleet-drone",
+          "source_t": 1793291234882
+        },
+        "relationships": [],
+        "route": null,
+        "seq": 2,
+        "sources": [
+          {
+            "components": [
+              "health",
+              "status"
+            ],
+            "data_type": "geo",
+            "first_seen_t": 1793291234095,
+            "integration": "fleet-drone",
+            "last_seen_t": 1793291234936,
+            "seq": 6,
+            "source_id": "sim-x1",
+            "source_t": 1793291234882,
+            "stream": "TEL",
+            "subject": "tel.fleet.drone.sim-x1.status",
+            "tier": "self_report"
+          }
+        ],
+        "speed": 0,
+        "stale": 10,
+        "status": {
+          "mode": "STABILIZE"
+        },
+        "t": 1793291234882,
+        "template": "asset",
+        "tracked": null,
+        "traits": [
+          "locatable",
+          "trackable",
+          "taskable",
+          "observable"
+        ],
+        "type": "fleet.drone",
+        "uid": "sim-x1",
+        "uncertainty": {
+          "ce_m": 3.85,
+          "error_ellipse": null,
+          "le_m": 5,
+          "pos_enu_cov": [
+            14.836,
+            0,
+            0,
+            14.836,
+            0,
+            25
+          ],
+          "vel_enu_cov": [
+            53.2444,
+            0,
+            0,
+            53.2444,
+            0,
+            0
+          ]
+        },
+        "v": 1
+      },
+      "legacy_omos_subjects_seen": 0,
+      "result": "pass",
+      "step": "1 sim-x1 telemetry -\u003e tel.fleet.drone.sim-x1.* -\u003e ent.drone.sim-x1.state with capabilities"
+    },
+    {
+      "detail": "arm events [proposed approved dispatched acknowledged executed]; takeoff events [proposed approved dispatched acknowledged executed]",
+      "result": "pass",
+      "step": "setup arm+takeoff (A4, zeus+alice)"
+    },
+    {
+      "detail": "snapshot item {\"callsign\":\"SIM-X1\",\"cot_type\":\"\",\"course\":0,\"disposition\":\"friendly\",\"entity_id\":\"sim-x1\",\"entity_type\":\"drone\",\"expiry_t\":1793291294882,\"hae\":-26.87,\"lat\":30.2672,\"live\":true,\"lon\":-97.7431,\"origin\":\"hub\",\"seq\":2,\"simulated\":true,\"speed\":0,\"stale\":10,\"t\":1793291234882}; watch ack map[ent_seq:4 lease_s:60 v:1 watch_id:w-366pKBD0YpcpvDXM9XF13M]; 2 batches, 2 sim-x1 ops (first: {\"e\":{\"callsign\":\"SIM-X1\",\"cot_type\":\"\",\"course\":113.9,\"disposition\":\"friendly\",\"entity_id\":\"sim-x1\",\"entity_type\":\"drone\",\"expiry_t\":1793291295297,\"hae\":-26.67,\"lat\":30.2672134,\"live\":true,\"lon\":-97.7429847,\"origin\":\"hub\",\"seq\":3,\"simulated\":true,\"speed\":14.29,\"stale\":10,\"t\":1793291235297},\"op\":\"upsert\"}); hazards layer items (NWS): 0",
+      "result": "pass",
+      "step": "2 layer snapshot+delta includes sim-x1"
+    },
+    {
+      "detail": "projected=true cot=\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?\u003e\n\u003cevent version=\"2.0\" uid=\"OM.drone.sim-x9\" type=\"a-f-A-M-H-Q\" how=\"m-s\" time=\"2026-10-29T16:27:15.621Z\" start=\"2026-10-29T16:27:15.606Z\" stale=\"2026-10-29T16:27:25.621Z\" opex=\"s\"\u003e\u003cpoint lat=\"30.267237\" lon=\"-97.742946\" hae=\"-26.3\" ce=\"1.9\" le=\"5.0\"/\u003e\u003cdetail\u003e\u003ccontact callsign=\"SIM-X1\"/\u003e\u003ctrack course=\"116.8\" speed=\"14.50\"/\u003e\u003cstatus battery=\"100\"/\u003e\u003cremarks\u003eOneMind multirotor · conf 0.95 · active · SIMULATED · fleet-drone\u003c/remarks\u003e\u003c_flow-tags_ omos-tak-projector=\"2026-10-29T16:27:15.621Z\"/\u003e\u003conemind v=\"1\" id=\"sim-x9\" type=\"drone\" seq=\"1\" conf=",
+      "result": "pass",
+      "step": "3b probe: correctly marked sim-x9 record is projected (TAK_RELEASE_GROUPS=homestead)"
+    },
+    {
+      "detail": "tak.cot.inject uids map[OM.drone.sim-x9:6]; feed-derived on inject: []; intel.* msgs from ingest: 12; non-drone ent msgs (NWS-derived): 3; sim-x1 CoT: ",
+      "result": "fail",
+      "step": "3 projector emits sim-x1 CoT on tak.cot.inject; no feed data on tak.cot.inject"
+    },
+    {
+      "detail": "zones zone-e2e-range(1800 m) and zone-e2e-pad(250 m) via zone.create+zeus confirm; goto act-01m647tbxjckmf4pw6pep69rcd events [proposed approved dispatched acknowledged executed]; evt.map.geofence.zone-e2e-pad.exit=true; alert={\"data\":{\"about\":{\"entity_id\":\"sim-x1\",\"entity_type\":\"drone\"},\"alert_id\":\"alr-gf-zone-e2e-pad-sim-x1\",\"alert_kind\":\"geofence\",\"level\":\"warning\",\"location\":{\"hae\":34.93,\"lat\":30.267429,\"lon\":-97.740488},\"message\":\"SIM-X1 is outside keep-in zone zone-e2e-pad\",\"opened_t\":1793291285277,\"raised_by\":\"omos-geofence\",\"reason\":\"left_keep_in\",\"seq\":1,\"simulated\":true,\"state\":\"open\",\"updated_t\":1793291285277,\"v\":1,\"zone_id\":\"zone-e2e-pad\",\"zone_kind\":\"keep_in\"},\"id\":\"abfd4473-92cb-4abf-aaec-e1a35110b250\",\"source\":\"omos-geofence\",\"subject\":\"evt.so.alert.raised\",\"ts\":\"2026-10-29T16:28:05.278Z\",\"type\":\"evt....; svc.geofence.alerts (CLIENT zeus)={\"alerts\":[{\"about\":{\"entity_id\":\"sim-x1\",\"entity_type\":\"drone\"},\"alert_id\":\"alr-gf-zone-e2e-pad-sim-x1\",\"alert_kind\":\"geofence\",\"level\":\"warning\",\"location\":{\"hae\":34.93,\"lat\":30.267429,\"lon\":-97.740488},\"message\":\"SIM-X1 is outside keep-in zone zone-e2e-pad\",\"opened_t\":1793291285277,\"raised_by\":\"omos-geofence\",\"reason\":\"left_keep_in\",\"seq\":1,\"simulated\":true,\"state\":\"open\",\"updated_t\":1793291285277,\"v\":1,\"zone_id\":\"zone-e2e-pad\",\"zone_kind\":\"keep_in\"}],\"v\":1}",
+      "result": "pass",
+      "step": "4 geofence drawn, drone exits, alert raised"
+    },
+    {
+      "action_get_before_confirm": {
+        "action": {
+          "action_id": "act-01m647twxb4pn25ksk14nch8gs",
+          "action_type": "task.assign",
+          "action_version": 1,
+          "actor_verified": true,
+          "approvals": [],
+          "approvals_needed": 1,
+          "confirm_by": "2026-10-29T12:30:05.419146-04:00",
+          "created_at": "2026-10-29T12:28:05.419146-04:00",
+          "family": "task",
+          "level": "A3",
+          "params": {
+            "description": "fly north 600 m",
+            "parent_id": "msn-60h4kq7dqhybfngjsr895pmtry",
+            "spec": {
+              "hae_m": 60,
+              "lat": 30.272595922182344,
+              "lon": -97.74309999999998
+            },
+            "task_id": "tsk-2rsmq44s6hj9jy73afh3wgkabv",
+            "type": "onemind.task.goto.v1"
+          },
+          "params_hash": "sha256:370bcc9099e3bce0af091b1203a424278ebcd2e3ec6a9f742ffc68c770aa5f27",
+          "policy": {
+            "checks": [
+              {
+                "allowed": true,
+                "object": "action_type:task.assign",
+                "relation": "proposer",
+                "user": "agent:hermes/zeus/legacy"
+              },
+              {
+                "allowed": true,
+                "object": "action_type:task.assign",
+                "relation": "proposer",
+                "user": "user:zeus"
+              },
+              {
+                "allowed": true,
+                "object": "asset:sim-x1",
+                "relation": "operator",
+                "user": "user:zeus"
+              }
+            ],
+            "model_id": "local:/Users/danielcarku/Desktop/work/.run/tmp-e2e/src/policy-service/platform/security/openfga/onemind-actions.json",
+            "store": "local"
+          },
+          "reason": "e2e integration",
+          "request_id": "d2176216-d044-4d3f-a9eb-11c0cf5fafbc",
+          "requested_by": {
+            "id": "agent:hermes/zeus/legacy",
+            "kind": "agent",
+            "on_behalf_of": "user:zeus"
+          },
+          "simulated": true,
+          "status": "awaiting_confirmation",
+          "target": {
+            "entity_id": "sim-x1",
+            "entity_type": "drone"
+          },
+          "updated_at": "2026-10-29T12:28:05.419146-04:00"
+        },
+        "denial": null
+      },
+      "detail": "mission msn-60h4kq7dqhybfngjsr895pmtry create events [proposed approved dispatched executed]; task tsk-2rsmq44s6hj9jy73afh3wgkabv action act-01m647twxb4pn25ksk14nch8gs: hermes propose=awaiting_confirmation, fleet cmds before confirm=0, hermes confirm (task: nats: timeout; command: nats: timeout), zeus confirm=dispatched; action events [proposed approved dispatched acknowledged executed]; cmd approval={\"approvals\":[{\"at\":\"2026-10-29T16:28:10.928Z\",\"by\":\"user:zeus\",\"step\":1}],\"approver\":\"user:zeus\",\"level\":\"A3\",\"params_hash\":\"sha256:370bcc9099e3bce0af091b1203a424278ebcd2e3ec6a9f742ffc68c770aa5f27\",\"reason\":\"e2e integration\",\"required\":true,\"status\":\"approved\"}; bridge outcomes [acknowledged executed]; bridge task reports [received executing]; KV mission-state final={\"end_t\":1793291337177,\"error\":null,\"estimate\":null,\"progress\":null,\"result\":{\"arrived\":true,\"distance_m\":23.34,\"source\":\"telemetry\",\"subject\":\"tel.fleet.drone.sim-x1.position\",\"vertical_m\":0},\"start_t\":1793291291048,\"state\":\"done_ok\",\"updated_t\":1793291337177}; task facts [created sent received executing done_ok]; mission facts [created updated updated completed]; drone 18 m from goal. problems: []",
+      "result": "pass",
+      "step": "5 mission + task goto via policy; agent confirm refused; human confirm accepted; bridge verifies; drone flies; mission-state; audit"
+    },
+    {
+      "detail": "pending task action act-01m647wfj0s9pg03e98ketpa1w (status awaiting_confirmation while estop ran); estop act-01m647wfj11x885t5x0rwj3tdy propose-\u003econfirm 2 ms, events [proposed approved dispatched acknowledged failed], cmd.fleet.drone.sim-x1.estop published=true, bridge outcomes [acknowledged failed(vehicle_rejected)], mavlink map[command:MAV_CMD_DO_FLIGHTTERMINATION id:185 result:3 result_name:MAV_RESULT_UNSUPPORTED]; estop reached the vehicle but did not execute (see bugs: the scripted sim answers MAV_CMD_DO_FLIGHTTERMINATION with UNSUPPORTED)",
+      "result": "fail",
+      "step": "6 estop works while a task is pending"
+    },
+    {
+      "detail": "zeus svc.policy.command.propose asset.strike -\u003e status=denied code=forbidden_action message=\"action crosses the civilian stop line (strike)\" named=true audited=true err=\u003cnil\u003e | hermes svc.policy.command.propose asset.intercept -\u003e status=denied code=forbidden_action message=\"action crosses the civilian stop line (intercept)\" named=true audited=true err=\u003cnil\u003e | hermes svc.policy.task.propose task.assign -\u003e status=denied code=forbidden_action message=\"task type crosses the civilian stop line (engage)\" named=true audited=true err=\u003cnil\u003e",
+      "result": "pass",
+      "step": "7 stop-line verb rejected by name"
+    },
+    {
+      "detail": "5 fleet commands, 0 without approval",
+      "result": "pass",
+      "step": "invariant: every cmd.fleet.\u003e has a human evt.so.action.approved"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+[68402] 2026/10/29 12:27:13.746986 [INF] Starting nats-server
+[68402] 2026/10/29 12:27:13.747111 [INF]   Version:  2.15.2
+[68402] 2026/10/29 12:27:13.747120 [INF]   Git:      [5a815f1]
+[68402] 2026/10/29 12:27:13.747124 [INF]   Name:     NBSZGRD3R3ACIRYJKZHEAS57SOOZE5TX6NGRYOOLURSN7N5TZX7ULYH6
+[68402] 2026/10/29 12:27:13.747128 [INF]   Node:     4EQ170Ln
+[68402] 2026/10/29 12:27:13.747132 [INF]   ID:       NBSZGRD3R3ACIRYJKZHEAS57SOOZE5TX6NGRYOOLURSN7N5TZX7ULYH6
+[68402] 2026/10/29 12:27:13.747143 [WRN] Plaintext passwords detected, use nkeys or bcrypt
+[68402] 2026/10/29 12:27:13.747153 [INF] Using configuration file: /Users/danielcarku/Desktop/work/.run/tmp-e2e/run/nats.conf (sha256:391d4bf5d9a0dbb45d03d4cea4f54aeb9fa3945e043806d7ea3ec16bce62d483)
+[68402] 2026/10/29 12:27:13.747289 [INF] Starting JetStream
+[68402] 2026/10/29 12:27:13.747457 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[68402] 2026/10/29 12:27:13.747462 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[68402] 2026/10/29 12:27:13.747466 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[68402] 2026/10/29 12:27:13.747469 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[68402] 2026/10/29 12:27:13.747472 [INF] 
+[68402] 2026/10/29 12:27:13.747476 [INF]          https://docs.nats.io/jetstream
+[68402] 2026/10/29 12:27:13.747478 [INF] 
+[68402] 2026/10/29 12:27:13.747481 [INF] ---------------- JETSTREAM ----------------
+[68402] 2026/10/29 12:27:13.747484 [INF]   Strict:          true
+[68402] 2026/10/29 12:27:13.747492 [INF]   Max Memory:      256.00 MB
+[68402] 2026/10/29 12:27:13.747496 [INF]   Max Storage:     64.00 GB
+[68402] 2026/10/29 12:27:13.747499 [INF]   Store Directory: "/Users/danielcarku/Desktop/work/.run/tmp-e2e/run/js/jetstream"
+[68402] 2026/10/29 12:27:13.747502 [INF]   API Level:       5
+[68402] 2026/10/29 12:27:13.747505 [INF] -------------------------------------------
+[68402] 2026/10/29 12:27:13.747917 [INF] Took 621.084µs to start JetStream
+[68402] 2026/10/29 12:27:13.747987 [INF] Listening for websocket clients on ws://127.0.0.1:51016
+[68402] 2026/10/29 12:27:13.747993 [WRN] Websocket not configured with TLS. DO NOT USE IN PRODUCTION!
+[68402] 2026/10/29 12:27:13.748026 [INF] Listening for client connections on 127.0.0.1:51015
+[68402] 2026/10/29 12:27:13.748035 [INF] Server is ready
+[68402] 2026/10/29 12:28:06.921307 [ERR] 127.0.0.1:51929 - cid:212 - "v1.53.1:go:e2e-hermes" - "AGENTS/user:hermes" - Publish Violation - Subject "svc.policy.task.confirm"
+[68402] 2026/10/29 12:28:08.923338 [ERR] 127.0.0.1:51929 - cid:212 - "v1.53.1:go:e2e-hermes" - "AGENTS/user:hermes" - Publish Violation - Subject "svc.policy.command.confirm"
+[68402] 2026/10/29 12:28:58.287860 [INF] Trapped "interrupt" signal
+[68402] 2026/10/29 12:28:58.340027 [INF] Initiating Shutdown...
+[68402] 2026/10/29 12:28:58.340074 [INF] Initiating JetStream Shutdown...
+[68402] 2026/10/29 12:28:58.438318 [INF] JetStream Shutdown
+[68402] 2026/10/29 12:28:58.438395 [INF] Server Exiting..

@@ -1,0 +1,4 @@
+{"time":"2026-10-29T12:27:13.876083-04:00","level":"INFO","msg":"waiting for lease","bucket":"entity-correlation","key":"lease.entity-service","holder":"Daniels-MacBook-Pro.local-68405"}
+{"time":"2026-10-29T12:27:13.877078-04:00","level":"INFO","msg":"lease acquired"}
+{"time":"2026-10-29T12:27:13.878823-04:00","level":"INFO","msg":"restored entities","count":0}
+{"time":"2026-10-29T12:28:13.876223-04:00","level":"INFO","msg":"counters","c":{"entities":2,"expired_on_arrival":2,"published":275,"skip_echo":14,"skip_no_position":9}}

@@ -1,0 +1,5 @@
+{"time":"2026-10-29T12:27:13.882935-04:00","level":"INFO","msg":"restored","crossings":0,"alert_facts":0,"alerts_open":0}
+{"time":"2026-10-29T12:27:13.885267-04:00","level":"INFO","msg":"geofence service ready","zones":0,"entities":0,"alerts_open":0,"signature_required":true,"keys":["e2e"]}
+{"time":"2026-10-29T12:27:45.80868-04:00","level":"INFO","msg":"zone command","zone":"zone-e2e-range","verb":"create","outcome":"created","code":"","action_id":"act-01m647t9r96q2tdfkas32avms0","command_id":"f08f40fa-dbfc-4b89-9d57-2530ccfc1c83","actor":"user:zeus"}
+{"time":"2026-10-29T12:27:45.913957-04:00","level":"INFO","msg":"zone command","zone":"zone-e2e-pad","verb":"create","outcome":"created","code":"","action_id":"act-01m647t9vnh9x60z7f3xztfazv","command_id":"07c9c745-9ab2-4fc0-b841-a1744e79d0e7","actor":"user:zeus"}
+{"time":"2026-10-29T12:28:13.881539-04:00","level":"INFO","msg":"counters","c":{"alert_raised":2,"alerts_open":2,"cmd_created":2,"crossing_enter":4,"crossing_exit":1,"entities":3,"entity_records":276,"feed_status":11,"published":7,"zone_set":2,"zones":2}}

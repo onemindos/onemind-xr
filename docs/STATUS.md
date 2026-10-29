@@ -13,7 +13,8 @@ row that is not done.
 | M2 lane B client (source only) | written, host-testable core passes; UE not installed: [xr #3](https://github.com/onemindos/onemind-xr/pull/3) | [evidence/M2](evidence/M2/) |
 | M3 lane C | L0 web client [xr #2](https://github.com/onemindos/onemind-xr/pull/2) (headless e2e passes); video [omos #559](https://github.com/onemindos/omos/pull/559) | [evidence/M3](evidence/M3/) |
 | M4 Act | built 2026-10-29, each independently reviewed, majors fixed; awaiting owner merge and owner checks: [#569 D1/D6 geofences+alerts](https://github.com/onemindos/omos/pull/569), [#568 D2/H4 missions](https://github.com/onemindos/omos/pull/568), [#564 I2/D5/D11 Hermes tools](https://github.com/onemindos/omos/pull/564), [#567 I1/I3/D10 agents, watch jobs, briefs](https://github.com/onemindos/omos/pull/567), [#566 H3 ROS 2 bridge](https://github.com/onemindos/omos/pull/566), [#565 J2 roles](https://github.com/onemindos/omos/pull/565), web Act [xr #5](https://github.com/onemindos/onemind-xr/pull/5), Unreal Act/TAK [xr #4](https://github.com/onemindos/onemind-xr/pull/4); #552 integration fixes pushed. Cross-PR blockers: params_hash mismatch #550 vs #554 (D2-P1); #552 sets no capabilities; #554 lacks zone.* actions; svc.cot.send unserved; #562 CLIENT account too narrow for browser clients | [evidence/M4](evidence/M4/) |
-| M5–M7 | next: integration pass, then M5 | — |
+| Integration pass | 2026-10-29: cross-PR fixes on #554/#550/#566 (shared params_hash vectors, zone actions), #552 (capabilities), #562 (identities for all services, CLIENT account), #563 (svc.cot.send), #556 (register); each independently reviewed. Whole-loop run on the local stack from branch tips: 9 of 12 steps pass, incl. drone → entity → layer → web client and agent-confirm refused / human-confirm flies sim-x1; 3 fail on 7 named bugs (fix wave next) | [evidence/INT](evidence/INT/) |
+| M5–M7 | next: E2E bug fixes, then M5 | — |
 
 ## Blockers (exact cause)
 
