@@ -1,0 +1,13 @@
+?   	github.com/onemindos/omos/services/agentops/cmd/agentops	[no test files]
+?   	github.com/onemindos/omos/services/agentops/internal/agentproto	[no test files]
+ok  	github.com/onemindos/omos/services/agentops/internal/brief	2.374s
+?   	github.com/onemindos/omos/services/agentops/internal/bus	[no test files]
+ok  	github.com/onemindos/omos/services/agentops/internal/chat	2.557s
+ok  	github.com/onemindos/omos/services/agentops/internal/cot	1.775s
+ok  	github.com/onemindos/omos/services/agentops/internal/e2e	2.076s
+?   	github.com/onemindos/omos/services/agentops/internal/feeds	[no test files]
+?   	github.com/onemindos/omos/services/agentops/internal/geo	[no test files]
+ok  	github.com/onemindos/omos/services/agentops/internal/model	2.347s
+?   	github.com/onemindos/omos/services/agentops/internal/natstest	[no test files]
+ok  	github.com/onemindos/omos/services/agentops/internal/presence	2.851s
+ok  	github.com/onemindos/omos/services/agentops/internal/watch	6.671s

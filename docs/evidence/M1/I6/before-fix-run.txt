@@ -1,0 +1,32 @@
+# Red-team suite against #554 as opened (origin/feat/policy-service 66900872), before the I6 fixes
+# 2026-10-29T11:40:57Z  go test -race -count=1 -v -run 'TestRedTeam|TestForbiddenNames' ./internal/policy/
+# service.go and catalogue.go restored to 66900872; TextStopLine (new in #557) stubbed to "never matches" in a temp test file so the suite compiles; constants and forbidden.go from #557 kept.
+    redteam_test.go:333: timed out waiting for guessed-id agent confirm audited
+    redteam_test.go:499: the confirmer is shown ambiguous parameters: {"lat":30.30,"lon":-97.70,"hae_m":160,"lat":30.27,"lon":-97.74}
+    redteam_test.go:576: want denied [forbidden_action], got {ActionID:act-01m63rg0g0pa1kw9z5nnv0qxhz Status:awaiting_confirmation Level:A3 ParamsHash:sha256:187e25312f25a1acdcaf0fd4f47fe214d43adf754de2677475ccefa0a4e1701c ConfirmBy:2026-10-29T12:02:00.000Z ApprovalsNeeded:1 Denial:<nil> DryRun:false}
+    redteam_test.go:770: RT03: no evt.so.action.denied (agent_cannot_confirm) for act-01m63rg0g0ppj3bqr02519jk3s
+    redteam_test.go:807: audit completeness: 144 replies checked, 1 missing; invariant: 9 cmd.fleet commands, 8 human-approved actions, 176 audit events
+--- FAIL: TestRedTeam (19.27s)
+    --- PASS: TestRedTeam/RT01 (0.28s)
+    --- PASS: TestRedTeam/RT02 (1.02s)
+    --- FAIL: TestRedTeam/RT03 (5.07s)
+    --- PASS: TestRedTeam/RT04 (0.08s)
+    --- PASS: TestRedTeam/RT05 (0.18s)
+    --- FAIL: TestRedTeam/RT06 (0.30s)
+    --- PASS: TestRedTeam/RT07 (2.48s)
+    --- FAIL: TestRedTeam/RT08 (0.32s)
+    --- PASS: TestRedTeam/RT09 (0.71s)
+    --- PASS: TestRedTeam/RT10 (0.20s)
+    --- PASS: TestRedTeam/RT11 (0.36s)
+    --- PASS: TestRedTeam/RT12 (0.22s)
+    --- PASS: TestRedTeam/RT13 (0.16s)
+    --- FAIL: TestRedTeam/RT15 (7.77s)
+    redteam_test.go:852: timed out waiting for denied audit for act-01m63rg0g0pr0e2skfmv4vx318
+--- FAIL: TestRedTeamFlooding (5.15s)
+    --- FAIL: TestRedTeamFlooding/RT14 (5.05s)
+    redteam_test.go:960: schemas clean outside the baseline (3 baseline hits); seeded schema detected: [actions/asset.engage.v1.schema.json:1: engage: {"$schema":"https://json-schema.org/draft/2020-12/schema","title":"asset.engage v1","type":"object", actions/asset.engage.v1.schema.json:2: t-k-: "properties":{"target_priority":{"type":"integer"},"cot_type":{"const":"t-k-d"},"mode":{"enum":["Strike","hold"]}}} actions/asset.engage.v1.schema.json:2: strike: "properties":{"target_priority":{"type":"integer"},"cot_type":{"const":"t-k-d"},"mode":{"enum":["Strike","hold"]}}}]
+--- PASS: TestForbiddenNames (0.08s)
+    --- PASS: TestForbiddenNames/RT16 (0.08s)
+FAIL
+FAIL	github.com/onemindos/omos/services/policy/internal/policy	24.974s
+FAIL

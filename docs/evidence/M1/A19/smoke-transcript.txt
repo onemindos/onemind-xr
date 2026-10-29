@@ -1,0 +1,125 @@
+
+== 0. render stage B with bcrypt hashes (scripts/nats_identities.py, branch feat/nats-identities)
+wrote 17 passwords to /Users/danielcarku/Desktop/work/.run/tmp-a19/smoke/passwords.json (0600)
+accounts: {'SYS': ['sys', 'monitor'], 'ONEMIND': ['onemind', 'leaf_tak', 'policy', 'entity', 'ingest', 'layer', 'projector', 'tak-client', 'bridge-mavlink-home', 'mesh-gateway', 'agent-fabric', 'leaf-tak', 'leaf-site-mac'], 'CLIENT': ['zeus'], 'AGENTS': ['hermes']}
+password fields are bcrypt: True
+hub: nats-server: v2.15.2 on nats://127.0.0.1:51835, leaf port 51837, websocket 51840
+
+== 1. streams and buckets created by the shared onemind user (as NACK does)
+  stream COT (tak.cot.>)
+  stream TEL (tel.>)
+  stream WORLD (evt.world.>)
+  stream INTEL (intel.>)
+  stream DET (det.>)
+  stream SYS (evt.sys.>)
+  stream CMD (cmd.fleet.> cmd.mission.> cmd.entity.>)
+  stream EVT (evt.so.> evt.drone.> evt.robot.> evt.entity.>)
+  stream MISSION (evt.mission.>)
+  stream ENT (A4 ent.json)
+  kv entity-correlation
+  kv geofences
+  kv mission-state
+  kv ingest-locks
+  kv ingest-state
+  kv feed-config
+leafs: hermes :51911  leaf-tak :51913  leaf-site-mac :51915
+[INF] 127.0.0.1:51912 - lid:73 - Leafnode connection created 
+[INF] 127.0.0.1:51914 - lid:74 - Leafnode connection created 
+[INF] 127.0.0.1:51919 - lid:75 - Leafnode connection created 
+
+== 2. FEATURES A19 acceptance with the nats CLI
+$ (as zeus, CLIENT) nats pub cmd.fleet.drone.sim-x1.goto '{}'
+08:12:05 >>> Unexpected NATS error: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+nats: error: nats: permissions violation: Permissions Violation for Publish to "cmd.fleet.drone.sim-x1.goto"
+$ (as zeus, CLIENT) nats pub ent.drone.sim-x1.state '{}'
+08:12:05 >>> Unexpected NATS error: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+nats: error: nats: permissions violation: Permissions Violation for Publish to "ent.drone.sim-x1.state"
+$ (as zeus, CLIENT) nats pub tak.cot.inject '<event/>'
+08:12:05 >>> Unexpected NATS error: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+nats: error: nats: permissions violation: Permissions Violation for Publish to "tak.cot.inject"
+$ (as hermes, a leaf-only credential) nats pub agents.hb.hermes.zeus.legacy '{}' directly on the hub
+nats: error: nats: Authorization Violation
+$ observers: TAK leaf subscribes tak.cot.inject; site leaf subscribes cmd.fleet.drone.sim-x1.>; onemind subscribes cmd.ha.>
+$ (Hermes agent on its in-pod leaf) nats pub tak.cot.inject / cmd.fleet.drone.sim-x1.goto / cmd.ha.light.on
+08:12:06 Published 17 bytes to "tak.cot.inject"
+08:12:06 Published 17 bytes to "cmd.fleet.drone.sim-x1.goto"
+08:12:06 Published 17 bytes to "cmd.ha.light.on"
+$ (projector, positive control) nats pub tak.cot.inject '<event uid="proj"/>'
+08:12:07 Published 19 bytes to "tak.cot.inject"
+messages seen by the TAK leaf on tak.cot.inject: 1 (want 1: the projector's, none from Hermes)
+[#1] Received on "tak.cot.inject"
+<event uid="proj"/>
+messages seen by the site leaf on cmd.fleet.drone.sim-x1.>: 0 (want 0)
+messages seen by onemind on cmd.ha.>: 0 (want 0)
+hermes leaf still connected: 1 connect(s), 0 close(s)
+
+== 3. real MAVLink bridge (PR #550) on the Mac site leaf, no credentials of its own; hub enforces leaf-site-mac
+private sim-x1 drone -> udp 127.0.0.1:52009
+$ (as onemind) nats stream info TEL: messages from tel.fleet.drone.sim-x1.* that crossed the site leaf
+│         2 Subjects in stream TEL        │
+│ Subject                         │ Count │
+│ tel.fleet.drone.sim-x1.status   │ 3     │
+│ tel.fleet.drone.sim-x1.position │ 18    │
+2026/10/29 08:12:09.129827 [bridge-mavlink] NATS connected: nats://127.0.0.1:51915
+2026/10/29 08:12:09.134787 [bridge-mavlink] MAVLink endpoint udpserver:127.0.0.1:52009, vehicle sysid 1, out V2
+2026/10/29 08:12:09.135044 [bridge-mavlink] subscribed cmd.fleet.drone.sim-x1.>; publishing tel.fleet.drone.sim-x1.position, tel.fleet.drone.sim-x1.status, evt.drone.sim-x1.command
+2026/10/29 08:12:09.165961 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:50169
+
+== 4. real entity service (PR #552) as user entity
+$ pubfx.py: A4 fixtures, each published (acked JetStream) as the user owning its subject
+    4 fixture(s) published as bridge-mavlink-home: acked
+   10 fixture(s) published as ingest: acked
+    1 fixture(s) published as mesh-gateway: acked
+   11 fixture(s) published as projector: acked
+    4 fixture(s) published as tak-client: acked
+$ curl /readyz: ready
+$ entity log lines mentioning permission: 0
+ENT messages: 12 subjects: 12
+$ (as zeus, CLIENT, through the svc.entity.> import) nats req svc.entity.get '{"entity_id":"sim-x1"}'
+{'entity_id': 'sim-x1', 'entity_type': 'drone', 'lifecycle': 'active', 'live': True} sources: ['fleet-drone', 'fleet-drone-build-mac', 'tak-mesh']
+$ (Hermes, AGENTS, through its leaf) nats req svc.entity.get '{"entity_id":"sim-x1"}'
+{"uid":"sim-x1","type":"fleet.drone","lat":0.0141513,"lon":-0.0403854,"hae":17.16,"course":109.5,"speed":2669.65,"callsign":"SIM-X1","stale":10,"t":179327594287
+
+== 5. real policy service (PR #554) as user policy; zeus confirms, Hermes cannot
+(the fixture sim-x1 advertises no task capabilities, so a stand-in svc.entity.get responder runs as user entity, as in the I4 smoke)
+{"time":"2026-10-29T08:12:25.220049-04:00","level":"INFO","msg":"policy service ready","authz":"local","signed":true}
+$ (as zeus) nats req svc.policy.command.propose asset.goto for sim-x1 (requested_by claims another user; the server-set identity wins)
+{"action_id":"act-01m63s6sxm5tdstbwp3g2xyh7e","status":"awaiting_confirmation","level":"A3","params_hash":"sha256:e173f7354711b3797aa25baae9a7eb547820b05f6148fdddb3aaa0655591ca85","confirm_by":"2026-10-29T12:14:26.932Z","approvals_needed":1,"denial":null}
+
+$ (Hermes via its leaf) nats req svc.policy.command.confirm (the agent tries to approve)
+08:12:27 No responders are available
+$ (Hermes via its leaf) nats req svc.policy.command.propose asset.goto (allowed: propose only)
+{"action_id":"act-01m63s6t1985e1b0jd501fnvha","status":"awaiting_confirmation","level":"A3","params_hash":"sha256:e173f7354711b3797aa25baae9a7eb547820b05f6148fdddb3aaa0655591ca85","confirm_by":"2026-10-29T12:14:27.049Z","approvals_needed":1,"denial":null}
+
+
+
+$ (as zeus) nats req svc.policy.command.confirm the goto (human approval)
+{"action_id":"act-01m63s6sxm5tdstbwp3g2xyh7e","status":"dispatched","approvals_needed":1,"approvals_received":1,"command_id":"3c448d65-99a6-43b6-8d5f-5ab3a7e5b159","denial":null}
+
+
+
+commands delivered to the site leaf (cmd.fleet.drone.sim-x1.>): 1
+[#1] Received on "cmd.fleet.drone.sim-x1.goto" with reply "_INBOX.QIqP3Y9IeZKLgb8ERzZdck.zu9vYadV"
+bridge outcomes on evt.drone.sim-x1.* seen in ONEMIND (crossed the site leaf):
+   1 "outcome":"acknowledged"
+   1 "outcome":"failed"
+[bridge-mavlink] command 3c448d65-99a6-43b6-8d5f-5ab3a7e5b159 goto outcome=acknowledged code= 
+[bridge-mavlink] command 3c448d65-99a6-43b6-8d5f-5ab3a7e5b159 goto outcome=failed code=vehicle_rejected vehicle answered MAV_RESULT_TEMPORARILY_REJECTED
+CMD stream messages: 1
+
+== 6. real omos-ingest (PR #553) as user ingest, NWS fixture served locally
+ingest exit: 0 ; log lines mentioning permission: 0
+INTEL messages: 15
+KV ingest-state keys: nws-alerts 
+{"time":"2026-10-29T08:12:32.713188-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"MacBookPro","source":"nws-alerts","records":12,"new":12}
+{"time":"2026-10-29T08:12:32.713248-04:00","level":"INFO","msg":"omos-ingest stopped","app":"omos-ingest","instance":"MacBookPro"}
+{"time":"2026-10-29T08:12:32.713363-04:00","level":"WARN","msg":"nats disconnected","app":"omos-ingest","instance":"MacBookPro","err":"<nil>"}
+
+== 7. server-side record
+hub log Authorization Violation lines: 0
+hub log Permissions Violation lines: 0
+   1 [ERR] 127.0.0.1:51948 - cid:76 - "v1.55.0:go:NATS CLI Version 0.5.1" - "CLIENT/user:zeus" - Publish Violation - Subject "cmd.fleet.drone.sim-x1.goto"
+   1 [ERR] 127.0.0.1:51955 - cid:77 - "v1.55.0:go:NATS CLI Version 0.5.1" - "CLIENT/user:zeus" - Publish Violation - Subject "ent.drone.sim-x1.state"
+   1 [ERR] 127.0.0.1:51960 - cid:78 - "v1.55.0:go:NATS CLI Version 0.5.1" - "CLIENT/user:zeus" - Publish Violation - Subject "tak.cot.inject"
+
+smoke done

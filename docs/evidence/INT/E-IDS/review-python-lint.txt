@@ -1,0 +1,15 @@
+..................................
+----------------------------------------------------------------------
+Ran 34 tests in 1.404s
+
+OK
+ok: 25 users, 5 accounts, invariants hold, values file current
+| `alice` | CLIENT | A | test configs only (never sealed, never live) |
+yl=0
+Changed YAML gate passed (4 files checked)
+vcy=0
+gitleaks
+[90m12:56PM[0m [32mINF[0m [1m7 commits scanned.[0m
+[90m12:56PM[0m [32mINF[0m [1mscanned ~338286 bytes (338.29 KB) in 91.4ms[0m
+[90m12:56PM[0m [32mINF[0m [1mno leaks found[0m
+gl=0

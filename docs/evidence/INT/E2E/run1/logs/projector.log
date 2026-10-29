@@ -1,0 +1,5 @@
+{"time":"2026-10-29T12:20:49.827449-04:00","level":"INFO","msg":"omos-tak-projector starting","target":"server","subject":"tak.cot.inject","instance":"hub","max_projected":500,"max_rate":50,"release_groups":null}
+{"time":"2026-10-29T12:20:49.829383-04:00","level":"INFO","msg":"watching kv","bucket":"mission-state"}
+{"time":"2026-10-29T12:20:49.829399-04:00","level":"INFO","msg":"watching kv","bucket":"geofences"}
+{"time":"2026-10-29T12:20:49.829435-04:00","level":"INFO","msg":"following ENT","stream":"ENT"}
+{"time":"2026-10-29T12:20:49.829957-04:00","level":"INFO","msg":"projector ready","target":"server","subject":"tak.cot.inject"}

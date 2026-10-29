@@ -1,0 +1,2501 @@
+{
+  "memory": 0,
+  "storage": 5056343349,
+  "reserved_memory": 0,
+  "reserved_storage": 2001048576,
+  "accounts": 1,
+  "ha_assets": 41,
+  "api": {
+    "level": 4,
+    "total": 266850,
+    "errors": 0
+  },
+  "server_id": "ND7NO7ZPSBI6KHVXFJFS74B5HBZBU76RTJ5M5MHOVLX7UZTRM5IWDKVE",
+  "now": "2026-10-29T11:29:29.578068675Z",
+  "config": {
+    "max_memory": 0,
+    "max_storage": 48318382080,
+    "store_dir": "/data/jetstream",
+    "sync_interval": 120000000000,
+    "strict": true
+  },
+  "limits": {},
+  "streams": 38,
+  "consumers": 2,
+  "messages": 9644078,
+  "bytes": 5056343349,
+  "meta_cluster": {
+    "name": "nats",
+    "leader": "nats-2",
+    "peer": "cnrtt3eg",
+    "cluster_size": 3,
+    "pending": 0,
+    "pending_requests": 0,
+    "pending_infos": 0,
+    "snapshot": {
+      "pending_entries": 0,
+      "pending_size": 0,
+      "last_time": "2026-10-27T22:15:56.690071516Z",
+      "last_duration": 706101
+    }
+  },
+  "account_details": [
+    {
+      "name": "ONEMIND",
+      "id": "ONEMIND",
+      "memory": 0,
+      "storage": 15169030115,
+      "reserved_memory": 18446744073709551615,
+      "reserved_storage": 18446744073709551615,
+      "accounts": 0,
+      "ha_assets": 0,
+      "api": {
+        "level": 0,
+        "total": 604822,
+        "errors": 3033
+      },
+      "stream_detail": [
+        {
+          "name": "VOICE",
+          "created": "2026-08-04T05:38:32.157481423Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-r8ruW0Jg",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.481552529Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 136050644,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 135936846,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "VOICE",
+            "subjects": [
+              "voice.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 2592000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "EVT",
+          "created": "2026-08-04T05:38:31.26268267Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-2jKUPnAz",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.405880327Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 196311035,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 195915142,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "EVT",
+            "subjects": [
+              "evt.so.\u003e",
+              "evt.hp.\u003e",
+              "evt.le.\u003e",
+              "evt.ge.\u003e",
+              "evt.task.\u003e",
+              "evt.cloud.\u003e",
+              "evt.bio.\u003e",
+              "evt.robot.\u003e",
+              "evt.drone.\u003e",
+              "evt.sat.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 7776000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 9,
+            "bytes": 5292,
+            "first_seq": 1,
+            "first_ts": "2026-10-09T00:05:43.776808481Z",
+            "last_seq": 9,
+            "last_ts": "2026-10-09T00:15:40.638771846Z",
+            "num_subjects": 4,
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_fleet-state",
+          "created": "2026-08-04T05:38:36.341441681Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-8NR4mdto",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.405883849Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 196305723,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 195915220,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_fleet-state",
+            "subjects": [
+              "$KV.fleet-state.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 30000000000,
+            "max_msgs_per_subject": 3,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 30000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "GEO",
+          "created": "2026-08-04T05:38:31.386762058Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-51gG0Vv0",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.396047857Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 209885443,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 209881533,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "GEO",
+            "subjects": [
+              "evt.tak.cot.\u003e",
+              "evt.tak.status.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 2592000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_agent-caps",
+          "created": "2026-08-04T05:38:35.781612434Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-G97d3xZq",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.454573363Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 136156841,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 136044868,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_agent-caps",
+            "subjects": [
+              "$KV.agent-caps.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 60000000000,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 60000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_om-schema",
+          "created": "2026-08-04T05:38:37.075079618Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-WuoehgF7",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 50534207,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_om-schema",
+            "subjects": [
+              "$KV.om-schema.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 5,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "WORLD",
+          "created": "2026-08-04T05:38:32.291125011Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-zyGlDcu9",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 85519186,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "WORLD",
+            "subjects": [
+              "evt.world.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": 2000000000,
+            "max_age": 86400000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_OVERWATCH_STATE",
+          "created": "2026-08-04T05:38:37.450247728Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-bSMZR9Q0",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 557850278,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_OVERWATCH_STATE",
+            "subjects": [
+              "$KV.OVERWATCH_STATE.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 5,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_geofences",
+          "created": "2026-08-04T05:38:36.461674966Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-EmRseqUE",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 557846705,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_geofences",
+            "subjects": [
+              "$KV.geofences.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 10,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_zeus-context",
+          "created": "2026-08-04T05:38:38.508934783Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-X36vueX7",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 559640450,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_zeus-context",
+            "subjects": [
+              "$KV.zeus-context.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 3600000000000,
+            "max_msgs_per_subject": 5,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "ENV",
+          "created": "2026-08-04T05:38:31.142765843Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-0vHSGkSU",
+            "leader": "nats-0",
+            "leader_since": "2026-10-25T03:43:43.990890658Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 586808217,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 586976327,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "ENV",
+            "subjects": [
+              "tel.nature.\u003e",
+              "tel.bio.\u003e",
+              "tel.weather.\u003e",
+              "tel.soil.\u003e",
+              "tel.water.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 2592000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_agent-registry",
+          "created": "2026-08-04T05:38:36.085293992Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-NiZHuKYe",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.44068572Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 166620721,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 166454631,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_agent-registry",
+            "subjects": [
+              "$KV.agent-registry.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 5,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_zeus-presence",
+          "created": "2026-08-04T05:38:38.791817531Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-NHYe4cJJ",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 557869945,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_zeus-presence",
+            "subjects": [
+              "$KV.zeus-presence.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 120000000000,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "TEL",
+          "created": "2026-08-04T05:38:32.016379616Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-OEwN2A9G",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 954818110,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "TEL",
+            "subjects": [
+              "tel.fleet.\u003e",
+              "tel.drone.\u003e",
+              "tel.robot.\u003e",
+              "tel.edge.\u003e",
+              "tel.iot.\u003e",
+              "tel.industrial.\u003e",
+              "tel.sat.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 604800000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_OVERWATCH_VIDEO",
+          "created": "2026-08-04T05:38:37.580928934Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-0ujF1VH5",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 557136187,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_OVERWATCH_VIDEO",
+            "subjects": [
+              "$KV.OVERWATCH_VIDEO.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_om-meta-dedup",
+          "created": "2026-08-04T05:38:36.955659646Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-hPcyajht",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 559671343,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_om-meta-dedup",
+            "subjects": [
+              "$KV.om-meta-dedup.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 30000000000,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 30000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_om_ui_projections",
+          "created": "2026-08-04T05:38:37.201072246Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-w6GxSkZL",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 60302856,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_om_ui_projections",
+            "subjects": [
+              "$KV.om_ui_projections.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": 1048576,
+            "max_age": 0,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_sys-health",
+          "created": "2026-08-04T05:38:37.860027935Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-3Er0FKQz",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 989955313,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_sys-health",
+            "subjects": [
+              "$KV.sys-health.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 60000000000,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 60000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_world-state",
+          "created": "2026-08-04T05:38:38.383727787Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-R3sDo7Ix",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 539371720,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_world-state",
+            "subjects": [
+              "$KV.world-state.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 300000000000,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "COT",
+          "created": "2026-08-04T05:38:31.011548433Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-m61hzQ7z",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.440710471Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 166635263,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 165898363,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "COT",
+            "subjects": [
+              "tak.cot.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 2592000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 9531820,
+            "bytes": 4948843022,
+            "first_seq": 26867363,
+            "first_ts": "2026-09-29T11:29:30.655654237Z",
+            "last_seq": 36399182,
+            "last_ts": "2026-10-29T11:29:15.770866772Z",
+            "num_subjects": 1,
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "ZEUS",
+          "created": "2026-08-04T05:38:32.420834427Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-UhRkoBAs",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 319944665,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "ZEUS",
+            "subjects": [
+              "zeus.\u003e",
+              "op.zeus.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 31536000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_OVERWATCH_INTERCEPT",
+          "created": "2026-08-04T05:38:37.323274994Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-owOw8vgN",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 435046290,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_OVERWATCH_INTERCEPT",
+            "subjects": [
+              "$KV.OVERWATCH_INTERCEPT.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "CMD",
+          "created": "2026-08-04T05:38:30.8798146Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-2CKQrTGD",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.453543466Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 143509218,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 143512532,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "CMD",
+            "subjects": [
+              "cmd.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 2592000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 2,
+            "bytes": 166,
+            "first_seq": 8,
+            "first_ts": "2026-09-30T19:04:26.595665437Z",
+            "last_seq": 9,
+            "last_ts": "2026-10-01T07:02:06.714064305Z",
+            "num_subjects": 1,
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_device-registry",
+          "created": "2026-08-04T05:38:36.208841866Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-us3VJqQD",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 557940223,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_device-registry",
+            "subjects": [
+              "$KV.device-registry.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_node-registry",
+          "created": "2026-08-04T05:38:36.714783596Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-JJ4OTga1",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 104727789,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_node-registry",
+            "subjects": [
+              "$KV.node-registry.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 5,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_projects",
+          "created": "2026-08-04T05:38:37.723245199Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-zcq0BQNi",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 558030226,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_projects",
+            "subjects": [
+              "$KV.projects.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 5,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_webhook-registry",
+          "created": "2026-08-04T05:38:38.256952753Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-RgB3A0Wq",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 558005880,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_webhook-registry",
+            "subjects": [
+              "$KV.webhook-registry.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_task-notify",
+          "created": "2026-08-04T05:38:38.130962703Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-Wa3o2SSx",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 458932823,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_task-notify",
+            "subjects": [
+              "$KV.task-notify.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 172800000000000,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "SYS",
+          "created": "2026-08-04T05:38:31.89220968Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-EqSZxirv",
+            "leader": "nats-0",
+            "leader_since": "2026-10-25T03:43:43.119729677Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 460123666,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 459564261,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "SYS",
+            "subjects": [
+              "evt.sys.\u003e",
+              "sys.\u003e",
+              "tel.host.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 604800000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_mission-state",
+          "created": "2026-08-04T05:38:36.589890692Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-I7sfw1xx",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.386432649Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 214267397,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 214343215,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_mission-state",
+            "subjects": [
+              "$KV.mission-state.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 5,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_task-index",
+          "created": "2026-08-04T05:38:37.998615316Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-AgLTUN0f",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 820921487,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_task-index",
+            "subjects": [
+              "$KV.task-index.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 2592000000000000,
+            "max_msgs_per_subject": 1,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "INTEL",
+          "created": "2026-08-04T05:38:31.518955566Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-rDecW0Ft",
+            "leader": "nats-0",
+            "leader_since": "2026-10-25T03:43:44.520410808Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 57283090,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 57255151,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "INTEL",
+            "subjects": [
+              "intel.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 7776000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 92129,
+            "bytes": 103612881,
+            "first_seq": 1,
+            "first_ts": "2026-08-04T05:38:32.103807669Z",
+            "last_seq": 92129,
+            "last_ts": "2026-10-29T11:22:34.137797245Z",
+            "num_subjects": 29311,
+            "consumer_count": 2
+          }
+        },
+        {
+          "name": "SAAS",
+          "created": "2026-08-04T05:38:31.763647677Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-1l8Kr44C",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 558061456,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "SAAS",
+            "subjects": [
+              "saas.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 7776000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "MISSION",
+          "created": "2026-08-04T05:38:31.643481345Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-YTQePXDB",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 990710951,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "MISSION",
+            "subjects": [
+              "evt.mission.\u003e",
+              "evt.map.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 7776000000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_agent-config",
+          "created": "2026-08-04T05:38:35.924698303Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-jFj6x5rd",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 557884638,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_agent-config",
+            "subjects": [
+              "$KV.agent-config.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 10,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "AGENTS",
+          "created": "2026-08-04T05:38:30.717623944Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-I0YToYBP",
+            "leader": "nats-0",
+            "leader_since": "2026-10-18T11:27:14.481715227Z",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 128192085,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 128241044,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "AGENTS",
+            "subjects": [
+              "agents.hb.\u003e",
+              "agents.status.\u003e",
+              "agents.discover",
+              "agents.heartbeat"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 604800000000000,
+            "max_msgs_per_subject": -1,
+            "max_msg_size": -1,
+            "discard": "old",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": false,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": false,
+            "deny_purge": false,
+            "allow_rollup_hdrs": false,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 20118,
+            "bytes": 3881988,
+            "first_seq": 313712,
+            "first_ts": "2026-10-22T11:29:29.610020418Z",
+            "last_seq": 333829,
+            "last_ts": "2026-10-29T11:29:00.260900714Z",
+            "num_subjects": 2,
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_om-config",
+          "created": "2026-08-04T05:38:36.834210532Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-3paNHrhS",
+            "leader": "nats-1",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": true,
+                "active": 105591200,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": false,
+                "active": 0,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_om-config",
+            "subjects": [
+              "$KV.om-config.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 0,
+            "max_msgs_per_subject": 10,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        },
+        {
+          "name": "KV_zeus-focus",
+          "created": "2026-08-04T05:38:38.645890513Z",
+          "cluster": {
+            "name": "nats",
+            "raft_group": "S-R3F-5siFEYSr",
+            "leader": "nats-2",
+            "system_account": true,
+            "traffic_account": "SYS",
+            "replicas": [
+              {
+                "name": "nats-1",
+                "current": false,
+                "active": 0,
+                "peer": "yrzKKRBu"
+              },
+              {
+                "name": "nats-2",
+                "current": true,
+                "active": 558039827,
+                "peer": "cnrtt3eg"
+              }
+            ]
+          },
+          "config": {
+            "name": "KV_zeus-focus",
+            "subjects": [
+              "$KV.zeus-focus.\u003e"
+            ],
+            "retention": "limits",
+            "max_consumers": -1,
+            "max_msgs": -1,
+            "max_bytes": -1,
+            "max_age": 86400000000000,
+            "max_msgs_per_subject": 3,
+            "max_msg_size": -1,
+            "discard": "new",
+            "storage": "file",
+            "num_replicas": 3,
+            "duplicate_window": 120000000000,
+            "compression": "none",
+            "allow_direct": true,
+            "mirror_direct": false,
+            "sealed": false,
+            "deny_delete": true,
+            "deny_purge": false,
+            "allow_rollup_hdrs": true,
+            "consumer_limits": {},
+            "allow_msg_ttl": false,
+            "metadata": {
+              "_nats.req.level": "0"
+            }
+          },
+          "state": {
+            "messages": 0,
+            "bytes": 0,
+            "first_seq": 0,
+            "first_ts": "0001-01-01T00:00:00Z",
+            "last_seq": 0,
+            "last_ts": "0001-01-01T00:00:00Z",
+            "consumer_count": 0
+          }
+        }
+      ]
+    }
+  ],
+  "total": 1
+}

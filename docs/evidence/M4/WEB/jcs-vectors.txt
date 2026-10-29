@@ -1,0 +1,6 @@
+sha256:f904a693de190fd5ec15baa70bb5a048758b61e2c942e276cc32be22bf9131ef
+sha256:557bb878d1b25cb3a44e4964653315439b3ad3310eb57d8d37e8689468d3fae3
+sha256:54f4af18e44c2bfbf329d57c2a5298874fd8cbd8bb70c699246ce06f01b4e066
+{"\r":2,"1":4,"n":[1e+21,1e-7,0.000001,333333333.3333333,0,100],"":6,"ö":7,"€":1,"😀":5,"דּ":3}
+
+# Produced by omos #554 services/policy/internal/policy/jcs.go (ParamsHash, Canonicalize) copied into a scratch main package; inputs in web/test/unit/act.test.ts 'JCS and params_hash'.

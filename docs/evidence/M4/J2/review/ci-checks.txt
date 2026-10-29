@@ -1,0 +1,19 @@
+## yamllint
+[Errno 2] No such file or directory: '.github/workflows/build-auth-callout.yml\n.github/workflows/build-policy.yml\nplatform/argocd/platform-auth-callout.yaml\nplatform/auth-callout/authentik-blueprint.yaml\nplatform/auth-callout/configmap.yaml\nplatform/auth-callout/deployment.yaml\nplatform/auth-callout/identities.fragment.yaml\nplatform/auth-callout/network-policy.yaml\nplatform/policy/configmap.yaml'
+rc=255
+## validate_changed_yaml
+Changed YAML gate passed (9 files checked)
+rc=0
+## validate_manifests
+Summary: 6 resources found in 6 files - Valid: 6, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 6 manifest file(s)
+rc=0
+## gitleaks
+[90m9:46AM[0m [32mINF[0m [1m1 commits scanned.[0m
+[90m9:46AM[0m [32mINF[0m [1mscanned ~145724 bytes (145.72 KB) in 71.1ms[0m
+[90m9:46AM[0m [32mINF[0m [1mno leaks found[0m
+rc=0
+[90m9:46AM[0m [32mINF[0m [1mscanned ~13036187 bytes (13.04 MB) in 3.9s[0m
+[90m9:46AM[0m [33mWRN[0m [1mleaks found: 9[0m
+rc=0
+yamllint rc=0

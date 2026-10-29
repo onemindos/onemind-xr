@@ -1,0 +1,246 @@
+test	Set up job	﻿2026-10-29T12:40:02.9240339Z Current runner version: '2.338.0'
+test	Set up job	2026-10-29T12:40:02.9260233Z ##[group]Runner Image Provisioner
+test	Set up job	2026-10-29T12:40:02.9260890Z Hosted Compute Agent
+test	Set up job	2026-10-29T12:40:02.9261294Z Version: 20261021.618
+test	Set up job	2026-10-29T12:40:02.9261664Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+test	Set up job	2026-10-29T12:40:02.9262159Z Build Date: 2026-10-21T00:45:21Z
+test	Set up job	2026-10-29T12:40:02.9262577Z Worker ID: {24b06142-c449-46b1-92d7-46fa15d40798}
+test	Set up job	2026-10-29T12:40:02.9263103Z Region: southcentralus
+test	Set up job	2026-10-29T12:40:02.9263459Z Cloud: Azure
+test	Set up job	2026-10-29T12:40:02.9264010Z ##[endgroup]
+test	Set up job	2026-10-29T12:40:02.9264937Z ##[group]Operating System
+test	Set up job	2026-10-29T12:40:02.9265312Z Ubuntu
+test	Set up job	2026-10-29T12:40:02.9265672Z 26.04.1
+test	Set up job	2026-10-29T12:40:02.9266035Z LTS
+test	Set up job	2026-10-29T12:40:02.9266354Z ##[endgroup]
+test	Set up job	2026-10-29T12:40:02.9266726Z ##[group]Runner Image
+test	Set up job	2026-10-29T12:40:02.9267132Z Image: ubuntu-26.04
+test	Set up job	2026-10-29T12:40:02.9267504Z Version: 20261025.179.1
+test	Set up job	2026-10-29T12:40:02.9268182Z Included Software: https://github.com/actions/runner-images/blob/ubuntu26/20261025.179/images/ubuntu/Ubuntu2604-Readme.md
+test	Set up job	2026-10-29T12:40:02.9269230Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu26%2F20261025.179
+test	Set up job	2026-10-29T12:40:02.9269836Z ##[endgroup]
+test	Set up job	2026-10-29T12:40:02.9270561Z ##[group]GITHUB_TOKEN Permissions
+test	Set up job	2026-10-29T12:40:02.9271818Z Contents: read
+test	Set up job	2026-10-29T12:40:02.9272215Z Metadata: read
+test	Set up job	2026-10-29T12:40:02.9272574Z ##[endgroup]
+test	Set up job	2026-10-29T12:40:02.9274171Z Secret source: Actions
+test	Set up job	2026-10-29T12:40:02.9274849Z Cache mode: write
+test	Set up job	2026-10-29T12:40:02.9275285Z Prepare workflow directory
+test	Set up job	2026-10-29T12:40:02.9529108Z Prepare all required actions
+test	Set up job	2026-10-29T12:40:02.9563063Z Getting action download info
+test	Set up job	2026-10-29T12:40:03.2133036Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+test	Set up job	2026-10-29T12:40:03.2977160Z Download action repository 'actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00' (SHA:44694675825211faa026b3c33043df3e48a5fa00)
+test	Set up job	2026-10-29T12:40:03.8076635Z Complete job name: test
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-10-29T12:40:03.8613880Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8614446Z with:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8614697Z   repository: onemindos/omos
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8616897Z   token: ***
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8617138Z   ssh-strict: true
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8617387Z   ssh-user: git
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8617645Z   persist-credentials: true
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8617932Z   clean: true
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8618186Z   sparse-checkout-cone-mode: true
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8618480Z   fetch-depth: 1
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8618761Z   fetch-tags: false
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8619022Z   show-progress: true
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8619279Z   lfs: false
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8619517Z   submodules: false
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8619776Z   set-safe-directory: true
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8620063Z   allow-unsafe-pr-checkout: false
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:03.8620425Z ##[endgroup]
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0692193Z Syncing repository: onemindos/omos
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0693274Z ##[group]Getting Git version info
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0693659Z Working directory is '/home/runner/work/omos/omos'
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0694461Z [command]/usr/bin/git version
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0710675Z git version 2.56.0
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0723304Z ##[endgroup]
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0733569Z Temporarily overriding HOME='/home/runner/work/_temp/6a3e7a83-4724-45c9-b5e7-63af4186bf27' before making global git config changes
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0735031Z Adding repository directory to the temporary git global config as a safe directory
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0737335Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/omos/omos
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0790326Z Deleting the contents of '/home/runner/work/omos/omos'
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0792300Z ##[group]Initializing the repository
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0795108Z [command]/usr/bin/git init /home/runner/work/omos/omos
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0906552Z hint: Using 'master' as the name for the initial branch. This default branch name
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0907586Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0908829Z hint: to use in all of your new repositories, which will suppress this warning,
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0909507Z hint: call:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0909873Z hint:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0910379Z hint: 	git config --global init.defaultBranch <name>
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0910938Z hint:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0911464Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0912329Z hint: 'development'. The just-created branch can be renamed via this command:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0912984Z hint:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0913364Z hint: 	git branch -m <name>
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0913929Z hint:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0914519Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0919543Z Initialized empty Git repository in /home/runner/work/omos/omos/.git/
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0927862Z [command]/usr/bin/git remote add origin https://github.com/onemindos/omos
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0973415Z ##[endgroup]
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0974500Z ##[group]Disabling automatic garbage collection
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.0977116Z [command]/usr/bin/git config --local gc.auto 0
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.1064202Z ##[endgroup]
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.1065289Z ##[group]Setting up auth
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.1069629Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.1103453Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.1474934Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.1504254Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.1739191Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.1772375Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.2020810Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.2056587Z ##[endgroup]
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.2057417Z ##[group]Fetching the repository
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:04.2067877Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +9b3fe28a303c71ee0d0fc6e55e9567b163185b13:refs/remotes/pull/563/merge
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.3174531Z From https://github.com/onemindos/omos
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.3175872Z  * [new ref]         9b3fe28a303c71ee0d0fc6e55e9567b163185b13 -> pull/563/merge
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.3182375Z ##[endgroup]
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.3183124Z ##[group]Determining the checkout info
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.3184129Z ##[endgroup]
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.3187116Z [command]/usr/bin/git sparse-checkout disable
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.3795417Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.3992491Z ##[group]Checking out the ref
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.3995733Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/563/merge
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5430560Z Note: switching to 'refs/remotes/pull/563/merge'.
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5431725Z 
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5432486Z You are in 'detached HEAD' state. You can look around, make experimental
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5434134Z changes and commit them, and you can discard any commits you make in this
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5435840Z state without impacting any branches by switching back to a branch.
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5436828Z 
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5437895Z If you want to create a new branch to retain commits you create, you may
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5439164Z do so (now or later) by using -c with the switch command. Example:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5439841Z 
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5440123Z   git switch -c <new-branch-name>
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5440901Z 
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5441177Z Or undo this operation with:
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5441604Z 
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5442002Z   git switch -
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5442416Z 
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5443115Z Turn off this advice by setting config variable advice.detachedHead to false
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5444184Z 
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5445152Z HEAD is now at 9b3fe28 Merge d346ee2ed18237b6ee6dec26f810d21a6109ca45 into d5d1a8bc295daa046b91c40d330e78224dd9e8ea
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5448262Z ##[endgroup]
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5488919Z [command]/usr/bin/git log -1 --format=%H
+test	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:40:05.5512663Z 9b3fe28a303c71ee0d0fc6e55e9567b163185b13
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	﻿2026-10-29T12:40:05.5849280Z ##[group]Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.5850399Z with:
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.5850986Z   go-version: 1.26.4
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.5851607Z   cache: false
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.5852207Z   check-latest: false
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.5858975Z   token: ***
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.5859601Z ##[endgroup]
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.6824770Z Setup go version spec 1.26.4
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.6846926Z Attempting to download 1.26.4...
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.6946195Z (node:2152) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:05.6948953Z (Use `node --trace-deprecation ...` to show where the warning was created)
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:06.6580866Z matching 1.26.4...
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:06.6632827Z Acquiring 1.26.4 from https://github.com/actions/go-versions/releases/download/1.26.4-26891772857/go-1.26.4-linux-x64.tar.gz
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:07.1982577Z Extracting Go...
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:07.2084802Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/30a54418-5924-4693-a40d-2733b8f55ddc -f /home/runner/work/_temp/7f88aa22-9695-4c69-8fbc-2155ca74bfad
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:08.0920134Z Successfully extracted go to /home/runner/work/_temp/30a54418-5924-4693-a40d-2733b8f55ddc
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:08.0920802Z Adding to the cache ...
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.0425954Z Successfully cached go to /opt/hostedtoolcache/go/1.26.4/x64
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.0427135Z Added go to the path
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.0429535Z Successfully set up Go version 1.26.4
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.0634615Z go version go1.26.4 linux/amd64
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.0634855Z 
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.0635157Z ##[group]go env
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1803206Z AR='ar'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1803570Z CC='gcc'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1803958Z CGO_CFLAGS='-O2 -g'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1804230Z CGO_CPPFLAGS=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1804434Z CGO_CXXFLAGS='-O2 -g'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1804643Z CGO_ENABLED='1'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1804834Z CGO_FFLAGS='-O2 -g'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1805041Z CGO_LDFLAGS='-O2 -g'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1805299Z CXX='g++'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1805537Z GCCGO='gccgo'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1805721Z GO111MODULE=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1805899Z GOAMD64='v1'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1806074Z GOARCH='amd64'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1806249Z GOAUTH='netrc'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1806429Z GOBIN=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1806691Z GOCACHE='/home/runner/.cache/go-build'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1806938Z GOCACHEPROG=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1807150Z GODEBUG=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1807375Z GOENV='/home/runner/.config/go/env'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1807636Z GOEXE=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1807807Z GOEXPERIMENT=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1807990Z GOFIPS140='off'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1808160Z GOFLAGS=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1808776Z GOGCCFLAGS='-fPIC -m64 -pthread -Wl,--no-gc-sections -fmessage-length=0 -ffile-prefix-map=/tmp/go-build927866678=/tmp/go-build -gno-record-gcc-switches'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1809352Z GOHOSTARCH='amd64'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1809539Z GOHOSTOS='linux'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1809722Z GOINSECURE=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1809969Z GOMOD='/dev/null'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1810172Z GOMODCACHE='/home/runner/go/pkg/mod'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1810401Z GONOPROXY=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1810600Z GONOSUMDB=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1810770Z GOOS='linux'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1810955Z GOPATH='/home/runner/go'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1811158Z GOPRIVATE=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1811839Z GOPROXY='https://proxy.golang.org,direct'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1812136Z GOROOT='/opt/hostedtoolcache/go/1.26.4/x64'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1812399Z GOSUMDB='sum.golang.org'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1812611Z GOTELEMETRY='local'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1812862Z GOTELEMETRYDIR='/home/runner/.config/go/telemetry'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1813131Z GOTMPDIR=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1813409Z GOTOOLCHAIN='local'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1813695Z GOTOOLDIR='/opt/hostedtoolcache/go/1.26.4/x64/pkg/tool/linux_amd64'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1814138Z GOVCS=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1814308Z GOVERSION='go1.26.4'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1814496Z GOWORK=''
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1814682Z PKG_CONFIG='pkg-config'
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1815020Z 
+test	Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:40:12.1815503Z ##[endgroup]
+test	Install nats-server	﻿2026-10-29T12:40:12.2017376Z ##[group]Run go install github.com/nats-io/nats-server/v2@v2.14.9
+test	Install nats-server	2026-10-29T12:40:12.2017783Z [36;1mgo install github.com/nats-io/nats-server/v2@v2.14.9[0m
+test	Install nats-server	2026-10-29T12:40:12.2048508Z shell: /usr/bin/bash -e {0}
+test	Install nats-server	2026-10-29T12:40:12.2048743Z env:
+test	Install nats-server	2026-10-29T12:40:12.2048879Z   GOTOOLCHAIN: local
+test	Install nats-server	2026-10-29T12:40:12.2049018Z ##[endgroup]
+test	Install nats-server	2026-10-29T12:40:12.3220135Z go: downloading github.com/nats-io/nats-server/v2 v2.14.9
+test	Install nats-server	2026-10-29T12:40:13.0231584Z go: downloading github.com/antithesishq/antithesis-sdk-go v0.8.0-default-no-op
+test	Install nats-server	2026-10-29T12:40:13.0233522Z go: downloading github.com/klauspost/compress v1.20.3
+test	Install nats-server	2026-10-29T12:40:13.0317818Z go: downloading github.com/minio/highwayhash v1.0.4
+test	Install nats-server	2026-10-29T12:40:13.1577071Z go: downloading github.com/nats-io/jwt/v2 v2.8.2
+test	Install nats-server	2026-10-29T12:40:13.1731126Z go: downloading github.com/nats-io/nkeys v0.4.16
+test	Install nats-server	2026-10-29T12:40:13.2711835Z go: downloading github.com/nats-io/nuid v1.0.1
+test	Install nats-server	2026-10-29T12:40:13.2786014Z go: downloading golang.org/x/crypto v0.58.0
+test	Install nats-server	2026-10-29T12:40:13.4318459Z go: downloading golang.org/x/time v0.16.0
+test	Install nats-server	2026-10-29T12:40:13.4917057Z go: downloading golang.org/x/sys v0.49.0
+test	Vet	﻿2026-10-29T12:40:31.3669093Z ##[group]Run go vet ./...
+test	Vet	2026-10-29T12:40:31.3669295Z [36;1mgo vet ./...[0m
+test	Vet	2026-10-29T12:40:31.3697551Z shell: /usr/bin/bash -e {0}
+test	Vet	2026-10-29T12:40:31.3697722Z env:
+test	Vet	2026-10-29T12:40:31.3697850Z   GOTOOLCHAIN: local
+test	Vet	2026-10-29T12:40:31.3697982Z ##[endgroup]
+test	Vet	2026-10-29T12:40:31.3842316Z go: downloading github.com/nats-io/nats.go v1.55.0
+test	Vet	2026-10-29T12:40:31.5691371Z go: downloading golang.org/x/crypto v0.57.0
+test	Vet	2026-10-29T12:40:31.5692268Z go: downloading github.com/klauspost/compress v1.20.0
+test	Vet	2026-10-29T12:40:31.6989221Z go: downloading golang.org/x/sys v0.48.0
+test	Test (race)	﻿2026-10-29T12:40:35.7605128Z ##[group]Run NATS_SERVER_BIN="$(go env GOPATH)/bin/nats-server" go test -race -count=1 ./...
+test	Test (race)	2026-10-29T12:40:35.7605520Z [36;1mNATS_SERVER_BIN="$(go env GOPATH)/bin/nats-server" go test -race -count=1 ./...[0m
+test	Test (race)	2026-10-29T12:40:35.7631706Z shell: /usr/bin/bash -e {0}
+test	Test (race)	2026-10-29T12:40:35.7631866Z env:
+test	Test (race)	2026-10-29T12:40:35.7632000Z   GOTOOLCHAIN: local
+test	Test (race)	2026-10-29T12:40:35.7632135Z ##[endgroup]
+test	Test (race)	2026-10-29T12:40:52.4555716Z ?   	github.com/onemindos/omos/services/projector/cmd/tak-projector	[no test files]
+test	Test (race)	2026-10-29T12:41:59.2909369Z ok  	github.com/onemindos/omos/services/projector/internal/projector	66.150s
+test	Post Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	﻿2026-10-29T12:41:59.4559486Z Post job cleanup.
+test	Post Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:41:59.5379220Z (node:8974) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+test	Post Run actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00	2026-10-29T12:41:59.5379690Z (Use `node --trace-deprecation ...` to show where the warning was created)
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-10-29T12:41:59.5584245Z Post job cleanup.
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6188507Z [command]/usr/bin/git version
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6224519Z git version 2.56.0
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6249665Z Temporarily overriding HOME='/home/runner/work/_temp/6ed802ff-9026-4d64-ab6d-85aa12d0fb08' before making global git config changes
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6250509Z Adding repository directory to the temporary git global config as a safe directory
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6253221Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/omos/omos
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6290714Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6322469Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6584343Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6610744Z http.https://github.com/.extraheader
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6622629Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6666460Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6913649Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-10-29T12:41:59.6942929Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test	Complete job	﻿2026-10-29T12:41:59.7311723Z Cleaning up orphan processes
+test	Complete job	2026-10-29T12:41:59.7555098Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

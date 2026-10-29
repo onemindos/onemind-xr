@@ -1,0 +1,44 @@
+NOTE: the reviewer's assertion len(tr.goals)==0 cannot hold for the first goto: its send_goal was already in flight to Nav2 when the estop ran. After the fix the queued goto is never sent (goals sent 1, was 2), the accepted in-flight goal is canceled again (re-stop), both gotos end failed/precondition_failed/estopped, mode=estop, goal=None. The regression test tests/test_bridge.py::test_estop_overtakes_inflight_and_queued_goto asserts exactly that.
+
+estopped: True mode: estop goal: False goals sent: 1
+('goto', 'acknowledged', '', '')
+('goto', 'acknowledged', '', '')
+('estop', 'acknowledged', '', '')
+('estop', 'executed', '', '')
+('goto', 'failed', 'precondition_failed', 'estopped')
+('goto', 'failed', 'precondition_failed', 'estopped')
+F
+=================================== FAILURES ===================================
+__________________ test_estop_during_inflight_and_queued_goto __________________
+
+    def test_estop_during_inflight_and_queued_goto():
+        async def go():
+            b, bus, tr, clock = make()
+            gate = asyncio.Event()
+            orig = tr.send_goal
+            async def slow(goal):
+                await gate.wait()      # Nav2 answers slowly (zenoh query up to 3 s)
+                return await orig(goal)
+            tr.send_goal = slow
+            b.on_odom(odom())
+            b._spawn(b.handle_command(*build(PRIV, verb="goto", data=target(5, 0), now=clock.t)))
+            b._spawn(b.handle_command(*build(PRIV, verb="goto", data=target(-5, 0), now=clock.t)))
+            for _ in range(10): await asyncio.sleep(0)
+            await b.handle_command(*build(PRIV, verb="estop", now=clock.t))
+            gate.set()
+            await settle(b)
+            return b, bus, tr
+        b, bus, tr = asyncio.run(go())
+        print("estopped:", b.estopped, "mode:", b.mode, "goal:", b.goal is not None, "goals sent:", len(tr.goals))
+        for o in outcomes(bus): print(o)
+        # Safety expectation: after an executed estop no goal is sent and the robot has no goal.
+>       assert len(tr.goals) == 0 and b.goal is None, "goto executed after e-stop latched"
+E       AssertionError: goto executed after e-stop latched
+E       assert (1 == 0)
+E        +  where 1 = len([PoseStamped(header=Header(stamp=Time(sec=1793281900, nanosec=157451000), frame_id='map'), pose=Pose(x=5.0000000003153895, y=0.0, z=0.0, qx=0.0, qy=0.0, qz=0.0, qw=1.0))])
+E        +    where [PoseStamped(header=Header(stamp=Time(sec=1793281900, nanosec=157451000), frame_id='map'), pose=Pose(x=5.0000000003153895, y=0.0, z=0.0, qx=0.0, qy=0.0, qz=0.0, qw=1.0))] = <test_bridge.FakeTransport object at 0x109255400>.goals
+
+../../../../../../onemind-xr/docs/evidence/M4/H3/review/test_repro_estop_race.py:29: AssertionError
+=========================== short test summary info ============================
+FAILED ../../../../../../onemind-xr/docs/evidence/M4/H3/review/test_repro_estop_race.py::test_estop_during_inflight_and_queued_goto
+1 failed in 0.07s

@@ -1,0 +1,11 @@
+=== RUN   TestReviewAbortAuditBeforeAbortCommand
+    review_race_test.go:20: guard={Commands:[0e005d92-ab9f-4eb8-8c25-e0f88e69933a 80fe04c3-5dae-47f3-974e-bb5d76458695] Epoch:1 LastVersion:2 Reporter:bridge-mavlink CancelFrom:2 PrevState:executing} state=cancel_requested err=<nil>
+    review_race_test.go:22: hold executed but task is cancel_requested, not done_not_ok+cancelled
+--- FAIL: TestReviewAbortAuditBeforeAbortCommand (0.23s)
+=== RUN   TestReviewHoldReportBeforeAbortCommand
+    review_race_test.go:41: guard={Commands:[f4e3242b-e158-4053-b006-1599c3c7fd3b 78fb5d71-83fb-45ac-ac1c-f3c2223ff64b] Epoch:1 LastVersion:3 Reporter:bridge-mavlink CancelFrom:2 PrevState:received} state=cancel_requested err=<nil>
+    review_race_test.go:43: hold executed but task is cancel_requested, not done_not_ok+cancelled
+--- FAIL: TestReviewHoldReportBeforeAbortCommand (0.23s)
+FAIL
+FAIL	github.com/onemindos/omos/services/mission/internal/mission	0.804s
+FAIL

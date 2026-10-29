@@ -1,0 +1,22 @@
+# e2e after review fixes (2026-10-29T14:03:12Z); entity #552 @ 13f0ebbb, policy #554 @ 66900872
+=== RUN   TestRealEntityServiceShowsAgentAndBriefCitesIt
+    e2e_test.go:111: [TestRealEntityServiceShowsAgentAndBriefCitesIt] real entity service published ent.agent.agent-hermes-zeus-legacy.state: entity_type=agent callsign=LEGACY type=fleet.agent lifecycle=active meta.mode=busy meta.activity=answering a TAK chat meta.current_task=map[state:executing summary: task_id:tsk-01jbx7k2m9q4r8s6t0v2w4y6z8] egress_tak=false current_task(field)=<nil>
+    e2e_test.go:127: [TestRealEntityServiceShowsAgentAndBriefCitesIt] offline brief from the real svc.entity.query: model=stub offline=true cited=[sim-x1 sim-x2 agent-hermes-zeus-legacy] gaps=1 text:
+        Brief for Homestead (test AOI) at 2026-10-29T14:03:13Z (offline fallback, deterministic summary).
+        Picture: 3 entities in the area (1 agent, 2 drone).
+        Key entities:
+        - SIM-X1 (drone) [sim-x1], multirotor
+        - SIM-X2 (drone) [sim-x2], multirotor
+        - LEGACY (agent) [agent-hermes-zeus-legacy], answering a TAK chat
+        Open alerts: none.
+        Intelligence gaps:
+        - feed nws-alerts: silent: never reported (expected, limit 5m0s)
+        
+--- PASS: TestRealEntityServiceShowsAgentAndBriefCitesIt (0.41s)
+=== RUN   TestRealPolicyKeepsWatchProposalWaiting
+    e2e_test.go:217: [TestRealPolicyKeepsWatchProposalWaiting] real policy answered: action_id=act-01m63zhnkxzmtkbj48s9a9a23d status=awaiting_confirmation level=A3 approvals_needed=1 denial=
+    e2e_test.go:223: [TestRealPolicyKeepsWatchProposalWaiting] audit evt.so.action.proposed: {"corr":"5beb721d-7c9f-5e23-ad51-58de64af1abc","data":{"action_id":"act-01m63zhnkxzmtkbj48s9a9a23d","action_type":"task.assign","action_version":1,"actor_verified":false,"agent_session":"alr-01m63zbqr03wh8nnvh04ybfezy","approvals":[],"level":"A3","model_alias":"stub","params_hash":"sha256:b5a1711388ee5f275255e7b2cd45ce502614f12602d7522fa801bedcf457fa15","policy":{"store":"local","model_id":"local:/Users/danielcarku/Desktop/work/wt/i4-policy/platform/security/openfga/onemind-actions.json","checks":[{"user":"agent:onemind-watch/zeus/hub","relation":"proposer","object":"action_type:task.assign","allowed":true},{"user":"user:zeus","relation":"proposer","object":"action_type:task.assign","allowed":true},{"user":"user:zeus","relation":"operator","object":"asset:sim-x1","allowed":true}]},"prompt_sha256":"f8a6113bff721a8d477067b601c6129ddcb6142e4200404e958a617a796a4edf","requested_by":{"kind":"a...
+    e2e_test.go:233: [TestRealPolicyKeepsWatchProposalWaiting] svc.policy.action.get after 1 s: {"action":{"action_id":"act-01m63zhnkxzmtkbj48s9a9a23d","family":"task","request_id":"1da9e484-f607-500f-b1cb-d8b7b6c8ce33","action_type":"task.assign","action_version":1,"level":"A3","target":{"entity_type":"drone","entity_id":"sim-x1"},"params":{"description":"Watch sim-keep-in (zone) fired: SIM-X1 (sim-x1) is outside zone zone-home (keep_in). Evidence: lat=30.3, lon=-97.74, seq=2, subject=ent.d...; cmd.> messages=0
+--- PASS: TestRealPolicyKeepsWatchProposalWaiting (2.17s)
+PASS
+ok  	github.com/onemindos/omos/services/agentops/internal/e2e	3.879s

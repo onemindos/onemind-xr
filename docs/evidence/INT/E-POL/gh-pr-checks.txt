@@ -1,0 +1,9 @@
+Helm render check: pass
+Lint & Validate: pass
+image: skipping
+Kubernetes manifest schema (kubeconform): pass
+Secret scan (gitleaks): pass
+preflight: pass
+test: pass
+test-and-image: pass
+acceptance: skipping

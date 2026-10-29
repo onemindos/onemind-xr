@@ -1,0 +1,49 @@
+== i4-policy
+ M docs/proposals/2026-10-29-nats-per-service-permissions.md
+ M docs/proposals/2026-10-29-policy-service-owner-proposals.md
+ M services/policy/README.md
+ M services/policy/internal/policy/catalogue.go
+ M services/policy/internal/policy/harness_test.go
+ M services/policy/internal/policy/service.go
+?? services/policy/internal/policy/hash_test.go
+?? services/schemas/actions/zone.create.v1.schema.json
+?? services/schemas/actions/zone.remove.v1.schema.json
+?? services/schemas/actions/zone.update.v1.schema.json
+?? services/schemas/command/testdata/
+yamllint rc=1
+Changed YAML gate passed (0 files checked)
+validate_changed_yaml rc=0
+vector json ok
+[90m11:29AM[0m [32mINF[0m [1mscanned ~13394319 bytes (13.39 MB) in 3.65s[0m
+[90m11:29AM[0m [33mWRN[0m [1mleaks found: 9[0m
+gitleaks rc=1
+== h2-mavlink
+ M .github/workflows/test-mavlink-bridge.yml
+ M services/bridge/bridges/mavlink/README.md
+ M services/bridge/bridges/mavlink/bridge.go
+ M services/bridge/bridges/mavlink/internal/command/command.go
+ M services/bridge/bridges/mavlink/internal/commandtest/commandtest.go
+?? services/bridge/bridges/mavlink/internal/command/hash_vectors_test.go
+?? services/schemas/command/testdata/
+yamllint rc=0
+Changed YAML gate passed (0 files checked)
+validate_changed_yaml rc=0
+vector json ok
+[90m11:29AM[0m [32mINF[0m [1mscanned ~12783815 bytes (12.78 MB) in 3.51s[0m
+[90m11:29AM[0m [33mWRN[0m [1mleaks found: 9[0m
+gitleaks rc=1
+== h3-ros2
+ M .github/workflows/test-ros2-bridge.yml
+ M services/bridge/bridges/ros2/README.md
+ M services/bridge/bridges/ros2/ros2bridge/bridge.py
+ M services/bridge/bridges/ros2/ros2bridge/command.py
+ M services/bridge/bridges/ros2/tests/cmdtest.py
+?? services/bridge/bridges/ros2/tests/test_params_hash_vectors.py
+?? services/schemas/command/testdata/
+yamllint rc=0
+Changed YAML gate passed (1 files checked)
+validate_changed_yaml rc=0
+vector json ok
+[90m11:29AM[0m [32mINF[0m [1mscanned ~13513519 bytes (13.51 MB) in 3.58s[0m
+[90m11:29AM[0m [33mWRN[0m [1mleaks found: 9[0m
+gitleaks rc=1

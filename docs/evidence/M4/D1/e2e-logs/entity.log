@@ -1,0 +1,4 @@
+{"time":"2026-10-29T10:04:59.339793-04:00","level":"INFO","msg":"restored entities","count":0}
+{"time":"2026-10-29T10:04:59.344787-04:00","level":"WARN","msg":"input stream missing; skipped","stream":"INTEL","err":"nats: API error: code=404 err_code=10059 description=stream not found"}
+{"time":"2026-10-29T10:04:59.345029-04:00","level":"WARN","msg":"input stream missing; skipped","stream":"DET","err":"nats: API error: code=404 err_code=10059 description=stream not found"}
+{"time":"2026-10-29T10:05:59.341707-04:00","level":"INFO","msg":"counters","c":{"entities":2,"published":297,"skip_echo":5}}

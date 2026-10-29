@@ -1,0 +1,6 @@
+{"time":"2026-10-29T13:07:50.122393-04:00","level":"INFO","msg":"omos-ingest up","app":"omos-ingest","instance":"e2e-1","version":"dev","sources":1}
+{"time":"2026-10-29T13:07:50.12278-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"e2e-1","source":"nws-alerts"}
+{"time":"2026-10-29T13:07:50.122804-04:00","level":"INFO","msg":"source start","app":"omos-ingest","instance":"e2e-1","source":"nws-alerts","kind":"rest_poll","url":"http://127.0.0.1:62350/alerts/active"}
+{"time":"2026-10-29T13:07:50.127043-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"e2e-1","source":"nws-alerts","records":12,"new":12}
+{"time":"2026-10-29T13:09:46.207977-04:00","level":"INFO","msg":"omos-ingest stopped","app":"omos-ingest","instance":"e2e-1"}
+{"time":"2026-10-29T13:09:46.208105-04:00","level":"WARN","msg":"nats disconnected","app":"omos-ingest","instance":"e2e-1","err":"<nil>"}

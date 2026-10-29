@@ -1,0 +1,9 @@
+ .../2026-10-29-grammar-register/README.md          | 106 +++++
+ docs/proposals/2026-10-29-grammar-register/bus.md  | 483 +++++++++++++++++++++
+ .../2026-10-29-grammar-register/cot-projection.md  | 138 ++++++
+ .../2026-10-29-grammar-register/cross-reference.md | 107 +++++
+ .../f1-intercept-example.md                        |  58 +++
+ .../2026-10-29-grammar-register/ontology.md        | 388 +++++++++++++++++
+ .../reference-architecture.md                      |  95 ++++
+ scripts/check_proposal_subjects.py                 | 310 +++++++++++++
+ 8 files changed, 1685 insertions(+)

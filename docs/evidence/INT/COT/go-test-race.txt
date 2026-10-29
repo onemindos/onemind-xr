@@ -1,0 +1,105 @@
+?   	github.com/onemindos/omos/services/projector/cmd/tak-projector	[no test files]
+=== RUN   TestAcceptance2AOI
+    harness_test.go:318: 2,000 aircraft, AOI around 20: 20 distinct OM.aircraft uids on tak.cot.inject (all inside), first 20 within 22ms
+    harness_test.go:318: restart with AOI in place: 20 uids projected again from ENT
+    harness_test.go:318: AOI deleted: 20 removals, last one 3.025s after delete (limit 8s = grace 3s + 5 s); 0 messages in the next 5 s
+--- PASS: TestAcceptance2AOI (13.85s)
+=== RUN   TestAcceptance3Marking
+    harness_test.go:318: TAK_RELEASE_GROUPS empty: CLEAR sent, AMBER+STRICT[homestead] and RED not sent (map[OM.drone.sim-clear:1])
+    harness_test.go:318: TAK_RELEASE_GROUPS=homestead: AMBER+STRICT[homestead] sent with marking headers, RED never; marking tightened to RED -> removal
+--- PASS: TestAcceptance3Marking (4.20s)
+=== RUN   TestAcceptance4PeopleNeverProjected
+    harness_test.go:318: person-class tracks, person and station entities inside the AOI over 4 s of updates: 0 CoT on tak.cot.inject and tak.cot.mesh.tx; control aircraft sent 1/1
+--- PASS: TestAcceptance4PeopleNeverProjected (4.29s)
+=== RUN   TestAcceptanceEgressTAK
+    harness_test.go:318: egress_tak=false inside an AOI: not sent; egress_tak turned off: removal
+--- PASS: TestAcceptanceEgressTAK (1.16s)
+=== RUN   TestAcceptanceMissionTier
+    harness_test.go:318: task target projected outside any AOI; active mission's aoi zone projects the aircraft inside it
+--- PASS: TestAcceptanceMissionTier (2.15s)
+=== RUN   TestAcceptance6Rate
+    harness_test.go:318: sim-x1 at 10 Hz for 12 s (~120 updates): 13 on tak.cot.inject (min gap 1s, max 1 per s), 3 on tak.cot.mesh.tx (min gap 5s, max 1 per 5 s)
+    harness_test.go:318: 5,000 aircraft in an AOI: 598 msgs on tak.cot.inject in 14s, max 50 in any one-second window by CoT send time (ceiling 50); 500 live uids incl. sim-x1 (cap 500), 49 replaced by nearer ones with a removal (cap order, section 3.3)
+--- PASS: TestAcceptance6Rate (28.27s)
+=== RUN   TestAcceptance5EchoAndTasking
+    harness_test.go:318: echo: projector output fed back on tak.cot.out and tak.cot.mesh.rx (and a relayed copy with the flow tag): ENT subjects 1 -> 1, only OM.drone.sim-x1 on tak.cot.inject
+    harness_test.go:318: stop-line 8: t-k-d on tak.cot.out and t-e-x on tak.cot.mesh.rx -> 0 ENT entities, 0 mission-state keys, 0 cmd.> and 0 svc.policy.> messages; projector logged 2 refusals
+    harness_test.go:318: test 8 (projector half): mesh PLI -> ent.person.tak-android-a6test01 (tlp AMBER+STRICT, egress_tak false); 0 messages for it on tak.cot.inject
+--- PASS: TestAcceptance5EchoAndTasking (9.88s)
+=== RUN   TestSendPrepareCotClientShapes
+--- PASS: TestSendPrepareCotClientShapes (0.00s)
+=== RUN   TestSendPrepareShapesM4
+--- PASS: TestSendPrepareShapesM4 (0.00s)
+=== RUN   TestSendPrepareCotRefusals
+--- PASS: TestSendPrepareCotRefusals (0.01s)
+=== RUN   TestSendPrepareChatWebShape
+--- PASS: TestSendPrepareChatWebShape (0.00s)
+=== RUN   TestSendRateBucket
+--- PASS: TestSendRateBucket (0.00s)
+=== RUN   TestSendConfigFromEnv
+--- PASS: TestSendConfigFromEnv (0.00s)
+=== RUN   TestSendIntegrationHub
+    harness_test.go:318: web geochat: ok uid=GeoChat.OM-WEB-zeus.All Chat Rooms.a417905dc9a9 targets=[server] skipped=[mesh]
+    harness_test.go:318: unreal marker: ok uid=onemind-headless-1-UiErQFEk targets=[server] skipped=[mesh]
+    harness_test.go:318: unreal route: ok uid=onemind-headless-4-Rr12Ss34 targets=[server] skipped=[mesh]
+    harness_test.go:318: unreal geofence: ok uid=onemind-headless-5-Gg12Hh34 targets=[server] skipped=[mesh]
+    harness_test.go:318: unreal chat: ok uid=GeoChat.onemind-headless.All Chat Rooms.onemind-headless-2-Ab3dEf9h targets=[server] skipped=[mesh]
+    harness_test.go:318: unreal M4 shape ring: ok uid=onemind-mac-24-R1ng0001.r1 targets=[server] skipped=[]
+    harness_test.go:318: unreal M4 shape rb: ok uid=onemind-mac-25-RngB0001 targets=[server] skipped=[]
+    harness_test.go:318: unreal M4 shape line: ok uid=onemind-mac-22-L1ne0001 targets=[server] skipped=[]
+    harness_test.go:318: replay of client_ref onemind-headless-1-UiErQFEk: stored reply, no second publish
+    harness_test.go:318: OM. uid impersonation: refused forbidden (<event uid> names a reserved uid (OM., INTEL.) "forbidden")
+    harness_test.go:318: INTEL. uid impersonation: refused forbidden (<event uid> names a reserved uid (OM., INTEL.) "forbidden")
+    harness_test.go:318: EUD PLI (person-track data): refused forbidden (<uid> is person-track data (an EUD position report); clients may not send it "forbidden")
+    harness_test.go:318: web sender impersonation (carol as OM-WEB-zeus): refused forbidden ({"code":"forbidden","message":"sender.uid \"OM-WEB-zeus\" is not bound to the calling user"})
+    harness_test.go:318: marking RED: refused forbidden (marking gate: "RED" is not releasable to TAK "forbidden")
+    harness_test.go:318: marking AMBER without releasable_to: refused forbidden (marking gate: "AMBER" is not releasable to TAK "forbidden")
+    harness_test.go:318: marking AMBER releasable to homestead (TAK_RELEASE_GROUPS): ok uid=onemind-headless-8-Amb2 targets=[server] skipped=[]
+    harness_test.go:318: mesh-only send to the hub projector: refused target_failed (this projector serves only target server "target_failed")
+    harness_test.go:318: same-account caller (no Nats-Request-Info): refused forbidden ({"code":"forbidden","message":"caller identity not verified: send through the CLIENT account's svc.cot.send import"})
+    harness_test.go:318: own-account caller with a hand-written Nats-Request-Info: refused forbidden
+    harness_test.go:318: AGENTS caller (no import): no responders
+    harness_test.go:318: zeus after carol is limited: ok uid=GeoChat.OM-WEB-zeus.Cyan.04bd0b3256be targets=[server] skipped=[]
+    harness_test.go:318: per-identity rate limit (6/min, burst 25): carol 24 ok then 6 rate_limited; zeus unaffected
+    harness_test.go:318: cmd.projector.disable: svc.cot.send refused forbidden (G1)
+    harness_test.go:318: single writer: 34 publishes on tak.cot.inject = 34 ok replies; counters ok=34 forbidden=9 rate_limited=6 target_failed=1 replayed=1
+--- PASS: TestSendIntegrationHub (0.53s)
+=== RUN   TestSendIntegrationMeshAndCeiling
+    harness_test.go:318: site projector: GeoChat direct message core-published on tak.cot.mesh.tx with Tak-Dest-Uid (CP-3), skipped server
+    harness_test.go:318: client ceiling COT_SEND_MAX_PER_SEC=3: 2 ok, 6 rate_limited in one burst; nothing on tak.cot.inject
+--- PASS: TestSendIntegrationMeshAndCeiling (0.10s)
+=== RUN   TestTypeTable
+    unit_test.go:146: COTTYPES_XML not set: CoTtypes.xml membership not checked
+--- PASS: TestTypeTable (0.04s)
+=== RUN   TestCivilianCheck
+    unit_test.go:174: 728 combinations, none forbidden
+--- PASS: TestCivilianCheck (0.29s)
+=== RUN   TestNeverTypes
+--- PASS: TestNeverTypes (0.00s)
+=== RUN   TestMarkingGate
+--- PASS: TestMarkingGate (0.00s)
+=== RUN   TestGatesOrderAndReasons
+--- PASS: TestGatesOrderAndReasons (0.01s)
+=== RUN   TestAOIGeometry
+--- PASS: TestAOIGeometry (0.00s)
+=== RUN   TestMissionTasking
+--- PASS: TestMissionTasking (0.00s)
+=== RUN   TestMeshProfile
+--- PASS: TestMeshProfile (0.01s)
+=== RUN   TestCoTContent
+--- PASS: TestCoTContent (0.00s)
+=== RUN   TestStaleClamp
+--- PASS: TestStaleClamp (0.00s)
+=== RUN   TestEngineHysteresisAndRemoval
+--- PASS: TestEngineHysteresisAndRemoval (0.00s)
+=== RUN   TestEngineIntervalsAndCeiling
+    unit_test.go:507: 5,000 entities: 1000 sent in 20 s, max 50 in any one-second window
+--- PASS: TestEngineIntervalsAndCeiling (2.71s)
+=== RUN   TestEngineCapOrder
+--- PASS: TestEngineCapOrder (0.00s)
+=== RUN   TestDisableRemovesAndStops
+--- PASS: TestDisableRemovesAndStops (0.01s)
+=== RUN   TestSimplifyAndBuffer
+--- PASS: TestSimplifyAndBuffer (0.20s)
+PASS
+ok  	github.com/onemindos/omos/services/projector/internal/projector	69.124s

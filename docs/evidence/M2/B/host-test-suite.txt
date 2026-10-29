@@ -1,0 +1,123 @@
+== configure + build (C++17, -Wall -Wextra -Wshadow -Werror -fno-exceptions -fno-rtti)
+== configure + build (C++20, -Wall -Wextra -Wshadow -Werror -fno-exceptions -fno-rtti)
+== unit tests
+[ RUN  ] json_roundtrip_and_types
+[  OK  ] json_roundtrip_and_types (0 ms)
+[ RUN  ] json_rejects_bad_input
+[  OK  ] json_rejects_bad_input (0 ms)
+[ RUN  ] base64_base32_sha
+[  OK  ] base64_base32_sha (0 ms)
+[ RUN  ] ws_handshake_accept_rfc6455_example
+[  OK  ] ws_handshake_accept_rfc6455_example (0 ms)
+[ RUN  ] ws_frame_encode_decode_and_fragmentation
+[  OK  ] ws_frame_encode_decode_and_fragmentation (0 ms)
+[ RUN  ] xml_parse_entities_and_limits
+[  OK  ] xml_parse_entities_and_limits (0 ms)
+[ RUN  ] cot_time_roundtrip
+[  OK  ] cot_time_roundtrip (0 ms)
+[ RUN  ] cot_event_vh_port_path_api
+[  OK  ] cot_event_vh_port_path_api (0 ms)
+[ RUN  ] cot_parse_eud_pli_fixture
+[  OK  ] cot_parse_eud_pli_fixture (0 ms)
+[ RUN  ] cot_drop_rules_and_disposition
+[  OK  ] cot_drop_rules_and_disposition (0 ms)
+[ RUN  ] tak_entity_id_matches_entity_service_rule
+[  OK  ] tak_entity_id_matches_entity_service_rule (0 ms)
+[ RUN  ] cot_builders_validate_and_send_body
+[  OK  ] cot_builders_validate_and_send_body (0 ms)
+[ RUN  ] milstd2525_vh_port
+[  OK  ] milstd2525_vh_port (0 ms)
+[ RUN  ] render_entity_from_full_record_and_render_item
+[  OK  ] render_entity_from_full_record_and_render_item (0 ms)
+[ RUN  ] entity_store_revision_rule_live_false_expiry_tombstones
+[  OK  ] entity_store_revision_rule_live_false_expiry_tombstones (0 ms)
+[ RUN  ] entity_store_journal_swap_remove_and_pick
+[  OK  ] entity_store_journal_swap_remove_and_pick (0 ms)
+[ RUN  ] inspector_rows_for_tak_person_record
+[  OK  ] inspector_rows_for_tak_person_record (0 ms)
+[ RUN  ] render_plan_bands_horizon_and_clusters
+[  OK  ] render_plan_bands_horizon_and_clusters (0 ms)
+[ RUN  ] render_plan_10k_entities_budget
+    10k render plan: 0.70 ms per frame (icons 9892 models 0 actors 0 clustered 108 culled 0)
+[  OK  ] render_plan_10k_entities_budget (10 ms)
+[ RUN  ] layer_watch_path_snapshot_deltas_gap_and_toggle
+[  OK  ] layer_watch_path_snapshot_deltas_gap_and_toggle (0 ms)
+[ RUN  ] layer_specs_parse
+[  OK  ] layer_specs_parse (0 ms)
+[ RUN  ] nats_parser_ops_and_split_input
+[  OK  ] nats_parser_ops_and_split_input (0 ms)
+[ RUN  ] nats_parser_rejects_garbage
+[  OK  ] nats_parser_rejects_garbage (0 ms)
+[ RUN  ] nats_serializer_and_subjects
+[  OK  ] nats_serializer_and_subjects (0 ms)
+[ RUN  ] js_ack_meta_both_forms
+[  OK  ] js_ack_meta_both_forms (0 ms)
+[ RUN  ] nats_client_connect_subscribe_request_many
+[  OK  ] nats_client_connect_subscribe_request_many (0 ms)
+[ RUN  ] nats_client_reconnect_resubscribes_and_flushes_buffer
+[  OK  ] nats_client_reconnect_resubscribes_and_flushes_buffer (0 ms)
+[ RUN  ] nats_client_detects_stale_connection
+[  OK  ] nats_client_detects_stale_connection (0 ms)
+[ RUN  ] nats_client_fatal_err_and_unsubscribe
+[  OK  ] nats_client_fatal_err_and_unsubscribe (0 ms)
+[ RUN  ] nats_headers_reject_crlf_and_colon
+[  OK  ] nats_headers_reject_crlf_and_colon (0 ms)
+[ RUN  ] nats_client_slow_consumer_cap_closes_and_reconnects
+[  OK  ] nats_client_slow_consumer_cap_closes_and_reconnects (0 ms)
+
+31 tests, 31 passed, 0 failed, 728 checks, 11 ms
+== integration tests (disposable nats-server, WebSocket)
+[ RUN  ] it_ws_connect_pubsub_request_reply
+[  OK  ] it_ws_connect_pubsub_request_reply (402 ms)
+[ RUN  ] it_kv_get_direct_fallback_and_watch
+    kv put -> watch delivery: 3 ms (B3 target: marker within 1 s)
+[  OK  ] it_kv_get_direct_fallback_and_watch (316 ms)
+[ RUN  ] it_reconnect_after_server_restart
+    reconnected 1574 ms after the server went down (server restarted after 1.5 s)
+    after reconnect: kv put -> client in 3 ms
+[  OK  ] it_reconnect_after_server_restart (2283 ms)
+[ RUN  ] it_direct_path_ent_snapshot_live_ttl_markers_and_live_false
+    direct path: 1000-entity snapshot in 11 ms
+    Nats-TTL 1s -> removed by delete marker after 1003 ms (expired counter 1)
+[  OK  ] it_direct_path_ent_snapshot_live_ttl_markers_and_live_false (1438 ms)
+[ RUN  ] it_layer_off_means_no_subscription_on_the_server
+    server-side subscriptions: before=0 on=6 off=1; ENT consumers after off=0
+[  OK  ] it_layer_off_means_no_subscription_on_the_server (2014 ms)
+[ RUN  ] it_direct_layers_camera_aoi_small_keeps_all_large_reloads_on_pan
+    after pan: large direct layer 16 entities (16 in the new view), small layer 400
+[  OK  ] it_direct_layers_camera_aoi_small_keeps_all_large_reloads_on_pan (417 ms)
+[ RUN  ] it_watch_path_snapshot_deltas_aoi_and_unwatch
+[  OK  ] it_watch_path_snapshot_deltas_aoi_and_unwatch (314 ms)
+[ RUN  ] it_dead_watch_resnapshots_after_30s_silence
+    silent watch -> new snapshot after 30011 ms (contract: 30 s)
+[  OK  ] it_dead_watch_resnapshots_after_30s_silence (30308 ms)
+[ RUN  ] it_10k_entities_snapshot_and_update_throughput
+    10,000-entity snapshot over svc.layer.snapshot (5 chunks): 82 ms wall, 81 ms in client (A5 contract target < 2 s)
+    30,000 delta upserts applied in 0.27 s (112360 updates/s, 30 batches) -> 10000 journal changes
+[  OK  ] it_10k_entities_snapshot_and_update_throughput (666 ms)
+
+9 tests, 9 passed, 0 failed, 99 checks, 38161 ms
+== AddressSanitizer + UBSan build, unit and integration tests
+31 tests, 31 passed, 0 failed, 728 checks, 62 ms
+9 tests, 9 passed, 0 failed, 99 checks, 39711 ms
+== 10,000-entity load (client core)
+[headless] layer fleet path=direct state=live entities=10000 snapshots=1 batches=0 err=
+[headless] final layer fleet: 10000 entities (added 10000, updated 148000, removed 0, expired 0, ignored older 0), last snapshot 207 ms
+== 10,000-entity load with the camera AOI of the default start (Austin, 8 km): a small direct layer keeps all
+[headless] layer fleet path=direct state=live entities=10000 snapshots=1 batches=0 err=
+[headless] final layer fleet: 10000 entities (added 10000, updated 150000, removed 0, expired 0, ignored older 0), last snapshot 208 ms
+== C1/C2 end to end
+[PASS] 0 omos mesh gateway (PR #551) and entity service (PR #552) build -- gw bef11eb104ee es 886596b188f2
+[PASS] 0b streams COT and ENT (ent.yaml settings) created -- b'{"type":"io.nats.jetstream.api.v1.stream_create_response","config":{"name":"ENT","subjects":["ent.*.*.state"],"retention":"limits","max_consumers":-1,"max_msgs"'
+[PASS] 0c nats-server, gateway and entity service running -- nats-server=up, tak-gateway=up, entity-service=up
+[PASS] C1a mesh PLI becomes ent.person.tak-{uid}.state -- 28 ms
+[PASS] C1b marking AMBER+STRICT and egress_tak false (cot-projection.md §8.3) -- {"tlp": "AMBER+STRICT", "egress_tak": false, "sources": [["tak-mesh", "tak.cot.mesh.rx", "COT", 1]]}
+[PASS] C1c the OneMind client core shows the EUD in its tak layer
+[PASS] C1d inspector shows sources and confidence breakdown
+[PASS] C1e inspector raw CoT fetched from COT by sequence
+[PASS] C2a svc.cot.send accepted the marker (reply ok, target mesh) -- uids=['onemind-headless-1-BRGcVdrt']
+[PASS] C2b takproto listener on the mesh group receives the marker as TAK Protocol v1 (mesh, 0xbf 0x01 0xbf) -- uid=onemind-headless-1-BRGcVdrt type=a-u-G lat=30.2700 callsign=OM-C2-MARK
+[PASS] C2c marker content intact (type a-u-G, position, callsign, opex simulated in xmlDetail or attrs)
+[PASS] C2d svc.cot.send stand-in refuses the projector's reserved OM. uid prefix
+12/12 checks passed
+exit 0

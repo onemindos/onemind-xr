@@ -1,0 +1,20 @@
+{
+ "CMD": "stream-caps/platform/nats/streams/cmd.yaml",
+ "COT": "stream-caps/platform/nats/streams/cot.yaml",
+ "DET": "stream-caps/platform/nats/streams/det.yaml",
+ "EVT": "stream-caps/platform/nats/streams/evt.yaml",
+ "INTEL": "stream-caps/platform/nats/streams/intel.yaml",
+ "KV_feed-config": "stream-caps/platform/nats/streams/kv-feed-config.yaml",
+ "KV_fleet-state": "stream-caps/platform/nats/streams/kv-fleet-state.yaml",
+ "KV_geofences": "stream-caps/platform/nats/streams/kv-geofences.yaml",
+ "KV_mission-state": "stream-caps/platform/nats/streams/kv-mission-state.yaml",
+ "KV_world-state": "stream-caps/platform/nats/streams/kv-world-state.yaml",
+ "MISSION": "stream-caps/platform/nats/streams/mission.yaml",
+ "SYS": "stream-caps/platform/nats/streams/sys.yaml",
+ "TEL": "stream-caps/platform/nats/streams/tel.yaml",
+ "WORLD": "stream-caps/platform/nats/streams/world.yaml",
+ "ENT": "entity-service/platform/nats/streams/ent.yaml",
+ "KV_entity-correlation": "entity-service/platform/nats/streams/kv-entity-correlation.yaml",
+ "KV_ingest-locks": "ingest-framework/platform/nats/streams/kv-ingest-locks.yaml",
+ "KV_ingest-state": "ingest-framework/platform/nats/streams/kv-ingest-state.yaml"
+}

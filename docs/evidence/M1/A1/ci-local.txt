@@ -1,0 +1,41 @@
+== validate_changed_yaml
+Changed YAML gate passed (6 files checked)
+rc=0
+== validate_manifests --all
+Summary: 1471 resources found in 524 files - Valid: 841, Invalid: 0, Errors: 0, Skipped: 630
+kubeconform: validating 524 manifest file(s)
+rc=0
+== validate_helm_renders (changed)
+warn  local chart platform/parked/kagent/charts/agent-sandbox is not registered in LOCAL_VALUES (not rendered)
+No Helm-affecting changes to render
+rc=0
+== kubeconform strict
+Summary: 5 resources found in 3 files - Valid: 5, Invalid: 0, Errors: 0, Skipped: 0
+rc=0
+== check_onemind_mcp_coverage
+All 57 Git-declared Argo Applications mapped to MCP access dispositions
+rc=0
+== shellcheck
+rc=0
+== gitleaks working tree vs baseline
+[90m7:48AM[0m [32mINF[0m [1mno leaks found[0m
+rc=0
+== gitleaks PR commits
+[90m7:48AM[0m [32mINF[0m [1mno leaks found[0m
+rc=0
+== redpanda-connect 4.115.1 lint of the ConfigMap pipelines
+LINT-OK
+== unittest test_gitops_feed_grammar -v
+test_aircraft_and_ships_stay_off (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_aircraft_and_ships_stay_off) ... ok
+test_duplicate_feed_hazards_is_removed (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_duplicate_feed_hazards_is_removed) ... ok
+test_each_pipeline_runs_in_at_most_one_deployment (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_each_pipeline_runs_in_at_most_one_deployment) ... ok
+test_grammar_deployment_is_a_reviewed_switch (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_grammar_deployment_is_a_reviewed_switch) ... ok
+test_grammar_pipelines_publish_only_grammar_subjects (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_grammar_pipelines_publish_only_grammar_subjects) ... ok
+Stage order from CUTOVER.md: never turn a legacy CoT output off while its grammar ... ok
+test_reference_copies_match_the_configmap (scripts.tests.test_gitops_feed_grammar.FeedGrammar.test_reference_copies_match_the_configmap) ... ok
+Ran 7 tests in 0.036s
+OK
+== unittest discover scripts/tests test_gitops* (CI step)
+Ran 175 tests in 13.341s
+
+OK (skipped=15)

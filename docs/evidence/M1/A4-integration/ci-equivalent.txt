@@ -1,0 +1,11 @@
+[90m9:25AM[0m [32mINF[0m [1mscanned ~13491014 bytes (13.49 MB) in 3.67s[0m
+[90m9:25AM[0m [32mINF[0m [1mno leaks found[0m
+== git staged
+[90m9:25AM[0m [32mINF[0m [1m0 commits scanned.[0m
+[90m9:25AM[0m [32mINF[0m [1mscanned ~130189 bytes (130.19 KB) in 53.9ms[0m
+[90m9:25AM[0m [32mINF[0m [1mno leaks found[0m
+== validate_changed_yaml
+Changed YAML gate passed (1 files checked)
+== validate_manifests
+Summary: 1 resource found in 1 file - Valid: 1, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)

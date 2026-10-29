@@ -1,0 +1,315 @@
+# omos CI-equivalent checks, 2026-10-29T12:38:34Z, branch feat/projector-aoi @ d346ee2e, base c0005e1a84c5306325ef623efaf9b3571508ab05
+## validate_changed_yaml
+Changed YAML gate passed (5 files checked)
+exit=0
+## check_onemind_mcp_coverage
+All 60 Git-declared Argo Applications mapped to MCP access dispositions
+exit=0
+## yamllint
+platform/onetak/media-mtx.yaml
+  86:16     error    too many spaces inside braces  (braces)
+  86:48     error    too many spaces inside braces  (braces)
+  87:16     error    too many spaces inside braces  (braces)
+  87:48     error    too many spaces inside braces  (braces)
+  88:16     error    too many spaces inside braces  (braces)
+  88:47     error    too many spaces inside braces  (braces)
+  89:16     error    too many spaces inside braces  (braces)
+  89:50     error    too many spaces inside braces  (braces)
+  90:16     error    too many spaces inside braces  (braces)
+  90:62     error    too many spaces inside braces  (braces)
+  91:16     error    too many spaces inside braces  (braces)
+  91:47     error    too many spaces inside braces  (braces)
+  97:24     error    too many spaces inside braces  (braces)
+  97:49     error    too many spaces inside braces  (braces)
+  98:22     error    too many spaces after colon  (colons)
+  98:24     error    too many spaces inside braces  (braces)
+  98:35     error    too many spaces after comma  (commas)
+  98:49     error    too many spaces inside braces  (braces)
+  112:14    error    too many spaces inside braces  (braces)
+  112:32    error    too many spaces inside braces  (braces)
+  114:8     error    too many spaces inside braces  (braces)
+  114:22    error    too many spaces after comma  (commas)
+  114:51    error    too many spaces inside braces  (braces)
+  115:8     error    too many spaces inside braces  (braces)
+  115:22    error    too many spaces after comma  (commas)
+  115:51    error    too many spaces inside braces  (braces)
+  116:8     error    too many spaces inside braces  (braces)
+  116:22    error    too many spaces after comma  (commas)
+  116:51    error    too many spaces inside braces  (braces)
+  117:8     error    too many spaces inside braces  (braces)
+  117:51    error    too many spaces inside braces  (braces)
+  118:8     error    too many spaces inside braces  (braces)
+  118:22    error    too many spaces after comma  (commas)
+  118:66    error    too many spaces inside braces  (braces)
+  119:8     error    too many spaces inside braces  (braces)
+  119:22    error    too many spaces after comma  (commas)
+  119:51    error    too many spaces inside braces  (braces)
+
+platform/takml/ghcr.sealedsecret.yaml
+  18:41     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/takserver/chart/production-values.yaml
+  121:13    error    trailing spaces  (trailing-spaces)
+
+platform/takserver/chart/third-party/ignite/values.yaml
+  87:3      warning  comment not indented like content  (comments-indentation)
+
+platform/argocd/platform-clickhouse-operator.yaml
+  62:3      warning  comment not indented like content  (comments-indentation)
+
+platform/nats/omos-nats-tailnet-service.yaml
+  20:8      error    too many spaces inside braces  (braces)
+  20:51     error    too many spaces inside braces  (braces)
+  21:8      error    too many spaces inside braces  (braces)
+  21:49     error    too many spaces inside braces  (braces)
+  22:8      error    too many spaces inside braces  (braces)
+  22:54     error    too many spaces inside braces  (braces)
+
+platform/parked/kagent/charts/agent-sandbox/values.yaml
+  23:3      warning  comment not indented like content  (comments-indentation)
+  32:3      warning  comment not indented like content  (comments-indentation)
+  70:3      warning  comment not indented like content  (comments-indentation)
+
+platform/monitoring/grafana-dashboards-nats.yaml
+  39:201    error    line too long (231 > 200 characters)  (line-length)
+  56:201    error    line too long (235 > 200 characters)  (line-length)
+  73:201    error    line too long (237 > 200 characters)  (line-length)
+  90:201    error    line too long (224 > 200 characters)  (line-length)
+  107:201   error    line too long (218 > 200 characters)  (line-length)
+  124:201   error    line too long (248 > 200 characters)  (line-length)
+
+platform/data/redpanda-connect/deployment.yaml
+  99:201    error    line too long (566 > 200 characters)  (line-length)
+  208:201   error    line too long (539 > 200 characters)  (line-length)
+  260:201   error    line too long (644 > 200 characters)  (line-length)
+  322:201   error    line too long (671 > 200 characters)  (line-length)
+
+platform/data/redpanda-connect/pipelines/feed-mta.yaml
+  73:201    error    line too long (562 > 200 characters)  (line-length)
+
+platform/data/redpanda-connect/pipelines/feed-ships.yaml
+  44:201    error    line too long (640 > 200 characters)  (line-length)
+
+platform/data/redpanda-connect/pipelines/feed-aircraft.yaml
+  55:201    error    line too long (667 > 200 characters)  (line-length)
+
+platform/data/redpanda-connect/pipelines/feed-hazards.yaml
+  101:201   error    line too long (535 > 200 characters)  (line-length)
+
+platform/matrix/ess-values.yaml
+  37:1      error    trailing spaces  (trailing-spaces)
+  42:1      error    trailing spaces  (trailing-spaces)
+  48:1      error    trailing spaces  (trailing-spaces)
+  57:1      error    trailing spaces  (trailing-spaces)
+  61:1      error    trailing spaces  (trailing-spaces)
+  72:1      error    trailing spaces  (trailing-spaces)
+  76:1      error    trailing spaces  (trailing-spaces)
+  84:1      error    trailing spaces  (trailing-spaces)
+  90:1      error    trailing spaces  (trailing-spaces)
+  96:1      error    trailing spaces  (trailing-spaces)
+  106:1     error    trailing spaces  (trailing-spaces)
+  118:1     error    trailing spaces  (trailing-spaces)
+  124:1     error    trailing spaces  (trailing-spaces)
+  127:1     error    trailing spaces  (trailing-spaces)
+  130:1     error    trailing spaces  (trailing-spaces)
+  132:1     error    trailing spaces  (trailing-spaces)
+  134:1     error    trailing spaces  (trailing-spaces)
+  137:1     error    trailing spaces  (trailing-spaces)
+  143:1     error    trailing spaces  (trailing-spaces)
+  145:1     error    trailing spaces  (trailing-spaces)
+  149:1     error    trailing spaces  (trailing-spaces)
+  155:1     error    trailing spaces  (trailing-spaces)
+  169:1     error    trailing spaces  (trailing-spaces)
+  174:1     error    trailing spaces  (trailing-spaces)
+  180:1     error    trailing spaces  (trailing-spaces)
+  188:1     error    trailing spaces  (trailing-spaces)
+  228:1     error    trailing spaces  (trailing-spaces)
+  233:1     error    trailing spaces  (trailing-spaces)
+  237:1     error    trailing spaces  (trailing-spaces)
+  245:1     error    trailing spaces  (trailing-spaces)
+  249:1     error    trailing spaces  (trailing-spaces)
+  259:1     error    trailing spaces  (trailing-spaces)
+  263:1     error    trailing spaces  (trailing-spaces)
+  267:1     error    trailing spaces  (trailing-spaces)
+  307:17    error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/hermes-platform-config.yaml
+  6:1       error    trailing spaces  (trailing-spaces)
+  13:1      error    trailing spaces  (trailing-spaces)
+  19:1      error    trailing spaces  (trailing-spaces)
+  26:1      error    trailing spaces  (trailing-spaces)
+  30:1      error    trailing spaces  (trailing-spaces)
+  33:1      error    trailing spaces  (trailing-spaces)
+  39:1      warning  comment not indented like content  (comments-indentation)
+  42:122    error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/overlays/onemind/kustomization.yaml
+  20:1      error    trailing spaces  (trailing-spaces)
+  30:1      error    trailing spaces  (trailing-spaces)
+  42:1      error    trailing spaces  (trailing-spaces)
+  48:1      error    trailing spaces  (trailing-spaces)
+  51:1      error    trailing spaces  (trailing-spaces)
+  54:1      error    trailing spaces  (trailing-spaces)
+  56:1      error    trailing spaces  (trailing-spaces)
+  58:1      error    trailing spaces  (trailing-spaces)
+  61:1      error    trailing spaces  (trailing-spaces)
+  67:1      error    trailing spaces  (trailing-spaces)
+  69:1      error    trailing spaces  (trailing-spaces)
+  73:1      error    trailing spaces  (trailing-spaces)
+  214:37    error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/kustomization.yaml
+  19:35     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/mautrix-telegram/kustomization.yaml
+  12:35     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/mautrix-telegram/manifests/deployment.yaml
+  102:17    error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/mautrix-telegram/manifests/configmap.yaml
+  14:1      error    trailing spaces  (trailing-spaces)
+  42:1      error    trailing spaces  (trailing-spaces)
+  56:1      error    trailing spaces  (trailing-spaces)
+  66:1      error    trailing spaces  (trailing-spaces)
+  70:1      error    trailing spaces  (trailing-spaces)
+  73:19     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/ingress/kustomization.yaml
+  11:35     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/ingress/manifests/ingress.yaml
+  41:29     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/redis/kustomization.yaml
+  12:35     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/redis/manifests/service.yaml
+  15:18     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/redis/manifests/secret.yaml
+  10:36     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/postgres/kustomization.yaml
+  12:35     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/postgres/manifests/service.yaml
+  15:18     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/nats-matrix-bridge/kustomization.yaml
+  12:35     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/nats-matrix-bridge/manifests/deployment.yaml
+  98:1      error    trailing spaces  (trailing-spaces)
+  103:1     error    trailing spaces  (trailing-spaces)
+  109:1     error    trailing spaces  (trailing-spaces)
+  110:1     error    trailing spaces  (trailing-spaces)
+  115:1     error    trailing spaces  (trailing-spaces)
+  122:1     error    trailing spaces  (trailing-spaces)
+  128:1     error    trailing spaces  (trailing-spaces)
+  140:1     error    trailing spaces  (trailing-spaces)
+  146:1     error    trailing spaces  (trailing-spaces)
+  155:1     error    trailing spaces  (trailing-spaces)
+  164:1     error    trailing spaces  (trailing-spaces)
+  169:1     error    trailing spaces  (trailing-spaces)
+  176:1     error    trailing spaces  (trailing-spaces)
+  183:1     error    trailing spaces  (trailing-spaces)
+  191:1     error    trailing spaces  (trailing-spaces)
+  197:1     error    trailing spaces  (trailing-spaces)
+  203:1     error    trailing spaces  (trailing-spaces)
+  209:1     error    trailing spaces  (trailing-spaces)
+  216:1     error    trailing spaces  (trailing-spaces)
+  222:1     error    trailing spaces  (trailing-spaces)
+  228:1     error    trailing spaces  (trailing-spaces)
+  234:1     error    trailing spaces  (trailing-spaces)
+  241:1     error    trailing spaces  (trailing-spaces)
+  245:1     error    trailing spaces  (trailing-spaces)
+  250:1     error    trailing spaces  (trailing-spaces)
+  253:1     error    trailing spaces  (trailing-spaces)
+  258:1     error    trailing spaces  (trailing-spaces)
+  268:1     error    trailing spaces  (trailing-spaces)
+  270:1     error    trailing spaces  (trailing-spaces)
+  273:1     error    trailing spaces  (trailing-spaces)
+  285:1     error    trailing spaces  (trailing-spaces)
+  295:1     error    trailing spaces  (trailing-spaces)
+  302:1     error    trailing spaces  (trailing-spaces)
+  304:1     error    trailing spaces  (trailing-spaces)
+  308:1     error    trailing spaces  (trailing-spaces)
+  315:1     error    trailing spaces  (trailing-spaces)
+  316:1     error    trailing spaces  (trailing-spaces)
+  319:1     error    trailing spaces  (trailing-spaces)
+  323:1     error    trailing spaces  (trailing-spaces)
+  326:1     error    trailing spaces  (trailing-spaces)
+  332:1     error    trailing spaces  (trailing-spaces)
+  333:1     error    trailing spaces  (trailing-spaces)
+  335:28    error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/nats-matrix-bridge/manifests/configmap.yaml
+  14:1      error    trailing spaces  (trailing-spaces)
+  21:1      error    trailing spaces  (trailing-spaces)
+  30:1      error    trailing spaces  (trailing-spaces)
+  73:1      error    trailing spaces  (trailing-spaces)
+  87:1      error    trailing spaces  (trailing-spaces)
+  93:1      error    trailing spaces  (trailing-spaces)
+  96:21     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/element-web/kustomization.yaml
+  12:35     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/element-web/manifests/deployment.yaml
+  66:17     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/element-web/manifests/configmap.yaml
+  60:6      error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/manifests/secret.yaml
+  22:36     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/synapse/kustomization.yaml
+  13:35     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/synapse/manifests/pvc.yaml
+  14:37     error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/matrix/base/synapse/manifests/configmap.yaml
+  12:1      error    trailing spaces  (trailing-spaces)
+  22:1      error    trailing spaces  (trailing-spaces)
+  34:1      error    trailing spaces  (trailing-spaces)
+  40:1      error    trailing spaces  (trailing-spaces)
+  45:1      error    trailing spaces  (trailing-spaces)
+  50:1      error    trailing spaces  (trailing-spaces)
+  65:1      error    trailing spaces  (trailing-spaces)
+  68:1      error    trailing spaces  (trailing-spaces)
+  71:1      error    trailing spaces  (trailing-spaces)
+  75:1      error    trailing spaces  (trailing-spaces)
+  81:1      error    trailing spaces  (trailing-spaces)
+  85:1      error    trailing spaces  (trailing-spaces)
+  89:1      error    trailing spaces  (trailing-spaces)
+  93:1      error    trailing spaces  (trailing-spaces)
+  96:1      error    trailing spaces  (trailing-spaces)
+  109:1     error    trailing spaces  (trailing-spaces)
+  112:21    error    no new line character at the end of file  (new-line-at-end-of-file)
+
+platform/takserver/chart/production-values.yaml
+  121:13    error    trailing spaces  (trailing-spaces)
+
+platform/takserver/chart/third-party/ignite/values.yaml
+  87:3      warning  comment not indented like content  (comments-indentation)
+
+exit=1
+## validate_manifests (changed)
+Summary: 4 resources found in 3 files - Valid: 4, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 3 manifest file(s)
+exit=0
+## gitleaks dir
+[90m8:38AM[0m [32mINF[0m [1mscanned ~13227070 bytes (13.23 MB) in 3.72s[0m
+[90m8:38AM[0m [32mINF[0m [1mno leaks found[0m
+exit=
+## gitleaks git (PR commits)
+[90m8:38AM[0m [32mINF[0m [1m2 commits scanned.[0m
+[90m8:38AM[0m [32mINF[0m [1mscanned ~151444 bytes (151.44 KB) in 67.8ms[0m
+[90m8:38AM[0m [32mINF[0m [1mno leaks found[0m
+exit=
+## gofmt -l services/projector
+exit=0
+## note: the full-tree yamllint is quality.yml's continue-on-error 'Report existing repository YAML debt' step; its 204 errors are in files this PR does not touch. The required step is validate_changed_yaml (exit 0 above).

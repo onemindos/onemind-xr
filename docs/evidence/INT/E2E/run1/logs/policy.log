@@ -1,0 +1,13 @@
+nats: permissions violation: Permissions Violation for Subscription to "evt.map.geofence.*" on connection [103]
+{"time":"2026-10-29T12:20:50.670338-04:00","level":"INFO","msg":"policy service ready","authz":"local","signed":true}
+{"time":"2026-10-29T12:20:51.044168-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.drone.sim-x1.arm","command_id":"f0f70b03-c1b8-4cf4-baa0-f95652019379","action_id":"act-01m647dmq0dtjqwbchmq65375r"}
+{"time":"2026-10-29T12:20:51.152349-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.drone.sim-x1.takeoff","command_id":"81b36495-4ff5-4ea7-a5db-1086761c7c98","action_id":"act-01m647dmtd2rz36ftecajdm1fd"}
+{"time":"2026-10-29T12:21:21.746374-04:00","level":"INFO","msg":"command published","subject":"cmd.map.geofence.zone-e2e-range.create","command_id":"eb0b2639-ac4c-481c-b35b-be765335b453","action_id":"act-01m647ejpget7e30dxp6jpzrzr"}
+{"time":"2026-10-29T12:21:36.82889-04:00","level":"INFO","msg":"command published","subject":"cmd.mission.msn-ajj6cnqqvfnv8he4hvfeqngjj3.create","command_id":"c084d7a3-b460-4a59-b826-5887492bde77","action_id":"act-01m647f1dv6ncmxy13aa299mp5"}
+{"time":"2026-10-29T12:21:42.44544-04:00","level":"INFO","msg":"command published","subject":"cmd.mission.tsk-ksgpkjp3f6wjt2rkzd9njnka5j.create","command_id":"e8f4b061-508b-4af6-bcdb-d9fc83d10394","action_id":"act-01m647f1h4e1jmdfjt3w3kay2a"}
+{"time":"2026-10-29T12:21:42.447711-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.drone.sim-x1.goto","command_id":"1f4493d1-d547-4ead-a57d-b67d92ef561f","action_id":"act-01m647f1h4e1jmdfjt3w3kay2a"}
+{"time":"2026-10-29T12:22:23.3705-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.drone.sim-x1.estop","command_id":"db7447f7-403e-4f5b-b33a-026f1846351f","action_id":"act-01m647gew908114ee01qma2s9m"}
+{"time":"2026-10-29T12:22:23.475562-04:00","level":"INFO","msg":"denied","action_id":"act-01m647gezke3fn2scw06g8s4we","action_type":"asset.strike","code":"forbidden_action","by":"user:zeus"}
+{"time":"2026-10-29T12:22:23.476464-04:00","level":"INFO","msg":"denied","action_id":"act-01m647gezmjzz7nvva297q05nr","action_type":"asset.intercept","code":"forbidden_action","by":"agent:hermes/zeus/legacy"}
+{"time":"2026-10-29T12:22:23.477346-04:00","level":"INFO","msg":"denied","action_id":"act-01m647gezn712gbhfjgh66yw1x","action_type":"task.assign","code":"forbidden_action","by":"agent:hermes/zeus/legacy"}
+{"time":"2026-10-29T12:24:57.727991-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.drone.sim-x1.goto","command_id":"f9fb4d29-302b-4280-88a0-56684fd3e88f","action_id":"act-01m647n429r3yc14mfw3p3z67g"}

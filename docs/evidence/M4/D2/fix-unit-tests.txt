@@ -1,0 +1,115 @@
+?   	github.com/onemindos/omos/services/mission/cmd/mission	[no test files]
+=== RUN   TestAbortAuditBeforeAbortCommand
+time=2026-10-29T10:13:08.622-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestAbortAuditBeforeAbortCommand (0.26s)
+=== RUN   TestAbortAuditAndHoldReportsBeforeAbortCommand
+time=2026-10-29T10:13:08.870-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestAbortAuditAndHoldReportsBeforeAbortCommand (0.26s)
+=== RUN   TestHoldReportBeforeAbortAndAudit
+time=2026-10-29T10:13:09.150-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestHoldReportBeforeAbortAndAudit (0.28s)
+=== RUN   TestHoldExecutedBeforeAbortAndAudit
+time=2026-10-29T10:13:09.410-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestHoldExecutedBeforeAbortAndAudit (0.27s)
+=== RUN   TestHoldRefusedBeforeAbort
+time=2026-10-29T10:13:09.677-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestHoldRefusedBeforeAbort (0.28s)
+=== RUN   TestRedeliveryOfAppliedCommand
+time=2026-10-29T10:13:09.952-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:10.095-04:00 level=INFO msg="command already applied (redelivery)" id=msn-k40gvdn3zf3y2q7yqb262zyre5 verb=waypoint command_id=b2645650-aca8-4fd4-bba2-4c44426bab15
+time=2026-10-29T10:13:10.096-04:00 level=INFO msg="command already applied (redelivery)" id=tsk-467kza85g11m68tf03xzhzfa6c verb=abort command_id=8616a3f8-fe47-49f3-aab4-372e3e487c22
+time=2026-10-29T10:13:10.098-04:00 level=INFO msg="command already applied (redelivery)" id=tsk-w3r4hr57s3qq5drw530e2ed2q4 verb=create command_id=5c7a96dd-4b24-49c9-ac47-6786974e5f28
+time=2026-10-29T10:13:10.099-04:00 level=INFO msg="command already applied (redelivery)" id=tsk-w3r4hr57s3qq5drw530e2ed2q4 verb=complete command_id=af9565ee-a8c2-4cf5-acc7-185aec45c0c7
+time=2026-10-29T10:13:10.126-04:00 level=WARN msg="command rejected" id=tsk-467kza85g11m68tf03xzhzfa6c verb=complete code=expired message="command expired at 2026-10-29T12:00:59.000Z"
+--- PASS: TestRedeliveryOfAppliedCommand (0.32s)
+=== RUN   TestListSizeCapAndPaging
+time=2026-10-29T10:13:10.292-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestListSizeCapAndPaging (0.74s)
+=== RUN   TestTerminalEviction
+time=2026-10-29T10:13:11.013-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:11.188-04:00 level=INFO msg="terminal records dropped from the in-memory copy" count=2
+--- PASS: TestTerminalEviction (0.32s)
+=== RUN   TestPersonTargetRefused
+time=2026-10-29T10:13:11.338-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:11.341-04:00 level=WARN msg="command rejected" id=tsk-qfvjnp3ja24d9d7y2xhkbxy6sk verb=create code=forbidden_action message="target trk-p1 is a person or a person-class track"
+time=2026-10-29T10:13:11.377-04:00 level=WARN msg="command rejected" id=tsk-zkqvhagjafcfjne9h6c8py2k9e verb=create code=forbidden_action message="spec target is a person or a person-class track"
+--- PASS: TestPersonTargetRefused (0.23s)
+=== RUN   TestContract1Lifecycle
+time=2026-10-29T10:13:11.564-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestContract1Lifecycle (0.25s)
+=== RUN   TestContract2OutOfOrderAndTerminal
+time=2026-10-29T10:13:11.820-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:11.878-04:00 level=INFO msg="report dropped (out of order)" task=tsk-vyjse6j9dtcchm80bnep5vrm75 reason="status_version 3 of command 0 is not newer than 5 of command 0"
+time=2026-10-29T10:13:11.915-04:00 level=INFO msg="report dropped (task terminal)" task=tsk-vyjse6j9dtcchm80bnep5vrm75 state=executing
+time=2026-10-29T10:13:11.916-04:00 level=INFO msg="report dropped (task terminal)" task=tsk-vyjse6j9dtcchm80bnep5vrm75 state=done_not_ok
+--- PASS: TestContract2OutOfOrderAndTerminal (0.27s)
+=== RUN   TestBridgeRestartAndEarlyReport
+time=2026-10-29T10:13:12.079-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestBridgeRestartAndEarlyReport (0.29s)
+=== RUN   TestOlderCommandReportDropped
+time=2026-10-29T10:13:12.368-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:12.451-04:00 level=INFO msg="report dropped (out of order)" task=tsk-z51er1kvr67p3yyv9e781334ht reason="status_version 9 of command 0 is not newer than 2 of command 1"
+--- PASS: TestOlderCommandReportDropped (0.24s)
+=== RUN   TestContract6DeliveryTimeout
+time=2026-10-29T10:13:12.608-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:12.654-04:00 level=INFO msg="report dropped (task terminal)" task=tsk-d5b1h626mc2tqed4ds426d63q8 state=received
+--- PASS: TestContract6DeliveryTimeout (0.41s)
+=== RUN   TestStaleTimeout
+time=2026-10-29T10:13:13.021-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestStaleTimeout (0.16s)
+=== RUN   TestCommandRejections
+time=2026-10-29T10:13:13.186-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:13.199-04:00 level=WARN msg="command rejected" id=tsk-k168x1hrj69bvdsqb2yby220qx verb=create code=expired message="command expired at 2026-10-29T11:59:59.000Z"
+time=2026-10-29T10:13:13.211-04:00 level=WARN msg="command rejected" id=tsk-6fgfmb9zdk79wm8tyt7nax3chg verb=create code=not_authorized message="command carries no approval"
+time=2026-10-29T10:13:13.225-04:00 level=WARN msg="command rejected" id=tsk-rq3q49phnmfhtn17g5wajzsdzv verb=create code=not_simulated message="asset tasks are for simulated sim-* assets only"
+time=2026-10-29T10:13:13.238-04:00 level=WARN msg="command rejected" id=tsk-jy2ytzbk1x5gm2pn6tgfd2apea verb=create code=unknown_action message="task type onemind.task.engage.v1 is not in the catalogue"
+time=2026-10-29T10:13:13.250-04:00 level=WARN msg="command rejected" id=tsk-fnvm77t3wmab9gcj7n0h6a1h04 verb=create code=schema_invalid message="task type onemind.task.manual.v1 does not fit assignee drone"
+time=2026-10-29T10:13:13.261-04:00 level=WARN msg="command rejected" id=tsk-5rr97md0k85fw87zcma38509pe verb=create code=precondition_failed message="parent mission msn-pxkbdnbv5dwkg49jenpb0mg99v does not exist or is finished"
+time=2026-10-29T10:13:13.273-04:00 level=WARN msg="command rejected" id=tsk-0q5ayp8v4jtte5xrxbaw8kn8sh verb=create code=schema_invalid message="task_id must equal the subject id"
+time=2026-10-29T10:13:13.284-04:00 level=WARN msg="command rejected" id=tsk-qtw3mt6q2xzzx22wa3vfpag6n9 verb=waypoint code=unknown_action message="verb waypoint is not create, waypoint, abort or complete for this id"
+time=2026-10-29T10:13:13.297-04:00 level=WARN msg="command rejected" id=msn-pmp245k3m09qc0s3b15dgy5f06 verb=cancel code=unknown_action message="verb cancel is not create, waypoint, abort or complete for this id"
+time=2026-10-29T10:13:13.308-04:00 level=WARN msg="command rejected" id=msn-pmp245k3m09qc0s3b15dgy5f06 verb=waypoint code=schema_invalid message="mission.waypoint needs seq >= 0, lat, lon, hae_m"
+time=2026-10-29T10:13:13.321-04:00 level=WARN msg="command rejected" id=msn-73syxp6m3bb4ypm8wwywxa17j6 verb=create code=schema_invalid message="mission.create needs name (1-120 chars), intent up to 2000"
+time=2026-10-29T10:13:13.334-04:00 level=WARN msg="command rejected" id=tsk-rn9waqg7bk7zscj62mgnt33a6t verb=abort code=not_found message="no task tsk-rn9waqg7bk7zscj62mgnt33a6t"
+--- PASS: TestCommandRejections (0.30s)
+=== RUN   TestCreateIdempotent
+time=2026-10-29T10:13:13.491-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:13.506-04:00 level=INFO msg="command already applied (redelivery)" id=tsk-jcwm0k5caq3s3g6j8zq954depp verb=create command_id=50073ce0-4b07-444b-90ab-f545f2b7cc46
+time=2026-10-29T10:13:13.545-04:00 level=WARN msg="command rejected" id=tsk-jcwm0k5caq3s3g6j8zq954depp verb=create code=conflict message="task tsk-jcwm0k5caq3s3g6j8zq954depp exists for another action"
+--- PASS: TestCreateIdempotent (0.21s)
+=== RUN   TestMissionVerbs
+time=2026-10-29T10:13:13.694-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:13.810-04:00 level=WARN msg="command rejected" id=msn-m98vfyegjc9c7218gwe826v69n verb=waypoint code=precondition_failed message="mission is aborted"
+time=2026-10-29T10:13:13.820-04:00 level=WARN msg="command rejected" id=tsk-9xqvxr8ew865499vf9bmx31x50 verb=create code=precondition_failed message="parent mission msn-m98vfyegjc9c7218gwe826v69n does not exist or is finished"
+--- PASS: TestMissionVerbs (0.31s)
+=== RUN   TestScheduledAndComplete
+time=2026-10-29T10:13:14.009-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestScheduledAndComplete (0.17s)
+=== RUN   TestReportRPC
+time=2026-10-29T10:13:14.173-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:14.219-04:00 level=INFO msg="report dropped (out of order)" task=tsk-vpj041t5wxg5stccz28xfr4dm5 reason="status_version 1 of command 0 is not newer than 1 of command 0"
+--- PASS: TestReportRPC (0.24s)
+=== RUN   TestApplyGetList
+time=2026-10-29T10:13:14.416-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestApplyGetList (0.33s)
+=== RUN   TestArrivalFromTelemetry
+time=2026-10-29T10:13:14.746-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:15.120-04:00 level=INFO msg="report dropped (task terminal)" task=tsk-aqv4pwt560qvcc5eqaw17r4av3 state=executing
+--- PASS: TestArrivalFromTelemetry (0.54s)
+=== RUN   TestRestart
+time=2026-10-29T10:13:15.284-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:15.378-04:00 level=INFO msg="task service ready" bucket=mission-state records=2
+time=2026-10-29T10:13:15.379-04:00 level=INFO msg="report dropped (out of order)" task=tsk-mf8w3v4hstnvc4myrzvwqk4h5r reason="status_version 3 of command 0 is not newer than 4 of command 0"
+time=2026-10-29T10:13:15.382-04:00 level=WARN msg="command rejected" id=tsk-pagzq768paajyt5jsgpz7ykdaq verb=create code=expired message="command expired at 2026-10-29T12:00:01.000Z"
+--- PASS: TestRestart (0.28s)
+=== RUN   TestCASConflictRetries
+time=2026-10-29T10:13:15.558-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestCASConflictRetries (0.16s)
+=== RUN   TestRollupTable
+--- PASS: TestRollupTable (0.00s)
+=== RUN   TestDispatchedBeforeCreate
+time=2026-10-29T10:13:15.714-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+time=2026-10-29T10:13:15.716-04:00 level=WARN msg="will retry" subject=evt.so.action.dispatched err="task tsk-qce7kfdna1qf991fn2jbx4bxfk not recorded yet"
+--- PASS: TestDispatchedBeforeCreate (1.15s)
+PASS
+ok  	github.com/onemindos/omos/services/mission/internal/mission	9.738s

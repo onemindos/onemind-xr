@@ -1,0 +1,1044 @@
+{
+  "setup": [
+    "asset.arm act-01m643ehqe8nyx5ckcvm8hgc2p: awaiting_confirmation → awaiting_confirmation (zeus) → dispatched (alice)",
+    "asset.arm: executed",
+    "asset.takeoff act-01m643ej15cg9tqejd6g2tfd4f: awaiting_confirmation → awaiting_confirmation (zeus) → dispatched (alice)",
+    "asset.takeoff: executed"
+  ],
+  "d1": {
+    "zone_id": "zone-dmvtolg1g1",
+    "action_id": "act-01m643erwcnpc22dbqhmbzgv1h",
+    "kv_value": {
+      "v": 1,
+      "name": "PATROL AOI",
+      "callsign": "PATROL AOI",
+      "active": true,
+      "geo": {
+        "coords": {
+          "coordinates": [
+            [
+              [
+                -97.747785,
+                30.263153
+              ],
+              [
+                -97.738414,
+                30.263153
+              ],
+              [
+                -97.738414,
+                30.271247
+              ],
+              [
+                -97.747785,
+                30.271247
+              ],
+              [
+                -97.747785,
+                30.263153
+              ]
+            ]
+          ],
+          "type": "Polygon"
+        },
+        "kind": "aoi",
+        "shape": "polygon"
+      },
+      "lat": 30.2672,
+      "lon": -97.7430995,
+      "watch": true,
+      "properties": {
+        "applies_to": []
+      },
+      "updated_by": "user:zeus",
+      "action_id": "act-01m643erwcnpc22dbqhmbzgv1h",
+      "command_id": "c99c8e94-615f-45e2-af43-9237ebe14308",
+      "simulated": true,
+      "zone_id": "zone-dmvtolg1g1",
+      "entity_id": "zone-dmvtolg1g1",
+      "uid": "zone-dmvtolg1g1",
+      "entity_type": "zone",
+      "live": true,
+      "pinned": true,
+      "expiry_t": null,
+      "t": 1793286695735,
+      "seq": 1
+    },
+    "rogue": {
+      "subject": "cmd.map.geofence.zone-rogue.create",
+      "zone_id": "zone-rogue",
+      "outcome": "refused",
+      "signed": false,
+      "at": 1793286695824,
+      "code": "unsigned",
+      "message": "command carries no policy signature"
+    }
+  },
+  "d3": {
+    "action_id": "act-01m643ewxd9y5ds9vzq0cp2h9j",
+    "events": [
+      "proposed",
+      "approved",
+      "dispatched",
+      "acknowledged",
+      "executed"
+    ],
+    "d0_m": 1338
+  },
+  "d1_keep_out_lifecycle": {
+    "zone_id": "zone-dmvtomjax2",
+    "rejected_update": true,
+    "removed_by": "act-01m643gezvajz9qmy2myg213sd"
+  },
+  "b20": {
+    "source": "nws-alerts",
+    "limit_s": 6,
+    "shown_after_last_fetch_s": 6.6
+  },
+  "d4": {
+    "hermes_action": "act-01m643gv5hypzt7ag7p02gcgbv"
+  },
+  "b11": {
+    "cot_types": {
+      "rectangle": [
+        "u-d-r"
+      ],
+      "circle": [
+        "u-d-c-c"
+      ],
+      "point": [
+        "b-m-p-s-m"
+      ],
+      "label": [
+        "b-m-p-s-m"
+      ],
+      "line": [
+        "b-m-r"
+      ],
+      "polygon": [
+        "u-d-f"
+      ],
+      "sector": [
+        "u-d-f"
+      ],
+      "rings": [
+        "u-d-c-c",
+        "u-d-c-c",
+        "u-d-c-c"
+      ],
+      "rangebearing": [
+        "u-d-f"
+      ],
+      "buffer": [
+        "u-d-f"
+      ]
+    }
+  },
+  "lasso_entities_after_finish": [
+    "tgt:act-01m643ewxd9y5ds9vzq0cp2h9j",
+    "hl:trk-sim-walker-01",
+    "ann:hermes-zone-north-field",
+    "tgt:act-01m643gv5hypzt7ag7p02gcgbv"
+  ],
+  "web_p2_polling": [
+    {
+      "status": "awaiting_confirmation",
+      "at": 1793286807717,
+      "via": "reply"
+    },
+    {
+      "status": "dispatched",
+      "at": 1793286808217,
+      "via": "reply"
+    },
+    {
+      "status": "executed",
+      "at": 1793286808749,
+      "via": "get"
+    }
+  ],
+  "audit": [
+    {
+      "subject": "evt.so.action.proposed",
+      "action_id": "act-01m643ehqe8nyx5ckcvm8hgc2p",
+      "action_type": "asset.arm",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "at": "2026-10-29T15:11:26.447Z"
+    },
+    {
+      "subject": "evt.so.action.approved",
+      "action_id": "act-01m643ehqe8nyx5ckcvm8hgc2p",
+      "action_type": "asset.arm",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:26.448Z",
+          "step": 1
+        },
+        {
+          "by": "user:alice",
+          "at": "2026-10-29T15:11:26.449Z",
+          "step": 2
+        }
+      ],
+      "at": "2026-10-29T15:11:26.449Z"
+    },
+    {
+      "subject": "evt.so.action.dispatched",
+      "action_id": "act-01m643ehqe8nyx5ckcvm8hgc2p",
+      "action_type": "asset.arm",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:26.448Z",
+          "step": 1
+        },
+        {
+          "by": "user:alice",
+          "at": "2026-10-29T15:11:26.449Z",
+          "step": 2
+        }
+      ],
+      "at": "2026-10-29T15:11:26.452Z"
+    },
+    {
+      "subject": "evt.so.action.acknowledged",
+      "action_id": "act-01m643ehqe8nyx5ckcvm8hgc2p",
+      "action_type": "asset.arm",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:26.448Z",
+          "step": 1
+        },
+        {
+          "by": "user:alice",
+          "at": "2026-10-29T15:11:26.449Z",
+          "step": 2
+        }
+      ],
+      "at": "2026-10-29T15:11:26.452Z"
+    },
+    {
+      "subject": "evt.so.action.executed",
+      "action_id": "act-01m643ehqe8nyx5ckcvm8hgc2p",
+      "action_type": "asset.arm",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:26.448Z",
+          "step": 1
+        },
+        {
+          "by": "user:alice",
+          "at": "2026-10-29T15:11:26.449Z",
+          "step": 2
+        }
+      ],
+      "at": "2026-10-29T15:11:26.535Z"
+    },
+    {
+      "subject": "evt.so.action.proposed",
+      "action_id": "act-01m643ej15cg9tqejd6g2tfd4f",
+      "action_type": "asset.takeoff",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "at": "2026-10-29T15:11:26.757Z"
+    },
+    {
+      "subject": "evt.so.action.approved",
+      "action_id": "act-01m643ej15cg9tqejd6g2tfd4f",
+      "action_type": "asset.takeoff",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:26.757Z",
+          "step": 1
+        },
+        {
+          "by": "user:alice",
+          "at": "2026-10-29T15:11:26.758Z",
+          "step": 2
+        }
+      ],
+      "at": "2026-10-29T15:11:26.758Z"
+    },
+    {
+      "subject": "evt.so.action.dispatched",
+      "action_id": "act-01m643ej15cg9tqejd6g2tfd4f",
+      "action_type": "asset.takeoff",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:26.757Z",
+          "step": 1
+        },
+        {
+          "by": "user:alice",
+          "at": "2026-10-29T15:11:26.758Z",
+          "step": 2
+        }
+      ],
+      "at": "2026-10-29T15:11:26.759Z"
+    },
+    {
+      "subject": "evt.so.action.acknowledged",
+      "action_id": "act-01m643ej15cg9tqejd6g2tfd4f",
+      "action_type": "asset.takeoff",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:26.757Z",
+          "step": 1
+        },
+        {
+          "by": "user:alice",
+          "at": "2026-10-29T15:11:26.758Z",
+          "step": 2
+        }
+      ],
+      "at": "2026-10-29T15:11:26.759Z"
+    },
+    {
+      "subject": "evt.so.action.executed",
+      "action_id": "act-01m643ej15cg9tqejd6g2tfd4f",
+      "action_type": "asset.takeoff",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:26.757Z",
+          "step": 1
+        },
+        {
+          "by": "user:alice",
+          "at": "2026-10-29T15:11:26.758Z",
+          "step": 2
+        }
+      ],
+      "at": "2026-10-29T15:11:26.863Z"
+    },
+    {
+      "subject": "evt.so.action.proposed",
+      "action_id": "act-01m643erwcnpc22dbqhmbzgv1h",
+      "action_type": "zone.create",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "at": "2026-10-29T15:11:33.773Z"
+    },
+    {
+      "subject": "evt.so.action.approved",
+      "action_id": "act-01m643erwcnpc22dbqhmbzgv1h",
+      "action_type": "zone.create",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:35.730Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:11:35.732Z"
+    },
+    {
+      "subject": "evt.so.action.dispatched",
+      "action_id": "act-01m643erwcnpc22dbqhmbzgv1h",
+      "action_type": "zone.create",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:35.730Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:11:35.735Z"
+    },
+    {
+      "subject": "evt.so.action.executed",
+      "action_id": "act-01m643erwcnpc22dbqhmbzgv1h",
+      "action_type": "zone.create",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:35.730Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:11:35.736Z"
+    },
+    {
+      "subject": "evt.so.action.proposed",
+      "action_id": "act-01m643ewxd9y5ds9vzq0cp2h9j",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "at": "2026-10-29T15:11:37.901Z"
+    },
+    {
+      "subject": "evt.so.action.approved",
+      "action_id": "act-01m643ewxd9y5ds9vzq0cp2h9j",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:39.760Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:11:39.760Z"
+    },
+    {
+      "subject": "evt.so.action.dispatched",
+      "action_id": "act-01m643ewxd9y5ds9vzq0cp2h9j",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:39.760Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:11:39.762Z"
+    },
+    {
+      "subject": "evt.so.action.acknowledged",
+      "action_id": "act-01m643ewxd9y5ds9vzq0cp2h9j",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:39.760Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:11:39.762Z"
+    },
+    {
+      "subject": "evt.so.action.executed",
+      "action_id": "act-01m643ewxd9y5ds9vzq0cp2h9j",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:11:39.760Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:11:39.775Z"
+    },
+    {
+      "subject": "evt.so.action.proposed",
+      "action_id": "act-01m643g9yh1r6tfg2r4m1kvtb6",
+      "action_type": "zone.create",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "at": "2026-10-29T15:12:24.018Z"
+    },
+    {
+      "subject": "evt.so.action.approved",
+      "action_id": "act-01m643g9yh1r6tfg2r4m1kvtb6",
+      "action_type": "zone.create",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:24.243Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:24.243Z"
+    },
+    {
+      "subject": "evt.so.action.dispatched",
+      "action_id": "act-01m643g9yh1r6tfg2r4m1kvtb6",
+      "action_type": "zone.create",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:24.243Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:24.245Z"
+    },
+    {
+      "subject": "evt.so.action.executed",
+      "action_id": "act-01m643g9yh1r6tfg2r4m1kvtb6",
+      "action_type": "zone.create",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:24.243Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:24.245Z"
+    },
+    {
+      "subject": "evt.so.action.denied",
+      "action_id": "act-01m643gce3befq6mtnmwhhyjjt",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "code": "precondition_failed",
+      "detail": "keep_out",
+      "at": "2026-10-29T15:12:26.564Z"
+    },
+    {
+      "subject": "evt.so.action.proposed",
+      "action_id": "act-01m643gdsct686eh89d40qtcmq",
+      "action_type": "zone.update",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "at": "2026-10-29T15:12:27.948Z"
+    },
+    {
+      "subject": "evt.so.action.rejected",
+      "action_id": "act-01m643gdsct686eh89d40qtcmq",
+      "action_type": "zone.update",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "code": "rejected_by_human",
+      "at": "2026-10-29T15:12:28.583Z"
+    },
+    {
+      "subject": "evt.so.action.proposed",
+      "action_id": "act-01m643gezvajz9qmy2myg213sd",
+      "action_type": "zone.remove",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "at": "2026-10-29T15:12:29.180Z"
+    },
+    {
+      "subject": "evt.so.action.approved",
+      "action_id": "act-01m643gezvajz9qmy2myg213sd",
+      "action_type": "zone.remove",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:29.462Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:29.463Z"
+    },
+    {
+      "subject": "evt.so.action.dispatched",
+      "action_id": "act-01m643gezvajz9qmy2myg213sd",
+      "action_type": "zone.remove",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:29.462Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:29.464Z"
+    },
+    {
+      "subject": "evt.so.action.executed",
+      "action_id": "act-01m643gezvajz9qmy2myg213sd",
+      "action_type": "zone.remove",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:29.462Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:29.466Z"
+    },
+    {
+      "subject": "evt.so.action.denied",
+      "action_id": "act-01m643gfh4pdbe5ay9jay7e0e6",
+      "action_type": "asset.hold",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:zeus"
+      },
+      "approvals": [],
+      "code": "not_simulated",
+      "at": "2026-10-29T15:12:29.733Z"
+    },
+    {
+      "subject": "evt.so.action.proposed",
+      "action_id": "act-01m643gv5hypzt7ag7p02gcgbv",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "agent",
+        "id": "agent:hermes/zeus/legacy",
+        "on_behalf_of": "user:zeus"
+      },
+      "approvals": [],
+      "at": "2026-10-29T15:12:41.649Z"
+    },
+    {
+      "subject": "evt.so.action.approved",
+      "action_id": "act-01m643gv5hypzt7ag7p02gcgbv",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "agent",
+        "id": "agent:hermes/zeus/legacy",
+        "on_behalf_of": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:46.920Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:46.921Z"
+    },
+    {
+      "subject": "evt.so.action.dispatched",
+      "action_id": "act-01m643gv5hypzt7ag7p02gcgbv",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "agent",
+        "id": "agent:hermes/zeus/legacy",
+        "on_behalf_of": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:46.920Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:46.923Z"
+    },
+    {
+      "subject": "evt.so.action.acknowledged",
+      "action_id": "act-01m643gv5hypzt7ag7p02gcgbv",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "agent",
+        "id": "agent:hermes/zeus/legacy",
+        "on_behalf_of": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:46.920Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:46.924Z"
+    },
+    {
+      "subject": "evt.so.action.executed",
+      "action_id": "act-01m643gv5hypzt7ag7p02gcgbv",
+      "action_type": "asset.goto",
+      "requested_by": {
+        "kind": "agent",
+        "id": "agent:hermes/zeus/legacy",
+        "on_behalf_of": "user:zeus"
+      },
+      "approvals": [
+        {
+          "by": "user:zeus",
+          "at": "2026-10-29T15:12:46.920Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:12:46.963Z"
+    },
+    {
+      "subject": "evt.so.action.proposed",
+      "action_id": "act-01m643j83hg6gbbrjbxxtsrm4c",
+      "action_type": "asset.rtl",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:carol"
+      },
+      "approvals": [],
+      "at": "2026-10-29T15:13:27.666Z"
+    },
+    {
+      "subject": "evt.so.action.approved",
+      "action_id": "act-01m643j83hg6gbbrjbxxtsrm4c",
+      "action_type": "asset.rtl",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:carol"
+      },
+      "approvals": [
+        {
+          "by": "user:carol",
+          "at": "2026-10-29T15:13:28.165Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:13:28.165Z"
+    },
+    {
+      "subject": "evt.so.action.dispatched",
+      "action_id": "act-01m643j83hg6gbbrjbxxtsrm4c",
+      "action_type": "asset.rtl",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:carol"
+      },
+      "approvals": [
+        {
+          "by": "user:carol",
+          "at": "2026-10-29T15:13:28.165Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:13:28.166Z"
+    },
+    {
+      "subject": "evt.so.action.acknowledged",
+      "action_id": "act-01m643j83hg6gbbrjbxxtsrm4c",
+      "action_type": "asset.rtl",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:carol"
+      },
+      "approvals": [
+        {
+          "by": "user:carol",
+          "at": "2026-10-29T15:13:28.165Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:13:28.167Z"
+    },
+    {
+      "subject": "evt.so.action.executed",
+      "action_id": "act-01m643j83hg6gbbrjbxxtsrm4c",
+      "action_type": "asset.rtl",
+      "requested_by": {
+        "kind": "user",
+        "id": "user:carol"
+      },
+      "approvals": [
+        {
+          "by": "user:carol",
+          "at": "2026-10-29T15:13:28.165Z",
+          "step": 1
+        }
+      ],
+      "at": "2026-10-29T15:13:28.237Z"
+    }
+  ],
+  "commands": [
+    {
+      "subject": "cmd.fleet.drone.sim-x1.arm",
+      "action_id": "act-01m643ehqe8nyx5ckcvm8hgc2p",
+      "approver": "user:alice",
+      "signed": true,
+      "simulated": true,
+      "data": {},
+      "at": "2026-10-29T15:11:26.451Z"
+    },
+    {
+      "subject": "cmd.fleet.drone.sim-x1.takeoff",
+      "action_id": "act-01m643ej15cg9tqejd6g2tfd4f",
+      "approver": "user:alice",
+      "signed": true,
+      "simulated": true,
+      "data": {
+        "hae_m": 60
+      },
+      "at": "2026-10-29T15:11:26.759Z"
+    },
+    {
+      "subject": "cmd.fleet.drone.sim-x1.goto",
+      "action_id": "act-01m643ewxd9y5ds9vzq0cp2h9j",
+      "approver": "user:zeus",
+      "signed": true,
+      "simulated": true,
+      "data": {
+        "hae_m": 60,
+        "lat": 30.2671993,
+        "lon": -97.7295636
+      },
+      "at": "2026-10-29T15:11:39.762Z"
+    },
+    {
+      "subject": "cmd.fleet.drone.sim-x1.goto",
+      "action_id": "act-01m643gv5hypzt7ag7p02gcgbv",
+      "approver": "user:zeus",
+      "signed": true,
+      "simulated": true,
+      "data": {
+        "hae_m": 60,
+        "lat": 30.2672,
+        "lon": -97.7431
+      },
+      "at": "2026-10-29T15:12:46.923Z"
+    },
+    {
+      "subject": "cmd.fleet.drone.sim-x1.rtl",
+      "action_id": "act-01m643j83hg6gbbrjbxxtsrm4c",
+      "approver": "user:carol",
+      "signed": true,
+      "simulated": true,
+      "data": {},
+      "at": "2026-10-29T15:13:28.166Z"
+    }
+  ],
+  "map_commands": [
+    {
+      "subject": "cmd.map.geofence.zone-dmvtolg1g1.create",
+      "action_id": "act-01m643erwcnpc22dbqhmbzgv1h",
+      "approval": "approved",
+      "approver": "user:zeus",
+      "signed": true,
+      "data": {
+        "geo": {
+          "coords": {
+            "coordinates": [
+              [
+                [
+                  -97.747785,
+                  30.263153
+                ],
+                [
+                  -97.738414,
+                  30.263153
+                ],
+                [
+                  -97.738414,
+                  30.271247
+                ],
+                [
+                  -97.747785,
+                  30.271247
+                ],
+                [
+                  -97.747785,
+                  30.263153
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "kind": "aoi",
+          "shape": "polygon"
+        },
+        "name": "PATROL AOI",
+        "watch": true
+      },
+      "at": "2026-10-29T15:11:35.734Z"
+    },
+    {
+      "subject": "cmd.map.geofence.zone-rogue.create",
+      "signed": false,
+      "data": {
+        "name": "ROGUE",
+        "geo": {
+          "shape": "circle",
+          "kind": "aoi",
+          "coords": {
+            "type": "Point",
+            "coordinates": [
+              -97.7431,
+              30.2672
+            ]
+          },
+          "radius_m": 9000
+        }
+      },
+      "at": "2026-10-29T15:11:35.824Z"
+    },
+    {
+      "subject": "cmd.map.geofence.zone-dmvtomjax2.create",
+      "action_id": "act-01m643g9yh1r6tfg2r4m1kvtb6",
+      "approval": "approved",
+      "approver": "user:zeus",
+      "signed": true,
+      "data": {
+        "geo": {
+          "coords": {
+            "coordinates": [
+              -97.7431,
+              30.275294
+            ],
+            "type": "Point"
+          },
+          "kind": "keep_out",
+          "radius_m": 200,
+          "shape": "circle"
+        },
+        "name": "NO FLY",
+        "watch": true
+      },
+      "at": "2026-10-29T15:12:24.244Z"
+    },
+    {
+      "subject": "cmd.map.geofence.zone-dmvtomjax2.remove",
+      "action_id": "act-01m643gezvajz9qmy2myg213sd",
+      "approval": "approved",
+      "approver": "user:zeus",
+      "signed": true,
+      "data": {},
+      "at": "2026-10-29T15:12:29.464Z"
+    }
+  ],
+  "geofence_results": [
+    {
+      "subject": "cmd.map.geofence.zone-dmvtolg1g1.create",
+      "zone_id": "zone-dmvtolg1g1",
+      "outcome": "created",
+      "signed": true,
+      "action_id": "act-01m643erwcnpc22dbqhmbzgv1h",
+      "at": "2026-10-29T15:11:35.736Z"
+    },
+    {
+      "subject": "cmd.map.geofence.zone-rogue.create",
+      "zone_id": "zone-rogue",
+      "outcome": "refused",
+      "signed": false,
+      "at": "2026-10-29T15:11:35.824Z",
+      "code": "unsigned",
+      "message": "command carries no policy signature"
+    },
+    {
+      "subject": "cmd.map.geofence.zone-dmvtomjax2.create",
+      "zone_id": "zone-dmvtomjax2",
+      "outcome": "created",
+      "signed": true,
+      "action_id": "act-01m643g9yh1r6tfg2r4m1kvtb6",
+      "at": "2026-10-29T15:12:24.245Z"
+    },
+    {
+      "subject": "cmd.map.geofence.zone-dmvtomjax2.remove",
+      "zone_id": "zone-dmvtomjax2",
+      "outcome": "deleted",
+      "signed": true,
+      "action_id": "act-01m643gezvajz9qmy2myg213sd",
+      "at": "2026-10-29T15:12:29.465Z"
+    }
+  ],
+  "hermes": [
+    {
+      "question": "What's moving near the north field?",
+      "reply": "1 moving near NORTH FIELD: WALKER (track, 4 m/s, 120 m from its centre). I highlighted them.",
+      "proposals": []
+    },
+    {
+      "question": "Send sim-x1 to the home field",
+      "reply": "I proposed sending sim-x1 to HOME FIELD. It does nothing until you confirm it (action act-01m643gv5hypzt7ag7p02gcgbv).",
+      "proposals": [
+        "act-01m643gv5hypzt7ag7p02gcgbv"
+      ]
+    }
+  ],
+  "tak_injected": [
+    "<event version=\"2.0\" uid=\"GeoChat.OM-WEB-zeus.All Chat Rooms.cc2445ac\" type=\"b-t-f\" how=\"h-g-i-g-o\" time=\"2026-10-29T15:12:48.316Z\" start=\"2026-10-29T15:12:48.316Z\" stale=\"2026-10-29T15:13:48.316Z\"><point lat=\"0\" lon=\"0\" hae=\"0\" ce=\"9999999\" le=\"9999999\"/><detail><__chat parent=\"RootContactGroup\" groupOwner=\"false\" chatroom=\"All Chat Rooms\" id=\"All Chat Rooms\" senderCallsign=\"ZEUS-WEB\"><chatgrp uid0=\"OM-WEB-zeus\" uid1=\"All Chat Rooms\" id=\"All Chat Rooms\"/></__chat><remarks source=\"BAO.F.ATAK.OM-WEB-zeus\" to=\"All Chat Rooms\" time=\"2026-10-29T15:12:48.316Z\">hello from the web</remarks></detail></event>"
+  ],
+  "page_errors": []
+}

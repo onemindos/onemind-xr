@@ -1,0 +1,45 @@
+## gofmt
+## go vet
+vet-ok
+## go test -race -count=1 -v
+--- PASS: TestTelemetryEnvelopes (0.40s)
+--- PASS: TestHAEPrefersAutopilotEllipsoid (0.56s)
+--- PASS: TestApprovedCommandsReachVehicle (0.23s)
+--- PASS: TestRefusedCommandsNeverReachVehicle (0.25s)
+--- PASS: TestVehicleRejectAndNoAck (0.83s)
+--- PASS: TestOfflineVehicleRefusedButEstopSent (0.31s)
+--- PASS: TestDryRunNotSent (0.22s)
+--- PASS: TestConfigRefusesNonSim (0.00s)
+--- PASS: TestRoundDropsNegativeZero (0.00s)
+--- PASS: TestRepositionFallsBackToCommandLong (1.04s)
+--- PASS: TestAckForOtherGCSIgnored (0.82s)
+--- PASS: TestTaskStatusVersions (0.22s)
+--- PASS: TestSendErrorsAreNotVehicleRejected (0.22s)
+--- PASS: TestHoldAtCurrentPosition (0.26s)
+--- PASS: TestHoldFallsBackToCommandLong (0.21s)
+--- PASS: TestHoldRefusedWithoutFreshPosition (0.31s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink	7.184s
+--- PASS: TestNewVerifierRefusesNonSim (0.00s)
+--- PASS: TestVerify (0.10s)
+--- PASS: TestReplayRefused (0.01s)
+--- PASS: TestSigOptionalWhenNotRequired (0.00s)
+--- PASS: TestParamsHashVectors (0.01s)
+--- PASS: TestTaskBoundParamsHash (0.02s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/command	2.027s
+--- PASS: TestCheck (0.00s)
+--- PASS: TestFailClosed (0.00s)
+--- PASS: TestParseRejects (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/fence	1.497s
+--- PASS: TestUndulationKnownPoints (0.11s)
+--- PASS: TestRoundTripAndWrap (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/geoid	1.807s
+--- PASS: TestCanonicalize (0.00s)
+--- PASS: TestCanonicalizeErrors (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/jcs	2.076s
+## build
+build-ok

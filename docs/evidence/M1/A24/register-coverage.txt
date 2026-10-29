@@ -1,0 +1,36 @@
+## register coverage: every ID in BUS-DESIGN 10.1 has a heading in the omos proposal set
+OK   BUS-P1 -> bus.md
+OK   BUS-P2 -> bus.md
+OK   BUS-P3 -> bus.md
+OK   BUS-P4 -> bus.md
+OK   BUS-P5 -> bus.md
+OK   BUS-P6 -> bus.md
+OK   BUS-P7 -> bus.md
+OK   BUS-P8 -> bus.md
+OK   BUS-P9 -> bus.md
+OK   BUS-P10 -> bus.md
+OK   BUS-P11 -> bus.md
+OK   ONT-P1 -> ontology.md
+OK   ONT-P3 -> ontology.md
+OK   ONT-P7 -> ontology.md
+OK   ONT-P8 -> ontology.md
+OK   ONT-P9 -> ontology.md
+OK   ONT-P10 -> ontology.md
+OK   ONT-P11 -> ontology.md
+OK   ONT-P12 -> ontology.md
+OK   ONT-P13 -> ontology.md
+OK   ONT-P14 -> ontology.md
+OK   RA1 -> reference-architecture.md
+OK   RA2 -> reference-architecture.md
+OK   RA3 -> reference-architecture.md
+OK   RA4 -> reference-architecture.md
+OK   CP-1 -> cot-projection.md
+OK   CP-2 -> cot-projection.md
+OK   CP-3 -> cot-projection.md
+OK   CP-4 -> cot-projection.md
+OK   F1 -> f1-intercept-example.md
+OK   ONT-P2 -> ontology.md (duplicate, not a row in 10.1)
+OK   ONT-P4 -> ontology.md (duplicate, not a row in 10.1)
+OK   ONT-P5 -> ontology.md (duplicate, not a row in 10.1)
+OK   ONT-P6 -> ontology.md (duplicate, not a row in 10.1)
+missing: 0
