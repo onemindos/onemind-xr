@@ -1,0 +1,24 @@
+== yamllint
+exit 0
+== validate_changed_yaml
+Changed YAML gate passed (0 files checked)
+== validate_manifests
+No changed plain manifests to validate
+== gitleaks
+[90m1:22PM[0m [32mINF[0m [1m4 commits scanned.[0m
+[90m1:22PM[0m [32mINF[0m [1mscanned ~221055 bytes (221.05 KB) in 91ms[0m
+[90m1:22PM[0m [32mINF[0m [1mno leaks found[0m
+[90m1:22PM[0m [32mINF[0m [1mscanned ~13330453 bytes (13.33 MB) in 3.68s[0m
+[90m1:22PM[0m [33mWRN[0m [1mleaks found: 9[0m
+== go vet
+go: downloading github.com/nats-io/nats.go v1.53.1
+go: downloading github.com/nats-io/nats-server/v2 v2.14.8
+go: downloading github.com/santhosh-tekuri/jsonschema/v6 v6.0.2
+go: downloading golang.org/x/text v0.42.0
+go: downloading github.com/klauspost/compress v1.20.1
+go: downloading github.com/nats-io/jwt/v2 v2.8.2
+go: downloading github.com/antithesishq/antithesis-sdk-go v0.8.0-default-no-op
+go: downloading github.com/minio/highwayhash v1.0.4
+go: downloading golang.org/x/time v0.16.0
+go: downloading golang.org/x/sys v0.48.0
+vet ok

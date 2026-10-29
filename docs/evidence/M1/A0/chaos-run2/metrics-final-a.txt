@@ -1,0 +1,2 @@
+ingest_feed_leader{instance="a",source="chaos-nws"} 0
+ingest_feed_leader{instance="a",source="chaos-sse"} 0

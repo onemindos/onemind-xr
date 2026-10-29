@@ -1,0 +1,2 @@
+?   	github.com/onemindos/omos/services/projector/cmd/tak-projector	[no test files]
+ok  	github.com/onemindos/omos/services/projector/internal/projector	71.295s

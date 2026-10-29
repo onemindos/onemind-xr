@@ -1,0 +1,3 @@
+$ stream COT subjects tak.cot.>  (no gateway subscribed)
+$ request tak.cot.mesh.tx -> reply: {"stream":"COT","seq":1}
+$ with a gateway-like responder also subscribed, first replies of 5 requests: ['{"stream":"COT","seq":2}', '{"stream":"COT","seq":3}', '{"stream":"COT","seq":4}', '{"stream":"COT","seq":5}', '{"stream":"COT","seq":6}']

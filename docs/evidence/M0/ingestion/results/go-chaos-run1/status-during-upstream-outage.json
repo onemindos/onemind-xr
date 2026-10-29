@@ -1,0 +1,90 @@
+{
+ "ais": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:28.777385-04:00",
+  "ageSec": 9.998041625,
+  "count": 1,
+  "lastError": "failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\"",
+  "stale": false
+ },
+ "cap": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:27.865767-04:00",
+  "ageSec": 10.909663208,
+  "count": 1,
+  "lastError": null,
+  "stale": false
+ },
+ "celestrak": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:01.038178-04:00",
+  "ageSec": 37.737290541,
+  "count": 5,
+  "lastError": null,
+  "stale": false
+ },
+ "eonet": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:27.53797-04:00",
+  "ageSec": 11.237448875,
+  "count": 1,
+  "lastError": "sse stream ended",
+  "stale": false
+ },
+ "gdacs": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:21.026422-04:00",
+  "ageSec": 17.749030833,
+  "count": 10,
+  "lastError": null,
+  "stale": false
+ },
+ "mediamtx": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:31.026837-04:00",
+  "ageSec": 7.748605459,
+  "count": 1,
+  "lastError": null,
+  "stale": false
+ },
+ "mqtt": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:27.99308-04:00",
+  "ageSec": 10.782356584,
+  "count": 1,
+  "lastError": null,
+  "stale": false
+ },
+ "nws": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:29.445124-04:00",
+  "ageSec": 9.330287458,
+  "count": 1,
+  "lastError": "http 503",
+  "stale": false
+ },
+ "outages": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:16.026187-04:00",
+  "ageSec": 22.749274333,
+  "count": 5,
+  "lastError": null,
+  "stale": false
+ },
+ "tiles": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:01.025111-04:00",
+  "ageSec": 37.750365958,
+  "count": 1,
+  "lastError": null,
+  "stale": false
+ },
+ "usgs": {
+  "engine": "go",
+  "fetchedAt": "2026-10-29T04:39:26.034547-04:00",
+  "ageSec": 12.74086275,
+  "count": 20,
+  "lastError": null,
+  "stale": false
+ }
+}

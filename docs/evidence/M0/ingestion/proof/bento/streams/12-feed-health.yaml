@@ -1,0 +1,39 @@
+# Feed health: every 10 s publish tel.feed.{source}.status with fetchedAt, count, lastError and stale flag.
+input:
+  generate: { interval: 10s, mapping: 'root = {"sources": {"usgs":60,"nws":60,"eonet":30,"ais":15,"cap":30,"mqtt":15,"celestrak":180,"gdacs":60,"outages":60,"tiles":120,"mediamtx":60}}' }
+pipeline:
+  processors:
+    - mapping: 'root = this.sources.key_values().map_each(kv -> {"source": kv.key, "staleAfter": kv.value})'
+    - unarchive: { format: json_array }
+    - mapping: 'meta src = this.source'
+    - branch:
+        request_map: 'root = ""'
+        processors:
+          - cache: { resource: live, operator: get, key: 'status.${! @src }' }
+          - catch: [ { mapping: 'root = "{}"' } ]
+        result_map: 'root.ok = content().string().parse_json()'
+    - branch:
+        request_map: 'root = ""'
+        processors:
+          - cache: { resource: live, operator: get, key: 'status.${! @src }.error' }
+          - catch: [ { mapping: 'root = "{}"' } ]
+        result_map: 'root.err = content().string().parse_json()'
+    - mapping: |
+        let fetched = this.ok.fetchedAt.or(null)
+        let age = if $fetched != null { (now().ts_unix_milli() - $fetched.ts_parse("2006-01-02T15:04:05.999999999Z07:00").ts_unix_milli()) / 1000 } else { null }
+        meta subject = "tel.feed." + this.source + ".status"
+        meta msgid = "status:" + this.source + ":" + now()
+        root = {"source": this.source, "engine": "bento", "fetchedAt": $fetched, "ageSec": $age,
+                "count": this.ok.count.or(0), "lastError": this.err.lastError.or(null), "errorAt": this.err.errorAt.or(null),
+                "stale": $age == null || $age > this.staleAfter}
+output:
+  retry:
+    max_retries: 0          # forever: a NATS outage blocks (backpressure), never drops
+    backoff: { initial_interval: 500ms, max_interval: 10s, max_elapsed_time: 0s }
+    output:
+      nats_jetstream:
+        urls: [ "${NATS_URL:nats://127.0.0.1:34222}" ]
+        subject: ${! @subject }
+        headers:
+          Nats-Msg-Id: ${! @msgid }
+        max_in_flight: 64

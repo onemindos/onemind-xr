@@ -1,0 +1,63 @@
+[60320] 2026/10/29 06:58:55.817476 [INF] Starting nats-server
+[60320] 2026/10/29 06:58:55.817610 [INF]   Version:  2.15.2
+[60320] 2026/10/29 06:58:55.817621 [INF]   Git:      [5a815f1]
+[60320] 2026/10/29 06:58:55.817626 [INF]   Name:     NDIKUQDA3VCFOAYJ36T7CQNTENHJBNKPTMVOFYVR2WC2XQAPERCK44KG
+[60320] 2026/10/29 06:58:55.817631 [INF]   Node:     13jXaNC9
+[60320] 2026/10/29 06:58:55.817635 [INF]   ID:       NDIKUQDA3VCFOAYJ36T7CQNTENHJBNKPTMVOFYVR2WC2XQAPERCK44KG
+[60320] 2026/10/29 06:58:55.817819 [INF] Starting JetStream
+[60320] 2026/10/29 06:58:55.818150 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[60320] 2026/10/29 06:58:55.818158 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[60320] 2026/10/29 06:58:55.818162 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[60320] 2026/10/29 06:58:55.818166 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[60320] 2026/10/29 06:58:55.818169 [INF] 
+[60320] 2026/10/29 06:58:55.818172 [INF]          https://docs.nats.io/jetstream
+[60320] 2026/10/29 06:58:55.818175 [INF] 
+[60320] 2026/10/29 06:58:55.818179 [INF] ---------------- JETSTREAM ----------------
+[60320] 2026/10/29 06:58:55.818182 [INF]   Strict:          true
+[60320] 2026/10/29 06:58:55.818187 [INF]   Max Memory:      24.00 GB
+[60320] 2026/10/29 06:58:55.818190 [INF]   Max Storage:     17.49 GB
+[60320] 2026/10/29 06:58:55.818194 [INF]   Store Directory: "/Users/danielcarku/Desktop/work/.run/tmp-a0/chaos2/js/jetstream"
+[60320] 2026/10/29 06:58:55.818197 [INF]   API Level:       5
+[60320] 2026/10/29 06:58:55.818201 [INF] -------------------------------------------
+[60320] 2026/10/29 06:58:55.818546 [INF] Took 712.291µs to start JetStream
+[60320] 2026/10/29 06:58:55.818630 [INF] Listening for client connections on 127.0.0.1:34322
+[60320] 2026/10/29 06:58:55.818642 [INF] Server is ready
+[61225] 2026/10/29 06:59:27.071821 [INF] Starting nats-server
+[61225] 2026/10/29 06:59:27.071952 [INF]   Version:  2.15.2
+[61225] 2026/10/29 06:59:27.071959 [INF]   Git:      [5a815f1]
+[61225] 2026/10/29 06:59:27.071964 [INF]   Name:     NB4YOFSZ65XV2HJ5AXWC2MSBMM5WZCZH6T4G3X3O5CMVNOLDAI6TDES5
+[61225] 2026/10/29 06:59:27.071970 [INF]   Node:     bJBHHjZF
+[61225] 2026/10/29 06:59:27.071973 [INF]   ID:       NB4YOFSZ65XV2HJ5AXWC2MSBMM5WZCZH6T4G3X3O5CMVNOLDAI6TDES5
+[61225] 2026/10/29 06:59:27.072293 [INF] Starting JetStream
+[61225] 2026/10/29 06:59:27.072589 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[61225] 2026/10/29 06:59:27.072602 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[61225] 2026/10/29 06:59:27.072607 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[61225] 2026/10/29 06:59:27.072610 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[61225] 2026/10/29 06:59:27.072614 [INF] 
+[61225] 2026/10/29 06:59:27.072618 [INF]          https://docs.nats.io/jetstream
+[61225] 2026/10/29 06:59:27.072621 [INF] 
+[61225] 2026/10/29 06:59:27.072625 [INF] ---------------- JETSTREAM ----------------
+[61225] 2026/10/29 06:59:27.072628 [INF]   Strict:          true
+[61225] 2026/10/29 06:59:27.072633 [INF]   Max Memory:      24.00 GB
+[61225] 2026/10/29 06:59:27.072637 [INF]   Max Storage:     17.45 GB
+[61225] 2026/10/29 06:59:27.072640 [INF]   Store Directory: "/Users/danielcarku/Desktop/work/.run/tmp-a0/chaos2/js/jetstream"
+[61225] 2026/10/29 06:59:27.072644 [INF]   API Level:       5
+[61225] 2026/10/29 06:59:27.072647 [INF] -------------------------------------------
+[61225] 2026/10/29 06:59:27.073305 [INF]   Starting restore for stream '$G > KV_ingest-locks'
+[61225] 2026/10/29 06:59:27.073329 [INF]   Starting restore for stream '$G > KV_ingest-state'
+[61225] 2026/10/29 06:59:27.073670 [INF]   Starting restore for stream '$G > TEL'
+[61225] 2026/10/29 06:59:27.073678 [INF]   Starting restore for stream '$G > INTEL'
+[61225] 2026/10/29 06:59:27.073790 [INF]   Starting restore for stream '$G > SYS'
+[61225] 2026/10/29 06:59:27.075082 [INF]   Restored 0 messages for stream '$G > KV_ingest-locks' in 2ms
+[61225] 2026/10/29 06:59:27.075608 [INF]   Restored 14 messages for stream '$G > TEL' in 2ms
+[61225] 2026/10/29 06:59:27.075697 [INF]   Restored 0 messages for stream '$G > SYS' in 2ms
+[61225] 2026/10/29 06:59:27.075793 [INF]   Restored 2 messages for stream '$G > KV_ingest-state' in 2ms
+[61225] 2026/10/29 06:59:27.077063 [INF]   Restored 1,574 messages for stream '$G > INTEL' in 3ms
+[61225] 2026/10/29 06:59:27.077182 [INF] Took 4.870667ms to start JetStream
+[61225] 2026/10/29 06:59:27.077267 [INF] Listening for client connections on 127.0.0.1:34322
+[61225] 2026/10/29 06:59:27.077283 [INF] Server is ready
+[61225] 2026/10/29 07:01:22.553119 [INF] Trapped "terminated" signal
+[61225] 2026/10/29 07:01:22.553451 [INF] Initiating Shutdown...
+[61225] 2026/10/29 07:01:22.553472 [INF] Initiating JetStream Shutdown...
+[61225] 2026/10/29 07:01:22.554900 [INF] JetStream Shutdown
+[61225] 2026/10/29 07:01:22.554973 [INF] Server Exiting..

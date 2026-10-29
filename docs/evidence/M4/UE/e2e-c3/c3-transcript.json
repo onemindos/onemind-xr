@@ -1,0 +1,1820 @@
+[
+ {
+  "part": "A-v1",
+  "client": [
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "sa"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "chat"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "ev": "direct_in",
+    "kind": "chat",
+    "text": "reply over mesh",
+    "type": "b-t-f",
+    "uid": "GeoChat.ANDROID-mesh.ONEMIND-e2e-v1.a6b94c69d009",
+    "v1": true
+   },
+   {
+    "ev": "final",
+    "pending": 0
+   }
+  ],
+  "rx": [
+   [
+    {
+     "Nats-Msg-Id": "cot-afed846a7948817e2d6791467e0f3fc9",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62858",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1\" type=\"a-f-G-U-C\" opex=\"s\" how=\"m-g\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:07:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"150\" ce=\"9999999\" le=\"9999999\"/><detail><uid Droid=\"OM-E2E\"/><contact endpoint=\"127.0.0.1:62854:tcp\" callsign=\"OM-E2E\"/><__group name=\"Cyan\" role=\"Team Member\"/><precisionlocation geopointsrc=\"USER\" altsrc=\"???\"/><takv device=\"Mac\" platform=\"OneMind\" os=\"macOS\" version=\"0.4.0\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-e8fef64c0c8ab6f7fe36eada5a6913cf",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62856",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-point\" type=\"b-m-p-s-m\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><contact callsign=\"Point 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-90ab82d882dc2007953ec0cfc6b213e0",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62862",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-line\" type=\"u-d-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2672000,-97.7431000\"/><link point=\"30.2703795,-97.7394185\"/><link point=\"30.2671997,-97.7337287\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><labels_on value=\"true\"/><contact callsign=\"Line 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-c4d094162ea012a497321138bfb3c644",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62859",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"GeoChat.ONEMIND-e2e-v1.B4MBJ5t5Ib449HrY5qQiOF\" type=\"b-t-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-30T14:05:13.706Z\"><point lat=\"0\" lon=\"0\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><__chat parent=\"RootContactGroup\" groupOwner=\"false\" messageId=\"B4MBJ5t5Ib449HrY5qQiOF\" chatroom=\"All Chat Rooms\" id=\"All Chat Rooms\" senderCallsign=\"OM-E2E\"><chatgrp uid0=\"ONEMIND-e2e-v1\" uid1=\"All Chat Rooms\" id=\"All Chat Rooms\"/></__chat><link uid=\"ONEMIND-e2e-v1\" type=\"a-f-G-U-C\" relation=\"p-p\"/><remarks source=\"BAO.F.OneMind.ONEMIND-e2e-v1\" to=\"All Chat Rooms\" time=\"2026-10-29T14:05:13.706Z\">hello mesh v1</remarks><contact callsign=\"OM-E2E\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-49a3c85aea9467da6250da5fe22acc4e",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62863",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-circle\" type=\"u-d-c-c\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"250.0\" minor=\"250.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Circle 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-71a7f34334850212f41b651728a5a734",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62860",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-polygon\" type=\"u-d-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2707973,-97.7431000\"/><link point=\"30.2654013,-97.7394930\"/><link point=\"30.2654013,-97.7467070\"/><link point=\"30.2707973,-97.7431000\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Polygon 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-5c2c88d26b1b9ab0c10ef4c365b2383f",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62857",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-rect\" type=\"u-d-r\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2691077,-97.7453089\"/><link point=\"30.2691077,-97.7408912\"/><link point=\"30.2652922,-97.7408912\"/><link point=\"30.2652922,-97.7453089\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Rectangle 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-a4a3b35c36fa260a7491346f4402443e",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62855",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-sector\" type=\"u-d-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2672000,-97.7431000\"/><link point=\"30.2718730,-97.7399761\"/><link point=\"30.2717508,-97.7397430\"/><link point=\"30.2716200,-97.7395164\"/><link point=\"30.2714808,-97.7392966\"/><link point=\"30.2713335,-97.7390840\"/><link point=\"30.2711782,-97.7388790\"/><link point=\"30.2710154,-97.7386821\"/><link point=\"30.2708454,-97.7384936\"/><link point=\"30.2706683,-97.7383139\"/><link point=\"30.2704847,-97.7381433\"/><link point=\"30.2702949,-97.7379821\"/><link point=\"30.2700991,-97.7378307\"/><link point=\"30.2698978,-97.7376893\"/><link point=\"30.2696914,-97.7375582\"/><link point=\"30.2694803,-97.7374377\"/><link point=\"30.2692648,-97.7373279\"/><link point=\"30.2690454,-97.7372291\"/><link point=\"30.2688225,-97.7371415\"/><link point=\"30.2685964,-97.7370652\"/><link point=\"30.2683677,-97.7370005\"/><link point=\"30.2681368,-97.7369473\"/><link point=\"30.2679042,-97.7369058\"/><link point=\"30.2676701,-97.7368762\"/><link point=\"30.2674352,-97.7368584\"/><link point=\"30.2671999,-97.7368524\"/><link point=\"30.2672000,-97.7431000\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Sector 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-28232da1c6a291ee713137657bc96aab",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62861",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-rings.r1\" type=\"u-r-b-c-c\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"200.0\" minor=\"200.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Rings 200.0 m\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-2c0a6538f8abd127607e1c95fe8332ee",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62864",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-rings.r3\" type=\"u-r-b-c-c\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"600.0\" minor=\"600.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Rings 600.0 m\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-b29c4f0e44005afc29e301b5e53e769a",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62865",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-rings.r2\" type=\"u-r-b-c-c\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"400.0\" minor=\"400.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Rings 400.0 m\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-78378b765240a20f094fe1c8691d32ed",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62866",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-rb\" type=\"u-rb-a\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><range value=\"1000.0\"/><bearing value=\"60.0\"/><inclination value=\"0.0\"/><rangeUnits value=\"1\"/><bearingUnits value=\"0\"/><northRef value=\"1\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><labels_on value=\"true\"/><contact callsign=\"R&amp;B 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-5af3c552882ebc33898870bbe31775aa",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62867",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "1"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-v1-buffer\" type=\"u-d-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:13.706Z\" start=\"2026-10-29T14:05:13.706Z\" stale=\"2026-10-29T14:10:13.706Z\"><point lat=\"30.2671999\" lon=\"-97.738935\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2680993,-97.7431000\"/><link point=\"30.2680991,-97.7347699\"/><link point=\"30.2680947,-97.7346678\"/><link point=\"30.2680818,-97.7345667\"/><link point=\"30.2680603,-97.7344676\"/><link point=\"30.2680306,-97.7343714\"/><link point=\"30.2679929,-97.7342790\"/><link point=\"30.2679475,-97.7341914\"/><link point=\"30.2678949,-97.7341093\"/><link point=\"30.2678356,-97.7340336\"/><link point=\"30.2677702,-97.7339650\"/><link point=\"30.2676993,-97.7339041\"/><link point=\"30.2676236,-97.7338516\"/><link point=\"30.2675439,-97.7338079\"/><link point=\"30.2674608,-97.7337735\"/><link point=\"30.2673752,-97.7337487\"/><link point=\"30.2672879,-97.7337337\"/><link point=\"30.2671997,-97.7337287\"/><link point=\"30.2671116,-97.7337337\"/><link point=\"30.2670243,-97.7337487\"/><link point=\"30.2669386,-97.7337735\"/><link point=\"30.2668556,-97.7338079\"/><link point=\"30.2667758,-97.7338516\"/><link point=\"30.2667001,-97.7339042\"/><link point=\"30.2666292,-97.7339650\"/><link point=\"30.2665638,-97.7340337\"/><link point=\"30.2665045,-97.7341094\"/><link point=\"30.2664520,-97.7341915\"/><link point=\"30.2664066,-97.7342791\"/><link point=\"30.2663689,-97.7343715\"/><link point=\"30.2663391,-97.7344677\"/><link point=\"30.2663177,-97.7345668\"/><link point=\"30.2663047,-97.7346679\"/><link point=\"30.2663004,-97.7347700\"/><link point=\"30.2663004,-97.7347700\"/><link point=\"30.2663007,-97.7431000\"/><link point=\"30.2663050,-97.7432021\"/><link point=\"30.2663180,-97.7433032\"/><link point=\"30.2663394,-97.7434023\"/><link point=\"30.2663691,-97.7434985\"/><link point=\"30.2664069,-97.7435909\"/><link point=\"30.2664523,-97.7436785\"/><link point=\"30.2665048,-97.7437606\"/><link point=\"30.2665641,-97.7438363\"/><link point=\"30.2666295,-97.7439049\"/><link point=\"30.2667004,-97.7439658\"/><link point=\"30.2667761,-97.7440183\"/><link point=\"30.2668559,-97.7440620\"/><link point=\"30.2669390,-97.7440964\"/><link point=\"30.2670246,-97.7441213\"/><link point=\"30.2671119,-97.7441363\"/><link point=\"30.2672000,-97.7441413\"/><link point=\"30.2672882,-97.7441362\"/><link point=\"30.2673755,-97.7441212\"/><link point=\"30.2674611,-97.7440964\"/><link point=\"30.2675442,-97.7440620\"/><link point=\"30.2676240,-97.7440183\"/><link point=\"30.2676997,-97.7439658\"/><link point=\"30.2677705,-97.7439049\"/><link point=\"30.2678359,-97.7438363\"/><link point=\"30.2678952,-97.7437605\"/><link point=\"30.2679478,-97.7436785\"/><link point=\"30.2679931,-97.7435908\"/><link point=\"30.2680309,-97.7434984\"/><link point=\"30.2680606,-97.7434022\"/><link point=\"30.2680820,-97.7433031\"/><link point=\"30.2680950,-97.7432020\"/><link point=\"30.2680993,-97.7431000\"/><link point=\"30.2680993,-97.7431000\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Buffer 1\"/></detail></event>"
+   ]
+  ]
+ },
+ {
+  "part": "A-xml",
+  "client": [
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "sa"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "chat"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "error": "",
+    "ev": "direct_sent",
+    "what": "shape"
+   },
+   {
+    "ev": "direct_in",
+    "kind": "chat",
+    "text": "reply over mesh",
+    "type": "b-t-f",
+    "uid": "GeoChat.ANDROID-mesh.ONEMIND-e2e-xml.733a6e60dd49",
+    "v1": true
+   },
+   {
+    "ev": "final",
+    "pending": 0
+   }
+  ],
+  "rx": [
+   [
+    {
+     "Nats-Msg-Id": "cot-bba59a8a22f79c15cd21e57cd8c1fd00",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62936",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml\" type=\"a-f-G-U-C\" opex=\"s\" how=\"m-g\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:07:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"150\" ce=\"9999999\" le=\"9999999\"/><detail><uid Droid=\"OM-E2E\"/><contact endpoint=\"127.0.0.1:62935:tcp\" callsign=\"OM-E2E\"/><__group name=\"Cyan\" role=\"Team Member\"/><precisionlocation geopointsrc=\"USER\" altsrc=\"???\"/><takv device=\"Mac\" platform=\"OneMind\" os=\"macOS\" version=\"0.4.0\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-02e01eb601b69a3c9ec4533a722f9a54",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62937",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-point\" type=\"b-m-p-s-m\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><contact callsign=\"Point 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-b57999799713072f6bef359444afc085",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62939",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-line\" type=\"u-d-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2672000,-97.7431000\"/><link point=\"30.2703795,-97.7394185\"/><link point=\"30.2671997,-97.7337287\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><labels_on value=\"true\"/><contact callsign=\"Line 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-3ed4841422da49630f546c6a0b783144",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62938",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"GeoChat.ONEMIND-e2e-xml.24WYt2VEU5ZT6C492yJDXC\" type=\"b-t-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-30T14:05:17.745Z\"><point lat=\"0\" lon=\"0\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><__chat parent=\"RootContactGroup\" groupOwner=\"false\" messageId=\"24WYt2VEU5ZT6C492yJDXC\" chatroom=\"All Chat Rooms\" id=\"All Chat Rooms\" senderCallsign=\"OM-E2E\"><chatgrp uid0=\"ONEMIND-e2e-xml\" uid1=\"All Chat Rooms\" id=\"All Chat Rooms\"/></__chat><link uid=\"ONEMIND-e2e-xml\" type=\"a-f-G-U-C\" relation=\"p-p\"/><remarks source=\"BAO.F.OneMind.ONEMIND-e2e-xml\" to=\"All Chat Rooms\" time=\"2026-10-29T14:05:17.745Z\">hello mesh xml</remarks><contact callsign=\"OM-E2E\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-a7a8ca666e84c70037688c31584038f1",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62940",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-polygon\" type=\"u-d-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2707973,-97.7431000\"/><link point=\"30.2654013,-97.7394930\"/><link point=\"30.2654013,-97.7467070\"/><link point=\"30.2707973,-97.7431000\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Polygon 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-a581d49d67482c2b5725c244f57e3f69",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62941",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-rect\" type=\"u-d-r\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2691077,-97.7453089\"/><link point=\"30.2691077,-97.7408912\"/><link point=\"30.2652922,-97.7408912\"/><link point=\"30.2652922,-97.7453089\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Rectangle 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-90c07bca632c8dccfbbad437b1e5d97a",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62942",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-circle\" type=\"u-d-c-c\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"250.0\" minor=\"250.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Circle 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-cfd3ae7c0450ca707656d0e87a29714c",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62944",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-rings.r1\" type=\"u-r-b-c-c\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"200.0\" minor=\"200.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Rings 200.0 m\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-7a294871ef58540a465afe030e2f1b6a",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62943",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-sector\" type=\"u-d-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2672000,-97.7431000\"/><link point=\"30.2718730,-97.7399761\"/><link point=\"30.2717508,-97.7397430\"/><link point=\"30.2716200,-97.7395164\"/><link point=\"30.2714808,-97.7392966\"/><link point=\"30.2713335,-97.7390840\"/><link point=\"30.2711782,-97.7388790\"/><link point=\"30.2710154,-97.7386821\"/><link point=\"30.2708454,-97.7384936\"/><link point=\"30.2706683,-97.7383139\"/><link point=\"30.2704847,-97.7381433\"/><link point=\"30.2702949,-97.7379821\"/><link point=\"30.2700991,-97.7378307\"/><link point=\"30.2698978,-97.7376893\"/><link point=\"30.2696914,-97.7375582\"/><link point=\"30.2694803,-97.7374377\"/><link point=\"30.2692648,-97.7373279\"/><link point=\"30.2690454,-97.7372291\"/><link point=\"30.2688225,-97.7371415\"/><link point=\"30.2685964,-97.7370652\"/><link point=\"30.2683677,-97.7370005\"/><link point=\"30.2681368,-97.7369473\"/><link point=\"30.2679042,-97.7369058\"/><link point=\"30.2676701,-97.7368762\"/><link point=\"30.2674352,-97.7368584\"/><link point=\"30.2671999,-97.7368524\"/><link point=\"30.2672000,-97.7431000\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Sector 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-a1103e035a9a941084e4b1e0f9d472e4",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62945",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-rings.r2\" type=\"u-r-b-c-c\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"400.0\" minor=\"400.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Rings 400.0 m\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-dec3dfbe042b5632b1e92dff8e3ad573",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62946",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-rings.r3\" type=\"u-r-b-c-c\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"600.0\" minor=\"600.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Rings 600.0 m\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-29378cd462bce91cb5d03ebc0d1689fa",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62947",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-rb\" type=\"u-rb-a\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><range value=\"1000.0\"/><bearing value=\"60.0\"/><inclination value=\"0.0\"/><rangeUnits value=\"1\"/><bearingUnits value=\"0\"/><northRef value=\"1\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><labels_on value=\"true\"/><contact callsign=\"R&amp;B 1\"/></detail></event>"
+   ],
+   [
+    {
+     "Nats-Msg-Id": "cot-b307f10f1e2b8d0611e19afe80789ce8",
+     "Tak-Delivery": "direct",
+     "Tak-From": "127.0.0.1:62948",
+     "Tak-Gateway": "m4ue",
+     "Tak-Proto": "0"
+    },
+    "<event version=\"2.0\" uid=\"ONEMIND-e2e-xml-buffer\" type=\"u-d-f\" opex=\"s\" how=\"h-e\" time=\"2026-10-29T14:05:17.745Z\" start=\"2026-10-29T14:05:17.745Z\" stale=\"2026-10-29T14:10:17.745Z\"><point lat=\"30.2671999\" lon=\"-97.738935\" hae=\"9999999\" ce=\"9999999\" le=\"9999999\"/><detail><remarks>SIMULATED</remarks><archive/><link point=\"30.2680993,-97.7431000\"/><link point=\"30.2680991,-97.7347699\"/><link point=\"30.2680947,-97.7346678\"/><link point=\"30.2680818,-97.7345667\"/><link point=\"30.2680603,-97.7344676\"/><link point=\"30.2680306,-97.7343714\"/><link point=\"30.2679929,-97.7342790\"/><link point=\"30.2679475,-97.7341914\"/><link point=\"30.2678949,-97.7341093\"/><link point=\"30.2678356,-97.7340336\"/><link point=\"30.2677702,-97.7339650\"/><link point=\"30.2676993,-97.7339041\"/><link point=\"30.2676236,-97.7338516\"/><link point=\"30.2675439,-97.7338079\"/><link point=\"30.2674608,-97.7337735\"/><link point=\"30.2673752,-97.7337487\"/><link point=\"30.2672879,-97.7337337\"/><link point=\"30.2671997,-97.7337287\"/><link point=\"30.2671116,-97.7337337\"/><link point=\"30.2670243,-97.7337487\"/><link point=\"30.2669386,-97.7337735\"/><link point=\"30.2668556,-97.7338079\"/><link point=\"30.2667758,-97.7338516\"/><link point=\"30.2667001,-97.7339042\"/><link point=\"30.2666292,-97.7339650\"/><link point=\"30.2665638,-97.7340337\"/><link point=\"30.2665045,-97.7341094\"/><link point=\"30.2664520,-97.7341915\"/><link point=\"30.2664066,-97.7342791\"/><link point=\"30.2663689,-97.7343715\"/><link point=\"30.2663391,-97.7344677\"/><link point=\"30.2663177,-97.7345668\"/><link point=\"30.2663047,-97.7346679\"/><link point=\"30.2663004,-97.7347700\"/><link point=\"30.2663004,-97.7347700\"/><link point=\"30.2663007,-97.7431000\"/><link point=\"30.2663050,-97.7432021\"/><link point=\"30.2663180,-97.7433032\"/><link point=\"30.2663394,-97.7434023\"/><link point=\"30.2663691,-97.7434985\"/><link point=\"30.2664069,-97.7435909\"/><link point=\"30.2664523,-97.7436785\"/><link point=\"30.2665048,-97.7437606\"/><link point=\"30.2665641,-97.7438363\"/><link point=\"30.2666295,-97.7439049\"/><link point=\"30.2667004,-97.7439658\"/><link point=\"30.2667761,-97.7440183\"/><link point=\"30.2668559,-97.7440620\"/><link point=\"30.2669390,-97.7440964\"/><link point=\"30.2670246,-97.7441213\"/><link point=\"30.2671119,-97.7441363\"/><link point=\"30.2672000,-97.7441413\"/><link point=\"30.2672882,-97.7441362\"/><link point=\"30.2673755,-97.7441212\"/><link point=\"30.2674611,-97.7440964\"/><link point=\"30.2675442,-97.7440620\"/><link point=\"30.2676240,-97.7440183\"/><link point=\"30.2676997,-97.7439658\"/><link point=\"30.2677705,-97.7439049\"/><link point=\"30.2678359,-97.7438363\"/><link point=\"30.2678952,-97.7437605\"/><link point=\"30.2679478,-97.7436785\"/><link point=\"30.2679931,-97.7435908\"/><link point=\"30.2680309,-97.7434984\"/><link point=\"30.2680606,-97.7434022\"/><link point=\"30.2680820,-97.7433031\"/><link point=\"30.2680950,-97.7432020\"/><link point=\"30.2680993,-97.7431000\"/><link point=\"30.2680993,-97.7431000\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/><contact callsign=\"Buffer 1\"/></detail></event>"
+   ]
+  ]
+ },
+ {
+  "part": "B-enroll",
+  "client": [
+   {
+    "ca_count": 1,
+    "error": "",
+    "ev": "enroll",
+    "ok": true,
+    "written": true
+   }
+  ],
+  "server": [
+   {
+    "path": "/Marti/api/tls/config",
+    "status": 200
+   },
+   {
+    "path": "/Marti/api/tls/signClient/v2?clientUid=ONEMIND-e2e&version=OneMind%200.4.0",
+    "status": 200,
+    "client_uid": "ONEMIND-e2e",
+    "csr_subject": "Certificate request self-signature verify OK\nsubject=CN=omclient, O=OneMind-Test, OU=TAK",
+    "csr_verify": ""
+   },
+   {
+    "path": "/Marti/api/tls/config",
+    "status": 401
+   }
+  ]
+ },
+ {
+  "part": "C1-v1",
+  "client": [
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "start",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "ev": "cot",
+    "kind": "contact",
+    "mode": 1,
+    "type": "a-f-G-U-C",
+    "uid": "ANDROID-peer"
+   },
+   {
+    "ev": "cot",
+    "from": "BRAVO",
+    "kind": "chat",
+    "mode": 1,
+    "text": "status?",
+    "type": "b-t-f",
+    "uid": "GeoChat.ANDROID-peer.ONEMIND-e2e.e0a63dfa1bbc"
+   },
+   {
+    "error": "",
+    "ev": "chat_sent",
+    "to": "ANDROID-peer"
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "Point 1",
+     "points": [],
+     "radius_m": 0,
+     "range_m": 0,
+     "type": "b-m-p-s-m",
+     "uid": "ONEMIND-e2e-point"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "Line 1",
+     "points": [
+      [
+       30.2672,
+       -97.7431
+      ],
+      [
+       30.2703795,
+       -97.7394185
+      ],
+      [
+       30.2671997,
+       -97.7337287
+      ]
+     ],
+     "radius_m": 0,
+     "range_m": 0,
+     "type": "u-d-f",
+     "uid": "ONEMIND-e2e-line"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "Polygon 1",
+     "points": [
+      [
+       30.2707973,
+       -97.7431
+      ],
+      [
+       30.2654013,
+       -97.739493
+      ],
+      [
+       30.2654013,
+       -97.746707
+      ],
+      [
+       30.2707973,
+       -97.7431
+      ]
+     ],
+     "radius_m": 0,
+     "range_m": 0,
+     "type": "u-d-f",
+     "uid": "ONEMIND-e2e-polygon"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "Rectangle 1",
+     "points": [
+      [
+       30.2691077,
+       -97.7453089
+      ],
+      [
+       30.2691077,
+       -97.7408912
+      ],
+      [
+       30.2652922,
+       -97.7408912
+      ],
+      [
+       30.2652922,
+       -97.7453089
+      ]
+     ],
+     "radius_m": 0,
+     "range_m": 0,
+     "type": "u-d-r",
+     "uid": "ONEMIND-e2e-rect"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "Circle 1",
+     "points": [],
+     "radius_m": 250,
+     "range_m": 0,
+     "type": "u-d-c-c",
+     "uid": "ONEMIND-e2e-circle"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "Sector 1",
+     "points": [
+      [
+       30.2672,
+       -97.7431
+      ],
+      [
+       30.271873,
+       -97.7399761
+      ],
+      [
+       30.2717508,
+       -97.739743
+      ],
+      [
+       30.27162,
+       -97.7395164
+      ],
+      [
+       30.2714808,
+       -97.7392966
+      ],
+      [
+       30.2713335,
+       -97.739084
+      ],
+      [
+       30.2711782,
+       -97.738879
+      ],
+      [
+       30.2710154,
+       -97.7386821
+      ],
+      [
+       30.2708454,
+       -97.7384936
+      ],
+      [
+       30.2706683,
+       -97.7383139
+      ],
+      [
+       30.2704847,
+       -97.7381433
+      ],
+      [
+       30.2702949,
+       -97.7379821
+      ],
+      [
+       30.2700991,
+       -97.7378307
+      ],
+      [
+       30.2698978,
+       -97.7376893
+      ],
+      [
+       30.2696914,
+       -97.7375582
+      ],
+      [
+       30.2694803,
+       -97.7374377
+      ],
+      [
+       30.2692648,
+       -97.7373279
+      ],
+      [
+       30.2690454,
+       -97.7372291
+      ],
+      [
+       30.2688225,
+       -97.7371415
+      ],
+      [
+       30.2685964,
+       -97.7370652
+      ],
+      [
+       30.2683677,
+       -97.7370005
+      ],
+      [
+       30.2681368,
+       -97.7369473
+      ],
+      [
+       30.2679042,
+       -97.7369058
+      ],
+      [
+       30.2676701,
+       -97.7368762
+      ],
+      [
+       30.2674352,
+       -97.7368584
+      ],
+      [
+       30.2671999,
+       -97.7368524
+      ],
+      [
+       30.2672,
+       -97.7431
+      ]
+     ],
+     "radius_m": 0,
+     "range_m": 0,
+     "type": "u-d-f",
+     "uid": "ONEMIND-e2e-sector"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "Rings 200.0 m",
+     "points": [],
+     "radius_m": 200,
+     "range_m": 0,
+     "type": "u-r-b-c-c",
+     "uid": "ONEMIND-e2e-rings.r1"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "Rings 400.0 m",
+     "points": [],
+     "radius_m": 400,
+     "range_m": 0,
+     "type": "u-r-b-c-c",
+     "uid": "ONEMIND-e2e-rings.r2"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "Rings 600.0 m",
+     "points": [],
+     "radius_m": 600,
+     "range_m": 0,
+     "type": "u-r-b-c-c",
+     "uid": "ONEMIND-e2e-rings.r3"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 60,
+     "center": [
+      30.2672,
+      -97.7431
+     ],
+     "label": "R&B 1",
+     "points": [],
+     "radius_m": 0,
+     "range_m": 1000,
+     "type": "u-rb-a",
+     "uid": "ONEMIND-e2e-rb"
+    }
+   },
+   {
+    "error": "",
+    "ev": "shape_sent",
+    "shape": {
+     "bearing_deg": 0,
+     "center": [
+      30.2671999,
+      -97.738935
+     ],
+     "label": "Buffer 1",
+     "points": [
+      [
+       30.2680993,
+       -97.7431
+      ],
+      [
+       30.2680991,
+       -97.7347699
+      ],
+      [
+       30.2680947,
+       -97.7346678
+      ],
+      [
+       30.2680818,
+       -97.7345667
+      ],
+      [
+       30.2680603,
+       -97.7344676
+      ],
+      [
+       30.2680306,
+       -97.7343714
+      ],
+      [
+       30.2679929,
+       -97.734279
+      ],
+      [
+       30.2679475,
+       -97.7341914
+      ],
+      [
+       30.2678949,
+       -97.7341093
+      ],
+      [
+       30.2678356,
+       -97.7340336
+      ],
+      [
+       30.2677702,
+       -97.733965
+      ],
+      [
+       30.2676993,
+       -97.7339041
+      ],
+      [
+       30.2676236,
+       -97.7338516
+      ],
+      [
+       30.2675439,
+       -97.7338079
+      ],
+      [
+       30.2674608,
+       -97.7337735
+      ],
+      [
+       30.2673752,
+       -97.7337487
+      ],
+      [
+       30.2672879,
+       -97.7337337
+      ],
+      [
+       30.2671997,
+       -97.7337287
+      ],
+      [
+       30.2671116,
+       -97.7337337
+      ],
+      [
+       30.2670243,
+       -97.7337487
+      ],
+      [
+       30.2669386,
+       -97.7337735
+      ],
+      [
+       30.2668556,
+       -97.7338079
+      ],
+      [
+       30.2667758,
+       -97.7338516
+      ],
+      [
+       30.2667001,
+       -97.7339042
+      ],
+      [
+       30.2666292,
+       -97.733965
+      ],
+      [
+       30.2665638,
+       -97.7340337
+      ],
+      [
+       30.2665045,
+       -97.7341094
+      ],
+      [
+       30.266452,
+       -97.7341915
+      ],
+      [
+       30.2664066,
+       -97.7342791
+      ],
+      [
+       30.2663689,
+       -97.7343715
+      ],
+      [
+       30.2663391,
+       -97.7344677
+      ],
+      [
+       30.2663177,
+       -97.7345668
+      ],
+      [
+       30.2663047,
+       -97.7346679
+      ],
+      [
+       30.2663004,
+       -97.73477
+      ],
+      [
+       30.2663004,
+       -97.73477
+      ],
+      [
+       30.2663007,
+       -97.7431
+      ],
+      [
+       30.266305,
+       -97.7432021
+      ],
+      [
+       30.266318,
+       -97.7433032
+      ],
+      [
+       30.2663394,
+       -97.7434023
+      ],
+      [
+       30.2663691,
+       -97.7434985
+      ],
+      [
+       30.2664069,
+       -97.7435909
+      ],
+      [
+       30.2664523,
+       -97.7436785
+      ],
+      [
+       30.2665048,
+       -97.7437606
+      ],
+      [
+       30.2665641,
+       -97.7438363
+      ],
+      [
+       30.2666295,
+       -97.7439049
+      ],
+      [
+       30.2667004,
+       -97.7439658
+      ],
+      [
+       30.2667761,
+       -97.7440183
+      ],
+      [
+       30.2668559,
+       -97.744062
+      ],
+      [
+       30.266939,
+       -97.7440964
+      ],
+      [
+       30.2670246,
+       -97.7441213
+      ],
+      [
+       30.2671119,
+       -97.7441363
+      ],
+      [
+       30.2672,
+       -97.7441413
+      ],
+      [
+       30.2672882,
+       -97.7441362
+      ],
+      [
+       30.2673755,
+       -97.7441212
+      ],
+      [
+       30.2674611,
+       -97.7440964
+      ],
+      [
+       30.2675442,
+       -97.744062
+      ],
+      [
+       30.267624,
+       -97.7440183
+      ],
+      [
+       30.2676997,
+       -97.7439658
+      ],
+      [
+       30.2677705,
+       -97.7439049
+      ],
+      [
+       30.2678359,
+       -97.7438363
+      ],
+      [
+       30.2678952,
+       -97.7437605
+      ],
+      [
+       30.2679478,
+       -97.7436785
+      ],
+      [
+       30.2679931,
+       -97.7435908
+      ],
+      [
+       30.2680309,
+       -97.7434984
+      ],
+      [
+       30.2680606,
+       -97.7434022
+      ],
+      [
+       30.268082,
+       -97.7433031
+      ],
+      [
+       30.268095,
+       -97.743202
+      ],
+      [
+       30.2680993,
+       -97.7431
+      ],
+      [
+       30.2680993,
+       -97.7431
+      ]
+     ],
+     "radius_m": 0,
+     "range_m": 0,
+     "type": "u-d-f",
+     "uid": "ONEMIND-e2e-buffer"
+    }
+   },
+   {
+    "all_contacts": 1,
+    "chats": [
+     {
+      "conversation": "ANDROID-peer",
+      "outgoing": false,
+      "text": "status?"
+     },
+     {
+      "conversation": "ANDROID-peer",
+      "outgoing": true,
+      "text": "all good"
+     }
+    ],
+    "connects": 1,
+    "declined": 0,
+    "ev": "final",
+    "events_in": 2,
+    "events_out": 13,
+    "last_error": "",
+    "mode": 2,
+    "negotiated_v1": 1,
+    "pings_out": 1,
+    "server_version": "5.8-test",
+    "visible_contacts": [
+     "BRAVO"
+    ]
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "stop",
+    "state": 4
+   }
+  ],
+  "peer_events": [
+   {
+    "mode": "xml",
+    "uid": "ONEMIND-e2e",
+    "type": "a-f-G-U-C",
+    "xmlDetail": "<event version=\"2.0\" how=\"m-g\" uid=\"ONEMIND-e2e\" type=\"a-f-G-U-C\" time=\"2026-10-29T14:05:22.905Z\" start=\"2026-10-29T14:05:22.905Z\" stale=\"2026-10-29T14:07:22.905Z\" opex=\"s\"><point lat=\"30.2672\" lon=\"-97.7431\" hae=\"150.0\" ce=\"9999999.0\" le=\"9999999.0\"/><detail><contact endpoint=\"*:-1:stcp\" callsign=\"OM-E2E\"/><__group name=\"Cyan\" role=\"Team Member\"/><takv device=\"Mac\" platform=\"OneMind\" os=\"macOS\" version=\"0.4.0\"/><uid Droid=\"OM-E2E\"/><precisionlocation geopointsrc=\"USER\" altsrc=\"???\"/></detail></event>",
+    "callsign": "OM-E2E"
+   },
+   {
+    "mode": "v1",
+    "uid": "GeoChat.ONEMIND-e2e.50a2PThZh2HflINkIYHCQ4",
+    "type": "b-t-f",
+    "xmlDetail": "<__chat parent=\"RootContactGroup\" groupOwner=\"false\" messageId=\"50a2PThZh2HflINkIYHCQ4\" chatroom=\"BRAVO\" id=\"ANDROID-peer\" senderCallsign=\"OM-E2E\"><chatgrp uid0=\"ONEMIND-e2e\" uid1=\"ANDROID-peer\" id=\"ANDROID-peer\"/></__chat><link uid=\"ONEMIND-e2e\" type=\"a-f-G-U-C\" relation=\"p-p\"/><remarks source=\"BAO.F.OneMind.ONEMIND-e2e\" to=\"ANDROID-peer\" time=\"2026-10-29T14:05:24.043Z\">all good</remarks><marti><dest callsign=\"BRAVO\"/></marti>",
+    "callsign": "OM-E2E",
+    "endpoint": "",
+    "lat": 0.0,
+    "lon": 0.0
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-point",
+    "type": "b-m-p-s-m",
+    "xmlDetail": "<remarks>SIMULATED</remarks>",
+    "callsign": "Point 1",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-line",
+    "type": "u-d-f",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><link point=\"30.2672000,-97.7431000\"/><link point=\"30.2703795,-97.7394185\"/><link point=\"30.2671997,-97.7337287\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><labels_on value=\"true\"/>",
+    "callsign": "Line 1",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-polygon",
+    "type": "u-d-f",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><link point=\"30.2707973,-97.7431000\"/><link point=\"30.2654013,-97.7394930\"/><link point=\"30.2654013,-97.7467070\"/><link point=\"30.2707973,-97.7431000\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/>",
+    "callsign": "Polygon 1",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-rect",
+    "type": "u-d-r",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><link point=\"30.2691077,-97.7453089\"/><link point=\"30.2691077,-97.7408912\"/><link point=\"30.2652922,-97.7408912\"/><link point=\"30.2652922,-97.7453089\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/>",
+    "callsign": "Rectangle 1",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-circle",
+    "type": "u-d-c-c",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"250.0\" minor=\"250.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/>",
+    "callsign": "Circle 1",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-sector",
+    "type": "u-d-f",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><link point=\"30.2672000,-97.7431000\"/><link point=\"30.2718730,-97.7399761\"/><link point=\"30.2717508,-97.7397430\"/><link point=\"30.2716200,-97.7395164\"/><link point=\"30.2714808,-97.7392966\"/><link point=\"30.2713335,-97.7390840\"/><link point=\"30.2711782,-97.7388790\"/><link point=\"30.2710154,-97.7386821\"/><link point=\"30.2708454,-97.7384936\"/><link point=\"30.2706683,-97.7383139\"/><link point=\"30.2704847,-97.7381433\"/><link point=\"30.2702949,-97.7379821\"/><link point=\"30.2700991,-97.7378307\"/><link point=\"30.2698978,-97.7376893\"/><link point=\"30.2696914,-97.7375582\"/><link point=\"30.2694803,-97.7374377\"/><link point=\"30.2692648,-97.7373279\"/><link point=\"30.2690454,-97.7372291\"/><link point=\"30.2688225,-97.7371415\"/><link point=\"30.2685964,-97.7370652\"/><link point=\"30.2683677,-97.7370005\"/><link point=\"30.2681368,-97.7369473\"/><link point=\"30.2679042,-97.7369058\"/><link point=\"30.2676701,-97.7368762\"/><link point=\"30.2674352,-97.7368584\"/><link point=\"30.2671999,-97.7368524\"/><link point=\"30.2672000,-97.7431000\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/>",
+    "callsign": "Sector 1",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-rings.r1",
+    "type": "u-r-b-c-c",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"200.0\" minor=\"200.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/>",
+    "callsign": "Rings 200.0 m",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-rings.r2",
+    "type": "u-r-b-c-c",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"400.0\" minor=\"400.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/>",
+    "callsign": "Rings 400.0 m",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-rings.r3",
+    "type": "u-r-b-c-c",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><shape><ellipse major=\"600.0\" minor=\"600.0\" angle=\"360\"/></shape><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/>",
+    "callsign": "Rings 600.0 m",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-rb",
+    "type": "u-rb-a",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><range value=\"1000.0\"/><bearing value=\"60.0\"/><inclination value=\"0.0\"/><rangeUnits value=\"1\"/><bearingUnits value=\"0\"/><northRef value=\"1\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><labels_on value=\"true\"/>",
+    "callsign": "R&B 1",
+    "endpoint": "",
+    "lat": 30.2672,
+    "lon": -97.7431
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-buffer",
+    "type": "u-d-f",
+    "xmlDetail": "<remarks>SIMULATED</remarks><archive/><link point=\"30.2680993,-97.7431000\"/><link point=\"30.2680991,-97.7347699\"/><link point=\"30.2680947,-97.7346678\"/><link point=\"30.2680818,-97.7345667\"/><link point=\"30.2680603,-97.7344676\"/><link point=\"30.2680306,-97.7343714\"/><link point=\"30.2679929,-97.7342790\"/><link point=\"30.2679475,-97.7341914\"/><link point=\"30.2678949,-97.7341093\"/><link point=\"30.2678356,-97.7340336\"/><link point=\"30.2677702,-97.7339650\"/><link point=\"30.2676993,-97.7339041\"/><link point=\"30.2676236,-97.7338516\"/><link point=\"30.2675439,-97.7338079\"/><link point=\"30.2674608,-97.7337735\"/><link point=\"30.2673752,-97.7337487\"/><link point=\"30.2672879,-97.7337337\"/><link point=\"30.2671997,-97.7337287\"/><link point=\"30.2671116,-97.7337337\"/><link point=\"30.2670243,-97.7337487\"/><link point=\"30.2669386,-97.7337735\"/><link point=\"30.2668556,-97.7338079\"/><link point=\"30.2667758,-97.7338516\"/><link point=\"30.2667001,-97.7339042\"/><link point=\"30.2666292,-97.7339650\"/><link point=\"30.2665638,-97.7340337\"/><link point=\"30.2665045,-97.7341094\"/><link point=\"30.2664520,-97.7341915\"/><link point=\"30.2664066,-97.7342791\"/><link point=\"30.2663689,-97.7343715\"/><link point=\"30.2663391,-97.7344677\"/><link point=\"30.2663177,-97.7345668\"/><link point=\"30.2663047,-97.7346679\"/><link point=\"30.2663004,-97.7347700\"/><link point=\"30.2663004,-97.7347700\"/><link point=\"30.2663007,-97.7431000\"/><link point=\"30.2663050,-97.7432021\"/><link point=\"30.2663180,-97.7433032\"/><link point=\"30.2663394,-97.7434023\"/><link point=\"30.2663691,-97.7434985\"/><link point=\"30.2664069,-97.7435909\"/><link point=\"30.2664523,-97.7436785\"/><link point=\"30.2665048,-97.7437606\"/><link point=\"30.2665641,-97.7438363\"/><link point=\"30.2666295,-97.7439049\"/><link point=\"30.2667004,-97.7439658\"/><link point=\"30.2667761,-97.7440183\"/><link point=\"30.2668559,-97.7440620\"/><link point=\"30.2669390,-97.7440964\"/><link point=\"30.2670246,-97.7441213\"/><link point=\"30.2671119,-97.7441363\"/><link point=\"30.2672000,-97.7441413\"/><link point=\"30.2672882,-97.7441362\"/><link point=\"30.2673755,-97.7441212\"/><link point=\"30.2674611,-97.7440964\"/><link point=\"30.2675442,-97.7440620\"/><link point=\"30.2676240,-97.7440183\"/><link point=\"30.2676997,-97.7439658\"/><link point=\"30.2677705,-97.7439049\"/><link point=\"30.2678359,-97.7438363\"/><link point=\"30.2678952,-97.7437605\"/><link point=\"30.2679478,-97.7436785\"/><link point=\"30.2679931,-97.7435908\"/><link point=\"30.2680309,-97.7434984\"/><link point=\"30.2680606,-97.7434022\"/><link point=\"30.2680820,-97.7433031\"/><link point=\"30.2680950,-97.7432020\"/><link point=\"30.2680993,-97.7431000\"/><link point=\"30.2680993,-97.7431000\"/><strokeColor value=\"-256\"/><strokeWeight value=\"3.0\"/><fillColor value=\"1090518784\"/><labels_on value=\"true\"/>",
+    "callsign": "Buffer 1",
+    "endpoint": "",
+    "lat": 30.2671999,
+    "lon": -97.738935
+   },
+   {
+    "mode": "v1",
+    "uid": "ONEMIND-e2e-ping",
+    "type": "t-x-c-t",
+    "xmlDetail": "",
+    "callsign": "",
+    "endpoint": "",
+    "lat": 0.0,
+    "lon": 0.0
+   }
+  ],
+  "peer_log": [
+   "takp-q"
+  ]
+ },
+ {
+  "part": "C2-xml-channel",
+  "client": [
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "start",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "ev": "cot",
+    "kind": "contact",
+    "mode": 0,
+    "type": "a-f-G-U-C",
+    "uid": "ANDROID-peer"
+   },
+   {
+    "ev": "cot",
+    "from": "BRAVO",
+    "kind": "chat",
+    "mode": 0,
+    "text": "status?",
+    "type": "b-t-f",
+    "uid": "GeoChat.ANDROID-peer.ONEMIND-e2e.623b0b35abfd"
+   },
+   {
+    "all_contacts": 1,
+    "chats": [
+     {
+      "conversation": "ANDROID-peer",
+      "outgoing": false,
+      "text": "status?"
+     }
+    ],
+    "connects": 1,
+    "declined": 0,
+    "ev": "final",
+    "events_in": 2,
+    "events_out": 1,
+    "last_error": "",
+    "mode": 0,
+    "negotiated_v1": 0,
+    "pings_out": 0,
+    "server_version": "",
+    "visible_contacts": []
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "stop",
+    "state": 4
+   }
+  ],
+  "peer_log": []
+ },
+ {
+  "part": "C3-rogue-cert",
+  "client": [
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "start",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": true,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connected",
+    "state": 2
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connection closed",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "all_contacts": 0,
+    "chats": [],
+    "connects": 14,
+    "declined": 0,
+    "ev": "final",
+    "events_in": 0,
+    "events_out": 14,
+    "last_error": "connection closed",
+    "mode": 0,
+    "negotiated_v1": 0,
+    "pings_out": 0,
+    "server_version": "",
+    "visible_contacts": []
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "takserver-test",
+    "reason": "stop",
+    "state": 4
+   }
+  ]
+ },
+ {
+  "part": "C4-bad-server",
+  "client": [
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "start",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "TLS handshake: error:0A000086:SSL routines::certificate verify failed (verify: unable to get local issuer certificate)",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "TLS handshake: error:0A000086:SSL routines::certificate verify failed (verify: unable to get local issuer certificate)",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "TLS handshake: error:0A000086:SSL routines::certificate verify failed (verify: unable to get local issuer certificate)",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "TLS handshake: error:0A000086:SSL routines::certificate verify failed (verify: unable to get local issuer certificate)",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "TLS handshake: error:0A000086:SSL routines::certificate verify failed (verify: unable to get local issuer certificate)",
+    "state": 3
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "connecting",
+    "state": 1
+   },
+   {
+    "all_contacts": 0,
+    "chats": [],
+    "connects": 0,
+    "declined": 0,
+    "ev": "final",
+    "events_in": 0,
+    "events_out": 0,
+    "last_error": "TLS handshake: error:0A000086:SSL routines::certificate verify failed (verify: unable to get local issuer certificate)",
+    "mode": 0,
+    "negotiated_v1": 0,
+    "pings_out": 0,
+    "server_version": "",
+    "visible_contacts": []
+   },
+   {
+    "connected": false,
+    "ev": "state",
+    "peer_cn": "",
+    "reason": "stop",
+    "state": 4
+   }
+  ]
+ }
+]

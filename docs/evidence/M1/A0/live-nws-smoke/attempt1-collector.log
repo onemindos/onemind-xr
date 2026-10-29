@@ -1,0 +1,6 @@
+{"time":"2026-10-29T06:57:26.730615-04:00","level":"INFO","msg":"omos-ingest up","app":"omos-ingest","instance":"live","version":"dev","sources":1}
+{"time":"2026-10-29T06:57:26.731351-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"live","source":"nws-alerts"}
+{"time":"2026-10-29T06:57:26.731394-04:00","level":"INFO","msg":"source start","app":"omos-ingest","instance":"live","source":"nws-alerts","kind":"rest_poll","url":"https://api.weather.gov/alerts/active?…"}
+{"time":"2026-10-29T06:57:26.914867-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"live","source":"nws-alerts","reason":"http_4xx","err":"http 400"}
+{"time":"2026-10-29T06:57:46.851439-04:00","level":"INFO","msg":"omos-ingest stopped","app":"omos-ingest","instance":"live"}
+{"time":"2026-10-29T06:57:46.851558-04:00","level":"WARN","msg":"nats disconnected","app":"omos-ingest","instance":"live","err":"<nil>"}

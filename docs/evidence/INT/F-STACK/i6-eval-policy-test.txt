@@ -1,0 +1,2 @@
+?   	github.com/onemindos/omos/services/policy/cmd/policy	[no test files]
+ok  	github.com/onemindos/omos/services/policy/internal/policy	30.709s

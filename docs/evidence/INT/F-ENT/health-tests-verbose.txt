@@ -1,0 +1,34 @@
+=== RUN   TestConnectionOfflineWhenStale
+--- PASS: TestConnectionOfflineWhenStale (0.00s)
+=== RUN   TestConnectionNotRestoredByCotSource
+--- PASS: TestConnectionNotRestoredByCotSource (0.00s)
+=== RUN   TestFleetHealthOverall
+=== RUN   TestFleetHealthOverall/online_full
+=== RUN   TestFleetHealthOverall/battery_above_warning
+=== RUN   TestFleetHealthOverall/battery_at_warning
+=== RUN   TestFleetHealthOverall/battery_above_failed
+=== RUN   TestFleetHealthOverall/battery_at_failed
+=== RUN   TestFleetHealthOverall/battery_empty
+=== RUN   TestFleetHealthOverall/degraded_link
+=== RUN   TestFleetHealthOverall/offline_link
+=== RUN   TestFleetHealthOverall/offline_beats_low_battery_warning
+=== RUN   TestFleetHealthOverall/connection_only
+--- PASS: TestFleetHealthOverall (0.00s)
+    --- PASS: TestFleetHealthOverall/online_full (0.00s)
+    --- PASS: TestFleetHealthOverall/battery_above_warning (0.00s)
+    --- PASS: TestFleetHealthOverall/battery_at_warning (0.00s)
+    --- PASS: TestFleetHealthOverall/battery_above_failed (0.00s)
+    --- PASS: TestFleetHealthOverall/battery_at_failed (0.00s)
+    --- PASS: TestFleetHealthOverall/battery_empty (0.00s)
+    --- PASS: TestFleetHealthOverall/degraded_link (0.00s)
+    --- PASS: TestFleetHealthOverall/offline_link (0.00s)
+    --- PASS: TestFleetHealthOverall/offline_beats_low_battery_warning (0.00s)
+    --- PASS: TestFleetHealthOverall/connection_only (0.00s)
+=== RUN   TestFleetHealthOverallStaleness
+--- PASS: TestFleetHealthOverallStaleness (0.00s)
+=== RUN   TestFleetOverallMapping
+--- PASS: TestFleetOverallMapping (0.00s)
+=== RUN   TestNoOverallWithoutFleetSource
+--- PASS: TestNoOverallWithoutFleetSource (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/engine	0.268s

@@ -1,0 +1,110 @@
+# 2026-10-29T10:45:50Z go version go1.27.3 darwin/arm64
+## gofmt -l
+## go vet ./... && go vet -tags e2e ./...
+vet: ok
+## go test -race -count=1 -v ./...
+=== RUN   TestTelemetryEnvelopes
+--- PASS: TestTelemetryEnvelopes (0.33s)
+=== RUN   TestHAEPrefersAutopilotEllipsoid
+--- PASS: TestHAEPrefersAutopilotEllipsoid (0.45s)
+=== RUN   TestApprovedCommandsReachVehicle
+--- PASS: TestApprovedCommandsReachVehicle (0.25s)
+=== RUN   TestRefusedCommandsNeverReachVehicle
+--- PASS: TestRefusedCommandsNeverReachVehicle (0.25s)
+=== RUN   TestVehicleRejectAndNoAck
+--- PASS: TestVehicleRejectAndNoAck (0.82s)
+=== RUN   TestOfflineVehicleRefusedButEstopSent
+--- PASS: TestOfflineVehicleRefusedButEstopSent (0.33s)
+=== RUN   TestDryRunNotSent
+--- PASS: TestDryRunNotSent (0.22s)
+=== RUN   TestConfigRefusesNonSim
+--- PASS: TestConfigRefusesNonSim (0.00s)
+=== RUN   TestRoundDropsNegativeZero
+--- PASS: TestRoundDropsNegativeZero (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink	4.686s
+=== RUN   TestNewVerifierRefusesNonSim
+--- PASS: TestNewVerifierRefusesNonSim (0.00s)
+=== RUN   TestVerify
+=== RUN   TestVerify/goto_approved
+=== RUN   TestVerify/arm_two_humans
+=== RUN   TestVerify/estop
+=== RUN   TestVerify/land_with_point
+=== RUN   TestVerify/takeoff
+=== RUN   TestVerify/arm_one_human
+=== RUN   TestVerify/arm_at_A3_level
+=== RUN   TestVerify/pending_approval
+=== RUN   TestVerify/no_approvals
+=== RUN   TestVerify/agent_approver
+=== RUN   TestVerify/same_human_twice
+=== RUN   TestVerify/not_simulated
+=== RUN   TestVerify/non-sim_subject
+=== RUN   TestVerify/other_sim_asset
+=== RUN   TestVerify/unknown_verb
+=== RUN   TestVerify/wrong_source
+=== RUN   TestVerify/unsigned
+=== RUN   TestVerify/wrong_key
+=== RUN   TestVerify/unknown_kid
+=== RUN   TestVerify/expired
+=== RUN   TestVerify/ttl_too_long
+=== RUN   TestVerify/future_ts
+=== RUN   TestVerify/hash_mismatch
+=== RUN   TestVerify/bad_params
+=== RUN   TestVerify/extra_param
+=== RUN   TestVerify/policy_denied
+=== RUN   TestVerify/tampered_after_signing
+--- PASS: TestVerify (0.07s)
+    --- PASS: TestVerify/goto_approved (0.01s)
+    --- PASS: TestVerify/arm_two_humans (0.00s)
+    --- PASS: TestVerify/estop (0.00s)
+    --- PASS: TestVerify/land_with_point (0.00s)
+    --- PASS: TestVerify/takeoff (0.00s)
+    --- PASS: TestVerify/arm_one_human (0.00s)
+    --- PASS: TestVerify/arm_at_A3_level (0.00s)
+    --- PASS: TestVerify/pending_approval (0.00s)
+    --- PASS: TestVerify/no_approvals (0.00s)
+    --- PASS: TestVerify/agent_approver (0.00s)
+    --- PASS: TestVerify/same_human_twice (0.00s)
+    --- PASS: TestVerify/not_simulated (0.00s)
+    --- PASS: TestVerify/non-sim_subject (0.00s)
+    --- PASS: TestVerify/other_sim_asset (0.00s)
+    --- PASS: TestVerify/unknown_verb (0.00s)
+    --- PASS: TestVerify/wrong_source (0.00s)
+    --- PASS: TestVerify/unsigned (0.00s)
+    --- PASS: TestVerify/wrong_key (0.00s)
+    --- PASS: TestVerify/unknown_kid (0.00s)
+    --- PASS: TestVerify/expired (0.00s)
+    --- PASS: TestVerify/ttl_too_long (0.00s)
+    --- PASS: TestVerify/future_ts (0.00s)
+    --- PASS: TestVerify/hash_mismatch (0.00s)
+    --- PASS: TestVerify/bad_params (0.00s)
+    --- PASS: TestVerify/extra_param (0.00s)
+    --- PASS: TestVerify/policy_denied (0.00s)
+    --- PASS: TestVerify/tampered_after_signing (0.00s)
+=== RUN   TestReplayRefused
+--- PASS: TestReplayRefused (0.01s)
+=== RUN   TestSigOptionalWhenNotRequired
+--- PASS: TestSigOptionalWhenNotRequired (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/command	1.556s
+?   	github.com/onemindos/omos-bridge/bridges/mavlink/internal/commandtest	[no test files]
+=== RUN   TestCheck
+--- PASS: TestCheck (0.00s)
+=== RUN   TestFailClosed
+--- PASS: TestFailClosed (0.00s)
+=== RUN   TestParseRejects
+--- PASS: TestParseRejects (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/fence	2.248s
+=== RUN   TestUndulationKnownPoints
+--- PASS: TestUndulationKnownPoints (0.11s)
+=== RUN   TestRoundTripAndWrap
+--- PASS: TestRoundTripAndWrap (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/geoid	1.360s
+=== RUN   TestCanonicalize
+--- PASS: TestCanonicalize (0.00s)
+=== RUN   TestCanonicalizeErrors
+--- PASS: TestCanonicalizeErrors (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/jcs	1.686s

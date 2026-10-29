@@ -1,0 +1,15 @@
+10:47:48 +000s build
+10:47:51 +003s nats-server up on 34322 (pid 49295)
+10:47:52 +004s streams INTEL, SYS, TEL created (dupe window 2m, max-bytes 1GB)
+10:47:54 +006s stub (50 alerts/s, 50 sse/s) and collectors a, b started
+10:48:08 +020s CHAOS 1: kill -9 nats-server
+10:48:23 +035s nats-server restarted (pid 49952)
+10:48:38 +050s CHAOS 2: upstream outage (503) on
+10:48:48 +060s leader during outage: b
+10:48:53 +065s upstream outage off
+10:49:08 +080s CHAOS 3: kill -9 leading collector b
+10:49:23 +095s collector b restarted; new leader: a
+10:49:38 +110s CHAOS 4: malformed upstream records on
+10:49:48 +120s malformed off
+10:50:18 +150s collect metrics and verify
+10:50:18 +150s verify exit 0 (PASS)

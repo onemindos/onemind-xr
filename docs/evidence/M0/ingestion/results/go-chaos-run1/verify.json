@@ -1,0 +1,233 @@
+{
+ "label": "go-chaos",
+ "sources": {
+  "usgs": {
+   "stored": 61,
+   "distinctMsgIds": 61,
+   "duplicates": 0,
+   "emitted": 53,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    60
+   ],
+   "storedSeqGaps": []
+  },
+  "nws": {
+   "stored": 76,
+   "distinctMsgIds": 76,
+   "duplicates": 0,
+   "emitted": 66,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    75
+   ],
+   "storedSeqGaps": []
+  },
+  "eonet": {
+   "stored": 151,
+   "distinctMsgIds": 151,
+   "duplicates": 0,
+   "emitted": 131,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    150
+   ],
+   "storedSeqGaps": []
+  },
+  "ais": {
+   "stored": 9507,
+   "distinctMsgIds": 9507,
+   "duplicates": 0,
+   "emitted": 8068,
+   "missingVsEmitted": 366,
+   "missingSample": [
+    "366000000-1793263106802",
+    "366000000-1793263111109",
+    "366000001-1793263106823",
+    "366000001-1793263111131",
+    "366000002-1793263106845"
+   ]
+  },
+  "cap": {
+   "stored": 70,
+   "distinctMsgIds": 70,
+   "duplicates": 0,
+   "emitted": 58,
+   "missingVsEmitted": 2,
+   "missingSample": [
+    "c17",
+    "c35"
+   ],
+   "storedSeqRange": [
+    1,
+    72
+   ],
+   "storedSeqGaps": [
+    "17..17",
+    "35..35"
+   ]
+  },
+  "mqtt": {
+   "stored": 273,
+   "distinctMsgIds": 273,
+   "duplicates": 0,
+   "emitted": 235,
+   "missingVsEmitted": 1,
+   "missingSample": [
+    "ws1-1"
+   ],
+   "storedSeqRange": [
+    2,
+    274
+   ],
+   "storedSeqGaps": []
+  },
+  "celestrak": {
+   "stored": 25,
+   "distinctMsgIds": 25,
+   "duplicates": 0,
+   "emitted": 25
+  },
+  "gdacs": {
+   "stored": 31,
+   "distinctMsgIds": 31,
+   "duplicates": 0,
+   "emitted": 27,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    30
+   ],
+   "storedSeqGaps": []
+  },
+  "outages": {
+   "stored": 20,
+   "distinctMsgIds": 20,
+   "duplicates": 0,
+   "emitted": 17,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  }
+ },
+ "rejects": [
+  {
+   "source": "usgs",
+   "reason": "jsonschema validation failed with 'file:///Users/danielcarku/Desktop/work/.run/ingest/s.js",
+   "count": 2
+  },
+  {
+   "source": "ais",
+   "reason": "invalid character 'n' looking for beginning of object key string",
+   "count": 1
+  }
+ ],
+ "latestStatus": {
+  "ais": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:38.504514-04:00",
+   "ageSec": 0.01872025,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "cap": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:38.240073-04:00",
+   "ageSec": 0.283161959,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "celestrak": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:18.531279-04:00",
+   "ageSec": 19.992004833,
+   "count": 0,
+   "lastError": null,
+   "stale": false
+  },
+  "eonet": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:37.430622-04:00",
+   "ageSec": 1.092615,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "gdacs": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:28.528328-04:00",
+   "ageSec": 9.994927917,
+   "count": 10,
+   "lastError": null,
+   "stale": false
+  },
+  "mediamtx": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:28.524033-04:00",
+   "ageSec": 9.999224709,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "mqtt": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:38.092376-04:00",
+   "ageSec": 0.430860583,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "nws": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:37.47771-04:00",
+   "ageSec": 1.045525792,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "outages": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:33.527591-04:00",
+   "ageSec": 4.995652458,
+   "count": 5,
+   "lastError": null,
+   "stale": false
+  },
+  "tiles": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:18.524462-04:00",
+   "ageSec": 19.99881875,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "usgs": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:42:33.529633-04:00",
+   "ageSec": 4.993615417,
+   "count": 20,
+   "lastError": null,
+   "stale": false
+  }
+ },
+ "videoRegistryKV": {
+  "sim-cam1": {
+   "engine": "go",
+   "path": "sim-cam1",
+   "ready": true,
+   "rtsp": "rtsp://127.0.0.1:38554/sim-cam1",
+   "seenAt": "2026-10-29T04:42:38.523686-04:00",
+   "tracks": [
+    "H264"
+   ]
+  }
+ }
+}

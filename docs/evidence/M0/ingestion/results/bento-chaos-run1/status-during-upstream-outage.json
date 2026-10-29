@@ -1,0 +1,90 @@
+{
+ "ais": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:34:09.730331-04:00",
+  "ageSec": 19.85,
+  "count": 1,
+  "lastError": null,
+  "stale": true
+ },
+ "cap": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:34:06.8966-04:00",
+  "ageSec": 22.684,
+  "count": 1,
+  "lastError": null,
+  "stale": false
+ },
+ "celestrak": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:33:19.578494-04:00",
+  "ageSec": 70.002,
+  "count": 0,
+  "lastError": null,
+  "stale": false
+ },
+ "eonet": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:34:08.711283-04:00",
+  "ageSec": 20.869,
+  "count": 1,
+  "lastError": null,
+  "stale": false
+ },
+ "gdacs": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:33:59.569452-04:00",
+  "ageSec": 30.011,
+  "count": 10,
+  "lastError": null,
+  "stale": false
+ },
+ "mediamtx": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:34:19.581761-04:00",
+  "ageSec": 9.999,
+  "count": 1,
+  "lastError": null,
+  "stale": false
+ },
+ "mqtt": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:34:09.073747-04:00",
+  "ageSec": 20.507,
+  "count": 1,
+  "lastError": null,
+  "stale": true
+ },
+ "nws": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:34:10.605588-04:00",
+  "ageSec": 18.975,
+  "count": 1,
+  "lastError": null,
+  "stale": false
+ },
+ "outages": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:33:49.569839-04:00",
+  "ageSec": 40.011,
+  "count": 5,
+  "lastError": null,
+  "stale": false
+ },
+ "tiles": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:33:19.573286-04:00",
+  "ageSec": 70.007,
+  "count": 1,
+  "lastError": null,
+  "stale": false
+ },
+ "usgs": {
+  "engine": "bento",
+  "fetchedAt": "2026-10-29T04:34:09.587288-04:00",
+  "ageSec": 19.993,
+  "count": 0,
+  "lastError": null,
+  "stale": false
+ }
+}

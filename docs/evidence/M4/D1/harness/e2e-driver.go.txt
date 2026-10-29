@@ -1,0 +1,398 @@
+// e2e-driver: end-to-end evidence run for D1/D6 on a disposable nats-server. It stands in for
+// the policy service (signs zone commands with a test key), publishes an aircraft observation
+// and feed status, and checks the facts on the bus. Not part of the PR.
+package main
+
+import (
+	"context"
+	"crypto/ed25519"
+	"crypto/rand"
+	"crypto/x509"
+	"encoding/base64"
+	"encoding/json"
+	"encoding/pem"
+	"fmt"
+	"os"
+	"strings"
+	"time"
+
+	"github.com/nats-io/nats.go"
+	"github.com/nats-io/nats.go/jetstream"
+
+	"github.com/onemindos/omos/services/geofence/internal/sig"
+)
+
+const lat0, lon0 = 30.2672, -97.7431
+
+var (
+	nc  *nats.Conn
+	js  jetstream.JetStream
+	ctx = context.Background()
+	dir = os.Getenv("E2E_DIR")
+)
+
+func logf(f string, a ...any) {
+	fmt.Printf("%s  %s\n", time.Now().UTC().Format("15:04:05.000"), fmt.Sprintf(f, a...))
+}
+
+func must(err error) {
+	if err != nil {
+		logf("FATAL %v", err)
+		os.Exit(1)
+	}
+}
+
+func main() {
+	var err error
+	nc, err = nats.Connect(os.Getenv("NATS_URL"))
+	must(err)
+	defer nc.Close()
+	js, _ = jetstream.New(nc)
+	switch os.Args[1] {
+	case "setup":
+		setup()
+	case "aoi":
+		aoi()
+	case "keepin":
+		keepin()
+	case "after-restart":
+		afterRestart()
+	case "feed":
+		feed()
+	case "rogue":
+		rogue()
+	case "verify":
+		verify()
+	}
+}
+
+func setup() {
+	for _, c := range []jetstream.StreamConfig{
+		{Name: "ENT", Subjects: []string{"ent.*.*.state"}, MaxMsgsPerSubject: 1, AllowDirect: true, AllowMsgTTL: true, SubjectDeleteMarkerTTL: 15 * time.Minute, Duplicates: 2 * time.Minute},
+		{Name: "CMD", Subjects: []string{"cmd.>"}, Duplicates: 2 * time.Minute},
+		{Name: "MISSION", Subjects: []string{"evt.mission.>", "evt.map.>"}, Duplicates: 2 * time.Minute},
+		{Name: "EVT", Subjects: []string{"evt.so.>", "evt.drone.>", "evt.robot.>"}, Duplicates: 2 * time.Minute},
+		{Name: "TEL", Subjects: []string{"tel.fleet.>", "tel.feed.>"}, Duplicates: 2 * time.Minute},
+		{Name: "COT", Subjects: []string{"tak.cot.>"}, Duplicates: 2 * time.Minute},
+		{Name: "WORLD", Subjects: []string{"evt.world.>"}, Duplicates: 2 * time.Minute},
+		{Name: "SYS", Subjects: []string{"evt.sys.>"}, Duplicates: 2 * time.Minute},
+	} {
+		_, err := js.CreateStream(ctx, c)
+		must(err)
+	}
+	for _, b := range []string{"geofences", "mission-state", "entity-correlation"} {
+		_, err := js.CreateKeyValue(ctx, jetstream.KeyValueConfig{Bucket: b, History: 10})
+		must(err)
+	}
+	pub, priv, _ := ed25519.GenerateKey(rand.Reader)
+	der, _ := x509.MarshalPKIXPublicKey(pub)
+	must(os.MkdirAll(dir+"/keys", 0o700))
+	must(os.WriteFile(dir+"/keys/policy-e2e.pem", pem.EncodeToMemory(&pem.Block{Type: "PUBLIC KEY", Bytes: der}), 0o600))
+	pk, _ := x509.MarshalPKCS8PrivateKey(priv)
+	must(os.WriteFile(dir+"/policy-e2e.key", pem.EncodeToMemory(&pem.Block{Type: "PRIVATE KEY", Bytes: pk}), 0o600))
+	must(os.WriteFile(dir+"/policy-e2e.pub.b64", []byte(base64.StdEncoding.EncodeToString(pub)), 0o600))
+	logf("streams ENT CMD MISSION EVT TEL COT WORLD SYS and KV geofences mission-state entity-correlation created; test policy key written")
+}
+
+func priv() ed25519.PrivateKey {
+	b, err := os.ReadFile(dir + "/policy-e2e.key")
+	must(err)
+	blk, _ := pem.Decode(b)
+	k, err := x509.ParsePKCS8PrivateKey(blk.Bytes)
+	must(err)
+	return k.(ed25519.PrivateKey)
+}
+
+func uuid4() string {
+	var b [16]byte
+	_, _ = rand.Read(b[:])
+	b[6] = (b[6] & 0x0f) | 0x40
+	b[8] = (b[8] & 0x3f) | 0x80
+	return fmt.Sprintf("%x-%x-%x-%x-%x", b[0:4], b[4:6], b[6:8], b[8:10], b[10:16])
+}
+
+// command publishes a zone command as the policy service would after one human approval.
+func command(zoneID, verb string, data any, signed bool) string {
+	subj := "cmd.map.geofence." + zoneID + "." + verb
+	id := uuid4()
+	now := time.Now()
+	env := map[string]any{"v": 1, "id": id, "ts": now.UTC().Format(time.RFC3339Nano), "cmd": subj, "source": "omos-policy",
+		"subject": subj, "data": data, "action_id": "act-" + id[:8], "expires_at": now.Add(30 * time.Second).UTC().Format(time.RFC3339Nano),
+		"simulated": true, "policy": map[string]any{"decision_id": "dec-" + id[:8], "allowed": true},
+		"approval": map[string]any{"required": true, "status": "approved", "approver": "user:zeus", "level": "A2",
+			"approvals": []map[string]any{{"by": "user:zeus"}}}}
+	b, _ := json.Marshal(env)
+	env = map[string]any{}
+	_ = json.Unmarshal(b, &env)
+	if signed {
+		must(sig.Sign(priv(), "policy-e2e", env))
+	} else {
+		env["source"] = "agent.hermes"
+	}
+	b, _ = json.Marshal(env)
+	_, err := js.Publish(ctx, subj, b, jetstream.WithMsgID(id))
+	must(err)
+	logf("PUBLISH %s (signed=%v, command id %s)", subj, signed, id)
+	return id
+}
+
+type fact struct {
+	subj string
+	env  struct {
+		Causation string          `json:"causation"`
+		Data      json.RawMessage `json:"data"`
+	}
+}
+
+func readAll(stream, filter string) []fact {
+	oc, err := js.OrderedConsumer(ctx, stream, jetstream.OrderedConsumerConfig{FilterSubjects: []string{filter}})
+	must(err)
+	var out []fact
+	for {
+		b, err := oc.Fetch(500, jetstream.FetchMaxWait(500*time.Millisecond))
+		must(err)
+		n := 0
+		for m := range b.Messages() {
+			n++
+			f := fact{subj: m.Subject()}
+			_ = json.Unmarshal(m.Data(), &f.env)
+			out = append(out, f)
+		}
+		if n == 0 {
+			return out
+		}
+	}
+}
+
+func waitResult(zoneID, cmdID string) fact {
+	for i := 0; i < 100; i++ {
+		for _, f := range readAll("MISSION", "evt.map.geofence.*") {
+			if f.env.Causation == cmdID {
+				logf("RESULT %s %s", f.subj, f.env.Data)
+				return f
+			}
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
+	must(fmt.Errorf("no result for %s", cmdID))
+	return fact{}
+}
+
+func aircraft(stop <-chan struct{}) {
+	t := time.NewTicker(2 * time.Second)
+	defer t.Stop()
+	for {
+		b, _ := json.Marshal(map[string]any{"uid": "icao-e2e001", "type": "air.ga", "lat": 30.2750, "lon": -97.7350, "hae": 450,
+			"course": 90, "speed": 40, "callsign": "N123OM", "stale": 30, "t": time.Now().UnixMilli(), "meta": map[string]any{"icao": "E2E001"}})
+		_, _ = js.Publish(ctx, "evt.world.air.icao-e2e001", b)
+		select {
+		case <-stop:
+			return
+		case <-t.C:
+		}
+	}
+}
+
+func watchCoT(d time.Duration) map[string]int {
+	seen := map[string]int{}
+	ch := make(chan *nats.Msg, 1000)
+	sub, err := nc.ChanSubscribe("tak.cot.inject", ch)
+	must(err)
+	defer func() { _ = sub.Unsubscribe() }()
+	end := time.After(d)
+	for {
+		select {
+		case m := <-ch:
+			s := string(m.Data)
+			if i := strings.Index(s, `uid="`); i >= 0 {
+				u := s[i+5:]
+				u = u[:strings.Index(u, `"`)]
+				seen[u]++
+			}
+		case <-end:
+			return seen
+		}
+	}
+}
+
+// aoi: drawing an AOI changes what TAK receives (FEATURES D1 acceptance, A6 on the local stack).
+func aoi() {
+	for i := 0; ; i++ {
+		if _, err := js.Stream(ctx, "ENT"); err == nil {
+			if m, err := js.Conn().Request("$JS.API.DIRECT.GET.ENT.ent.drone.sim-x1.state", nil, time.Second); err == nil && len(m.Data) > 0 && m.Header.Get("Status") == "" {
+				var e struct {
+					Lat, Lon float64
+					Seq      int
+				}
+				_ = json.Unmarshal(m.Data, &e)
+				logf("CHAIN OK: MAVLink sim -> bridge -> tel.fleet -> entity service -> ent.drone.sim-x1.state (seq %d, %.5f,%.5f)", e.Seq, e.Lat, e.Lon)
+				break
+			}
+		}
+		if i > 120 {
+			must(fmt.Errorf("sim-x1 never reached ENT"))
+		}
+		time.Sleep(500 * time.Millisecond)
+	}
+	stop := make(chan struct{})
+	go aircraft(stop)
+	time.Sleep(4 * time.Second)
+	before := watchCoT(12 * time.Second)
+	logf("TAK (tak.cot.inject) before the AOI, 12 s: %v", before)
+	box := [][]float64{{-97.7380, 30.2730}, {-97.7320, 30.2730}, {-97.7320, 30.2770}, {-97.7380, 30.2770}, {-97.7380, 30.2730}}
+	id := command("north-aoi", "create", map[string]any{"name": "North field AOI",
+		"geo": map[string]any{"shape": "polygon", "kind": "aoi", "coords": map[string]any{"type": "Polygon", "coordinates": [][][]float64{box}}}}, true)
+	waitResult("north-aoi", id)
+	after := watchCoT(12 * time.Second)
+	close(stop)
+	logf("TAK (tak.cot.inject) after the AOI, 12 s: %v", after)
+	const uid = "OM.aircraft.icao-e2e001" // cot-projection.md uid rule
+	if before[uid] == 0 && after[uid] > 0 {
+		logf("PASS D1: drawing the AOI made TAK receive %s (0 before, %d after)", uid, after[uid])
+	} else {
+		logf("FAIL D1: %s before=%d after=%d", uid, before[uid], after[uid])
+		os.Exit(1)
+	}
+}
+
+func waitAlert(pred func(subj string, a map[string]any) bool, timeout time.Duration, what string) map[string]any {
+	end := time.Now().Add(timeout)
+	for time.Now().Before(end) {
+		for _, f := range readAll("EVT", "evt.so.alert.>") {
+			var a map[string]any
+			_ = json.Unmarshal(f.env.Data, &a)
+			if pred(f.subj, a) {
+				logf("ALERT %s %s", f.subj, f.env.Data)
+				return a
+			}
+		}
+		time.Sleep(250 * time.Millisecond)
+	}
+	logf("FAIL: no %s within %s", what, timeout)
+	os.Exit(1)
+	return nil
+}
+
+// keepin: a keep-in over the west part of sim-x1's 150 m orbit; the drone leaves it.
+func keepin() {
+	h := 0.003
+	ring := [][]float64{{lon0 - h, lat0 - h}, {lon0 + 0.0005, lat0 - h}, {lon0 + 0.0005, lat0 + h}, {lon0 - h, lat0 + h}, {lon0 - h, lat0 - h}}
+	id := command("home", "create", map[string]any{"name": "Home keep-in (west of the orbit centre + 48 m)",
+		"geo":        map[string]any{"shape": "polygon", "kind": "keep_in", "coords": map[string]any{"type": "Polygon", "coordinates": [][][]float64{ring}}},
+		"applies_to": []string{"sim-x1"}}, true)
+	waitResult("home", id)
+	waitAlert(func(s string, a map[string]any) bool {
+		return s == "evt.so.alert.raised" && a["alert_kind"] == "geofence" && a["reason"] == "left_keep_in"
+	}, 150*time.Second, "geofence alert")
+	for _, f := range readAll("MISSION", "evt.map.geofence.home.*") {
+		logf("MISSION %s %s", f.subj, f.env.Data)
+	}
+	logf("PASS D6: sim-x1 (MAVLink sim through bridge and entity service) left the keep-in and raised an alert")
+}
+
+func afterRestart() {
+	waitAlert(func(s string, a map[string]any) bool {
+		return s == "evt.so.alert.resolved" && a["alert_kind"] == "geofence" && a["reason"] == "returned"
+	}, 150*time.Second, "geofence alert resolution after restart")
+	waitAlert(func(s string, a map[string]any) bool {
+		return s == "evt.so.alert.raised" && a["alert_kind"] == "geofence" && a["seq"].(float64) >= 3
+	}, 150*time.Second, "second geofence alert after restart")
+	logf("PASS: after the restart the service kept the open alert, resolved it on re-entry and raised the next one")
+}
+
+func feed() {
+	pub := func(stale bool, lastErr any) {
+		b, _ := json.Marshal(map[string]any{"source": "e2e-nws", "kind": "rest_poll", "collector": "omos-ingest", "instance": "e2e",
+			"leader": true, "fetchedAt": time.Now().UTC().Format(time.RFC3339), "count": 12, "lastError": lastErr,
+			"staleAfterSec": 900, "stale": stale, "at": time.Now().UTC().Format(time.RFC3339)})
+		_, err := js.Publish(ctx, "tel.feed.e2e-nws.status", b)
+		must(err)
+		logf("PUBLISH tel.feed.e2e-nws.status stale=%v lastError=%v", stale, lastErr)
+	}
+	for i := 0; i < 3; i++ {
+		pub(false, nil)
+		time.Sleep(2 * time.Second)
+	}
+	pub(true, "HTTP 503 from api.weather.gov")
+	waitAlert(func(s string, a map[string]any) bool {
+		return s == "evt.so.alert.raised" && a["alert_kind"] == "feed_outage" && a["reason"] == "stale"
+	}, 10*time.Second, "stale feed alert")
+	pub(false, nil)
+	waitAlert(func(s string, a map[string]any) bool {
+		return s == "evt.so.alert.resolved" && a["alert_kind"] == "feed_outage"
+	}, 10*time.Second, "feed alert resolution")
+	logf("collector goes silent (FEED_SILENCE=20s)")
+	waitAlert(func(s string, a map[string]any) bool {
+		return s == "evt.so.alert.raised" && a["alert_kind"] == "feed_outage" && a["reason"] == "silent"
+	}, 40*time.Second, "silent feed alert")
+	logf("PASS D6: a stale feed and a silent feed each raised an alert")
+}
+
+func rogue() {
+	id := command("rogue", "create", map[string]any{"kind": "keep_out", "polygon": [][]float64{{-97.744, 30.267}, {-97.742, 30.267}, {-97.742, 30.268}}}, false)
+	f := waitResult("rogue", id)
+	if !strings.Contains(string(f.env.Data), `"code":"unsigned"`) {
+		logf("FAIL: unsigned command was not refused")
+		os.Exit(1)
+	}
+	if _, err := js.Conn().Request("$JS.API.DIRECT.GET.KV_geofences.$KV.geofences.rogue", nil, time.Second); err == nil {
+		// direct get on a missing key answers 404 in a header; check the KV instead
+	}
+	kv, _ := js.KeyValue(ctx, "geofences")
+	if _, err := kv.Get(ctx, "rogue"); err == nil {
+		logf("FAIL: rogue zone written")
+		os.Exit(1)
+	}
+	logf("PASS: a direct (unsigned) cmd.map.geofence publish, as Hermes or a client could send, was refused and wrote nothing")
+}
+
+// verify checks the invariants over the whole run: crossings alternate per (zone, entity),
+// and no alert is raised while it is already open (so the restart duplicated nothing).
+func verify() {
+	ok := true
+	last := map[string]string{}
+	n := 0
+	for _, f := range readAll("MISSION", "evt.map.geofence.*.*") {
+		p := strings.Split(f.subj, ".")
+		ev := p[4]
+		if ev != "enter" && ev != "exit" {
+			continue
+		}
+		n++
+		var c map[string]any
+		_ = json.Unmarshal(f.env.Data, &c)
+		k := p[3] + "|" + fmt.Sprint(c["entity_id"])
+		if last[k] == ev || (last[k] == "" && ev == "exit") {
+			logf("VIOLATION: %s %s after %q", k, ev, last[k])
+			ok = false
+		}
+		last[k] = ev
+	}
+	open := map[string]bool{}
+	na := 0
+	for _, f := range readAll("EVT", "evt.so.alert.>") {
+		na++
+		var a map[string]any
+		_ = json.Unmarshal(f.env.Data, &a)
+		id := fmt.Sprint(a["alert_id"])
+		switch f.subj {
+		case "evt.so.alert.raised":
+			if open[id] {
+				logf("VIOLATION: %s raised while open", id)
+				ok = false
+			}
+			open[id] = true
+		case "evt.so.alert.resolved":
+			if !open[id] {
+				logf("VIOLATION: %s resolved while not open", id)
+				ok = false
+			}
+			delete(open, id)
+		}
+	}
+	logf("verify: %d crossings, %d alert facts, open now %v", n, na, open)
+	if !ok {
+		os.Exit(1)
+	}
+	logf("PASS invariants: crossings alternate per (zone, entity); no alert raised twice while open (across the restart)")
+}

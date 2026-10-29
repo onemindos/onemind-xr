@@ -1,0 +1,18 @@
+0s 08:58:55Z start engine go
+45s 08:59:40Z NATS kill -9
+55s 08:59:50Z webhook responses while NATS down:
+1793264370.585 c12 200
+1793264373.595 c13 200
+1793264376.600 c14 200
+1793264379.603 c15 200
+70s 09:00:05Z NATS restart
+110s 09:00:45Z upstream down (503)
+130s 09:01:05Z status snapshot during upstream outage
+135s 09:01:10Z upstream ok
+160s 09:01:35Z collector kill -9
+190s 09:02:05Z collector restart
+220s 09:02:35Z upstream malformed
+235s 09:02:50Z upstream ok
+300s 09:03:55Z verify
+300s 09:03:55Z stop engine
+301s 09:03:56Z done

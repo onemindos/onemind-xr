@@ -1,0 +1,4 @@
+# go vet ./...  (2026-10-29T11:01:38Z, go version go1.27.3 darwin/arm64)
+vet: ok
+# gofmt -l .
+gofmt: clean

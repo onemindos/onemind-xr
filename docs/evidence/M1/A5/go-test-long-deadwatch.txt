@@ -1,0 +1,6 @@
+# A5_LONG=1 go test -count=1 -v -run TestA5DeadWatch (contract timers: heartbeat 10s, dead watch 30s, lease 60s) 2026-10-29T12:07:17Z
+=== RUN   TestA5DeadWatch
+    acceptance_test.go:828: service killed; client gave up the watch 20.07s after the last batch (dead time 30s): [dead watch: no responders to the renew]
+--- PASS: TestA5DeadWatch (31.20s)
+PASS
+ok  	github.com/onemindos/omos/services/layer/internal/layer	31.544s

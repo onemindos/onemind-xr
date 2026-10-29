@@ -1,0 +1,6 @@
+PR #564 checks after 1566f558 (2026-10-29T13:57:20Z)
+Helm render check	pass	45s	https://github.com/onemindos/omos/actions/runs/40886041285/job/123489900112	
+Kubernetes manifest schema (kubeconform)	pass	7s	https://github.com/onemindos/omos/actions/runs/40886041285/job/123489899628	
+Lint & Validate	pass	24s	https://github.com/onemindos/omos/actions/runs/40886041285/job/123489900323	
+Secret scan (gitleaks)	pass	8s	https://github.com/onemindos/omos/actions/runs/40886041285/job/123489900269	
+test	pass	32s	https://github.com/onemindos/omos/actions/runs/40886041280/job/123489899678	

@@ -1,0 +1,17 @@
+HTTP/2 200 
+server: nginx/1.28.3
+content-type: application/geo+json
+etag: W/"62433b8f1e867c6a4cb3b1dd36e50ee3:dtagent10337260504112723F6xZ:dtagent10337260504112723F6xZ"
+access-control-allow-origin: *
+access-control-expose-headers: X-Correlation-Id, X-Request-Id, X-Server-Id
+x-request-id: 01a18734-d924-7e1e-8291-0021fc485f52
+x-correlation-id: 13ba5533
+x-server-id: vm-cprk-api-ops-app4.ncep.noaa.gov
+server-timing: dtTrId;desc="358766c658ee251741cef5446b596cd1", dtSInfo;desc="0"
+cache-control: public, max-age=5, s-maxage=5
+expires: Thu, 29 Oct 2026 10:29:15 GMT
+date: Thu, 29 Oct 2026 10:29:10 GMT
+x-edge-request-id: 6f07366
+vary: Accept,Feature-Flags,Accept-Language
+strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+

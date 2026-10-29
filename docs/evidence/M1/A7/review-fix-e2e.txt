@@ -1,0 +1,31 @@
+# A7 e2e after review fixes (2026-10-29T11:00:36Z)
+gateway a7e2e: NATS nats://127.0.0.1:63104, SA ('239.2.3.1', 26969), chat ('224.10.10.1', 27012), direct :63124, getfile :63125
+[PASS] 1 takproto v1 SA on the mesh appears on tak.cot.mesh.rx -- {"Nats-Msg-Id": "cot-667b14ef7cf5625506db1eca152dae8a", "Tak-Delivery": "mesh", "Tak-From": "127.0.0.1:55507", "Tak-Gateway": "a7e2e", "Tak-Proto": "1"}
+[PASS] 1b XML on the bus keeps typed and untyped detail (__group, uid Droid, contact) -- b'<event version="2.0" uid="ANDROID-e2edc71ba10" type="a-f-G-U-C" how="h-e" time="2026-10-29T11:00:38.042Z" start="2026-10-29T11:00:38.043Z" stale="2026-10-29T11:05:38.043Z"><point lat="30.2672" lon="-97.7431" hae="150" ce="9.9" le="9999999"/><detail><uid Droid="E2E-EUD" /><contact endpoint="127.0.0.1:63126:tcp" callsign="E2E-EUD"/><__group name="Cyan" role="Team Member"/><status battery="88"/><takv'
+[PASS] 2 MESH_TO_TAK_SERVER unset (default false): nothing on tak.cot.inject
+[PASS] 3 projected sim-x1 on tak.cot.mesh.tx is received as TAK Protocol v1 by a takproto listener on lo0 -- 174 bytes, header bf01bf
+[PASS] 3b takproto decodes type, point and callsign
+[PASS] 3c request/reply on tak.cot.mesh.tx answers ok -- b'ok'
+[PASS] 3d malformed CoT is refused with an error reply -- b'error: xml decode: XML syntax error on line 1: unexpected EOF'
+[PASS] 3e a-h-* CoT on tak.cot.mesh.tx is refused with an error reply and not sent on the mesh -- b'error: CoT type a-h-A is not sent on the mesh (a-h-* refused)'
+[PASS] 4 GeoChat (v1) on 224.10.10.1 group appears on tak.cot.mesh.rx with Tak-Delivery chat -- {'Nats-Msg-Id': 'cot-d382b0b84ad27bcd032e804b77ce2713', 'Tak-Delivery': 'chat', 'Tak-From': '127.0.0.1:55507', 'Tak-Gateway': 'a7e2e', 'Tak-Proto': '1'}
+[PASS] 4b b-t-f on tak.cot.mesh.tx goes out on the chat group
+[PASS] 5 directed TCP CoT to the gateway appears with Tak-Delivery direct
+[PASS] 5b Tak-Dest-Uid header sends a directed message to the contact's advertised endpoint
+[PASS] 6 directed b-f-t-r: gateway fetches from the sender's address, verifies SHA-256, stores it -- /Users/danielcarku/Desktop/work/.run/tmp-a7/datapkg/inbox/fb9a7771bd5a2e0f645cf893c2f75cebc58694bfc0d68f8e02a356cdb8e62c40-mission1.zip
+[PASS] 6b gateway sends b-f-t-a ackresponse success=true to the sender's endpoint -- b'<ackresponse uid="69b010e0-a494-4fac-9a10-bfbd29a9a113" senderUid="omos-gw-a7e2e" success="true" tag="mission1" reason="Transfer complete" sha256="fb9a7771bd5a2e0f645cf893c2f75cebc58694bfc0d68f8e02a356cdb8e62c40" sizeInBytes="20000"/>'
+[PASS] 6c gateway serves its outbox at /getfile?file=<name>
+[PASS] 6d path traversal on /getfile refused
+[PASS] 7 tel.fleet.edge.a7e2e.status reports tx_interface lo0, tx count, chat group, datapkg_rx -- {"chat_group": "224.10.10.1:27012", "contacts": 1, "datapkg_failed": 0, "datapkg_rx": 1, "encrypted": false, "errors": 2, "gateway": "a7e2e", "last_error": "tak.cot.mesh.tx uid=OM.track.e2e-hostile: CoT type a-h-A is not sent on the mesh (a-h-* refused)", "mesh_group": "239.2.3.1:26969", "proto_version": 1, "rx": 4, "to_tak_server": false, "tx": 4, "tx_interface": "lo0", "version": "0.4.0"}
+[PASS] 7c tak.cot.mesh.rx is stored in stream COT by acked publishes and counted in meta.rx -- meta.rx=4 COT msgs=4
+[PASS] 7b broadcast protocol stays v1 after GeoChat from a takproto peer (TakControl with unset versions) -- proto_version=1
+[PASS] 8c xmlDetail that closes </detail></event> is dropped: nothing on tak.cot.inject or tak.cot.mesh.rx -- 0 messages
+[PASS] 8 MESH_TO_TAK_SERVER=true: the EUD PLI appears once on tak.cot.inject -- 1 copies
+[PASS] 8b CP-2: OM.*, INTEL.* and omos-gw-* CoT heard on the mesh are not copied to tak.cot.inject -- 0 copies, 1 inject msgs total
+[PASS] 9 gateway C (bus A) -> encrypted mesh -> gateway D (bus B) -- {'Nats-Msg-Id': 'cot-c0001b1cd128b4a4b2fc98698b191722', 'Tak-Delivery': 'mesh', 'Tak-From': '127.0.0.1:61094', 'Tak-Gateway': 'a7encD', 'Tak-Proto': '1'}
+[PASS] 9b the datagram on the wire is not plaintext and OpenSSL decrypts it to a takproto frame -- 224 bytes on the wire; decrypted header bf01bf
+[PASS] 9c OpenSSL-encrypted takproto SA from the peer is accepted
+[PASS] 9d plaintext on an encrypted mesh is dropped
+
+26/26 checks passed
+exit=0

@@ -1,0 +1,23 @@
+# CI-equivalent after review fixes (2026-10-29T14:03:24Z)
+## changed files
+docs/proposals/2026-10-29-grammar-register/i1-agents-watch-briefs.md
+services/agentops/README.md
+services/agentops/cmd/agentops/main.go
+services/agentops/internal/brief/brief.go
+services/agentops/internal/chat/chat.go
+services/agentops/internal/chat/chat_test.go
+services/agentops/internal/presence/presence.go
+services/agentops/internal/presence/presence_test.go
+services/agentops/internal/watch/config.go
+services/agentops/internal/watch/config_test.go
+services/agentops/internal/watch/engine.go
+services/agentops/internal/watch/engine_test.go
+## validate_changed_yaml (base origin/main)
+Changed YAML gate passed (5 files checked)
+## validate_manifests (changed)
+Summary: 3 resources found in 3 files - Valid: 3, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 3 manifest file(s)
+## gitleaks (working tree)
+[90m10:03AM[0m [32mINF[0m [1mscanned ~12914259 bytes (12.91 MB) in 4.36s[0m
+[90m10:03AM[0m [33mWRN[0m [1mleaks found: 9[0m
+gitleaks dir services/agentops: no leaks found; gitleaks dir docs/proposals/2026-10-29-grammar-register: no leaks found. Whole-tree scan reports 9 findings, all in pre-existing files outside this PR (the .gitleaks-baseline.json set).

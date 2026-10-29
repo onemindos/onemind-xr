@@ -1,0 +1,9 @@
+0s 09:12:34Z start instance a
+3s 09:12:37Z start instance b
+30s 09:13:04Z leases:
+usgs=a nws=a eonet=a ais=a cap=a mqtt=a celestrak=a gdacs=a outages=a tiles=a mediamtx=a 
+35s 09:13:09Z kill -9 instance a (leader of most sources)
+60s 09:13:34Z leases after takeover:
+usgs=b nws=b eonet=b ais=b cap=b mqtt=b celestrak=b gdacs=b outages=b tiles=b mediamtx=b 
+120s 09:14:34Z verify
+121s 09:14:35Z done

@@ -1,0 +1,16 @@
+ingest_feed_age_seconds{source="chaos-nws"} 155.717646375
+ingest_feed_age_seconds{source="chaos-sse"} 155.018240542
+ingest_feed_last_error_timestamp_seconds{source="chaos-nws"} 1.79327136169e+09
+ingest_feed_last_error_timestamp_seconds{source="chaos-sse"} 1.793271366471e+09
+ingest_feed_last_success_timestamp_seconds{source="chaos-nws"} 1.79327121247e+09
+ingest_feed_last_success_timestamp_seconds{source="chaos-sse"} 1.793271213169e+09
+ingest_feed_leader{instance="a",source="chaos-nws"} 1
+ingest_feed_leader{instance="a",source="chaos-sse"} 1
+ingest_feed_records{source="chaos-nws"} 203
+ingest_feed_records{source="chaos-sse"} 1
+ingest_feed_stale{source="chaos-nws"} 1
+ingest_feed_stale{source="chaos-sse"} 1
+ingest_feed_stale_after_seconds{source="chaos-nws"} 5
+ingest_feed_stale_after_seconds{source="chaos-sse"} 5
+ingest_feed_up{source="chaos-nws"} 0
+ingest_feed_up{source="chaos-sse"} 0

@@ -1,0 +1,11 @@
+# Service-level config: metrics on :38195, JSON logs
+# Engine-compatible with Redpanda Connect (same Benthos v4 config format).
+http:
+  address: 127.0.0.1:38195
+  enabled: true
+metrics:
+  prometheus: {}
+logger:
+  level: INFO
+  format: json
+  add_timestamp: true

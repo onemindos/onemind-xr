@@ -1,0 +1,19 @@
+== i6-eval validate_changed_yaml (base origin/main merge-base 62e3d22bc05814178c2d531e77a9fa4a228f6f3a)
+Changed YAML gate passed (6 files checked)
+rc=0
+== validate_manifests
+Summary: 4 resources found in 4 files - Valid: 4, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 4 manifest file(s)
+rc=0
+== check_onemind_mcp_coverage
+All 58 Git-declared Argo Applications mapped to MCP access dispositions
+rc=0
+== gitleaks dir
+[90m2:01PM[0m [32mINF[0m [1mscanned ~12996759 bytes (13 MB) in 3.57s[0m
+[90m2:01PM[0m [32mINF[0m [1mno leaks found[0m
+rc=0
+== gitleaks commits 62e3d22bc05814178c2d531e77a9fa4a228f6f3a..HEAD
+[90m2:01PM[0m [32mINF[0m [1m6 commits scanned.[0m
+[90m2:01PM[0m [32mINF[0m [1mscanned ~367601 bytes (367.60 KB) in 109ms[0m
+[90m2:01PM[0m [32mINF[0m [1mno leaks found[0m
+rc=0

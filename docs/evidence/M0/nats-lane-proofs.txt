@@ -1,0 +1,426 @@
+## P1 JetStream: dedup, max-msgs-per-subject, republish, direct get, per-message TTL (nats-server 2.15.2, 2026-10-29T08:06:09Z)
+$ nats stream add TEL --subjects 'tel.>' --storage file --replicas 1 --retention limits --discard old --max-age 24h --max-msgs-per-subject 100 --dupe-window 2m --allow-direct --allow-msg-ttl --republish-source 'tel.>' --republish-destination 'rt.tel.>' --defaults
+Stream TEL was created
+
+Information for Stream TEL created 2026-10-29 04:06:09
+
+                     Subjects: tel.>
+                     Replicas: 1
+                      Storage: File
+
+Options:
+
+                 Republishing: tel.> to rt.tel.>
+                    Retention: Limits
+              Acknowledgments: true
+               Discard Policy: Old
+             Duplicate Window: 2m0s
+                   Direct Get: true
+  Allows Atomic Batch Publish: false
+    Allows Fast Batch Publish: false
+              Allows Counters: false
+            Allows Msg Delete: true
+       Allows Per-Message TTL: true
+                 Allows Purge: true
+             Allows Schedules: false
+               Allows Rollups: false
+
+Limits:
+
+             Maximum Messages: unlimited
+          Maximum Per Subject: 100
+                Maximum Bytes: unlimited
+                  Maximum Age: 1d0h0m0s
+         Maximum Message Size: unlimited
+            Maximum Consumers: unlimited
+
+State:
+
+                 Host Version: 2.15.2
+           Required API Level: 1 hosted at level 5
+                     Messages: 0
+                        Bytes: 0 B
+               First Sequence: 0
+                Last Sequence: 0
+             Active Consumers: 0
+
+$ nats pub tel.sim-x1.drone.position '{"lat":1}' -H Nats-Msg-Id:pos-1
+04:06:09 Published 9 bytes to "tel.sim-x1.drone.position"
+
+$ nats pub tel.sim-x1.drone.position '{"lat":1}' -H Nats-Msg-Id:pos-1
+04:06:09 Published 9 bytes to "tel.sim-x1.drone.position"
+
+$ nats stream info TEL --json | jq '.state.messages'
+1
+
+$ for i in $(seq 1 150); do nats pub tel.sim-x2.drone.position "{\"i\":$i}" >/dev/null 2>&1; done; nats -s nats://127.0.0.1:14222 stream subjects TEL
+╭───────────────────────────────────────────────────────────────────────╮
+│                        2 Subjects in stream TEL                       │
+├───────────────────────────┬───────┬───────────────────────────┬───────┤
+│ Subject                   │ Count │ Subject                   │ Count │
+├───────────────────────────┼───────┼───────────────────────────┼───────┤
+│ tel.sim-x1.drone.position │ 1     │ tel.sim-x2.drone.position │ 100   │
+╰───────────────────────────┴───────┴───────────────────────────┴───────╯
+
+
+$ nats stream get TEL --last-for tel.sim-x2.drone.position
+Item: TEL#151 received 2026-10-29 08:06:12.544441 +0000 UTC (56ms) on Subject tel.sim-x2.drone.position
+
+{"i":150}
+
+
+
+$ nats pub tel.sim-x3.drone.heartbeat 'ttl-test' -H Nats-TTL:2s; nats -s nats://127.0.0.1:14222 stream subjects TEL; sleep 3; nats -s nats://127.0.0.1:14222 stream subjects TEL
+04:06:12 Published 8 bytes to "tel.sim-x3.drone.heartbeat"
+╭────────────────────────────────────────────────────────────────────────╮
+│                        3 Subjects in stream TEL                        │
+├────────────────────────────┬───────┬───────────────────────────┬───────┤
+│ Subject                    │ Count │ Subject                   │ Count │
+├────────────────────────────┼───────┼───────────────────────────┼───────┤
+│ tel.sim-x3.drone.heartbeat │ 1     │ tel.sim-x2.drone.position │ 100   │
+│ tel.sim-x1.drone.position  │ 1     │                           │       │
+╰────────────────────────────┴───────┴───────────────────────────┴───────╯
+
+╭───────────────────────────────────────────────────────────────────────╮
+│                        2 Subjects in stream TEL                       │
+├───────────────────────────┬───────┬───────────────────────────┬───────┤
+│ Subject                   │ Count │ Subject                   │ Count │
+├───────────────────────────┼───────┼───────────────────────────┼───────┤
+│ tel.sim-x1.drone.position │ 1     │ tel.sim-x2.drone.position │ 100   │
+╰───────────────────────────┴───────┴───────────────────────────┴───────╯
+
+
+$ (nats sub 'rt.tel.>' --count 1 &) ; sleep 0.5; nats -s nats://127.0.0.1:14222 pub tel.sim-x1.drone.position '{"lat":2}'; sleep 0.5
+04:06:15 Subscribing on rt.tel.> 
+04:06:16 Published 9 bytes to "tel.sim-x1.drone.position"
+[#1] Received on "rt.tel.sim-x1.drone.position"
+Nats-Last-Sequence: 1
+Nats-Stream: TEL
+Nats-Subject: tel.sim-x1.drone.position
+Nats-Sequence: 153
+Nats-Time-Stamp: 2026-10-29T08:06:16.221824Z
+
+{"lat":2}
+
+
+
+## P2 KV: history, revision CAS, watch, bucket TTL, per-key TTL
+$ nats kv add ENTITY --history 5 --ttl 1h --replicas 1 --storage file --marker-ttl 1m 2>&1 | grep -E 'Bucket|History|TTL|Per-Key|Limit Marker|Values Stored'
+Information for Key-Value Store Bucket ENTITY created 2026-10-29 04:06:35
+            Bucket Name: ENTITY
+           History Kept: 5
+          Values Stored: 0
+  Per-Key TTL Supported: true
+       Limit Marker TTL: 1m0s
+            Bucket Size: 0 B
+    Maximum Bucket Size: unlimited
+
+$ nats kv put ENTITY air.icao-a1b2c3 '{"v":1}'; nats kv put ENTITY air.icao-a1b2c3 '{"v":2}'; nats kv history ENTITY air.icao-a1b2c3
+{"v":1}
+{"v":2}
+╭───────────────────────────────────────────────────────────────────────────╮
+│                    History for ENTITY > air.icao-a1b2c3                   │
+├─────────────────┬──────────┬─────┬─────────────────────┬────────┬─────────┤
+│ Key             │ Revision │ Op  │ Created             │ Length │ Value   │
+├─────────────────┼──────────┼─────┼─────────────────────┼────────┼─────────┤
+│ air.icao-a1b2c3 │        1 │ PUT │ 2026-10-29 04:06:35 │ 7      │ {"v":1} │
+│ air.icao-a1b2c3 │        2 │ PUT │ 2026-10-29 04:06:35 │ 7      │ {"v":2} │
+╰─────────────────┴──────────┴─────┴─────────────────────┴────────┴─────────╯
+
+
+$ nats kv update ENTITY air.icao-a1b2c3 '{"v":3}' 1
+nats: error: nats: nats: API error: code=400 err_code=10071 description=wrong last sequence: 2: nats: key revision mismatch
+
+$ nats kv update ENTITY air.icao-a1b2c3 '{"v":3}' 2
+{"v":3}
+
+$ (nats kv watch ENTITY 'air.>' > /tmp/claude-501/kvw.txt 2>&1 &); sleep 0.5; nats kv put ENTITY air.icao-ffff01 '{"v":9}'; sleep 0.5; pkill -f 'kv watch ENTITY'; cat /tmp/claude-501/kvw.txt
+{"v":9}
+[2026-10-29 04:06:35] PUT ENTITY > air.icao-a1b2c3: {"v":3}
+[2026-10-29 04:06:35] PUT ENTITY > air.icao-ffff01: {"v":9}
+
+$ nats kv create ENTITY sea.mmsi-123 '{"v":1}' --ttl 2s; nats kv get ENTITY sea.mmsi-123 --raw; sleep 3; nats kv get ENTITY sea.mmsi-123
+{"v":1}
+{"v":1}ENTITY > sea.mmsi-123 revision: 5 created @ 2026-10-29 04:06:36
+
+{"v":1}
+
+
+## P3 Object Store: chunked put/get with digest
+$ head -c 3000000 /dev/urandom > /tmp/claude-501/tile.bin; nats object add TILES --replicas 1 --storage file >/dev/null; nats object put TILES /tmp/claude-501/tile.bin --name tiles/homestead/z18.glb -f >/dev/null; nats object info TILES tiles/homestead/z18.glb
+Object information for TILES > tiles/homestead/z18.glb
+
+               Size: 2.9 MiB
+  Modification Time: 2026-10-29 04:06:39
+             Chunks: 23
+             Digest: SHA-256 eb5bf7f4d07d9c9ee2b9b0c4d01f3ffaecbcdf9cc57a91b87a7d15313c2df466
+
+$ nats object get TILES tiles/homestead/z18.glb -O /tmp/claude-501/out.bin -f >/dev/null; cmp /tmp/claude-501/tile.bin /tmp/claude-501/out.bin && echo IDENTICAL; nats stream info OBJ_TILES --json | jq '{msgs:.state.messages,subjects:.config.subjects}'
+IDENTICAL
+{
+  "msgs": 24,
+  "subjects": [
+    "$O.TILES.C.>",
+    "$O.TILES.M.>"
+  ]
+}
+
+## P4 Consumers: durable pull with explicit ack, redelivery state
+$ nats consumer add TEL entity-svc --pull --deliver all --ack explicit --filter 'tel.*.drone.>' --max-deliver 5 --defaults >/dev/null; nats consumer next TEL entity-svc --count 2 --ack 2>&1 | grep -E 'Subject|Acknowledged|seq' | head; nats consumer info TEL entity-svc --json | jq '{ack_floor:.ack_floor.stream_seq,num_pending,num_ack_pending}'
+[04:06:40] subj: tel.sim-x1.drone.position / tries: 1 / cons seq: 1 / str seq: 1 / pending: 101
+Acknowledged message
+[04:06:40] subj: tel.sim-x2.drone.position / tries: 1 / cons seq: 2 / str seq: 52 / pending: 100
+Acknowledged message
+{
+  "ack_floor": 52,
+  "num_pending": 100,
+  "num_ack_pending": 0
+}
+
+## P5 Mirror and Source with subject transform
+$ nats stream add TEL_MIRROR --mirror TEL --replicas 1 --defaults >/dev/null; sleep 1; nats stream info TEL_MIRROR --json | jq '{mirror:.config.mirror.name, msgs:.state.messages, first:.state.first_seq, last:.state.last_seq}'; nats stream info TEL --json | jq '{msgs:.state.messages, first:.state.first_seq, last:.state.last_seq}'
+{
+  "mirror": "TEL",
+  "msgs": 102,
+  "first": 1,
+  "last": 153
+}
+{
+  "msgs": 102,
+  "first": 1,
+  "last": 153
+}
+
+$ nats stream add --config /tmp/claude-501/src.json >/dev/null; sleep 1; nats stream subjects FLEET_AGG
+╭─────────────────────────────────────────╮
+│      2 Subjects in stream FLEET_AGG     │
+├─────────────────────────────────┬───────┤
+│ Subject                         │ Count │
+├─────────────────────────────────┼───────┤
+│ tel.fleet.drone.position.sim-x1 │ 2     │
+│ tel.fleet.drone.position.sim-x2 │ 100   │
+╰─────────────────────────────────┴───────╯
+
+
+## P2b KV per-key TTL recheck
+$ nats stream get KV_ENTITY --last-for '$KV.ENTITY.sea.mmsi-123' 2>&1 | head -8
+Item: KV_ENTITY#5 received 2026-10-29 08:06:36.501224 +0000 UTC (18.14s) on Subject $KV.ENTITY.sea.mmsi-123
+
+Headers:
+  Nats-Expected-Last-Subject-Sequence: 0
+  Nats-TTL: 60
+
+{"v":1}
+
+
+$ sleep 5; nats kv get ENTITY sea.mmsi-123 2>&1; nats kv ls ENTITY
+ENTITY > sea.mmsi-123 revision: 5 created @ 2026-10-29 04:06:36
+
+{"v":1}
+
+air.icao-a1b2c3
+air.icao-ffff01
+sea.mmsi-123
+
+$ nats kv put ENTITY sea.mmsi-456 x; nats req '$KV.ENTITY.sea.mmsi-456' 'y' -H Nats-TTL:2s 2>&1 | tail -2; sleep 4; nats kv get ENTITY sea.mmsi-456 2>&1 | tail -2
+x
+
+
+y
+
+
+$ date -u +%T; nats stream get KV_ENTITY --last-for '$KV.ENTITY.sea.mmsi-456' 2>&1 | grep -E 'Item|TTL'
+08:07:13
+Item: KV_ENTITY#7 received 2026-10-29 08:06:59.738159 +0000 UTC (14.24s) on Subject $KV.ENTITY.sea.mmsi-456
+  Nats-TTL: 60
+
+$ date -u +%T; nats kv ls ENTITY
+08:07:13
+air.icao-a1b2c3
+air.icao-ffff01
+sea.mmsi-123
+sea.mmsi-456
+
+$ nats kv create ENTITY sea.mmsi-789 z --ttl 5s >/dev/null; nats stream get KV_ENTITY --last-for '$KV.ENTITY.sea.mmsi-789' 2>&1 | grep -E 'TTL'
+  Nats-TTL: 60
+
+## P6 Accounts, permissions, stream export/import, service export/import (passwords are throwaway localhost values, redacted)
+$ nats -s nats://<user>@hub pub intel.weather.nws.alert ok
+04:07:26 Published 2 bytes to "intel.weather.nws.alert"
+
+$ nats -s nats://<user>@hub pub cmd.drone.sim-x1.land nope; sleep 0.3; grep -i 'Permissions Violation' /Users/danielcarku/Desktop/work/.run/nats-lane/logs/hub.log | tail -1 | sed 's/^.*\[ERR\]/[ERR]/'
+nats: error: nats: permissions violation: Permissions Violation for Publish to "cmd.drone.sim-x1.land"
+
+$ (nats -s nats://<user>@hub sub 'ent.>' --count 1 &); sleep 0.5; nats pub ent.aircraft.icao-a1b2c3.state '{"lat":40.7}'; sleep 0.5
+04:07:27 Subscribing on ent.> 
+04:07:27 Published 12 bytes to "ent.aircraft.icao-a1b2c3.state"
+[#1] Received on "ent.aircraft.icao-a1b2c3.state"
+{"lat":40.7}
+
+
+
+$ (nats reply 'svc.entity.get' 'entity-reply-from-FABRIC' --count 1 &); sleep 0.5; nats -s nats://<user>@hub req svc.entity.get q
+04:07:28 Listening on "svc.entity.get" in group "NATS-RPLY-22"
+04:07:28 Sending request on "svc.entity.get"
+04:07:28 [#0] Received on subject "svc.entity.get":
+04:07:28 Nats-Request-Info: {"acc":"CLIENT","rtt":284292}
+
+q
+04:07:28 
+Draining...
+04:07:28 Exiting
+04:07:28 Received with rtt 2.384042ms
+entity-reply-from-FABRIC
+
+
+
+$ (nats -s nats://<user>@hub sub 'tel.>' --count 1 --timeout 2s &); sleep 0.5; nats pub tel.sim-x1.drone.position isolated; sleep 2
+04:07:28 Subscribing on tel.> 
+04:07:29 Published 8 bytes to "tel.sim-x1.drone.position"
+
+## P7 Leaf node + JetStream domains: edge store-and-forward and hub re-sync after disconnection
+$ nats --server edge stream add SITE_EVT --subjects 'evt.homestead.>' --storage file --replicas 1 --max-age 168h --dupe-window 2m --defaults >/dev/null && echo created-on-edge
+created-on-edge
+
+$ nats --server hub stream add --config /Users/danielcarku/Desktop/work/.run/nats-lane/hubsrc.json >/dev/null && echo hub-sources-edge1
+hub-sources-edge1
+
+$ for i in 1 2 3; do nats --server edge pub evt.homestead.gate.opened "online-$i" >/dev/null; done; sleep 1; nats --server hub stream info HUB_SITE_EVT --json | jq '{hub_msgs:.state.messages, source_lag:.sources[0].lag, active:.sources[0].active}'
+04:07:51 Published 8 bytes to "evt.homestead.gate.opened"
+04:07:51 Published 8 bytes to "evt.homestead.gate.opened"
+04:07:51 Published 8 bytes to "evt.homestead.gate.opened"
+{
+  "hub_msgs": 3,
+  "source_lag": 0,
+  "active": 926840000
+}
+
+$ kill $(cat /Users/danielcarku/Desktop/work/.run/nats-lane/hub.pid); sleep 1; curl -s 127.0.0.1:28222/leafz | jq '.leafnodes'
+04:07:52 >>> Disconnected due to: EOF, will attempt reconnect
+0
+
+$ for i in 1 2 3 4 5; do nats --server edge pub evt.homestead.gate.opened "offline-$i" >/dev/null; done; nats --server edge stream info SITE_EVT --json | jq '{edge_msgs:.state.messages}'
+04:07:53 Published 9 bytes to "evt.homestead.gate.opened"
+04:07:53 Published 9 bytes to "evt.homestead.gate.opened"
+04:07:53 Published 9 bytes to "evt.homestead.gate.opened"
+04:07:53 Published 9 bytes to "evt.homestead.gate.opened"
+04:07:53 Published 9 bytes to "evt.homestead.gate.opened"
+{
+  "edge_msgs": 8
+}
+
+$ nohup /Users/danielcarku/Desktop/work/.tools/bin/nats-server -c /Users/danielcarku/Desktop/work/.run/nats-lane/hub.conf -l /Users/danielcarku/Desktop/work/.run/nats-lane/logs/hub.log >/dev/null 2>&1 & echo $! > /Users/danielcarku/Desktop/work/.run/nats-lane/hub.pid; sleep 5; curl -s 127.0.0.1:28222/leafz | jq '.leafnodes'
+1
+
+$ sleep 3; nats --server hub stream info HUB_SITE_EVT --json | jq '{hub_msgs:.state.messages, lag:.sources[0].lag}'; nats --server hub stream get HUB_SITE_EVT --last-for evt.homestead.gate.opened 2>&1 | tail -2
+{
+  "hub_msgs": 3,
+  "lag": 0
+}
+
+
+
+## P7b Overlap trap: with the leaf up, a hub stream whose subjects overlap edge subjects captures edge publishes directly
+$ B=$(nats --server hub stream info TEL --json | jq .state.last_seq); nats --server edge pub tel.edge1.host.cpu 42 >/dev/null; sleep 0.5; A=$(nats --server hub stream info TEL --json | jq .state.last_seq); echo hub TEL last_seq before=$B after=$A
+04:08:01 Published 2 bytes to "tel.edge1.host.cpu"
+hub TEL last_seq before=154 after=155
+
+2026/10/29 04:07:53.772269 [INF]   Starting restore for stream 'FABRIC > HUB_SITE_EVT'
+2026/10/29 04:07:53.773072 [INF]   Restored 3 messages for stream 'FABRIC > HUB_SITE_EVT' in 1ms
+
+$ # poll hub HUB_SITE_EVT (hub restarted 08:07:53Z)
+08:10:18 hub_msgs=8 source={"lag":0,"active":67862000,"error":null}
+
+
+
+$ nats --server hub stream get HUB_SITE_EVT --last-for evt.homestead.gate.opened
+  Nats-Stream-Source: SITE_EVT:JE7QNXai 8 > > evt.homestead.gate.opened 4P5j0hCi
+offline-5
+
+## P7c second outage, 1s polling
+08:10:30 hub restarted; edge holds 10 msgs
+08:11:11 hub_msgs=10 after 41s
+2026/10/29 04:10:30.811039 [ERR] Error trying to connect as leafnode to remote server "127.0.0.1:17422" (attempt 1): dial tcp 127.0.0.1:17422: connect: connection refused
+2026/10/29 04:10:32.628566 [INF] 127.0.0.1:17422 - lid:29 - Leafnode connection created for account: LOCAL 
+
+## P8 WebSocket client and MQTT 3.1.1 client on the same server and account
+$ nats -s ws://127.0.0.1:19222 pub tel.sim-ws.drone.position hello-from-websocket
+04:11:24 Published 20 bytes to "tel.sim-ws.drone.position"
+$ nats stream get TEL --last-for tel.sim-ws.drone.position
+Item: TEL#156 received 2026-10-29 08:11:24.57855 +0000 UTC (22ms) on Subject tel.sim-ws.drone.position
+hello-from-websocket
+# [verifier] transcript inconsistency: the command shows "tel.>" but the output line says "tel.sim-s1.>"; the delivered subject and header are unaffected.
+$ (nats sub "tel.>" --count 1 &); python mqtt_pub.py   # raw-socket MQTT CONNECT + PUBLISH QoS0, user admin via no_auth_user
+04:11:24 Subscribing on tel.sim-s1.> 
+CONNACK 20020000
+PUBLISHED tel/sim-s1/soil/moisture
+[#1] Received on "tel.sim-s1.soil.moisture"
+Nmqtt-Pub: 0
+
+{"pct":31}
+
+
+
+## P2c KV per-key TTL recheck (sea.mmsi-123 written 08:06:36Z with stored Nats-TTL 60)
+$ date; nats kv ls ENTITY
+08:11:26
+air.icao-a1b2c3
+air.icao-ffff01
+sea.mmsi-456
+
+$ nats kv history ENTITY sea.mmsi-456
+╭──────────────────────────────────────────────────────────────────────╮
+│                   History for ENTITY > sea.mmsi-456                  │
+├──────────────┬──────────┬─────┬─────────────────────┬────────┬───────┤
+│ Key          │ Revision │ Op  │ Created             │ Length │ Value │
+├──────────────┼──────────┼─────┼─────────────────────┼────────┼───────┤
+│ sea.mmsi-456 │        6 │ PUT │ 2026-10-29 04:06:59 │ 1      │ x     │
+╰──────────────┴──────────┴─────┴─────────────────────┴────────┴───────╯
+
+
+## P9 Decentralized JWT (partial)
+$ nats auth operator add lab --signing-key   # nsc-compatible store under work/.run/nats-lane/xdg
+Operator lab created with system account SYSTEM (output shown during run; keys not printed)
+$ nats-server -c jwt.conf -t   # operator: lab.jwt, system_account, resolver: MEMORY with resolver_preload
+nats-server: configuration file jwt.conf is valid 
+$ nats auth account add SITE --operator=lab --jetstream ...
+nats: error: cannot ask for confirmation without a terminal
+Result: natscli 0.5.1 'auth account add' requires an interactive terminal; account/user JWT issuance and a scoped-user connection were NOT exercised here (unverified locally).
+
+## P7d Core publishes at the edge while the leaf is down (no edge stream on tel.edge1.>)
+hub TEL last_seq before outage=157; 3 core publishes to tel.edge1.host.cpu at edge during outage; leaf reconnected=1; hub TEL last_seq after=157  => core messages published during the outage are not delivered (no store-and-forward without an edge stream)
+
+## P10 KV-shaped stream on the locked grammar: ent.{type}.{id}.state, 1 msg per subject, per-message TTL, subject delete markers
+$ nats stream add ENT --subjects "ent.*.*.state" --max-msgs-per-subject 1 --allow-direct --allow-msg-ttl --subject-del-markers-ttl 1m --discard old --storage file --replicas 1 --defaults
+                     Subjects: ent.*.*.state
+                   Direct Get: true
+       Allows Per-Message TTL: true
+   Subject Delete Markers TTL: 1m0s
+               Allows Rollups: true
+          Maximum Per Subject: 1
+$ nats sub "ent.>" (background) ; nats pub ent.aircraft.icao-a1b2c3.state v1 ; nats pub ent.aircraft.icao-a1b2c3.state v2 -H Nats-TTL:2s ; sleep 4
+04:18:57 Subscribing on ent.> 
+[#1] Received on "ent.aircraft.icao-a1b2c3.state"
+[#2] Received on "ent.aircraft.icao-a1b2c3.state"
+Nats-TTL: 2s
+
+$ nats stream get ENT --last-for ent.aircraft.icao-a1b2c3.state
+Item: ENT#3 received 2026-10-29 08:18:59.791536 +0000 UTC (3.03s) on Subject ent.aircraft.icao-a1b2c3.state
+Headers:
+  Nats-Marker-Reason: MaxAge
+  Nats-TTL: 1m0s
+  Nats-Rollup: sub
+nil body
+
+$ nats sub "ent.>" --stream ENT --last-per-subject --headers-only --count 1   # ordered JetStream consumer
+04:19:14 Subscribing to subject ent.> for last message per subject 
+[#1] Received JetStream message: stream: ENT seq: 3 / pending: 0 / subject: ent.aircraft.icao-a1b2c3.state / time: 2026-10-29 04:18:59
+Nats-Marker-Reason: MaxAge
+Nats-TTL: 1m0s
+Nats-Rollup: sub
+Nats-Msg-Size: 0
+
+Result: the expiry marker (Nats-Marker-Reason: MaxAge) is delivered to JetStream consumers/watchers, not to plain core subscribers.
+# [verifier] single run; ADR-43 does not state whether markers reach core subscribers. The marker (ENT#3, 08:18:59.79Z) fell inside the 4 s window of the background core subscriber.
+
+04:19:23 >>> Disconnected due to: EOF, will attempt reconnect

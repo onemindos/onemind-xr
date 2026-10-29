@@ -1,0 +1,10 @@
+platform/ingest/configmap.yaml - ConfigMap omos-ingest-sources is valid
+platform/ingest/service.yaml - Service omos-ingest is valid
+platform/ingest/deployment.yaml - Deployment omos-ingest is valid
+platform/nats/streams/kv-ingest-state.yaml - KeyValue kv-ingest-state is valid
+platform/ingest/prometheusrule.yaml - PrometheusRule omos-ingest is valid
+platform/nats/streams/kv-ingest-locks.yaml - KeyValue kv-ingest-locks is valid
+platform/ingest/servicemonitor.yaml - ServiceMonitor omos-ingest is valid
+platform/nats/streams/tel.yaml - Stream tel is valid
+platform/argocd/platform-ingest.yaml - Application platform-ingest is valid
+Summary: 9 resources found in 9 files - Valid: 9, Invalid: 0, Errors: 0, Skipped: 0

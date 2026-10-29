@@ -1,0 +1,13 @@
+# helm template nats-2.14.2 (live chart version) with platform/nats/values.template.yaml + values.identities.stage-<X>.template.yaml,
+# then the rendered nats-config ConfigMap's accounts/leafnodes compared with scripts/nats_identities.py conf (placeholder passwords).
+# 2026-10-29T11:59:49Z  helm v4.3.1+gc0d08d0
+stage A1: helm render ok; accounts identical to the renderer: True; system_account: True; leafnodes.authorization kept (leaf_tak): True
+  users per account: {'AGENTS': ['hermes'], 'CLIENT': ['zeus'], 'ONEMIND': ['onemind', 'policy', 'entity', 'ingest', 'layer', 'projector', 'tak-client', 'bridge-mavlink-home', 'mesh-gateway', 'agent-fabric', 'leaf-tak', 'leaf-site-mac'], 'SYS': ['sys', 'monitor']}
+  kept from values.template.yaml: leafnodes.port=7422 no_advertise=True jetstream.max_file_store=__natsraw__:20Gi cluster.name=nats
+stage A2: helm render ok; accounts identical to the renderer: True; system_account: True; leafnodes.authorization removed: True
+  users per account: {'AGENTS': ['hermes'], 'CLIENT': ['zeus'], 'ONEMIND': ['onemind', 'leaf_tak', 'policy', 'entity', 'ingest', 'layer', 'projector', 'tak-client', 'bridge-mavlink-home', 'mesh-gateway', 'agent-fabric', 'leaf-tak', 'leaf-site-mac'], 'SYS': ['sys', 'monitor']}
+  kept from values.template.yaml: leafnodes.port=7422 no_advertise=True jetstream.max_file_store=__natsraw__:20Gi cluster.name=nats
+stage B: helm render ok; accounts identical to the renderer: True; system_account: True; leafnodes.authorization removed: True
+  users per account: {'AGENTS': ['hermes'], 'CLIENT': ['zeus'], 'ONEMIND': ['onemind', 'leaf_tak', 'policy', 'entity', 'ingest', 'layer', 'projector', 'tak-client', 'bridge-mavlink-home', 'mesh-gateway', 'agent-fabric', 'leaf-tak', 'leaf-site-mac'], 'SYS': ['sys', 'monitor']}
+  kept from values.template.yaml: leafnodes.port=7422 no_advertise=True jetstream.max_file_store=__natsraw__:20Gi cluster.name=nats
+# result: all stages render through the chart to the same accounts the tests run

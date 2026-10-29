@@ -1,0 +1,8 @@
+?   	github.com/onemindos/omos/services/entity/cmd/entity-service	[no test files]
+ok  	github.com/onemindos/omos/services/entity/internal/adapt	1.329s
+ok  	github.com/onemindos/omos/services/entity/internal/bus	20.067s
+ok  	github.com/onemindos/omos/services/entity/internal/engine	2.065s
+ok  	github.com/onemindos/omos/services/entity/internal/fusion	1.319s
+ok  	github.com/onemindos/omos/services/entity/internal/identity	2.100s
+?   	github.com/onemindos/omos/services/entity/internal/model	[no test files]
+ok  	github.com/onemindos/omos/services/entity/internal/orbit	2.343s

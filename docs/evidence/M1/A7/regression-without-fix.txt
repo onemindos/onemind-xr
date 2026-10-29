@@ -1,0 +1,17 @@
+# Regression check: TestTransmitOnNamedInterface against a copy with IP_MULTICAST_IF disabled (old mesh.go:84 behaviour)
+# 2026-10-29T10:34:17Z
+=== RUN   TestTransmitOnNamedInterface
+    gateway_test.go:115: transmit interface = <nil>, want lo0
+--- FAIL: TestTransmitOnNamedInterface (0.00s)
+FAIL
+FAIL	github.com/onemindos/omos-bridge/bridges/tak	0.353s
+FAIL
+
+# Same, with the interface assertion bypassed: does the lo0 peer hear the gateway?
+=== RUN   TestTransmitOnNamedInterface
+    gateway_test.go:125: peer joined on lo0 heard nothing from a gateway transmitting on lo0
+--- FAIL: TestTransmitOnNamedInterface (3.00s)
+FAIL
+FAIL	github.com/onemindos/omos-bridge/bridges/tak	3.306s
+FAIL
+  interface: en0

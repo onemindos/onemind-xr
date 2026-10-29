@@ -1,0 +1,1 @@
+turtlebot sim on zenoh router listen=tcp/127.0.0.1:58344 ns='sim_tb1'

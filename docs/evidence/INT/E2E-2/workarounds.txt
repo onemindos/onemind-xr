@@ -1,0 +1,23 @@
+E2E-2 test-only workarounds: removed vs remaining (diff: harness/changes-from-E2E.diff)
+
+REMOVED (fixes made them unnecessary)
+- mkconf.py copied zeus into a hand-made `alice` -> now `nats_identities.py conf --test-users` (feat/nats-identities 957b8da5 test_only human).
+- mkconf.py let `hermes` log in as a STANDARD client -> hermes stays LEAFNODE only; the scripted agent connects through
+  the branch's stand-in sidecar (`leaf-conf --remote --plain`); the hub got a leafnode listener on 127.0.0.1.
+  Agent confirm now fails at the sidecar with Publish Violation (run1/logs/hermes-sidecar.log).
+- E2E_DEV policy grant `evt.map.geofence.>` -> in the A19 render now; zone.create ends executed without it.
+- E2E_DEV projector TAK_RELEASE_GROUPS=homestead + sim-x9 probe record -> probe removed; projector gets the
+  deployment.yaml value (homestead, A6-P15) and entity the deployment.yaml OWN_RELEASABLE_TO=homestead; the real sim-x1 is projected.
+- Step 6 "estop UNSUPPORTED" expectation -> the sim answers 185 with ACCEPTED; step 6 now also requires executed,
+  entity meta.armed=false and no fleet command for the pending task. A reflight (arm+takeoff, A4) follows so step 8 has a flying drone.
+
+REMAINING (still differ from a deployment)
+- MISSION_ARRIVAL=true, MISSION_ARRIVAL_RADIUS_M=25 (deployment: false pending owner decision D2-P2; proposal radius 5 m).
+  Without it the task never leaves `executing` (run2-arrival-off). This is the one remaining workaround that the result depends on.
+- POLICY_AUTHZ=local with a tuples file (deployment: openfga); hand-written principals files for policy, mission and layer;
+  ephemeral Ed25519 policy signing key (deployment: SealedSecret).
+- Streams/KV created from the branch CRs through the JetStream API with replicas forced to 1 (deployment: NACK, R3).
+- NWS source served from the recorded fixture in feat/ingest-framework by a local HTTP stub (no internet).
+- alice is the branch's test_only human (A4 needs two humans; the live layout has one).
+- Hermes is a scripted client (no model API), through the stand-in sidecar rather than the pod.
+- Web step: int.spec.ts/int.config.ts dropped into a scratch worktree of run/m4-web; credentials injected via sessionStorage.

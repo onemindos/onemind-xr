@@ -1,0 +1,33 @@
+# omos CI-equivalent checks, local, 2026-10-29T14:07:07Z, HEAD 1677a7ca on origin/feat/entity-service 13f0ebbb
+## validate_changed_yaml.py
+Changed YAML gate passed (5 files checked)
+exit=0
+## yamllint on the new and changed YAML
+exit=0
+## check_onemind_mcp_coverage.py
+All 59 Git-declared Argo Applications mapped to MCP access dispositions
+exit=0
+## validate_manifests.py (changed manifests)
+Summary: 3 resources found in 3 files - Valid: 3, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 3 manifest file(s)
+exit=0
+## kubeconform -strict platform/omos/geofence
+Summary: 2 resources found in 2 files - Valid: 2, Invalid: 0, Errors: 0, Skipped: 0
+exit=0
+## gitleaks dir (files this PR adds or changes, CI config)
+[90m10:07AM[0m [32mINF[0m [1mscanned ~238362 bytes (238.36 KB) in 39.1ms[0m
+[90m10:07AM[0m [32mINF[0m [1mno leaks found[0m
+exit=0
+## gitleaks git 13f0ebbb6ad5d7592a5fb79e46736b61c6ccd52e..HEAD
+[90m10:07AM[0m [32mINF[0m [1m1 commits scanned.[0m
+[90m10:07AM[0m [32mINF[0m [1mscanned ~195727 bytes (195.73 KB) in 82.6ms[0m
+[90m10:07AM[0m [32mINF[0m [1mno leaks found[0m
+exit=0
+## shell scripts added
+none
+## gitops unit tests
+Ran 168 tests in 14.254s
+
+OK (skipped=15)
+## A24 subject checker on the proposal
+result: PASS (0 errors)

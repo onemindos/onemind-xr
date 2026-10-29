@@ -1,0 +1,68 @@
+# Source 1 - REST JSON polling (USGS-style GeoJSON). ETag/If-None-Match, backoff on 429.
+input:
+  generate: { interval: 5s, mapping: 'root = ""' }   # empty body: the http processor sends the message as the request body
+pipeline:
+  processors:
+    - branch:
+        request_map: 'root = ""'
+        processors:
+          - cache: { resource: live, operator: get, key: etag.usgs }
+          - catch: [ { mapping: 'root = ""' } ]
+        result_map: 'meta etag = content().string()'
+    - http:
+        url: http://127.0.0.1:38080/usgs.geojson
+        verb: GET
+        headers: { If-None-Match: '${! @etag }', User-Agent: onemind-ingest-proof/0 }
+        rate_limit: rl_usgs
+        successful_on: [ 304 ]
+        backoff_on: [ 429 ]
+        retries: 3
+        retry_period: 2s
+        max_retry_backoff: 30s
+        timeout: 10s
+        extract_headers: { include_patterns: [ '(?i)^etag$' ] }
+    - catch:
+        - branch:
+            request_map: 'root = {"fetchedAt": null, "code": @http_status_code.or("0"), "count": 0, "lastError": error(), "errorAt": now()}'
+            processors:
+              - cache: { resource: live, operator: set, key: "status.usgs.error", value: '${! content() }' }
+        - mapping: root = deleted()
+    - branch:
+        request_map: 'root = {"fetchedAt": now(), "code": @http_status_code.or("0"), "count": if @http_status_code == "200" { this.features.length() } else { 0 }, "lastError": null}'
+        processors:
+          - cache: { resource: live, operator: set, key: "status.usgs", value: '${! content() }' }
+    - branch:
+        request_map: 'root = if @http_status_code == "200" && @Etag.or("") != "" { @Etag } else { deleted() }'
+        processors:
+          - cache: { resource: live, operator: set, key: etag.usgs, value: '${! content() }' }
+    - mapping: 'root = if @http_status_code == "304" { deleted() } else { this.features }'
+    - unarchive: { format: json_array }
+    - json_schema:
+        schema: |
+          {"type":"object","required":["id","properties","geometry"],
+           "properties":{"id":{"type":"string"},
+             "properties":{"type":"object","required":["mag","time"],"properties":{"mag":{"type":"number"},"time":{"type":"integer"}}},
+             "geometry":{"type":"object","required":["coordinates"]}}}
+    - mapping: |
+        meta subject = "intel.seismic.usgs.event"
+        meta msgid = "usgs:" + this.id
+        root = {"id": this.id, "mag": this.properties.mag, "place": this.properties.place,
+                "lon": this.geometry.coordinates.index(0), "lat": this.geometry.coordinates.index(1),
+                "time": this.properties.time, "source": "usgs", "fetchedAt": now()}
+    - catch:
+        - mapping: |
+            meta subject = "evt.feed.usgs.rejected"
+            meta msgid = "rej:usgs:" + content().string().hash("xxhash64").encode("hex") + ":" + timestamp_unix_nano().string()
+            root = {"source": "usgs", "reason": error(), "raw": content().string().slice(0, 2000), "at": now()}
+    - dedupe: { cache: seen, key: '${! @msgid }' }   # in-memory seen-set; restart replays are caught by Nats-Msg-Id
+output:
+  retry:
+    max_retries: 0          # forever: a NATS outage blocks (backpressure), never drops
+    backoff: { initial_interval: 500ms, max_interval: 10s, max_elapsed_time: 0s }
+    output:
+      nats_jetstream:
+        urls: [ "${NATS_URL:nats://127.0.0.1:34222}" ]
+        subject: ${! @subject }
+        headers:
+          Nats-Msg-Id: ${! @msgid }
+        max_in_flight: 64

@@ -1,0 +1,25 @@
+                await gate.wait()      # Nav2 answers slowly (zenoh query up to 3 s)
+                return await orig(goal)
+            tr.send_goal = slow
+            b.on_odom(odom())
+            b._spawn(b.handle_command(*build(PRIV, verb="goto", data=target(5, 0), now=clock.t)))
+            b._spawn(b.handle_command(*build(PRIV, verb="goto", data=target(-5, 0), now=clock.t)))
+            for _ in range(10): await asyncio.sleep(0)
+            await b.handle_command(*build(PRIV, verb="estop", now=clock.t))
+            gate.set()
+            await settle(b)
+            return b, bus, tr
+        b, bus, tr = asyncio.run(go())
+        print("estopped:", b.estopped, "mode:", b.mode, "goal:", b.goal is not None, "goals sent:", len(tr.goals))
+        for o in outcomes(bus): print(o)
+        # Safety expectation: after an executed estop no goal is sent and the robot has no goal.
+>       assert len(tr.goals) == 0 and b.goal is None, "goto executed after e-stop latched"
+E       AssertionError: goto executed after e-stop latched
+E       assert (2 == 0)
+E        +  where 2 = len([PoseStamped(header=Header(stamp=Time(sec=1793281626, nanosec=341872000), frame_id='map'), pose=Pose(x=5.0000000003153...0), frame_id='map'), pose=Pose(x=-5.0000000003153895, y=0.0, z=0.0, qx=0.0, qy=0.0, qz=1.0, qw=6.123233995736766e-17))])
+E        +    where [PoseStamped(header=Header(stamp=Time(sec=1793281626, nanosec=341872000), frame_id='map'), pose=Pose(x=5.0000000003153...0), frame_id='map'), pose=Pose(x=-5.0000000003153895, y=0.0, z=0.0, qx=0.0, qy=0.0, qz=1.0, qw=6.123233995736766e-17))] = <test_bridge.FakeTransport object at 0x10b0f6450>.goals
+
+../../../../../../.run/tmp-h3review/repro/test_repro_estop_race.py:29: AssertionError
+=========================== short test summary info ============================
+FAILED ../../../../../../.run/tmp-h3review/repro/test_repro_estop_race.py::test_estop_during_inflight_and_queued_goto
+1 failed in 0.07s

@@ -1,0 +1,32 @@
+[95301] 2026/10/29 09:48:35.871527 [INF] Starting nats-server
+[95301] 2026/10/29 09:48:35.871666 [INF]   Version:  2.15.2
+[95301] 2026/10/29 09:48:35.871675 [INF]   Git:      [5a815f1]
+[95301] 2026/10/29 09:48:35.871680 [INF]   Name:     NAYYSBDKB7U4AVVTW5IMPSTMUGWLTWS76SY55URJE4U5BD5D4XWVPB5W
+[95301] 2026/10/29 09:48:35.871689 [INF]   Node:     CQ4VEaV5
+[95301] 2026/10/29 09:48:35.871693 [INF]   ID:       NAYYSBDKB7U4AVVTW5IMPSTMUGWLTWS76SY55URJE4U5BD5D4XWVPB5W
+[95301] 2026/10/29 09:48:35.871699 [WRN] Plaintext passwords detected, use nkeys or bcrypt
+[95301] 2026/10/29 09:48:35.871713 [INF] Using configuration file: /Users/danielcarku/Desktop/work/.run/tmp-d2/e2e-patched/nats.conf (sha256:0466e50e1951e701397caab2f182fc588b8d168e15169d43f11913c2736e4029)
+[95301] 2026/10/29 09:48:35.871900 [INF] Starting JetStream
+[95301] 2026/10/29 09:48:35.872078 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[95301] 2026/10/29 09:48:35.872085 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[95301] 2026/10/29 09:48:35.872089 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[95301] 2026/10/29 09:48:35.872093 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[95301] 2026/10/29 09:48:35.872096 [INF] 
+[95301] 2026/10/29 09:48:35.872101 [INF]          https://docs.nats.io/jetstream
+[95301] 2026/10/29 09:48:35.872105 [INF] 
+[95301] 2026/10/29 09:48:35.872108 [INF] ---------------- JETSTREAM ----------------
+[95301] 2026/10/29 09:48:35.872111 [INF]   Strict:          true
+[95301] 2026/10/29 09:48:35.872119 [INF]   Max Memory:      64.00 MB
+[95301] 2026/10/29 09:48:35.872124 [INF]   Max Storage:     512.00 MB
+[95301] 2026/10/29 09:48:35.872127 [INF]   Store Directory: "/Users/danielcarku/Desktop/work/.run/tmp-d2/e2e-patched/js/jetstream"
+[95301] 2026/10/29 09:48:35.872130 [INF]   API Level:       5
+[95301] 2026/10/29 09:48:35.872134 [INF] -------------------------------------------
+[95301] 2026/10/29 09:48:35.872583 [INF] Took 670.75µs to start JetStream
+[95301] 2026/10/29 09:48:35.872659 [INF] Listening for client connections on 127.0.0.1:60106
+[95301] 2026/10/29 09:48:35.872670 [INF] Server is ready
+[95301] 2026/10/29 09:48:39.224380 [ERR] 127.0.0.1:60175 - cid:42 - "v1.53.1:go:e2e-hermes" - "AGENTS/user:hermes" - Publish Violation - Subject "svc.policy.task.confirm"
+[95301] 2026/10/29 09:49:21.831768 [INF] Trapped "interrupt" signal
+[95301] 2026/10/29 09:49:21.884153 [INF] Initiating Shutdown...
+[95301] 2026/10/29 09:49:21.884202 [INF] Initiating JetStream Shutdown...
+[95301] 2026/10/29 09:49:21.909984 [INF] JetStream Shutdown
+[95301] 2026/10/29 09:49:21.910110 [INF] Server Exiting..

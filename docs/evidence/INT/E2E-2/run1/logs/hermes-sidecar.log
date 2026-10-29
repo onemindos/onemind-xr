@@ -1,0 +1,18 @@
+[86025] 2026/10/29 13:01:21.982769 [INF] Starting nats-server
+[86025] 2026/10/29 13:01:21.982887 [INF]   Version:  2.15.2
+[86025] 2026/10/29 13:01:21.982895 [INF]   Git:      [5a815f1]
+[86025] 2026/10/29 13:01:21.982899 [INF]   Name:     hermes-legacy-leaf
+[86025] 2026/10/29 13:01:21.982907 [INF]   ID:       NARGQGXWHRBKTETASB5IU5DLGWVLICPON3W3PW4T5NHIAPYODSIBIM67
+[86025] 2026/10/29 13:01:21.982915 [WRN] Plaintext passwords detected, use nkeys or bcrypt
+[86025] 2026/10/29 13:01:21.982929 [INF] Using configuration file: /Users/danielcarku/Desktop/work/.run/tmp-e2e/run/hermes-standin.conf (sha256:a2d6023ec26d0429d653660fcaf76197169650fcccc32ba16de9c05f3291fa2a)
+[86025] 2026/10/29 13:01:21.983170 [INF] Starting http monitor on 127.0.0.1:55609
+[86025] 2026/10/29 13:01:21.983264 [INF] Listening for client connections on 127.0.0.1:55608
+[86025] 2026/10/29 13:01:21.983274 [INF] Server is ready
+[86025] 2026/10/29 13:01:21.983546 [INF] 127.0.0.1:55601 - lid:6 - Leafnode connection created for account: OMOS 
+[86025] 2026/10/29 13:01:21.985093 [INF] 127.0.0.1:55601 - lid:6 - JetStream using domains: local "", remote ""
+[86025] 2026/10/29 13:01:44.730976 [ERR] 127.0.0.1:56043 - cid:7 - "v1.53.1:go:e2e-hermes" - "OMOS/user:local" - Publish Violation - Subject "svc.policy.task.confirm"
+[86025] 2026/10/29 13:01:46.733193 [ERR] 127.0.0.1:56043 - cid:7 - "v1.53.1:go:e2e-hermes" - "OMOS/user:local" - Publish Violation - Subject "svc.policy.command.confirm"
+[86025] 2026/10/29 13:05:46.642758 [INF] Trapped "interrupt" signal
+[86025] 2026/10/29 13:05:46.642848 [INF] Initiating Shutdown...
+[86025] 2026/10/29 13:05:46.642904 [INF] 127.0.0.1:55601 - lid:6 - Leafnode connection closed: Server Shutdown - Remote: NAXBK2AI4JJHU7HJJJIDWI3IKP5AVRC3RCQSI2F5IJV2MO2NXLGBGFAJ
+[86025] 2026/10/29 13:05:46.642953 [INF] Server Exiting..

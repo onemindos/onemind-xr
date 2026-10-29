@@ -1,0 +1,9 @@
+=== RUN   TestProbeTwoDronesSameSysid
+    probe_test.go:25: sysid case: first="sim-x1" second="sim-x1"
+--- PASS: TestProbeTwoDronesSameSysid (0.00s)
+=== RUN   TestProbeTwoEUDsSameCallsign
+    probe_test.go:38: second lat=30.5 sources=2
+    probe_test.go:39: callsign case: first="tak-android-aaaa" second="tak-android-aaaa"
+--- PASS: TestProbeTwoEUDsSameCallsign (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/engine	0.250s

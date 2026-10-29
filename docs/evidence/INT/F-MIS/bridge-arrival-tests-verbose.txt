@@ -1,0 +1,20 @@
+=== RUN   TestGotoArrivalReportsDoneOK
+2026/10/29 13:30:01.016481 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:50925
+2026/10/29 13:30:01.137926 [bridge-mavlink] command 51e9146b-294e-4c7e-9d7a-78088738d4a0 goto outcome=acknowledged code= 
+2026/10/29 13:30:01.138517 [bridge-mavlink] command 51e9146b-294e-4c7e-9d7a-78088738d4a0 goto outcome=executed code= 
+2026/10/29 13:30:01.466120 [bridge-mavlink] task tsk-arrive: arrived 3.0 m / 2.0 m from the goto target of command 51e9146b-294e-4c7e-9d7a-78088738d4a0
+--- PASS: TestGotoArrivalReportsDoneOK (0.87s)
+=== RUN   TestGotoArrivalSupersededOrOff
+2026/10/29 13:30:01.888103 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:56669
+2026/10/29 13:30:01.903166 [bridge-mavlink] command 0505f620-bf5f-4732-8196-f7f11e8069ac goto outcome=acknowledged code= 
+2026/10/29 13:30:01.903726 [bridge-mavlink] command 0505f620-bf5f-4732-8196-f7f11e8069ac goto outcome=executed code= 
+2026/10/29 13:30:01.907139 [bridge-mavlink] command a5380266-1561-409b-86eb-277e30fc32b7 rtl outcome=acknowledged code= 
+2026/10/29 13:30:01.907569 [bridge-mavlink] command a5380266-1561-409b-86eb-277e30fc32b7 rtl outcome=executed code= 
+2026/10/29 13:30:01.911114 [bridge-mavlink] command 0463895e-825b-4e32-80c4-f6adcb66d7d0 goto outcome=acknowledged code= 
+2026/10/29 13:30:01.911505 [bridge-mavlink] command 0463895e-825b-4e32-80c4-f6adcb66d7d0 goto outcome=executed code= 
+2026/10/29 13:30:01.915603 [bridge-mavlink] command dc61610d-8945-43aa-8bbc-81f13e50016e goto outcome=acknowledged code= 
+2026/10/29 13:30:01.916095 [bridge-mavlink] command dc61610d-8945-43aa-8bbc-81f13e50016e goto outcome=executed code= 
+2026/10/29 13:30:02.318364 [bridge-mavlink] MAVLink channel closed: udp:127.0.0.1:56669
+--- PASS: TestGotoArrivalSupersededOrOff (0.63s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink	2.804s

@@ -1,0 +1,6 @@
+Helm render check	pass	40s	https://github.com/onemindos/omos/actions/runs/40867395040/job/123425511410	
+Kubernetes manifest schema (kubeconform)	pass	10s	https://github.com/onemindos/omos/actions/runs/40867395040/job/123425510868	
+Lint & Validate	pass	20s	https://github.com/onemindos/omos/actions/runs/40867395040/job/123425511196	
+Secret scan (gitleaks)	pass	8s	https://github.com/onemindos/omos/actions/runs/40867395040/job/123425511375	
+
+[exited with code 0]

@@ -1,0 +1,20 @@
+$ gh api -H "Accept: application/vnd.github.raw" "repos/TAK-Product-Center/VR/contents/LICENSE?ref=4bd384978b48b0a46e7f17b272933a152a61c013" | head -5
+                    GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+
+$ gh api ... Game/Plugins/VH_COT/VH_COT.uplugin?ref=4bd38497... | grep CreatedBy
+	"VersionName" : "1.0",
+	"CreatedBy" : "Virtual Heroes, a division of ARA",
+	"CreatedByURL" : "http://www.virtualheroes.com",
+
+$ gh api repos/TAK-Product-Center/VR --jq .license.spdx_id
+GPL-3.0
+$ wc -l of the files read for the port
+     247 VH_COTEvent.h
+     383 VH_COTEvent.cpp
+     102 VH_MilStd2525.h
+     405 VH_MilStd2525.cpp
+    1137 total

@@ -1,0 +1,106 @@
+# Video lane proofs, 2026-10-29 (build machine: M1 Max, macOS 26.5; MediaMTX v1.21.3; ffmpeg 8.1.1)
+# Credentials were random per-run test values, redacted as $PUBPASS / $RDPASS. Reproduce with the files in this folder.
+
+### Loop 1: ffmpeg testsrc -> shared MediaMTX RTSP 127.0.0.1:8554/m0-video-test -> HLS readback  (2026-10-29T08:16:03Z)
+GET /m0-video-test/index.m3u8 -> HTTP 302
+--- ffprobe of HLS readback
+program|stream|codec_name=aac|sample_rate=48000|r_frame_rate=0/0
+stream|codec_name=h264|width=1280|height=720|r_frame_rate=30/1
+
+stream|codec_name=aac|sample_rate=48000|r_frame_rate=0/0
+stream|codec_name=h264|width=1280|height=720|r_frame_rate=30/1
+--- capture 5 s of HLS to mp4 and probe
+stream|codec_name=h264
+stream|codec_name=aac
+format|duration=5.027000|size=4861790
+--- RTSP readback (ffprobe)
+[h264 @ 0x728c4c380] Missing reference picture, default is 0
+stream|codec_name=h264|width=1280|height=720
+stream|codec_name=aac
+--- one frame from HLS
+-rw-r--r--@ 1 danielcarku  staff  135702 Oct 29 04:16 frame.png
+
+### Loop 2: lane MediaMTX v1.21.3 with internal auth + fMP4 recording (2026-10-29T08:16:56Z); credentials redacted as $PUBPASS/$RDPASS
+--- (a) anonymous RTSP publish to drone/sim-x1 (expect rejection)
+[rtsp @ 0xae6c1c500] method ANNOUNCE failed: 401 (Unauthorized)
+[out#0/rtsp @ 0xae7020900] Could not write header (incorrect codec parameters ?): Server returned 401 Unauthorized (authorization failed)
+--- (f) authenticated publisher to a path outside its permission other/x (expect rejection)
+[out#0/rtsp @ 0x9f5008fc0] Could not write header (incorrect codec parameters ?): Server returned 400 Bad Request
+[vf#0:0 @ 0x9f4c20000] Error sending frames to consumers: Server returned 400 Bad Request
+--- start publishers: RTSP drone/sim-x1, RTMP cam/rtmp-test, SRT drone/srt-test, WHIP cam/whip-test (35 s each)
+--- (g) API /v3/paths/list
+cam/rtmp-test ready= True source= rtmpConn tracks= ['H264', 'MPEG-4 Audio']
+drone/sim-x1 ready= True source= rtspSession tracks= ['H264', 'MPEG-4 Audio']
+--- (h) HLS without credentials (expect 401)
+HTTP 302
+--- (h) HLS with viewer credentials, each ingest protocol
+drone/sim-x1 via HLS: aac h264,1280,720  aac h264,1280,720 
+cam/rtmp-test via HLS: aac h264,1280,720  aac h264,1280,720 
+drone/srt-test via HLS: http://viewer:$RDPASS@127.0.0.1:18888/drone/srt-test/index.m3u8: Server returned 404 Not Found 
+cam/whip-test via HLS: http://viewer:$RDPASS@127.0.0.1:18888/cam/whip-test/index.m3u8: Server returned 404 Not Found 
+--- RTSP read of WHIP-published path (protocol conversion)
+[rtsp @ 0xc4ac44000] method DESCRIBE failed: 404 (Not Found) rtsp://viewer:$RDPASS@127.0.0.1:18554/cam/whip-test: Server returned 404 Not Found 
+--- HLS 302 explained: MediaMTX v1.21 cookieCheck redirect. Following redirects with a cookie jar:
+anon: HTTP 401
+viewer: HTTP 404
+--- (e) WHIP publish retry with Basic credentials in URL userinfo
+--- (d) SRT ingest: add path drone/sim-x1 forward -> srt://127.0.0.1:18890 streamid publish:drone/srt-test (MediaMTX SRT client, since Homebrew ffmpeg 8.1.1 has no libsrt)
+PATCH path config -> HTTP 200 {"status":"ok"}
+cam/whip-test ready= True source= webRTCSession tracks= ['Opus', 'H264']
+drone/srt-test via HLS: http://viewer:X@127.0.0.1:18888/drone/srt-test/index.m3u8: Server returned 404 Not Found 
+cam/whip-test via HLS:  h264,1280,720 opus 
+RTSP read of WHIP path: opus h264 
+--- (d) SRT retry: POST paths/add drone/srt-src with forward -> SRT drone/srt-test: HTTP 200
+drone/srt-src ready= True source= rtspSession tracks= ['H264', 'MPEG-4 Audio']
+drone/srt-test ready= True source= srtConn tracks= ['H264', 'MPEG-4 Audio']
+drone/srt-test via HLS:  aac h264,1280,720 
+drone/srt-test via RTSP: h264 aac 
+--- (i) recordings on disk (fMP4, 10 s segments)
+recordings/cam/rtmp-test/2026-10-29_04-16-58-605575.mp4
+recordings/cam/rtmp-test/2026-10-29_04-17-06-586797.mp4
+recordings/cam/rtmp-test/2026-10-29_04-17-16-591182.mp4
+recordings/cam/rtmp-test/2026-10-29_04-17-26-597146.mp4
+recordings/cam/whip-test/2026-10-29_04-17-42-276399.mp4
+recordings/cam/whip-test/2026-10-29_04-17-51-304167.mp4
+recordings/cam/whip-test/2026-10-29_04-18-00-826995.mp4
+recordings/drone/sim-x1/2026-10-29_04-16-57-105156.mp4
+recordings/drone/sim-x1/2026-10-29_04-17-06-692748.mp4
+recordings/drone/sim-x1/2026-10-29_04-17-16-697314.mp4
+recordings/drone/sim-x1/2026-10-29_04-17-26-702648.mp4
+recordings/drone/srt-src/2026-10-29_04-18-06-532682.mp4
+recordings/drone/srt-src/2026-10-29_04-18-16-116243.mp4
+recordings/drone/srt-src/2026-10-29_04-18-26-121576.mp4
+recordings/drone/srt-test/2026-10-29_04-17-42-409549.mp4
+recordings/drone/srt-test/2026-10-29_04-17-47-685508.mp4
+recordings/drone/srt-test/2026-10-29_04-17-47-841917.mp4
+recordings/drone/srt-test/2026-10-29_04-17-53-011481.mp4
+recordings/drone/srt-test/2026-10-29_04-17-58-352713.mp4
+recordings/drone/srt-test/2026-10-29_04-17-58-514559.mp4
+136M	recordings
+probe recordings/drone/sim-x1/2026-10-29_04-16-57-105156.mp4: h264 aac 9.999989 
+--- (i) playback server /list for drone/sim-x1 (viewer)
+[{"start":"2026-10-29T04:16:57.105156-04:00","duration":34.584492,"url":"http://127.0.0.1:19996/get?duration=34.584492\u0026path=drone%2Fsim-x1\u0026start=2026-10-29T04%3A16%3A57.105156-04%3A00"}]
+--- playback /list anonymous: HTTP 401
+playback /get 5 s fmp4: h264 aac 5.024188,4886614 
+--- metrics sample
+paths{name="drone/srt-src",state="ready"} 1
+paths{name="drone/srt-test",state="ready"} 1
+paths_bytes_received{name="drone/srt-src",state="ready"} 22018704
+paths_bytes_received{name="drone/srt-test",state="ready"} 21858442
+--- (j) KLV (MISB ST 0601, synthetic) + H.264 in MPEG-TS -> MediaMTX path source udp+mpegts -> read back
+add path: {"status":"ok"} HTTP 200
+drone/klv-test ready= True source= mpegtsSource tracks= ['H264', 'KLV']
+RTSP read (ffprobe): (eval):7: command not found: timeout 
+HLS read (lowLatency fMP4 variant):  h264 
+recording: recordings/drone/klv-test/2026-10-29_04-21-06-156209.ts -> h264 klv  h264 klv 
+ST 0601 packets: 101, checksum ok: 101, bad: 0
+first: {'time_us': 1793262052396849, 'heading': 90.001373, 'sensor_lat': 40.0, 'sensor_lon': -74.9987, 'sensor_alt_m': 119.975586, 'hfov': 60.0, 'vfov': 34.000458, 'frame_center_lat': 40.0, 'frame_center_lon': -75.0, 'ls_version': 19}
+last:  {'time_us': 1793262062396849, 'heading': 149.998627, 'sensor_lat': 40.000866, 'sensor_lon': -74.99935, 'sensor_alt_m': 119.975586, 'hfov': 60.0, 'vfov': 34.000458, 'frame_center_lat': 40.0, 'frame_center_lon': -75.0, 'ls_version': 19}
+RTSP DESCRIBE/probe of drone/klv-test: h264,video unknown,data 
+RTSP readback TS streams:  bin_data h264 
+--- (k) LL-HLS live-edge lag: wall clock minus PROGRAM-DATE-TIME of newest part (1 s segments, 200 ms parts, GOP 1 s)
+live-edge lag = 0.06 s  (#EXT-X-PART-INF:PART-TARGET=0.20000)
+live-edge lag = 0.10 s  (#EXT-X-PART-INF:PART-TARGET=0.20000)
+live-edge lag = 0.16 s  (#EXT-X-PART-INF:PART-TARGET=0.20000)
+live-edge lag = 0.20 s  (#EXT-X-PART-INF:PART-TARGET=0.20000)
+live-edge lag = 0.07 s  (#EXT-X-PART-INF:PART-TARGET=0.20000)

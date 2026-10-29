@@ -1,0 +1,16 @@
+{
+  "goto": {
+    "action_id": "act-01m63ymyhk95pedrkr7yk944cb",
+    "command_id": "b7cd3c0d-307e-428c-9883-f6a0727ad40b",
+    "arrived_within_m": 0.315
+  },
+  "agent_confirm": "agent_cannot_confirm",
+  "client_publish_cmd": "permissions violation; bridge received nothing",
+  "replay": "replayed",
+  "unsigned": "bad_signature",
+  "bridge_fence": "precondition_failed/keep_in (policy approved act-01m63yn3xk3bq3gc9bgtsvhahf)",
+  "policy_fence": "precondition_failed",
+  "non_sim": "not_simulated",
+  "estop_latch": "estopped",
+  "invariant": "6 policy commands, all human-approved"
+}

@@ -1,0 +1,39 @@
+[98438] 2026/10/29 13:31:41.595074 [INF] Starting nats-server
+[98438] 2026/10/29 13:31:41.595177 [INF]   Version:  2.15.2
+[98438] 2026/10/29 13:31:41.595180 [INF]   Git:      [5a815f1]
+[98438] 2026/10/29 13:31:41.595181 [INF]   Name:     NAHNI4OLD5TVOXPOAR2FQHKPT4FIOW4AYA6B7HAPDPV5K6J5ASXIEGPU
+[98438] 2026/10/29 13:31:41.595182 [INF]   Node:     a2nIujLT
+[98438] 2026/10/29 13:31:41.595184 [INF]   ID:       NAHNI4OLD5TVOXPOAR2FQHKPT4FIOW4AYA6B7HAPDPV5K6J5ASXIEGPU
+[98438] 2026/10/29 13:31:41.595188 [WRN] Plaintext passwords detected, use nkeys or bcrypt
+[98438] 2026/10/29 13:31:41.595203 [INF] Using configuration file: /Users/danielcarku/Desktop/work/.run/tmp-f-alert/a19-vUmaLC/nats.conf (sha256:6085bd1c13568891fdf71d8fc2aabb18330516bfef59b605b4e52aee1868c1b0)
+[98438] 2026/10/29 13:31:41.595433 [INF] Starting JetStream
+[98438] 2026/10/29 13:31:41.595626 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[98438] 2026/10/29 13:31:41.595629 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[98438] 2026/10/29 13:31:41.595631 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[98438] 2026/10/29 13:31:41.595632 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[98438] 2026/10/29 13:31:41.595632 [INF] 
+[98438] 2026/10/29 13:31:41.595634 [INF]          https://docs.nats.io/jetstream
+[98438] 2026/10/29 13:31:41.595634 [INF] 
+[98438] 2026/10/29 13:31:41.595635 [INF] ---------------- JETSTREAM ----------------
+[98438] 2026/10/29 13:31:41.595636 [INF]   Strict:          true
+[98438] 2026/10/29 13:31:41.595645 [INF]   Max Memory:      64.00 MB
+[98438] 2026/10/29 13:31:41.595646 [INF]   Max Storage:     256.00 MB
+[98438] 2026/10/29 13:31:41.595647 [INF]   Store Directory: "/Users/danielcarku/Desktop/work/.run/tmp-f-alert/a19-vUmaLC/js/jetstream"
+[98438] 2026/10/29 13:31:41.595650 [INF]   API Level:       5
+[98438] 2026/10/29 13:31:41.595651 [INF] -------------------------------------------
+[98438] 2026/10/29 13:31:41.596425 [INF] Took 986.584µs to start JetStream
+[98438] 2026/10/29 13:31:41.596502 [INF] Listening for websocket clients on ws://127.0.0.1:55208
+[98438] 2026/10/29 13:31:41.596504 [WRN] Websocket not configured with TLS. DO NOT USE IN PRODUCTION!
+[98438] 2026/10/29 13:31:41.596536 [INF] Listening for client connections on 127.0.0.1:55207
+[98438] 2026/10/29 13:31:41.596544 [INF] Server is ready
+[reply] 13:31:41 Listening on "svc.geofence.alerts" in group "NATS-RPLY-22"
+[reply] 13:31:42 [#0] Received on subject "svc.geofence.alerts":
+13:31:42 Nats-Request-Info: {"start":"2026-10-29T17:31:42.170382Z","host":"127.0.0.1","id":9,"acc":"CLIENT","user":"zeus","name":"f-alert-zeus","lang":"nats.ws","ver":"3.4.0","rtt":5117000,"server":"NAHNI4OLD5TVOXPOAR2FQHKPT4FIOW4AYA6B7HAPDPV5K6J5ASXIEGPU","kind":"Client","client_type":"websocket"}
+[98438] 2026/10/29 13:31:42.374496 [ERR] 127.0.0.1:55229 - wid:12 - "v3.4.0:nats.ws:f-alert-zeus" - "CLIENT/user:zeus" - Subscription Violation - Subject "ent.alert.*.state", SID 1
+[98438] 2026/10/29 13:31:42.377195 [ERR] 127.0.0.1:55230 - wid:13 - "v3.4.0:nats.ws:f-alert-role-newcomer" - "CLIENT/user:role-newcomer" - Subscription Violation - Subject "evt.so.alert.>", SID 1
+[98438] 2026/10/29 13:31:42.377296 [ERR] 127.0.0.1:55230 - wid:13 - "v3.4.0:nats.ws:f-alert-role-newcomer" - "CLIENT/user:role-newcomer" - Publish Violation - Subject "svc.geofence.alerts"
+[98438] 2026/10/29 13:31:44.455558 [INF] Trapped "terminated" signal
+[98438] 2026/10/29 13:31:44.455638 [INF] Initiating Shutdown...
+[98438] 2026/10/29 13:31:44.455654 [INF] Initiating JetStream Shutdown...
+[98438] 2026/10/29 13:31:44.455660 [INF] JetStream Shutdown
+[98438] 2026/10/29 13:31:44.455781 [INF] Server Exiting..

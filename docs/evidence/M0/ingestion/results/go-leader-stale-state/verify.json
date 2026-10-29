@@ -1,0 +1,215 @@
+{
+ "label": "go-leader",
+ "sources": {
+  "usgs": {
+   "stored": 3,
+   "distinctMsgIds": 3,
+   "duplicates": 0,
+   "emitted": 16,
+   "missingVsEmitted": 13,
+   "missingSample": [
+    "q10",
+    "q11",
+    "q12",
+    "q13",
+    "q14"
+   ],
+   "storedSeqRange": [
+    0,
+    2
+   ],
+   "storedSeqGaps": []
+  },
+  "nws": {
+   "stored": 0,
+   "distinctMsgIds": 0,
+   "duplicates": 0,
+   "emitted": 18,
+   "missingVsEmitted": 18,
+   "missingSample": [
+    "a10",
+    "a11",
+    "a12",
+    "a13",
+    "a14"
+   ]
+  },
+  "eonet": {
+   "stored": 0,
+   "distinctMsgIds": 0,
+   "duplicates": 0,
+   "emitted": 0
+  },
+  "ais": {
+   "stored": 4993,
+   "distinctMsgIds": 4993,
+   "duplicates": 0,
+   "emitted": 3167,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  },
+  "cap": {
+   "stored": 36,
+   "distinctMsgIds": 36,
+   "duplicates": 0,
+   "emitted": 23,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    1,
+    36
+   ],
+   "storedSeqGaps": []
+  },
+  "mqtt": {
+   "stored": 357,
+   "distinctMsgIds": 258,
+   "duplicates": 99,
+   "emitted": 80,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    1,
+    258
+   ],
+   "storedSeqGaps": []
+  },
+  "celestrak": {
+   "stored": 0,
+   "distinctMsgIds": 0,
+   "duplicates": 0,
+   "emitted": 10
+  },
+  "gdacs": {
+   "stored": 0,
+   "distinctMsgIds": 0,
+   "duplicates": 0,
+   "emitted": 8,
+   "missingVsEmitted": 8,
+   "missingSample": [
+    "g0",
+    "g1",
+    "g2",
+    "g3",
+    "g4"
+   ]
+  },
+  "outages": {
+   "stored": 0,
+   "distinctMsgIds": 0,
+   "duplicates": 0,
+   "emitted": 6,
+   "missingVsEmitted": 6,
+   "missingSample": [
+    "o0",
+    "o1",
+    "o2",
+    "o3",
+    "o4"
+   ]
+  }
+ },
+ "rejects": [],
+ "latestStatus": {
+  "ais": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:14.987786-04:00",
+   "ageSec": 0.002416208,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "cap": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:13.205332-04:00",
+   "ageSec": 1.7848763330000001,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "celestrak": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:07.062388-04:00",
+   "ageSec": 7.9278590829999995,
+   "count": 0,
+   "lastError": null,
+   "stale": false
+  },
+  "eonet": {
+   "engine": "go",
+   "fetchedAt": null,
+   "ageSec": null,
+   "count": 0,
+   "lastError": null,
+   "stale": true
+  },
+  "gdacs": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:07.063734-04:00",
+   "ageSec": 7.926501417,
+   "count": 10,
+   "lastError": null,
+   "stale": false
+  },
+  "mediamtx": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:07.062361-04:00",
+   "ageSec": 7.927884042,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "mqtt": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:14.684609-04:00",
+   "ageSec": 0.305593375,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "nws": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:13.008732-04:00",
+   "ageSec": 1.981474416,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "outages": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:07.064684-04:00",
+   "ageSec": 7.925561166,
+   "count": 5,
+   "lastError": null,
+   "stale": false
+  },
+  "tiles": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:07.061226-04:00",
+   "ageSec": 7.929010583,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "usgs": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T04:56:12.063735-04:00",
+   "ageSec": 2.926482375,
+   "count": 20,
+   "lastError": null,
+   "stale": false
+  }
+ },
+ "videoRegistryKV": {
+  "sim-cam1": {
+   "engine": "go",
+   "path": "sim-cam1",
+   "ready": true,
+   "rtsp": "rtsp://127.0.0.1:38554/sim-cam1",
+   "seenAt": "2026-10-29T04:56:17.060064-04:00",
+   "tracks": [
+    "H264"
+   ]
+  }
+ }
+}

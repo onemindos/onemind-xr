@@ -1,0 +1,1 @@
+ok  	github.com/onemindos/omos/services/policy/internal/policy	151.106s

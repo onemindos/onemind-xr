@@ -1,0 +1,8 @@
+Independent review of omos PR #558 (head 47f8037a), 2026-10-29.
+Blocker (environment): downloading the Redpanda Connect 4.103.1 binary (the version of the cluster image digest)
+to lint the grammar pipelines on the cluster engine was denied by the permission system. Not worked around.
+The replay passed on 4.115.1 only. Owner step: run
+  platform/data/redpanda-connect/test/replay.sh with REDPANDA_CONNECT pointing at a 4.103.1 binary
+  (or `redpanda-connect lint` inside the cluster image) before Stage 1. Expected: RESULT: PASS (0 failed).
+Local results: unittest 7/7 OK (unittest.txt); replay.sh RESULT: PASS 0 failed (replay.txt, replay/logs);
+yamllint OK; validate_changed_yaml OK; kubeconform 3/3 valid; gitleaks no leaks; GitHub CI 4/4 pass.

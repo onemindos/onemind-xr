@@ -1,0 +1,41 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.14, pytest-9.2.0, pluggy-1.7.0 -- /Users/danielcarku/Desktop/work/.tools/py/bin/python
+rootdir: /Users/danielcarku/Desktop/work/wt/i2-hermes-tools/platform/hermes/agent/plugins/onemind-bus/tests
+configfile: pytest.ini
+collecting ... collected 33 items
+
+test_account_layout.py::test_a19_stream_import_delivers_but_loses_the_ack PASSED [  3%]
+test_account_layout.py::test_i2p2_service_import_returns_the_ack PASSED  [  6%]
+test_policy_integration.py::test_1_hermes_proposal_waits_for_a_human PASSED [  9%]
+test_policy_integration.py::test_2_hermes_cannot_confirm PASSED          [ 12%]
+test_policy_integration.py::test_3_only_a_human_confirm_dispatches PASSED [ 15%]
+test_policy_integration.py::test_4_follow_that_person_is_denied_and_recorded PASSED [ 18%]
+test_policy_integration.py::test_5_invariant_no_fleet_command_without_a_human_approval PASSED [ 21%]
+test_scripted_model.py::test_d11_ten_scripted_requests_each_change_the_view PASSED [ 24%]
+test_scripted_model.py::test_d11_without_a_map_client_ack_the_model_reports_failure PASSED [ 27%]
+test_scripted_model.py::test_i2_spatial_question_answered_with_bus_tools_only PASSED [ 30%]
+test_scripted_model.py::test_d5_scripted_refusal_follow_that_person PASSED [ 33%]
+test_tools.py::test_registers_the_expected_tools_and_nothing_that_confirms_or_publishes PASSED [ 36%]
+test_tools.py::test_subject_allowlist_refuses_everything_else PASSED     [ 39%]
+test_tools.py::test_retire_flag_blocks_nats_publish_by_default_and_can_be_turned_off PASSED [ 42%]
+test_tools.py::test_geo_helpers PASSED                                   [ 45%]
+test_tools.py::test_bus_down_is_reported_not_raised PASSED               [ 48%]
+test_tools.py::test_entity_get PASSED                                    [ 51%]
+test_tools.py::test_entity_query_near_an_area_moving_only PASSED         [ 54%]
+test_tools.py::test_entity_query_by_name_and_type PASSED                 [ 57%]
+test_tools.py::test_layer_list_meta_snapshot PASSED                      [ 60%]
+test_tools.py::test_command_propose_sends_an_agent_request_on_behalf_of_the_human PASSED [ 63%]
+test_tools.py::test_task_family_routing_and_missing_operator PASSED      [ 66%]
+test_tools.py::test_person_reference_is_denied_and_reported PASSED       [ 69%]
+test_tools.py::test_action_status PASSED                                 [ 72%]
+test_tools.py::test_map_fly_to_entity_reports_the_applied_view PASSED    [ 75%]
+test_tools.py::test_map_action_without_a_client_ack_is_not_success PASSED [ 78%]
+test_tools.py::test_map_layers_validates_against_the_layer_service PASSED [ 81%]
+test_tools.py::test_annotate_uses_the_real_boundary PASSED               [ 84%]
+test_tools.py::test_measure_reports_distance_and_whether_it_was_drawn PASSED [ 87%]
+test_tools.py::test_camera_tour_and_frame PASSED                         [ 90%]
+test_tools.py::test_select_and_clear PASSED                              [ 93%]
+test_tools.py::test_no_tool_reaches_cmd_fleet_or_confirm_even_with_hostile_arguments PASSED [ 96%]
+test_tools.py::test_injected_callsign_is_returned_as_data_only PASSED    [100%]
+
+============================= 33 passed in 31.09s ==============================

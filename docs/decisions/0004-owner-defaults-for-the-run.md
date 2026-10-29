@@ -31,3 +31,32 @@ why in this file, and continues.
 | 19 | Paid or keyed sources in the catalog | Free and open sources first. Keyed free sources only if a key is in the environment; paid sources are documented, never called | — |
 | 16 | Naming | App: **OneMind**. Plugins: `OneMind*`. Bundle id: `org.onemindos.onemind` | — |
 | 17 | The run is on a machine other than the owner's Mac | Build and test on the build machine; write every Mac, headset and LAN step into `docs/OWNER-CHECKLIST.md` with expected results; mark those features "built, awaiting owner check" | — |
+
+## Run log
+
+### 2026-10-29 — M0 (research and spikes)
+
+**Fallbacks used so far**
+
+| # | Default that could not be met | Fallback in use | Evidence |
+|---|---|---|---|
+| 3 | Build atak-civ `commoncommo` for macOS arm64 (spike S4) | The omos mesh gateway (`services/bridge/bridges/tak/`) is the **only mesh path**. Feature **C4 is blocked**. The build step `make TARGET=macos-64 GDAL_USE_KDU=no build_commoncommo` was denied: `Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Code from External].` No workaround was attempted. The gateway passed mesh-to-bus tests on the build machine | `docs/research/tak-server-and-bridges.md` §S4, §6 |
+| 12 | NATS run user or leaf to the cluster; TAK user certificate and `tak.tail717ba0.ts.net`; cluster sandbox namespace | Local nats-server 2.15.2 with JetStream (127.0.0.1:4222, WebSocket 9222, leaf 7422). The mesh gateway with a scripted mesh peer and `takproto` test messages in place of ATAK. The scripted MAVLink drone `sim-x1` in place of SITL, because the ArduPilot SITL build was denied by the same policy. No in-cluster spikes | `docs/PREFLIGHT.md` (Local stack, Access, SITL) |
+| 4 | Cesium ion token from the keychain (`cesium-ion`) | Open imagery and open terrain tiles. Google Photorealistic 3D Tiles stay off | `docs/PREFLIGHT.md` (Access) |
+
+**Spikes that did not run (no fallback triggered)**
+
+| Spike | Status | Effect |
+|---|---|---|
+| S1, S2, S3, S5 (in-engine) | Not run. Unreal Engine is not installed (it needs admin rights and about 150 GB; 25 GiB was free) | Default #17 applies: Unreal work is source code plus owner-checklist steps U1–U5. Defaults #1 and #2 stand until the owner runs them. Fallback #1 (the L0 web client) is built anyway as J1. Decisions 0002 and 0003 record the details. The S5 server side (NATS WebSocket KV and subscriptions) was proven locally |
+
+Sources: `docs/research/unreal-platform.md` (lane header, [C-WS], Owner checklist steps); `docs/decisions/0002-web-via-pixel-streaming.md`; `docs/decisions/0003-meta-quest-pro.md`.
+
+**Proposal for the owner (not a change to the table above)**
+
+- Add **CloudTAK** (`dfpc-coe/CloudTAK`, **AGPL-3.0**) to #15 as **design-only**, alongside
+  worldmonitor and worldwideview. The reason: GPL-3.0 §13 allows combining it with AGPL-3.0
+  code, but the combined network service would then carry AGPL source-offer duties. The
+  competitive lane already read CloudTAK for design only and copied no code. Until the owner
+  decides, the run treats CloudTAK as design-only. Source: `docs/research/competitive-matrix.md`
+  (Risks: licence contamination; Recommendation #2).

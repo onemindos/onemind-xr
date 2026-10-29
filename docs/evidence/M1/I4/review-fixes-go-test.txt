@@ -1,0 +1,77 @@
+?   	github.com/onemindos/omos/services/policy/cmd/policy	[no test files]
+=== RUN   TestStopNotBlockedByTaskWait
+    review_test.go:51: estop proposed and confirmed in 6.042166ms while the task confirm waited (TaskCreateTimeout 400ms)
+--- PASS: TestStopNotBlockedByTaskWait (0.53s)
+=== RUN   TestActionsCloseAndAreDropped
+--- PASS: TestActionsCloseAndAreDropped (0.36s)
+=== RUN   TestUnevaluableGeofenceFailsClosed
+2026/10/29 07:23:01 WARN geofence cannot be evaluated; movement is denied for the assets it applies to key=zone-corridor zone=zone-corridor kind=keep_out problem="shape corridor with geometry LineString is not supported" applies_to=[sim-x1]
+--- PASS: TestUnevaluableGeofenceFailsClosed (0.11s)
+=== RUN   TestPolicyService
+=== RUN   TestPolicyService/human_goto:_propose_waits,_confirm_dispatches_one_signed_command,_outcomes_audited
+=== RUN   TestPolicyService/agent_proposes_but_can_never_confirm
+=== RUN   TestPolicyService/agent_without_a_human_on_behalf_of_is_refused
+=== RUN   TestPolicyService/stop-line_verbs_are_rejected_by_name_and_nothing_reaches_cmd.fleet
+=== RUN   TestPolicyService/unknown_verbs_are_refused_(closed_allowlist)
+=== RUN   TestPolicyService/approval_levels_A1_A2_A3_A4_A5
+=== RUN   TestPolicyService/approvals_are_bound_to_action_id_and_params_hash
+=== RUN   TestPolicyService/a_replayed_approval_is_refused_and_sends_nothing
+=== RUN   TestPolicyService/an_unconfirmed_action_expires_and_cannot_be_confirmed_later
+=== RUN   TestPolicyService/no_replay_to_offline_assets
+=== RUN   TestPolicyService/no_acknowledgement_fails_the_action
+=== RUN   TestPolicyService/simulated_only,_schema,_capability,_person_targets,_geofence
+=== RUN   TestPolicyService/authorization:_unauthorized_human,_unknown_identity,_idempotency
+=== RUN   TestPolicyService/same-account_callers_are_unverified_and_cannot_confirm
+=== RUN   TestPolicyService/a_forged_Nats-Request-Info_header_is_replaced_by_the_server
+=== RUN   TestPolicyService/tasks:_assign_dispatches_create_then_the_asset_command;_missing_task_record_stops_it
+=== RUN   TestPolicyService/action.get:_agents_read_only_their_own_actions
+=== RUN   TestPolicyService/svc.policy.check_answers_tuple_checks_and_dry_runs
+=== RUN   TestPolicyService/OpenFGA_unreachable:_every_proposal_is_denied_policy_unavailable_and_logged
+=== RUN   TestPolicyService/server_permissions:_clients_and_agents_cannot_publish_cmd.fleet
+=== NAME  TestPolicyService
+    service_test.go:652: invariant checked: 6 cmd.fleet commands, 8 human-approved actions, CMD stream holds 9 messages, 96 audit events
+--- PASS: TestPolicyService (7.48s)
+    --- PASS: TestPolicyService/human_goto:_propose_waits,_confirm_dispatches_one_signed_command,_outcomes_audited (0.03s)
+    --- PASS: TestPolicyService/agent_proposes_but_can_never_confirm (3.02s)
+    --- PASS: TestPolicyService/agent_without_a_human_on_behalf_of_is_refused (0.00s)
+    --- PASS: TestPolicyService/stop-line_verbs_are_rejected_by_name_and_nothing_reaches_cmd.fleet (0.05s)
+    --- PASS: TestPolicyService/unknown_verbs_are_refused_(closed_allowlist) (0.00s)
+    --- PASS: TestPolicyService/approval_levels_A1_A2_A3_A4_A5 (0.02s)
+    --- PASS: TestPolicyService/approvals_are_bound_to_action_id_and_params_hash (0.02s)
+    --- PASS: TestPolicyService/a_replayed_approval_is_refused_and_sends_nothing (0.12s)
+    --- PASS: TestPolicyService/an_unconfirmed_action_expires_and_cannot_be_confirmed_later (0.06s)
+    --- PASS: TestPolicyService/no_replay_to_offline_assets (0.13s)
+    --- PASS: TestPolicyService/no_acknowledgement_fails_the_action (0.07s)
+    --- PASS: TestPolicyService/simulated_only,_schema,_capability,_person_targets,_geofence (0.02s)
+    --- PASS: TestPolicyService/authorization:_unauthorized_human,_unknown_identity,_idempotency (0.02s)
+    --- PASS: TestPolicyService/same-account_callers_are_unverified_and_cannot_confirm (3.05s)
+    --- PASS: TestPolicyService/a_forged_Nats-Request-Info_header_is_replaced_by_the_server (0.05s)
+    --- PASS: TestPolicyService/tasks:_assign_dispatches_create_then_the_asset_command;_missing_task_record_stops_it (0.44s)
+    --- PASS: TestPolicyService/action.get:_agents_read_only_their_own_actions (0.01s)
+    --- PASS: TestPolicyService/svc.policy.check_answers_tuple_checks_and_dry_runs (0.01s)
+    --- PASS: TestPolicyService/OpenFGA_unreachable:_every_proposal_is_denied_policy_unavailable_and_logged (0.04s)
+    --- PASS: TestPolicyService/server_permissions:_clients_and_agents_cannot_publish_cmd.fleet (0.01s)
+=== RUN   TestCanonicalizeRFC8785
+--- PASS: TestCanonicalizeRFC8785 (0.00s)
+=== RUN   TestParamsHashIgnoresKeyOrder
+--- PASS: TestParamsHashIgnoresKeyOrder (0.00s)
+=== RUN   TestStopLine
+--- PASS: TestStopLine (0.00s)
+=== RUN   TestApprovalLevels
+--- PASS: TestApprovalLevels (0.00s)
+=== RUN   TestSchemasCoverCatalogue
+--- PASS: TestSchemasCoverCatalogue (0.03s)
+=== RUN   TestGeofence
+--- PASS: TestGeofence (0.00s)
+=== RUN   TestAuditLimiter
+--- PASS: TestAuditLimiter (0.00s)
+=== RUN   TestModelTypeRestrictions
+--- PASS: TestModelTypeRestrictions (0.00s)
+=== RUN   TestModelDSLMatchesJSON
+--- PASS: TestModelDSLMatchesJSON (0.00s)
+=== RUN   TestIDsAndDirectory
+--- PASS: TestIDsAndDirectory (0.00s)
+=== RUN   TestSweepDropsOldFinishedActions
+--- PASS: TestSweepDropsOldFinishedActions (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/policy/internal/policy	10.014s

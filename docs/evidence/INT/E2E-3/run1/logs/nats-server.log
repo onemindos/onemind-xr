@@ -1,0 +1,38 @@
+[13292] 2026/10/29 14:10:55.138495 [INF] Starting nats-server
+[13292] 2026/10/29 14:10:55.138622 [INF]   Version:  2.15.2
+[13292] 2026/10/29 14:10:55.138636 [INF]   Git:      [5a815f1]
+[13292] 2026/10/29 14:10:55.138642 [INF]   Name:     NBPOTGNH5KO4UUUPWORYJDCMY5LD7ZUW67PTDTZI3VJAFO2LKPXN6XSL
+[13292] 2026/10/29 14:10:55.138647 [INF]   Node:     CakVjJ6Y
+[13292] 2026/10/29 14:10:55.138650 [INF]   ID:       NBPOTGNH5KO4UUUPWORYJDCMY5LD7ZUW67PTDTZI3VJAFO2LKPXN6XSL
+[13292] 2026/10/29 14:10:55.138657 [WRN] Plaintext passwords detected, use nkeys or bcrypt
+[13292] 2026/10/29 14:10:55.138671 [INF] Using configuration file: /Users/danielcarku/Desktop/work/.run/tmp-e2e/run/nats.conf (sha256:178ee19e61c8a5b641c74af34d759d1f9c0cb2c2a6add924d56b05384469a75e)
+[13292] 2026/10/29 14:10:55.138898 [INF] Starting JetStream
+[13292] 2026/10/29 14:10:55.139063 [INF]     _ ___ _____ ___ _____ ___ ___   _   __  __
+[13292] 2026/10/29 14:10:55.139069 [INF]  _ | | __|_   _/ __|_   _| _ \ __| /_\ |  \/  |
+[13292] 2026/10/29 14:10:55.139073 [INF] | || | _|  | | \__ \ | | |   / _| / _ \| |\/| |
+[13292] 2026/10/29 14:10:55.139076 [INF]  \__/|___| |_| |___/ |_| |_|_\___/_/ \_\_|  |_|
+[13292] 2026/10/29 14:10:55.139080 [INF] 
+[13292] 2026/10/29 14:10:55.139083 [INF]          https://docs.nats.io/jetstream
+[13292] 2026/10/29 14:10:55.139086 [INF] 
+[13292] 2026/10/29 14:10:55.139089 [INF] ---------------- JETSTREAM ----------------
+[13292] 2026/10/29 14:10:55.139092 [INF]   Strict:          true
+[13292] 2026/10/29 14:10:55.139100 [INF]   Max Memory:      256.00 MB
+[13292] 2026/10/29 14:10:55.139104 [INF]   Max Storage:     64.00 GB
+[13292] 2026/10/29 14:10:55.139107 [INF]   Store Directory: "/Users/danielcarku/Desktop/work/.run/tmp-e2e/run/js/jetstream"
+[13292] 2026/10/29 14:10:55.139111 [INF]   API Level:       5
+[13292] 2026/10/29 14:10:55.139114 [INF] -------------------------------------------
+[13292] 2026/10/29 14:10:55.140138 [INF] Took 1.230333ms to start JetStream
+[13292] 2026/10/29 14:10:55.140221 [INF] Listening for websocket clients on ws://127.0.0.1:65047
+[13292] 2026/10/29 14:10:55.140230 [WRN] Websocket not configured with TLS. DO NOT USE IN PRODUCTION!
+[13292] 2026/10/29 14:10:55.140269 [INF] Listening for leafnode connections on 127.0.0.1:65048
+[13292] 2026/10/29 14:10:55.140383 [INF] Listening for client connections on 127.0.0.1:65046
+[13292] 2026/10/29 14:10:55.140395 [INF] Server is ready
+[13292] 2026/10/29 14:10:55.349895 [INF] 127.0.0.1:65063 - lid:10 - Leafnode connection created 
+[13292] 2026/10/29 14:14:43.411155 [ERR] 127.0.0.1:52571 - wid:558 - "v3.4.0:nats.ws:onemind-l0-web" - "CLIENT/user:zeus" - Subscription Violation - Subject "ent.alert.*.state", SID 18
+[13292] 2026/10/29 14:16:02.543437 [ERR] 127.0.0.1:53924 - wid:718 - "v3.4.0:nats.ws:onemind-l0-web" - "CLIENT/user:zeus" - Subscription Violation - Subject "ent.alert.*.state", SID 18
+[13292] 2026/10/29 14:17:20.763094 [INF] 127.0.0.1:65063 - lid:10 - Leafnode connection closed: Client Closed - Remote: hermes-legacy-leaf
+[13292] 2026/10/29 14:17:20.764199 [INF] Trapped "interrupt" signal
+[13292] 2026/10/29 14:17:20.814530 [INF] Initiating Shutdown...
+[13292] 2026/10/29 14:17:20.814575 [INF] Initiating JetStream Shutdown...
+[13292] 2026/10/29 14:17:20.904609 [INF] JetStream Shutdown
+[13292] 2026/10/29 14:17:20.904722 [INF] Server Exiting..

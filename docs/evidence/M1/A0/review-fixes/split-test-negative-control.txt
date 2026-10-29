@@ -1,0 +1,7 @@
+# Negative control: fence disabled (safeWindow = 1000 x TTL) and default 8 MiB reconnect buffer
+=== RUN   TestLeaderCutOffAloneNeverPublishesAfterTakeover
+    lease_split_test.go:93: old leader still running when the standby started (a stopped 0, b started 1793272670251192000)
+--- FAIL: TestLeaderCutOffAloneNeverPublishesAfterTakeover (3.82s)
+FAIL
+FAIL	github.com/onemindos/omos-bridge/ingest/internal/ingest	4.211s
+FAIL

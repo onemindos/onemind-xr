@@ -1,0 +1,10 @@
+ingest_checkpoints_total{result="ok",source="nws-alerts"} 1
+ingest_feed_age_seconds{source="nws-alerts"} 19.706339333
+ingest_feed_last_success_timestamp_seconds{source="nws-alerts"} 1.793271486093e+09
+ingest_feed_leader{instance="live",source="nws-alerts"} 1
+ingest_feed_records{source="nws-alerts"} 356
+ingest_feed_stale{source="nws-alerts"} 0
+ingest_feed_stale_after_seconds{source="nws-alerts"} 600
+ingest_feed_up{source="nws-alerts"} 1
+ingest_published_total{source="nws-alerts"} 356
+ingest_upstream_requests_total{code="200",source="nws-alerts"} 1

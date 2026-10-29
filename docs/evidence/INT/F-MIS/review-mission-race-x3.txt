@@ -1,0 +1,1 @@
+ok  	github.com/onemindos/omos/services/mission/internal/mission	4.203s

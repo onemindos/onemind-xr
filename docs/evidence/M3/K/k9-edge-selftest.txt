@@ -1,0 +1,11 @@
+# K9 edge MediaMTX selftest — 2026-10-29T11:55:53Z
+# command: infra/edge/mac-media/edge-media.sh selftest (run with /bin/bash 3.2.57, the macOS default), MediaMTX v1.21.3, ffmpeg version 8.1.1
+# commit: branch feat/mediamtx-video (worktree /Users/danielcarku/Desktop/work/wt/k-video)
+PASS anonymous publish to the edge refused (401)
+PASS cloud drone/sim-x1 is fed by the edge over SRT (source.type=srtConn) after 2 checks
+PASS cloud read of drone/sim-x1 as onemind-client: h264,640,360
+PASS edge LAN read of drone/sim-x1 as lan-viewer: h264,640,360
+PASS anonymous read of the edge refused (401)
+PASS anonymous read of the cloud refused (401)
+PASS edge log redacts the forward password; cloud log does not contain it
+SELFTEST OK

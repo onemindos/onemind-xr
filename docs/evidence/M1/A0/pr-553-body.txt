@@ -1,0 +1,49 @@
+## What
+
+Feature **A0**: `omos-ingest`, the collector framework the ingestion lane recommended (plain Go on `nats.go`, in `services/bridge/ingest`). The first migrated feed is **NWS alerts**, the life-safety feed. The legacy `feed-intel` NOAA task is **unchanged and keeps running** beside it until the new pipeline matches it for 7 days (decision 0004 #18).
+
+- **One owner per source.** KV lease `ingest-locks`. It survives a bus outage, and a crashed leader is replaced within the TTL.
+- **Acked publish.** Synchronous JetStream publish with retries and `Nats-Msg-Id` dedup. KV checkpoints (`ingest-state`) are written only after acks. A failed checkpoint read skips the poll.
+- **Schema validation and dead letters.** Records are checked against JSON Schemas in `services/schemas`. Bad records go to `evt.sys.{source}.rejected` with the reason.
+- **Upstream politeness.** Per-source rate limit and quota, ETag and If-Modified-Since, Retry-After, and backoff on 429 and 5xx. 403 is not retried. Every source must record its terms of use.
+- **Freshness.** `tel.feed.{source}.status` carries `fetchedAt`, record count and last error. Matching `ingest_feed_*` Prometheus metrics feed a stale-feed alert. Logs are JSON. Memory is bounded.
+- **Delivery modes.** REST poll, RSS/Atom, file/bulk (`-once` for a CronJob), SSE (resumes with `Last-Event-ID`) and WebSocket (bounded queue that drops the oldest).
+
+## Subjects (locked grammar)
+
+| Data | Subject |
+|---|---|
+| NWS alert (bus envelope) | `intel.weather.noaa.alert` (4 tokens; registry row F094) |
+| Feed status | `tel.feed.{source}.status` (this PR adds `tel.feed.>` to `TEL`) |
+| Dead letter | `evt.sys.{source}.rejected` (stored by `SYS`) |
+
+Gaps and closest-fit choices are listed in `docs/proposals/2026-10-29-a0-omos-ingest.md` (A0-1 to A0-7). The projector skips the new envelope because it has no top-level `lat`/`lon` (`platform/omos/tak-projector.yaml` `intel_handler`), so TAK gets no duplicate alert markers while both pipelines run.
+
+## Deploy (owner)
+
+- `platform/ingest/`: Deployment (1 replica, ecosystem pool, 20m/48Mi requests, 250m/128Mi limits, non-root, read-only root FS), feed registry ConfigMap, Service, ServiceMonitor, PrometheusRule.
+- `platform/argocd/platform-ingest.yaml`: **manual sync**, plus its MCP coverage entry.
+- `platform/nats/streams/`: new `kv-ingest-locks.yaml` (TTL 10s) and `kv-ingest-state.yaml`, and `tel.feed.>` added to `tel.yaml`. Note: `platform-nats-streams` auto-syncs, so these apply on merge. Once `TEL` binds `tel.feed.>`, it also stores the existing `feed-intel` heartbeats.
+- `.github/workflows/build-omos-ingest.yml`: tests on PRs. On `main` it pushes `ghcr.io/onemindos/omos-ingest:0.1.0` and `:sha-…`. **Pin the digest** from the `omos-ingest-image` artifact in `deployment.yaml` before syncing.
+- No new secrets. The Deployment reuses `omos-nats-creds`. Keyed sources later use the optional SealedSecret `omos-ingest-keys` (README has the steps). `NATS_TLS_INSECURE=true` keeps the current omos Python feeds' TLS posture (proposal A0-6).
+- `docs/STACK.md`: Tier 2 row added.
+
+## Tests (run locally on the build machine)
+
+- `go vet ./...` is clean. `go test -race -count=1 ./...` passes **46/46** tests against an embedded JetStream server. Every item on the reliability list has a named test; the README maps each one.
+- Golden tests run on a **recorded api.weather.gov response** from 2026-10-29, trimmed to 12 alerts, plus synthetic malformed, RSS, Atom, CSV and GeoJSON fixtures.
+- **Chaos test** (`test/chaos/chaos.sh`). Two collectors run under 100 records/s. During the run: `kill -9` of nats-server, an upstream 503 outage, `kill -9` of the leading collector, and a window of malformed records. Result over 3 runs: **0 duplicates, 0 missing**, and a dead letter for every malformed record (101/101 per source).
+- **Stale alert end to end** (`test/chaos/stale-alert.sh`). A real Prometheus 3.15.1 ran the unchanged rules. `OneMindFeedStale` went pending, then firing during a 3-minute upstream outage, and resolved afterwards. `promtool test rules` passes (`test/alerts/run.sh`).
+- **Live smoke.** One real request to `api.weather.gov/alerts/active?status=actual` stored 356 alerts. All passed the schema, with 0 dead letters.
+- `kubeconform -strict` (k8s 1.36.0 plus the CRD catalog): 9/9 valid. `yamllint -c .yamllint.yml`, `shellcheck` and `scripts/check_onemind_mcp_coverage.py` all pass.
+- Not run locally: gitleaks (not installed here), the Docker build (no Docker), and the in-cluster Helm and kubeconform jobs.
+
+## Follow-ups (not in this PR)
+
+- OpenTelemetry traces to Tempo are not built yet.
+- Zone-based NWS alerts (351 of 356 live) carry `affectedZones` and UGC/SAME codes but no point. Zone shapes should be resolved in the entity service (A4).
+- Quota counters live in memory.
+- Per-service NATS user (A0-5) and the NATS CA in `omos` (A0-6).
+- Stream caps and the 1 h `INTEL` dedup window belong in the caps PR (A0-7).
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)

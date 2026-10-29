@@ -1,0 +1,5752 @@
+# OneMind source registry (machine-readable). Generated 2026-10-29 from
+# docs/sources/map-sources/Audit Reports/source-catalog-240-records.csv by the sources-registry lane.
+# Method, sources and caveats: docs/research/source-registry-method.md. Human view: SOURCE-REGISTRY.md.
+# Field `kind` uses the omos services/schemas/registry/source.schema.json enum. Values ending in
+# '(catalog, unverified)' are copied from the historical catalog and not re-checked.
+# `subject` is the collector output in the locked omos grammar; `state` is what the entity service derives.
+# `historical_nats_pattern` is the catalog's old fabric.* value, kept for traceability only (outside the grammar).
+version: 1
+generated: '2026-10-29'
+probe_date: '2026-10-29T08:20:29Z'
+sources:
+- id: f001-511-ny
+  ref: F001
+  name: 511 NY
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: road-traffic
+  route: jetstream
+  subject: intel.transit.511ny.event
+  historical_nats_pattern: fabric.intel.transit.511ny.*
+  source_url: https://511ny.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://511ny.org
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Identity overlaps F106 (511ny.org/developers, API key). Landing page only.
+- id: f002-511-ny-rideshare
+  ref: F002
+  name: 511 NY Rideshare
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: road-traffic
+  route: none
+  historical_nats_pattern: fabric.intel.transit.511nyrideshare.*
+  source_url: https://511nyrideshare.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://511nyrideshare.org
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Rideshare portal; no documented geodata export found.
+- id: f003-abuse-ch-feodo-urlhaus
+  ref: F003
+  name: abuse.ch (Feodo/URLhaus)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: unverified (Feodo blocklist regenerated periodically)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: cyber
+  route: hermes_knowledge
+  subject: intel.cyber.abusech.ioc
+  historical_nats_pattern: fabric.intel.cyber.abuse.*
+  source_url: https://abuse.ch
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://feodotracker.abuse.ch/downloads/ipblocklist.json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Non-geospatial indicator lists; Hermes enrichment, not map.
+- id: f004-abuseipdb
+  ref: F004
+  name: AbuseIPDB
+  catalog: Fabric Feeds
+  kind: external_api
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: cyber
+  route: hermes_knowledge
+  subject: svc.cyber.abuseipdb
+  historical_nats_pattern: fabric.intel.cyber.abuseipdb.*
+  source_url: https://www.abuseipdb.com/api
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+  notes: On-demand IP reputation lookup (svc RPC wrapper).
+- id: f005-acled
+  ref: F005
+  name: ACLED
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: omos polls 3600 s (omos/platform/omos/intel-scripts.yaml); ACLED data updated weekly (unverified)
+  auth: OAuth2 (myACLED email/password -> https://acleddata.com/oauth/token, 24 h access token)
+  rate_limit: unverified
+  licence: ACLED Terms and Conditions (attribution; commercial use restricted) - unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: conflict
+  route: jetstream
+  subject: intel.conflict.acled.event
+  historical_nats_pattern: fabric.intel.conflict.acled.*
+  source_url: https://acleddata.com/acleddatanew/wp-content/uploads/dlm_uploads/2017/10/API-User-Guide.pdf
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: OAuth2 account required'
+  notes: Live in omos (intel.conflict.acled.{iso3}.{type}). Catalog says API Key; current docs say OAuth2.
+- id: f006-adis
+  ref: F006
+  name: ADIS
+  catalog: Fabric Feeds
+  kind: other
+  status: reference-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: certificate (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Gov/Open (catalog)
+  geometry: none
+  layer: reference
+  route: none
+  historical_nats_pattern: fabric.intel.military.adis.*
+  source_url: https://github.com/dectalk/adis
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: GitHub tool reference; gov certificate. Not a feed.
+- id: f007-ads-b-exchange
+  ref: F007
+  name: ADS-B Exchange
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (RapidAPI/enterprise) - unverified
+  geometry: point (moving)
+  layer: air
+  route: jetstream+kv
+  subject: intel.air.adsbx.position
+  state: ent.aircraft.{icao}.state -> KV world-state
+  historical_nats_pattern: fabric.intel.aviation.adsb.*
+  source_url: https://www.adsbexchange.com/data
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs); paid tiers'
+- id: f008-adsb-lol
+  ref: F008
+  name: adsb.lol
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: rest_poll
+  cadence: 5-10 s per AOI (proposed)
+  auth: none (catalog, unverified)
+  rate_limit: dynamic, load-based; API key planned (github.com/adsblol/api README)
+  licence: code BSD-3-Clause; data licence not stated on README (unverified)
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: air
+  route: jetstream+kv
+  subject: intel.air.adsblol.position
+  state: ent.aircraft.{icao}.state -> KV world-state
+  historical_nats_pattern: fabric.intel.aviation.adsb.*
+  source_url: https://adsb.lol
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://api.adsb.lol/v2/point/40.71/-74.01/25
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: ADSBx-RapidAPI compatible.
+- id: f009-airframes-io-acars-vdl
+  ref: F009
+  name: Airframes.io (ACARS/VDL)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: websocket
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: air
+  route: jetstream
+  subject: intel.air.airframes.acars
+  historical_nats_pattern: fabric.intel.aviation.acars.*
+  source_url: https://airframes.io
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f010-airplanes-live
+  ref: F010
+  name: airplanes.live
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: rest_poll
+  cadence: 1 req/s max
+  auth: none (catalog, unverified)
+  rate_limit: 1 request/second (airplanes.live/api-guide, via search snippet; page 403 to fetch)
+  licence: non-commercial, no SLA (airplanes.live/api-guide)
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: air
+  route: jetstream+kv
+  subject: intel.air.airplaneslive.position
+  state: ent.aircraft.{icao}.state -> KV world-state
+  historical_nats_pattern: fabric.intel.aviation.adsb.*
+  source_url: https://airplanes.live
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://api.airplanes.live/v2/point/40.71/-74.01/25
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f011-ais-marinetraffic
+  ref: F011
+  name: AIS (MarineTraffic)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid credits - unverified
+  geometry: point (moving)
+  layer: sea
+  route: jetstream+kv
+  subject: intel.sea.marinetraffic.position
+  state: ent.vessel.{mmsi}.state
+  historical_nats_pattern: fabric.intel.maritime.ais.*
+  source_url: https://www.marinetraffic.com/en/ais-api-services
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+- id: f012-aisstream-io
+  ref: F012
+  name: AISStream.io
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: websocket
+  cadence: continuous stream
+  auth: api_key (catalog, unverified)
+  rate_limit: throttled per key and user; BETA, no SLA (aisstream.io/documentation via search)
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: sea
+  route: jetstream+kv
+  subject: intel.sea.aisstream.position
+  state: ent.vessel.{mmsi}.state -> KV world-state
+  historical_nats_pattern: fabric.intel.maritime.aisstream.*
+  source_url: https://aisstream.io
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs) (key sent in subscription message)'
+  notes: Live in omos feed-ships.yaml -> tak.cot.inject (omos/platform/data/redpanda-connect/deployment.yaml:223). Backend-only / browsers unsupported - **unverified** (verifier 2026-10-29).
+- id: f013-aistream
+  ref: F013
+  name: AIStream
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: news
+  route: hermes_knowledge
+  subject: intel.news.aistream.item
+  historical_nats_pattern: fabric.intel.news.aistream.*
+  source_url: https://aistream.io
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+  notes: Identity unclear (aistream.io).
+- id: f014-al-jazeera-rss
+  ref: F014
+  name: Al Jazeera RSS
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rss
+  cadence: 15 min (proposed)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: publisher copyright; headlines+links only (unverified)
+  cost: Free (catalog)
+  geometry: none
+  layer: news
+  route: jetstream
+  subject: intel.news.aljazeera.item
+  historical_nats_pattern: fabric.intel.news.rss.*
+  source_url: https://www.aljazeera.com/xml/rss/all.xml
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://www.aljazeera.com/xml/rss/all.xml
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f015-alternative-me-fear-greed
+  ref: F015
+  name: Alternative.me Fear/Greed
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.alternativeme.index
+  historical_nats_pattern: fabric.intel.finance.sentiment.*
+  source_url: https://alternative.me/crypto/fear-and-greed-index/
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://api.alternative.me/fng/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f016-amtrak-train-tracking
+  ref: F016
+  name: Amtrak Train Tracking
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: 60 s (proposed)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: undocumented endpoint behind Amtrak map; terms unverified (response reported encrypted - unverified)
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: rail-transit
+  route: jetstream+kv
+  subject: intel.transit.amtrak.position
+  state: ent.train.{id}.state
+  historical_nats_pattern: fabric.intel.transit.amtrak.*
+  source_url: https://maps.amtrak.com/services/MapDataService/trains/getTrainsData
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://maps.amtrak.com/services/MapDataService/trains/getTrainsData
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f017-aprs-aprs2-net
+  ref: F017
+  name: APRS (aprs2.net)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: tcp_stream
+  cadence: continuous
+  auth: APRS-IS login with callsign; receive-only passcode -1 (unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: rf
+  route: jetstream+kv
+  subject: intel.rf.aprs.position
+  state: ent.station.{callsign}.state
+  historical_nats_pattern: fabric.feed.aprs.*
+  source_url: https://www.aprs2.net
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://www.aprs2.net
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: TCP 14580 filter port not probed; landing page only.
+- id: f018-aprs-is-network
+  ref: F018
+  name: APRS-IS Network
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: tcp_stream
+  cadence: continuous
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: rf
+  route: jetstream+kv
+  subject: intel.rf.aprs.position
+  state: ent.station.{callsign}.state
+  historical_nats_pattern: fabric.feed.rf.aprs.*
+  source_url: https://www.aprs-is.net
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://www.aprs-is.net
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Same network as F017; one collector.
+- id: f019-arcgis-living-atlas
+  ref: F019
+  name: ArcGIS Living Atlas
+  catalog: Fabric Feeds
+  kind: external_api
+  status: catalog
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: on demand (catalog search)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: overlays
+  route: object_store
+  subject: svc.geo.arcgis
+  historical_nats_pattern: fabric.intel.geo.arcgis.*
+  source_url: https://www.arcgis.com/sharing/rest/search
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://www.arcgis.com/sharing/rest/search?q=wildfire&f=json&num=1
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Discovery catalog; each chosen item becomes its own overlay record.
+- id: f020-asfinag-austria-cctv
+  ref: F020
+  name: Asfinag (Austria CCTV)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: video
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: cameras
+  route: mediamtx
+  state: ent.camera.{id}.state
+  historical_nats_pattern: fabric.intel.cctv.asfinag.*
+  source_url: https://asfinag.at
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://asfinag.at
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Public webcam site; re-stream rights unverified -> link only.
+- id: f021-aviationstack
+  ref: F021
+  name: AviationStack
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: point (moving)
+  layer: air
+  route: jetstream
+  subject: intel.air.aviationstack.flight
+  historical_nats_pattern: fabric.intel.aviation.flights.*
+  source_url: https://aviationstack.com
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f022-baltic-live-cam
+  ref: F022
+  name: Baltic Live Cam
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: video
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: cameras
+  route: none
+  state: ent.camera.{id}.state
+  historical_nats_pattern: fabric.intel.cctv.baltic.*
+  source_url: https://balticlivecam.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://balticlivecam.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Embed-only webcams; no re-stream.
+- id: f023-bbc-world-rss
+  ref: F023
+  name: BBC World RSS
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rss
+  cadence: 15 min (proposed)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: BBC RSS terms (headlines+links, attribution) - unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: news
+  route: jetstream
+  subject: intel.news.bbc.item
+  historical_nats_pattern: fabric.intel.news.rss.*
+  source_url: https://feeds.bbci.co.uk/news/world/rss.xml
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://feeds.bbci.co.uk/news/world/rss.xml
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f024-bls-bureau-of-labor
+  ref: F024
+  name: BLS (Bureau of Labor)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: monthly releases
+  auth: 'API key optional: v1 keyless, v2 keyed (unverified)'
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.bls.series
+  historical_nats_pattern: fabric.intel.finance.bls.*
+  source_url: https://www.bls.gov/developers/
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://api.bls.gov/publicAPI/v1/timeseries/data/CUUR0000SA0
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f025-bluesky-social-osint
+  ref: F025
+  name: Bluesky (Social OSINT)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: websocket
+  cadence: continuous (Jetstream firehose) or search poll
+  auth: Public AppView reads keyless; posting needs OAuth (unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: news
+  route: jetstream
+  subject: intel.social.bluesky.post
+  historical_nats_pattern: fabric.intel.social.bluesky.*
+  source_url: https://docs.bsky.app/docs/api/
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor=bsky.app
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Topic/keyword monitoring only; no profiling of individuals (onemind-xr/ULTRACODE-PROMPT.md:318 (no targeting of people)).
+- id: f026-broadcastify-scanner-streams
+  ref: F026
+  name: Broadcastify (Scanner Streams)
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: audio
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: rf
+  route: none
+  historical_nats_pattern: radio.stream.<agency>
+  source_url: https://www.broadcastify.com/
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs); terms restrict rebroadcast (unverified)'
+- id: f027-caltrans-511
+  ref: F027
+  name: Caltrans / 511
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: road-traffic
+  route: jetstream
+  subject: intel.transit.caltrans.status
+  historical_nats_pattern: fabric.intel.transit.caltrans.*
+  source_url: https://cwwp2.dot.ca.gov/documentation/speed.htm
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://cwwp2.dot.ca.gov/data/d7/cctv/cctvStatusD07.json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Probe uses CWWP2 D7 CCTV JSON (path unverified).
+- id: f028-carto-basemaps
+  ref: F028
+  name: CARTO Basemaps
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: API key now required (github.com/CartoDB/basemap-styles README)
+  rate_limit: unverified
+  licence: free non-commercial <=5M tiles/month, commercial <=1M; terms carto.com/legal/basemap-terms (README)
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://carto.com/basemaps/
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: provider now requires a key'
+  notes: Catalog says keyless; README contradicts.
+- id: f029-celestrak-tle
+  ref: F029
+  name: CelesTrak TLE
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: once per 2 h (CelesTrak updates every 2 h; repeat downloads get 403)
+  auth: none (catalog, unverified)
+  rate_limit: one download per update; >50 HTTP errors in 2 h -> firewall (celestrak.org gp-data-formats.php)
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: space
+  route: jetstream+kv
+  subject: intel.space.celestrak.tle
+  state: ent.satellite.{norad}.state (propagated)
+  historical_nats_pattern: fabric.feed.satellites.*
+  source_url: https://celestrak.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f030-cisa-kev
+  ref: F030
+  name: CISA KEV
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: daily check
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: US Government work (unverified)
+  cost: Free (catalog)
+  geometry: none
+  layer: cyber
+  route: hermes_knowledge
+  subject: intel.cyber.cisa.kev
+  historical_nats_pattern: fabric.intel.cyber.cisa.*
+  source_url: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f031-citibike-gbfs-api
+  ref: F031
+  name: CitiBike GBFS API
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: per GBFS ttl (proposed 60 s)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: rail-transit
+  route: jetstream+kv
+  subject: intel.transit.citibike.status
+  state: ent.station.{id}.state
+  historical_nats_pattern: fabric.intel.transit.citibike.*
+  source_url: https://gbfs.citibikenyc.com/gbfs/en/gbfs.json
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://gbfs.citibikenyc.com/gbfs/en/gbfs.json
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f032-cloudflare-radar
+  ref: F032
+  name: Cloudflare Radar
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: cyber
+  route: jetstream
+  subject: intel.cyber.cloudflare.outage
+  historical_nats_pattern: fabric.intel.network.cloudflare.*
+  source_url: https://radar.cloudflare.com/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f033-coingecko
+  ref: F033
+  name: CoinGecko
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: public tier now uses a free demo key (unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.coingecko.price
+  historical_nats_pattern: fabric.intel.finance.crypto.*
+  source_url: https://www.coingecko.com/api/documentation
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://api.coingecko.com/api/v3/ping
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f034-copernicus-sentinel
+  ref: F034
+  name: Copernicus/Sentinel
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: catalog
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: daily (STAC search)
+  auth: OAuth2 for downloads (catalog)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: imagery
+  route: object_store
+  source_url: https://scihub.copernicus.eu
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://scihub.copernicus.eu
+    http: '000'
+    result: network error
+    date: '2026-10-29T08:20:29Z'
+    error: 'curl: (7) Failed to connect to scihub.copernicus.eu port 443 after 4113 ms: Couldn''t connect to server'
+    probe_kind: landing/doc page
+  notes: SciHub replaced by Copernicus Data Space Ecosystem (unverified); probe records the catalog link.
+- id: f035-datacenter-map
+  ref: F035
+  name: Datacenter Map
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: infra
+  route: none
+  historical_nats_pattern: fabric.intel.infra.datacentermap.*
+  source_url: https://www.datacentermap.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.datacentermap.com
+    http: '429'
+    result: rate limited
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f036-dcgs-af-air-force
+  ref: F036
+  name: DCGS-AF (Air Force)
+  catalog: Fabric Feeds
+  kind: other
+  status: reference-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: certificate (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Gov/Open (catalog)
+  geometry: none
+  layer: reference
+  route: none
+  historical_nats_pattern: fabric.intel.military.dcgs.*
+  source_url: https://www.af.mil/About-Us/Fact-Sheets/Display/Article/104525/distributed-common-ground-system
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: USAF fact sheet; not a feed.
+- id: f037-deepstate-map
+  ref: F037
+  name: DeepState Map
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: scrape
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: terms unverified; front-line polygons; unofficial endpoints only
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: conflict
+  route: object_store
+  subject: intel.conflict.deepstate.frontline
+  historical_nats_pattern: fabric.intel.frontlines.*
+  source_url: https://deepstatemap.live
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://deepstatemap.live
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f038-eia-energy-info-admin
+  ref: F038
+  name: EIA (Energy Info Admin)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.energy.eia.series
+  historical_nats_pattern: fabric.intel.energy.eia.*
+  source_url: https://api.eia.gov/v2/
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f039-element84-earth-search
+  ref: F039
+  name: Element84 Earth Search
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: on demand / daily STAC search
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: imagery
+  route: object_store
+  subject: intel.imagery.earthsearch.scene
+  historical_nats_pattern: fabric.intel.imagery.stac.*
+  source_url: https://earth-search.aws.element84.com/v1
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://earth-search.aws.element84.com/v1
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: STAC API; scenes (COGs) served to the client via tile proxy, metadata on the bus.
+- id: f040-emsc-seismic-portal
+  ref: F040
+  name: EMSC Seismic Portal
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: rest_poll
+  cadence: omos polls 120 s (omos/platform/omos/intel-scripts.yaml); WebSocket push also offered (unverified)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.seismic.emsc.event
+  historical_nats_pattern: fabric.intel.emsc.*
+  source_url: https://www.seismicportal.eu/fdsnws/event/1/
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://www.seismicportal.eu/fdsnws/event/1/query?limit=1&format=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Live in omos as intel.seismic.emsc.{bucket}.{id}.
+- id: f041-epa-radnet
+  ref: F041
+  name: EPA RadNet
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: scrape
+  cadence: hourly (unverified)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.radiation.radnet.reading
+  historical_nats_pattern: fabric.intel.environment.rad.*
+  source_url: https://www.epa.gov/radnet
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.epa.gov/radnet
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f042-epa-water-quality-portal
+  ref: F042
+  name: EPA Water Quality Portal
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: environment
+  route: object_store
+  subject: intel.water.wqp.station
+  historical_nats_pattern: fabric.intel.water.epa.*
+  source_url: https://www.waterqualitydata.us/data/Station/search
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://www.waterqualitydata.us/data/Station/search?bBox=-74.1,40.6,-73.9,40.8&mimeType=geojson
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f043-esri-world-imagery
+  ref: F043
+  name: Esri World Imagery
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: 'Esri terms goto.arcgisonline.com/maps/World_Imagery; attribution ''Source: Esri, Vantor, Earthstar Geographics...'' (MapServer page)'
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f044-eurostat
+  ref: F044
+  name: Eurostat
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: monthly
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.eurostat.series
+  historical_nats_pattern: fabric.intel.finance.eurostat.*
+  source_url: https://ec.europa.eu/eurostat/web/main/data/web-services
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_manr?geo=EU&lastTimePeriod=1
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f045-faa-dronezone-laanc
+  ref: F045
+  name: FAA DroneZone (LAANC)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: aviation-airspace
+  route: jetstream
+  subject: intel.air.laanc.authorization
+  historical_nats_pattern: fabric.intel.aviation.laanc.*
+  source_url: https://www.faa.gov/uas/programs_partnerships/data_exchange
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: FAA partner program (approved UAS service suppliers only) - unverified'
+- id: f046-faa-notam
+  ref: F046
+  name: FAA NOTAM
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Gov/Open (catalog)
+  geometry: point / polygon
+  layer: aviation-airspace
+  route: jetstream
+  subject: intel.air.faa.notam
+  historical_nats_pattern: fabric.intel.aviation.notam.*
+  source_url: https://api.faa.gov/api/NOTAM/v1/notams
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    not_tested: 'not probed: FAA API portal issues client_id/client_secret (unverified; catalog says none)'
+- id: f047-faa-swim
+  ref: F047
+  name: FAA SWIM
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: message_queue
+  cadence: continuous (JMS/Solace, unverified)
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: air
+  route: jetstream
+  subject: intel.air.faaswim.flight
+  historical_nats_pattern: fabric.intel.aviation.faa.swim.*
+  source_url: https://swim.faa.gov
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs) (SWIM subscription)'
+- id: f048-faster-whisper-radio-transcription
+  ref: F048
+  name: faster-whisper (Radio Transcription)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: tool
+  priority: P2
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: rf
+  route: hermes_knowledge
+  subject: intel.rf.whisper.transcript
+  historical_nats_pattern: radio.transcript.<talkgroup>
+  source_url: https://github.com/SYSTRAN/faster-whisper
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: Transcription tool for F137/F109 audio; output transcripts as intel.rf.*.transcript.
+- id: f049-finnhub
+  ref: F049
+  name: Finnhub
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.finnhub.quote
+  historical_nats_pattern: fabric.intel.finance.finnhub.*
+  source_url: https://finnhub.io/docs/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f050-flightaware-aeroapi
+  ref: F050
+  name: FlightAware AeroAPI
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium/metered
+  geometry: point (moving)
+  layer: air
+  route: jetstream
+  subject: intel.air.flightaware.flight
+  historical_nats_pattern: fabric.intel.aviation.flightaware.*
+  source_url: https://flightaware.com/commercial/aeroapi
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs); metered'
+- id: f051-flock-safety-api
+  ref: F051
+  name: Flock Safety API
+  catalog: Fabric Feeds
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: point / polygon
+  layer: none
+  route: none
+  historical_nats_pattern: fabric.intel.surveillance.flock.*
+  source_url: https://www.flocksafety.com/api
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+  notes: ALPR of vehicles/people; excluded by policy (onemind-xr/ULTRACODE-PROMPT.md:318 (no targeting of people)).
+- id: f052-fred-st-louis-fed
+  ref: F052
+  name: FRED (St. Louis Fed)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.fred.series
+  historical_nats_pattern: fabric.intel.finance.fred.*
+  source_url: https://fred.stlouisfed.org/docs/api/fred
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f053-gadm-boundaries
+  ref: F053
+  name: GADM Boundaries
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: catalog
+  priority: P2
+  delivery_mode: bulk_download
+  cadence: per release (years)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: 'GADM licence: non-commercial, no redistribution (unverified)'
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: boundaries
+  route: object_store
+  source_url: https://gadm.org
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://gadm.org
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f054-gdacs
+  ref: F054
+  name: GDACS
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: rss
+  cadence: omos polls 600 s (omos/platform/omos/intel-scripts.yaml)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.disaster.gdacs.event
+  historical_nats_pattern: fabric.intel.disaster.gdacs.*
+  source_url: https://www.gdacs.org/gdacsapi
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://www.gdacs.org/xml/rss.xml
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Live in omos as intel.disaster.gdacs.{type}.{id}.
+- id: f055-gdelt-project
+  ref: F055
+  name: GDELT Project
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: bulk_download
+  cadence: every 15 min (blog.gdeltproject.org GDELT 2.0)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: terms not stated on GDELT 2.0 post (unverified)
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: news
+  route: jetstream
+  subject: intel.news.gdelt.event
+  historical_nats_pattern: fabric.intel.gdelt.*
+  source_url: https://www.gdeltproject.org
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: http://data.gdeltproject.org/gdeltv2/lastupdate.txt
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://data.gdeltproject.org:443/gdeltv2/lastupdate.txt
+    probe_kind: machine endpoint
+- id: f056-geofabrik-osm
+  ref: F056
+  name: GeoFabrik OSM
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: bulk_download
+  cadence: daily extracts
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: ODbL (OSM data) - unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: overlays
+  route: object_store
+  source_url: https://download.geofabrik.de
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://download.geofabrik.de/index-v1.json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Source for self-hosted vector tiles/PMTiles and offline maps.
+- id: f057-global-fishing-watch
+  ref: F057
+  name: Global Fishing Watch
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: sea
+  route: jetstream
+  subject: intel.sea.gfw.event
+  historical_nats_pattern: fabric.intel.maritime.fishing.*
+  source_url: https://globalfishingwatch.org/data-download/datasets/public-fishing-effort
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f058-globaltuners
+  ref: F058
+  name: GlobalTuners
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: audio
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: rf
+  route: none
+  historical_nats_pattern: fabric.intel.rf.globaltuners.*
+  source_url: https://www.globaltuners.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f059-glofas-flood-forecast
+  ref: F059
+  name: GloFAS Flood Forecast
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: object_store
+  subject: intel.water.glofas.forecast
+  historical_nats_pattern: fabric.intel.water.glofas.*
+  source_url: https://global-flood.emergency.copernicus.eu/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://global-flood.emergency.copernicus.eu/api
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://global-flood.emergency.copernicus.eu/api/
+    probe_kind: machine endpoint
+- id: f060-gpio
+  ref: F060
+  name: GPIO
+  catalog: Fabric Feeds
+  kind: sensor_network
+  status: edge-device
+  priority: P2
+  delivery_mode: device
+  cadence: event-driven
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: fleet
+  route: edge_leaf
+  subject: tel.{node}.gpio.{metric}
+  historical_nats_pattern: fabric.sensor.gpio.*
+  source_url: https://www.kernel.org/doc/html/latest/driver-api/gpio/index.html
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: Local sensors on homestead nodes via NATS leaf.
+- id: f061-gpsjam
+  ref: F061
+  name: GPSJam
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: rf
+  route: object_store
+  subject: intel.rf.gpsjam.daily
+  historical_nats_pattern: fabric.intel.aviation.gpsjam.*
+  source_url: https://gpsjam.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://gpsjam.org
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Daily H3 interference map; no documented API (unverified).
+- id: f062-greynoise
+  ref: F062
+  name: GreyNoise
+  catalog: Fabric Feeds
+  kind: external_api
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: cyber
+  route: hermes_knowledge
+  subject: svc.cyber.greynoise
+  historical_nats_pattern: fabric.intel.cyber.greynoise.*
+  source_url: https://api.greynoise.io/v3/community
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f063-gscpi-ny-fed
+  ref: F063
+  name: GSCPI (NY Fed)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: monthly
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.nyfed.gscpi
+  historical_nats_pattern: fabric.intel.finance.scm.*
+  source_url: https://www.newyorkfed.org/research/policy/gscpi
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://www.newyorkfed.org/research/policy/gscpi
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f064-gtfs-rt-standard
+  ref: F064
+  name: GTFS-RT Standard
+  catalog: Fabric Feeds
+  kind: other
+  status: standard
+  priority: P1
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: rail-transit
+  route: none
+  historical_nats_pattern: fabric.intel.transit.gtfs.*
+  source_url: https://gtfs.org/realtime/
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: Adopted format for F086/F087/M046.
+- id: f065-hf-radio-safecomlink
+  ref: F065
+  name: HF Radio / SafeComLink
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: rf
+  route: none
+  historical_nats_pattern: fabric.intel.rf.hf.*
+  source_url: https://safecomlink.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://safecomlink.com
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://www.safecomlink.com/
+    probe_kind: landing/doc page
+- id: f066-hifld
+  ref: F066
+  name: HIFLD
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: catalog
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: dataset updates (months)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Gov/Open (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://hifld-geoplatform.hub.arcgis.com
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://hifld-geoplatform.hub.arcgis.com
+    http: '404'
+    result: not found
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: HIFLD Open availability changed in 2025 (unverified).
+- id: f067-hyperliquid-defi
+  ref: F067
+  name: Hyperliquid (DeFi)
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: none
+  historical_nats_pattern: fabric.intel.finance.defi.*
+  source_url: https://app.hyperliquid.xyz/trade
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://app.hyperliquid.xyz/trade
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f068-iaea-nuclear-events
+  ref: F068
+  name: IAEA Nuclear Events
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: scrape
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.nuclear.iaea.event
+  historical_nats_pattern: fabric.intel.nuclear.iaea.*
+  source_url: https://www.iaea.org/resources/databases
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://www.iaea.org/resources/databases
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f069-iaea-radiation-data
+  ref: F069
+  name: IAEA Radiation Data
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: reference-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: hermes_knowledge
+  historical_nats_pattern: fabric.intel.radiation.iaea.*
+  source_url: https://www.iaea.org/resources/databases/safeguards-analytical-laboratory
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://www.iaea.org/resources/databases/safeguards-analytical-laboratory
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Link is a laboratory page, not a data feed.
+- id: f070-iea-oil-energy-stats
+  ref: F070
+  name: IEA Oil & Energy Stats
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.energy.iea.series
+  historical_nats_pattern: fabric.intel.energy.iea.*
+  source_url: https://api.iea.org
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f071-imf-sdmx-weo
+  ref: F071
+  name: IMF SDMX / WEO
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: monthly/quarterly
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.imf.series
+  historical_nats_pattern: fabric.intel.finance.imf.*
+  source_url: https://data.imf.org/api/
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://data.imf.org/api/
+    http: '308'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://data.imf.org/api
+    probe_kind: machine endpoint
+- id: f072-inform-risk-index
+  ref: F072
+  name: INFORM Risk Index
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: yearly
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: humanitarian
+  route: hermes_knowledge
+  historical_nats_pattern: fabric.intel.risk.*
+  source_url: https://inform-index.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://inform-index.org
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: http://drmkc.jrc.ec.europa.eu/inform-index
+    probe_kind: landing/doc page
+- id: f073-ioda-georgia-tech
+  ref: F073
+  name: IODA (Georgia Tech)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: 5-10 min (proposed)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: cyber
+  route: jetstream
+  subject: intel.cyber.ioda.outage
+  historical_nats_pattern: fabric.intel.cyber.ioda.*
+  source_url: https://ioda.inetintel.cc.gatech.edu
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://api.ioda.inetintel.cc.gatech.edu/v2/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f074-ipapi-co
+  ref: F074
+  name: ipapi.co
+  catalog: Fabric Feeds
+  kind: external_api
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: on demand
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: cyber
+  route: none
+  subject: svc.geo.ipapi
+  historical_nats_pattern: fabric.intel.geo.ip.*
+  source_url: https://ipapi.co
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://ipapi.co/8.8.8.8/json/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: On-demand IP geolocation for Hermes tools.
+- id: f075-kalshi-prediction-markets
+  ref: F075
+  name: Kalshi (Prediction Markets)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.kalshi.market
+  historical_nats_pattern: fabric.intel.finance.predict.*
+  source_url: https://trading.kalshi.com/docs/api/
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f076-kiwisdr
+  ref: F076
+  name: KiwiSDR
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: audio
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: rf
+  route: none
+  historical_nats_pattern: fabric.feed.rf.kiwisdr.*
+  source_url: https://rx.linkfanel.net
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://rx.linkfanel.net
+    http: '000'
+    result: network error
+    date: '2026-10-29T08:20:29Z'
+    error: 'curl: (7) Failed to connect to rx.linkfanel.net port 443 after 431 ms: Couldn''t connect to server'
+    probe_kind: landing/doc page
+  notes: Receiver directory; each KiwiSDR is a web UI.
+- id: f077-link-16-j-series-jreap
+  ref: F077
+  name: Link 16 / J-Series (JREAP)
+  catalog: Fabric Feeds
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: certificate (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Gov/Open (catalog)
+  geometry: none
+  layer: none
+  route: none
+  historical_nats_pattern: fabric.intel.military.link16.*
+  source_url: https://en.wikipedia.org/wiki/Link_16
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference); military datalink, certificate-gated'
+  notes: Not applicable to a civilian platform.
+- id: f078-live-news-streams-youtube
+  ref: F078
+  name: Live News Streams (YouTube)
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: video
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: news
+  route: none
+  historical_nats_pattern: fabric.intel.news.live.*
+  source_url: https://www.youtube.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.youtube.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Embed links only; no re-stream (YouTube terms, unverified).
+- id: f079-liveuamap
+  ref: F079
+  name: LiveUAMap
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: point / polygon
+  layer: conflict
+  route: jetstream
+  subject: intel.conflict.liveuamap.event
+  historical_nats_pattern: fabric.intel.conflict.liveuamap.*
+  source_url: https://liveuamap.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://liveuamap.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: API is keyed/paid; duplicate of F080/F161/M035 (catalog auth values conflict).
+- id: f080-liveuamap
+  ref: F080
+  name: LiveUAMap
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: point / polygon
+  layer: conflict
+  route: jetstream
+  subject: intel.conflict.liveuamap.event
+  historical_nats_pattern: fabric.intel.conflict.liveuamap.*
+  source_url: https://liveuamap.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    shared_with: F079
+    url: https://liveuamap.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+- id: f081-mappingsupport
+  ref: F081
+  name: MappingSupport
+  catalog: Fabric Feeds
+  kind: other
+  status: catalog
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: overlays
+  route: none
+  source_url: https://mappingsupport.com
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://mappingsupport.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Directory of US GIS services; used for discovery.
+- id: f082-marinetraffic-ais
+  ref: F082
+  name: MarineTraffic AIS
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: sea
+  route: jetstream+kv
+  subject: intel.sea.marinetraffic.position
+  historical_nats_pattern: fabric.intel.maritime.marinetraffic.*
+  source_url: https://www.marinetraffic.com/en/ais-api-services
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+  notes: Duplicate of F011.
+- id: f083-mavlink
+  ref: F083
+  name: MAVLink
+  catalog: Fabric Feeds
+  kind: sensor_network
+  status: edge-device
+  priority: P0
+  delivery_mode: device
+  cadence: 1-10 Hz
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: fleet
+  route: edge_leaf
+  subject: tel.drone.{id}.{metric}
+  state: ent.drone.{id}.state; KV fleet-state
+  historical_nats_pattern: fabric.drone.mavlink.*
+  source_url: https://mavlink.io/en
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: Local scripted MAVLink drone sim-x1 on UDP 14550 (PREFLIGHT.md).
+- id: f084-meshtastic-map
+  ref: F084
+  name: Meshtastic Map
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: rf
+  route: jetstream
+  subject: intel.rf.meshtastic.node
+  historical_nats_pattern: fabric.feed.rf.meshtastic.*
+  source_url: https://meshtastic.liamcottle.net
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://meshtastic.liamcottle.net
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Community map (unofficial); own mesh comes via M041.
+- id: f085-modbus
+  ref: F085
+  name: Modbus
+  catalog: Fabric Feeds
+  kind: sensor_network
+  status: edge-device
+  priority: P3
+  delivery_mode: device
+  cadence: poll per device
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: fleet
+  route: edge_leaf
+  subject: tel.{node}.modbus.{metric}
+  historical_nats_pattern: fabric.sensor.modbus.*
+  source_url: https://modbus.org/specs.php
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: f086-mta-gtfs-rt
+  ref: F086
+  name: MTA GTFS-RT
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: 30 s (GTFS-RT protobuf)
+  auth: 'none: omos fetches api-endpoint.mta.info without a key (omos/platform/data/redpanda-connect/deployment.yaml:38)'
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: rail-transit
+  route: jetstream+kv
+  subject: intel.transit.mta.position
+  state: ent.train.{id}.state
+  historical_nats_pattern: fabric.intel.transit.mta.*
+  source_url: https://api.mta.info
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Live in omos (only MTA pipeline is launched, per audit README).
+- id: f087-mta-nyc-transit
+  ref: F087
+  name: MTA NYC (Transit)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: 30 s
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: rail-transit
+  route: jetstream+kv
+  subject: intel.transit.mta.position
+  state: ent.train.{id}.state
+  historical_nats_pattern: fabric.intel.transit.mta.*
+  source_url: https://api.mta.info
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    shared_with: F086
+    url: https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+  notes: Duplicate of F086.
+- id: f088-nasa-earthdata
+  ref: F088
+  name: NASA Earthdata
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: catalog
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: on demand (CMR search)
+  auth: Earthdata Login for downloads (unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: imagery
+  route: object_store
+  source_url: https://earthdata.nasa.gov
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://cmr.earthdata.nasa.gov/search/collections.json?page_size=1
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f089-nasa-eonet
+  ref: F089
+  name: NASA EONET
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: rest_poll
+  cadence: omos polls 300 s (omos/platform/omos/intel-scripts.yaml)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.natural.eonet.event
+  historical_nats_pattern: fabric.intel.eonet.*
+  source_url: https://eonet.gsfc.nasa.gov/docs/v3
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://eonet.gsfc.nasa.gov/api/v3/events?limit=1
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Live in omos as intel.natural.nasa.eonet.{cat}.{id} (5 tokens; collapse 'nasa.eonet' to one token).
+- id: f090-nasa-firms
+  ref: F090
+  name: NASA FIRMS
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: rest_poll
+  cadence: omos polls 600 s (omos/platform/omos/intel-scripts.yaml)
+  auth: MAP_KEY required (firms.modaps.eosdis.nasa.gov/api/map_key)
+  rate_limit: 5000 transactions / 10 min per MAP_KEY (FIRMS map_key page)
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.fire.firms.detection
+  historical_nats_pattern: fabric.intel.fire.firms.*
+  source_url: https://firms.modaps.eosdis.nasa.gov/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+  notes: Live in omos as intel.fire.nasa.firms.{region}.
+- id: f091-nasa-gibs-modis-imagery
+  ref: F091
+  name: NASA GIBS / MODIS Imagery
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: tiles_wmts
+  cadence: unverified
+  auth: none (GIBS access-basics page mentions no auth)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: imagery
+  route: tile_proxy
+  historical_nats_pattern: fabric.intel.imagery.gibs.*
+  source_url: https://nasa.github.io/gibs/
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief/default/GoogleMapsCompatible_Level8/0/0/0.jpeg
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f092-nc-dot-traffic-cameras
+  ref: F092
+  name: NC DOT Traffic Cameras
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: 5 min (camera list)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: cameras
+  route: mediamtx
+  state: ent.camera.{id}.state
+  historical_nats_pattern: fabric.intel.transit.ncdot.*
+  source_url: https://eapps.ncdot.gov/services/traffic-prod/v1/cameras
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://eapps.ncdot.gov/services/traffic-prod/v1/cameras
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Camera registry on the bus; snapshots/streams via MediaMTX or direct URL.
+- id: f093-nifc-fire-perimeters
+  ref: F093
+  name: NIFC Fire Perimeters
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: 15 min (proposed)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.fire.nifc.perimeter
+  historical_nats_pattern: fabric.intel.fire.nifc.*
+  source_url: https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Current_WildlandFire_Perimeters/FeatureServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Current_WildlandFire_Perimeters/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f094-noaa-nws-alerts
+  ref: F094
+  name: NOAA NWS Alerts
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: rest_poll
+  cadence: omos polls 300 s (omos/platform/omos/intel-scripts.yaml)
+  auth: User-Agent required (weather.gov services-web-api)
+  rate_limit: not public; retry after ~5 s on limit (weather.gov services-web-api)
+  licence: '''open data, free to use for any purpose'' (weather.gov services-web-api)'
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.weather.noaa.alert
+  historical_nats_pattern: fabric.feed.hazards.*
+  source_url: https://www.weather.gov/documentation/services-web-api
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://api.weather.gov/alerts/active?area=NY
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: 'Live in omos twice: intel.weather.noaa.alert.* and feed-hazards -> tak.cot.inject (omos/platform/data/redpanda-connect/deployment.yaml:153).'
+- id: f095-noaa-swpc-space-weather
+  ref: F095
+  name: NOAA SWPC Space Weather
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: 1-5 min
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: space
+  route: jetstream
+  subject: intel.space.swpc.index
+  historical_nats_pattern: fabric.intel.space.weather.*
+  source_url: https://services.swpc.noaa.gov
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f096-noaa-weather
+  ref: F096
+  name: NOAA Weather
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: hourly forecasts
+  auth: User-Agent required
+  rate_limit: unverified
+  licence: open data (weather.gov services-web-api)
+  cost: Gov/Open (catalog)
+  geometry: point / polygon
+  layer: weather
+  route: kv
+  subject: intel.weather.noaa.forecast
+  historical_nats_pattern: fabric.intel.weather.noaa.*
+  source_url: https://api.weather.gov
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://api.weather.gov
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Per-AOI gridpoint forecasts; latest in KV.
+- id: f097-nominatim-osm-geocoding
+  ref: F097
+  name: Nominatim (OSM Geocoding)
+  catalog: Fabric Feeds
+  kind: external_api
+  status: hosted-service
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: on demand
+  auth: none (catalog, unverified)
+  rate_limit: max 1 req/s; scheduled scripts 4 req/min; cache results (OSMF Nominatim policy)
+  licence: ODbL attribution (OSMF policy)
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: reference
+  route: none
+  subject: svc.geo.geocode
+  historical_nats_pattern: fabric.intel.geo.nominatim.*
+  source_url: https://nominatim.openstreetmap.org
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://nominatim.openstreetmap.org/status?format=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Use self-hosted Nominatim (M048) for production.
+- id: f098-north-star-camera-globe
+  ref: F098
+  name: North Star — Camera Globe
+  catalog: Fabric Feeds
+  kind: other
+  status: commercial-reference
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  historical_nats_pattern: fabric.intel.surveillance.northstar.cameras.*
+  source_url: https://nstarlive.com/#camera-globe
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+- id: f099-north-star-crypto-tracing
+  ref: F099
+  name: North Star — Crypto Tracing
+  catalog: Fabric Feeds
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  historical_nats_pattern: fabric.intel.finance.northstar.crypto.*
+  source_url: https://nstarlive.com/#crypto-tracing
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+  notes: 'Crypto tracing of persons: policy (onemind-xr/ULTRACODE-PROMPT.md:318 (no targeting of people)).'
+- id: f100-north-star-netscan
+  ref: F100
+  name: North Star — NetScan
+  catalog: Fabric Feeds
+  kind: other
+  status: commercial-reference
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  historical_nats_pattern: fabric.intel.cyber.northstar.netscan.*
+  source_url: https://nstarlive.com/#netscan
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+- id: f101-north-star-platform-nstarlive-com
+  ref: F101
+  name: North Star — Platform (nstarlive.com)
+  catalog: Fabric Feeds
+  kind: other
+  status: commercial-reference
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  historical_nats_pattern: fabric.intel.osint.northstar.*
+  source_url: https://nstarlive.com
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+- id: f102-north-star-username-identity-osint
+  ref: F102
+  name: North Star — Username / Identity OSINT
+  catalog: Fabric Feeds
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  historical_nats_pattern: fabric.intel.osint.northstar.identity.*
+  source_url: https://nstarlive.com/#username-research
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+  notes: 'Identity OSINT on persons: policy (onemind-xr/ULTRACODE-PROMPT.md:318 (no targeting of people)).'
+- id: f103-north-star-watchtower-global-sa-globe
+  ref: F103
+  name: North Star — Watchtower (Global SA Globe)
+  catalog: Fabric Feeds
+  kind: other
+  status: commercial-reference
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  historical_nats_pattern: fabric.intel.osint.northstar.watchtower.*
+  source_url: https://nstarlive.com/#watchtower
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+- id: f104-nrc-event-notifications
+  ref: F104
+  name: NRC Event Notifications
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: scrape
+  cadence: daily (business days)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.nuclear.nrc.event
+  historical_nats_pattern: fabric.intel.nuclear.nrc.*
+  source_url: https://www.nrc.gov/reading-rm/doc-collections/event-status/event/
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.nrc.gov/reading-rm/doc-collections/event-status/event/
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://www.nrc.gov/reading-rm/doc-collections/event-status/event/index.html
+    probe_kind: landing/doc page
+- id: f105-nws-cap-alerts
+  ref: F105
+  name: NWS CAP Alerts
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rss
+  cadence: 2-5 min
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.weather.noaa.alert
+  historical_nats_pattern: fabric.intel.weather.nws.alerts.*
+  source_url: https://alerts.weather.gov/cap/us.php?x=1
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://alerts.weather.gov/cap/us.php?x=1
+    http: '000'
+    result: network error
+    date: '2026-10-29T08:20:29Z'
+    error: 'curl: (6) Could not resolve host: alerts.weather.gov'
+    probe_kind: machine endpoint
+  notes: Legacy CAP ATOM; superseded by api.weather.gov/alerts (F094) - unverified. One collector for both.
+- id: f106-nyc-511-traffic
+  ref: F106
+  name: NYC 511 (Traffic)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: road-traffic
+  route: jetstream
+  subject: intel.transit.511ny.event
+  historical_nats_pattern: fabric.intel.transit.nyc511.*
+  source_url: https://511ny.org/developers
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f107-onvif
+  ref: F107
+  name: ONVIF
+  catalog: Fabric Feeds
+  kind: sensor_network
+  status: standard
+  priority: P1
+  delivery_mode: device
+  cadence: stream
+  auth: basic (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: cameras
+  route: mediamtx
+  state: ent.camera.{id}.state
+  historical_nats_pattern: fabric.sensor.camera.*
+  source_url: https://www.onvif.org/profiles
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: 'Owned cameras: ONVIF discovery + RTSP into MediaMTX.'
+- id: f108-openaq
+  ref: F108
+  name: OpenAQ
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: environment
+  route: jetstream
+  subject: intel.environment.openaq.reading
+  historical_nats_pattern: fabric.intel.environment.aq.*
+  source_url: https://api.openaq.org/v3/
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f109-openmhz-scanner-feeds
+  ref: F109
+  name: OpenMHZ (Scanner Feeds)
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: audio
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: rf
+  route: none
+  historical_nats_pattern: fabric.feed.rf.openmhz.*
+  source_url: https://openmhz.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://openmhz.com
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f110-opensanctions
+  ref: F110
+  name: OpenSanctions
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: CC BY-NC 4.0, commercial licence otherwise (unverified)
+  cost: Free (catalog)
+  geometry: none
+  layer: reference
+  route: hermes_knowledge
+  historical_nats_pattern: fabric.intel.entity.sanctions.*
+  source_url: https://www.opensanctions.org/#downloads
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://data.opensanctions.org/datasets/latest/index.json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Reference for Hermes only; no person tracking.
+- id: f111-openseamap
+  ref: F111
+  name: OpenSeaMap
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: charts-nautical
+  route: tile_proxy
+  historical_nats_pattern: fabric.intel.maritime.charts.*
+  source_url: https://map.openseamap.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://map.openseamap.org
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Tile template in M060.
+- id: f112-opensky-network
+  ref: F112
+  name: OpenSky Network
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: rest_poll
+  cadence: 10 s anonymous / 5 s authenticated
+  auth: anonymous allowed; authenticated = OAuth2 client credentials only (opensky-api rest.html)
+  rate_limit: anonymous 400 credits/day; standard user 4000/day (opensky-api rest.html)
+  licence: not stated on REST docs (unverified)
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: air
+  route: jetstream+kv
+  subject: intel.air.opensky.position
+  state: ent.aircraft.{icao}.state -> KV world-state
+  historical_nats_pattern: fabric.intel.aviation.opensky.*
+  source_url: https://opensky-network.org/apidoc
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://opensky-network.org/api/states/all?lamin=40.5&lomin=-74.3&lamax=41.0&lomax=-73.7
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: 'Live in omos feed-aircraft (omos/platform/data/redpanda-connect/deployment.yaml:284). It polls anonymously: the http processor sends no credentials (lines 283-288), and the injected OPENSKY_USERNAME/PASSWORD env vars (lines 546-556) are unused. OpenSky no longer accepts basic auth (rest.html). [verifier-corrected 2026-10-29]'
+- id: f113-openweathermap
+  ref: F113
+  name: OpenWeatherMap
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: point / polygon
+  layer: weather
+  route: kv
+  subject: intel.weather.owm.observation
+  historical_nats_pattern: fabric.intel.weather.owm.*
+  source_url: https://openweathermap.org/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f114-openweathermap-tiles
+  ref: F114
+  name: OpenWeatherMap Tiles
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: raster or vector tiles
+  layer: weather
+  route: tile_proxy
+  historical_nats_pattern: fabric.intel.weather.owm.*
+  source_url: https://openweathermap.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f115-overpass-api-osm
+  ref: F115
+  name: Overpass API (OSM)
+  catalog: Fabric Feeds
+  kind: external_api
+  status: hosted-service
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: on demand
+  auth: none (catalog, unverified)
+  rate_limit: <10,000 queries and <1 GB/day; divide by 100 for regular use; pause 30 s after 429 (OSM wiki Overpass_API)
+  licence: ODbL (unverified)
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: overlays
+  route: object_store
+  subject: svc.geo.overpass
+  source_url: https://overpass-api.de
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://overpass-api.de/api/status
+    http: '000'
+    result: network error
+    date: '2026-10-29T08:20:29Z'
+    error: 'curl: (28) Operation timed out after 15005 milliseconds with 0 bytes received'
+    probe_kind: machine endpoint
+- id: f116-peeringdb
+  ref: F116
+  name: PeeringDB
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  historical_nats_pattern: fabric.intel.infra.peeringdb.*
+  source_url: https://www.peeringdb.com/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://www.peeringdb.com/api/fac?limit=1
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Facility locations as overlay.
+- id: f117-pulsepoint-fire-ems-cad-dispatch
+  ref: F117
+  name: PulsePoint (Fire/EMS CAD Dispatch)
+  catalog: Fabric Feeds
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: hazards
+  route: none
+  historical_nats_pattern: incidents.fire.<city>
+  source_url: https://www.pulsepoint.org/
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.pulsepoint.org/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: No public API; medical dispatch data about people (onemind-xr/ULTRACODE-PROMPT.md:318 (no targeting of people)).
+- id: f118-pytak-adsbcot-aiscot
+  ref: F118
+  name: PyTAK / ADSBCOT / AISCOT
+  catalog: Fabric Feeds
+  kind: other
+  status: tool
+  priority: P2
+  delivery_mode: none
+  cadence: n/a
+  auth: certificate (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: reference
+  route: none
+  historical_nats_pattern: fabric.tak.cot.*
+  source_url: https://github.com/snstac/pytak
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: CoT tooling reference (design input for the TAK projector).
+- id: f119-radiationnetwork-com
+  ref: F119
+  name: RadiationNetwork.com
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: hazards
+  route: none
+  historical_nats_pattern: fabric.intel.radiation.radnet.citizen.*
+  source_url: https://www.radiationnetwork.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.radiationnetwork.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f120-reddit-social-osint
+  ref: F120
+  name: Reddit (Social OSINT)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: oauth2 (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: news
+  route: jetstream
+  subject: intel.social.reddit.post
+  historical_nats_pattern: fabric.intel.social.reddit.*
+  source_url: https://www.reddit.com/dev/api/
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: OAuth2 required'
+- id: f121-reliefweb-un-ocha
+  ref: F121
+  name: ReliefWeb (UN OCHA)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: hourly
+  auth: appname parameter (approval may be required - unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: humanitarian
+  route: hermes_knowledge
+  subject: intel.humanitarian.reliefweb.report
+  historical_nats_pattern: fabric.intel.humanitarian.*
+  source_url: https://reliefweb.int/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://api.reliefweb.int/v2/reports?appname=onemind-registry&limit=1
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f122-remote-id-astm-f3411
+  ref: F122
+  name: Remote ID (ASTM F3411)
+  catalog: Fabric Feeds
+  kind: sensor_network
+  status: edge-device
+  priority: P2
+  delivery_mode: device
+  cadence: 1 Hz broadcast
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: air
+  route: edge_leaf
+  subject: det.air.remoteid.{id}
+  state: ent.drone.{id}.state
+  historical_nats_pattern: fabric.drone.remoteid.*
+  source_url: https://www.faa.gov/uas/getting_started/remote_id
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: Needs a Remote ID receiver at the edge.
+- id: f123-ros-2-dds
+  ref: F123
+  name: ROS 2 / DDS
+  catalog: Fabric Feeds
+  kind: sensor_network
+  status: edge-device
+  priority: P1
+  delivery_mode: device
+  cadence: topic rate
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: fleet
+  route: edge_leaf
+  subject: tel.robot.{id}.{metric}
+  state: ent.robot.{id}.state; KV fleet-state
+  historical_nats_pattern: fabric.robot.<id>.*
+  source_url: https://docs.ros.org/en/humble
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: f124-sae-j2735-v2x
+  ref: F124
+  name: SAE J2735 / V2X
+  catalog: Fabric Feeds
+  kind: sensor_network
+  status: standard
+  priority: P3
+  delivery_mode: device
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: road-traffic
+  route: edge_leaf
+  subject: tel.{node}.v2x.{metric}
+  historical_nats_pattern: fabric.vehicle.v2x.*
+  source_url: https://www.sae.org/standards/content/j2735_202309
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference); SAE standard is paywalled'
+- id: f125-safecast-radiation
+  ref: F125
+  name: Safecast (Radiation)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: hourly
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: CC0 (unverified)
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.radiation.safecast.reading
+  historical_nats_pattern: fabric.intel.environment.rad.*
+  source_url: https://api.safecast.org
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://api.safecast.org/measurements.json?per_page=1
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f126-sam-gov-federal-contracts
+  ref: F126
+  name: SAM.gov (Federal Contracts)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: reference
+  route: hermes_knowledge
+  subject: intel.gov.sam.notice
+  historical_nats_pattern: fabric.intel.contracts.*
+  source_url: https://sam.gov/data-services/Contract-Opportunities/apiProd
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f127-satnogs
+  ref: F127
+  name: SATnogs
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: space
+  route: jetstream
+  subject: intel.space.satnogs.observation
+  historical_nats_pattern: fabric.intel.space.satnogs.*
+  source_url: https://network.satnogs.org/api/
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f128-serial-port
+  ref: F128
+  name: Serial Port
+  catalog: Fabric Feeds
+  kind: sensor_network
+  status: edge-device
+  priority: P3
+  delivery_mode: device
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: fleet
+  route: edge_leaf
+  subject: tel.{node}.serial.{metric}
+  historical_nats_pattern: fabric.sensor.serial.*
+  source_url: https://www.kernel.org/doc/html/latest/driver-api/serial/index.html
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: f129-shadowserver-foundation
+  ref: F129
+  name: Shadowserver Foundation
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: cyber
+  route: hermes_knowledge
+  historical_nats_pattern: fabric.intel.cyber.shadow.*
+  source_url: https://dashboard.shadowserver.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f130-shodan-internetdb
+  ref: F130
+  name: Shodan InternetDB
+  catalog: Fabric Feeds
+  kind: external_api
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: on demand
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: non-commercial use (unverified)
+  cost: Free (catalog)
+  geometry: none
+  layer: cyber
+  route: hermes_knowledge
+  subject: svc.cyber.internetdb
+  historical_nats_pattern: fabric.intel.cyber.shodan.*
+  source_url: https://internetdb.shodan.io
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://internetdb.shodan.io/8.8.8.8
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f131-skywatch-earthcache
+  ref: F131
+  name: SkyWatch EarthCache
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: raster or vector tiles
+  layer: imagery
+  route: object_store
+  source_url: https://earthcache.skywatch.com
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs); paid tasking'
+- id: f132-smithsonian-gvp-volcanoes
+  ref: F132
+  name: Smithsonian GVP Volcanoes
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P2
+  delivery_mode: rss
+  cadence: weekly report
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.natural.gvp.report
+  historical_nats_pattern: fabric.intel.environment.volc.*
+  source_url: https://volcano.si.edu
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://volcano.si.edu
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f133-spaceweatherlive
+  ref: F133
+  name: SpaceWeatherLive
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: space
+  route: jetstream
+  subject: intel.space.spaceweatherlive.index
+  historical_nats_pattern: fabric.intel.space.spaceweather.*
+  source_url: https://www.spaceweatherlive.com/en/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://www.spaceweatherlive.com/en/api
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://www.spaceweatherlive.com/en/api.html
+    probe_kind: machine endpoint
+- id: f134-stanag-4586-uas-control
+  ref: F134
+  name: STANAG 4586 (UAS Control)
+  catalog: Fabric Feeds
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: certificate (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Gov/Open (catalog)
+  geometry: none
+  layer: none
+  route: none
+  historical_nats_pattern: fabric.drone.control.stanag.*
+  source_url: https://en.wikipedia.org/wiki/STANAG_4586
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference); NATO standard, not adopted (MAVLink used)'
+- id: f135-telegram-osint-channels
+  ref: F135
+  name: Telegram OSINT Channels
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: websocket
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: news
+  route: jetstream
+  subject: intel.social.telegram.post
+  historical_nats_pattern: fabric.intel.social.telegram.*
+  source_url: https://core.telegram.org/api
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    not_tested: 'not probed: MTProto api_id/api_hash account required'
+- id: f136-tfl-transport-for-london
+  ref: F136
+  name: TfL (Transport for London)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: rail-transit
+  route: jetstream
+  subject: intel.transit.tfl.status
+  historical_nats_pattern: fabric.intel.transit.tfl.*
+  source_url: https://api.tfl.gov.uk
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f137-trunk-recorder-p25-smartnet-radio
+  ref: F137
+  name: Trunk Recorder (P25/SmartNet Radio)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: edge-device
+  priority: P3
+  delivery_mode: audio
+  cadence: continuous (local SDR)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: rf
+  route: mediamtx
+  subject: intel.rf.trunk.call
+  historical_nats_pattern: radio.capture.<system>.<talkgroup>
+  source_url: https://github.com/robotastic/trunk-recorder
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: Edge SDR recorder; audio to MediaMTX/object store, transcripts via F048.
+- id: f138-tzeva-adom-red-alert-il
+  ref: F138
+  name: Tzeva Adom (Red Alert IL)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: 5 s during alerts (unverified)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: conflict
+  route: jetstream
+  subject: intel.conflict.tzevaadom.alert
+  historical_nats_pattern: fabric.intel.conflict.alerts.*
+  source_url: https://api.tzevaadom.co.il/notifications
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://api.tzevaadom.co.il/notifications
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Unofficial mirror of Israel Home Front Command alerts; terms unverified.
+- id: f139-ucdp-uppsala-conflict-data
+  ref: F139
+  name: UCDP (Uppsala Conflict Data)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: monthly (candidate events)
+  auth: access token may now be required (unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: conflict
+  route: jetstream
+  subject: intel.conflict.ucdp.event
+  historical_nats_pattern: fabric.intel.conflict.ucdp.*
+  source_url: https://ucdp.uu.se/apidocs
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://ucdpapi.pcr.uu.se/api/gedevents/24.1?pagesize=1
+    http: '401'
+    result: auth required
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f140-ukmto-uk-maritime-trade-ops
+  ref: F140
+  name: UKMTO (UK Maritime Trade Ops)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P2
+  delivery_mode: scrape
+  cadence: hourly
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: sea
+  route: jetstream
+  subject: intel.sea.ukmto.incident
+  historical_nats_pattern: fabric.intel.maritime.ukmto.*
+  source_url: https://www.ukmto.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.ukmto.org
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f141-un-comtrade
+  ref: F141
+  name: UN Comtrade
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: finance
+  route: hermes_knowledge
+  historical_nats_pattern: fabric.intel.finance.trade.*
+  source_url: https://comtradeplus.un.org/TradeFlow
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f142-unhcr-population-data
+  ref: F142
+  name: UNHCR Population Data
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: yearly
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: humanitarian
+  route: hermes_knowledge
+  historical_nats_pattern: fabric.intel.humanitarian.*
+  source_url: https://api.unhcr.org/population/v1/
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://api.unhcr.org/population/v1/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f143-us-treasury-fiscaldata
+  ref: F143
+  name: US Treasury FiscalData
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: jetstream
+  subject: intel.finance.treasury.series
+  historical_nats_pattern: fabric.intel.finance.treasury.*
+  source_url: https://fiscaldata.treasury.gov/api-documentation/
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v2/accounting/od/debt_to_penny?page%5Bsize%5D=1
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f144-usaspending-gov
+  ref: F144
+  name: USAspending.gov
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: reference
+  route: hermes_knowledge
+  historical_nats_pattern: fabric.intel.finance.usaspend.*
+  source_url: https://api.usaspending.gov
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://api.usaspending.gov/api/v2/references/toptier_agencies/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f145-usda-nass-yields
+  ref: F145
+  name: USDA NASS Yields
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Gov/Open (catalog)
+  geometry: none
+  layer: reference
+  route: hermes_knowledge
+  source_url: https://quickstats.nass.usda.gov/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f146-usda-plants-db
+  ref: F146
+  name: USDA PLANTS DB
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: rare
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Gov/Open (catalog)
+  geometry: none
+  layer: reference
+  route: hermes_knowledge
+  source_url: https://plants.usda.gov/downloads
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://plants.usda.gov/downloads
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://plants.sc.egov.usda.gov:443/downloads
+    probe_kind: landing/doc page
+  notes: Homestead plant reference for Hermes.
+- id: f147-usfs-fire-detection
+  ref: F147
+  name: USFS Fire Detection
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.fire.usfs.detection
+  historical_nats_pattern: fabric.intel.fire.usfs.*
+  source_url: https://apps.fs.usda.gov/arcx/rest/services
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://apps.fs.usda.gov/arcx/rest/services?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f148-usgs-earthquakes
+  ref: F148
+  name: USGS Earthquakes
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P0
+  delivery_mode: rest_poll
+  cadence: feeds update every minute (USGS geojson.php); omos polls 60 s
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: USGS public domain (unverified); Feed Life Cycle Policy applies
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.seismic.usgs.event
+  historical_nats_pattern: fabric.feed.hazards.*
+  source_url: https://earthquake.usgs.gov/earthquakes/feed/v1.0/
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: 'Live in omos twice: intel.seismic.usgs.* and feed-hazards -> tak.cot.inject (omos/platform/data/redpanda-connect/deployment.yaml:129).'
+- id: f149-usgs-nwis-water
+  ref: F149
+  name: USGS NWIS (Water)
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: 15 min (instantaneous values)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: environment
+  route: jetstream
+  subject: intel.water.nwis.reading
+  historical_nats_pattern: fabric.intel.water.usgs.nwis.*
+  source_url: https://waterservices.usgs.gov/rest/
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://waterservices.usgs.gov/nwis/iv/?format=json&sites=01646500&parameterCd=00060
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: NWIS legacy services are being replaced (unverified).
+- id: f150-uspto-patents
+  ref: F150
+  name: USPTO Patents
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: identity-conflict
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: reference
+  route: hermes_knowledge
+  historical_nats_pattern: fabric.intel.patents.*
+  source_url: https://api.usaspending.gov/api/v2/search/
+  endpoint_evidence: inconsistent_source_link
+  test:
+    not_tested: 'not probed: catalog link points to USAspending, not USPTO; endpoint unknown'
+- id: f151-websdr-network
+  ref: F151
+  name: WebSDR Network
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: P3
+  delivery_mode: audio
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: rf
+  route: none
+  historical_nats_pattern: fabric.intel.rf.websdr.*
+  source_url: http://websdr.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: http://websdr.org
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: f152-where-the-iss-at
+  ref: F152
+  name: Where the ISS at
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: 10 s
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: space
+  route: jetstream+kv
+  subject: intel.space.wheretheiss.position
+  state: ent.satellite.25544.state
+  historical_nats_pattern: fabric.intel.space.iss.*
+  source_url: https://api.wheretheiss.at
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://api.wheretheiss.at/v1/satellites/25544
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Redundant with F029 + SGP4 propagation.
+- id: f153-who-disease-outbreaks
+  ref: F153
+  name: WHO Disease Outbreaks
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: daily
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: health
+  route: jetstream
+  subject: intel.health.who.outbreak
+  historical_nats_pattern: fabric.intel.health.who.*
+  source_url: https://www.who.int/api/emergencies/diseaseoutbreaknews
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://www.who.int/api/emergencies/diseaseoutbreaknews
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f154-wikidata
+  ref: F154
+  name: Wikidata
+  catalog: Fabric Feeds
+  kind: external_api
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: on demand
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: CC0 (unverified)
+  cost: Free (catalog)
+  geometry: none
+  layer: reference
+  route: hermes_knowledge
+  subject: svc.knowledge.wikidata
+  historical_nats_pattern: fabric.intel.reference.*
+  source_url: https://www.wikidata.org/wiki/Wikidata:Data_access
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://www.wikidata.org/w/api.php?action=wbgetentities&ids=Q42&props=labels&format=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f155-wikipedia-rest-api
+  ref: F155
+  name: Wikipedia REST API
+  catalog: Fabric Feeds
+  kind: external_api
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: on demand
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: CC BY-SA (unverified)
+  cost: Free (catalog)
+  geometry: none
+  layer: reference
+  route: hermes_knowledge
+  subject: svc.knowledge.wikipedia
+  historical_nats_pattern: fabric.intel.reference.wiki.*
+  source_url: https://en.wikipedia.org/api/rest_v1/
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://en.wikipedia.org/api/rest_v1/page/summary/OpenStreetMap
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: f156-windy-api
+  ref: F156
+  name: Windy API
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: point / polygon
+  layer: weather
+  route: kv
+  historical_nats_pattern: fabric.intel.weather.windy.*
+  source_url: https://api.windy.com
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: f157-wri-global-power-plant-db
+  ref: F157
+  name: WRI Global Power Plant DB
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: bulk_download
+  cadence: static (no recent release, unverified)
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: CC BY 4.0 (unverified)
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  historical_nats_pattern: fabric.intel.infra.power.*
+  source_url: https://datasets.wri.org/dataset/globalpowerplantdatabase
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://datasets.wri.org/dataset/globalpowerplantdatabase
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://datasets.wri.org/datasets/global-power-plant-database
+    probe_kind: landing/doc page
+- id: f158-wsdot-traffic-cameras
+  ref: F158
+  name: WSDOT Traffic Cameras
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: Traveler API access code required (unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (camera/receiver) + stream
+  layer: cameras
+  route: mediamtx
+  state: ent.camera.{id}.state
+  historical_nats_pattern: fabric.intel.transit.wsdot.*
+  source_url: https://wsdot.wa.gov/traffic/api/
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://wsdot.wa.gov/traffic/api/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Probe is the documentation page.
+- id: f159-wwv-nist-time
+  ref: F159
+  name: WWV (NIST Time)
+  catalog: Fabric Feeds
+  kind: other
+  status: reference-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: reference
+  route: none
+  historical_nats_pattern: fabric.intel.wwv.*
+  source_url: https://www.nist.gov/pml/time-and-frequency-division/time-services
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference) (radio time service)'
+- id: f160-yahoo-finance
+  ref: F160
+  name: Yahoo Finance
+  catalog: Fabric Feeds
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: finance
+  route: none
+  historical_nats_pattern: fabric.intel.finance.yahoo.*
+  source_url: https://finance.yahoo.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: no official API; scraping against terms (unverified)'
+- id: f161-liveuamap
+  ref: F161
+  name: LiveUAMap
+  catalog: Fabric Feeds
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: conflict
+  route: jetstream
+  subject: intel.conflict.liveuamap.event
+  historical_nats_pattern: fabric.intel.conflict.liveuamap.*
+  source_url: https://liveuamap.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    shared_with: F079
+    url: https://liveuamap.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+  notes: Older top-level copy; catalog auth None vs F079/F080 API Key.
+- id: m001-acled-crisis-map
+  ref: M001
+  name: ACLED Crisis Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: conflict
+  route: none
+  source_url: https://acleddata.com/dashboard/
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+  notes: Dashboard; data via F005.
+- id: m002-ais-vessel-overlay
+  ref: M002
+  name: AIS Vessel Overlay
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: sea
+  route: none
+  source_url: https://www.marinetraffic.com/en/ais/home/centerx:0/centery:0/zoom:2
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19) (MarineTraffic UI)'
+  notes: Use F012 for AIS.
+- id: m003-amtrak-rail-network
+  ref: M003
+  name: Amtrak Rail Network
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: rare
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: rail-transit
+  route: object_store
+  source_url: https://opendata.arcgis.com/datasets/baa5a6c4d4ae4034850e99aaca38cfbb_0.geojson
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://opendata.arcgis.com/datasets/baa5a6c4d4ae4034850e99aaca38cfbb_0.geojson
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://hub.arcgis.com/api/download/v1/items/baa5a6c4d4ae4034850e99aaca38cfbb/geojson?redirect=true&layers=0
+    probe_kind: machine endpoint
+- id: m004-arcgis-online
+  ref: M004
+  name: ArcGIS Online
+  catalog: Map Layers
+  kind: other
+  status: hosted-service
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: overlays
+  route: none
+  source_url: https://www.arcgis.com/sharing/rest/
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://www.arcgis.com/sharing/rest/?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Platform root of F019.
+- id: m005-arcgis-world-imagery
+  ref: M005
+  name: ArcGIS World Imagery
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: Esri terms goto.arcgisonline.com/maps/World_Imagery (MapServer page)
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Same service as F043/M016.
+- id: m006-bing-maps
+  ref: M006
+  name: Bing Maps
+  catalog: Map Layers
+  kind: world_feed
+  status: hosted-service
+  priority: '-'
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: basemap
+  route: tile_proxy
+  source_url: https://www.bing.com/maps
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+  notes: Bing Maps for Enterprise licensing changed (unverified).
+- id: m007-bing-satellite-xyz
+  ref: M007
+  name: Bing Satellite (XYZ)
+  catalog: Map Layers
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: none
+  source_url: http://ecn.t3.tiles.virtualearth.net/tiles/a{q}.jpeg?g=1
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    not_tested: 'not probed: direct tile URL bypasses Bing Maps API keys/terms (unverified)'
+- id: m008-cesium-ion
+  ref: M008
+  name: Cesium ion
+  catalog: Map Layers
+  kind: world_feed
+  status: hosted-service
+  priority: P2
+  delivery_mode: tiles_3d
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium/paid
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://ion.cesium.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs); optional behind keychain token (decision 0004 #4)'
+- id: m009-cloudflare-radar-map
+  ref: M009
+  name: Cloudflare Radar Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: cyber
+  route: none
+  source_url: https://radar.cloudflare.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+  notes: Data via F032.
+- id: m010-cloudtak-tiles-pmtiles
+  ref: M010
+  name: CloudTAK Tiles (PMTiles)
+  catalog: Map Layers
+  kind: world_feed
+  status: self-hosted
+  priority: P0
+  delivery_mode: tiles_pmtiles
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Self-hosted (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://tiles.atoc.onemindos.dev
+  endpoint_evidence: catalogued_self_hosted_service_no_layer_spec
+  test:
+    url: https://tiles.atoc.onemindos.dev
+    http: '000'
+    result: network error
+    date: '2026-10-29T08:20:29Z'
+    error: 'curl: (6) Could not resolve host: tiles.atoc.onemindos.dev'
+    probe_kind: machine endpoint
+  notes: OneMind self-hosted PMTiles (CloudTAK).
+- id: m011-dcd-data-center-map
+  ref: M011
+  name: DCD Data Center Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: infra
+  route: none
+  source_url: https://www.datacenterdynamics.com/en/map/
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.datacenterdynamics.com/en/map/
+    http: '403'
+    result: forbidden (auth or bot protection)
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: m012-deflock-crowdsourced-alpr-license-plate-
+  ref: M012
+  name: DeFlock — Crowdsourced ALPR / License Plate Reader Map
+  catalog: Map Layers
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: weekly
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://deflock.org
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://deflock.org
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: ALPR camera locations (infrastructure, OSM-derived - unverified); camera sites only, never vehicle reads.
+- id: m013-eia-power-plant-locations
+  ref: M013
+  name: EIA Power Plant Locations
+  catalog: Map Layers
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://www.eia.gov/maps/layer_info-m.php
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.eia.gov/maps/layer_info-m.php
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://atlas.eia.gov/search
+    probe_kind: landing/doc page
+- id: m014-epa-radnet-map
+  ref: M014
+  name: EPA RadNet Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: hazards
+  route: none
+  source_url: https://www.epa.gov/radnet
+  endpoint_evidence: website_or_provider_landing
+  test:
+    shared_with: F041
+    url: https://www.epa.gov/radnet
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+- id: m015-epa-water-quality-map
+  ref: M015
+  name: EPA Water Quality Map
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: rare
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: environment
+  route: object_store
+  source_url: https://watersgeo.epa.gov/arcgis/rest/services
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    url: https://watersgeo.epa.gov/arcgis/rest/services?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m016-esri-imagery-world
+  ref: M016
+  name: Esri Imagery (World)
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    shared_with: M005
+    url: https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+- id: m017-esri-world-street-map
+  ref: M017
+  name: Esri World Street Map
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m018-esri-world-topo
+  ref: M018
+  name: Esri World Topo
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m019-faa-sectional-charts
+  ref: M019
+  name: FAA Sectional Charts
+  catalog: Map Layers
+  kind: world_feed
+  status: website-only
+  priority: P2
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: aviation-airspace
+  route: tile_proxy
+  source_url: https://vfrmap.com/
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://vfrmap.com/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Unofficial; FAA publishes sectional rasters itself (unverified).
+- id: m020-faa-tfr-overlay
+  ref: M020
+  name: FAA TFR Overlay
+  catalog: Map Layers
+  kind: world_feed
+  status: website-only
+  priority: P1
+  delivery_mode: scrape
+  cadence: 15 min
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: aviation-airspace
+  route: jetstream
+  subject: intel.air.faa.tfr
+  source_url: https://tfr.faa.gov/tfr2/list.html
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://tfr.faa.gov/tfr2/list.html
+    http: '302'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://tfr.faa.gov/tfr3/
+    probe_kind: landing/doc page
+- id: m021-fema-flood-zones
+  ref: M021
+  name: FEMA Flood Zones
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: tiles_wms
+  cadence: rare
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: hazards
+  route: tile_proxy
+  source_url: https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m022-flightaware-map
+  ref: M022
+  name: FlightAware Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: air
+  route: none
+  source_url: https://flightaware.com/live/
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: m023-flock-safety-camera-map
+  ref: M023
+  name: Flock Safety Camera Map
+  catalog: Map Layers
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  source_url: https://www.flocksafety.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+  notes: 'Flock ALPR: policy (onemind-xr/ULTRACODE-PROMPT.md:318 (no targeting of people)).'
+- id: m024-geoserver-ogc
+  ref: M024
+  name: GeoServer (OGC)
+  catalog: Map Layers
+  kind: world_feed
+  status: tool
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: overlays
+  route: tile_proxy
+  source_url: https://geoserver.org
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: Self-host option for WMS/WFS.
+- id: m025-google-maps
+  ref: M025
+  name: Google Maps
+  catalog: Map Layers
+  kind: other
+  status: hosted-service
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: basemap
+  route: none
+  source_url: https://maps.googleapis.com
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: m026-google-satellite-xyz
+  ref: M026
+  name: Google Satellite (XYZ)
+  catalog: Map Layers
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: none
+  source_url: https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    not_tested: 'not probed: Google allows imagery only through Maps Platform APIs (archived FAQ; current terms unverified); Photorealistic tiles off (decision 0004 #4)'
+- id: m027-heavens-above-sat-tracks
+  ref: M027
+  name: Heavens Above (Sat Tracks)
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: space
+  route: none
+  source_url: https://www.heavens-above.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.heavens-above.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: m028-hifld-ems-stations
+  ref: M028
+  name: HIFLD EMS Stations
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: rare
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/EMS_Stations/FeatureServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/EMS_Stations/FeatureServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m029-hifld-fire-stations
+  ref: M029
+  name: HIFLD Fire Stations
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: rare
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Fire_Stations/FeatureServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Fire_Stations/FeatureServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m030-hifld-hospitals
+  ref: M030
+  name: HIFLD Hospitals
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: rare
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospital/FeatureServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospital/FeatureServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m031-hifld-law-enforcement
+  ref: M031
+  name: HIFLD Law Enforcement
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: rare
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Law_Enforcement_Stations/FeatureServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Law_Enforcement_Stations/FeatureServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m032-iaea-pris-global-reactors
+  ref: M032
+  name: IAEA PRIS (Global Reactors)
+  catalog: Map Layers
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://pris.iaea.org/PRIS/home.aspx
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://pris.iaea.org/PRIS/home.aspx
+    http: '302'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://pris-stats.iaea.org/
+    probe_kind: landing/doc page
+- id: m033-ioda-internet-outage-map
+  ref: M033
+  name: IODA Internet Outage Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: cyber
+  route: none
+  source_url: https://ioda.inetintel.cc.gatech.edu
+  endpoint_evidence: website_or_provider_landing
+  test:
+    shared_with: F073
+    url: https://api.ioda.inetintel.cc.gatech.edu/v2/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+- id: m034-kiwisdr-receiver-map
+  ref: M034
+  name: KiwiSDR Receiver Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: rf
+  route: none
+  source_url: http://www.kiwisdr.com/public/
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: http://www.kiwisdr.com/public/
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+- id: m035-liveuamap-overlay
+  ref: M035
+  name: LiveUAMap Overlay
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: conflict
+  route: none
+  source_url: https://liveuamap.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    shared_with: F079
+    url: https://liveuamap.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+- id: m036-mapbox
+  ref: M036
+  name: Mapbox
+  catalog: Map Layers
+  kind: world_feed
+  status: hosted-service
+  priority: '-'
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: basemap
+  route: tile_proxy
+  source_url: https://mapbox.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: m037-mapserver-ogc
+  ref: M037
+  name: MapServer (OGC)
+  catalog: Map Layers
+  kind: world_feed
+  status: tool
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: overlays
+  route: tile_proxy
+  source_url: https://mapserver.org
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: m038-maputnik-style-editor
+  ref: M038
+  name: Maputnik (Style Editor)
+  catalog: Map Layers
+  kind: other
+  status: self-hosted
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Self-hosted (catalog)
+  geometry: none
+  layer: basemap
+  route: none
+  source_url: https://maputnik.tail717ba0.ts.net
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: tailnet/cluster-internal host, unreachable from build machine (PREFLIGHT.md Access)'
+  notes: Style editor.
+- id: m039-martin-vector-tiles
+  ref: M039
+  name: Martin (Vector Tiles)
+  catalog: Map Layers
+  kind: world_feed
+  status: self-hosted
+  priority: P1
+  delivery_mode: tiles_mvt
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Self-hosted (catalog)
+  geometry: raster or vector tiles
+  layer: overlays
+  route: tile_proxy
+  source_url: https://martin.tail717ba0.ts.net
+  endpoint_evidence: catalogued_self_hosted_service_no_layer_spec
+  test:
+    not_tested: 'not probed: tailnet/cluster-internal host, unreachable from build machine (PREFLIGHT.md Access)'
+  notes: Vector tiles from PostGIS.
+- id: m040-meshcore
+  ref: M040
+  name: MeshCore
+  catalog: Map Layers
+  kind: sensor_network
+  status: edge-device
+  priority: P3
+  delivery_mode: device
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: fleet
+  route: edge_leaf
+  subject: tel.{node}.mesh.{metric}
+  source_url: https://github.com/ripplebiz/MeshCore
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: m041-meshtastic
+  ref: M041
+  name: Meshtastic
+  catalog: Map Layers
+  kind: sensor_network
+  status: edge-device
+  priority: P2
+  delivery_mode: mqtt
+  cadence: event-driven
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point (moving)
+  layer: fleet
+  route: edge_leaf
+  subject: tel.{node}.mesh.{metric}
+  state: ent.station.{nodeid}.state
+  source_url: https://meshtastic.org
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: Meshtastic via local MQTT/serial bridge.
+- id: m042-mta-map-nyc-transit
+  ref: M042
+  name: MTA Map (NYC Transit)
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: rail-transit
+  route: none
+  source_url: https://data.mta.info/map
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://data.mta.info/map
+    http: '000'
+    result: network error
+    date: '2026-10-29T08:20:29Z'
+    error: 'curl: (6) Could not resolve host: data.mta.info'
+    probe_kind: landing/doc page
+- id: m043-nasa-eyes-3d-space
+  ref: M043
+  name: NASA Eyes (3D Space)
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: space
+  route: none
+  source_url: https://eyes.nasa.gov
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://eyes.nasa.gov
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://science.nasa.gov/eyes/
+    probe_kind: landing/doc page
+- id: m044-nasa-firms-fire-overlay
+  ref: M044
+  name: NASA FIRMS Fire Overlay
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: tiles_wms
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: tile_proxy
+  source_url: https://firms.modaps.eosdis.nasa.gov/arcgis/rest/services/active_fire_viirs_noaa20_nrt/MapServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    not_tested: 'not probed: FIRMS map services need a MAP_KEY (FIRMS map_key page)'
+- id: m045-nifc-fire-perimeters-map
+  ref: M045
+  name: NIFC Fire Perimeters (Map)
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / polygon
+  layer: hazards
+  route: jetstream
+  subject: intel.fire.nifc.perimeter
+  source_url: https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Current_WildlandFire_Perimeters/FeatureServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    shared_with: F093
+    url: https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Current_WildlandFire_Perimeters/FeatureServer/0/query?where=1%3D1&returnCountOnly=true&f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+- id: m046-nj-transit-rail
+  ref: M046
+  name: NJ Transit Rail
+  catalog: Map Layers
+  kind: world_feed
+  status: catalog
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: unverified
+  auth: developer registration for GTFS (unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: rail-transit
+  route: object_store
+  source_url: https://www.njtransit.com/developer-tools
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    url: https://www.njtransit.com/developer-tools
+    http: '302'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://developer.njtransit.com/registration/login
+    probe_kind: landing/doc page
+- id: m047-noaa-enc-nautical-charts
+  ref: M047
+  name: NOAA ENC (Nautical Charts)
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: tiles_wms
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: charts-nautical
+  route: tile_proxy
+  source_url: https://gis.charttools.noaa.gov/arcgis/rest/services/MCS/ENCOnline/MapServer
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://gis.charttools.noaa.gov/arcgis/rest/services/MCS/ENCOnline/MapServer?f=json
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m048-nominatim-geocoding
+  ref: M048
+  name: Nominatim (Geocoding)
+  catalog: Map Layers
+  kind: external_api
+  status: self-hosted
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Self-hosted (catalog)
+  geometry: point / line / polygon
+  layer: reference
+  route: none
+  subject: svc.geo.geocode
+  source_url: https://nominatim.tail717ba0.ts.net
+  endpoint_evidence: catalogued_self_hosted_service_no_layer_spec
+  test:
+    not_tested: 'not probed: tailnet/cluster-internal host, unreachable from build machine (PREFLIGHT.md Access)'
+- id: m049-north-star-camera-globe-250k-cameras
+  ref: M049
+  name: North Star — Camera Globe (250k Cameras)
+  catalog: Map Layers
+  kind: other
+  status: commercial-reference
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  source_url: https://nstarlive.com/#camera-globe
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+- id: m050-north-star-crypto-tracing-map
+  ref: M050
+  name: North Star — Crypto Tracing Map
+  catalog: Map Layers
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  source_url: https://nstarlive.com/#crypto-tracing
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+  notes: policy (onemind-xr/ULTRACODE-PROMPT.md:318 (no targeting of people))
+- id: m051-north-star-identity-osint-layer
+  ref: M051
+  name: North Star — Identity OSINT Layer
+  catalog: Map Layers
+  kind: other
+  status: excluded
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  source_url: https://nstarlive.com/#username-research
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+  notes: policy (onemind-xr/ULTRACODE-PROMPT.md:318 (no targeting of people))
+- id: m052-north-star-netscan-network-recon
+  ref: M052
+  name: North Star — NetScan (Network Recon)
+  catalog: Map Layers
+  kind: other
+  status: commercial-reference
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  source_url: https://nstarlive.com/#netscan
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+- id: m053-north-star-platform-overview
+  ref: M053
+  name: North Star — Platform Overview
+  catalog: Map Layers
+  kind: other
+  status: commercial-reference
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  source_url: https://nstarlive.com
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+- id: m054-north-star-watchtower-globe
+  ref: M054
+  name: North Star — Watchtower Globe
+  catalog: Map Layers
+  kind: other
+  status: commercial-reference
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Paid (catalog)
+  geometry: none
+  layer: none
+  route: none
+  source_url: https://nstarlive.com/#watchtower
+  endpoint_evidence: commercial_ui_or_marketing_only
+  test:
+    not_tested: 'not probed: paid (decision 0004 #19)'
+- id: m055-nrc-nuclear-reactor-map
+  ref: M055
+  name: NRC Nuclear Reactor Map
+  catalog: Map Layers
+  kind: world_feed
+  status: website-only
+  priority: P3
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://www.nrc.gov/reactors/operating/map-power-reactors.html
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://www.nrc.gov/reactors/operating/map-power-reactors.html
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://www.nrc.gov/facilities-safety/operating-reactors/map-power-reactors
+    probe_kind: landing/doc page
+- id: m056-nws-radar-mrms
+  ref: M056
+  name: NWS Radar (MRMS)
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: tiles_wms
+  cadence: 2 min (MRMS) - unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: weather
+  route: tile_proxy
+  source_url: https://opengeo.ncep.noaa.gov/geoserver/conus/conus_bref_qcd/ows?SERVICE=WMS
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://opengeo.ncep.noaa.gov/geoserver/conus/conus_bref_qcd/ows?SERVICE=WMS&REQUEST=GetCapabilities
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m057-nyc-subway-lines
+  ref: M057
+  name: NYC Subway Lines
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: bulk_download
+  cadence: rare
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: rail-transit
+  route: object_store
+  source_url: https://data.cityofnewyork.us/api/geospatial/3qem-6v3v?method=export&type=GeoJSON
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://data.cityofnewyork.us/api/geospatial/3qem-6v3v?method=export&type=GeoJSON
+    http: '400'
+    result: bad request
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m058-openaip-aviation
+  ref: M058
+  name: OpenAIP (Aviation)
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: aviation-airspace
+  route: object_store
+  source_url: https://api.core.openaip.net/api
+  endpoint_evidence: api_or_service_root_incomplete_request
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: m059-opencpn
+  ref: M059
+  name: OpenCPN
+  catalog: Map Layers
+  kind: other
+  status: tool
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: charts-nautical
+  route: none
+  source_url: https://opencpn.org
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: m060-openseamap-nautical-charts
+  ref: M060
+  name: OpenSeaMap (Nautical Charts)
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: charts-nautical
+  route: tile_proxy
+  source_url: https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://tiles.openseamap.org/seamark/10/301/385.png
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+- id: m061-opensky-network-map
+  ref: M061
+  name: OpenSky Network (Map)
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: air
+  route: none
+  source_url: https://opensky-network.org/map
+  endpoint_evidence: website_or_provider_landing
+  test:
+    shared_with: F112
+    url: https://opensky-network.org/api/states/all?lamin=40.5&lomin=-74.3&lamax=41.0&lomax=-73.7
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+- id: m062-openstreetmap-tile-cdn
+  ref: M062
+  name: OpenStreetMap (Tile CDN)
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P1
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: no numeric limit; distinct User-Agent; honour cache headers (>=7 days); no bulk/offline (OSMF tile policy)
+  licence: ODbL; visible attribution (OSMF tile policy)
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://tile.openstreetmap.org/{z}/{x}/{y}.png
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    url: https://tile.openstreetmap.org/0/0/0.png
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: machine endpoint
+  notes: Viewing-only; offline/precache must use self-hosted tiles (M010).
+- id: m063-openweathermap-tiles
+  ref: M063
+  name: OpenWeatherMap Tiles
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: tiles_xyz
+  cadence: unverified
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: raster or vector tiles
+  layer: weather
+  route: tile_proxy
+  source_url: https://tile.openweathermap.org/map/{layer}/{z}/{x}/{y}.png
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs)'
+- id: m064-overpass-api
+  ref: M064
+  name: Overpass API
+  catalog: Map Layers
+  kind: external_api
+  status: self-hosted
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Self-hosted (catalog)
+  geometry: point / line / polygon
+  layer: overlays
+  route: object_store
+  subject: svc.geo.overpass
+  source_url: https://overpass.tail717ba0.ts.net
+  endpoint_evidence: catalogued_self_hosted_service_no_layer_spec
+  test:
+    not_tested: 'not probed: tailnet/cluster-internal host, unreachable from build machine (PREFLIGHT.md Access)'
+- id: m065-peeringdb-data-center-map
+  ref: M065
+  name: PeeringDB Data Center Map
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P3
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://www.peeringdb.com/api/fac
+  endpoint_evidence: explicit_machine_path_or_tile_template
+  test:
+    shared_with: F116
+    url: https://www.peeringdb.com/api/fac?limit=1
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+- id: m066-pg-featureserv
+  ref: M066
+  name: pg_featureserv
+  catalog: Map Layers
+  kind: world_feed
+  status: self-hosted
+  priority: P2
+  delivery_mode: rest_poll
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Self-hosted (catalog)
+  geometry: point / line / polygon
+  layer: overlays
+  route: object_store
+  source_url: http://pg-featureserv.geo.svc.cluster.local:9000
+  endpoint_evidence: catalogued_self_hosted_service_no_layer_spec
+  test:
+    not_tested: 'not probed: tailnet/cluster-internal host, unreachable from build machine (PREFLIGHT.md Access)'
+- id: m067-pmtiles-format-spec
+  ref: M067
+  name: PMTiles (Format/Spec)
+  catalog: Map Layers
+  kind: world_feed
+  status: standard
+  priority: P0
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: object_store
+  source_url: https://protomaps.com/pmtiles
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+  notes: 'Adopted: PMTiles for static overlays and offline basemaps.'
+- id: m068-protomaps
+  ref: M068
+  name: Protomaps
+  catalog: Map Layers
+  kind: world_feed
+  status: hosted-service
+  priority: P1
+  delivery_mode: tiles_pmtiles
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: object_store
+  source_url: https://protomaps.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://protomaps.com
+    http: '200'
+    result: reachable
+    date: '2026-10-29T08:20:29Z'
+    probe_kind: landing/doc page
+  notes: Downloadable planet builds; hosted API keyed (unverified).
+- id: m069-qgis-desktop
+  ref: M069
+  name: QGIS Desktop
+  catalog: Map Layers
+  kind: other
+  status: tool
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: overlays
+  route: none
+  source_url: https://qgis.org
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: m070-qgis-server-wms-wfs
+  ref: M070
+  name: QGIS Server (WMS/WFS)
+  catalog: Map Layers
+  kind: world_feed
+  status: self-hosted
+  priority: P3
+  delivery_mode: tiles_wms
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Self-hosted (catalog)
+  geometry: raster or vector tiles
+  layer: overlays
+  route: tile_proxy
+  source_url: https://qgis.tail717ba0.ts.net
+  endpoint_evidence: catalogued_self_hosted_service_no_layer_spec
+  test:
+    not_tested: 'not probed: tailnet/cluster-internal host, unreachable from build machine (PREFLIGHT.md Access)'
+- id: m071-safecast-radiation-map
+  ref: M071
+  name: Safecast Radiation Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: hazards
+  route: none
+  source_url: https://safecast.org/tilemap
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://safecast.org/tilemap
+    http: '302'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: https://map.safecast.org/
+    probe_kind: landing/doc page
+  notes: Data via F125.
+- id: m072-safecomlink-hf-map
+  ref: M072
+  name: SafeComLink HF Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: rf
+  route: none
+  source_url: https://safecomlink.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    shared_with: F065
+    url: https://safecomlink.com
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+- id: m073-tileserver-gl
+  ref: M073
+  name: TileServer GL
+  catalog: Map Layers
+  kind: world_feed
+  status: self-hosted
+  priority: P1
+  delivery_mode: tiles_mvt
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Self-hosted (catalog)
+  geometry: raster or vector tiles
+  layer: basemap
+  route: tile_proxy
+  source_url: https://tileserver.tail717ba0.ts.net
+  endpoint_evidence: catalogued_self_hosted_service_no_layer_spec
+  test:
+    not_tested: 'not probed: tailnet/cluster-internal host, unreachable from build machine (PREFLIGHT.md Access)'
+- id: m074-usgs-water-resources-map
+  ref: M074
+  name: USGS Water Resources Map
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: environment
+  route: none
+  source_url: https://waterdata.usgs.gov/nwis
+  endpoint_evidence: website_or_provider_landing
+  test:
+    url: https://waterdata.usgs.gov/nwis
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'
+    redirect: http://waterdata.usgs.gov/
+    probe_kind: landing/doc page
+  notes: Data via F149.
+- id: m075-wfs-ogc-standard
+  ref: M075
+  name: WFS (OGC Standard)
+  catalog: Map Layers
+  kind: other
+  status: standard
+  priority: P2
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: none
+  layer: overlays
+  route: none
+  source_url: https://www.ogc.org/standard/wfs/
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: m076-windy-embed
+  ref: M076
+  name: Windy Embed
+  catalog: Map Layers
+  kind: other
+  status: website-only
+  priority: '-'
+  delivery_mode: none
+  cadence: n/a
+  auth: api_key (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Freemium (catalog)
+  geometry: none
+  layer: weather
+  route: none
+  source_url: https://embed.windy.com
+  endpoint_evidence: website_or_provider_landing
+  test:
+    not_tested: 'not probed: needs API key / account (rule: never call keyed APIs) (embed)'
+- id: m077-wms-ogc-standard
+  ref: M077
+  name: WMS (OGC Standard)
+  catalog: Map Layers
+  kind: world_feed
+  status: standard
+  priority: P1
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: overlays
+  route: tile_proxy
+  source_url: https://www.ogc.org/standard/wms/
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: m078-wmts-ogc-standard
+  ref: M078
+  name: WMTS (OGC Standard)
+  catalog: Map Layers
+  kind: world_feed
+  status: standard
+  priority: P1
+  delivery_mode: none
+  cadence: n/a
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: raster or vector tiles
+  layer: overlays
+  route: tile_proxy
+  source_url: https://www.ogc.org/standard/wmts/
+  endpoint_evidence: software_standard_or_tool_reference
+  test:
+    not_tested: 'not probed: not an endpoint (standard, tool or reference)'
+- id: m079-wri-global-power-plant-db
+  ref: M079
+  name: WRI Global Power Plant DB
+  catalog: Map Layers
+  kind: world_feed
+  status: candidate
+  priority: P2
+  delivery_mode: bulk_download
+  cadence: unverified
+  auth: none (catalog, unverified)
+  rate_limit: unverified
+  licence: unverified
+  cost: Free (catalog)
+  geometry: point / line / polygon
+  layer: infra
+  route: object_store
+  source_url: https://datasets.wri.org/dataset/globalpowerplantdatabase
+  endpoint_evidence: documentation_or_dataset_catalog
+  test:
+    shared_with: F157
+    url: https://datasets.wri.org/dataset/globalpowerplantdatabase
+    http: '301'
+    result: moved
+    date: '2026-10-29T08:20:29Z'

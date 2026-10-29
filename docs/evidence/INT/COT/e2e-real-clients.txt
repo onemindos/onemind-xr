@@ -1,0 +1,37 @@
+== 2026-10-29T15:32:47Z svc.cot.send e2e with real client code
+projector: ready
+"msg":"serving client CoT","subject":"svc.cot.send","accounts":["CLIENT"],"allow_unverified":false,"per_identity_per_min":30
+
+== 1. Unreal client core (onemind_headless) as CLIENT/zeus over WebSocket: marker + chat
+  [headless] svc.cot.send marker uid=onemind-headless-1-zITPTyqI
+  <event version="2.0" how="h-e" uid="onemind-headless-1-zITPTyqI" type="a-u-G" time="2026-10-29T15:32:49.452Z" start="2026-10-29T15:32:49.452Z" stale="2026-10-29T15:37:49.452Z" opex="s"><point lat="30.27" lon="-97.74" hae="9999999.0" ce="9999999.0" le="9999999.0"/><detail><contact callsign="OM-C2-MARK"/><remarks>marker from the OneMind client · SIMULATED</remarks></detail></event>
+  [headless] svc.cot.send reply ok=1 uid=onemind-headless-1-zITPTyqI targets=1 error=
+  [headless] chat reply ok=1 error=
+
+== 2. L0 web client body from chat.ts geochatRequest
+  request (zeus): {"v":1,"kind":"geochat","target":"both","message_uid":"GeoChat.OM-WEB-zeus.All Chat Rooms.d34a1142-bd74-434d-acb8-a42e9628afa6","room":{"id":"All Chat Rooms","name":"All Chat Rooms","kind":"all"},"text":"eyes on north field","sender":{"uid":"OM-WEB-zeus","callsign":"ZEUS"}}
+  reply:   {"ok":true,"skipped":["mesh"],"targets":["server"],"uid":"GeoChat.OM-WEB-zeus.All Chat Rooms.d34a1142-bd74-434d-acb8-a42e9628afa6","v":1}
+  -- carol sending with zeus's sender uid (impersonation):
+  request (carol): {"v":1,"kind":"geochat","target":"both","message_uid":"GeoChat.OM-WEB-zeus.Cyan.13770e12-056c-40c6-8c63-2c2d5afdebd4","room":{"id":"Cyan","name":"Cyan","kind":"group"},"text":"I am zeus","sender":{"uid":"OM-WEB-zeus","callsign":"ZEUS"}}
+  reply:   {"error":{"code":"forbidden","message":"sender.uid \"OM-WEB-zeus\" is not bound to the calling user"},"ok":false,"v":1}
+  -- same-account caller (ONEMIND/onemind, no verified identity):
+  request (onemind): {"v":1,"kind":"geochat","target":"both","message_uid":"GeoChat.OM-WEB-onemind.Cyan.f2f88654-ea24-4825-82b5-b470b35dee6e","room":{"id":"Cyan","name":"Cyan","kind":"group"},"text":"hi","sender":{"uid":"OM-WEB-onemind","callsign":"ONEMIND"}}
+  reply:   {"error":{"code":"forbidden","message":"caller identity not verified: send through the CLIENT account's svc.cot.send import"},"ok":false,"v":1}
+
+== 3. What reached TAK (tak.cot.inject / tak.cot.mesh.tx)
+  tak.cot.inject  sender=CLIENT/zeus origin=svc.cot.send marking=CLEAR
+    <event version="2.0" how="h-e" uid="onemind-headless-1-zITPTyqI" type="a-u-G" time="2026-10-29T15:32:49.452Z" start="2026-10-29T15:32:49.452Z" stale="2026-10-29T15:37:49.452Z" opex="s"><point lat="30.27" lon="-97.74" hae="9999999.0" ce="9999999.0" le="9999999.0"/><detail><contact callsign="OM-C2-MARK"/><remarks>marker from the OneMind client · SIMULATED</remarks></detail></event>
+  tak.cot.inject  sender=CLIENT/zeus origin=svc.cot.send marking=CLEAR
+    <event version="2.0" how="h-e" uid="GeoChat.onemind-headless.All Chat Rooms.onemind-headless-2-Qp9jUIS7" type="b-t-f" time="2026-10-29T15:32:49.452Z" start="2026-10-29T15:32:49.452Z" stale="2026-10-29T15:37:49.452Z" opex="s"><point lat="0.0" lon="0.0" hae="9999999.0" ce="9999999.0" le="9999999.0"/><detail><contact callsign="OneMind"/><__chat parent="RootContactGroup" groupOwner="false" messageId="
+  tak.cot.inject  sender=CLIENT/zeus origin=svc.cot.send marking=CLEAR
+    <event version="2.0" uid="GeoChat.OM-WEB-zeus.All Chat Rooms.d34a1142-bd74-434d-acb8-a42e9628afa6" type="b-t-f" how="h-g-i-g-o" time="2026-10-29T15:32:52.200Z" start="2026-10-29T15:32:52.200Z" stale="2026-10-29T15:42:52.200Z"><point lat="0.0" lon="0.0" hae="9999999.0" ce="9999999.0" le="9999999.0"/><detail><__chat parent="RootContactGroup" groupOwner="false" messageId="d34a1142-bd74-434d-acb8-a42e
+RESULT PASS: 3 publishes (want 3: UE marker, UE chat, web GeoChat; all CLIENT/zeus; none from refused requests)
+
+== projector log (svc.cot.send lines)
+  {"time":"2026-10-29T11:32:48.55975-04:00","level":"INFO","msg":"serving client CoT","subject":"svc.cot.send","accounts":["CLIENT"],"allow_unverified":false,"per_identity_per_min":30}
+  {"time":"2026-10-29T11:32:49.454976-04:00","level":"INFO","msg":"svc.cot.send","caller":"CLIENT/zeus","verified":true,"kind":"marker","uid":"onemind-headless-1-zITPTyqI","subject":"tak.cot.inject","marking":"CLEAR"}
+  {"time":"2026-10-29T11:32:49.455184-04:00","level":"INFO","msg":"svc.cot.send","caller":"CLIENT/zeus","verified":true,"kind":"chat","uid":"GeoChat.onemind-headless.All Chat Rooms.onemind-headless-2-Qp9jUIS7","subject":"tak.cot.inject","marking":"CLEAR"}
+  {"time":"2026-10-29T11:32:52.200204-04:00","level":"INFO","msg":"svc.cot.send","caller":"CLIENT/zeus","verified":true,"kind":"geochat","uid":"GeoChat.OM-WEB-zeus.All Chat Rooms.d34a1142-bd74-434d-acb8-a42e9628afa6","subject":"tak.cot.inject","marking":"CLEAR"}
+  {"time":"2026-10-29T11:32:52.430156-04:00","level":"WARN","msg":"svc.cot.send refused","code":"forbidden","detail":"sender.uid \"OM-WEB-zeus\" is not bound to the calling user","caller":"CLIENT/carol","kind":"geochat"}
+  {"time":"2026-10-29T11:32:52.658907-04:00","level":"WARN","msg":"svc.cot.send refused","code":"forbidden","detail":"caller identity not verified: send through the CLIENT account's svc.cot.send import","caller":"unverified","kind":"geochat"}
+/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/INT/COT/e2e-real-clients.sh: line 120: 52424 Terminated: 15          URL=nats://127.0.0.1:$PORT PW=$P_ONE $PY -I "$TMP/rec.py" "$TMP/rec.jsonl"

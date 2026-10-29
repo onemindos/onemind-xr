@@ -1,0 +1,18 @@
+== yamllint (changed YAML)
+PASS
+== validate_changed_yaml.py (YAML_BASE_SHA=66900872b8a8d5b9970bc4318401318eeed5aab3)
+Changed YAML gate passed (9 files checked)
+PASS
+== validate_manifests.py (changed)
+Summary: 6 resources found in 6 files - Valid: 6, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 6 manifest file(s)
+== validate_manifests.py (changed vs 66900872b8a8d5b9970bc4318401318eeed5aab3)
+Summary: 6 resources found in 6 files - Valid: 6, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 6 manifest file(s)
+== gitleaks (branch commits)
+[90m9:37AM[0m [32mINF[0m [1m1 commits scanned.[0m
+[90m9:37AM[0m [32mINF[0m [1mscanned ~145724 bytes (145.72 KB) in 65.9ms[0m
+[90m9:37AM[0m [32mINF[0m [1mno leaks found[0m
+== gitleaks (working tree vs baseline)
+[90m9:37AM[0m [32mINF[0m [1mscanned ~13036187 bytes (13.04 MB) in 3.55s[0m
+[90m9:37AM[0m [32mINF[0m [1mno leaks found[0m

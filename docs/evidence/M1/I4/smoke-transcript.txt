@@ -1,0 +1,58 @@
+== stack: nats-server nats-server: v2.15.2 on nats://127.0.0.1:62811; streams CMD EVT MISSION, KV geofences
+== policy log (start)
+{"time":"2026-10-29T07:00:44.603546-04:00","level":"INFO","msg":"policy service ready","authz":"local","signed":true}
+
+== 1. zeus (CLIENT) proposes asset.goto for sim-x1
+{"action_id":"act-01m63n3hxj424g03p90pw9hxj5","status":"awaiting_confirmation","level":"A3","params_hash":"sha256:2af52095e60de0f0dbb37a1a99935df332bceb209a972e5ee8527ef698eadf9d","confirm_by":"2026-10-29T11:02:46.130Z","approvals_needed":1,"denial":null}
+
+== 2. hermes (AGENTS) tries to confirm it (server permission)
+07:00:46 >>> Unexpected NATS error: nats: permissions violation: Permissions Violation for Publish to "svc.policy.command.confirm"
+
+== 3. hermes proposes asset.strike (stop line)
+{"action_id":"act-01m63n3kzxy9mwcw0k6zmbfj1p","status":"denied","level":"A0","params_hash":"sha256:ffe0834495c48e113fa81ee7bf3571f8e0f6a39a36b11587451d0d2b00eacb8f","approvals_needed":0,"denial":{"code":"forbidden_action","message":"action crosses the civilian stop line (strike)"}}
+
+
+
+== 4. zeus proposes a goto for a non-sim asset
+{"action_id":"act-01m63n3m0xyzdq2tjj72yg5h3n","status":"denied","level":"A3","params_hash":"sha256:63ee9906dc13e91a3ca07c46fa4595d5a6c17373a8fe4a6903016be9dcfd6eda","approvals_needed":0,"denial":{"code":"not_simulated","message":"only simulated assets (sim-*) can be commanded in this run"}}
+
+
+
+== 5. zeus confirms the goto with the shown params_hash
+{"action_id":"act-01m63n3hxj424g03p90pw9hxj5","status":"dispatched","approvals_needed":1,"approvals_received":1,"command_id":"b38b6422-dee8-4b79-b260-1a8978fb03b0","denial":null}
+
+
+
+== 6. zeus replays the same approval
+{"action_id":"act-01m63n3hxj424g03p90pw9hxj5","status":"dispatched","approvals_needed":1,"approvals_received":1,"denial":{"code":"replayed","message":"this action was already approved; an approval is used once"}}
+
+
+
+== 7. hermes reads the action (not its own)
+{"action":null,"denial":{"code":"not_authorized","message":"agents may read only their own actions"}}
+
+
+
+== commands seen on cmd.> (admin subscriber)
+07:00:44 Subscribing on cmd.> 
+[#1] Received on "cmd.fleet.drone.sim-x1.goto" with reply "_INBOX.fF2S3xelHs4WDjkcmhZY6F.hO17RXfk"
+Nats-Msg-Id: b38b6422-dee8-4b79-b260-1a8978fb03b0
+
+{"action_id":"act-01m63n3hxj424g03p90pw9hxj5","approval":{"approvals":[{"by":"user:zeus","at":"2026-10-29T11:00:48.307Z","step":1}],"approver":"user:zeus","level":"A3","params_hash":"sha256:2af52095e60de0f0dbb37a1a99935df332bceb209a972e5ee8527ef698eadf9d","reason":"smoke","required":true,"status":"approved"},"causation":"99a84ddc-2719-4fdd-9490-8ecb79fdd114","cmd":"cmd.fleet.drone.sim-x1.goto","data":{"hae_m":160,"lat":30.27,"lon":-97.742},"expires_at":"2026-10-29T11:01:18.308Z","id":"b38b6422-dee8-4b79-b260-1a8978fb03b0","policy":{"allowed":true,"decision_id":"dec-01m63n3hxj424g03p90pw9hxj5"},"sig":{"alg":"ed25519","kid":"smoke","value":"7DLBG3dnvNIDFygalJPhTwGTxN4anLVSLue3X7Ef5BI58lJBVSUBv0iAp0iL3j4GSkw07g7fA/+Ax19hg+DeBQ=="},"simulated":true,"source":"service:policy","subject":"cmd.fleet.drone.sim-x1.goto","ts":"2026-10-29T11:00:48.308Z","v":1}
+
+
+
+== audit subjects seen on evt.so.action.>
+   1 evt.so.action.approved
+   3 evt.so.action.denied
+   1 evt.so.action.dispatched
+   1 evt.so.action.proposed
+
+== CMD stream
+messages: 1
+
+== policy log (last lines)
+{"time":"2026-10-29T07:00:48.254169-04:00","level":"INFO","msg":"denied","action_id":"act-01m63n3kzxy9mwcw0k6zmbfj1p","action_type":"asset.strike","code":"forbidden_action","by":"agent:hermes/zeus/legacy"}
+{"time":"2026-10-29T07:00:48.286074-04:00","level":"INFO","msg":"denied","action_id":"act-01m63n3m0xyzdq2tjj72yg5h3n","action_type":"asset.goto","code":"not_simulated","by":"user:zeus"}
+{"time":"2026-10-29T07:00:48.308585-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.drone.sim-x1.goto","command_id":"b38b6422-dee8-4b79-b260-1a8978fb03b0","action_id":"act-01m63n3hxj424g03p90pw9hxj5"}
+{"time":"2026-10-29T07:00:48.330877-04:00","level":"INFO","msg":"confirm refused","action_id":"act-01m63n3hxj424g03p90pw9hxj5","code":"replayed","by":"user:zeus"}

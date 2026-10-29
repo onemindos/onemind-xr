@@ -1,0 +1,95 @@
+# Review fixes, commit ad2a8be8 on feat/mediamtx-video (2026-10-29T12:24:15Z)
+## go vet + go test -race -count=1 -v ./...
+=== RUN   TestE2EMediaMTX
+    e2e_test.go:118: PASS anonymous RTSP publish to drone/sim-x1: refused (401)
+    e2e_test.go:119: PASS reader identity onemind-client publishing: refused (401)
+    e2e_test.go:120: PASS mavlink-bridge publishing to configured path cam/gate-north (outside its grant): refused (401)
+    e2e_test.go:121: PASS mavlink-bridge publishing a non-sim drone drone/x47 (no such path): refused (400)
+    e2e_test.go:151: PASS evt.video.sim-x1.online after 0.6s: {V:1 Event:online StreamID:drone/sim-x1 EntityType:drone EntityID:sim-x1 EntitySubject:ent.drone.sim-x1.state Reason: TS:2026-10-29 12:24:23.736275 +0000 UTC Origin:hub}
+    e2e_test.go:159: PASS svc.registry.video.get ent.drone.sim-x1.state ->
+    e2e_test.go:171: PASS anonymous RTSP read refused (401)
+    e2e_test.go:176: PASS publisher identity mavlink-bridge cannot read (401)
+    e2e_test.go:181: PASS tak-viewer RTSP read: h264,640,360
+    e2e_test.go:187: PASS anonymous HLS read refused (401 after the cookie check)
+    e2e_test.go:207: PASS LL-HLS media playlist (5 EXT-X-PART lines)
+    e2e_test.go:229: PASS OPTIONS from a foreign Origin gets no Access-Control-Allow-Origin (HTTP 204)
+    e2e_test.go:229: PASS GET from a foreign Origin gets no Access-Control-Allow-Origin (HTTP 200)
+    e2e_test.go:240: PASS decoded a frame of sim-x1 over HLS from the registry URL (43350 bytes)
+    e2e_test.go:266: PASS recording segments appeared: [2026-10-29_08-24-23-267112_-0400.mp4 2026-10-29_08-24-24-760994_-0400.mp4 2026-10-29_08-24-26-760994_-0400.mp4]
+    e2e_test.go:268: PASS playback /list for onemind-client: [{"start":"2026-10-29T08:24:23.267112-04:00","duration":5.493882,"url":"http://127.0.0.1:65274/get?duration=5.493882\u0026path=drone%2Fsim-x1\u0026start=2026-10-29T08%3A24%3A23.267112-04%3A00"}]
+    e2e_test.go:275: PASS recordings rolled: 2026-10-29_08-24-23-267112_-0400.mp4 deleted after retention, now [2026-10-29_08-24-34-760582_-0400.mp4 2026-10-29_08-24-36-760582_-0400.mp4 2026-10-29_08-24-38-760577_-0400.mp4 2026-10-29_08-24-40-760577_-0400.mp4 2026-10-29_08-24-42-760577_-0400.mp4]
+    e2e_test.go:288: PASS evt.video.sim-x1.offline: {V:1 Event:offline StreamID:drone/sim-x1 EntityType:drone EntityID:sim-x1 EntitySubject:ent.drone.sim-x1.state Reason:publisher_stopped TS:2026-10-29 12:24:49.234327 +0000 UTC Origin:hub}
+--- PASS: TestE2EMediaMTX (32.09s)
+=== RUN   TestRegistryLifecycle
+--- PASS: TestRegistryLifecycle (2.48s)
+=== RUN   TestRestartMarksVanishedStreamsOffline
+--- PASS: TestRestartMarksVanishedStreamsOffline (0.38s)
+=== RUN   TestMissingBucketFails
+--- PASS: TestMissingBucketFails (0.06s)
+=== RUN   TestListAnswersWhileKVPutIsSlow
+--- PASS: TestListAnswersWhileKVPutIsSlow (0.07s)
+=== RUN   TestParsePath
+--- PASS: TestParsePath (0.00s)
+=== RUN   TestParseEntityRef
+--- PASS: TestParseEntityRef (0.00s)
+=== RUN   TestNoAnonymousAccess
+--- PASS: TestNoAnonymousAccess (0.00s)
+=== RUN   TestPermissionsAndRecording
+--- PASS: TestPermissionsAndRecording (0.00s)
+=== RUN   TestDeploymentEnvMatchesUsers
+--- PASS: TestDeploymentEnvMatchesUsers (0.01s)
+=== RUN   TestBuildRecord
+--- PASS: TestBuildRecord (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/video-registry/internal/registry	36.649s
+=== RUN   TestVideoURLHygiene
+--- PASS: TestVideoURLHygiene (0.00s)
+=== RUN   TestCheck
+--- PASS: TestCheck (0.00s)
+=== RUN   TestFeed
+--- PASS: TestFeed (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/video-registry/internal/takvideo	1.255s
+
+## old service.go + new test (expected FAIL)
+integration_test.go:309: list blocked while a KV Put was in flight: nats: timeout / FAIL (run before the fix)
+
+## plugin manifests
+ok   services/plugins/examples/drone-orbit/onemind-plugin.yaml (org.onemindos.action.drone-orbit 0.1.0, kinds action)
+ok   services/plugins/examples/sim-x1-camera/onemind-plugin.yaml (org.onemindos.video.sim-x1-camera 0.1.0, kinds video)
+ok   services/plugins/examples/usgs-quakes/onemind-plugin.yaml (org.onemindos.layer.usgs-quakes 0.1.0, kinds source,layer)
+ok   services/plugins/examples/video-lookup/onemind-plugin.yaml (org.onemindos.skill.video-lookup 0.1.0, kinds skill)
+FAIL scripts/tests/fixtures/plugins/reserved-wildcard/onemind-plugin.yaml
+  - bus.publishes: 'evt.*.*.*' is reserved: evt.so.action.* is the policy service's audit record
+  - bus.publishes: 'tak.cot.>' is reserved: only the projector publishes tak.cot.inject
+  - bus.publishes: 'tak.cot.>' is reserved: only the site projector publishes tak.cot.mesh.tx
+test_every_example_is_valid (scripts.tests.test_plugin_manifests.Examples.test_every_example_is_valid) ... ok
+test_usgs_layer_fields_match_ingest_output (scripts.tests.test_plugin_manifests.Examples.test_usgs_layer_fields_match_ingest_output) ... ok
+test_usgs_layer_needs_no_core_change (scripts.tests.test_plugin_manifests.Examples.test_usgs_layer_needs_no_core_change) ... ok
+test_cli_exit_code (scripts.tests.test_plugin_manifests.Fixtures.test_cli_exit_code) ... ok
+test_kind_without_block (scripts.tests.test_plugin_manifests.Fixtures.test_kind_without_block) ... ok
+test_off_grammar_fails (scripts.tests.test_plugin_manifests.Fixtures.test_off_grammar_fails) ... ok
+test_real_drone_action_refused (scripts.tests.test_plugin_manifests.Fixtures.test_real_drone_action_refused) ... ok
+test_reserved_overlap (scripts.tests.test_plugin_manifests.Fixtures.test_reserved_overlap) ... ok
+test_reserved_wildcards_fail (scripts.tests.test_plugin_manifests.Fixtures.test_reserved_wildcards_fail) ... ok
+test_reserved_writers_fail (scripts.tests.test_plugin_manifests.Fixtures.test_reserved_writers_fail) ... ok
+test_unsafe_action_fails (scripts.tests.test_plugin_manifests.Fixtures.test_unsafe_action_fails) ... ok
+test_covers (scripts.tests.test_plugin_manifests.Grammar.test_covers) ... ok
+test_off_grammar (scripts.tests.test_plugin_manifests.Grammar.test_off_grammar) ... ok
+test_on_grammar (scripts.tests.test_plugin_manifests.Grammar.test_on_grammar) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.321s
+
+OK
+
+## GitHub CI on ad2a8be8
+Helm render check	pass	41s	https://github.com/onemindos/omos/actions/runs/40871898585/job/123440778985	
+Kubernetes manifest schema (kubeconform)	pass	6s	https://github.com/onemindos/omos/actions/runs/40871898585/job/123440779484	
+Lint & Validate	pass	26s	https://github.com/onemindos/omos/actions/runs/40871898585/job/123440779371	
+Secret scan (gitleaks)	pass	8s	https://github.com/onemindos/omos/actions/runs/40871898585/job/123440779551	
+test-and-image	pass	39s	https://github.com/onemindos/omos/actions/runs/40871898598/job/123440779492	
+image	skipping	0	https://github.com/onemindos/omos/actions/runs/40871898537/job/123441843098	
+preflight	pass	35s	https://github.com/onemindos/omos/actions/runs/40871898598/job/123440779438	
+test	pass	2m14s	https://github.com/onemindos/omos/actions/runs/40871898537/job/123440778597	
+acceptance	skipping	0	https://github.com/onemindos/omos/actions/runs/40871898598/job/123440781413	

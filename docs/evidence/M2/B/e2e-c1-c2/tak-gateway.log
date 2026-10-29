@@ -1,0 +1,7 @@
+2026/10/29 08:38:44 [tak-mesh-e2e] starting v0.4.0: mesh 239.2.3.1:36969, NATS nats://127.0.0.1:64878
+2026/10/29 08:38:44 [tak-mesh-e2e] mesh 239.2.3.1:36969, chat 224.10.10.1:37012, transmit interface lo0
+2026/10/29 08:38:44 [tak-mesh-e2e] data packages: inbox /Users/danielcarku/Desktop/work/.run/tmp-b-client/e2e/datapkg/inbox, outbox /Users/danielcarku/Desktop/work/.run/tmp-b-client/e2e/datapkg/outbox
+2026/10/29 08:38:44 [tak-mesh-e2e] ready: tak.cot.mesh.tx -> mesh, mesh -> tak.cot.mesh.rx
+2026/10/29 08:39:04 [tak-mesh-e2e] NATS disconnected: EOF
+2026/10/29 08:39:04 [tak-mesh-e2e] received terminated, shutting down
+2026/10/29 08:39:04 [tak-mesh-e2e] NATS drain: nats: connection reconnecting

@@ -1,0 +1,49 @@
+# go vet + go test -race -count=1 -v ./...  (go version go1.27.3 darwin/arm64, 2026-10-29T10:34:48Z, commit base 977b7eb2)
+go vet: clean
+=== RUN   TestTransmitOnNamedInterface
+--- PASS: TestTransmitOnNamedInterface (0.00s)
+=== RUN   TestTransmitDefaultInterfaceWhenUnset
+--- PASS: TestTransmitDefaultInterfaceWhenUnset (0.00s)
+=== RUN   TestGeoChatGroup
+--- PASS: TestGeoChatGroup (0.30s)
+=== RUN   TestCryptoKnownAnswer
+--- PASS: TestCryptoKnownAnswer (0.00s)
+=== RUN   TestCryptoRejects
+--- PASS: TestCryptoRejects (0.00s)
+=== RUN   TestEncryptedMesh
+--- PASS: TestEncryptedMesh (0.00s)
+=== RUN   TestInjectAllowed
+--- PASS: TestInjectAllowed (0.00s)
+=== RUN   TestDirectAddr
+--- PASS: TestDirectAddr (0.00s)
+=== RUN   TestEndpointTrackedAndDirectEncrypted
+--- PASS: TestEndpointTrackedAndDirectEncrypted (0.00s)
+=== RUN   TestParseFileShare
+--- PASS: TestParseFileShare (0.00s)
+=== RUN   TestDataPackageReceive
+    gateway_test.go:447: datapkg: data package "Mission 1" from ANDROID-1: sha256 624cb61ffab2b1f2546aaf61c26d14b831ad493f2831d7c4f5ceb56617a1f26e, request said 0000000000000000000000000000000000000000000000000000000000000000
+--- PASS: TestDataPackageReceive (0.01s)
+=== RUN   TestFetchURL
+--- PASS: TestFetchURL (0.00s)
+=== RUN   TestGetfileServe
+--- PASS: TestGetfileServe (0.01s)
+=== RUN   TestSARoundTripThroughProtobuf
+--- PASS: TestSARoundTripThroughProtobuf (0.00s)
+=== RUN   TestWholeElementRule
+--- PASS: TestWholeElementRule (0.00s)
+=== RUN   TestTypedCopyIgnoredWhenXMLHasElement
+--- PASS: TestTypedCopyIgnoredWhenXMLHasElement (0.00s)
+=== RUN   TestTakControlWire
+--- PASS: TestTakControlWire (0.00s)
+=== RUN   TestDecodeRejectsGarbage
+--- PASS: TestDecodeRejectsGarbage (0.00s)
+=== RUN   TestNegotiation
+--- PASS: TestNegotiation (0.00s)
+=== RUN   TestDedupIDStableAcrossProtocols
+--- PASS: TestDedupIDStableAcrossProtocols (0.00s)
+=== RUN   TestMulticastLoopback
+--- PASS: TestMulticastLoopback (0.00s)
+=== RUN   TestDirectTCP
+--- PASS: TestDirectTCP (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/tak	1.638s

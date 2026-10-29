@@ -1,0 +1,15 @@
+## nws-cap.json (16211147 bytes, 16 x the live full-US body, just under the 16 MiB maxBodyBytes cap) - omos-ingest -once, GOMEMLIMIT=200MiB, fresh buckets
+gc 1 @0.004s 1%: 0.037+0.23+0.007 ms clock, 0.37+0.016/0.49/0.010+0.074 ms cpu, 3->4->1 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 2 @0.012s 1%: 0.016+0.42+0.003 ms clock, 0.16+0.016/0.93/0.22+0.038 ms cpu, 3->3->2 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 3 @0.013s 1%: 0.020+0.44+0.005 ms clock, 0.20+0/0.85/0.58+0.055 ms cpu, 6->6->6 MB, 6 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 4 @0.015s 2%: 0.017+0.64+0.005 ms clock, 0.17+0/0.66/0.85+0.056 ms cpu, 13->13->13 MB, 13 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 5 @0.017s 2%: 0.041+2.7+0.012 ms clock, 0.41+0/0.43/3.0+0.12 ms cpu, 35->35->16 MB, 35 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 6 @0.053s 0%: 0.033+0.42+0.014 ms clock, 0.33+0.015/0.72/0.13+0.14 ms cpu, 32->32->32 MB, 33 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 7 @0.126s 0%: 0.044+1.7+0.004 ms clock, 0.44+0.084/4.8/8.4+0.040 ms cpu, 62->63->50 MB, 64 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 8 @0.338s 0%: 0.045+1.8+0.016 ms clock, 0.45+0.058/4.7/7.6+0.16 ms cpu, 98->98->50 MB, 101 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 9 @0.527s 0%: 0.051+1.8+0.022 ms clock, 0.51+0.029/4.7/8.9+0.22 ms cpu, 98->99->50 MB, 101 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 10 @0.715s 0%: 0.055+2.1+0.032 ms clock, 0.55+0.025/5.5/8.2+0.32 ms cpu, 98->99->51 MB, 102 MB goal, 0 MB stacks, 0 MB globals, 10 P
+{"time":"2026-10-29T07:19:50.329684-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"m2","source":"nws-cap","records":5712,"new":5712}
+        0.81 real         0.53 user         0.21 sys
+           128286720  maximum resident set size
+           116490984  peak memory footprint

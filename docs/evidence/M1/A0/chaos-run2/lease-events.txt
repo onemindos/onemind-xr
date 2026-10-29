@@ -1,0 +1,14 @@
+{"time":"2026-10-29T06:58:56.570045-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"a","source":"chaos-sse"}
+{"time":"2026-10-29T06:58:56.570059-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"a","source":"chaos-nws"}
+{"time":"2026-10-29T06:59:16.571282-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-nws","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:59:16.571294-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-sse","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:59:19.905918-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-sse","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:59:19.90595-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-nws","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:59:23.241028-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-nws","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:59:23.241032-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-sse","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:59:26.574789-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-sse","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:59:26.574787-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-nws","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:59:27.940761-04:00","level":"INFO","msg":"lease re-created after outage","app":"omos-ingest","instance":"a","source":"chaos-nws"}
+{"time":"2026-10-29T06:59:27.940907-04:00","level":"INFO","msg":"lease re-created after outage","app":"omos-ingest","instance":"a","source":"chaos-sse"}
+{"time":"2026-10-29T07:00:21.305178-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"b","source":"chaos-nws"}
+{"time":"2026-10-29T07:00:21.305179-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"b","source":"chaos-sse"}

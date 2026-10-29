@@ -1,0 +1,16 @@
+# Private MediaMTX for the video-registry source: API on, everything localhost
+logLevel: warn
+api: yes
+apiAddress: 127.0.0.1:39997
+rtsp: yes
+rtspAddress: 127.0.0.1:38554
+rtpAddress: 127.0.0.1:38000
+rtcpAddress: 127.0.0.1:38001
+rtmp: no
+hls: no
+webrtc: no
+srt: no
+moq: no
+paths:
+  sim-cam1:
+    source: publisher

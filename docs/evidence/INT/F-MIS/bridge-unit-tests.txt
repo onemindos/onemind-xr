@@ -1,0 +1,6 @@
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink	9.225s
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/command	1.395s
+?   	github.com/onemindos/omos-bridge/bridges/mavlink/internal/commandtest	[no test files]
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/fence	1.848s
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/geoid	1.567s
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/jcs	2.286s

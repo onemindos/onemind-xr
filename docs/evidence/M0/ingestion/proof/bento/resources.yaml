@@ -1,0 +1,29 @@
+# Shared resources for all Bento streams (bento -r resources.yaml streams streams/*.yaml)
+
+rate_limit_resources:
+  # one per upstream: politeness is per source, not per pipeline
+  - label: rl_usgs
+    local: { count: 1, interval: 5s }
+  - label: rl_nws
+    local: { count: 2, interval: 1s }
+  - label: rl_celestrak
+    local: { count: 1, interval: 30s }
+  - label: rl_gdacs
+    local: { count: 1, interval: 10s }
+  - label: rl_outages
+    local: { count: 1, interval: 15s }
+  - label: rl_tiles
+    local: { count: 1, interval: 30s }
+  - label: rl_mediamtx
+    local: { count: 1, interval: 10s }
+
+cache_resources:
+  # in-memory on purpose: ETag/cursor state is lost on restart, which forces one
+  # refetch that Nats-Msg-Id dedup absorbs. A shared cache written before the
+  # publish ack would lose data (Bento docs, processors/dedupe "Delivery Guarantees").
+  - label: live
+    memory:
+      default_ttl: 24h
+  - label: seen
+    memory:
+      default_ttl: 6h

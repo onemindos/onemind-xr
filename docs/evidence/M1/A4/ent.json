@@ -1,0 +1,1 @@
+{"name":"ENT","subjects":["ent.*.*.state"],"retention":"limits","max_consumers":-1,"max_msgs":-1,"max_bytes":1073741824,"max_age":604800000000000,"max_msgs_per_subject":1,"max_msg_size":-1,"discard":"old","storage":"file","num_replicas":1,"duplicate_window":120000000000,"allow_direct":true,"allow_msg_ttl":true,"subject_delete_marker_ttl":900000000000}

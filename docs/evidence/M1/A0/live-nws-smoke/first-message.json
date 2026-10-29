@@ -1,0 +1,49 @@
+{
+ "subject": "intel.weather.noaa.alert",
+ "hdrs": "NATS/1.0\r\nNats-Msg-Id: nws:urn:oid:2.49.0.1.840.0.605c7ca7c8e57c36023ae718542f7816dd694cfa.001.1\r\n\r\n",
+ "data": {
+  "v": 1,
+  "id": "4287707a-f704-400e-b96b-e7fef4873ade",
+  "ts": "2026-10-29T10:52:00.000Z",
+  "type": "intel.weather.noaa.alert",
+  "source": "ingest.nws-alerts",
+  "subject": "intel.weather.noaa.alert",
+  "data": {
+   "affectedZones": [
+    "https://api.weather.gov/zones/forecast/ANZ658"
+   ],
+   "areaDesc": "Coastal waters from NC VA border to Currituck Beach Light NC out 20 NM",
+   "category": "Met",
+   "certainty": "Likely",
+   "description": "* WHAT...Seas 4 TO 5 ft.\n\n* WHERE...Coastal waters from NC VA border to Currituck Beach\nLight NC out 20 NM.\n\n* WHEN...Until 10 AM EDT this morning.\n\n* IMPACTS...Conditions will be hazardous to small craft.",
+   "effective": "2026-10-29T06:52:00-04:00",
+   "ends": "2026-10-29T10:00:00-04:00",
+   "event": "Small Craft Advisory",
+   "expires": "2026-10-29T10:00:00-04:00",
+   "headline": "Small Craft Advisory issued October 29 at 6:52AM EDT until October 29 at 10:00AM EDT by NWS Wakefield VA",
+   "id": "urn:oid:2.49.0.1.840.0.605c7ca7c8e57c36023ae718542f7816dd694cfa.001.1",
+   "instruction": "Inexperienced mariners, especially those operating smaller\nvessels, should avoid navigating in hazardous conditions.",
+   "messageType": "Update",
+   "onset": "2026-10-29T06:52:00-04:00",
+   "references": [
+    "urn:oid:2.49.0.1.840.0.1fb7424d8623eb91669c48f3d3ff7c7fd7f4d9f7.001.1"
+   ],
+   "response": "Avoid",
+   "same": [
+    "073658"
+   ],
+   "senderName": "NWS Wakefield VA",
+   "sent": "2026-10-29T06:52:00-04:00",
+   "severity": "Minor",
+   "status": "Actual",
+   "type": "weather_alert",
+   "ugc": [
+    "ANZ658"
+   ],
+   "urgency": "Expected",
+   "web": "http://www.weather.gov"
+  },
+  "fetchedAt": "2026-10-29T10:58:06.039Z",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.605c7ca7c8e57c36023ae718542f7816dd694cfa.001.1"
+ }
+}

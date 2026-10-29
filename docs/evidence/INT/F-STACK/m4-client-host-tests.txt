@@ -1,0 +1,245 @@
+== configure + build (C++17, -Wall -Wextra -Wshadow -Werror -fno-exceptions -fno-rtti)
+== configure + build (C++20, -Wall -Wextra -Wshadow -Werror -fno-exceptions -fno-rtti)
+== unit tests
+[ RUN  ] GeoMathDestinationBearing
+[  OK  ] GeoMathDestinationBearing (0 ms)
+[ RUN  ] DrawingCircleRectanglePolygonLine
+[  OK  ] DrawingCircleRectanglePolygonLine (0 ms)
+[ RUN  ] DrawingSectorRingsRangeBearingPoint
+[  OK  ] DrawingSectorRingsRangeBearingPoint (0 ms)
+[ RUN  ] DrawingBufferAndLasso
+[  OK  ] DrawingBufferAndLasso (0 ms)
+[ RUN  ] FeedGapsStatesAndLayers
+[  OK  ] FeedGapsStatesAndLayers (0 ms)
+[ RUN  ] FeedGapsFromManifest
+[  OK  ] FeedGapsFromManifest (0 ms)
+[ RUN  ] JcsMatchesPolicyService
+[  OK  ] JcsMatchesPolicyService (0 ms)
+[ RUN  ] TaskingPreChecksAndRequest
+[  OK  ] TaskingPreChecksAndRequest (0 ms)
+[ RUN  ] TakMissionTokensAndParsers
+[  OK  ] TakMissionTokensAndParsers (0 ms)
+[ RUN  ] json_roundtrip_and_types
+[  OK  ] json_roundtrip_and_types (0 ms)
+[ RUN  ] json_rejects_bad_input
+[  OK  ] json_rejects_bad_input (0 ms)
+[ RUN  ] base64_base32_sha
+[  OK  ] base64_base32_sha (0 ms)
+[ RUN  ] ws_handshake_accept_rfc6455_example
+[  OK  ] ws_handshake_accept_rfc6455_example (0 ms)
+[ RUN  ] ws_frame_encode_decode_and_fragmentation
+[  OK  ] ws_frame_encode_decode_and_fragmentation (0 ms)
+[ RUN  ] xml_parse_entities_and_limits
+[  OK  ] xml_parse_entities_and_limits (0 ms)
+[ RUN  ] cot_time_roundtrip
+[  OK  ] cot_time_roundtrip (0 ms)
+[ RUN  ] cot_event_vh_port_path_api
+[  OK  ] cot_event_vh_port_path_api (0 ms)
+[ RUN  ] cot_parse_eud_pli_fixture
+[  OK  ] cot_parse_eud_pli_fixture (0 ms)
+[ RUN  ] cot_drop_rules_and_disposition
+[  OK  ] cot_drop_rules_and_disposition (0 ms)
+[ RUN  ] tak_entity_id_matches_entity_service_rule
+[  OK  ] tak_entity_id_matches_entity_service_rule (0 ms)
+[ RUN  ] cot_builders_validate_and_send_body
+[  OK  ] cot_builders_validate_and_send_body (0 ms)
+[ RUN  ] milstd2525_vh_port
+[  OK  ] milstd2525_vh_port (0 ms)
+[ RUN  ] render_entity_from_full_record_and_render_item
+[  OK  ] render_entity_from_full_record_and_render_item (0 ms)
+[ RUN  ] entity_store_revision_rule_live_false_expiry_tombstones
+[  OK  ] entity_store_revision_rule_live_false_expiry_tombstones (0 ms)
+[ RUN  ] entity_store_journal_swap_remove_and_pick
+[  OK  ] entity_store_journal_swap_remove_and_pick (0 ms)
+[ RUN  ] inspector_rows_for_tak_person_record
+[  OK  ] inspector_rows_for_tak_person_record (0 ms)
+[ RUN  ] render_plan_bands_horizon_and_clusters
+[  OK  ] render_plan_bands_horizon_and_clusters (0 ms)
+[ RUN  ] render_plan_10k_entities_budget
+    10k render plan: 0.90 ms per frame (icons 9892 models 0 actors 0 clustered 108 culled 0)
+[  OK  ] render_plan_10k_entities_budget (13 ms)
+[ RUN  ] layer_watch_path_snapshot_deltas_gap_and_toggle
+[  OK  ] layer_watch_path_snapshot_deltas_gap_and_toggle (0 ms)
+[ RUN  ] layer_specs_parse
+[  OK  ] layer_specs_parse (0 ms)
+[ RUN  ] nats_parser_ops_and_split_input
+[  OK  ] nats_parser_ops_and_split_input (0 ms)
+[ RUN  ] nats_parser_rejects_garbage
+[  OK  ] nats_parser_rejects_garbage (0 ms)
+[ RUN  ] nats_serializer_and_subjects
+[  OK  ] nats_serializer_and_subjects (0 ms)
+[ RUN  ] js_ack_meta_both_forms
+[  OK  ] js_ack_meta_both_forms (0 ms)
+[ RUN  ] nats_client_connect_subscribe_request_many
+[  OK  ] nats_client_connect_subscribe_request_many (0 ms)
+[ RUN  ] nats_client_reconnect_resubscribes_and_flushes_buffer
+[  OK  ] nats_client_reconnect_resubscribes_and_flushes_buffer (0 ms)
+[ RUN  ] nats_client_detects_stale_connection
+[  OK  ] nats_client_detects_stale_connection (0 ms)
+[ RUN  ] nats_client_fatal_err_and_unsubscribe
+[  OK  ] nats_client_fatal_err_and_unsubscribe (0 ms)
+[ RUN  ] nats_headers_reject_crlf_and_colon
+[  OK  ] nats_headers_reject_crlf_and_colon (0 ms)
+[ RUN  ] nats_client_slow_consumer_cap_closes_and_reconnects
+[  OK  ] nats_client_slow_consumer_cap_closes_and_reconnects (0 ms)
+[ RUN  ] TakProtoVarint
+[  OK  ] TakProtoVarint (0 ms)
+[ RUN  ] TakProtoRoundTripTypedAndXml
+[  OK  ] TakProtoRoundTripTypedAndXml (0 ms)
+[ RUN  ] TakProtoWholeElementRule
+[  OK  ] TakProtoWholeElementRule (0 ms)
+[ RUN  ] TakProtoXmlDetailWinsOverTyped
+[  OK  ] TakProtoXmlDetailWinsOverTyped (0 ms)
+[ RUN  ] TakProtoControlAndFraming
+[  OK  ] TakProtoControlAndFraming (0 ms)
+[ RUN  ] TakStreamXmlFramingPingsAndSelf
+[  OK  ] TakStreamXmlFramingPingsAndSelf (0 ms)
+[ RUN  ] TakStreamNegotiatesV1
+[  OK  ] TakStreamNegotiatesV1 (0 ms)
+[ RUN  ] TakStreamDeclineAndTimeout
+[  OK  ] TakStreamDeclineAndTimeout (0 ms)
+[ RUN  ] TakStreamQueueRulesAndRefusals
+[  OK  ] TakStreamQueueRulesAndRefusals (0 ms)
+[ RUN  ] TakStreamBadV1FrameAndOversize
+[  OK  ] TakStreamBadV1FrameAndOversize (0 ms)
+[ RUN  ] TakDirectEncodingAndUrls
+[  OK  ] TakDirectEncodingAndUrls (0 ms)
+[ RUN  ] TakSelfSaIsAContactCard
+[  OK  ] TakSelfSaIsAContactCard (0 ms)
+[ RUN  ] TakEnrollParsers
+[  OK  ] TakEnrollParsers (0 ms)
+[ RUN  ] TakEnrollFlow
+[  OK  ] TakEnrollFlow (0 ms)
+[ RUN  ] TakContactsAndChannels
+[  OK  ] TakContactsAndChannels (0 ms)
+[ RUN  ] TakChatBothWays
+[  OK  ] TakChatBothWays (0 ms)
+[ RUN  ] HttpExchangeOverTransport
+[  OK  ] HttpExchangeOverTransport (0 ms)
+[ RUN  ] HttpExchangeResponseCap
+[  OK  ] HttpExchangeResponseCap (0 ms)
+[ RUN  ] TakContactsBoundsUntrustedInput
+[  OK  ] TakContactsBoundsUntrustedInput (125 ms)
+
+59 tests, 59 passed, 0 failed, 1045 checks, 143 ms
+== integration tests (disposable nats-server, WebSocket)
+[ RUN  ] ItMissionsBothWays
+[  OK  ] ItMissionsBothWays (532 ms)
+[ RUN  ] ItFeedGapStoppedFeed
+    gap shown 803 ms after the feed stopped: nws-alerts stale (data 1 s old (limit 1 s)), weakens layer weather
+[  OK  ] ItFeedGapStoppedFeed (2185 ms)
+[ RUN  ] ItTaskingStubPolicy
+[  OK  ] ItTaskingStubPolicy (196 ms)
+[ RUN  ] it_ws_connect_pubsub_request_reply
+[  OK  ] it_ws_connect_pubsub_request_reply (396 ms)
+[ RUN  ] it_kv_get_direct_fallback_and_watch
+    kv put -> watch delivery: 3 ms (B3 target: marker within 1 s)
+[  OK  ] it_kv_get_direct_fallback_and_watch (323 ms)
+[ RUN  ] it_reconnect_after_server_restart
+    reconnected 1570 ms after the server went down (server restarted after 1.5 s)
+    after reconnect: kv put -> client in 2 ms
+[  OK  ] it_reconnect_after_server_restart (2273 ms)
+[ RUN  ] it_direct_path_ent_snapshot_live_ttl_markers_and_live_false
+    direct path: 1000-entity snapshot in 20 ms
+    Nats-TTL 1s -> removed by delete marker after 999 ms (expired counter 1)
+[  OK  ] it_direct_path_ent_snapshot_live_ttl_markers_and_live_false (1430 ms)
+[ RUN  ] it_layer_off_means_no_subscription_on_the_server
+    server-side subscriptions: before=0 on=6 off=1; ENT consumers after off=0
+[  OK  ] it_layer_off_means_no_subscription_on_the_server (2001 ms)
+[ RUN  ] it_direct_layers_camera_aoi_small_keeps_all_large_reloads_on_pan
+    after pan: large direct layer 16 entities (16 in the new view), small layer 400
+[  OK  ] it_direct_layers_camera_aoi_small_keeps_all_large_reloads_on_pan (423 ms)
+[ RUN  ] it_watch_path_snapshot_deltas_aoi_and_unwatch
+[  OK  ] it_watch_path_snapshot_deltas_aoi_and_unwatch (317 ms)
+[ RUN  ] it_dead_watch_resnapshots_after_30s_silence
+    silent watch -> new snapshot after 30009 ms (contract: 30 s)
+[  OK  ] it_dead_watch_resnapshots_after_30s_silence (30301 ms)
+[ RUN  ] it_10k_entities_snapshot_and_update_throughput
+    10,000-entity snapshot over svc.layer.snapshot (5 chunks): 89 ms wall, 88 ms in client (A5 contract target < 2 s)
+    30,000 delta upserts applied in 0.30 s (101010 updates/s, 30 batches) -> 10000 journal changes
+[  OK  ] it_10k_entities_snapshot_and_update_throughput (709 ms)
+[ RUN  ] ItTransportCloseDuringConnectIsPrompt
+    Close() during connect returned in 0 ms
+[  OK  ] ItTransportCloseDuringConnectIsPrompt (159 ms)
+[ RUN  ] ItTransportConnectDeadline
+    connect gave up after 339 ms: connect: Operation timed out
+[  OK  ] ItTransportConnectDeadline (339 ms)
+[ RUN  ] ItTransportOutboundHighWaterMark
+    peer not reading: failed after 4736 KiB queued: send buffer overflow (peer not reading)
+[  OK  ] ItTransportOutboundHighWaterMark (31 ms)
+
+15 tests, 15 passed, 0 failed, 163 checks, 41622 ms
+== AddressSanitizer + UBSan build, unit and integration tests
+59 tests, 59 passed, 0 failed, 1045 checks, 1134 ms
+15 tests, 15 passed, 0 failed, 163 checks, 43179 ms
+== 10,000-entity load (client core)
+[headless] layer fleet path=direct state=live entities=10000 snapshots=1 batches=0 err=
+[headless] final layer fleet: 10000 entities (added 10000, updated 148904, removed 0, expired 0, ignored older 0), last snapshot 212 ms
+== 10,000-entity load with the camera AOI of the default start (Austin, 8 km): a small direct layer keeps all
+[headless] layer fleet path=direct state=live entities=10000 snapshots=1 batches=0 err=
+[headless] final layer fleet: 10000 entities (added 10000, updated 150000, removed 0, expired 0, ignored older 0), last snapshot 179 ms
+== C1/C2 end to end
+[PASS] 0 omos mesh gateway (PR #551) and entity service (PR #552) build -- gw bef11eb104ee es 4f4f65d8eb32
+[PASS] 0b streams COT and ENT (ent.yaml settings) created -- b'{"type":"io.nats.jetstream.api.v1.stream_create_response","config":{"name":"ENT","subjects":["ent.*.*.state"],"retention":"limits","max_consumers":-1,"max_msgs"'
+[PASS] 0c nats-server, gateway and entity service running -- nats-server=up, tak-gateway=up, entity-service=up
+[PASS] C1a mesh PLI becomes ent.person.tak-{uid}.state -- 16 ms
+[PASS] C1b marking AMBER+STRICT and egress_tak false (cot-projection.md §8.3) -- {"tlp": "AMBER+STRICT", "egress_tak": false, "sources": [["tak-mesh", "tak.cot.mesh.rx", "COT", 1]]}
+[PASS] C1c the OneMind client core shows the EUD in its tak layer
+[PASS] C1d inspector shows sources and confidence breakdown
+[PASS] C1e inspector raw CoT fetched from COT by sequence
+[PASS] C2a svc.cot.send accepted the marker (reply ok, target mesh) -- uids=['onemind-headless-1-FMUwjGtT']
+[PASS] C2b takproto listener on the mesh group receives the marker as TAK Protocol v1 (mesh, 0xbf 0x01 0xbf) -- uid=onemind-headless-1-FMUwjGtT type=a-u-G lat=30.2700 callsign=OM-C2-MARK
+[PASS] C2c marker content intact (type a-u-G, position, callsign, opex simulated in xmlDetail or attrs)
+[PASS] C2d svc.cot.send stand-in refuses the projector's reserved OM. uid prefix
+12/12 checks passed
+== C3/C8/B11 end to end (mesh gateway directed TCP, enrollment stub, mTLS TAK-stream peer)
+PASS A mesh gateway builds from feat/tak-mesh-gateway bef11eb1
+PASS A[v1] all 13 directed sends succeeded
+PASS A[v1] client SA (contact card) on tak.cot.mesh.rx
+PASS A[v1] delivered as directed TCP, Tak-Proto 1
+PASS A[v1] chat reached the bus
+PASS A[v1] all 11 shapes reached the bus
+PASS A[v1] chat from the bus delivered to the client's own endpoint
+PASS A[xml] all 13 directed sends succeeded
+PASS A[xml] client SA (contact card) on tak.cot.mesh.rx
+PASS A[xml] delivered as directed TCP, Tak-Proto 0
+PASS A[xml] chat reached the bus
+PASS A[xml] all 11 shapes reached the bus
+PASS A[xml] chat from the bus delivered to the client's own endpoint
+PASS B enrollment succeeded (tls/config + signClient/v2)
+PASS B CSR subject is CN=<user> plus the server's nameEntries, signature valid
+PASS B clientUid passed to signClient/v2
+PASS B private key written owner-only (0600)
+PASS B wrong TAK password is refused
+PASS B enrollment refuses a server its CA does not trust
+PASS C1 mutual TLS with the enrolled certificate (server sees CN=omclient)
+PASS C1 TAK Protocol v1 negotiated (takp-q answered, client in v1)
+PASS C1 server version read from the offer
+PASS C1 client is a TAK contact: its SA reached the server with callsign and stcp endpoint
+PASS C1 server's user shows in the client's contact list
+PASS C1 chat server -> client
+PASS C1 chat client -> server (direct, marti dest BRAVO)
+PASS C1 keep-alive pings sent and answered
+PASS C1 every shape decoded by the peer (v1) with the drawn geometry (11/11)
+PASS C2 XML-only server: no negotiation, client stays on XML
+PASS C2 switching channel changes what is visible (BRAVO hidden under Red, still known)
+PASS C3 a certificate from another CA is refused (server never accepts a session or an event)
+PASS C4 the client refuses a server signed by an unknown CA
+32/32 checks passed
+== D3 end to end (real policy service from omos feat/policy-service)
+PASS policy service builds from feat/policy-service 39570a54
+PASS policy service ready (local authz, fail-closed checks on)
+PASS 1 proposal waits for a human (awaiting_confirmation, A3)
+PASS 1 client hash equals the policy service's params_hash
+PASS 1 no cmd.fleet.> before the human confirmed
+PASS 2 exactly one cmd.fleet.drone.sim-x1.goto after confirm
+PASS 2 command carries the clicked point and the approved hash
+PASS 2 client followed the audit trail to executed
+PASS 2 audit on evt.so.action.* in order
+PASS 3 goto into the keep-out zone is denied (precondition_failed)
+PASS 3 nothing dispatched
+PASS 4 a human rejection ends the action
+PASS 4 nothing dispatched
+PASS 5 policy denies a non-sim id with not_simulated
+PASS 6 the client's user cannot publish cmd.fleet.> (server permissions violation)
+15/15 checks passed

@@ -1,0 +1,37 @@
+[WebServer] 
+[WebServer] (!) outDir /Users/danielcarku/Desktop/work/.run/tmp-e2e/web-dist is not inside project root and will not be emptied.
+[WebServer] Use --emptyOutDir to override.
+[WebServer] 
+
+Running 1 test using 1 worker
+
+  ✘  1 e2e-int/int.spec.ts:15:1 › web client on the real stack: drone moving, pending confirm, human confirm, it flies (28.9s)
+
+
+  1) e2e-int/int.spec.ts:15:1 › web client on the real stack: drone moving, pending confirm, human confirm, it flies 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('[data-testid="alert-item"][data-source="service"]').filter({ hasText: /zone-e2e-pad/i }).first()
+    Expected: visible
+    Timeout: 20000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" locator('[data-testid="alert-item"][data-source="service"]').filter({ hasText: /zone-e2e-pad/i }).first() with timeout 20000ms
+      - waiting for locator('[data-testid="alert-item"][data-source="service"]').filter({ hasText: /zone-e2e-pad/i }).first()
+
+
+      37 |   await page.getByTestId("alert-chip").click();
+      38 |   const alertItem = page.locator('[data-testid="alert-item"][data-source="service"]').filter({ hasText: /zone-e2e-pad/i });
+    > 39 |   await expect(alertItem.first()).toBeVisible({ timeout: 20_000 });
+         |                                   ^
+      40 |   await expect(page.locator("#tab-alerts")).toHaveAttribute("data-alert-service", "ok/ok", { timeout: 20_000 });
+      41 |   notes.alert = {
+      42 |     text: await alertItem.first().textContent(),
+        at /Users/danielcarku/Desktop/work/.run/tmp-e2e/src/web/web/e2e-int/int.spec.ts:39:35
+
+    Error Context: ../../../pw-results/int-web-client-on-the-real-8f53e-firm-human-confirm-it-flies/error-context.md
+
+  1 failed
+    e2e-int/int.spec.ts:15:1 › web client on the real stack: drone moving, pending confirm, human confirm, it flies 

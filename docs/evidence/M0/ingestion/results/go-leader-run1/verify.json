@@ -1,0 +1,210 @@
+{
+ "label": "go-leader",
+ "sources": {
+  "usgs": {
+   "stored": 24,
+   "distinctMsgIds": 24,
+   "duplicates": 0,
+   "emitted": 16,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    23
+   ],
+   "storedSeqGaps": []
+  },
+  "nws": {
+   "stored": 31,
+   "distinctMsgIds": 31,
+   "duplicates": 0,
+   "emitted": 21,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    30
+   ],
+   "storedSeqGaps": []
+  },
+  "eonet": {
+   "stored": 61,
+   "distinctMsgIds": 61,
+   "duplicates": 0,
+   "emitted": 42,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    60
+   ],
+   "storedSeqGaps": []
+  },
+  "ais": {
+   "stored": 5261,
+   "distinctMsgIds": 5261,
+   "duplicates": 0,
+   "emitted": 3473,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  },
+  "cap": {
+   "stored": 38,
+   "distinctMsgIds": 38,
+   "duplicates": 0,
+   "emitted": 25,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    1,
+    38
+   ],
+   "storedSeqGaps": []
+  },
+  "mqtt": {
+   "stored": 123,
+   "distinctMsgIds": 123,
+   "duplicates": 0,
+   "emitted": 82,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    1,
+    275
+   ],
+   "storedSeqGaps": [
+    "123..274"
+   ]
+  },
+  "celestrak": {
+   "stored": 10,
+   "distinctMsgIds": 10,
+   "duplicates": 0,
+   "emitted": 10
+  },
+  "gdacs": {
+   "stored": 12,
+   "distinctMsgIds": 12,
+   "duplicates": 0,
+   "emitted": 8,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    11
+   ],
+   "storedSeqGaps": []
+  },
+  "outages": {
+   "stored": 8,
+   "distinctMsgIds": 8,
+   "duplicates": 0,
+   "emitted": 5,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  }
+ },
+ "rejects": [],
+ "latestStatus": {
+  "ais": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:52.200859-04:00",
+   "ageSec": 0.003986208,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "cap": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:49.385623-04:00",
+   "ageSec": 2.8192355,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "celestrak": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:42.245862-04:00",
+   "ageSec": 9.959036625,
+   "count": 0,
+   "lastError": null,
+   "stale": false
+  },
+  "eonet": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:50.290342-04:00",
+   "ageSec": 1.9145100830000001,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "gdacs": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:42.24775-04:00",
+   "ageSec": 9.957149875,
+   "count": 10,
+   "lastError": null,
+   "stale": false
+  },
+  "mediamtx": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:42.245-04:00",
+   "ageSec": 9.959902375,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "mqtt": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:51.791065-04:00",
+   "ageSec": 0.413780541,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "nws": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:50.288219-04:00",
+   "ageSec": 1.9166361250000001,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "outages": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:42.248736-04:00",
+   "ageSec": 9.956165958,
+   "count": 5,
+   "lastError": null,
+   "stale": false
+  },
+  "tiles": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:42.244339-04:00",
+   "ageSec": 9.960561,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "usgs": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:05:47.255767-04:00",
+   "ageSec": 4.949101667,
+   "count": 20,
+   "lastError": null,
+   "stale": false
+  }
+ },
+ "videoRegistryKV": {
+  "sim-cam1": {
+   "engine": "go",
+   "path": "sim-cam1",
+   "ready": true,
+   "rtsp": "rtsp://127.0.0.1:38554/sim-cam1",
+   "seenAt": "2026-10-29T05:05:52.244576-04:00",
+   "tracks": [
+    "H264"
+   ]
+  }
+ }
+}

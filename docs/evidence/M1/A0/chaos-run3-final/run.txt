@@ -1,0 +1,18 @@
+commit dbd9568d373a28c012a812835e4470b496a6de9d
+11:01:42 +000s build
+11:01:45 +003s nats-server up on 34322 (pid 63855)
+11:01:45 +003s streams INTEL, SYS, TEL created (dupe window 2m, max-bytes 1GB)
+11:01:47 +005s stub (50 alerts/s, 50 sse/s) and collectors a, b started
+11:02:02 +020s CHAOS 1: kill -9 nats-server
+11:02:17 +035s nats-server restarted (pid 64706)
+11:02:32 +050s CHAOS 2: upstream outage (503) on
+11:02:42 +060s leader during outage: b
+11:02:47 +065s upstream outage off
+11:03:02 +080s CHAOS 3: kill -9 leading collector b
+/Users/danielcarku/Desktop/work/wt/a0-ingest/services/bridge/ingest/test/chaos/chaos.sh: line 21: 63931 Killed: 9               "$WORK/bin/omos-ingest" -config "$HERE/sources.chaos.yaml" -schemas "$SCHEMAS" -nats "$NURL" -instance "$1" -listen "127.0.0.1:$2" -create-buckets >> "$OUT/collector-$1.log" 2>&1
+11:03:17 +095s collector b restarted; new leader: a
+11:03:32 +110s CHAOS 4: malformed upstream records on
+11:03:42 +120s malformed off
+11:04:12 +150s collect metrics and verify
+11:04:12 +150s verify exit 0 (PASS)
+exit 0
