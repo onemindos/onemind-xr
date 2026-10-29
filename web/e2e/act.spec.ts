@@ -29,7 +29,7 @@ type L0 = {
   flyTo(lon: number, lat: number, height: number): void;
 };
 
-async function open(browser: Browser, s: ActStack, user: "zeus" | "alice" | "newbie" | "carol", viewport = { width: 1440, height: 900 }) {
+async function open(browser: Browser, s: ActStack, user: "zeus" | "alice" | "newbie" | "carol" | "dana" | "rookie", viewport = { width: 1440, height: 900 }) {
   const page = await browser.newPage({ viewport });
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -415,6 +415,74 @@ test.describe.serial("Act features on the real policy service and MAVLink bridge
     expect(errors).toEqual([]);
     // Cesium reports render failures in its own panel, not as page errors.
     await expect(page.locator(".cesium-widget-errorPanel")).toHaveCount(0);
+  });
+
+  test("F-ALERT: a #562 CLIENT user sees the geofence service's open alert live; a J2 newcomer sees no alert and no asset command", async ({ browser }) => {
+    // A keep-in pad 3 km away: sim-x1 is outside it from the start, so the geofence service raises
+    // a warning at once (#569 raises for a zone drawn around an asset that already violates it).
+    const pad = destination(CENTER, 225, 3000);
+    await s.geofence.fixture("zone-falert-pad", { v: 1, name: "F-ALERT PAD", callsign: "F-ALERT PAD", active: true, lat: pad[1], lon: pad[0], geo: { shape: "circle", kind: "keep_in", radius_m: 100, coords: { type: "Point", coordinates: pad } }, watch: true, properties: { applies_to: ["sim-x1"] } });
+    await expect.poll(() => s.geofence.alerts.has("alr-gf-zone-falert-pad-sim-x1"), { timeout: 10_000 }).toBe(true);
+
+    // dana holds exactly the #562 CLIENT human permissions: no ent.*, so the client's alerts layer
+    // gets nothing from ent.alert.*.state; the alert comes from svc.geofence.alerts + evt.so.alert.*.
+    const d = await open(browser, s, "dana");
+    await d.page.getByTestId("alert-chip").click();
+    const item = d.page.locator('[data-testid="alert-item"][data-source="service"]').filter({ hasText: "SIM-X1 is outside keep-in zone F-ALERT PAD" });
+    await expect(item).toBeVisible({ timeout: 15_000 });
+    await expect(item).toContainText("WARNING");
+    await expect(item).toContainText("left keep in");
+    await expect(d.page.locator("#tab-alerts")).toHaveAttribute("data-alert-service", "ok/ok", { timeout: 15_000 });
+    await shot(d.page, "f-alert-client562-open-alert.png");
+    // Live: the zone goes away, the service resolves the alert, and the list drops it without a
+    // snapshot (the refresh is 60 s; this waits 15 s at most).
+    const snapAt = await l0(d.page, (l) => (l as unknown as { alertFeed: { status: { lastSnapshotAt: number } } }).alertFeed.status.lastSnapshotAt);
+    await s.geofence.dropFixture("zone-falert-pad");
+    await expect(item).toHaveCount(0, { timeout: 15_000 });
+    expect(await l0(d.page, (l) => (l as unknown as { alertFeed: { status: { lastSnapshotAt: number } } }).alertFeed.status.lastSnapshotAt)).toBe(snapAt);
+    const facts = s.geofence.alertFacts.filter((f) => f.data.alert_id === "alr-gf-zone-falert-pad-sim-x1").map((f) => `${f.subject}:${f.data.reason}`);
+    expect(facts).toEqual(["evt.so.alert.raised:left_keep_in", "evt.so.alert.resolved:zone_removed"]);
+
+    // Raise it again for the newcomer checks.
+    await s.geofence.fixture("zone-falert-pad", { v: 1, name: "F-ALERT PAD", callsign: "F-ALERT PAD", active: true, lat: pad[1], lon: pad[0], geo: { shape: "circle", kind: "keep_in", radius_m: 100, coords: { type: "Point", coordinates: pad } }, watch: true, properties: { applies_to: ["sim-x1"] } });
+    await expect(item).toBeVisible({ timeout: 15_000 });
+
+    // J2, UI mode: in Newcomer mode the alert is listed, and following it to sim-x1 still offers no
+    // asset command and no drawing.
+    await l0(d.page, (l, rec) => l.store.apply(rec, "fleet"), s.entity.droneRecord(s.entity.seq.get("sim-x1")));
+    await d.page.getByTestId("role").selectOption("newcomer");
+    await d.page.getByTestId("alert-chip").click();
+    await item.getByRole("button", { name: /Show sim-x1/ }).click();
+    await expect(d.page.getByTestId("commands-hidden")).toContainText("Newcomer");
+    await expect(d.page.getByTestId("task-goto")).toHaveCount(0);
+    await expect(d.page.getByTestId("tab-draw")).toBeHidden();
+    await shot(d.page, "f-alert-newcomer-mode-no-commands.png");
+
+    // J2, server role: rookie holds the #565 newcomer role's permissions. The server refuses both
+    // alert paths, so no service alert is shown, and nothing offers an asset command even when the
+    // UI is switched to operator (no policy access: the effective role stays below operator).
+    const r = await open(browser, s, "rookie");
+    await expect(r.page.locator("#tab-alerts")).toHaveAttribute("data-alert-service", /^denied\//, { timeout: 15_000 });
+    expect(await r.page.locator('[data-testid="alert-item"][data-source="service"]').count()).toBe(0);
+    expect(await l0(r.page, (l) => (l as unknown as { alertFeed: { alerts(): unknown[] } }).alertFeed.alerts().length)).toBe(0);
+    await l0(r.page, (l, rec) => l.store.apply(rec, "fleet"), s.entity.droneRecord(s.entity.seq.get("sim-x1")));
+    await r.page.getByTestId("role").selectOption("operator");
+    await r.page.getByRole("tab", { name: /Entities/ }).click();
+    await r.page.getByTestId("entity-sim-x1").click();
+    await expect(r.page.getByTestId("commands-hidden")).toBeVisible({ timeout: 15_000 });
+    await expect(r.page.getByTestId("task-goto")).toHaveCount(0);
+    await r.page.getByTestId("alert-chip").click();
+    await shot(r.page, "f-alert-newcomer-role-no-alerts.png");
+    notes.f_alert = {
+      facts: s.geofence.alertFacts.map((f) => ({ subject: f.subject, alert_id: f.data.alert_id, reason: f.data.reason, seq: f.data.seq, at: new Date(f.at).toISOString() })),
+      dana_status: await l0(d.page, (l) => (l as unknown as { alertFeed: { status: unknown } }).alertFeed.status),
+      rookie_status: await l0(r.page, (l) => (l as unknown as { alertFeed: { status: unknown } }).alertFeed.status),
+    };
+    await s.geofence.dropFixture("zone-falert-pad");
+    expect(d.errors).toEqual([]);
+    expect(r.errors).toEqual([]);
+    await d.page.close();
+    await r.page.close();
   });
 
   test("WEB-P2: with the omos #562 CLIENT permissions, status comes from action.get polling alone", async ({ browser }) => {

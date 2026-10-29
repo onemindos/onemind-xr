@@ -163,12 +163,24 @@ export function buildReal(binDir = join(TMP_ROOT, "bin")): Availability {
 function natsConf(dir: string, port: number, wsPort: number, p: Record<string, string>): string {
   const clientPerms = `permissions: {
           publish: { allow: ["svc.>", "cmd.map.>", "agents.prompt.hermes.>", "_INBOX.>"], deny: ["cmd.fleet.>"] }
-          subscribe: { allow: ["_INBOX.>", "cmd.map.>", "ent.>", "evt.so.action.>", "evt.map.>", "tel.feed.>", "tak.cot.>"] } }`;
+          subscribe: { allow: ["_INBOX.>", "cmd.map.>", "ent.>", "evt.so.action.>", "evt.so.alert.>", "evt.map.>", "tel.feed.>", "tak.cot.>"] } }`;
   // Exactly the CLIENT user of omos #562 (platform/nats/identities/identities.yaml): requests and
   // cmd.map only; no subscription to evt.so.action, tel.feed, tak.cot or ent.
   const client562 = `permissions: {
           publish: { allow: ["svc.layer.>", "svc.entity.>", "svc.policy.>", "svc.cot.send", "cmd.map.>", "agents.prompt.hermes.>"] }
           subscribe: { allow: ["cmd.map.>", "_INBOX.>"] } }`;
+  // The CLIENT human of omos #562 as of feat/nats-identities 1f2e33ff (zeus/alice in
+  // identities.yaml): requests on the imported services, subscriptions on the read-only stream
+  // imports (A19-P11, now with evt.so.alert.>), never ent.*.
+  const human562 = `permissions: {
+          publish: { allow: ["svc.layer.>", "svc.entity.>", "svc.policy.>", "svc.cot.send", "svc.mission.get", "svc.mission.list", "svc.mission.report", "svc.geofence.alerts", "svc.registry.video.get", "svc.registry.video.list", "svc.tak.mission.>", "cmd.map.>", "agents.prompt.hermes.>"] }
+          subscribe: { allow: ["cmd.map.>", "evt.so.action.>", "evt.mission.>", "evt.map.geofence.>", "evt.so.alert.>", "tel.feed.*.status", "tak.cot.out", "tak.cot.mesh.rx", "_INBOX.>"] }
+          allow_responses: { max: -1, expires: "5s" } }`;
+  // The J2 newcomer role (omos #565 platform/security/roles/onemind-roles.json, plus the A19-P11
+  // proposed tel.feed.*.status): layer and entity reads only; no alerts, no policy, no cmd.map.
+  const newcomer565 = `permissions: {
+          publish: { allow: ["svc.layer.list", "svc.layer.meta", "svc.layer.snapshot", "svc.layer.watch", "svc.layer.unwatch", "svc.entity.get", "svc.entity.search"] }
+          subscribe: { allow: ["_INBOX.>", "tel.feed.*.status"] } }`;
   return `
 listen: "127.0.0.1:${port}"
 websocket { listen: "127.0.0.1:${wsPort}", no_tls: true }
@@ -187,8 +199,8 @@ accounts {
           subscribe: { allow: ["cmd.fleet.drone.sim-x1.>", "_INBOX.>"] } } }
     ]
     exports: [
-      { service: "svc.policy.>" }, { service: "svc.entity.>" }, { service: "svc.cot.send" }
-      { stream: "ent.>" }, { stream: "evt.so.action.>" }, { stream: "evt.map.>" }, { stream: "tel.feed.>" }, { stream: "tak.cot.>" }
+      { service: "svc.policy.>" }, { service: "svc.entity.>" }, { service: "svc.cot.send" }, { service: "svc.geofence.alerts" }
+      { stream: "ent.>" }, { stream: "evt.so.action.>" }, { stream: "evt.so.alert.>" }, { stream: "evt.map.>" }, { stream: "tel.feed.>" }, { stream: "tak.cot.>" }
     ]
     imports: [
       { stream: { account: CLIENT, subject: "cmd.map.>" } }
@@ -201,15 +213,19 @@ accounts {
       { user: alice, password: "${p.alice}", ${clientPerms} }
       { user: newbie, password: "${p.newbie}", ${clientPerms} }
       { user: carol, password: "${p.carol}", ${client562} }
+      { user: dana, password: "${p.dana}", ${human562} }
+      { user: rookie, password: "${p.rookie}", ${newcomer565} }
     ]
     exports: [ { stream: "cmd.map.>" } ]
     imports: [
       { service: { account: ONEMIND, subject: "svc.policy.>" }, share: true }
       { service: { account: ONEMIND, subject: "svc.entity.>" }, share: true }
       { service: { account: ONEMIND, subject: "svc.cot.send" }, share: true }
+      { service: { account: ONEMIND, subject: "svc.geofence.alerts" }, share: true }
       { service: { account: AGENTS, subject: "agents.prompt.hermes.>" }, share: true }
       { stream: { account: ONEMIND, subject: "ent.>" } }
       { stream: { account: ONEMIND, subject: "evt.so.action.>" } }
+      { stream: { account: ONEMIND, subject: "evt.so.alert.>" } }
       { stream: { account: ONEMIND, subject: "evt.map.>" } }
       { stream: { account: ONEMIND, subject: "tel.feed.>" } }
       { stream: { account: ONEMIND, subject: "tak.cot.>" } }
@@ -398,9 +414,24 @@ export interface GeofenceResult {
   at: number;
 }
 
+/** Alert rule per zone kind (omos #569 README "Alerts per zone kind"). */
+const ALERT_RULE: Record<string, { when: "inside" | "outside"; level: string; reason: string }> = {
+  keep_in: { when: "outside", level: "warning", reason: "left_keep_in" },
+  keep_out: { when: "inside", level: "warning", reason: "entered_keep_out" },
+  hazard: { when: "inside", level: "caution", reason: "entered_hazard" },
+  aoi: { when: "inside", level: "advisory", reason: "entered_zone" },
+  control_area: { when: "inside", level: "advisory", reason: "entered_zone" },
+};
+
 class GeofenceStandin {
   zones = new Map<string, Record<string, unknown>>();
   inside = new Map<string, boolean>();
+  /** open alerts (#569 alert.v1), by alert_id */
+  alerts = new Map<string, Record<string, unknown>>();
+  /** every evt.so.alert.* fact the stand-in published */
+  alertFacts: { subject: string; data: Record<string, unknown>; at: number }[] = [];
+  private alertSeq = new Map<string, number>();
+  private seeded = new Set<string>();
   results: GeofenceResult[] = [];
   seq = 0;
   constructor(
@@ -412,7 +443,22 @@ class GeofenceStandin {
 
   /** Fixture zones present before the run (as if already in KV `geofences`). */
   async seed(id: string, rec: Record<string, unknown>): Promise<void> {
+    this.seeded.add(id);
     await this.write(id, rec);
+  }
+
+  /** A zone already in KV that the alert rules watch (unlike `seed`): test fixture, no policy. */
+  async fixture(id: string, rec: Record<string, unknown>): Promise<void> {
+    await this.write(id, rec);
+  }
+
+  /** Drop a fixture zone (as a deleted KV key); its alert resolves `zone_removed` on the next tick. */
+  async dropFixture(id: string): Promise<void> {
+    const cur = this.zones.get(id);
+    if (!cur) return;
+    await this.kv.delete(id);
+    this.zones.delete(id);
+    this.entity.publish({ ...cur, live: false, seq: this.entity.next(id), t: Date.now() });
   }
 
   private async write(id: string, rec: Record<string, unknown>): Promise<void> {
@@ -505,7 +551,41 @@ class GeofenceStandin {
     return inside;
   }
 
+  /** Raise or resolve the alert of one zone and sim-x1, as #569 does (D1-P3 subjects). */
+  private alertFor(id: string, z: Record<string, unknown> | undefined, violating: boolean, why?: string): void {
+    const alertId = `alr-gf-${id}-sim-x1`;
+    const cur = this.alerts.get(alertId);
+    if (!!cur === violating) return;
+    const kind = ((z?.geo as { kind?: string } | undefined)?.kind ?? (cur?.zone_kind as string | undefined)) ?? "aoi";
+    const rule = ALERT_RULE[kind];
+    if (!rule) return;
+    const seq = (this.alertSeq.get(alertId) ?? 0) + 1;
+    this.alertSeq.set(alertId, seq);
+    const now = Date.now();
+    const d = this.entity.drone;
+    const name = (z?.name as string | undefined) ?? id;
+    const data: Record<string, unknown> = violating
+      ? {
+          v: 1, alert_id: alertId, alert_kind: "geofence", level: rule.level, state: "open", about: { entity_type: "drone", entity_id: "sim-x1" },
+          zone_id: id, zone_kind: kind, reason: rule.reason, raised_by: "geofence-standin", opened_t: now, updated_t: now, seq, simulated: true,
+          message: rule.when === "outside" ? `SIM-X1 is outside keep-in zone ${name}` : `SIM-X1 is inside ${kind.replace("_", "-")} zone ${name}`,
+          ...(d ? { location: { lat: d.lat, lon: d.lon } } : {}),
+        }
+      : { ...cur, state: "resolved", reason: why ?? "returned", updated_t: now, resolved_t: now, seq };
+    if (violating) this.alerts.set(alertId, data);
+    else this.alerts.delete(alertId);
+    const subject = `evt.so.alert.${violating ? "raised" : "resolved"}`;
+    this.alertFacts.push({ subject, data, at: now });
+    this.nc.publish(subject, enc.encode(JSON.stringify({ v: 1, id: randomUUID(), ts: new Date(now).toISOString(), source: "geofence-standin", subject, data })));
+  }
+
   start(): NodeJS.Timeout {
+    // The open set (#569 svc.geofence.alerts: `{kind?, entity_id?, feed?}` -> `{v, alerts}`).
+    this.nc.subscribe("svc.geofence.alerts", {
+      callback: (_e, m) => {
+        m.respond(enc.encode(JSON.stringify({ v: 1, alerts: [...this.alerts.values()] })));
+      },
+    });
     this.nc.subscribe("cmd.map.geofence.*.*", {
       callback: (_e, m) => {
         let env: Record<string, unknown> = {};
@@ -534,6 +614,16 @@ class GeofenceStandin {
           this.nc.publish(`evt.map.geofence.${id}.${now ? "enter" : "exit"}`, enc.encode(JSON.stringify({ entity_id: "sim-x1", zone_id: id, t: Date.now() })));
         }
         this.inside.set(key, now);
+        // Raised also for a zone drawn around an asset that already violates it (#569); seeded
+        // AOIs (Hermes' places) stay quiet so the earlier tests' alert lists do not change.
+        if (this.seeded.has(id)) continue;
+        const rule = ALERT_RULE[kind ?? ""];
+        if (rule && z.active !== false) this.alertFor(id, z, rule.when === "inside" ? now : !now);
+      }
+      for (const a of [...this.alerts.values()]) {
+        const zid = a.zone_id as string;
+        const z = this.zones.get(zid);
+        if (!z || z.active === false) this.alertFor(zid, z, false, z ? "zone_inactive" : "zone_removed");
       }
     }, 250);
   }
@@ -696,7 +786,7 @@ class TakStandin {
 export interface ActStack {
   wsUrl: string;
   url: string;
-  users: Record<"zeus" | "alice" | "newbie" | "carol", { user: string; pass: string }>;
+  users: Record<"zeus" | "alice" | "newbie" | "carol" | "dana" | "rookie", { user: string; pass: string }>;
   admin: NatsConnection;
   feeds: FeedStandin;
   hermes: HermesStandin;
@@ -721,7 +811,7 @@ export async function startActStack(): Promise<ActStack> {
   let logs = "";
   const port = await freePort();
   const wsPort = await freePort();
-  const p: Record<string, string> = Object.fromEntries(["admin", "policy", "bridge", "zeus", "alice", "newbie", "carol", "hermes"].map((u) => [u, pw()]));
+  const p: Record<string, string> = Object.fromEntries(["admin", "policy", "bridge", "zeus", "alice", "newbie", "carol", "dana", "rookie", "hermes"].map((u) => [u, pw()]));
   writeFileSync(join(dir, "nats.conf"), natsConf(dir, port, wsPort, p), { mode: 0o600 });
   const spawnLogged = (name: string, cmd: string, args: string[], env: Record<string, string> = {}) => {
     const c = spawn(cmd, args, { env: { ...process.env, ...env }, stdio: ["ignore", "pipe", "pipe"], cwd: dir });
@@ -836,7 +926,7 @@ export async function startActStack(): Promise<ActStack> {
 
   const stack: ActStack = {
     wsUrl, url,
-    users: { zeus: { user: "zeus", pass: p.zeus }, alice: { user: "alice", pass: p.alice }, newbie: { user: "newbie", pass: p.newbie }, carol: { user: "carol", pass: p.carol } },
+    users: { zeus: { user: "zeus", pass: p.zeus }, alice: { user: "alice", pass: p.alice }, newbie: { user: "newbie", pass: p.newbie }, carol: { user: "carol", pass: p.carol }, dana: { user: "dana", pass: p.dana }, rookie: { user: "rookie", pass: p.rookie } },
     admin, feeds, hermes, tak, entity, geofence, audit, commands, mapCommands,
     async kvGet(key) {
       const r = await admin.request(`$JS.API.DIRECT.GET.KV_geofences`, enc.encode(JSON.stringify({ last_by_subj: `$KV.geofences.${key}` })), { timeout: 3000 });

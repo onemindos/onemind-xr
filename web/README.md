@@ -17,14 +17,14 @@ only: it never publishes `ent.*` or `cmd.*` (entity.md §2; onemind-xr `CLAUDE.m
 | Entities, removal and expiry | `seq` rule (older or equal ignored), `live: false` removes, `expiry_t` expires (core subscribers never see delete markers), `stale` dims, tombstones stop a late copy resurrecting a removed entity (`src/bus/store.ts`) | entity.md §5, §8; layer-delta.md §2.2, §3 |
 | Marking check | defence in depth: records whose `marking` the viewer may not see are not drawn (`?groups=`, default `homestead`) | entity.md §8 |
 | Mission tier | view filter: tasked, or inside an AOI or geofence zone (FEATURES A6 rule) | FEATURES A6, J1 |
-| Alerts | `ent.alert.*` entities, entity `health.alerts[]`, and `evt.map.geofence.{id}.{enter\|exit}` | ONTOLOGY.md §3; omos NATS-DOCTRINE |
+| Alerts | open alerts of the omos geofence and alert service (#569): `svc.geofence.alerts` for the open set, then live `evt.so.alert.{raised\|updated\|resolved}` (polled when the subscription is refused; nothing shown when the snapshot is refused, as for the J2 newcomer role). Also entity `health.alerts[]`, `evt.map.geofence.{id}.{enter\|exit}`, stale assets and feed gaps, minus what the service already reports, and `ent.alert.*` entities where a user may read `ent.*` (a CLIENT user may not, omos #562) | omos #569 README, alert.v1 schema; #562 A19-P11; ONTOLOGY.md §3 |
 | Entity detail with provenance | full record from the feed or `svc.entity.get`; shows `provenance`, `sources[]`, `confidence_parts`, `conflicts` | entity.md §4.1, §8 |
 | Video panel | from the entity's `media[]` (MediaMTX URL, never NATS): WHEP first, LL-HLS second (hls.js 1.7.3, or native HLS on iOS Safari). A loopback host is replaced by the page's host so a phone on the LAN reaches the Mac | entity.md §4.1 `media`; video-and-plugins.md |
 | Phone layout | globe on top, tabbed bottom sheet, 44 px touch targets, no horizontal scroll | J1 acceptance |
 
 Subjects it reads: `ent.{drone,robot,vehicle,node,track,zone,alert,person,place,hazard,event,aircraft,vessel}.*.state`
-(only on the interim and core paths), `evt.map.geofence.*.*`. Requests it sends: `svc.layer.snapshot`,
-`svc.layer.watch`, `svc.layer.unwatch`, `svc.entity.query`, `svc.entity.get`. All are existing
+(only on the interim and core paths), `evt.map.geofence.*.*`, `evt.so.alert.>`. Requests it sends: `svc.layer.snapshot`,
+`svc.layer.watch`, `svc.layer.unwatch`, `svc.entity.query`, `svc.entity.get`, `svc.geofence.alerts`. All are existing
 grammar patterns (omos `CLAUDE.md`); no new subject is introduced.
 
 ## Run it
