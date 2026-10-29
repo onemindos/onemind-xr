@@ -6,6 +6,8 @@
 //   2. `health.alerts[]` of any entity (entity.md §4.1 `health`).
 //   3. `evt.map.geofence.{id}.{enter|exit}` (omos docs/NATS-DOCTRINE.md, geofence watch job). Its
 //      payload is not specified there, so only subject tokens plus common id fields are read.
+//   4. (FEATURES D6) stale own assets: a fleet entity past its `stale` limit.
+//   5. (FEATURES D6) feed outages: the B20 gaps (act/gaps.ts).
 import type { EntityRecord } from "./store";
 
 export type AlertLevel = "advisory" | "caution" | "warning";
@@ -17,7 +19,7 @@ export interface AlertItem {
   title: string;
   about?: string;
   t: number;
-  source: "entity" | "health" | "geofence";
+  source: "entity" | "health" | "geofence" | "stale" | "feed";
   state: string;
 }
 
@@ -93,4 +95,33 @@ export function alertFromGeofence(subject: string, payload: unknown, now: number
 
 export function sortAlerts(items: AlertItem[]): AlertItem[] {
   return [...items].sort((a, b) => LEVEL_RANK[b.level] - LEVEL_RANK[a.level] || b.t - a.t);
+}
+
+/** Own asset gone stale (FEATURES D6). Only commandable fleet types raise it. */
+export function alertFromStaleAsset(rec: EntityRecord, stale: boolean): AlertItem | null {
+  if (!stale || !["drone", "robot", "vehicle"].includes(rec.r.entity_type)) return null;
+  const name = rec.r.callsign ?? rec.r.entity_id;
+  return {
+    key: `stale:${rec.r.entity_id}`,
+    level: "caution",
+    kind: "stale asset",
+    title: `${name} has not reported for ${Math.round((Date.now() - rec.r.t) / 1000)} s`,
+    about: rec.r.entity_id,
+    t: rec.r.t,
+    source: "stale",
+    state: "open",
+  };
+}
+
+/** Feed outages from the intelligence-gaps model (FEATURES B20, D6). */
+export function alertsFromGaps(gaps: { key: string; source: string; layers: string[]; reason: string; detail: string; since: number }[]): AlertItem[] {
+  return gaps.map((g) => ({
+    key: `feed:${g.key}`,
+    level: g.reason === "error" || g.reason === "layer_down" ? "warning" : "caution",
+    kind: "feed outage",
+    title: `${g.source} ${g.reason.replace("_", " ")}: ${g.layers.join(", ") || "no layer"} weakened`,
+    t: g.since,
+    source: "feed" as const,
+    state: "open",
+  }));
 }

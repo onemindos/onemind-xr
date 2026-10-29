@@ -1,5 +1,7 @@
-// OneMind L0 light web client (FEATURES J1). A view and an input device only: it reads the bus
-// over NATS WebSocket and never publishes `ent.*` or `cmd.*` (entity.md §2; CLAUDE.md rule 3).
+// OneMind L0 light web client (FEATURES J1, plus the M4 Act features in ui/act.ts). A view and an
+// input device: it reads the bus over NATS WebSocket and never publishes `ent.*` or `cmd.fleet.*`
+// (entity.md §2; CLAUDE.md rule 3). Its only `cmd.*` publish is `cmd.map.geofence.*`
+// (asset-command.md §2: clients publish `cmd.map.>`); asset commands go through policy.
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "./styles.css";
 import { wsconnect, type NatsConnection, type Subscription } from "@nats-io/nats-core";
@@ -12,6 +14,7 @@ import { EntityStore, type EntityRecord } from "./bus/store";
 import type { Entity } from "./bus/types";
 import { playbackUrls } from "./bus/videourl";
 import { loadCredentials, readConfig, saveCredentials } from "./config";
+import { Act } from "./ui/act";
 import { h } from "./ui/dom";
 import { Globe } from "./ui/globe";
 import { renderAlerts, renderDetail, renderEntityList, renderLayers } from "./ui/panels";
@@ -38,6 +41,22 @@ let dirtyGlobe = true;
 let dirtyPanels = true;
 
 const globe = new Globe($("globe"), cfg, (id) => select(id, false));
+const act = new Act({
+  store,
+  globe,
+  feedStatus,
+  enabledLayers: () => [...enabled],
+  setLayer: (id, on) => {
+    if (enabled.has(id) !== on) toggleLayer(id, on);
+  },
+  selected: () => selected,
+  select: (id, fly) => select(id, fly),
+  showTab: (name) => showTab(name),
+  natsUser: () => loadCredentials().user ?? "",
+  onAlertsChanged: () => {
+    dirtyPanels = true;
+  },
+});
 const player = new VideoPlayer($("video") as HTMLVideoElement, (s) => {
   $("video-state").textContent = s.message;
   $("video-panel").dataset.transport = s.transport;
@@ -127,8 +146,10 @@ function renderPanels(): void {
     if (a) alerts.push(a);
     alerts.push(...alertsFromHealth(v.rec));
   }
-  const sorted = sortAlerts(alerts);
-  $("tab-alerts").replaceChildren(renderAlerts(sorted, (id) => select(id, true)));
+  // FEATURES D6: stale own assets and feed outages (B20) join the alert stream.
+  alerts.push(...act.extraAlerts(vis.map((v) => ({ rec: v.rec, stale: v.stale }))));
+  const sorted = sortAlerts(alerts.filter((x) => !act.isDismissed(x.key)));
+  $("tab-alerts").replaceChildren(renderAlerts(sorted, (id) => select(id, true), (key) => act.dismiss(key)));
   $("alert-count").textContent = String(sorted.length);
   $("alert-chip").dataset.level = sorted[0]?.level ?? "none";
 
@@ -262,6 +283,7 @@ async function connect(url: string): Promise<void> {
   feeds.clear();
   geofenceSub?.unsubscribe();
   geofenceSub = null;
+  act.detach();
   const old = nc;
   nc = null;
   if (old) await old.close().catch(() => undefined);
@@ -299,6 +321,7 @@ async function connect(url: string): Promise<void> {
     }
   })();
   for (const def of DEFAULT_LAYERS) if (enabled.has(def.id)) startFeed(def);
+  act.attach(conn);
   // Geofence crossings (omos docs/NATS-DOCTRINE.md: evt.map.geofence.{id}.{enter|exit}).
   geofenceSub = conn.subscribe("evt.map.geofence.*.*", {
     callback: (_e, m) => {
@@ -380,6 +403,9 @@ Object.assign(window, {
     get connected() {
       return !!nc && !nc.isClosed();
     },
+    act,
+    toScreen: (lon: number, lat: number) => globe.toScreen(lon, lat),
+    flyTo: (lon: number, lat: number, height: number) => globe.flyTo(lon, lat, height, 0),
     h,
   },
 });

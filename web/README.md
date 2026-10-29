@@ -73,6 +73,46 @@ through `NATS_SERVER_BIN`, `MEDIAMTX_BIN`, `FFMPEG_BIN`, `work/.tools/bin` or `P
 The e2e browser runs with `--in-process-gpu` because the separate GPU process hangs on the build
 machine ([webgl-probe.txt](../docs/evidence/M3/J1/webgl-probe.txt)).
 
+## Act features (M4: D1, D3, B11, B20, D4, D6, J2, C8)
+
+The Act panels live in `src/act/` (logic, unit tested) and `src/ui/act.ts`, `src/ui/overlay.ts`
+(DOM and Cesium). The client still never publishes `cmd.fleet.*` or `ent.*`.
+
+| Feature | What the operator does | Bus (all existing grammar) |
+|---|---|---|
+| D1 AOIs and geofences | Draw an area, pick a kind (`aoi`, `keep_in`, `keep_out`, `hazard`, `control_area`), Share as zone. Keep-in and keep-out ask for a confirm first | publishes `cmd.map.geofence.{id}.create\|update\|remove` (doctrine §9.7); the body carries the doctrine fields plus the zone record KV `geofences` stores, with `geo.shape` `polygon` or `circle` only (the policy service treats any other keep-in/keep-out shape as unevaluable) |
+| D3 click to task | Select a `sim-*` asset, Go to point, click the map. The confirm dialog shows the exact parameters, the `params_hash`, the level and the deadline; Confirm or Reject (with a reason). Status updates live in Tasks and Detail | `svc.policy.command.propose`, `svc.policy.command.confirm`, `svc.policy.action.get` (polled), `evt.so.action.>` when the connection may subscribe |
+| B11 drawing | Point, label, line, polygon, rectangle, circle, sector, range rings, range and bearing, lasso select, buffer; measurements on the map; CoT export (copy or download) | none until shared; CoT types per cot-projection.md §5.5 (`src/act/cot.ts` header) |
+| B20 intelligence gaps | Gaps tab: stale, failing, silent or never-fetched feeds and down layers, each naming the layers and alerts it weakens | `tel.feed.*.status` (omos #553 shape) when permitted; layer manifests' `freshness` otherwise |
+| D4 Hermes | Ask about the map; the question goes with the selection, viewport, layers, visible entities (≤ 50), zones and gaps. Hermes' highlights and annotations show on the map; its proposals appear as pending confirms | request (single reply or chunks) on `agents.prompt.hermes.zeus.legacy` (`?hermes=` to change); renders `cmd.map.highlight\|annotation\|viewport\|filter` |
+| D6 alerts | Alerts tab adds stale own assets and feed outages to J1's geofence crossings and alert entities; Dismiss hides one for this viewer | as above |
+| J2 role modes | Mode: Newcomer (view, chat, Hermes), Observer (+ draw, share zones), Operator (+ asset commands, confirm). Operator only takes effect when a policy dry run says the user operates the asset | `svc.policy.check` with `{v, action}` (dry run of `asset.estop`, which skips asset preconditions, so the answer is authorization only) |
+| C8 contacts and chat | Chat tab: TAK contacts, channels (TAK groups), All Chat Rooms, group and direct rooms; send GeoChat | reads CoT XML on `tak.cot.out` and `tak.cot.mesh.rx` when permitted; sends `svc.cot.send` (structured body, the projector builds the CoT) |
+
+A `CLIENT` account user in the omos #562 layout may subscribe only `cmd.map.>` and `_INBOX.>`:
+the client then falls back to polling (`svc.policy.action.get`, layer manifests) and the Tasks
+tab shows which subscriptions were refused. Chat and direct feed status need the owner proposals
+in [`docs/evidence/M4/WEB/OWNER-PROPOSALS.md`](../docs/evidence/M4/WEB/OWNER-PROPOSALS.md).
+
+### Act tests
+
+```bash
+npx vitest run test/unit/act.test.ts      # geodesy, drawings, CoT, policy tracker, roles, gaps, Hermes, chat
+npx playwright test e2e/act.spec.ts       # the Act stack below, in headless Chromium
+```
+
+`e2e/act.spec.ts` runs against `test/standins/stack.ts`: a disposable nats-server with `ONEMIND`,
+`CLIENT` and `AGENTS` accounts and random per-run passwords; the **real policy service** (omos
+#554, built from `$OMOS_POLICY_DIR`, default `work/wt/i4-policy`) with its OpenFGA model and a
+per-run tuples file; the **real MAVLink bridge** (omos #550, `$OMOS_BRIDGE_DIR`, default
+`work/wt/h2-mavlink`) with an Ed25519 key per run and signatures required; and the scripted drone
+`sim-x1`. Setup arms and takes off through policy with two humans (A4), never around it.
+Stand-ins, in test fixtures only: entity (omos #552 sets no `capabilities`, so the real policy
+would deny every goto `not_capable`), the KV `geofences` writer and geofence watcher (not built
+yet), feed heartbeats, a scripted Hermes (no model API may be called here), `svc.cot.send` (not
+built anywhere) and a scripted ATAK peer. The spec is skipped with the reason when Go, the omos
+worktrees or pymavlink are missing (`POLICY_BIN`, `BRIDGE_BIN`, `PYTHON`, `SIM_DRONE` override).
+
 ## Pins and licences
 
 | Package | Version | Licence |
@@ -97,7 +137,7 @@ No code was copied from worldmonitor (AGPL-3.0), CloudTAK (AGPL-3.0) or worldwid
 2.0). Design ideas only: primitive collections instead of one Cesium Entity per object, render
 loop that sleeps when nothing changes (competitive-matrix.md).
 
-## Known gaps (not in J1)
+## Known gaps
 
 - Density cells (`mode: "cells"`) for large layers at wide zoom are not drawn. The client always
   asks a large layer for entities inside the view AOI; when the layer service answers with cells
@@ -113,4 +153,8 @@ loop that sleeps when nothing changes (competitive-matrix.md).
 - Benchmark gate G4 (≥ 57.6 fps, cold start ≤ 1.86 s) is not measured here; the headless
   SwiftShader browser is not representative.
 - Contract gaps found while building are listed as owner proposals in
-  [`docs/evidence/M3/J1/OWNER-PROPOSALS.md`](../docs/evidence/M3/J1/OWNER-PROPOSALS.md).
+  [`docs/evidence/M3/J1/OWNER-PROPOSALS.md`](../docs/evidence/M3/J1/OWNER-PROPOSALS.md) and
+  [`docs/evidence/M4/WEB/OWNER-PROPOSALS.md`](../docs/evidence/M4/WEB/OWNER-PROPOSALS.md).
+- Act: alert acknowledgement through policy (`alert.acknowledge`) is not offered (Dismiss is
+  local); missions (D2), voice for Hermes, and drawings persisted on the bus (entity.create is
+  not in the policy catalogue) are not built. Drawings live in the page until shared.

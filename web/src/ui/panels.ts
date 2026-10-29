@@ -14,7 +14,7 @@ function row(k: string, v: string | Node, testid?: string): HTMLElement {
   return h("div", { class: "kv" }, h("dt", {}, k), h("dd", testid ? { "data-testid": testid } : {}, v));
 }
 
-export function renderAlerts(items: AlertItem[], onPick: (id: string) => void): HTMLElement {
+export function renderAlerts(items: AlertItem[], onPick: (id: string) => void, onDismiss?: (key: string) => void): HTMLElement {
   if (!items.length) return h("p", { class: "empty", "data-testid": "alerts-empty" }, "No open alerts.");
   const ul = h("ul", { class: "alerts", "data-testid": "alerts-list" });
   for (const a of items) {
@@ -25,13 +25,18 @@ export function renderAlerts(items: AlertItem[], onPick: (id: string) => void): 
     );
     const about = a.about;
     if (about) b.addEventListener("click", () => onPick(about));
+    // Dismiss hides an alert for this viewer only (it does not acknowledge it on the bus).
+    const dismiss = onDismiss && (a.source === "stale" || a.source === "feed" || a.source === "geofence")
+      ? h("button", { class: "link dismiss", type: "button", "aria-label": `Dismiss ${a.title}`, "data-testid": "alert-dismiss" }, "Dismiss")
+      : null;
+    if (dismiss) dismiss.addEventListener("click", () => onDismiss!(a.key));
     ul.append(
       h(
         "li",
-        { class: `alert lvl-${a.level}`, "data-testid": "alert-item", "data-key": a.key },
+        { class: `alert lvl-${a.level}`, "data-testid": "alert-item", "data-key": a.key, "data-source": a.source },
         h("span", { class: "lvl" }, a.level.toUpperCase()),
         b,
-        h("span", { class: "muted" }, `${a.kind} · ${a.source} · ${ago(a.t)}`),
+        h("span", { class: "muted" }, `${a.kind} · ${a.source} · ${ago(a.t)}`, dismiss ? " · " : "", dismiss),
       ),
     );
   }

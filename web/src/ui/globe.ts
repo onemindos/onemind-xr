@@ -19,6 +19,7 @@ import {
   PolygonHierarchy,
   Rectangle,
   SceneMode,
+  SceneTransforms,
   ScreenSpaceEventHandler,
   ScreenSpaceEventType,
   TileMapServiceImageryProvider,
@@ -60,6 +61,9 @@ export class Globe {
   private zoneSeq = new Map<string, number>();
   private selected: string | null = null;
   private clampZones: boolean;
+  /** Draw and task modes take map clicks instead of selection (FEATURES B11, D1, D3). */
+  private clickTap: ((lonLat: [number, number]) => void) | null = null;
+  private moveTap: ((lonLat: [number, number] | null) => void) | null = null;
 
   constructor(container: HTMLElement, cfg: Config, onPick: (id: string | null) => void) {
     this.clampZones = cfg.terrain === "terrarium";
@@ -102,11 +106,42 @@ export class Globe {
     this.labels = scene.primitives.add(new LabelCollection());
     const h = new ScreenSpaceEventHandler(scene.canvas);
     h.setInputAction((e: { position: Cartesian2 }) => {
+      if (this.clickTap) {
+        const ll = this.pickLonLat(e.position);
+        if (ll) this.clickTap(ll);
+        return;
+      }
       const p = scene.pick(e.position);
       const raw: unknown = defined(p) ? (typeof p.id === "string" ? p.id : p.id?.id) : undefined;
       onPick(typeof raw === "string" ? (raw.startsWith("zone:") ? raw.slice(5) : raw) : null);
     }, ScreenSpaceEventType.LEFT_CLICK);
+    h.setInputAction((e: { endPosition: Cartesian2 }) => {
+      if (this.moveTap) this.moveTap(this.pickLonLat(e.endPosition));
+    }, ScreenSpaceEventType.MOUSE_MOVE);
     if (cfg.view) this.flyTo(cfg.view.lon, cfg.view.lat, cfg.view.height, 0);
+  }
+
+  /** Route map clicks (and pointer moves) to a draw or task tool; null restores selection. */
+  setTap(click: ((lonLat: [number, number]) => void) | null, move: ((lonLat: [number, number] | null) => void) | null = null): void {
+    this.clickTap = click;
+    this.moveTap = move;
+    this.viewer.container.classList.toggle("tapping", !!click);
+  }
+
+  /** The point on the ellipsoid under a canvas position, as [lon, lat]. */
+  pickLonLat(pos: Cartesian2): [number, number] | null {
+    const c = this.viewer.camera.pickEllipsoid(pos, this.viewer.scene.globe.ellipsoid);
+    if (!c) return null;
+    const g = this.viewer.scene.globe.ellipsoid.cartesianToCartographic(c);
+    return [CMath.toDegrees(g.longitude), CMath.toDegrees(g.latitude)];
+  }
+
+  /** Canvas position of a lon/lat (end-to-end tests click real map points with it). */
+  toScreen(lon: number, lat: number): { x: number; y: number } | null {
+    const p = SceneTransforms.worldToWindowCoordinates(this.viewer.scene, Cartesian3.fromDegrees(lon, lat, 0));
+    if (!p) return null;
+    const r = this.viewer.scene.canvas.getBoundingClientRect();
+    return { x: r.left + p.x, y: r.top + p.y };
   }
 
   flyTo(lon: number, lat: number, height: number, duration = 1.2): void {
