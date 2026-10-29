@@ -39,8 +39,9 @@ public:
 	FString SendChat(const FString& Text, const FString& Room = TEXT(""));
 
 	// --- Drawing and tactical graphics (B11) -------------------------------------------
-	// Each shape goes to svc.cot.send as kind "shape" (Docs/svc-cot-send.md) and, when the
-	// client is connected to TAK Server itself (C3), also over its own stream. Layouts:
+	// Each shape goes to svc.cot.send as kind "shape" (Docs/svc-cot-send.md), through the
+	// projector's gates. A copy over the client's own TAK stream (C3) is sent only with
+	// UOneMindTakSettings::bSendShapesOnOwnStream, off until proposal UE-P5. Layouts:
 	// OneMindCore/Drawing.h. Colours are ARGB 0xAARRGGBB as integers (4294967040 = opaque yellow); FillArgb 0 = no fill.
 
 	UFUNCTION(BlueprintCallable, Category = "OneMind|Draw")

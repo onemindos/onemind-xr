@@ -37,6 +37,12 @@ void AOneMindPlayerController::OnPossess(APawn* InPawn)
 
 bool AOneMindPlayerController::CursorLonLat(double& OutLon, double& OutLat, FVector& OutWorld) const
 {
+	double Ignored = 0;
+	return CursorLonLatHeight(OutLon, OutLat, Ignored, OutWorld);
+}
+
+bool AOneMindPlayerController::CursorLonLatHeight(double& OutLon, double& OutLat, double& OutHae, FVector& OutWorld) const
+{
 	FHitResult Hit;
 	if (!GetHitResultUnderCursor(ECC_Visibility, false, Hit)) return false;
 	AOneMindGlobe* Globe = AOneMindGlobe::GetOrSpawn(this);
@@ -44,6 +50,7 @@ bool AOneMindPlayerController::CursorLonLat(double& OutLon, double& OutLat, FVec
 	const FVector Llh = Globe->WorldToLonLatHeight(Hit.Location);
 	OutLon = Llh.X;
 	OutLat = Llh.Y;
+	OutHae = Llh.Z;  // height of the hit surface above the WGS84 ellipsoid (Cesium georeference)
 	OutWorld = Hit.Location;
 	return true;
 }
@@ -151,21 +158,32 @@ void AOneMindPlayerController::TickAct(float DeltaTime)
 	{
 		FString Layer, Id;
 		if (!Overlay->GetSelectedId().Split(TEXT("/"), &Layer, &Id)) Id = Overlay->GetSelectedId();
-		double Lon = 0, Lat = 0;
+		double Lon = 0, Lat = 0, GroundHae = 0;
 		FVector WorldHit;
-		if (Id.StartsWith(TEXT("sim-")) && CursorLonLat(Lon, Lat, WorldHit)) OneMindTask(Id, TEXT("drone"), Lat, Lon, 120.0);
+		if (Id.StartsWith(TEXT("sim-")) && CursorLonLatHeight(Lon, Lat, GroundHae, WorldHit))
+		{
+			// hae_m is height above the ellipsoid, not above ground: the surface under the cursor plus
+			// the configured height above it. Without a terrain tileset the surface is the ellipsoid.
+			LastTaskGroundHae = GroundHae;
+			OneMindTask(Id, TEXT("drone"), Lat, Lon, GroundHae + TaskHeightAboveGroundMeters);
+		}
 		else UE_LOG(LogTemp, Warning, TEXT("OneMind: select a sim-* asset, point at the target and press T"));
 	}
 	FString Act;
+	bool bTaskAwaiting = false;
 	if (Mission)
 	{
 		const FOneMindPendingTask Task = Mission->GetPendingTask();
 		const bool bAwaiting = Task.Status == TEXT("awaiting_confirmation");
+		bTaskAwaiting = bAwaiting;
 		Act += Mission->GetOverlayText();
 		if (bAwaiting)
 		{
-			// The dialog text (exact parameters and hash) is on screen from this frame on.
-			Mission->MarkPendingShown();
+			if (Task.Verb == TEXT("goto"))
+				Act += FString::Printf(TEXT("  hae_m = surface under cursor %.0f m HAE + %.0f m above it (TaskHeightAboveGroundMeters)\n"),
+					LastTaskGroundHae, TaskHeightAboveGroundMeters);
+			// Y is passed on at once, but the mission subsystem refuses an approval until the
+			// dialog has been on screen for 500 ms (marked shown below, after it is rendered).
 			if (WasInputKeyJustPressed(EKeys::Y)) Mission->ConfirmPending();
 			else if (WasInputKeyJustPressed(EKeys::N)) Mission->RejectPending(TEXT("rejected in the OneMind client"));
 		}
@@ -208,6 +226,9 @@ void AOneMindPlayerController::TickAct(float DeltaTime)
 	{
 		Overlay->SetShowGaps(bShowGaps);  // the gaps panel itself comes from the layer subsystem
 		Overlay->SetActText(Act);
+		// The overlay draws this text in this frame's HUD pass, after the tick: only now does the
+		// dialog count as shown (the first call starts the 500 ms minimum before Y approves).
+		if (bTaskAwaiting) Mission->MarkPendingShown();
 	}
 }
 

@@ -357,9 +357,11 @@ std::string AssetTasking::Propose(const TaskDraft& d, TimeMs now, Done done) {
   return p.request_id;
 }
 
-void AssetTasking::MarkShown(const std::string& action_id) {
+void AssetTasking::MarkShown(const std::string& action_id, TimeMs now) {
   auto it = actions_.find(action_id);
-  if (it != actions_.end()) it->second.shown = true;
+  if (it == actions_.end() || it->second.shown) return;
+  it->second.shown = true;
+  it->second.shown_at = now;
 }
 
 void AssetTasking::Confirm(const std::string& action_id, bool approve, const std::string& reason, TimeMs now, Done done) {
@@ -374,6 +376,7 @@ void AssetTasking::Confirm(const std::string& action_id, bool approve, const std
   std::string why;
   if (a.status != "awaiting_confirmation") why = "not awaiting confirmation (" + a.status + ")";
   else if (!a.shown) why = "the parameters were not shown to the human";
+  else if (approve && now - a.shown_at < kMinShownMs) why = "the parameters were shown for less than 500 ms";
   else if (a.confirm_by && now >= a.confirm_by) why = "expired";
   else if (a.params_hash.empty() || a.params_hash != a.local_hash) why = "params_hash mismatch";
   else if (!approve && reason.empty()) why = "a rejection needs a reason";

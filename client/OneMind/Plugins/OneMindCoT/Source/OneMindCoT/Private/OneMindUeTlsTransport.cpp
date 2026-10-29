@@ -64,6 +64,7 @@ bool FOneMindUeTlsTransport::Open(const std::string& Url)
 	{
 		FScopeLock Lock(&Mutex);
 		OutBuf.clear();
+		bOverflow = false;
 	}
 	RunGeneration = ++Generation;
 	Thread = FRunnableThread::Create(this, TEXT("OneMindTakTls"), 0, TPri_Normal);
@@ -73,7 +74,8 @@ bool FOneMindUeTlsTransport::Open(const std::string& Url)
 void FOneMindUeTlsTransport::Send(const std::string& Bytes)
 {
 	FScopeLock Lock(&Mutex);
-	OutBuf += Bytes;
+	if (OutBuf.size() + Bytes.size() > KMaxPendingBytes) bOverflow = true;  // Run fails the connection
+	else OutBuf += Bytes;
 }
 
 void FOneMindUeTlsTransport::Close()
@@ -110,14 +112,35 @@ uint32 FOneMindUeTlsTransport::Run()
 	}
 	TSharedRef<FInternetAddr> Addr = Resolved.Results[0].Address;
 	FSocket* Socket = Subsystem->CreateSocket(NAME_Stream, TEXT("OneMindTak"), Addr->GetProtocolType());
-	if (!Socket || !Socket->Connect(*Addr))
+	if (!Socket)
 	{
-		if (Socket) Subsystem->DestroySocket(Socket);
 		Deliver(Gen, KClosed, "connect failed");
 		return 0;
 	}
+	// Non-blocking connect with a deadline, waited on in 50 ms slices that watch bCloseRequested,
+	// so Close() on the game thread never waits for the OS connect timeout (about 75 s on macOS).
+	// FSocketBSD::Connect treats "would block" as success; SE_EINPROGRESS is accepted too in case
+	// a platform reports it (UE 5.8 behaviour unverified until the owner's build, UE-1).
 	Socket->SetNonBlocking(true);
 	Socket->SetNoDelay(true);
+	bool bConnected = false;
+	if (Socket->Connect(*Addr) || Subsystem->GetLastErrorCode() == SE_EINPROGRESS || Subsystem->GetLastErrorCode() == SE_EWOULDBLOCK)
+	{
+		const double ConnectEnd = FPlatformTime::Seconds() + KConnectTimeoutSec;
+		while (!bCloseRequested && FPlatformTime::Seconds() < ConnectEnd)
+		{
+			const ESocketConnectionState Cs = Socket->GetConnectionState();
+			if (Cs == SCS_Connected) { bConnected = true; break; }
+			if (Cs == SCS_ConnectionError) break;
+			Socket->Wait(ESocketWaitConditions::WaitForWrite, FTimespan::FromMilliseconds(50));
+		}
+	}
+	if (!bConnected)
+	{
+		Subsystem->DestroySocket(Socket);
+		Deliver(Gen, KClosed, bCloseRequested ? "connect cancelled" : "connect failed");
+		return 0;
+	}
 
 	omtls::TlsSession Session;
 	bool bOpened = false;
@@ -144,9 +167,11 @@ uint32 FOneMindUeTlsTransport::Run()
 	while (!bCloseRequested)
 	{
 		std::string Plain;
+		bool bOverflowNow = false;
 		{
 			FScopeLock Lock(&Mutex);
 			Plain.swap(OutBuf);
+			bOverflowNow = bOverflow;
 		}
 		if (!Plain.empty())
 		{
@@ -184,6 +209,12 @@ uint32 FOneMindUeTlsTransport::Run()
 			{
 				NetOut.erase(0, Sent);
 			}
+		}
+		if (bOverflowNow || NetOut.size() > KMaxPendingBytes)
+		{
+			// The peer stopped reading (TCP window full) while we keep queueing: fail instead of growing.
+			Reason = "send buffer overflow (peer not reading)";
+			break;
 		}
 		if (bEof) { Reason = bOpened ? "connection closed" : "connection closed during handshake"; break; }
 		Socket->Wait(ESocketWaitConditions::WaitForRead, FTimespan::FromMilliseconds(20));

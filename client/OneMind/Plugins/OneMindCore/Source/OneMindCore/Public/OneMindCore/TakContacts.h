@@ -29,6 +29,7 @@
 
 #include "OneMindCore/CoT.h"
 
+#include <deque>
 #include <map>
 #include <set>
 #include <string>
@@ -56,11 +57,18 @@ struct OM_CORE_API ChatConversation {
   bool direct = false;
   std::vector<ChatMessage> messages;
   size_t unread = 0;
+  TimeMs last_activity = 0;  // newest message (receive time); the oldest conversation is evicted first
 };
 
 class OM_CORE_API TakContacts {
  public:
   static constexpr const char* kAllChatRooms = "All Chat Rooms";
+  // Bounds on state built from untrusted TAK input (peers choose uids, rooms, groups, stale).
+  static constexpr size_t kMaxSeenMessages = 4096;    // dedup window (oldest ids forgotten first)
+  static constexpr size_t kMaxConversations = 256;    // least recently active evicted
+  static constexpr size_t kMaxMessagesPerConversation = 500;
+  static constexpr size_t kMaxGroups = 64;            // further group names are not listed
+  static constexpr TimeMs kMaxStaleMs = 3600 * 1000;  // a contact's stale is clamped to now + 1 h
 
   explicit TakContacts(std::string self_uid, std::string self_callsign)
       : self_uid_(std::move(self_uid)), self_callsign_(std::move(self_callsign)) {}
@@ -97,11 +105,13 @@ class OM_CORE_API TakContacts {
   void MarkRead(const std::string& id);
 
  private:
-  ChatConversation& Conv(const std::string& id, const std::string& title, bool direct);
+  ChatConversation& Conv(const std::string& id, const std::string& title, bool direct, TimeMs now);
+  void RememberMessage(const std::string& id);
   std::string self_uid_, self_callsign_;
   std::map<std::string, TakContact> contacts_;
   std::map<std::string, ChatConversation> convs_;
   std::set<std::string> seen_msgs_;
+  std::deque<std::string> seen_order_;  // insertion order of seen_msgs_, for the bound
   std::set<std::string> active_;
   std::set<std::string> heard_groups_;
 };

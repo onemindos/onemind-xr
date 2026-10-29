@@ -329,9 +329,16 @@ TEST(ItTaskingStubPolicy) {
   t.Confirm(got.action_id, true, "", om::WallClockMs(), [&](const om::PendingAction&, const std::string& e) { err = e; });
   EXPECT_TRUE(err.find("not shown") != std::string::npos);
   EXPECT_EQ(confirms, 0);
-  t.MarkShown(got.action_id);
+  const om::TimeMs shown_at = om::WallClockMs();
+  t.MarkShown(got.action_id, shown_at);
+  // Y in the frame the dialog first appears (or within 500 ms) does not approve.
   err = "pending";
-  t.Confirm(got.action_id, true, "", om::WallClockMs(), [&](const om::PendingAction&, const std::string& e) { err = e; });
+  t.Confirm(got.action_id, true, "", shown_at + 10, [&](const om::PendingAction&, const std::string& e) { err = e; });
+  EXPECT_TRUE(err.find("less than 500 ms") != std::string::npos);
+  EXPECT_EQ(confirms, 0);
+  t.MarkShown(got.action_id, shown_at + 400);  // later calls do not restart the clock
+  err = "pending";
+  t.Confirm(got.action_id, true, "", shown_at + om::AssetTasking::kMinShownMs, [&](const om::PendingAction&, const std::string& e) { err = e; });
   EXPECT_TRUE(omit::PollUntil(all, [&] { return t.Find(got.action_id) && t.Find(got.action_id)->status == "executed"; }, 3000));
   EXPECT_EQ(confirms, 1);
   EXPECT_EQ(t.Find(got.action_id)->timeline.size(), 5u);
@@ -349,7 +356,7 @@ TEST(ItTaskingStubPolicy) {
             });
   EXPECT_TRUE(omit::PollUntil(all, [&] { return err != "pending"; }, 3000));
   EXPECT_EQ(got.denial_code, std::string("hash_mismatch"));
-  t.MarkShown(got.action_id);
+  t.MarkShown(got.action_id, 0);
   t.Confirm(got.action_id, true, "", om::WallClockMs(), [&](const om::PendingAction&, const std::string& e) { err = e; });
   EXPECT_EQ(confirms, 1);
   // A non-sim asset never reaches policy.

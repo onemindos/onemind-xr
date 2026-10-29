@@ -19,7 +19,7 @@ std::string TakContacts::Ingest(const std::string& xml, TimeMs now, const std::s
     std::string msg_id = ev.GetAttribute("detail\t__chat\tmessageId");
     std::string key = msg_id.empty() ? c.uid : msg_id;
     if (seen_msgs_.count(key)) return "chat";  // the same message over two paths
-    seen_msgs_.insert(key);
+    RememberMessage(key);
     std::string room = ev.GetAttribute("detail\t__chat\tchatroom");
     std::string id = ev.GetAttribute("detail\t__chat\tid");
     std::string sender_uid = ev.GetAttribute("detail\t__chat\tchatgrp\tuid0");
@@ -44,10 +44,10 @@ std::string TakContacts::Ingest(const std::string& xml, TimeMs now, const std::s
     m.sender_callsign = c.chat_sender;
     m.text = c.remarks;
     m.time = c.time ? c.time : now;
-    ChatConversation& cv = Conv(conv_id, title, direct);
+    ChatConversation& cv = Conv(conv_id, title, direct, now);
     cv.messages.push_back(m);
     cv.unread++;
-    if (cv.messages.size() > 500) cv.messages.erase(cv.messages.begin());
+    if (cv.messages.size() > kMaxMessagesPerConversation) cv.messages.erase(cv.messages.begin());
     return "chat";
   }
   if (c.callsign.empty() || !CotType::IsAtom(c.type)) return "other";
@@ -66,9 +66,9 @@ std::string TakContacts::Ingest(const std::string& xml, TimeMs now, const std::s
   k.takv_version = c.takv_version;
   k.point = c.point;
   k.last_seen = now;
-  k.stale = c.stale > 0 ? c.stale : now + 120000;
+  k.stale = c.stale > 0 ? std::min(c.stale, now + kMaxStaleMs) : now + 120000;
   k.via = via;
-  if (!c.group_name.empty()) heard_groups_.insert(c.group_name);
+  if (!c.group_name.empty() && heard_groups_.size() < kMaxGroups) heard_groups_.insert(c.group_name);
   if (convs_.count(c.uid)) convs_[c.uid].title = c.callsign;
   return "contact";
 }
@@ -121,8 +121,24 @@ std::string TakContacts::ActiveGroupsRequestBody(const std::vector<std::string>&
   return arr.Dump();
 }
 
-ChatConversation& TakContacts::Conv(const std::string& id, const std::string& title, bool direct) {
+void TakContacts::RememberMessage(const std::string& id) {
+  if (!seen_msgs_.insert(id).second) return;
+  seen_order_.push_back(id);
+  while (seen_order_.size() > kMaxSeenMessages) {
+    seen_msgs_.erase(seen_order_.front());
+    seen_order_.pop_front();
+  }
+}
+
+ChatConversation& TakContacts::Conv(const std::string& id, const std::string& title, bool direct, TimeMs now) {
+  if (!convs_.count(id) && convs_.size() >= kMaxConversations) {
+    auto oldest = convs_.begin();
+    for (auto it = convs_.begin(); it != convs_.end(); ++it)
+      if (it->second.last_activity < oldest->second.last_activity) oldest = it;
+    convs_.erase(oldest);
+  }
   ChatConversation& cv = convs_[id];
+  if (now > cv.last_activity) cv.last_activity = now;
   if (cv.id.empty()) {
     cv.id = id;
     cv.direct = direct;
@@ -159,8 +175,10 @@ CotEvent TakContacts::BuildChatTo(const std::string& conversation, const std::st
   m.text = text;
   m.time = now;
   m.outgoing = true;
-  seen_msgs_.insert(message_uid);
-  Conv(m.conversation, direct ? to->callsign : conversation, direct).messages.push_back(m);
+  RememberMessage(message_uid);
+  ChatConversation& cv = Conv(m.conversation, direct ? to->callsign : conversation, direct, now);
+  cv.messages.push_back(m);
+  if (cv.messages.size() > kMaxMessagesPerConversation) cv.messages.erase(cv.messages.begin());
   return ev;
 }
 

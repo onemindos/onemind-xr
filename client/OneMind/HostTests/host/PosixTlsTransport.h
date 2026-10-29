@@ -19,12 +19,16 @@ namespace omhost {
 
 class PosixTlsTransport : public om::ITransport {
  public:
-  explicit PosixTlsTransport(omtls::TlsConfig tls = omtls::TlsConfig()) : tls_(std::move(tls)) {}
+  /// Outbound bytes not yet accepted by the socket; beyond this the connection is failed.
+  static constexpr size_t kMaxPendingBytes = 4u << 20;
+  explicit PosixTlsTransport(omtls::TlsConfig tls = omtls::TlsConfig(), int connect_timeout_ms = 10000)
+      : tls_(std::move(tls)), connect_timeout_ms_(connect_timeout_ms) {}
   ~PosixTlsTransport() override;
   void SetListener(Listener* l) override;
   bool Open(const std::string& url) override;
   void Send(const std::string& bytes) override;
-  /// Flushes queued bytes (up to 2 s), closes, and joins the I/O thread.
+  /// Flushes queued bytes (up to 2 s), closes, and joins the I/O thread. A connect in
+  /// progress is abandoned within about 50 ms.
   void Close() override;
   /// Test hook: drop the TCP connection abruptly.
   void KillSocketForTest();
@@ -34,7 +38,9 @@ class PosixTlsTransport : public om::ITransport {
   void Run(std::string host, int port, bool tls, uint64_t gen);
   void Deliver(uint64_t gen, int kind, const std::string& data);
   omtls::TlsConfig tls_;
-  std::mutex mu_;       // listener_, out_
+  int connect_timeout_ms_;
+  bool overflow_ = false;  // guarded by mu_
+  std::mutex mu_;       // listener_, out_, overflow_
   std::mutex life_mu_;  // Open/Close
   Listener* listener_ = nullptr;
   std::string out_;

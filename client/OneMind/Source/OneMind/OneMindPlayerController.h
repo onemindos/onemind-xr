@@ -13,7 +13,7 @@
 #include "GameFramework/PlayerController.h"
 #include "OneMindPlayerController.generated.h"
 
-UCLASS()
+UCLASS(Config = Game)
 class ONEMIND_API AOneMindPlayerController : public APlayerController
 {
 	GENERATED_BODY()
@@ -34,7 +34,14 @@ public:
 	UFUNCTION(Exec)
 	void OneMindChat(const FString& Text);
 
-	/** Console: OneMindTask sim-x1 drone 30.27 -97.74 120 (same path as T). */
+	/** Height above the surface under the cursor for T (click-to-task goto), in metres. The goto's
+	 *  hae_m = that surface's height above the WGS84 ellipsoid + this value. DefaultGame.ini
+	 *  [/Script/OneMind.OneMindPlayerController]. */
+	UPROPERTY(Config, EditAnywhere, Category = "OneMind|Task")
+	double TaskHeightAboveGroundMeters = 120.0;
+
+	/** Console: OneMindTask sim-x1 drone 30.27 -97.74 270 (the last value is hae_m, height above
+	 *  the ellipsoid, not above ground; T computes it from the terrain). */
 	UFUNCTION(Exec)
 	void OneMindTask(const FString& AssetId, const FString& AssetClass, double Lat, double Lon, double HaeMeters);
 
@@ -70,6 +77,7 @@ protected:
 
 private:
 	bool CursorLonLat(double& OutLon, double& OutLat, FVector& OutWorld) const;
+	bool CursorLonLatHeight(double& OutLon, double& OutLat, double& OutHae, FVector& OutWorld) const;
 	void TickAct(float DeltaTime);
 	void FinishShape();
 
@@ -78,4 +86,5 @@ private:
 	TArray<FVector2D> DrawPoints;  // (lat, lon)
 	bool bShowGaps = true;
 	float SelfTimer = 0.f;
+	double LastTaskGroundHae = 0.0;  // surface height (HAE) under the cursor at the last T
 };

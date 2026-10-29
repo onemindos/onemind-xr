@@ -22,7 +22,10 @@ namespace omhost {
 namespace {
 enum { kOpen = 0, kData = 1, kClosed = 2 };
 
-int ConnectTcp(const std::string& host, int port, std::string& err) {
+// Non-blocking connect with a deadline, polled in 50 ms slices so Close() (close_req, wake
+// pipe) never waits for the OS connect timeout (about 75 s on macOS).
+int ConnectTcp(const std::string& host, int port, std::string& err, const std::atomic<bool>& close_req, int wake_fd,
+               int timeout_ms) {
   addrinfo hints{};
   hints.ai_family = AF_UNSPEC;
   hints.ai_socktype = SOCK_STREAM;
@@ -32,16 +35,39 @@ int ConnectTcp(const std::string& host, int port, std::string& err) {
     return -1;
   }
   int fd = -1;
-  for (addrinfo* a = res; a; a = a->ai_next) {
+  err.clear();
+  auto end = std::chrono::steady_clock::now() + std::chrono::milliseconds(timeout_ms);
+  for (addrinfo* a = res; a && !close_req; a = a->ai_next) {
     fd = ::socket(a->ai_family, a->ai_socktype, a->ai_protocol);
     if (fd < 0) continue;
-    if (::connect(fd, a->ai_addr, a->ai_addrlen) == 0) break;
+    fcntl(fd, F_SETFL, fcntl(fd, F_GETFL) | O_NONBLOCK);
+    int rc = ::connect(fd, a->ai_addr, a->ai_addrlen);
+    int soerr = rc == 0 ? 0 : errno;
+    if (rc != 0 && errno == EINPROGRESS) {
+      soerr = ETIMEDOUT;
+      while (!close_req && std::chrono::steady_clock::now() < end) {
+        pollfd p[2] = {{fd, POLLOUT, 0}, {wake_fd, POLLIN, 0}};
+        int n = ::poll(p, wake_fd >= 0 ? 2 : 1, 50);
+        if (n > 0 && (p[1].revents & POLLIN)) {  // Send() before the connection is up: drain, keep waiting
+          char drain[64];
+          while (::read(wake_fd, drain, sizeof(drain)) > 0) {
+          }
+        }
+        if (n > 0 && (p[0].revents & (POLLOUT | POLLERR | POLLHUP))) {
+          socklen_t len = sizeof(soerr);
+          if (getsockopt(fd, SOL_SOCKET, SO_ERROR, &soerr, &len) != 0) soerr = errno;
+          break;
+        }
+      }
+    }
+    if (soerr == 0 && !close_req) break;
+    err = close_req ? std::string("connect cancelled") : std::string("connect: ") + std::strerror(soerr);
     ::close(fd);
     fd = -1;
   }
   freeaddrinfo(res);
   if (fd < 0) {
-    err = std::string("connect: ") + std::strerror(errno);
+    if (err.empty()) err = close_req ? "connect cancelled" : "connect: no address";
     return -1;
   }
   int one = 1;
@@ -111,6 +137,7 @@ bool PosixTlsTransport::Open(const std::string& url) {
   {
     std::lock_guard<std::mutex> l(mu_);
     out_.clear();
+    overflow_ = false;
   }
   uint64_t gen = ++gen_;
   thread_ = std::thread([this, host, port, scheme, gen] { Run(host, port, scheme == "tls", gen); });
@@ -120,7 +147,8 @@ bool PosixTlsTransport::Open(const std::string& url) {
 void PosixTlsTransport::Send(const std::string& bytes) {
   {
     std::lock_guard<std::mutex> l(mu_);
-    out_ += bytes;
+    if (out_.size() + bytes.size() > kMaxPendingBytes) overflow_ = true;  // Run fails the connection
+    else out_ += bytes;
   }
   if (wake_[1] >= 0) {
     char c = 1;
@@ -166,7 +194,7 @@ void PosixTlsTransport::Deliver(uint64_t gen, int kind, const std::string& data)
 
 void PosixTlsTransport::Run(std::string host, int port, bool use_tls, uint64_t gen) {
   std::string err;
-  int fd = ConnectTcp(host, port, err);
+  int fd = ConnectTcp(host, port, err, close_req_, wake_[0], connect_timeout_ms_);
   if (fd < 0) {
     Deliver(gen, kClosed, err);
     return;
@@ -198,9 +226,11 @@ void PosixTlsTransport::Run(std::string host, int port, bool use_tls, uint64_t g
       while (::read(wake_[0], buf, sizeof(buf)) > 0) {
       }
     std::string plain_out;
+    bool overflow;
     {
       std::lock_guard<std::mutex> l(mu_);
       plain_out.swap(out_);
+      overflow = overflow_;
     }
     if (!plain_out.empty()) {
       if (use_tls) tls.Write(plain_out);
@@ -246,6 +276,11 @@ void PosixTlsTransport::Run(std::string host, int port, bool use_tls, uint64_t g
       ssize_t n = ::send(fd, net_out.data(), net_out.size(), 0);
       if (n > 0) net_out.erase(0, static_cast<size_t>(n));
       else if (n < 0 && errno != EAGAIN && errno != EWOULDBLOCK) eof = true;
+    }
+    if (overflow || net_out.size() > kMaxPendingBytes) {
+      // The peer stopped reading (TCP window full) while we keep queueing: fail instead of growing.
+      reason = "send buffer overflow (peer not reading)";
+      break;
     }
     if (eof) {
       reason = opened ? "connection closed" : "connection closed during handshake";

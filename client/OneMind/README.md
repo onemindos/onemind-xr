@@ -34,13 +34,14 @@ client/OneMind/
     OneMindLayers/              UOneMindLayerSubsystem: layer catalogue, toggles, AOI from the camera, gaps panel (B20)
     OneMindEntities/            AOneMindEntityRenderer (ISM per class and band, near actors, clusters), overlay + inspector
     OneMindCoT/                 UOneMindCoTSubsystem: marker, SPI, route, geofence, chat, B11 shapes through svc.cot.send;
-                                UOneMindTakSubsystem (C3/C8): own TAK stream, enrollment, contacts, chat, channels;
+                                UOneMindTakSubsystem (C3/C8): own TAK stream (SA + chat, UE-P5), enrollment, contacts, channels;
                                 FOneMindUeTlsTransport (FSocket + Tls/OmTlsSession, OpenSSL), OneMindKeychain (Mac keychain)
     OneMindMission/             UOneMindMissionSubsystem: TAK missions (C7), click-to-task with the confirm dialog (D3)
   HostTests/                    CMake build of OneMindCore, unit + integration tests, headless client, e2e scripts
   Tools/entity_load.py          10,000 simulated entities into ENT for the render check
   Tools/mac/build-and-run.sh    owner's one command: checks, build, package, run
   Docs/svc-cot-send.md          proposed svc.cot.send body (C2)
+  Docs/tak-own-stream.md        proposal UE-P5: what the client may send over its own TAK stream (C3)
   THIRD_PARTY.md                VR-TAK attribution and other notices
 ```
 

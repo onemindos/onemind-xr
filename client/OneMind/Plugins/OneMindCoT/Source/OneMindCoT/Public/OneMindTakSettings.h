@@ -27,6 +27,10 @@ public:
 	UPROPERTY(Config, EditAnywhere, Category = "Server") bool bAutoConnect = false;
 	/** "auto" accepts TAK Protocol v1 when the server offers it; "xml" never negotiates. */
 	UPROPERTY(Config, EditAnywhere, Category = "Server") FString Protocol = TEXT("auto");
+	/** Also send drawn shapes (B11) over the client's own TAK stream, bypassing the projector's
+	 *  AOI, marking and rate gates (docs/contracts/cot-projection.md §1 "Who may publish").
+	 *  Off until the owner ratifies proposal UE-P5; shapes always go through svc.cot.send. */
+	UPROPERTY(Config, EditAnywhere, Category = "Server") bool bSendShapesOnOwnStream = false;
 
 	/** Contact uid; empty = "ONEMIND-" + this machine's id. */
 	UPROPERTY(Config, EditAnywhere, Category = "Identity") FString ClientUid;

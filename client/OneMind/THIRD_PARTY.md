@@ -44,8 +44,16 @@ Each ported file carries a header naming the origin, the commit and the modifica
   formats, no code was copied.
 - The client's `params_hash` follows RFC 8785 (JCS) and was checked against golden values printed
   by the omos policy service's `jcs.go` (PR #554, Apache-2.0); nothing was copied from it.
-- OpenSSL (Apache-2.0) is linked for TLS and CSRs: the engine's bundled copy inside Unreal and
-  Homebrew `openssl@3` for the host tests; it is not vendored here.
+- OpenSSL is linked for TLS and CSRs; it is not vendored here. Two copies, two licences:
+  - host tests: Homebrew `openssl@3` (OpenSSL 3.x, Apache-2.0, compatible with GPL-3.0);
+  - Unreal build: the engine's bundled OpenSSL (`AddEngineThirdPartyPrivateStaticDependencies(Target,
+    "OpenSSL")` in `Plugins/OneMindCoT/Source/OneMindCoT/OneMindCoT.Build.cs`). Its version in UE 5.8
+    is **unverified** (owner step UE-1 checks `Engine/Source/ThirdParty/OpenSSL`). Earlier UE 5
+    releases bundled OpenSSL 1.1.1 (reviewer's finding on PR #4, not checked here), which is under the
+    OpenSSL/SSLeay licence; that licence is not compatible with GPL-3.0-or-later without a linking
+    exception. If UE 5.8 bundles 1.1.1, owner decision UE-P6 (`docs/evidence/M4/UE/OWNER-STEPS.md`)
+    chooses between adding an OpenSSL linking exception to this project's licence and linking an
+    OpenSSL 3.x build instead. Until then the Unreal build's OpenSSL licence status is open.
 
 ## Map data shown by default
 

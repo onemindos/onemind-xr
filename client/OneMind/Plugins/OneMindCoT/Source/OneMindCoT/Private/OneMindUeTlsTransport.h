@@ -22,6 +22,10 @@ class FSocket;
 class FOneMindUeTlsTransport : public om::ITransport, public FRunnable
 {
 public:
+	/** Outbound bytes not yet accepted by the socket; beyond this the connection is failed. */
+	static constexpr size_t KMaxPendingBytes = 4u << 20;
+	static constexpr double KConnectTimeoutSec = 10.0;
+
 	explicit FOneMindUeTlsTransport(omtls::TlsConfig InTls = omtls::TlsConfig()) : Tls(MoveTemp(InTls)) {}
 	virtual ~FOneMindUeTlsTransport() override;
 
@@ -38,9 +42,10 @@ private:
 	void Deliver(uint64 Gen, int32 Kind, const std::string& Data);
 
 	omtls::TlsConfig Tls;
-	FCriticalSection Mutex;  // Listener, OutBuf
+	FCriticalSection Mutex;  // Listener, OutBuf, bOverflow
 	Listener* TransportListener = nullptr;
 	std::string OutBuf;
+	bool bOverflow = false;
 	FString Host;
 	int32 Port = 0;
 	bool bUseTls = false;

@@ -6,6 +6,7 @@
 #include "OneMindCore/ClientCore.h"
 #include "OneMindCore/CoT.h"
 #include "OneMindCore/Drawing.h"
+#include "OneMindTakSettings.h"
 #include "OneMindTakSubsystem.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogOneMindCoT, Log, All);
@@ -60,11 +61,14 @@ om::ShapeStyle Style(int64 Stroke, int64 Fill)
 	return S;
 }
 
-// svc.cot.send (bus, projector gates, mesh and server targets) plus the client's own TAK
-// stream when connected; the projector and TAK Server both deduplicate by uid.
+// svc.cot.send (bus, projector gates, mesh and server targets). The client's own TAK stream
+// gets a copy only with bSendShapesOnOwnStream (off by default): the own stream is limited to SA
+// and chat until the owner ratifies proposal UE-P5 (cot-projection.md: every CoT that reaches
+// TAK passes the projector's gates). The projector and TAK Server both deduplicate by uid.
 FString SendShape(UOneMindCoTSubsystem* Self, const om::CotEvent& Ev)
 {
-	if (UGameInstance* GI = Self->GetGameInstance())
+	UGameInstance* GI = GetDefault<UOneMindTakSettings>()->bSendShapesOnOwnStream ? Self->GetGameInstance() : nullptr;
+	if (GI)
 	{
 		if (UOneMindTakSubsystem* Tak = GI->GetSubsystem<UOneMindTakSubsystem>())
 		{

@@ -64,8 +64,11 @@ public:
 	virtual TStatId GetStatId() const override;
 	virtual bool IsTickableWhenPaused() const override { return true; }
 
-	/** Enrolls a certificate for this client with a TAK user. The password is used once and
-	 *  not stored; key, certificate and CA go to the keychain. */
+	/** Enrolls a certificate for this client with a TAK user. Requires the TAK Server CA in the
+	 *  keychain item "server-ca" (owner-provisioned); without it nothing is sent and OnEnrolled
+	 *  reports NoCaError. The password is used once and not stored; key and certificate go to
+	 *  the keychain; the CA chain in the server's reply is never stored. One enrollment at a
+	 *  time: a second call while one runs is refused. */
 	UFUNCTION(BlueprintCallable, Category = "OneMind|TAK")
 	void Enroll(const FString& TakUser, const FString& TakPassword);
 
@@ -107,8 +110,12 @@ public:
 	UFUNCTION(BlueprintPure, Category = "OneMind|TAK")
 	TArray<FOneMindChatLine> GetConversation(const FString& Conversation) const;
 
-	/** Sends a CoT the client built (a drawn shape) over the TAK stream as well. */
+	/** Sends a CoT over the client's own TAK stream. Under proposal UE-P5 the own stream carries
+	 *  only the client's SA and direct/group chat; drawn shapes go through svc.cot.send (the
+	 *  projector's gates) unless UOneMindTakSettings::bSendShapesOnOwnStream is on. */
 	FString SendCot(const om::CotEvent& Ev);
+
+	static const char* const NoCaError;
 
 	UPROPERTY(BlueprintAssignable, Category = "OneMind|TAK") FOnOneMindTakState OnStateChanged;
 	UPROPERTY(BlueprintAssignable, Category = "OneMind|TAK") FOnOneMindChat OnChat;
@@ -121,6 +128,8 @@ private:
 	std::unique_ptr<om::TakContacts> Contacts;
 	std::shared_ptr<FOneMindTakEnrollPlatform> EnrollPlatform;  // shared_ptr: complete only in the .cpp
 	std::unique_ptr<om::TakEnrollment> Enrollment;
+	std::unique_ptr<om::TakEnrollment> RetiredEnrollment;
 	om::TakSelf Self;
 	float ExpireTimer = 0.f;
+	bool bEnrolling = false;
 };

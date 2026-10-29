@@ -11,8 +11,10 @@
 //    refuses to confirm when the policy's hash differs, so the human approves exactly the
 //    parameters on the screen;
 //  - confirms only through Confirm(), which the UI calls from the human's button press after
-//    showing the parameters and hash (MarkShown). An expired or already decided action cannot
-//    be confirmed. The policy service decides whether the caller is a human (asset-command.md
+//    showing the parameters and hash (MarkShown, called once the dialog has been rendered). An
+//    approval is refused until the dialog has been on screen for kMinShownMs, so a key press in
+//    the frame the propose reply lands cannot approve parameters nobody has seen. An expired or
+//    already decided action cannot be confirmed. The policy service decides whether the caller is a human (asset-command.md
 //    §4 step 4); agents use their own path and are refused there.
 // SPDX-License-Identifier: GPL-3.0-or-later
 #pragma once
@@ -67,6 +69,7 @@ struct OM_CORE_API PendingAction {
   TimeMs confirm_by = 0;
   int approvals_needed = 0;
   bool shown = false;  // the UI displayed parameters and hash to the human
+  TimeMs shown_at = 0; // when it was first displayed
   TaskDraft draft;
   std::vector<ActionEvent> timeline;
   bool Final() const;
@@ -83,8 +86,11 @@ class OM_CORE_API AssetTasking {
   /// Local checks, then svc.policy.command.propose. Returns the request id, or "" with
   /// the reason in `done` when a local check failed.
   std::string Propose(const TaskDraft& d, TimeMs now, Done done);
-  /// The UI calls this once the confirm dialog shows the parameters and the hash.
-  void MarkShown(const std::string& action_id);
+  /// Minimum time the dialog must have been displayed before an approval is accepted.
+  static constexpr TimeMs kMinShownMs = 500;
+  /// The UI calls this once the confirm dialog has displayed the parameters and the hash
+  /// (after rendering it, not when building it). Only the first call counts.
+  void MarkShown(const std::string& action_id, TimeMs now);
   /// The human's decision (approve=true) or rejection with a reason.
   void Confirm(const std::string& action_id, bool approve, const std::string& reason, TimeMs now, Done done);
   void Tick(TimeMs now);

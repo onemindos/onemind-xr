@@ -75,11 +75,12 @@ public:
 	UFUNCTION(BlueprintPure, Category = "OneMind|Task")
 	FOneMindPendingTask GetPendingTask() const;
 
-	/** Called by the dialog when it has drawn the parameters and hash. */
+	/** Called once the dialog has been rendered with the parameters and hash (not when its text
+	 *  is built). ConfirmPending is refused until 500 ms after the first call. */
 	UFUNCTION(BlueprintCallable, Category = "OneMind|Task")
 	void MarkPendingShown();
 
-	/** The human's "Confirm" button. */
+	/** The human's "Confirm" button (refused within 500 ms of MarkPendingShown). */
 	UFUNCTION(BlueprintCallable, Category = "OneMind|Task")
 	void ConfirmPending();
 

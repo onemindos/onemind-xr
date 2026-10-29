@@ -101,6 +101,8 @@ OM_CORE_API std::string BuildHttpRequest(const std::string& method, const std::s
 /// trust store). Poll from one thread until it returns true.
 class OM_CORE_API HttpExchange : public ITransport::Listener {
  public:
+  /// Larger replies fail with "response too large" (enrollment replies are a few KiB).
+  static constexpr size_t kMaxResponseBytes = 1u << 20;
   explicit HttpExchange(std::shared_ptr<ITransport> t);
   ~HttpExchange() override;
   bool Start(const std::string& method, const std::string& https_url,
@@ -115,7 +117,8 @@ class OM_CORE_API HttpExchange : public ITransport::Listener {
  private:
   std::shared_ptr<ITransport> t_;
   std::mutex mu_;
-  bool opened_ = false, closed_ = false, sent_ = false, done_ = false;
+  bool opened_ = false, closed_ = false, sent_ = false, done_ = false, overflow_ = false;
+  size_t checked_ = 0;  // rx_ size at the last completeness check (Poll copies only new data)
   std::string rx_, close_reason_, request_;
   TimeMs deadline_ = 0;
 };

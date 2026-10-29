@@ -377,8 +377,10 @@ int Enroll(std::map<std::string, std::string> a) {
       std::string dir = a["out"];
       std::string chain;
       for (const auto& ca : r.ca_pems) chain += ca;
+      // A CA chain received over an unverified connection (--insecure) is never written as a
+      // trust anchor; with --ca it came over a connection verified against that CA.
       bool ok = WriteFile(dir + "/client.pem", r.cert_pem, 0644) && WriteFile(dir + "/client.key", platform.KeyPem(r.key_ref), 0600) &&
-                WriteFile(dir + "/server-ca.pem", chain, 0644);
+                (a.count("insecure") || WriteFile(dir + "/server-ca.pem", chain, 0644));
       j.set("written", ok);
       rc = ok ? 0 : 1;
     }
@@ -444,7 +446,7 @@ int Task(std::map<std::string, std::string> a) {
     if (phase == "dialog") {
       if (!dialog_at) {
         dialog_at = now;
-        tasking.MarkShown(action_id);  // the dialog shows params and hash to the human
+        tasking.MarkShown(action_id, now);  // the dialog shows params and hash to the human
         const om::PendingAction* p = tasking.Find(action_id);
         if (p) dump("dialog", *p, "");
       }

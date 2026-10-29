@@ -92,7 +92,7 @@ FOneMindPendingTask UOneMindMissionSubsystem::GetPendingTask() const
 
 void UOneMindMissionSubsystem::MarkPendingShown()
 {
-	if (Tasking) Tasking->MarkShown(TCHAR_TO_UTF8(*PendingActionId));
+	if (Tasking) Tasking->MarkShown(TCHAR_TO_UTF8(*PendingActionId), om::WallClockMs());  // first call starts the 500 ms clock
 }
 
 void UOneMindMissionSubsystem::ConfirmPending()

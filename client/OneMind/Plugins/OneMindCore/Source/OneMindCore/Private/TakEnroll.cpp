@@ -214,6 +214,12 @@ void HttpExchange::OnTransportOpen() {
 }
 void HttpExchange::OnTransportData(const char* data, size_t len) {
   std::lock_guard<std::mutex> l(mu_);
+  if (overflow_) return;
+  if (rx_.size() + len > kMaxResponseBytes) {
+    overflow_ = true;
+    rx_.clear();
+    return;
+  }
   rx_.append(data, len);
 }
 void HttpExchange::OnTransportClosed(const std::string& reason) {
@@ -224,14 +230,24 @@ void HttpExchange::OnTransportClosed(const std::string& reason) {
 
 bool HttpExchange::Poll(TimeMs now, HttpResponse& out) {
   if (done_) return true;
-  bool opened, closed;
+  bool opened, closed, overflow, fresh;
   std::string rx, reason;
   {
     std::lock_guard<std::mutex> l(mu_);
     opened = opened_;
     closed = closed_;
-    rx = rx_;
+    overflow = overflow_;
+    fresh = rx_.size() != checked_;
+    if (fresh || closed) rx = rx_;  // copy only when something new arrived or at the end
+    checked_ = rx_.size();
     reason = close_reason_;
+  }
+  if (overflow) {
+    out = HttpResponse();
+    out.error = "response too large";
+    done_ = true;
+    t_->Close();
+    return true;
   }
   if (opened && !sent_) {
     t_->Send(request_);
@@ -239,7 +255,7 @@ bool HttpExchange::Poll(TimeMs now, HttpResponse& out) {
   }
   // Done when the server closes (Connection: close), or once a Content-Length body is complete.
   bool complete = false;
-  if (!rx.empty()) {
+  if (fresh && !rx.empty()) {
     HttpResponse probe;
     size_t he = rx.find("\r\n\r\n");
     if (he != std::string::npos && ParseHttpResponse(rx, probe)) {

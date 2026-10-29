@@ -14,6 +14,8 @@ DEFINE_LOG_CATEGORY_STATIC(LogOneMindTak, Log, All);
 
 // Enrollment platform for Unreal: HTTPS through om::HttpExchange over the TLS transport (our
 // own trust store, so a TAK Server's private CA works), OpenSSL key and CSR, keychain storage.
+// Fails closed: without a trusted CA no request is sent, because the TAK user's password goes
+// out as HTTP Basic auth and must only reach a server whose certificate chain was verified.
 class FOneMindTakEnrollPlatform : public om::IEnrollPlatform
 {
 public:
@@ -23,19 +25,22 @@ public:
 		HttpCallback Callback;
 	};
 	TArray<TSharedPtr<FPending>> Pending;
-	std::string TrustPem;  // CA the user confirmed for enrollment; empty = no verification (logged)
+	std::string TrustPem;  // the owner-provisioned TAK Server CA (keychain "server-ca"); required
 	std::string KeyPem;
 
 	virtual void Https(const std::string& Method, const std::string& Url,
 		const std::vector<std::pair<std::string, std::string>>& Headers, const std::string& Body, HttpCallback Cb) override
 	{
-		omtls::TlsConfig Cfg;
-		Cfg.ca_pem = TrustPem;
-		Cfg.verify_peer = !TrustPem.empty();
 		if (TrustPem.empty())
 		{
-			UE_LOG(LogOneMindTak, Warning, TEXT("Enrollment without a trusted CA: the server certificate is not verified"));
+			om::HttpResponse R;
+			R.error = UOneMindTakSubsystem::NoCaError;
+			Cb(R);
+			return;
 		}
+		omtls::TlsConfig Cfg;
+		Cfg.ca_pem = TrustPem;
+		Cfg.verify_peer = true;
 		TSharedPtr<FPending> P = MakeShared<FPending>();
 		P->Exchange = std::make_unique<om::HttpExchange>(std::make_shared<FOneMindUeTlsTransport>(Cfg));
 		P->Callback = MoveTemp(Cb);
@@ -49,6 +54,14 @@ public:
 		Pending.Add(P);
 	}
 
+	/** Drops in-flight requests without calling back (their callbacks point at the enrollment). */
+	void Reset()
+	{
+		Pending.Reset();
+		KeyPem.clear();
+		TrustPem.clear();
+	}
+
 	virtual bool MakeKeyAndCsr(const std::vector<std::pair<std::string, std::string>>& Subject, int KeyBits,
 		std::string& KeyRef, std::string& CsrPem, std::string& Err) override
 	{
@@ -59,16 +72,18 @@ public:
 
 	void Poll()
 	{
+		// Collect first, then call back: a callback may start the next request or Reset().
+		TArray<TPair<TSharedPtr<FPending>, om::HttpResponse>> Done;
 		for (int32 i = Pending.Num() - 1; i >= 0; --i)
 		{
 			om::HttpResponse R;
 			if (Pending[i]->Exchange->Poll(om::WallClockMs(), R))
 			{
-				TSharedPtr<FPending> P = Pending[i];
+				Done.Emplace(Pending[i], R);
 				Pending.RemoveAt(i);
-				P->Callback(R);  // may start the next request
 			}
 		}
+		for (TPair<TSharedPtr<FPending>, om::HttpResponse>& D : Done) D.Key->Callback(D.Value);
 	}
 };
 
@@ -106,7 +121,10 @@ void UOneMindTakSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 void UOneMindTakSubsystem::Deinitialize()
 {
 	Disconnect();
+	if (EnrollPlatform) EnrollPlatform->Reset();  // before the enrollment its callbacks reference
 	Enrollment.reset();
+	RetiredEnrollment.reset();
+	bEnrolling = false;
 	EnrollPlatform.reset();
 	Contacts.reset();
 	Super::Deinitialize();
@@ -120,6 +138,7 @@ TStatId UOneMindTakSubsystem::GetStatId() const
 void UOneMindTakSubsystem::Tick(float DeltaTime)
 {
 	if (EnrollPlatform) EnrollPlatform->Poll();
+	RetiredEnrollment.reset();  // a finished enrollment replaced from inside its own callback
 	if (Stream) Stream->Poll(om::WallClockMs());
 	ExpireTimer += DeltaTime;
 	if (Contacts && ExpireTimer > 5.f)
@@ -129,11 +148,29 @@ void UOneMindTakSubsystem::Tick(float DeltaTime)
 	}
 }
 
+const char* const UOneMindTakSubsystem::NoCaError = "no TAK Server CA in keychain (server-ca)";
+
 void UOneMindTakSubsystem::Enroll(const FString& TakUser, const FString& TakPassword)
 {
+	if (bEnrolling)
+	{
+		// The running enrollment's HTTP callbacks capture it and share the platform's key slot.
+		UE_LOG(LogOneMindTak, Warning, TEXT("TAK enrollment already in progress; wait for it to finish"));
+		OnEnrolled.Broadcast(false, TEXT("enrollment already in progress"));
+		return;
+	}
 	const UOneMindTakSettings* S = GetDefault<UOneMindTakSettings>();
+	// Trust anchor: the TAK Server CA the owner put in the keychain (OWNER-STEPS UE-4). Never
+	// learned from the server itself, so a man in the middle cannot get the password or become
+	// trusted for 8089.
 	std::string Trust;
-	OneMindKeychain::Load(TEXT("server-ca"), Trust);  // a CA from an earlier enrollment or the owner
+	if (!OneMindKeychain::Load(TEXT("server-ca"), Trust) || Trust.find("-----BEGIN CERTIFICATE-----") == std::string::npos)
+	{
+		UE_LOG(LogOneMindTak, Error, TEXT("TAK enrollment refused: %s"), UTF8_TO_TCHAR(NoCaError));
+		OnEnrolled.Broadcast(false, UTF8_TO_TCHAR(NoCaError));
+		return;
+	}
+	EnrollPlatform->Reset();
 	EnrollPlatform->TrustPem = Trust;
 	om::EnrollConfig Cfg;
 	Cfg.host = TCHAR_TO_UTF8(*S->ServerHost);
@@ -141,19 +178,23 @@ void UOneMindTakSubsystem::Enroll(const FString& TakUser, const FString& TakPass
 	Cfg.user = TCHAR_TO_UTF8(*TakUser);
 	Cfg.password = TCHAR_TO_UTF8(*TakPassword);
 	Cfg.client_uid = Self.uid;
+	bEnrolling = true;
+	RetiredEnrollment = std::move(Enrollment);  // may be the caller (OnEnrolled handler): freed next tick
 	Enrollment = std::make_unique<om::TakEnrollment>(*EnrollPlatform, Cfg);
 	TWeakObjectPtr<UOneMindTakSubsystem> Weak(this);
 	Enrollment->Start([Weak](const om::EnrollResult& R)
 	{
 		if (!Weak.IsValid()) return;
+		Weak->bEnrolling = false;
 		bool bOk = R.ok;
 		if (bOk)
 		{
-			std::string Chain;
-			for (const std::string& Ca : R.ca_pems) Chain += Ca;
+			// The CA chain in the reply is not stored: "server-ca" stays the owner-provisioned
+			// anchor that verified this exchange, and Connect() verifies 8089 against it.
 			bOk = OneMindKeychain::Store(TEXT("client-key"), Weak->EnrollPlatform->KeyPem) &&
-				OneMindKeychain::Store(TEXT("client-cert"), R.cert_pem) &&
-				(Chain.empty() || OneMindKeychain::Store(TEXT("server-ca"), Chain));
+				OneMindKeychain::Store(TEXT("client-cert"), R.cert_pem);
+			UE_LOG(LogOneMindTak, Log, TEXT("TAK enrollment: the server returned %d CA certificate(s); not stored (server-ca is owner-provisioned)"),
+				static_cast<int32>(R.ca_pems.size()));
 		}
 		Weak->EnrollPlatform->KeyPem.clear();
 		const FString Err = bOk ? FString() : (R.ok ? FString(TEXT("keychain write failed")) : FString(UTF8_TO_TCHAR(R.error.c_str())));

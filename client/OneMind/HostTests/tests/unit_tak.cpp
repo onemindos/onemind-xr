@@ -510,12 +510,14 @@ TEST(TakEnrollFlow) {
 
 TEST(TakContactsAndChannels) {
   om::TakContacts k("ONEMIND-test", "OM-TEST");
-  EXPECT_EQ(k.Ingest(kSa, 1000, "stream"), std::string("contact"));
+  om::TimeMs t0 = 0;  // received when the SA was sent (its stale is 2 min later, under the 1 h clamp)
+  om::ParseCotTime("2026-10-29T12:00:00.000Z", t0);
+  EXPECT_EQ(k.Ingest(kSa, t0, "stream"), std::string("contact"));
   std::string bravo = kSa;
   bravo.replace(bravo.find("ANDROID-abc"), 11, "ANDROID-bbb");
   bravo.replace(bravo.find("ALPHA"), 5, "BRAVO");
   bravo.replace(bravo.find("Cyan"), 4, "Red!");
-  EXPECT_EQ(k.Ingest(bravo, 1000, "mesh"), std::string("contact"));
+  EXPECT_EQ(k.Ingest(bravo, t0, "mesh"), std::string("contact"));
   EXPECT_EQ(k.Visible().size(), 2u);
   EXPECT_EQ(k.Visible()[0]->callsign, std::string("ALPHA"));
   k.SetActiveChannels({"Red!"});
@@ -614,4 +616,65 @@ TEST(HttpExchangeOverTransport) {
   EXPECT_TRUE(ex2.Poll(101, out2));
   EXPECT_EQ(out2.error, std::string("timeout"));
   EXPECT_FALSE(ex2.Start("GET", "http://h:1/x", {}, "", 0));
+}
+
+TEST(HttpExchangeResponseCap) {
+  auto t = std::make_shared<FakeTransport>();
+  om::HttpExchange ex(t);
+  EXPECT_TRUE(ex.Start("GET", "https://h:8446/Marti/api/tls/config", {}, "", 0));
+  t->l->OnTransportOpen();
+  om::HttpResponse out;
+  EXPECT_FALSE(ex.Poll(1, out));
+  std::string head = "HTTP/1.1 200 OK\r\nContent-Length: 99999999\r\n\r\n";
+  t->l->OnTransportData(head.data(), head.size());
+  EXPECT_FALSE(ex.Poll(2, out));
+  const std::string chunk(64 * 1024, 'a');
+  for (size_t sent = 0; sent <= om::HttpExchange::kMaxResponseBytes; sent += chunk.size())
+    t->l->OnTransportData(chunk.data(), chunk.size());
+  EXPECT_TRUE(ex.Poll(3, out));
+  EXPECT_EQ(out.error, std::string("response too large"));
+  EXPECT_TRUE(out.body.empty());
+}
+
+TEST(TakContactsBoundsUntrustedInput) {
+  om::TakContacts k("ONEMIND-test", "OM-TEST");
+  // A far-future stale is clamped to now + 1 h.
+  std::string far = kSa;
+  far.replace(far.find("stale=\"2026-10-29T12:02:00.000Z\""), 32, "stale=\"2099-01-01T00:00:00.000Z\"");
+  const om::TimeMs now = 1000;
+  EXPECT_EQ(k.Ingest(far, now, "stream"), std::string("contact"));
+  EXPECT_EQ(k.Find("ANDROID-abc")->stale, now + om::TakContacts::kMaxStaleMs);
+  EXPECT_EQ(k.Expire(now + om::TakContacts::kMaxStaleMs), 1u);
+  // Group names: at most kMaxGroups listed.
+  for (size_t i = 0; i < om::TakContacts::kMaxGroups + 20; ++i) {
+    std::string s = kSa;
+    s.replace(s.find("ANDROID-abc"), 11, "ANDROID-g" + std::to_string(i));
+    s.replace(s.find("Cyan"), 4, "G" + std::to_string(i));
+    k.Ingest(s, now, "mesh");
+  }
+  EXPECT_EQ(k.Channels().size(), om::TakContacts::kMaxGroups);
+  // Conversations: at most kMaxConversations; the least recently active goes first.
+  auto chat = [&](const std::string& room, const std::string& msg, om::TimeMs t) {
+    om::CotBuild b;
+    b.uid = "GeoChat.ANDROID-x." + room + "." + msg;
+    b.callsign = "X";
+    b.simulated = false;
+    om::CotEvent ev = om::BuildChat(b, "ANDROID-x", room, "hi", t);
+    ev.SetAttribute("detail\t__chat\tid", room);
+    return k.Ingest(ev.ToXML(), t, "mesh");
+  };
+  EXPECT_EQ(chat("room-0", "m0", 10), std::string("chat"));
+  for (size_t i = 1; i < om::TakContacts::kMaxConversations + 10; ++i)
+    chat("room-" + std::to_string(i), "m" + std::to_string(i), static_cast<om::TimeMs>(10 + i));
+  EXPECT_EQ(k.Conversations().size(), om::TakContacts::kMaxConversations);
+  EXPECT_TRUE(k.Conversation("room-0") == nullptr);
+  EXPECT_TRUE(k.Conversation("room-" + std::to_string(om::TakContacts::kMaxConversations + 9)) != nullptr);
+  // Dedup window: an id older than kMaxSeenMessages is forgotten, a recent one is not.
+  for (size_t i = 0; i < om::TakContacts::kMaxSeenMessages + 5; ++i) chat("room-z", "s" + std::to_string(i), 100000);
+  const size_t before = k.Conversation("room-z")->messages.size();
+  EXPECT_EQ(before, om::TakContacts::kMaxMessagesPerConversation);
+  chat("room-z", "s" + std::to_string(om::TakContacts::kMaxSeenMessages + 4), 100001);  // recent: deduplicated
+  EXPECT_EQ(k.Conversation("room-z")->messages.back().message_id, "s" + std::to_string(om::TakContacts::kMaxSeenMessages + 4));
+  chat("room-z", "s0", 100002);  // forgotten: accepted again (bounded memory over perfect dedup)
+  EXPECT_EQ(k.Conversation("room-z")->messages.back().message_id, std::string("s0"));
 }
