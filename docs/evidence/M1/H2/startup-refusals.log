@@ -1,0 +1,8 @@
+$ ASSET_ID=real-1 ./bridge-mavlink
+2026/10/29 06:46:37.506131 [bridge-mavlink] config: ASSET_ID "real-1" must start with sim- (simulated assets only, decision 0004 #13)
+exit=1
+$ ASSET_ID=sim-x1 MAVLINK_ENDPOINT=udpserver:127.0.0.1:0 ./bridge-mavlink   (SIG_REQUIRED defaults to true, no POLICY_PUBKEYS)
+2026/10/29 06:46:37.516050 [bridge-mavlink] NATS connected: nats://127.0.0.1:4222
+2026/10/29 06:46:37.521125 [bridge-mavlink] MAVLink endpoint udpserver:127.0.0.1:0, vehicle sysid 1, out V2
+2026/10/29 06:46:37.521230 [bridge-mavlink] signatures required but no policy public keys configured
+exit=1

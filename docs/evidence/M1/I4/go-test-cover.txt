@@ -1,0 +1,1 @@
+ok  	github.com/onemindos/omos/services/policy/internal/policy	7.432s	coverage: 80.1% of statements

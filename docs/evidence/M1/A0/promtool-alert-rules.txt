@@ -1,0 +1,5 @@
+Checking /var/folders/qh/6x88kkv16qb85hbhcyb56mp40000gn/T/tmp.41LFW8boHS/rules.yaml
+  SUCCESS: 6 rules found
+
+  SUCCESS
+

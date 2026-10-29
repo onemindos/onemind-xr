@@ -1,0 +1,107 @@
+?   	github.com/onemindos/omos-bridge/ingest/cmd/omos-ingest	[no test files]
+=== RUN   TestFetchConditionalHeadersAnd304
+--- PASS: TestFetchConditionalHeadersAnd304 (0.00s)
+=== RUN   TestFetch429HonoursRetryAfter
+--- PASS: TestFetch429HonoursRetryAfter (0.00s)
+=== RUN   TestFetch5xxBackoffThenGiveUp
+--- PASS: TestFetch5xxBackoffThenGiveUp (0.00s)
+=== RUN   TestFetch403NoRetry
+--- PASS: TestFetch403NoRetry (0.00s)
+=== RUN   TestFetchTransportErrorRetried
+--- PASS: TestFetchTransportErrorRetried (0.00s)
+=== RUN   TestFetchBodyLimit
+--- PASS: TestFetchBodyLimit (0.00s)
+=== RUN   TestFetchRateLimit
+--- PASS: TestFetchRateLimit (0.30s)
+=== RUN   TestQuotaWindow
+--- PASS: TestQuotaWindow (0.00s)
+=== RUN   TestFetchQuotaStopsRequests
+--- PASS: TestFetchQuotaStopsRequests (0.00s)
+=== RUN   TestRetryAfterParsing
+--- PASS: TestRetryAfterParsing (0.00s)
+=== RUN   TestFetchFileURL
+--- PASS: TestFetchFileURL (0.00s)
+=== RUN   TestFetchLongRetryAfterHonouredByPollLoop
+--- PASS: TestFetchLongRetryAfterHonouredByPollLoop (0.00s)
+=== RUN   TestConfigDefaultsAndValidation
+--- PASS: TestConfigDefaultsAndValidation (0.01s)
+=== RUN   TestCheckDataSubjectGrammar
+--- PASS: TestCheckDataSubjectGrammar (0.00s)
+=== RUN   TestDropQueueBoundedDropsOldest
+--- PASS: TestDropQueueBoundedDropsOldest (0.02s)
+=== RUN   TestKeepCurrentLastKeepsSnapshotInRing
+--- PASS: TestKeepCurrentLastKeepsSnapshotInRing (0.00s)
+=== RUN   TestStableUUIDDeterministicV4
+--- PASS: TestStableUUIDDeterministicV4 (0.00s)
+=== RUN   TestReadSSE
+--- PASS: TestReadSSE (0.00s)
+=== RUN   TestStatusBoardFreshness
+--- PASS: TestStatusBoardFreshness (0.00s)
+=== RUN   TestFreshnessMetrics
+--- PASS: TestFreshnessMetrics (0.00s)
+=== RUN   TestNextDelayBackoff
+--- PASS: TestNextDelayBackoff (0.00s)
+=== RUN   TestPublishAckAndMsgIDDedup
+--- PASS: TestPublishAckAndMsgIDDedup (0.08s)
+=== RUN   TestPublishRetriesUntilStreamExists
+--- PASS: TestPublishRetriesUntilStreamExists (0.94s)
+=== RUN   TestPublishBlocksThroughNATSRestart
+--- PASS: TestPublishBlocksThroughNATSRestart (1.17s)
+=== RUN   TestFullStreamBlocksWithoutLossOrCheckpoint
+--- PASS: TestFullStreamBlocksWithoutLossOrCheckpoint (1.60s)
+=== RUN   TestRESTPollEndToEndWithETag
+--- PASS: TestRESTPollEndToEndWithETag (0.12s)
+=== RUN   TestRestartBeyondDedupWindowDoesNotDuplicate
+--- PASS: TestRestartBeyondDedupWindowDoesNotDuplicate (1.13s)
+=== RUN   TestCheckpointOnlyAfterAck
+--- PASS: TestCheckpointOnlyAfterAck (1.11s)
+=== RUN   TestCheckpointReadErrorSkipsPoll
+--- PASS: TestCheckpointReadErrorSkipsPoll (3.07s)
+=== RUN   TestMalformedRecordsToDeadLetter
+--- PASS: TestMalformedRecordsToDeadLetter (0.11s)
+=== RUN   TestWholeBodyParseErrorDeadLettered
+--- PASS: TestWholeBodyParseErrorDeadLettered (0.07s)
+=== RUN   TestLeaseSingleOwnerAndTakeover
+    integration_test.go:528: takeover after crash: 2.03s (lease TTL 1.5s)
+--- PASS: TestLeaseSingleOwnerAndTakeover (6.15s)
+=== RUN   TestLeaseSurvivesBusOutage
+--- PASS: TestLeaseSurvivesBusOutage (4.77s)
+=== RUN   TestLeaseLostStopsSource
+--- PASS: TestLeaseLostStopsSource (0.57s)
+=== RUN   TestFreshnessStatusAndUpstreamOutage
+--- PASS: TestFreshnessStatusAndUpstreamOutage (3.18s)
+=== RUN   TestSSEResumeNoGapNoDuplicate
+--- PASS: TestSSEResumeNoGapNoDuplicate (1.06s)
+=== RUN   TestWebSocketAdapter
+--- PASS: TestWebSocketAdapter (0.11s)
+=== RUN   TestRSSAdapter
+--- PASS: TestRSSAdapter (0.07s)
+=== RUN   TestFileBulkOnce
+--- PASS: TestFileBulkOnce (0.08s)
+=== RUN   TestReplayRebuildsRecords
+--- PASS: TestReplayRebuildsRecords (0.12s)
+=== RUN   TestSaveCheckpointTrimsInPlace
+--- PASS: TestSaveCheckpointTrimsInPlace (0.06s)
+PASS
+ok  	github.com/onemindos/omos-bridge/ingest/internal/ingest	27.506s
+?   	github.com/onemindos/omos-bridge/ingest/internal/natstest	[no test files]
+=== RUN   TestNWSGolden
+--- PASS: TestNWSGolden (0.05s)
+=== RUN   TestNWSMalformed
+--- PASS: TestNWSMalformed (0.01s)
+=== RUN   TestKeysIndependentOfClock
+--- PASS: TestKeysIndependentOfClock (0.01s)
+=== RUN   TestRSSAndAtom
+--- PASS: TestRSSAndAtom (0.00s)
+=== RUN   TestCSVAndGeoJSONAndJSON
+--- PASS: TestCSVAndGeoJSONAndJSON (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/ingest/internal/parsers	1.920s
+?   	github.com/onemindos/omos-bridge/ingest/test/chaos/stub	[no test files]
+?   	github.com/onemindos/omos-bridge/ingest/test/chaos/verify	[no test files]
+EXIT=0
+ok: 1 sources valid
+CHECK=0
+ok: 0 sources valid
+CHECK2=0
+ok: 1 sources valid

@@ -1,0 +1,57 @@
+$ nats-server -js -a 127.0.0.1 -p 62508 -sd /Users/danielcarku/Desktop/work/.run/tmp-a4/e2e  (nats-server: v2.15.2)
+$ create input streams COT TEL WORLD INTEL SYS, ENT (CR settings, R1) and KV entity-correlation
+  stream COT (tak.cot.>) created
+  stream TEL (tel.fleet.>) created
+  stream WORLD (evt.world.>) created
+  stream INTEL (intel.>) created
+  stream SYS (evt.sys.>) created
+  stream ENT created from ent.json
+  kv entity-correlation created
+$ python3 gen_fixtures.py 1793271407000 > live.jsonl  (fixtures dated 45 s before now); python3 pub.py live.jsonl
+published 30 fixture messages with JetStream ack
+$ NATS_URL=nats://127.0.0.1:62508 START_LOOKBACK=0 HTTP_ADDR=127.0.0.1:18080 entity-service   (run 1)
+$ curl /readyz
+ready
+$ curl /metrics
+omos_entity_duplicate_key_split 1
+omos_entity_entities 12
+omos_entity_out_of_order_kinematics 5
+omos_entity_parse_error 1
+omos_entity_published 25
+omos_entity_rejected 2
+omos_entity_skip_echo 1
+omos_entity_skip_no_position 1
+omos_entity_sl9_person_hostile 1
+$ nats kv get entity-correlation lease.entity-service --raw
+{"holder":"e2e-1-59118","expires_ms":1793271469230}
+$ nats stream info ENT --json | state
+{'messages': 12, 'num_subjects': 12, 'last_seq': 25} config: {'max_msgs_per_subject': 1, 'allow_msg_ttl': True, 'subject_delete_marker_ttl': 900000000000, 'allow_direct': True}
+$ nats req svc.entity.get '{"entity_id":"icao-a1b2c3"}'  (selected fields)
+{"entity_id": "icao-a1b2c3", "entity_type": "aircraft", "seq": 5, "lat": 40.6605742, "lon": -73.7549675, "confidence": 0.9623, "confidence_parts": {"source_prior": 0.85, "track_quality": 0.9689, "corroboration": 0.9775}, "lifecycle": "active", "live": true, "expiry_t": 1793271549000}
+sources: [('feed-aircraft', 'COT', 3), ('world-air', 'WORLD', 3)]
+$ nats req svc.entity.query '{"types":["vessel","drone","person"]}'
+  mmsi-367000001 vessel seq 3 tlp CLEAR egress_tak True
+  mmsi-367000001-x2 vessel seq 1 tlp CLEAR egress_tak True
+  sim-x1 drone seq 5 tlp AMBER+STRICT egress_tak True
+  tak-android-a1b2c3d4e5f6 person seq 2 tlp AMBER+STRICT egress_tak False
+  tak-pbe3cesvp2esvfbrw3eze2we2h person seq 1 tlp AMBER+STRICT egress_tak False
+$ nats stream get ENT --last-for ent.drone.sim-x1.state (headers)
+  Nats-Msg-Id: sim-x1:5
+  Nats-TTL: 50s
+  OneMind-Marking: AMBER+STRICT
+  OneMind-Releasable-To: 
+  OneMind-Schema: entity.v1
+$ dead letters on evt.sys.entity.rejected:
+{"disposition":"hostile","entity_type":"person","integration":"tak-server","reason":"sl9_person_hostile","seq":14,"service":"entity-service","source_id":"ANDROID-badf00d","stream":"COT","subject":"tak.cot.out","t":1793271454241}
+{"reason":"parse_error: cot xml: XML syntax error on line 1: unexpected EOF","seq":16,"service":"entity-service","stream":"COT","subject":"tak.cot.inject","t":1793271454241}
+$ restart (run 2, same durables, nothing new to read). Expect no record for any already-processed input; a lifecycle change (active->stale) caused by the wall clock is a new seq, not a duplicate.
+omos_entity_entities 12
+omos_entity_published 1
+omos_entity_restored 12
+ENT last_seq before restart=25 after restart=26
+$ nats stream get ENT 26  (record published after the restart)
+  ent.aircraft.icao-a1b2c3.state seq 6 lifecycle stale t 1793271429000 stale 30 confidence 0.4022
+{"time":"2026-10-29T06:57:34.231478-04:00","level":"INFO","msg":"lease acquired"}
+{"time":"2026-10-29T06:57:34.232325-04:00","level":"INFO","msg":"restored entities","count":0}
+{"time":"2026-10-29T06:57:37.154801-04:00","level":"INFO","msg":"lease acquired"}
+{"time":"2026-10-29T06:57:38.156804-04:00","level":"INFO","msg":"restored entities","count":12}

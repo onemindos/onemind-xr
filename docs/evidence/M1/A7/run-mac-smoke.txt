@@ -1,0 +1,12 @@
+# run-mac.sh smoke test 2026-10-29T10:45:44Z
+$ NATS_URL=nats://127.0.0.1:14299 ./run-mac.sh   (MESH_INTERFACE unset)
+MESH_INTERFACE is unset: the system would use en0 for 239.2.3.1.
+Set MESH_INTERFACE to the interface on the ATAK LAN (ifconfig lists them).  -> exit 1
+$ NATS_URL=nats://127.0.0.1:14299 MESH_INTERFACE=lo0 MESH_GROUP=239.2.3.1:26980 DIRECT_TCP_PORT=0 MESH_CHAT_GROUP=off ./run-mac.sh  (SIGTERM after 3 s)
+tak-mesh: NATS nats://127.0.0.1:14299, interface lo0, MESH_TO_TAK_SERVER=false
+2026/10/29 06:45:23 [tak-mesh] starting v0.3.0: mesh 239.2.3.1:26980, NATS nats://127.0.0.1:14299
+2026/10/29 06:45:23 [tak-mesh] mesh 239.2.3.1:26980, chat , transmit interface lo0
+2026/10/29 06:45:23 [tak-mesh] ready: tak.cot.mesh.tx -> mesh, mesh -> tak.cot.mesh.rx
+2026/10/29 06:45:26 [tak-mesh] received terminated, shutting down
+$ NATS_URL=nats://127.0.0.1:1 MESH_INTERFACE=lo0 ./run-mac.sh
+NATS leaf not answering at nats://127.0.0.1:1; start it first (infra/edge/mac-leaf/README.md)  -> exit 1

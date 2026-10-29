@@ -4,7 +4,10 @@
 Simulated asset only (`sim-*`, decision 0004 #13). It speaks real MAVLink 2 via
 pymavlink: HEARTBEAT, SYS_STATUS, GLOBAL_POSITION_INT, ATTITUDE and VFR_HUD,
 orbiting a centre point, and it ACKs COMMAND_LONG (arm, disarm, takeoff, land,
-RTL) by changing its simulated state. It never talks to real hardware.
+RTL) by changing its simulated state. MAV_CMD_DO_REPOSITION (goto) is accepted
+over COMMAND_INT (x/y degE7, z altitude) or COMMAND_LONG (param5/6/7) when armed
+and airborne: the drone flies to the point and holds there until land or RTL.
+It never talks to real hardware.
 
 Usage: mavlink_sim_drone.py [--out udpout:127.0.0.1:14550] [--sysid 1]
        [--lat 0] [--lon 0] [--radius 150] [--alt 60]
@@ -31,6 +34,9 @@ def main():
 
     link = mavutil.mavlink_connection(args.out, source_system=args.sysid, source_component=1)
     armed, airborne, alt, battery = False, False, 0.0, 100.0
+    goto = None  # (lat, lon, alt) after an accepted DO_REPOSITION
+    cur_lat, cur_lon = args.lat, args.lon
+    m_per_deg_lon = 111_320.0 * max(math.cos(math.radians(args.lat)), 1e-6)
     t0 = time.monotonic()
     last_hb = 0.0
     boot = time.monotonic()
@@ -44,11 +50,27 @@ def main():
         r = args.radius if airborne else 0.0
         north, east = r * math.cos(ang), r * math.sin(ang)
         lat = args.lat + north / 111_320.0
-        lon = args.lon + east / (111_320.0 * max(math.cos(math.radians(args.lat)), 1e-6))
+        lon = args.lon + east / m_per_deg_lon
         target_alt = args.alt if airborne else 0.0
-        alt += max(min(target_alt - alt, 2.0), -2.0) * 0.1
         heading = (math.degrees(ang) + 90.0) % 360.0
         vn, ve = (-args.speed * math.sin(ang), args.speed * math.cos(ang)) if airborne else (0.0, 0.0)
+        if airborne and goto is not None:
+            # Fly straight to the reposition point at --speed (0.1 s ticks), then hold.
+            dn = (goto[0] - cur_lat) * 111_320.0
+            de = (goto[1] - cur_lon) * m_per_deg_lon
+            dist = math.hypot(dn, de)
+            step = min(dist, args.speed * 0.1)
+            if dist > 0:
+                vn, ve = args.speed * dn / dist, args.speed * de / dist
+                heading = math.degrees(math.atan2(de, dn)) % 360.0
+                cur_lat += step * dn / dist / 111_320.0
+                cur_lon += step * de / dist / m_per_deg_lon
+            if dist <= step:
+                vn, ve = 0.0, 0.0
+            lat, lon, target_alt = cur_lat, cur_lon, goto[2]
+        else:
+            cur_lat, cur_lon = lat, lon
+        alt += max(min(target_alt - alt, 2.0), -2.0) * 0.1
         if armed:
             battery = max(battery - 0.002, 0.0)
         ms = int((now - boot) * 1000)
@@ -65,10 +87,20 @@ def main():
         link.mav.vfr_hud_send(args.speed if airborne else 0.0, args.speed if airborne else 0.0,
                               int(heading), 50 if airborne else 0, alt, 0.0)
 
-        msg = link.recv_match(type="COMMAND_LONG", blocking=False)
+        msg = link.recv_match(type=["COMMAND_LONG", "COMMAND_INT"], blocking=False)
         if msg is not None:
             result = M.MAV_RESULT_ACCEPTED
-            if msg.command == M.MAV_CMD_COMPONENT_ARM_DISARM:
+            is_int = msg.get_type() == "COMMAND_INT"
+            if msg.command == M.MAV_CMD_DO_REPOSITION:
+                if not (armed and airborne):
+                    result = M.MAV_RESULT_TEMPORARILY_REJECTED
+                elif is_int:
+                    goto = (msg.x / 1e7, msg.y / 1e7, msg.z)
+                else:
+                    goto = (msg.param5, msg.param6, msg.param7)
+            elif is_int:
+                result = M.MAV_RESULT_UNSUPPORTED
+            elif msg.command == M.MAV_CMD_COMPONENT_ARM_DISARM:
                 armed = msg.param1 >= 1
                 airborne = airborne and armed
             elif msg.command == M.MAV_CMD_NAV_TAKEOFF and armed:
@@ -77,6 +109,8 @@ def main():
                 airborne = False
             else:
                 result = M.MAV_RESULT_UNSUPPORTED
+            if not airborne:
+                goto = None
             link.mav.command_ack_send(msg.command, result)
         time.sleep(0.1)
 

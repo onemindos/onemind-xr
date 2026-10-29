@@ -1,0 +1,5 @@
+# yamllint -c .yamllint.yml (changed YAML)
+yamllint: ok
+
+# kubeconform -strict -summary (plain manifests, datreeio CRD catalog as in quality.yml)
+Summary: 4 resources found in 4 files - Valid: 4, Invalid: 0, Errors: 0, Skipped: 0

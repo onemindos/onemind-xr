@@ -1,0 +1,26 @@
+## python scripts/validate_changed_yaml.py
+Changed YAML gate passed (6 files checked)
+exit: 0
+
+## python scripts/check_onemind_mcp_coverage.py
+All 58 Git-declared Argo Applications mapped to MCP access dispositions
+exit: 0
+
+## python scripts/validate_manifests.py
+Summary: 4 resources found in 4 files - Valid: 4, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 4 manifest file(s)
+exit: 0
+
+## python scripts/check_secret_patterns.py
+(findings in files this PR touches:)
+none
+exit: 0
+
+## python -m unittest discover -s scripts/tests -p test_gitops*.py
+.................................................................Applying scoped AGE compatibility for PgSTAC partition_sys_meta
+...................
+----------------------------------------------------------------------
+Ran 168 tests in 17.393s
+
+OK (skipped=15)
+exit: 0

@@ -1,0 +1,9 @@
+$ -check sources.local.yaml
+ok: 1 sources valid
+exit 0
+$ -check (ConfigMap data[sources.yaml] extracted)
+ok: 1 sources valid
+exit 0
+$ -check platform/ingest/configmap.yaml (raw ConfigMap: zero sources)
+check failed: no enabled sources in ../../../platform/ingest/configmap.yaml (0 entries)
+exit 1

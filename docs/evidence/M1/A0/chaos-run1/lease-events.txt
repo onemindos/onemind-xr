@@ -1,0 +1,16 @@
+{"time":"2026-10-29T06:47:52.755838-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"a","source":"chaos-nws","instance":"a"}
+{"time":"2026-10-29T06:47:52.755854-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"a","source":"chaos-sse","instance":"a"}
+{"time":"2026-10-29T06:48:12.757445-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-sse","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:48:12.757445-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-nws","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:48:16.092601-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-sse","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:48:16.092642-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-nws","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:48:19.4279-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-nws","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:48:19.427923-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-sse","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:48:22.762343-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-sse","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:48:22.762372-04:00","level":"WARN","msg":"lease renew deferred (bus unreachable)","app":"omos-ingest","instance":"a","source":"chaos-nws","err":"context deadline exceeded"}
+{"time":"2026-10-29T06:48:24.069311-04:00","level":"WARN","msg":"lease lost to another instance","app":"omos-ingest","instance":"a","source":"chaos-sse","err":"nats: nats: API error: code=400 err_code=10071 description=w
+{"time":"2026-10-29T06:48:24.069334-04:00","level":"WARN","msg":"lease lost to another instance","app":"omos-ingest","instance":"a","source":"chaos-nws","err":"nats: nats: API error: code=400 err_code=10071 description=w
+{"time":"2026-10-29T06:49:17.448701-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"a","source":"chaos-nws","instance":"a"}
+{"time":"2026-10-29T06:49:17.448709-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"a","source":"chaos-sse","instance":"a"}
+{"time":"2026-10-29T06:48:26.940895-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"b","source":"chaos-nws","instance":"b"}
+{"time":"2026-10-29T06:48:26.940917-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"b","source":"chaos-sse","instance":"b"}

@@ -1,0 +1,28 @@
+=== a7e2e.log
+2026/10/29 06:42:20 [a7e2e] starting v0.3.0: mesh 239.2.3.1:26969, NATS nats://127.0.0.1:59468
+2026/10/29 06:42:20 [a7e2e] mesh 239.2.3.1:26969, chat 224.10.10.1:27012, transmit interface lo0
+2026/10/29 06:42:20 [a7e2e] data packages: inbox /Users/danielcarku/Desktop/work/.run/tmp-a7/datapkg/inbox, outbox /Users/danielcarku/Desktop/work/.run/tmp-a7/datapkg/outbox
+2026/10/29 06:42:20 [a7e2e] serving outbox on http :59477/getfile
+2026/10/29 06:42:20 [a7e2e] directed messages on TCP :59476
+2026/10/29 06:42:20 [a7e2e] ready: tak.cot.mesh.tx -> mesh, mesh -> tak.cot.mesh.rx
+2026/10/29 06:42:21 [a7e2e] tak.cot.mesh.tx: xml decode: XML syntax error on line 1: unexpected EOF
+2026/10/29 06:42:50 [a7e2e] received terminated, shutting down
+2026/10/29 06:42:50 [a7e2e] starting v0.3.0: mesh 239.2.3.1:26969, NATS nats://127.0.0.1:59468
+2026/10/29 06:42:50 [a7e2e] mesh 239.2.3.1:26969, chat 224.10.10.1:27012, transmit interface lo0
+2026/10/29 06:42:50 [a7e2e] directed messages on TCP :59476
+2026/10/29 06:42:50 [a7e2e] ready: tak.cot.mesh.tx -> mesh, mesh -> tak.cot.mesh.rx
+2026/10/29 06:42:53 [a7e2e] received terminated, shutting down
+=== a7encC.log
+2026/10/29 06:42:53 [a7encC] starting v0.3.0: mesh 239.2.3.1:26970, NATS nats://127.0.0.1:59468
+2026/10/29 06:42:53 [a7encC] mesh encryption on: plaintext mesh and directed messages are dropped
+2026/10/29 06:42:53 [a7encC] mesh 239.2.3.1:26970, chat , transmit interface lo0
+2026/10/29 06:42:53 [a7encC] ready: tak.cot.mesh.tx -> mesh, mesh -> tak.cot.mesh.rx
+2026/10/29 06:42:55 [a7encC] mesh decode from 127.0.0.1:54244: mesh decrypt failed
+2026/10/29 06:42:57 [a7encC] received terminated, shutting down
+=== a7encD.log
+2026/10/29 06:42:54 [a7encD] starting v0.3.0: mesh 239.2.3.1:26970, NATS nats://127.0.0.1:59471
+2026/10/29 06:42:54 [a7encD] mesh encryption on: plaintext mesh and directed messages are dropped
+2026/10/29 06:42:54 [a7encD] mesh 239.2.3.1:26970, chat , transmit interface lo0
+2026/10/29 06:42:54 [a7encD] ready: tak.cot.mesh.tx -> mesh, mesh -> tak.cot.mesh.rx
+2026/10/29 06:42:55 [a7encD] mesh decode from 127.0.0.1:54244: mesh decrypt failed
+2026/10/29 06:42:57 [a7encD] received terminated, shutting down

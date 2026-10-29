@@ -1,0 +1,9 @@
+## yamllint -c .yamllint.yml (changed YAML)
+yamllint: ok
+## shellcheck test/e2e.sh
+shellcheck: ok
+## python -I -m json.tool geofence.example.json
+json: ok
+## python scripts/validate_manifests.py (changed files)
+Summary: 3 resources found in 1 file - Valid: 3, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)

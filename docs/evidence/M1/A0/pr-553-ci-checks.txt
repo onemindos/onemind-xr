@@ -1,0 +1,9 @@
+image	skipping	0	https://github.com/onemindos/omos/actions/runs/40862257379/job/123409175448	
+Helm render check	pass	43s	https://github.com/onemindos/omos/actions/runs/40862257177/job/123408151154	
+Kubernetes manifest schema (kubeconform)	pass	7s	https://github.com/onemindos/omos/actions/runs/40862257177/job/123408151900	
+Lint & Validate	pass	24s	https://github.com/onemindos/omos/actions/runs/40862257177/job/123408151732	
+Secret scan (gitleaks)	pass	9s	https://github.com/onemindos/omos/actions/runs/40862257177/job/123408151691	
+preflight	pass	34s	https://github.com/onemindos/omos/actions/runs/40862257178/job/123408151724	
+test	pass	2m14s	https://github.com/onemindos/omos/actions/runs/40862257379/job/123408152307	
+test-and-image	pass	17s	https://github.com/onemindos/omos/actions/runs/40862257178/job/123408151191	
+acceptance	skipping	0	https://github.com/onemindos/omos/actions/runs/40862257178/job/123408153808	

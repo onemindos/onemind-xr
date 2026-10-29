@@ -1,0 +1,214 @@
+{"time":"2026-10-29T06:52:52.110775-04:00","level":"INFO","msg":"omos-ingest up","app":"omos-ingest","instance":"a","version":"dev","sources":2}
+{"time":"2026-10-29T06:52:52.111293-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"a","source":"chaos-nws"}
+{"time":"2026-10-29T06:52:52.111303-04:00","level":"INFO","msg":"lease acquired","app":"omos-ingest","instance":"a","source":"chaos-sse"}
+{"time":"2026-10-29T06:52:52.11133-04:00","level":"INFO","msg":"source start","app":"omos-ingest","instance":"a","source":"chaos-nws","kind":"rest_poll","url":"http://127.0.0.1:38180/alerts/active"}
+{"time":"2026-10-29T06:52:52.111337-04:00","level":"INFO","msg":"source start","app":"omos-ingest","instance":"a","source":"chaos-sse","kind":"sse","url":"http://127.0.0.1:38180/sse"}
+{"time":"2026-10-29T06:52:52.113424-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":2,"new":2}
+{"time":"2026-10-29T06:52:53.119747-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":7,"new":5}
+{"time":"2026-10-29T06:52:54.124411-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":12,"new":5}
+{"time":"2026-10-29T06:52:55.128165-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":17,"new":5}
+{"time":"2026-10-29T06:52:56.131861-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":22,"new":5}
+{"time":"2026-10-29T06:52:57.135535-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":27,"new":5}
+{"time":"2026-10-29T06:52:58.142215-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":32,"new":5}
+{"time":"2026-10-29T06:52:59.147854-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":37,"new":5}
+{"time":"2026-10-29T06:53:00.154951-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":42,"new":5}
+{"time":"2026-10-29T06:53:01.160255-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":47,"new":5}
+{"time":"2026-10-29T06:53:02.164545-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":52,"new":5}
+{"time":"2026-10-29T06:53:03.173192-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":57,"new":5}
+{"time":"2026-10-29T06:53:04.179499-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":62,"new":5}
+{"time":"2026-10-29T06:53:05.185911-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":67,"new":5}
+{"time":"2026-10-29T06:53:06.195889-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":72,"new":5}
+{"time":"2026-10-29T06:53:07.205824-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":77,"new":5}
+{"time":"2026-10-29T06:53:08.211274-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":82,"new":5}
+{"time":"2026-10-29T06:53:09.216701-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":87,"new":5}
+{"time":"2026-10-29T06:53:10.227943-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":92,"new":5}
+{"time":"2026-10-29T06:53:11.240994-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":97,"new":5}
+{"time":"2026-10-29T06:53:12.249886-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":102,"new":5}
+{"time":"2026-10-29T06:53:13.257639-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":107,"new":5}
+{"time":"2026-10-29T06:53:14.269529-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":112,"new":5}
+{"time":"2026-10-29T06:53:15.277401-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":117,"new":5}
+{"time":"2026-10-29T06:53:16.289222-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":122,"new":5}
+{"time":"2026-10-29T06:53:17.300511-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":127,"new":5}
+{"time":"2026-10-29T06:53:18.307292-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":132,"new":5}
+{"time":"2026-10-29T06:53:19.321792-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":138,"new":6}
+{"time":"2026-10-29T06:53:20.333806-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":143,"new":5}
+{"time":"2026-10-29T06:53:21.346724-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":148,"new":5}
+{"time":"2026-10-29T06:53:22.360043-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":153,"new":5}
+{"time":"2026-10-29T06:53:23.368763-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":158,"new":5}
+{"time":"2026-10-29T06:53:24.378524-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":163,"new":5}
+{"time":"2026-10-29T06:53:25.388937-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":168,"new":5}
+{"time":"2026-10-29T06:53:26.397024-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":173,"new":5}
+{"time":"2026-10-29T06:53:27.407223-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":178,"new":5}
+{"time":"2026-10-29T06:53:28.417452-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":183,"new":5}
+{"time":"2026-10-29T06:53:29.427531-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":188,"new":5}
+{"time":"2026-10-29T06:53:30.444703-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":193,"new":5}
+{"time":"2026-10-29T06:53:31.459401-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":198,"new":5}
+{"time":"2026-10-29T06:53:32.47005-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":203,"new":5}
+{"time":"2026-10-29T06:53:33.271477-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"transport","err":"sse stream ended"}
+{"time":"2026-10-29T06:53:34.274901-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:36.276416-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:36.478521-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:38.27843-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:40.281528-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:41.487485-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:42.284501-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:44.289273-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:46.293894-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:48.297961-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:48.505226-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:50.303638-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:52.309175-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:54.31362-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:55.519589-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:56.3197-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:53:58.323805-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:00.327591-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:02.33042-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:02.532567-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:04.334125-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:06.336155-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:08.339622-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:09.541717-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:10.343053-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:12.346957-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:14.349625-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:16.352948-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:16.55338-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:18.35599-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:20.358413-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:22.361507-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:23.564152-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:24.363622-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:26.365906-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:28.369483-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:30.370965-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:30.575788-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:32.37282-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:34.374208-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:36.377257-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:37.584508-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:38.379819-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:40.381633-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:42.384382-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:44.385674-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:44.591815-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:46.389665-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:48.392452-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:50.39474-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:51.606279-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:52.396057-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:54.398739-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:56.40144-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:58.403428-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:54:58.612453-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:00.404396-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:02.405567-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:04.406644-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:05.621511-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:06.4101-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:08.412014-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:10.413576-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:12.415222-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:12.627568-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:14.417102-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:16.418985-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:18.42149-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:19.632261-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:20.423222-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:22.424012-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:24.426592-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:26.427894-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:26.638368-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:28.42946-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:30.431413-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:32.433548-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:33.648962-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:34.435191-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:36.437362-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:38.439377-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:40.442102-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:40.663551-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:42.445409-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:44.448542-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:46.450754-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:47.668989-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:48.452872-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:50.454949-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:52.456763-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:54.458892-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:54.674666-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:56.460555-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:55:58.462306-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:00.464298-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:01.690689-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:02.467174-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:04.469371-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:06.471779-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:08.473661-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:08.696869-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:10.475299-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:12.47794-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:14.479454-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:15.702792-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:16.481454-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:18.482802-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:20.48455-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:22.485362-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:22.709237-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:24.487161-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:26.488695-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:28.490512-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:29.714804-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-nws","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:30.49559-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:32.497977-04:00","level":"WARN","msg":"source error","app":"omos-ingest","instance":"a","source":"chaos-sse","reason":"http_5xx","err":"http 503"}
+{"time":"2026-10-29T06:56:33.765523-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":300}
+{"time":"2026-10-29T06:56:34.77986-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":6}
+{"time":"2026-10-29T06:56:35.79865-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:56:36.811108-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:37.825498-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:38.84055-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:39.859265-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:40.872604-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:41.897935-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:56:42.916413-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:56:43.92965-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:56:44.948748-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:45.966988-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":6}
+{"time":"2026-10-29T06:56:46.982325-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:56:47.995883-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:49.009293-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:56:50.027178-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:51.04382-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:52.05729-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:53.074144-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:54.09102-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:56:55.109454-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:56:56.122905-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:56:57.150304-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:56:58.166735-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":6}
+{"time":"2026-10-29T06:56:59.181694-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:00.194846-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:01.207874-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:02.221063-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:03.233964-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:04.250347-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:05.265566-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:06.283184-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:07.298159-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:08.311525-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:09.32521-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:10.339114-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:11.352131-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":6}
+{"time":"2026-10-29T06:57:12.368711-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:13.388234-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:14.40456-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:15.421017-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:16.432744-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:17.446172-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:18.471727-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:19.486432-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:20.509348-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:21.526712-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":300,"new":5}
+{"time":"2026-10-29T06:57:22.544177-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"a","source":"chaos-nws","records":301,"new":5}
+{"time":"2026-10-29T06:57:23.232242-04:00","level":"WARN","msg":"nats disconnected","app":"omos-ingest","instance":"a","err":"EOF"}
+{"time":"2026-10-29T06:57:25.230111-04:00","level":"INFO","msg":"omos-ingest stopped","app":"omos-ingest","instance":"a"}

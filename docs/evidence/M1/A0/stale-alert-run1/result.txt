@@ -1,0 +1,9 @@
+10:52:51 +003s nats, stub, collector a and prometheus started
+10:53:33 +045s alerts at 45s-healthy: []
+10:53:33 +045s upstream outage on (503) for 180 s
+10:54:08 +080s alerts at 80s-outage-35s: [('OneMindFeedStale', 'chaos-nws', 'pending'), ('OneMindFeedStale', 'chaos-sse', 'pending')]
+10:56:08 +200s alerts at 200s-outage-155s: [('OneMindFeedStale', 'chaos-nws', 'firing'), ('OneMindFeedStale', 'chaos-sse', 'firing')]
+10:56:33 +225s upstream outage off
+10:57:23 +275s alerts at 275s-recovered: []
+STALE ALERT PASS {"healthy": [], "outage": [["OneMindFeedStale", "chaos-sse", "firing"], ["OneMindFeedStale", "chaos-nws", "firing"]], "recovered": []}
+exit 0

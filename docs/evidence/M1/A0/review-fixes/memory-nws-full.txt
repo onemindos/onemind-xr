@@ -1,0 +1,9 @@
+## nws-full.json (1559159 bytes) - omos-ingest -once, GOMEMLIMIT=100MiB, cluster registry entry with url pointed at a local copy
+gc 1 @0.004s 2%: 0.060+0.41+0.012 ms clock, 0.60+0.18/0.74/0.18+0.12 ms cpu, 3->3->1 MB, 4 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 2 @0.012s 1%: 0.042+0.33+0.011 ms clock, 0.42+0/0.70/0.57+0.11 ms cpu, 5->5->2 MB, 5 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 3 @0.017s 1%: 0.032+0.35+0.010 ms clock, 0.32+0.020/0.78/0.49+0.10 ms cpu, 5->5->4 MB, 5 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 4 @0.036s 1%: 0.034+0.40+0.024 ms clock, 0.34+0.076/0.84/1.0+0.24 ms cpu, 9->9->5 MB, 9 MB goal, 0 MB stacks, 0 MB globals, 10 P
+gc 5 @0.057s 1%: 0.039+0.59+0.012 ms clock, 0.39+0.017/1.2/0.62+0.12 ms cpu, 10->11->5 MB, 11 MB goal, 0 MB stacks, 0 MB globals, 10 P
+{"time":"2026-10-29T07:18:59.052317-04:00","level":"INFO","msg":"published","app":"omos-ingest","instance":"mem","source":"nws-full","records":356,"new":356}
+            31424512  maximum resident set size
+            19645112  peak memory footprint

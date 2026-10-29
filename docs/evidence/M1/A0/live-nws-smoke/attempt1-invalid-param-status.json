@@ -1,0 +1,1 @@
+{"source":"nws-alerts","kind":"rest_poll","collector":"omos-ingest","instance":"live","leader":true,"fetchedAt":null,"count":0,"published":0,"lastError":"http 400","errorAt":"2026-10-29T06:57:26.914842-04:00","staleAfterSec":600,"ageSec":null,"stale":true,"at":"2026-10-29T06:57:46.731433-04:00"}

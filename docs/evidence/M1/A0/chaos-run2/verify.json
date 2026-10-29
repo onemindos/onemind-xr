@@ -1,0 +1,63 @@
+{
+  "cutoff": "2026-10-29T11:01:07.248482Z",
+  "generatedAt": "2026-10-29T11:01:22.482611Z",
+  "lastStatus": {
+    "chaos-nws": {
+      "ageSec": 1.012293333,
+      "at": "2026-10-29T07:01:21.977228-04:00",
+      "collector": "omos-ingest",
+      "count": 1499,
+      "errorAt": null,
+      "fetchedAt": "2026-10-29T07:01:20.964931-04:00",
+      "instance": "b",
+      "kind": "rest_poll",
+      "lastError": null,
+      "leader": true,
+      "published": 53,
+      "source": "chaos-nws",
+      "stale": false,
+      "staleAfterSec": 5
+    },
+    "chaos-sse": {
+      "ageSec": 0.024146542,
+      "at": "2026-10-29T07:01:21.977228-04:00",
+      "collector": "omos-ingest",
+      "count": 1,
+      "errorAt": null,
+      "fetchedAt": "2026-10-29T07:01:21.953081-04:00",
+      "instance": "b",
+      "kind": "sse",
+      "lastError": null,
+      "leader": true,
+      "published": 1,
+      "source": "chaos-sse",
+      "stale": false,
+      "staleAfterSec": 5
+    }
+  },
+  "pass": true,
+  "sources": {
+    "nws": {
+      "subject": "intel.weather.noaa.alert",
+      "emittedValid": 6447,
+      "emittedMalformed": 101,
+      "stored": 7182,
+      "duplicates": 0,
+      "missing": 0,
+      "malformedStoredOnDataSubject": 0,
+      "deadLetters": 101,
+      "ignoredTail": 750
+    },
+    "sse": {
+      "subject": "intel.test.chaos-sse.event",
+      "emittedValid": 6447,
+      "emittedMalformed": 101,
+      "stored": 7207,
+      "duplicates": 0,
+      "missing": 0,
+      "malformedStoredOnDataSubject": 0,
+      "deadLetters": 101,
+      "ignoredTail": 750
+    }
+  }
+}

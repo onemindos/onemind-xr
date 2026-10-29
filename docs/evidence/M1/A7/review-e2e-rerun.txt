@@ -1,0 +1,28 @@
+# Independent reviewer rerun of mesh_peer_e2e.py against a fresh build of 58e47759, 2026-10-29T10:54:37Z
+gateway a7e2e: NATS nats://127.0.0.1:61583, SA ('239.2.3.1', 26969), chat ('224.10.10.1', 27012), direct :61591, getfile :61592
+[PASS] 1 takproto v1 SA on the mesh appears on tak.cot.mesh.rx -- {"Nats-Msg-Id": "cot-feda787e27df83d31d67e196397c909c", "Tak-Delivery": "mesh", "Tak-From": "127.0.0.1:62528", "Tak-Gateway": "a7e2e", "Tak-Proto": "1"}
+[PASS] 1b XML on the bus keeps typed and untyped detail (__group, uid Droid, contact) -- b'<event version="2.0" uid="ANDROID-e2e4a059f64" type="a-f-G-U-C" how="h-e" time="2026-10-29T10:50:44.673Z" start="2026-10-29T10:50:44.673Z" stale="2026-10-29T10:55:44.673Z"><point lat="30.2672" lon="-97.7431" hae="150" ce="9.9" le="9999999"/><detail><uid Droid="E2E-EUD" /><contact endpoint="127.0.0.1:61593:tcp" callsign="E2E-EUD"/><__group name="Cyan" role="Team Member"/><status battery="88"/><takv'
+[PASS] 2 MESH_TO_TAK_SERVER unset (default false): nothing on tak.cot.inject
+[PASS] 3 projected sim-x1 on tak.cot.mesh.tx is received as TAK Protocol v1 by a takproto listener on lo0 -- 174 bytes, header bf01bf
+[PASS] 3b takproto decodes type, point and callsign
+[PASS] 3c request/reply on tak.cot.mesh.tx answers ok -- b'ok'
+[PASS] 3d malformed CoT is refused with an error reply -- b'error: xml decode: XML syntax error on line 1: unexpected EOF'
+[PASS] 4 GeoChat (v1) on 224.10.10.1 group appears on tak.cot.mesh.rx with Tak-Delivery chat -- {'Nats-Msg-Id': 'cot-6ea99218ba0e3bc0320613c2f36aa9f3', 'Tak-Delivery': 'chat', 'Tak-From': '127.0.0.1:62528', 'Tak-Gateway': 'a7e2e', 'Tak-Proto': '1'}
+[PASS] 4b b-t-f on tak.cot.mesh.tx goes out on the chat group
+[PASS] 5 directed TCP CoT to the gateway appears with Tak-Delivery direct
+[PASS] 5b Tak-Dest-Uid header sends a directed message to the contact's advertised endpoint
+[PASS] 6 directed b-f-t-r: gateway fetches from the sender's address, verifies SHA-256, stores it -- /Users/danielcarku/Desktop/work/.run/tmp-a7/datapkg/inbox/81c49e2e682e4e5d6eb2c69c43546f43abe00bf7d5ef81e5dda33d129380421e-mission1.zip
+[PASS] 6b gateway sends b-f-t-a ackresponse success=true to the sender's endpoint -- b'<ackresponse uid="c41e9131-7ab4-4ad5-a270-8438005e436d" senderUid="omos-gw-a7e2e" success="true" tag="mission1" reason="Transfer complete" sha256="81c49e2e682e4e5d6eb2c69c43546f43abe00bf7d5ef81e5dda33d129380421e" sizeInBytes="20000"/>'
+[PASS] 6c gateway serves its outbox at /getfile?file=<name>
+[PASS] 6d path traversal on /getfile refused
+[PASS] 7 tel.fleet.edge.a7e2e.status reports tx_interface lo0, tx count, chat group, datapkg_rx -- {"chat_group": "224.10.10.1:27012", "contacts": 1, "datapkg_failed": 0, "datapkg_rx": 1, "encrypted": false, "errors": 1, "gateway": "a7e2e", "last_error": "tak.cot.mesh.tx: xml decode: XML syntax error on line 1: unexpected EOF", "mesh_group": "239.2.3.1:26969", "proto_version": 1, "rx": 4, "to_tak_server": false, "tx": 4, "tx_interface": "lo0", "version": "0.3.0"}
+[PASS] 7b broadcast protocol stays v1 after GeoChat from a takproto peer (TakControl with unset versions) -- proto_version=1
+[PASS] 8 MESH_TO_TAK_SERVER=true: the EUD PLI appears once on tak.cot.inject -- 1 copies
+[PASS] 8b CP-2: OM.*, INTEL.* and omos-gw-* CoT heard on the mesh are not copied to tak.cot.inject -- 0 copies, 1 inject msgs total
+[PASS] 9 gateway C (bus A) -> encrypted mesh -> gateway D (bus B) -- {'Nats-Msg-Id': 'cot-dab050933c05776b3143ecedb293ae71', 'Tak-Delivery': 'mesh', 'Tak-From': '127.0.0.1:64887', 'Tak-Gateway': 'a7encD', 'Tak-Proto': '1'}
+[PASS] 9b the datagram on the wire is not plaintext and OpenSSL decrypts it to a takproto frame -- 224 bytes on the wire; decrypted header bf01bf
+[PASS] 9c OpenSSL-encrypted takproto SA from the peer is accepted
+[PASS] 9d plaintext on an encrypted mesh is dropped
+
+23/23 checks passed
+exit 0

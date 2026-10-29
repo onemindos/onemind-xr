@@ -1,0 +1,50 @@
+# omos CI-equivalent checks, 2026-10-29T10:46:46Z, commit 58e47759 vs origin/main
+## changed files
+docs/NATS-DOCTRINE.md
+docs/architecture/decisions/0003-tak-native-clients-and-mesh.md
+docs/roadmap/2026-10-29-tak-mesh-gateway-owner-proposals.md
+services/bridge/README.md
+services/bridge/bridges/tak/.env.example
+services/bridge/bridges/tak/README.md
+services/bridge/bridges/tak/bridge.yaml
+services/bridge/bridges/tak/cotxml.go
+services/bridge/bridges/tak/crypto.go
+services/bridge/bridges/tak/datapkg.go
+services/bridge/bridges/tak/gateway_test.go
+services/bridge/bridges/tak/go.mod
+services/bridge/bridges/tak/go.sum
+services/bridge/bridges/tak/main.go
+services/bridge/bridges/tak/mesh.go
+services/bridge/bridges/tak/mesh_test.go
+services/bridge/bridges/tak/run-mac.sh
+services/bridge/bridges/tak/takproto.go
+## yamllint -c .yamllint.yml (changed YAML)
+yamllint: clean
+## validate_changed_yaml.py
+Changed YAML gate passed (1 files checked)
+## yamllint platform/ docs/ (CI step)
+yamllint tree: findings (exit 1)
+## shellcheck
+shellcheck run-mac.sh: clean
+## validate_manifests.py (changed)
+No changed plain manifests to validate
+## validate_helm_renders.py (changed)
+warn  local chart platform/parked/kagent/charts/agent-sandbox is not registered in LOCAL_VALUES (not rendered)
+No Helm-affecting changes to render
+## note: tree-wide yamllint errors are pre-existing on origin/main; this change touches no YAML under platform/ or docs/
+## manual secret scan of added lines (gitleaks not installed on the build machine)
+284:+cp .env.example .env          # edit; secrets come from the environment, not this file
+302:+| `MESH_AUTH_KEY`, `MESH_CIPHER_KEY` | unset | Mesh encryption keys, 64 hex characters each, different; both or neither. Secrets |
+496:+		tok, err := dec.Token()
+1355:+		"f16fe7ef8a321eadddb0d4a66dcc348b2d118b98c6485ca5812cc207f5fe3e69"
+1662:+		{"file:///etc/passwd", "192.168.1.20:5000", ""},
+1680:+	os.WriteFile(filepath.Join(d.Dir, "secret.txt"), []byte("nope"), 0o640)
+1699:+	for _, p := range []string{"/getfile?file=" + url.QueryEscape("../secret.txt"), "/getfile?file=.hidden",
+1701:+		"/getfile?file=" + url.QueryEscape(`..\secret.txt`)} {
+1755:+	natsURL, natsUser, natsPassword string
+1821:+// subjectToken makes s safe to use as one NATS subject token.
+1822:+func subjectToken(s string) string { return unsafeChars.ReplaceAllString(s, "_") }
+1830:+	id := subjectToken(cfg.gatewayID)
+1840:+		opts = append(opts, nats.UserInfo(cfg.natsUser, cfg.natsPassword))
+2876:+# Mesh keys and NATS credentials come from the environment (the host's secret
+(end of scan)

@@ -1,0 +1,6 @@
+?   	github.com/onemindos/omos-bridge/ingest/cmd/omos-ingest	[no test files]
+ok  	github.com/onemindos/omos-bridge/ingest/internal/ingest	50.935s
+?   	github.com/onemindos/omos-bridge/ingest/internal/natstest	[no test files]
+ok  	github.com/onemindos/omos-bridge/ingest/internal/parsers	1.888s
+?   	github.com/onemindos/omos-bridge/ingest/test/chaos/stub	[no test files]
+?   	github.com/onemindos/omos-bridge/ingest/test/chaos/verify	[no test files]

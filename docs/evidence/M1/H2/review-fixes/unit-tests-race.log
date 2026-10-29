@@ -1,0 +1,197 @@
+=== RUN   TestTelemetryEnvelopes
+2026/10/29 06:56:22.472702 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:52741
+2026/10/29 06:56:22.587802 [bridge-mavlink] MAVLink channel closed: udp:127.0.0.1:52741
+--- PASS: TestTelemetryEnvelopes (0.31s)
+=== RUN   TestHAEPrefersAutopilotEllipsoid
+2026/10/29 06:56:22.785184 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:63558
+--- PASS: TestHAEPrefersAutopilotEllipsoid (0.46s)
+=== RUN   TestApprovedCommandsReachVehicle
+2026/10/29 06:56:23.257019 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:58184
+2026/10/29 06:56:23.273211 [bridge-mavlink] command 9e25db2c-4ded-4f23-a198-535a3d607aec arm outcome=acknowledged code= 
+2026/10/29 06:56:23.273879 [bridge-mavlink] command 9e25db2c-4ded-4f23-a198-535a3d607aec arm outcome=executed code= 
+2026/10/29 06:56:23.277569 [bridge-mavlink] command d3c46b69-ebe2-46ce-95e7-5d7953c1bb2e takeoff outcome=acknowledged code= 
+2026/10/29 06:56:23.278074 [bridge-mavlink] command d3c46b69-ebe2-46ce-95e7-5d7953c1bb2e takeoff outcome=executed code= 
+2026/10/29 06:56:23.281957 [bridge-mavlink] command ad1cd8ee-1121-4744-b5c2-7372ac1f00f3 goto outcome=acknowledged code= 
+2026/10/29 06:56:23.282413 [bridge-mavlink] command ad1cd8ee-1121-4744-b5c2-7372ac1f00f3 goto outcome=executed code= 
+2026/10/29 06:56:23.285731 [bridge-mavlink] command a019e809-0778-425b-a208-d10d6fa45e57 rtl outcome=acknowledged code= 
+2026/10/29 06:56:23.286194 [bridge-mavlink] command a019e809-0778-425b-a208-d10d6fa45e57 rtl outcome=executed code= 
+2026/10/29 06:56:23.289504 [bridge-mavlink] command f18a3fed-5d2d-43a9-ab9c-68cc67960698 land outcome=acknowledged code= 
+2026/10/29 06:56:23.289939 [bridge-mavlink] command f18a3fed-5d2d-43a9-ab9c-68cc67960698 land outcome=executed code= 
+2026/10/29 06:56:23.293458 [bridge-mavlink] command 7831eb54-7fed-4a15-bdb4-8ff3d8fcea98 disarm outcome=acknowledged code= 
+2026/10/29 06:56:23.293913 [bridge-mavlink] command 7831eb54-7fed-4a15-bdb4-8ff3d8fcea98 disarm outcome=executed code= 
+2026/10/29 06:56:23.297344 [bridge-mavlink] command 93e8f5cd-7818-4ef8-b958-ef6fb69e81fc estop outcome=acknowledged code= 
+2026/10/29 06:56:23.297798 [bridge-mavlink] command 93e8f5cd-7818-4ef8-b958-ef6fb69e81fc estop outcome=executed code= 
+2026/10/29 06:56:23.298325 [bridge-mavlink] MAVLink channel closed: udp:127.0.0.1:58184
+--- PASS: TestApprovedCommandsReachVehicle (0.25s)
+=== RUN   TestRefusedCommandsNeverReachVehicle
+2026/10/29 06:56:23.496018 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:65037
+2026/10/29 06:56:23.511171 [bridge-mavlink] command 66aa1724-469d-4f76-ad8f-b71d6d942c12 rtl outcome=refused code=not_authorized command is not approved
+2026/10/29 06:56:23.514246 [bridge-mavlink] command 97d53586-97e2-4560-9300-280fc7bc0f3a goto outcome=refused code=agent_cannot_confirm approval by non-human principal "agent:hermes/zeus/legacy"
+2026/10/29 06:56:23.517065 [bridge-mavlink] command 2d45dd9a-af20-479a-9d34-2e16b24744f7 arm outcome=refused code=not_authorized arm needs 2 distinct human approvals, has 1
+2026/10/29 06:56:23.518780 [bridge-mavlink] command f4c9f3ce-6be8-438e-90d3-f62c55873e3b rtl outcome=refused code=not_simulated simulated must be true
+2026/10/29 06:56:23.521639 [bridge-mavlink] command 817d6657-8e64-41de-8a64-bd370e0a75ff rtl outcome=refused code=bad_signature signature does not verify
+2026/10/29 06:56:23.522373 [bridge-mavlink] command fc835bd4-592d-4660-982f-52b11bf07cd6 rtl outcome=refused code=bad_signature unsigned command
+2026/10/29 06:56:23.525162 [bridge-mavlink] command c8875619-de92-4420-9700-05de488f4163 rtl outcome=refused code=expired expired at 2026-10-29T10:54:53.508Z
+2026/10/29 06:56:23.526986 [bridge-mavlink] command a969ecd6-c515-45d8-9539-185a3b0dfa65 orbit outcome=refused code=unknown_action verb "orbit" is not in the bridge catalogue
+2026/10/29 06:56:23.530318 [bridge-mavlink] command cfdd202b-1db2-457d-b183-9fa74c5fed5e goto outcome=refused code=precondition_failed goto target: position inside keep-out zone no-fly
+2026/10/29 06:56:23.533612 [bridge-mavlink] command fadc866f-40e8-4621-b8bc-48002ea00516 goto outcome=refused code=precondition_failed goto target: position outside every keep-in zone
+2026/10/29 06:56:23.536989 [bridge-mavlink] command 28471f65-7e77-4295-9c15-bd327c8f2a8d goto outcome=refused code=precondition_failed goto target: hae 400.0 m above ceiling 300.0 m
+2026/10/29 06:56:23.540166 [bridge-mavlink] command e251fe16-d435-4f9d-a730-c3fba1b66741 land outcome=refused code=precondition_failed land point: position outside every keep-in zone
+2026/10/29 06:56:23.543256 [bridge-mavlink] command 8ca9cd79-a4eb-408c-9902-fbdfce30ac2e rtl outcome=acknowledged code= 
+2026/10/29 06:56:23.543719 [bridge-mavlink] command 8ca9cd79-a4eb-408c-9902-fbdfce30ac2e rtl outcome=executed code= 
+2026/10/29 06:56:23.545567 [bridge-mavlink] command 8ca9cd79-a4eb-408c-9902-fbdfce30ac2e rtl outcome=refused code=replayed command id 8ca9cd79-a4eb-408c-9902-fbdfce30ac2e already received
+2026/10/29 06:56:23.545826 [bridge-mavlink] command  rtl outcome=refused code=schema_invalid envelope: invalid character 'o' in literal null (expecting 'u')
+--- PASS: TestRefusedCommandsNeverReachVehicle (0.25s)
+=== RUN   TestVehicleRejectAndNoAck
+2026/10/29 06:56:23.745121 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:60794
+2026/10/29 06:56:23.758627 [bridge-mavlink] command edeebe81-d203-4d97-8eed-fecefcaf43a6 rtl outcome=acknowledged code= 
+2026/10/29 06:56:23.759097 [bridge-mavlink] command edeebe81-d203-4d97-8eed-fecefcaf43a6 rtl outcome=failed code=vehicle_rejected vehicle answered MAV_RESULT_UNSUPPORTED
+2026/10/29 06:56:23.762434 [bridge-mavlink] command f57a676c-4b79-47ae-b4ae-c563cfb70414 land outcome=acknowledged code= 
+2026/10/29 06:56:24.364720 [bridge-mavlink] command f57a676c-4b79-47ae-b4ae-c563cfb70414 land outcome=failed code=no_ack no COMMAND_ACK from vehicle
+--- PASS: TestVehicleRejectAndNoAck (0.82s)
+=== RUN   TestOfflineVehicleRefusedButEstopSent
+2026/10/29 06:56:24.563742 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:59995
+2026/10/29 06:56:24.679984 [bridge-mavlink] command df863c91-6bed-483d-800e-67922f657ca4 rtl outcome=refused code=precondition_failed no HEARTBEAT from sysid 1 within 3s
+2026/10/29 06:56:24.683335 [bridge-mavlink] command 3d5eb6c5-1328-406a-8378-591495f86cca estop outcome=acknowledged code= 
+2026/10/29 06:56:24.683824 [bridge-mavlink] command 3d5eb6c5-1328-406a-8378-591495f86cca estop outcome=executed code= 
+2026/10/29 06:56:24.684309 [bridge-mavlink] MAVLink channel closed: udp:127.0.0.1:59995
+--- PASS: TestOfflineVehicleRefusedButEstopSent (0.32s)
+=== RUN   TestDryRunNotSent
+2026/10/29 06:56:24.886931 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:50863
+2026/10/29 06:56:24.901907 [bridge-mavlink] command b72e21d0-fef7-4232-b3b9-523efcef1721 rtl outcome=acknowledged code= dry_run: verified, not sent to the vehicle
+2026/10/29 06:56:24.902248 [bridge-mavlink] MAVLink channel closed: udp:127.0.0.1:50863
+--- PASS: TestDryRunNotSent (0.22s)
+=== RUN   TestConfigRefusesNonSim
+--- PASS: TestConfigRefusesNonSim (0.00s)
+=== RUN   TestRoundDropsNegativeZero
+--- PASS: TestRoundDropsNegativeZero (0.00s)
+=== RUN   TestRepositionFallsBackToCommandLong
+=== RUN   TestRepositionFallsBackToCommandLong/no_ack
+2026/10/29 06:56:25.098277 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:51315
+2026/10/29 06:56:25.114372 [bridge-mavlink] command 86c263ea-dfe4-4193-8f1a-fbe7b3be9e95 goto outcome=acknowledged code= 
+2026/10/29 06:56:25.717437 [bridge-mavlink] command 86c263ea-dfe4-4193-8f1a-fbe7b3be9e95 goto outcome=executed code= 
+2026/10/29 06:56:25.725966 [bridge-mavlink] command bab34e07-ab19-44ed-b672-ac4c9578e553 goto outcome=acknowledged code= 
+2026/10/29 06:56:25.726769 [bridge-mavlink] command bab34e07-ab19-44ed-b672-ac4c9578e553 goto outcome=executed code= 
+=== RUN   TestRepositionFallsBackToCommandLong/unsupported
+2026/10/29 06:56:25.940756 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:50433
+2026/10/29 06:56:25.956208 [bridge-mavlink] command 66b4d8d5-a0a8-4048-bdf0-e242a66f72bd goto outcome=acknowledged code= 
+2026/10/29 06:56:25.956888 [bridge-mavlink] command 66b4d8d5-a0a8-4048-bdf0-e242a66f72bd goto outcome=executed code= 
+2026/10/29 06:56:25.960322 [bridge-mavlink] command 784b610d-d1ce-42ee-8a1b-a2d2cd5c78e0 goto outcome=acknowledged code= 
+2026/10/29 06:56:25.960694 [bridge-mavlink] command 784b610d-d1ce-42ee-8a1b-a2d2cd5c78e0 goto outcome=executed code= 
+--- PASS: TestRepositionFallsBackToCommandLong (1.06s)
+    --- PASS: TestRepositionFallsBackToCommandLong/no_ack (0.83s)
+    --- PASS: TestRepositionFallsBackToCommandLong/unsupported (0.23s)
+=== RUN   TestAckForOtherGCSIgnored
+2026/10/29 06:56:26.159084 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:51165
+2026/10/29 06:56:26.173507 [bridge-mavlink] command e5a4f90d-4d06-434e-828a-7618a098ddf3 rtl outcome=acknowledged code= 
+2026/10/29 06:56:26.775065 [bridge-mavlink] command e5a4f90d-4d06-434e-828a-7618a098ddf3 rtl outcome=failed code=no_ack no COMMAND_ACK from vehicle
+2026/10/29 06:56:26.785259 [bridge-mavlink] command c20f7ecd-578a-4d4c-9cd5-cb430a723f18 rtl outcome=acknowledged code= 
+2026/10/29 06:56:26.785864 [bridge-mavlink] command c20f7ecd-578a-4d4c-9cd5-cb430a723f18 rtl outcome=executed code= 
+--- PASS: TestAckForOtherGCSIgnored (0.83s)
+=== RUN   TestTaskStatusVersions
+2026/10/29 06:56:26.995445 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:54096
+2026/10/29 06:56:27.010829 [bridge-mavlink] command a2b00dcc-cdf4-4406-b7f9-93a5fae25e3d takeoff outcome=acknowledged code= 
+2026/10/29 06:56:27.011419 [bridge-mavlink] command a2b00dcc-cdf4-4406-b7f9-93a5fae25e3d takeoff outcome=executed code= 
+2026/10/29 06:56:27.015426 [bridge-mavlink] command b6fc91a5-c694-47f5-beb4-a9c2f0c333c6 goto outcome=acknowledged code= 
+2026/10/29 06:56:27.015906 [bridge-mavlink] command b6fc91a5-c694-47f5-beb4-a9c2f0c333c6 goto outcome=executed code= 
+--- PASS: TestTaskStatusVersions (0.23s)
+2026/10/29 06:56:27.016843 [bridge-mavlink] MAVLink channel closed: udp:127.0.0.1:54096
+=== RUN   TestSendErrorsAreNotVehicleRejected
+2026/10/29 06:56:27.216180 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:55086
+2026/10/29 06:56:27.230529 [bridge-mavlink] command 97c2afee-5d16-4088-9832-92a742103a70 rtl outcome=acknowledged code= 
+2026/10/29 06:56:27.230643 [bridge-mavlink] command 97c2afee-5d16-4088-9832-92a742103a70 rtl outcome=failed code=precondition_failed vehicle not heard yet: sysid 1
+2026/10/29 06:56:27.234179 [bridge-mavlink] command 72d7dc37-9d6d-4bf6-a8d1-a28622cffeff rtl outcome=acknowledged code= 
+2026/10/29 06:56:27.234293 [bridge-mavlink] command 72d7dc37-9d6d-4bf6-a8d1-a28622cffeff rtl outcome=failed code=conflict same MAV_CMD already in flight: MAV_CMD_NAV_RETURN_TO_LAUNCH
+2026/10/29 06:56:27.237558 [bridge-mavlink] command ff128c21-8ac5-4eeb-b57c-284e3a8d4290 rtl outcome=acknowledged code= 
+2026/10/29 06:56:27.237660 [bridge-mavlink] command ff128c21-8ac5-4eeb-b57c-284e3a8d4290 rtl outcome=failed code=no_ack context canceled
+2026/10/29 06:56:27.240820 [bridge-mavlink] command 1c2efaf0-bae8-432f-949e-8d1dfd2d692f rtl outcome=acknowledged code= 
+2026/10/29 06:56:27.240911 [bridge-mavlink] command 1c2efaf0-bae8-432f-949e-8d1dfd2d692f rtl outcome=failed code=no_ack write: broken pipe
+2026/10/29 06:56:27.241365 [bridge-mavlink] MAVLink channel closed: udp:127.0.0.1:55086
+--- PASS: TestSendErrorsAreNotVehicleRejected (0.22s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink	6.955s
+=== RUN   TestNewVerifierRefusesNonSim
+--- PASS: TestNewVerifierRefusesNonSim (0.00s)
+=== RUN   TestVerify
+=== RUN   TestVerify/goto_approved
+=== RUN   TestVerify/arm_two_humans
+=== RUN   TestVerify/estop
+=== RUN   TestVerify/land_with_point
+=== RUN   TestVerify/takeoff
+=== RUN   TestVerify/arm_one_human
+=== RUN   TestVerify/arm_at_A3_level
+=== RUN   TestVerify/pending_approval
+=== RUN   TestVerify/no_approvals
+=== RUN   TestVerify/agent_approver
+=== RUN   TestVerify/same_human_twice
+=== RUN   TestVerify/not_simulated
+=== RUN   TestVerify/non-sim_subject
+=== RUN   TestVerify/other_sim_asset
+=== RUN   TestVerify/unknown_verb
+=== RUN   TestVerify/wrong_source
+=== RUN   TestVerify/unsigned
+=== RUN   TestVerify/wrong_key
+=== RUN   TestVerify/unknown_kid
+=== RUN   TestVerify/expired
+=== RUN   TestVerify/ttl_too_long
+=== RUN   TestVerify/future_ts
+=== RUN   TestVerify/hash_mismatch
+=== RUN   TestVerify/bad_params
+=== RUN   TestVerify/extra_param
+=== RUN   TestVerify/policy_denied
+=== RUN   TestVerify/tampered_after_signing
+--- PASS: TestVerify (0.08s)
+    --- PASS: TestVerify/goto_approved (0.01s)
+    --- PASS: TestVerify/arm_two_humans (0.00s)
+    --- PASS: TestVerify/estop (0.00s)
+    --- PASS: TestVerify/land_with_point (0.00s)
+    --- PASS: TestVerify/takeoff (0.00s)
+    --- PASS: TestVerify/arm_one_human (0.00s)
+    --- PASS: TestVerify/arm_at_A3_level (0.00s)
+    --- PASS: TestVerify/pending_approval (0.00s)
+    --- PASS: TestVerify/no_approvals (0.00s)
+    --- PASS: TestVerify/agent_approver (0.00s)
+    --- PASS: TestVerify/same_human_twice (0.00s)
+    --- PASS: TestVerify/not_simulated (0.00s)
+    --- PASS: TestVerify/non-sim_subject (0.00s)
+    --- PASS: TestVerify/other_sim_asset (0.00s)
+    --- PASS: TestVerify/unknown_verb (0.00s)
+    --- PASS: TestVerify/wrong_source (0.00s)
+    --- PASS: TestVerify/unsigned (0.00s)
+    --- PASS: TestVerify/wrong_key (0.00s)
+    --- PASS: TestVerify/unknown_kid (0.00s)
+    --- PASS: TestVerify/expired (0.00s)
+    --- PASS: TestVerify/ttl_too_long (0.00s)
+    --- PASS: TestVerify/future_ts (0.00s)
+    --- PASS: TestVerify/hash_mismatch (0.00s)
+    --- PASS: TestVerify/bad_params (0.00s)
+    --- PASS: TestVerify/extra_param (0.00s)
+    --- PASS: TestVerify/policy_denied (0.00s)
+    --- PASS: TestVerify/tampered_after_signing (0.00s)
+=== RUN   TestReplayRefused
+--- PASS: TestReplayRefused (0.01s)
+=== RUN   TestSigOptionalWhenNotRequired
+--- PASS: TestSigOptionalWhenNotRequired (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/command	1.717s
+?   	github.com/onemindos/omos-bridge/bridges/mavlink/internal/commandtest	[no test files]
+=== RUN   TestCheck
+--- PASS: TestCheck (0.00s)
+=== RUN   TestFailClosed
+--- PASS: TestFailClosed (0.00s)
+=== RUN   TestParseRejects
+--- PASS: TestParseRejects (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/fence	2.176s
+=== RUN   TestUndulationKnownPoints
+--- PASS: TestUndulationKnownPoints (0.11s)
+=== RUN   TestRoundTripAndWrap
+--- PASS: TestRoundTripAndWrap (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/geoid	1.345s
+=== RUN   TestCanonicalize
+--- PASS: TestCanonicalize (0.00s)
+=== RUN   TestCanonicalizeErrors
+--- PASS: TestCanonicalizeErrors (0.00s)
+PASS
+ok  	github.com/onemindos/omos-bridge/bridges/mavlink/internal/jcs	1.424s

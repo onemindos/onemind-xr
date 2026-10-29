@@ -1,0 +1,2 @@
+INTEL msgs 356
+SYS (dead letters) msgs 0

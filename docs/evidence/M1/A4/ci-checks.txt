@@ -1,0 +1,38 @@
+## yamllint -c .yamllint.yml (changed YAML)
+yamllint: PASS (6 files)
+
+## kubeconform -strict (k8s 1.36.0, datreeio CRD catalog)
+Summary: 5 resources found in 5 files - Valid: 5, Invalid: 0, Errors: 0, Skipped: 0
+## YAML_BASE_SHA=62e3d22bc05814178c2d531e77a9fa4a228f6f3a python scripts/validate_changed_yaml.py
+Changed YAML gate passed (6 files checked)
+exit=0
+
+## YAML_BASE_SHA=62e3d22bc05814178c2d531e77a9fa4a228f6f3a python scripts/validate_manifests.py
+Summary: 5 resources found in 5 files - Valid: 5, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 5 manifest file(s)
+exit=0
+## gitleaks git --log-opts origin/main..HEAD (commits in this PR), v8.30.1
+6:58AM INF 1 commits scanned.
+6:58AM INF scanned ~226554 bytes (226.55 KB) in 93.4ms
+6:58AM INF no leaks found
+exit=0
+
+## python scripts/check_onemind_mcp_coverage.py
+All 58 Git-declared Argo Applications mapped to MCP access dispositions
+exit=0
+
+## python -m unittest discover -s scripts/tests -p 'test_gitops*.py' (Go on PATH)
+Ran 168 tests in 14.505s
+
+OK (skipped=15)
+
+## GitHub Actions on PR #552, head ede5f5af (2026-10-29T11:07:34Z)
+Helm render check	pass	42s	https://github.com/onemindos/omos/actions/runs/40862299579/job/123408296360	
+Kubernetes manifest schema (kubeconform)	pass	8s	https://github.com/onemindos/omos/actions/runs/40862299579/job/123408296609	
+Lint & Validate	pass	24s	https://github.com/onemindos/omos/actions/runs/40862299579/job/123408296099	
+Secret scan (gitleaks)	pass	9s	https://github.com/onemindos/omos/actions/runs/40862299579/job/123408296483	
+image	skipping	0	https://github.com/onemindos/omos/actions/runs/40862299480/job/123408910846	
+preflight	pass	34s	https://github.com/onemindos/omos/actions/runs/40862299450/job/123408294578	
+test	pass	1m19s	https://github.com/onemindos/omos/actions/runs/40862299480/job/123408295043	
+test-and-image	pass	15s	https://github.com/onemindos/omos/actions/runs/40862299450/job/123408295138	
+acceptance	skipping	0	https://github.com/onemindos/omos/actions/runs/40862299450/job/123408296626	
