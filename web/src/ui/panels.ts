@@ -82,6 +82,13 @@ export function renderDetail(rec: EntityRecord | undefined, stale: boolean, miss
       r.simulated ? h("span", { class: "badge sim", "data-testid": "badge-simulated" }, "SIMULATED") : null,
       stale ? h("span", { class: "badge stale" }, "STALE") : null,
       mission ? h("span", { class: "badge mission" }, "MISSION TIER") : null,
+      rec.fullStale
+        ? h(
+            "span",
+            { class: "badge stale", "data-testid": "badge-full-stale", title: "Position is current; the other details are from an older record and are being refetched." },
+            `DETAILS FROM SEQ ${f?.seq ?? "?"}`,
+          )
+        : null,
       f?.marking?.tlp ? h("span", { class: "badge tlp" }, `TLP:${f.marking.tlp}`) : null,
       f?.lifecycle ? h("span", { class: "badge" }, f.lifecycle) : null,
     ),

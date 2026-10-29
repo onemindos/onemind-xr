@@ -27,6 +27,9 @@ const feedStatus = new Map<string, FeedStatus>();
 const geofenceAlerts = new Map<string, AlertItem>();
 let nc: NatsConnection | null = null;
 let geofenceSub: Subscription | null = null;
+/** Bumped on every connect(): a superseded attempt (or its retry timer) must not touch `nc`. */
+let connectGen = 0;
+let retryTimer: ReturnType<typeof setTimeout> | undefined;
 let missionOnly = cfg.missionOnly;
 let selected: string | null = null;
 let videoPath: string | null = null;
@@ -140,7 +143,8 @@ function renderPanels(): void {
   $("entity-count").textContent = String(list.length);
 
   const rec = selected ? store.get(selected) : undefined;
-  const dsig = rec ? `${rec.r.entity_id}:${rec.r.seq}:${store.isStale(rec)}:${!!rec.full}:${Math.floor(Date.now() / 5000)}` : "none";
+  if (rec?.fullStale) refreshFull(rec.r.entity_id);
+  const dsig = rec ? `${rec.r.entity_id}:${rec.r.seq}:${store.isStale(rec)}:${!!rec.full}:${!!rec.fullStale}:${Math.floor(Date.now() / 5000)}` : "none";
   if (dsig !== lastDetailSig) {
     lastDetailSig = dsig;
     $("detail-body").replaceChildren(
@@ -178,11 +182,20 @@ function select(id: string | null, fly: boolean): void {
   showTab("detail");
   const rec = store.get(id);
   if (rec && fly && isLocatable(rec.r, rec.full)) globe.flyTo(rec.r.lon, rec.r.lat, 3000);
-  if (nc) {
-    void getEntity(nc, id).then((full) => {
-      if (full && typeof full === "object") store.attachFull(full as Entity);
-    });
-  }
+  fullFetchAt = 0;
+  refreshFull(id);
+}
+
+// The full record (svc.entity.get) for the selected entity; refetched, at most every 2 s, while
+// later render-only records make the held one older (store `fullStale`).
+let fullFetchAt = 0;
+function refreshFull(id: string): void {
+  const now = Date.now();
+  if (!nc || now - fullFetchAt < 2000) return;
+  fullFetchAt = now;
+  void getEntity(nc, id).then((full) => {
+    if (full && typeof full === "object") store.attachFull(full as Entity);
+  });
 }
 
 function maybePlayVideo(full: Entity | undefined): void {
@@ -242,15 +255,22 @@ function setConn(state: string, text: string): void {
 }
 
 async function connect(url: string): Promise<void> {
+  const gen = ++connectGen;
+  clearTimeout(retryTimer);
+  retryTimer = undefined;
   for (const f of feeds.values()) f.stop();
   feeds.clear();
   geofenceSub?.unsubscribe();
-  if (nc) await nc.close().catch(() => undefined);
+  geofenceSub = null;
+  const old = nc;
   nc = null;
+  if (old) await old.close().catch(() => undefined);
+  if (gen !== connectGen) return;
   const creds = loadCredentials();
   setConn("connecting", `connecting ${url}`);
+  let conn: NatsConnection;
   try {
-    nc = await wsconnect({
+    conn = await wsconnect({
       servers: url,
       name: "onemind-l0-web",
       user: creds.user || undefined,
@@ -259,14 +279,21 @@ async function connect(url: string): Promise<void> {
       reconnectTimeWait: 2000,
     });
   } catch (err) {
+    if (gen !== connectGen) return;
     setConn("error", `cannot reach ${url}: ${(err as Error).message}`);
-    setTimeout(() => void connect(url), 3000);
+    retryTimer = setTimeout(() => void connect(url), 3000);
     return;
   }
+  if (gen !== connectGen) {
+    // A newer connect() started while this one was dialling.
+    await conn.close().catch(() => undefined);
+    return;
+  }
+  nc = conn;
   setConn("connected", `bus ${url}`);
-  const conn = nc;
   void (async () => {
     for await (const s of conn.status()) {
+      if (gen !== connectGen) break;
       if (s.type === "disconnect") setConn("reconnecting", "bus disconnected, retrying");
       if (s.type === "reconnect") setConn("connected", `bus ${url}`);
     }

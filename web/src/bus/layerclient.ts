@@ -6,6 +6,10 @@
 //      -> `{entities, cursor}`). The subscription is opened first so nothing is lost between the
 //      snapshot and the first live record; the seq rule removes duplicates.
 //   3. Core subscription only, when neither service answers (expiry from expiry_t).
+// Large layers (air, sea) never leave path 1 while a layer service answers, even with an error
+// or density cells (layer-snapshot.md §1 tier rules): they show "zoom in" or the error and retry.
+// Paths 2 and 3 open for a large layer only with no layer responders, a bounded AOI and a
+// per-layer entity cap in the store.
 // The client never publishes `ent.*` or `cmd.*` (entity.md §2).
 import {
   createInbox,
@@ -44,6 +48,12 @@ export interface FeedOptions {
   leaseS?: number;
   maxRateHz?: number;
   queryLimit?: number;
+  /** Large layers: entity cap in the store (FEATURES A14). Default 5000, the snapshot `max`. */
+  maxEntities?: number;
+  /** Large layers on paths 2 and 3: the widest AOI side, in degrees, before "zoom in". */
+  interimMaxSpanDeg?: number;
+  /** Delay before retrying the layer service after an error. */
+  retryMs?: number;
   onStatus?: (s: FeedStatus) => void;
   now?: () => number;
 }
@@ -82,9 +92,20 @@ function parse<T>(m: Msg): T | null {
   }
 }
 
-function insideBbox(lat: number, lon: number, b: [number, number, number, number]): boolean {
-  return lon >= b[0] && lon <= b[2] && lat >= b[1] && lat <= b[3];
+type Bbox = [number, number, number, number];
+
+/** Point in bbox [w, s, e, n]. West > east is a view across the antimeridian. */
+export function insideBbox(lat: number, lon: number, b: Bbox): boolean {
+  if (lat < b[1] || lat > b[3]) return false;
+  return b[0] <= b[2] ? lon >= b[0] && lon <= b[2] : lon >= b[0] || lon <= b[2];
 }
+
+/** Width and height of a bbox in degrees, handling the antimeridian. */
+export function bboxSpan(b: Bbox): { dLon: number; dLat: number } {
+  return { dLon: b[0] <= b[2] ? b[2] - b[0] : 360 - b[0] + b[2], dLat: b[3] - b[1] };
+}
+
+export const ZOOM_IN = "zoom in for entities";
 
 export class LayerFeed {
   status: FeedStatus;
@@ -95,6 +116,9 @@ export class LayerFeed {
   private deadTimer?: ReturnType<typeof setTimeout>;
   private renewTimer?: ReturnType<typeof setInterval>;
   private stopped = false;
+  private retryTimer?: ReturnType<typeof setTimeout>;
+  /** Which path the feed is on (or trying): the layer service, or interim/core. */
+  private path: "layer" | "interim" = "layer";
   private o: Required<Omit<FeedOptions, "aoi" | "zoom" | "onStatus">> & FeedOptions;
 
   constructor(
@@ -109,10 +133,18 @@ export class LayerFeed {
       leaseS: 60,
       maxRateHz: 4,
       queryLimit: 200,
+      maxEntities: 5000,
+      interimMaxSpanDeg: 10,
+      retryMs: 5000,
       now: () => Date.now(),
       ...opts,
     };
     this.status = { layer: def.id, mode: "connecting", resnapshots: 0 };
+    if (def.tier === "large") store.setLayerCap(def.id, this.o.maxEntities);
+  }
+
+  private get large(): boolean {
+    return this.def.tier === "large";
   }
 
   async start(): Promise<FeedMode> {
@@ -121,13 +153,18 @@ export class LayerFeed {
       const seq = await this.snapshot();
       if (this.stopped) return "stopped";
       await this.watch(seq + 1);
-      this.setStatus({ mode: "layer", detail: "svc.layer.watch" });
+      if (this.stopped) return "stopped";
+      this.setStatus({ mode: "layer", detail: this.status.detail?.includes(ZOOM_IN) ? this.status.detail : "svc.layer.watch" });
       return "layer";
     } catch (err) {
       if (this.stopped) return "stopped";
-      if (!(err instanceof NoResponders)) {
-        this.setStatus({ mode: "error", detail: String((err as Error).message ?? err) });
-        if (err instanceof LayerError && err.code === "forbidden") return "error";
+      if (err instanceof NoResponders) return this.startInterim();
+      this.setStatus({ mode: "error", detail: String((err as Error).message ?? err) });
+      if (err instanceof LayerError && err.code === "forbidden") return "error";
+      if (this.large) {
+        // A layer service is answering: stay on its path (never raw ent.* for a large layer).
+        this.scheduleRetry();
+        return "error";
       }
     }
     return this.startInterim();
@@ -135,6 +172,7 @@ export class LayerFeed {
 
   stop(): void {
     this.stopped = true;
+    clearTimeout(this.retryTimer);
     this.clearWatch();
     for (const s of this.subs) s.unsubscribe();
     this.subs = [];
@@ -149,9 +187,20 @@ export class LayerFeed {
   setAoi(aoi: Aoi | null, zoom?: number): void {
     this.o.aoi = aoi;
     if (zoom !== undefined) this.o.zoom = zoom;
-    if (this.status.mode === "layer" && this.watchId) this.sendWatch(this.watchId, undefined);
-    if (this.status.mode !== "layer" && aoi && this.def.tier === "large") {
-      // Interim: client-side AOI filter.
+    if (this.stopped || !this.large) return;
+    if (this.path === "layer") {
+      if (this.status.mode === "layer" && this.watchId) this.sendWatch(this.watchId, undefined);
+      // aoi_required, too_many and the like: retry now with the new AOI.
+      else if (this.status.mode === "error") void this.resnapshot("aoi changed");
+      return;
+    }
+    // Paths 2 and 3: subscribe only inside a bounded AOI, and filter client-side.
+    const open = this.subs.length > 0;
+    if (this.aoiBounded() !== open) {
+      void this.startInterim();
+      return;
+    }
+    if (open && aoi) {
       this.store.batch(() => {
         for (const id of this.store.idsInLayer(this.def.id)) {
           const r = this.store.get(id)!.r;
@@ -159,6 +208,19 @@ export class LayerFeed {
         }
       });
     }
+  }
+
+  private aoiBounded(): boolean {
+    const a = this.o.aoi;
+    if (!a) return false;
+    const { dLon, dLat } = bboxSpan(a.bbox);
+    return dLon <= this.o.interimMaxSpanDeg && dLat <= this.o.interimMaxSpanDeg;
+  }
+
+  private scheduleRetry(): void {
+    clearTimeout(this.retryTimer);
+    if (this.stopped) return;
+    this.retryTimer = setTimeout(() => void this.resnapshot("retry"), this.o.retryMs);
   }
 
   // ---- path 1: layer service -------------------------------------------------------------
@@ -186,16 +248,26 @@ export class LayerFeed {
     let entSeq = 0;
     const items: unknown[] = [];
     let truncated = false;
+    let cells = false;
     for (const c of chunks) {
+      entSeq = Math.max(entSeq, c.ent_seq ?? 0);
+      if (c.mode === "cells") {
+        // Wide zoom on a large layer (layer-snapshot.md §3.1). L0 draws no density cells: it
+        // shows "zoom in" and keeps the watch, which sends `enter` ops once the zoom allows.
+        cells = true;
+        continue;
+      }
       if (c.mode !== "entities") {
         throw new LayerError("unsupported_mode", `L0 draws entities only, got ${c.mode}`);
       }
-      entSeq = Math.max(entSeq, c.ent_seq ?? 0);
       truncated ||= !!c.truncated;
       items.push(...(c.items ?? []));
     }
-    this.store.replaceLayer(this.def.id, items);
-    this.setStatus({ detail: truncated ? "snapshot truncated: zoom in" : undefined });
+    if (this.stopped) return entSeq;
+    this.store.replaceLayer(this.def.id, cells ? [] : items);
+    this.setStatus({
+      detail: cells ? `density cells at this zoom: ${ZOOM_IN}` : truncated ? "snapshot truncated: zoom in" : undefined,
+    });
     return entSeq;
   }
 
@@ -233,6 +305,7 @@ export class LayerFeed {
   /** layer-delta.md §2.1. Resolves after the first reply (the watch id). */
   private watch(fromSeq: number): Promise<void> {
     this.clearWatch();
+    if (this.stopped) return Promise.resolve();
     this.lastN = 0;
     const inbox = createInbox();
     return new Promise((resolve, reject) => {
@@ -273,7 +346,7 @@ export class LayerFeed {
             if (first) {
               first = false;
               clearTimeout(firstTimer);
-              this.startRenew(body.lease_s ?? this.o.leaseS);
+              if (!this.stopped) this.startRenew(body.lease_s ?? this.o.leaseS);
               resolve();
             }
             return;
@@ -312,6 +385,12 @@ export class LayerFeed {
     }
     this.lastN = b.n;
     if (b.watch_id) this.watchId = b.watch_id;
+    if (b.mode === "cells" && !this.status.detail?.includes(ZOOM_IN)) {
+      this.store.replaceLayer(this.def.id, []);
+      this.setStatus({ detail: `density cells at this zoom: ${ZOOM_IN}` });
+    } else if (b.mode === "entities" && this.status.detail?.includes(ZOOM_IN)) {
+      this.setStatus({ detail: undefined });
+    }
     this.store.batch(() => {
       for (const op of b.ops) {
         switch (op.op) {
@@ -351,10 +430,19 @@ export class LayerFeed {
     this.status.resnapshots++;
     this.setStatus({ detail: `re-snapshot (${why})` });
     this.clearWatch();
+    clearTimeout(this.retryTimer);
+    if (this.watchId) {
+      // Release the old watch before opening a new one (layer-delta.md §2.1).
+      this.bus.publish("svc.layer.unwatch", toJson({ v: 1, watch_id: this.watchId }));
+      this.watchId = null;
+    }
+    this.path = "layer";
     try {
       const seq = await this.snapshot();
+      if (this.stopped) return;
       await this.watch(seq + 1);
-      this.setStatus({ mode: "layer", detail: undefined });
+      if (this.stopped) return;
+      this.setStatus({ mode: "layer", ...(this.status.detail?.includes(ZOOM_IN) ? {} : { detail: undefined }) });
     } catch (err) {
       if (this.stopped) return;
       if (err instanceof NoResponders) {
@@ -362,7 +450,7 @@ export class LayerFeed {
         return;
       }
       this.setStatus({ mode: "error", detail: String((err as Error).message) });
-      setTimeout(() => void this.resnapshot("retry"), 5000);
+      this.scheduleRetry();
     }
   }
 
@@ -388,9 +476,20 @@ export class LayerFeed {
   // ---- paths 2 and 3: interim ------------------------------------------------------------
 
   private async startInterim(): Promise<FeedMode> {
+    if (this.stopped) return "stopped";
+    this.path = "interim";
     this.clearWatch();
     for (const s of this.subs) s.unsubscribe();
     this.subs = [];
+    if (this.large && !this.aoiBounded()) {
+      // No layer service and no bounded AOI: refuse to pull a world-scale raw ent.* feed.
+      this.store.batch(() => this.store.idsInLayer(this.def.id).forEach((id) => this.store.remove(id, "left_aoi")));
+      this.setStatus({
+        mode: "core",
+        detail: `${ZOOM_IN}: no layer service, raw ent.* needs a view under ${this.o.interimMaxSpanDeg}°`,
+      });
+      return "core";
+    }
     for (const t of this.def.entityTypes) {
       this.subs.push(
         this.bus.subscribe(entSubject(t), {
@@ -408,7 +507,7 @@ export class LayerFeed {
                 return;
               }
             }
-            this.store.apply(body, this.def.id);
+            if (this.store.apply(body, this.def.id) === "capped") this.noteCapped();
             this.status.lastBatchAt = this.o.now();
           },
         }),
@@ -416,9 +515,12 @@ export class LayerFeed {
     }
     try {
       const n = await this.querySnapshot();
-      this.setStatus({ mode: "interim", detail: `svc.entity.query (${n}) + ent.*.*.state` });
+      if (this.stopped) return "stopped";
+      const capped = this.status.detail?.startsWith("entity cap");
+      this.setStatus({ mode: "interim", detail: capped ? this.status.detail : `svc.entity.query (${n}) + ent.*.*.state` });
       return "interim";
     } catch (err) {
+      if (this.stopped) return "stopped";
       const detail =
         err instanceof NoResponders
           ? "ent.*.*.state only (no svc.layer / svc.entity responders)"
@@ -451,20 +553,26 @@ export class LayerFeed {
         }
         throw err;
       }
+      if (this.stopped) return n;
       const se = serviceError(m);
       if (se) throw new LayerError("service_error", se);
       const body = parse<{ entities?: unknown[]; cursor?: string | null }>(m);
       if (!body) throw new LayerError("bad_reply", "svc.entity.query");
       this.store.batch(() => {
         for (const e of body.entities ?? []) {
-          this.store.apply(e, this.def.id);
-          n++;
+          if (this.store.apply(e, this.def.id) === "capped") this.noteCapped();
+          else n++;
         }
       });
       cursor = body.cursor ?? null;
       if (!cursor) break;
     }
     return n;
+  }
+
+  private noteCapped(): void {
+    const detail = `entity cap ${this.store.layerCap(this.def.id)} reached: zoom in`;
+    if (this.status.detail !== detail) this.setStatus({ detail });
   }
 
   private setStatus(p: Partial<FeedStatus>): void {

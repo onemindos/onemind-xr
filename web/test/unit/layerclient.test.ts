@@ -1,7 +1,7 @@
 import { NoRespondersError } from "@nats-io/nats-core";
 import { afterEach, describe, expect, it } from "vitest";
 import { DEFAULT_LAYERS } from "../../src/bus/catalog";
-import { LayerFeed, type Bus } from "../../src/bus/layerclient";
+import { bboxSpan, insideBbox, LayerFeed, type Bus } from "../../src/bus/layerclient";
 import { EntityStore } from "../../src/bus/store";
 
 // In-memory bus with NATS wildcard matching, reply subjects and 503 no-responders statuses.
@@ -267,5 +267,153 @@ describe("LayerFeed: interim and core paths (entity.md §8)", () => {
     await f.start();
     f.stop();
     expect(fb.published.every((p) => p.subject.startsWith("svc."))).toBe(true);
+  });
+});
+
+describe("LayerFeed: large layers stay AOI-bounded (layer-snapshot.md §1, FEATURES A14)", () => {
+  const air = DEFAULT_LAYERS.find((l) => l.id === "air")!;
+  const aircraft = (id: string, seq: number, lat: number, lon: number) =>
+    ent(id, seq, { entity_type: "aircraft", lat, lon });
+  const entSubs = (fb: FakeBus) => fb.subs.filter((s) => !s.dead && s.pat.startsWith("ent."));
+
+  it("cells mode at wide zoom: zoom in, keep the watch, never subscribe to raw ent.*", async () => {
+    const fb = new FakeBus();
+    const watches: { inbox: string; q: Record<string, unknown> }[] = [];
+    fb.serve("svc.layer.snapshot", (_q, m) =>
+      m.respond(js({ v: 1, layer: "air", part: 0, last: true, mode: "cells", ent_seq: 7, as_of: 1, items: [[1, 2, 900, 40, -74]] })),
+    );
+    fb.serve("svc.layer.watch", (q, m) => {
+      watches.push({ inbox: m.reply!, q });
+      m.respond(js({ v: 1, watch_id: "w-a", lease_s: q.lease_s, ent_seq: 7 }));
+    });
+    const store = new EntityStore();
+    const f = new LayerFeed(fb.bus, store, air, { aoi: { bbox: [-170, -80, 170, 80] }, zoom: 3 });
+    feeds.push(f);
+    expect(await f.start()).toBe("layer");
+    expect(f.status.detail).toMatch(/zoom in/);
+    expect(store.size).toBe(0);
+    expect(entSubs(fb)).toHaveLength(0);
+    expect(watches[0].q).toMatchObject({ from_seq: 8, zoom: 3 });
+    // Zooming in re-sends the watch with the new AOI; the service answers with enter ops.
+    f.setAoi({ bbox: [-74.3, 40.5, -73.6, 41] }, 10);
+    expect(watches.at(-1)!.q).toMatchObject({ watch_id: "w-a", zoom: 10, aoi: { bbox: [-74.3, 40.5, -73.6, 41] } });
+    fb.deliver(watches[0].inbox, js({ v: 1, watch_id: "w-a", layer: "air", n: 1, mode: "entities", ops: [{ op: "enter", e: aircraft("icao-1", 3, 40.7, -74) }] }));
+    expect(store.get("icao-1")).toBeDefined();
+    expect(f.status.detail).toBeUndefined();
+  });
+
+  it("aoi_required (or any service error) keeps a large layer on the layer path and retries", async () => {
+    const fb = new FakeBus();
+    let asks = 0;
+    fb.serve("svc.layer.snapshot", (q, m) => {
+      asks++;
+      if (!q.aoi) return m.respond(js({ v: 1, error: "aoi_required", detail: "large layer" }));
+      m.respond(js({ v: 1, layer: "air", part: 0, last: true, mode: "entities", ent_seq: 1, as_of: 1, items: [aircraft("icao-1", 1, 40.7, -74)] }));
+    });
+    fb.serve("svc.layer.watch", (q, m) => m.respond(js({ v: 1, watch_id: "w-a", lease_s: q.lease_s, ent_seq: 1 })));
+    const store = new EntityStore();
+    const f = new LayerFeed(fb.bus, store, air, { aoi: null, retryMs: 30 });
+    feeds.push(f);
+    expect(await f.start()).toBe("error");
+    expect(f.status.detail).toMatch(/aoi_required/);
+    expect(entSubs(fb)).toHaveLength(0);
+    await wait(80);
+    expect(asks).toBeGreaterThanOrEqual(2); // retried on the layer path
+    expect(entSubs(fb)).toHaveLength(0);
+    // A bounded view arrives: the feed retries at once and lands on the watch.
+    f.setAoi({ bbox: [-74.3, 40.5, -73.6, 41] }, 10);
+    await wait(30);
+    expect(f.status.mode).toBe("layer");
+    expect(store.get("icao-1")).toBeDefined();
+  });
+
+  it("with no layer responders, refuses raw ent.* until the AOI is bounded, then caps the store", async () => {
+    const fb = new FakeBus();
+    const store = new EntityStore();
+    const f = new LayerFeed(fb.bus, store, air, { aoi: { bbox: [-180, -85, 180, 85] }, maxEntities: 2 });
+    feeds.push(f);
+    expect(await f.start()).toBe("core");
+    expect(entSubs(fb)).toHaveLength(0);
+    expect(f.status.detail).toMatch(/zoom in/);
+    f.setAoi({ bbox: [-75, 40, -73, 41] }, 10);
+    await wait(10);
+    expect(entSubs(fb).map((s) => s.pat)).toEqual(["ent.aircraft.*.state"]);
+    for (let i = 0; i < 4; i++) fb.deliver(`ent.aircraft.icao-${i}.state`, js(aircraft(`icao-${i}`, 1, 40.5, -74)));
+    expect(store.layerSize("air")).toBe(2);
+    expect(f.status.detail).toMatch(/cap 2/);
+    // Zooming back out closes the raw subscription and clears the layer.
+    f.setAoi({ bbox: [-120, 10, -60, 60] }, 4);
+    await wait(10);
+    expect(entSubs(fb)).toHaveLength(0);
+    expect(store.layerSize("air")).toBe(0);
+  });
+
+  it("handles a view across the antimeridian (west > east)", async () => {
+    expect(insideBbox(10, 179, [170, 0, -170, 20])).toBe(true);
+    expect(insideBbox(10, -175, [170, 0, -170, 20])).toBe(true);
+    expect(insideBbox(10, 0, [170, 0, -170, 20])).toBe(false);
+    expect(bboxSpan([170, 0, -170, 20])).toEqual({ dLon: 20, dLat: 20 });
+    const fb = new FakeBus();
+    const store = new EntityStore();
+    const f = new LayerFeed(fb.bus, store, air, { aoi: { bbox: [175, 0, -175, 8] } });
+    feeds.push(f);
+    expect(await f.start()).toBe("core");
+    fb.deliver("ent.aircraft.icao-e.state", js(aircraft("icao-e", 1, 5, 178)));
+    fb.deliver("ent.aircraft.icao-w.state", js(aircraft("icao-w", 1, 5, -178)));
+    expect(store.layerSize("air")).toBe(2);
+  });
+});
+
+describe("LayerFeed: stop() is honoured mid-flight (review fixes)", () => {
+  it("a stop during a re-snapshot opens no new watch and renews nothing", async () => {
+    const fb = new FakeBus();
+    let hold: (() => void) | null = null;
+    let snaps = 0;
+    const watchReqs: Record<string, unknown>[] = [];
+    fb.serve("svc.layer.snapshot", (_q, m) => {
+      snaps++;
+      const reply = () => m.respond(js({ v: 1, layer: "fleet", part: 0, last: true, mode: "entities", ent_seq: 5, as_of: 1, items: [ent("sim-a", snaps)] }));
+      if (snaps === 1) reply();
+      else hold = reply;
+    });
+    fb.serve("svc.layer.watch", (q, m) => {
+      watchReqs.push(q);
+      m.respond(js({ v: 1, watch_id: `w-${watchReqs.length}`, lease_s: 0.05, ent_seq: 5 }));
+    });
+    const store = new EntityStore();
+    const f = new LayerFeed(fb.bus, store, fleet, { leaseS: 0.05 });
+    expect(await f.start()).toBe("layer");
+    const inbox = fb.subs.filter((s) => !s.dead && s.pat.startsWith("_INBOX")).at(-1)!.pat;
+    fb.deliver(inbox, js({ v: 1, watch_id: "w-1", layer: "fleet", n: 1, ops: [] }));
+    fb.deliver(inbox, js({ v: 1, watch_id: "w-1", layer: "fleet", n: 3, ops: [] })); // gap -> re-snapshot
+    await wait(5);
+    // The old watch was released before the new snapshot.
+    expect(fb.published.some((p) => p.subject === "svc.layer.unwatch" && (p.body as { watch_id: string }).watch_id === "w-1")).toBe(true);
+    f.stop();
+    store.remove("sim-a", "left_aoi");
+    hold!();
+    await wait(120);
+    const before = watchReqs.length;
+    await wait(120);
+    expect(watchReqs.length).toBe(before);
+    expect(watchReqs.filter((q) => q.watch_id === null)).toHaveLength(1); // no second watch
+    expect(store.get("sim-a")).toBeUndefined(); // the late snapshot was not applied
+    expect(f.status.mode).toBe("stopped");
+  });
+
+  it("a stop during the interim query loop applies no further pages", async () => {
+    const fb = new FakeBus();
+    let page = 0;
+    let f!: LayerFeed;
+    fb.serve("svc.entity.query", (_q, m) => {
+      page++;
+      if (page === 1) f.stop();
+      m.respond(js({ entities: [ent(`sim-${page}`, 1)], cursor: page < 5 ? `c${page}` : null }));
+    });
+    const store = new EntityStore();
+    f = new LayerFeed(fb.bus, store, fleet);
+    expect(await f.start()).toBe("stopped");
+    expect(page).toBe(1);
+    expect(store.size).toBe(0);
   });
 });

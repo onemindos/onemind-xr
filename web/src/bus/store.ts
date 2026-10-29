@@ -12,6 +12,11 @@ export interface EntityRecord {
   r: RenderEntity;
   /** The latest full record, when one arrived (core subscription or svc.entity.*). */
   full?: Entity;
+  /**
+   * True when a later render-only record (higher seq) arrived after `full`: position and the
+   * render fields are current, the rest of `full` is older. The client refetches it.
+   */
+  fullStale?: boolean;
   layer: string;
   receivedAt: number;
 }
@@ -27,6 +32,8 @@ export interface StoreStats {
   invalid: number;
   expired: number;
   removed: number;
+  /** New entities refused because their layer was at its cap. */
+  capped: number;
 }
 
 type Listener = (c: Change) => void;
@@ -40,7 +47,9 @@ export class EntityStore {
   private listeners = new Set<Listener>();
   private pending: Change = { upserted: [], removed: [] };
   private batchDepth = 0;
-  readonly stats: StoreStats = { applied: 0, ignoredOlder: 0, invalid: 0, expired: 0, removed: 0 };
+  private layerCounts = new Map<string, number>();
+  private caps = new Map<string, number>();
+  readonly stats: StoreStats = { applied: 0, ignoredOlder: 0, invalid: 0, expired: 0, removed: 0, capped: 0 };
 
   constructor(private now: () => number = () => Date.now()) {}
 
@@ -60,6 +69,24 @@ export class EntityStore {
     const out: string[] = [];
     for (const [id, rec] of this.recs) if (rec.layer === layer) out.push(id);
     return out;
+  }
+
+  /** Entities held for one layer. */
+  layerSize(layer: string): number {
+    return this.layerCounts.get(layer) ?? 0;
+  }
+
+  /**
+   * Cap a layer (FEATURES A14: no layer holds more than its cap). New entities beyond the cap
+   * are refused with "capped"; entities already held keep updating.
+   */
+  setLayerCap(layer: string, cap: number | undefined): void {
+    if (cap === undefined) this.caps.delete(layer);
+    else this.caps.set(layer, cap);
+  }
+
+  layerCap(layer: string): number | undefined {
+    return this.caps.get(layer);
   }
 
   onChange(l: Listener): () => void {
@@ -86,7 +113,7 @@ export class EntityStore {
     raw: unknown,
     layer: string,
     opts: { allowEqualSeq?: boolean } = {},
-  ): "added" | "updated" | "removed" | "ignored" | "invalid" {
+  ): "added" | "updated" | "removed" | "ignored" | "invalid" | "capped" {
     const r = toRender(raw);
     if (!r) {
       this.stats.invalid++;
@@ -111,9 +138,20 @@ export class EntityStore {
       this.stats.expired++;
       return held ? "removed" : "ignored";
     }
-    const full = isFull(raw) ? (raw as Entity) : held?.full;
-    const rec: EntityRecord = { r, full, layer: held?.layer ?? layer, receivedAt: now };
+    const recLayer = held?.layer ?? layer;
+    if (!held) {
+      const cap = this.caps.get(recLayer);
+      if (cap !== undefined && this.layerSize(recLayer) >= cap) {
+        this.stats.capped++;
+        return "capped";
+      }
+    }
+    const fresh = isFull(raw);
+    const full = fresh ? (raw as Entity) : held?.full;
+    const fullStale = !fresh && !!full && (typeof full.seq !== "number" || r.seq > full.seq);
+    const rec: EntityRecord = { r, full, fullStale, layer: recLayer, receivedAt: now };
     this.recs.set(r.entity_id, rec);
+    if (!held) this.layerCounts.set(recLayer, this.layerSize(recLayer) + 1);
     this.tombs.delete(r.entity_id);
     this.stats.applied++;
     this.emit({ upserted: [rec], removed: [] });
@@ -176,6 +214,7 @@ export class EntityStore {
     if (!rec) return;
     if (typeof full.seq === "number" && full.seq < rec.r.seq) return;
     rec.full = full;
+    rec.fullStale = false;
     this.emit({ upserted: [rec], removed: [] });
   }
 
@@ -184,6 +223,7 @@ export class EntityStore {
     if (seq !== undefined) this.tombs.set(id, { seq, at: this.now() });
     if (!rec) return;
     this.recs.delete(id);
+    this.layerCounts.set(rec.layer, Math.max(0, this.layerSize(rec.layer) - 1));
     this.stats.removed++;
     this.emit({ upserted: [], removed: [{ id, reason, layer: rec.layer }] });
   }

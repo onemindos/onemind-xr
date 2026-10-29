@@ -99,8 +99,14 @@ loop that sleeps when nothing changes (competitive-matrix.md).
 
 ## Known gaps (not in J1)
 
-- Density cells (`mode: "cells"`) for large layers at wide zoom are not drawn; the client asks
-  for entities with an AOI and shows "snapshot truncated: zoom in".
+- Density cells (`mode: "cells"`) for large layers at wide zoom are not drawn. The client always
+  asks a large layer for entities inside the view AOI; when the layer service answers with cells
+  it shows "zoom in for entities" and keeps the watch, which adds entities once the zoom allows.
+  On any other layer-service error (`aoi_required`, `too_many`, `layer_down`, timeout) a large
+  layer shows the error and retries the layer service; it never falls back to raw `ent.*`
+  while a layer service answers. With no layer responders at all, the raw `ent.*` fallback
+  opens for a large layer only when the view is under 10° on each side, and the store caps a
+  large layer at 5,000 entities.
 - Authentik login through auth callout into the `CLIENT` account (REFERENCE-ARCHITECTURE §8) is
   not wired: the client offers NATS user and password only.
 - PWA install, flat 2D map mode on one catalog and touch gestures beyond Cesium's are J6.

@@ -141,3 +141,38 @@ describe("EntityStore merge rules (entity.md §5, layer-delta.md §2.2)", () => 
     expect(s.get("sim-x1")!.full?.provenance?.how).toBe("m-s");
   });
 });
+
+describe("EntityStore: layer cap and older full records (review fixes)", () => {
+  it("refuses new entities beyond a layer cap and keeps updating held ones", () => {
+    const s = new EntityStore(clock().now);
+    s.setLayerCap("air", 2);
+    expect(s.apply(rec("a", 1), "air")).toBe("added");
+    expect(s.apply(rec("b", 1), "air")).toBe("added");
+    expect(s.apply(rec("c", 1), "air")).toBe("capped");
+    expect(s.apply(rec("a", 2, { lat: 31 }), "air")).toBe("updated");
+    expect(s.layerSize("air")).toBe(2);
+    expect(s.stats.capped).toBe(1);
+    s.remove("b", "left_aoi");
+    expect(s.layerSize("air")).toBe(1);
+    expect(s.apply(rec("c", 1), "air")).toBe("added");
+    // Other layers are not capped.
+    expect(s.apply(rec("d", 1), "fleet")).toBe("added");
+  });
+
+  it("marks the full record older when a render upsert with a higher seq arrives", () => {
+    const s = new EntityStore(clock().now);
+    s.apply(rec("sim-x1", 41), "fleet");
+    s.attachFull(simX1 as never); // seq 42
+    expect(s.get("sim-x1")!.fullStale).toBe(false);
+    expect(s.apply(rec("sim-x1", 43, { lat: 30.3 }), "fleet")).toBe("updated");
+    const r = s.get("sim-x1")!;
+    expect(r.r.lat).toBe(30.3);
+    expect(r.full?.seq).toBe(42);
+    expect(r.fullStale).toBe(true);
+    s.attachFull({ ...(simX1 as object), seq: 43 } as never);
+    expect(s.get("sim-x1")!.fullStale).toBe(false);
+    // A full record on the feed is never older than itself.
+    expect(s.apply({ ...(simX1 as object), seq: 44 }, "fleet")).toBe("updated");
+    expect(s.get("sim-x1")!.fullStale).toBe(false);
+  });
+});
