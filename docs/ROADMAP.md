@@ -17,7 +17,7 @@ parallel once M0 is done.
 
 ## Spikes (run in M0, before committing code)
 
-| ID | Question | Pass | If it fails |
+| ID | Question | Pass | If it fails (decision 0004) |
 |---|---|---|---|
 | S1 | Does UE 5.8 + Cesium for Unreal (current release) build and run on the owner's Mac? | Packaged app shows the globe | Pin the newest working pair and record why |
 | S2 | Does Pixel Streaming 2 stream from the Mac to a browser on the LAN? | Live picture and input < 150 ms | Decision 0002 falls back to a Linux GPU host, plus the L0 web client |

@@ -1,116 +1,160 @@
 # Ultracode run prompt
 
-Paste everything below the line into Claude Code, started in a folder that contains
-both checkouts side by side:
+Before starting:
 
-```
-work/
-  onemind-xr/   git clone https://github.com/onemindos/onemind-xr
-  omos/         git clone https://github.com/onemindos/omos
-```
-
-Grant the access in [`docs/ACCESS.md`](docs/ACCESS.md) first.
+1. On the owner's Mac, put both repos side by side and start Claude Code in `work/`:
+   ```
+   work/
+     onemind-xr/   git clone git@github.com:onemindos/onemind-xr.git
+     omos/         git clone git@github.com:onemindos/omos.git
+   ```
+2. Grant what you can from [`docs/ACCESS.md`](docs/ACCESS.md). Anything missing is
+   handled by the fallbacks in decision 0004; the run will not stop to ask.
+3. Paste everything below the line.
 
 ---
 
 ultracode
 
-You are building **OneMind XR**, the best open TAK platform: intel-dashboard breadth,
-TAK-native action and mesh, drones, robots and AI agents, and a live 3D digital twin,
-on every device level. The owner is Zeus (OneMind, an NGO). Work in two repos:
+# Mission
 
-- `onemind-xr/`: the client (Unreal Engine 5.8 + Cesium for Unreal). Read its
-  `CLAUDE.md`, then `docs/VISION.md`, `docs/FEATURES.md`, `docs/ARCHITECTURE.md`,
-  `docs/ROADMAP.md`, `docs/ACCESS.md`, `docs/decisions/` and
-  `docs/research/2026-10-29-findings.md`.
-- `omos/`: the platform (NATS bus, TAK Server, feeds, Hermes, bridges). Read its
-  `CLAUDE.md`, `docs/MISSION.md`, `docs/NATS-DOCTRINE.md`, `docs/STACK.md` and
-  `PLATFORM-ROADMAP.md`. **Its `CLAUDE.md` governs all work inside omos.** Branch
-  `feat/tak-mesh-gateway` holds the TAK mesh gateway (omos ADR 0003).
+Build **OneMind**: the best open TAK platform on the market. It is one 3D operating
+picture that combines intel-dashboard breadth (worldmonitor, osiris, worldwideview,
+gods-eye-view, Argos Atlas), TAK-native action and mesh, drones, robots and AI
+agents, and a live 3D digital twin of the owner's homestead. It runs on every level,
+from a phone browser to a native Mac app and a Meta Quest Pro headset. The owner is
+Zeus (OneMind, an NGO). Use the JADC2 loop throughout: Sense, Make Sense, Act.
 
-## Hard rules
+**Work autonomously from start to finish. Do not ask the owner questions.** Every
+owner decision is already made in
+`onemind-xr/docs/decisions/0004-owner-defaults-for-the-run.md`. When something is
+blocked, apply its fallback, record what happened, and keep going on everything
+else. Report blockers only in `docs/STATUS.md` and the final report.
 
-1. No guessing. Cite a file, URL or command output for every claim. Mark anything
+# The two repositories
+
+| Repo | Owns | Merge rule |
+|---|---|---|
+| `onemind-xr/` | The client: an Unreal Engine 5.8 project with Cesium for Unreal, its `OneMind*` plugins, the web front ends, client contracts and docs | Merge to `main` after an independent review agent approves |
+| `omos/` | The platform: NATS JetStream (the authority bus), TAK Server 5.8, feeds (Redpanda Connect, Python), Hermes, bridges, the TAK mesh gateway, Argo CD manifests | PRs only. Never merge `main`. Its `CLAUDE.md` governs all work inside it |
+
+Read before acting:
+- `onemind-xr/`: `CLAUDE.md`, `docs/VISION.md`, `docs/FEATURES.md`,
+  `docs/ARCHITECTURE.md`, `docs/ROADMAP.md`, `docs/ACCESS.md`, all of
+  `docs/decisions/`, and `docs/research/2026-10-29-findings.md`.
+- `omos/`: `CLAUDE.md`, `docs/MISSION.md`, `docs/NATS-DOCTRINE.md`, `docs/STACK.md`,
+  `PLATFORM-ROADMAP.md`, `docs/architecture/decisions/0003-tak-native-clients-and-mesh.md`.
+- omos branch `feat/tak-mesh-gateway`: the TAK mesh gateway in
+  `services/bridge/bridges/tak` (multicast SA, directed TCP, TAK Protocol v1). It has
+  no PR yet; opening and finishing that PR is yours (feature A7).
+
+# Facts already verified (don't re-research these; build on them)
+
+- VR-TAK is GPL-3.0, an engine fork of UE 5.3.2 (10,081 patched engine files), with
+  Commo only as Windows x64 binaries. **Do not fork it.** Port its plugins
+  (`VH_COT`, `VTAK_Mensuration`, `VTAK_Orbit`, `VH_Replication`, `VH_VR`,
+  `VH_SessionPlayback`) into the new project with attribution (decision 0001).
+- Cesium for Unreal supports the three newest Unreal versions (UE 5.8 since v2.28.0,
+  July 2026) and lists macOS and Android.
+- Pixel Streaming 2 on macOS is unproven: community reports show bugs. The
+  headset is a Meta Quest Pro (DK94EC). Quest Link needs Windows.
+- Common Commo (atak-civ `commoncommo`) is C++ with JNI, Objective-C and Win32
+  bindings. The TAK Protocol spec is atak-civ `takproto/README.txt`.
+- Intel dashboards scale by: collectors separate from the viewer, a latest-snapshot
+  cache per layer, loading layers on demand, and GPU batch rendering. In NATS terms:
+  streams per feed, KV for snapshots, subjects for deltas.
+- In omos today, Redpanda Connect pushes every aircraft, ship and transit item as CoT
+  straight to `tak.cot.inject`, and nothing publishes `ent.*.state`. Fixing both is
+  the first platform job.
+
+# Rules
+
+1. **No guessing.** Cite a file, URL or command output for every claim. Mark anything
    unproven as unverified.
-2. NATS subject grammar is locked. Missing pattern: write a proposal, don't invent.
-3. Cluster access is read-only except the sandbox namespace in `docs/ACCESS.md`.
-   Platform changes are omos PRs; never merge omos `main`; never `helm upgrade`,
-   `kubectl apply` outside the sandbox, `terraform apply` or `platform/install.sh`.
-   Do not touch omos PRs assigned to another harness in omos `CLAUDE.md`.
-4. No secrets in Git. Tokens come from the keychain or environment.
-5. Licences: this repo is GPL-3.0. Port VR-TAK and ATAK-CIV code with attribution;
-   reuse MIT code with its notice; never copy worldmonitor (AGPL) or worldwideview
-   (Elastic 2.0) code.
-6. Real assets: publish only to simulated assets (`sim-*`) and `tak.cot.mesh.tx`
-   until the owner signs off M4. Any command that moves real hardware needs a human
-   confirm.
-7. Done means evidence in `onemind-xr/docs/evidence/<milestone>/` (test output,
-   recording, screenshot, transcript).
-8. macOS (the owner's Apple Silicon Mac) is the first platform. A feature isn't done
-   until it runs there.
+2. **NATS grammar is locked** (omos `CLAUDE.md`). Use existing patterns only;
+   decision 0004 #8 covers the rare gap.
+3. **Cluster:** read-only, except a sandbox namespace if one was granted. Never
+   `kubectl apply` outside it, `helm upgrade`, `terraform apply`, or
+   `platform/install.sh`. Platform changes are omos PRs with the full omos
+   checklist: pinned GHCR image, Argo Application, requests and limits,
+   SealedSecrets, a `docs/STACK.md` row. The hub-core node pool is
+   memory-saturated, so new workloads target the ecosystem pool. Leave omos PRs
+   assigned to other harnesses (omos `CLAUDE.md`) alone.
+4. **No secrets in Git**, not even test values. Tokens come from the macOS keychain
+   or the environment.
+5. **Licences:** onemind-xr is GPL-3.0. Port VR-TAK and ATAK-CIV code with
+   attribution; reuse MIT code (gods-eye-view, osiris) with its notice; never copy
+   worldmonitor (AGPL-3.0) or worldwideview (Elastic 2.0) code.
+6. **Safety:** simulated assets only (`sim-*`). Asset commands always pass policy,
+   audit and a human-confirm step in the UI, even in simulation.
+7. **Evidence:** a feature is done only when its acceptance test in
+   `docs/FEATURES.md` passes and the proof (test output, screenshot, screen
+   recording, transcript) is in `onemind-xr/docs/evidence/<milestone>/`.
+8. **Mac first:** nothing counts as done until it runs on this Mac.
+9. **Never wait on a merge:** run unmerged omos services locally from their branches
+   against a local NATS server (or a leaf to the cluster if credentials exist), so
+   client lanes keep moving.
+10. **No spending:** create, buy or resize nothing that costs money.
 
-## Phase 1: Research (fan out, then synthesize)
+# Phase 1 — Research and contracts (M0)
 
-Run these lanes in parallel. Each writes `onemind-xr/docs/research/<topic>.md` with
-sources, verified facts, open risks and a recommendation.
+Run in parallel. Each lane writes `onemind-xr/docs/research/<topic>.md` with
+sources, verified facts, risks and a recommendation.
 
-1. **Competitors in depth:** worldmonitor, osiris, worldwideview, gods-eye-view,
-   Argos Atlas, ARTAK/EolianVR, CloudTAK, TAKX, WinTAK. For each: every data source
-   and layer, ingestion design, caching, rendering at scale, AI features, what they
-   cannot do. Output a feature-parity matrix against `docs/FEATURES.md` and list
-   features we are missing.
-2. **TAK depth:** atak-civ (Commo, takkernel, takproto, plugin SDK), TAK Server 5.8
-   APIs (Marti, mission API, data packages, federation), the omos NatsBridgePlugin
-   and cot-tap, and the omos mesh gateway. Answer spike S4 (Commo on macOS arm64).
-3. **VR-TAK porting map:** for each VR-TAK plugin, what it does, what depends on its
-   engine patch, and the port cost to UE 5.8.
-4. **Unreal 5.8 platform:** Cesium for Unreal (current release, macOS, Android),
-   Pixel Streaming 2 on macOS (spike S2), OpenXR on the Meta Quest Pro DK94EC
-   (spike S3), large-entity rendering (HISM, Niagara, Mass), a NATS client in Unreal
-   (spike S5).
-5. **Drones, robotics and agents:** PX4/ArduPilot SITL, MAVLink, ROS 2 to NATS
-   (Zenoh, rosbridge), CoT types and details for UAV/UGV, swarm tasking, onboard
-   detection, and agent tool design for Hermes over NATS (omos
-   `services/onemind-core`, `platform/hermes`).
-6. **omos live state (read-only):** what each feed publishes today, what writes
+1. **Competitors:** worldmonitor, osiris, worldwideview, gods-eye-view, Argos Atlas,
+   ARTAK/EolianVR, CloudTAK, TAKX, WinTAK. For each: every data source and layer,
+   ingestion, caching, rendering at scale, AI features, and what it cannot do.
+   Output `competitive-matrix.md` against `docs/FEATURES.md`, then add every
+   missing capability to `docs/FEATURES.md` with a priority and acceptance test.
+   **Target: match or beat every competitor on every row.**
+2. **TAK:** TAK Server 5.8 APIs (Marti, missions, data packages, federation), the omos
+   NatsBridgePlugin and cot-tap, the mesh gateway, the ATAK plugin SDK. Run spike S4.
+3. **VR-TAK porting map:** each plugin's function, its engine-patch dependencies, and
+   port cost.
+4. **Unreal platform:** run spikes S1 (UE + Cesium on this Mac), S2 (Pixel Streaming 2
+   from the Mac), S3 (Quest Pro) and S5 (NATS client in Unreal). Large-entity
+   rendering options (HISM, Niagara, Mass).
+5. **Drones, robots, agents:** PX4/ArduPilot SITL, MAVLink, ROS 2 to NATS (Zenoh or
+   rosbridge), CoT types and detail for UAVs and UGVs, swarm tasking, onboard
+   detection, Hermes agent tools over NATS (omos `services/onemind-core`,
+   `platform/hermes`).
+6. **omos live state (read-only):** what each feed publishes, what writes
    `kv-world-state` and `kv-fleet-state`, TAK Server and plugin health, Hermes
-   tools, and capacity for new services (the hub-core pool is memory-saturated).
+   tools, and node capacity.
 
-Then synthesize: update `docs/FEATURES.md` (add what competitors have that we
-lack, re-rank priorities), write `docs/contracts/` (entity, layer snapshot, layer
-delta, mission/task, asset command, CoT projection, each citing its omos source),
-and update decisions 0002 and 0003 from the spike results. **Stop and report to
-the owner** with a one-page summary and any decision only the owner can make.
+Then:
+- Write `docs/contracts/`: `entity.md`, `layer-snapshot.md`, `layer-delta.md`,
+  `mission-task.md`, `asset-command.md`, `cot-projection.md`,
+  `robotics-cot-profile.md`. Each one cites the omos file that defines its
+  subjects and buckets.
+- Update decisions 0002 and 0003 from the spike results, applying decision 0004
+  fallbacks where a spike failed.
+- Write `docs/research/SUMMARY.md` (one page).
 
-## Phase 2: Build (milestones M1–M6 in `docs/ROADMAP.md`)
+Do not stop here. Continue to Phase 2.
 
-Run independent lanes in parallel worktrees, one writer per set of files:
+# Phase 2 — Build (M1–M6 in `docs/ROADMAP.md`)
 
-- **Lane A, omos spine (M1):** fix the feeds (A1), feed registry and health (A2,
-  A3), entity service (A4), layer snapshots (A5), projector AOI filter (A6), mesh
-  gateway on the Mac (A7), MAVLink and SITL (H1, H2, H6, H9), policy and audit (I4).
-  One focused omos PR per feature, each with tests and the omos checklist (GHCR
-  pinned image, Argo Application, requests and limits, SealedSecrets, STACK.md row).
-- **Lane B, client on the Mac (M2):** UE 5.8 project, plugins from
-  `docs/ARCHITECTURE.md`, globe, layers on the contracts, TAK entities and sending
-  CoT, 10k entities at 60 fps.
-- **Lane C, surfaces (M3):** Pixel Streaming or its fallback, and the L0 light web
-  view on the same contracts.
-- **Lane D, act (M4):** AOIs, missions, tasking, asset commands with confirm,
-  Hermes panel and tools, alerts, role modes.
-- **Lane E, twin and headset (M5):** WebODM to 3D Tiles for the homestead, drone
-  video panels, Quest Pro build, simulation and rehearsal.
-- **Lane F, the leap (M6):** Commo in the client, swarm search, detections to
-  entities, multi-user, Windows and Linux builds.
+Parallel lanes in separate worktrees, one writer per set of files:
 
-Order: A and B start together after Phase 1; C after B shows a globe; D after A6
-and B; E and F after D. Every lane verifies its own work, then an independent
-reviewer agent checks it against the acceptance test in `docs/FEATURES.md` before
-it counts.
+| Lane | Repo | Scope (feature IDs) | Starts |
+|---|---|---|---|
+| A — Spine | omos | A1 fix the feeds, A2–A3 feed registry and health, A4 entity service, A5 layer snapshots, A6 projector AOI filter, A7 mesh gateway PR and LAN test with ATAK, H1–H2 MAVLink + SITL, H6 safety, H9 robotics CoT profile, I4 policy and audit. One focused PR per feature, each with tests | After Phase 1 |
+| B — Client | onemind-xr | B1–B6, C1–C2, F1: the UE project on the Mac, `OneMindBus`, `OneMindGlobe`, `OneMindLayers`, `OneMindEntities`, `OneMindCoT`; 10,000 entities at 60 fps | After Phase 1 |
+| C — Surfaces | onemind-xr | F2/F3 web streaming or fallback, J1 L0 light web client, J3 adaptive quality | After B shows a globe |
+| D — Act | both | D1–D6 AOIs, missions, tasking, asset commands, Hermes panel and tools, alerts; H3–H4 ROS 2 and tasking; I1–I3 agents; J2 role modes | After A6 and B |
+| E — Twin and XR | both | E1–E2 WebODM to 3D Tiles and drone video, F4 Quest Pro, H7 simulation and rehearsal | After D |
+| F — Leap | both | C3–C6 TAK contact, Commo in the client, data packages, voice; E3–E5; F5–F6 Windows, Linux, multi-user; H5 swarm; H8 detection; I5 multi-agent; B7–B10; G1–G3 | After D |
 
-## Reporting
+For every feature: implement, test, save the evidence, then have an independent
+reviewer agent check it against its acceptance test and the rules above. Fix
+findings before marking it done.
 
-Keep `onemind-xr/docs/STATUS.md` current: milestone, lane, done (with evidence
-link), blocked (with the exact owner action needed), next. At the end, report what
-is proven on the Mac, what is merged or awaiting the owner in omos, and what is
-left.
+# Reporting
+
+- Keep `onemind-xr/docs/STATUS.md` current: each milestone and feature, its state
+  (done with an evidence link, in progress, or blocked with the exact cause), and
+  the omos PR links.
+- **Final report:** what is proven on this Mac; which omos PRs are open and in what
+  order to merge them; which decision 0004 fallbacks were used and why; what access
+  was missing; and what is left, in priority order.

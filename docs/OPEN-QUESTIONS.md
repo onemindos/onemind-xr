@@ -1,5 +1,8 @@
 # Open Questions
 
+The build run does not wait on these. Each has a default or fallback in
+[decision 0004](decisions/0004-owner-defaults-for-the-run.md); the owner can revisit any of them.
+
 | # | Question | Owner | Resolved by |
 |---|---|---|---|
 | 1 | Pixel Streaming 2 on macOS with UE 5.8? | build | Spike S2 |

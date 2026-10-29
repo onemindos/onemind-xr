@@ -20,7 +20,7 @@ Status: **planning and setup.** No client code yet. Start with
 | [docs/FEATURES.md](docs/FEATURES.md) | Every feature, with priority and acceptance test |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Layers, data flow, deployment targets |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Milestones M0–M7 with exit criteria |
-| [docs/decisions/](docs/decisions/) | Decisions taken, and the spikes that can overturn them |
+| [docs/decisions/](docs/decisions/) | Decisions taken, including the owner defaults the run uses instead of asking (0004) |
 | [docs/research/](docs/research/) | Verified findings this plan rests on |
 | [docs/OPEN-QUESTIONS.md](docs/OPEN-QUESTIONS.md) | What is not known yet |
 
