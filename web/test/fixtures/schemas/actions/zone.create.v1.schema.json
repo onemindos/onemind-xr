@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.onemindos.local/actions/zone.create/v1",
+  "title": "zone.create v1 parameters",
+  "description": "Draw an area of interest or geofence (A2; ONTOLOGY.md section 6.2). Target: {entity_type: zone, entity_id: <zone id>}. Parameters of an ActionRequest (onemind-xr docs/contracts/asset-command.md section 6.1); the policy service copies them into the data of cmd.map.geofence.{id}.{verb} after approval and the geofence service (services/geofence) applies them to KV geofences. Unknown fields are refused.",
+  "type": "object",
+  "required": [],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "geo": {
+      "type": "object",
+      "required": [
+        "shape",
+        "kind",
+        "coords"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "shape": {
+          "enum": [
+            "polygon",
+            "multipolygon",
+            "circle",
+            "corridor"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "aoi",
+            "keep_in",
+            "keep_out",
+            "hazard",
+            "control_area"
+          ]
+        },
+        "coords": {
+          "type": "object",
+          "required": [
+            "type",
+            "coordinates"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Polygon",
+                "MultiPolygon",
+                "Point",
+                "LineString"
+              ]
+            },
+            "coordinates": {
+              "type": "array"
+            }
+          },
+          "description": "GeoJSON geometry, [lon, lat]: Polygon for polygon, MultiPolygon for multipolygon, Point for circle, LineString for corridor"
+        },
+        "radius_m": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 200000,
+          "description": "circle radius or corridor half-width"
+        },
+        "alt_min_m": {
+          "type": "number"
+        },
+        "alt_max_m": {
+          "type": "number"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "keep_in",
+                  "keep_out"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "shape": {
+                "enum": [
+                  "polygon",
+                  "circle"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "shape": {
+                "enum": [
+                  "circle",
+                  "corridor"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "radius_m"
+            ]
+          }
+        }
+      ]
+    },
+    "polygon": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5000,
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 3,
+        "items": {
+          "type": "number"
+        }
+      },
+      "description": "doctrine section 9.7 shorthand: outer ring as [[lon, lat], ...]; needs kind"
+    },
+    "kind": {
+      "enum": [
+        "aoi",
+        "keep_in",
+        "keep_out",
+        "hazard",
+        "control_area"
+      ]
+    },
+    "watch": {
+      "type": "boolean",
+      "description": "crossings are published and alerted; default true for keep_in, keep_out, hazard"
+    },
+    "watch_types": {
+      "type": "array",
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{0,31}$",
+        "not": {
+          "const": "person"
+        }
+      },
+      "description": "entity types the zone watches; person is refused (civilian stop line)"
+    },
+    "applies_to": {
+      "type": "array",
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_:-]{0,127}$"
+      }
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 500
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "geo"
+      ]
+    },
+    {
+      "required": [
+        "polygon",
+        "kind"
+      ]
+    }
+  ]
+}

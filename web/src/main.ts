@@ -325,6 +325,10 @@ async function connect(url: string): Promise<void> {
   // Geofence crossings (omos docs/NATS-DOCTRINE.md: evt.map.geofence.{id}.{enter|exit}).
   geofenceSub = conn.subscribe("evt.map.geofence.*.*", {
     callback: (_e, m) => {
+      // A refused subscription arrives here with an empty message (omos #562 CLIENT users may
+      // not subscribe evt.map.>); touching it would throw in nats-core's read loop and stop the
+      // whole connection.
+      if (_e) return;
       let body: unknown = null;
       try {
         body = m.json();

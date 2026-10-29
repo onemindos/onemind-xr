@@ -115,6 +115,25 @@ export function gotoRequest(
   };
 }
 
+/**
+ * A zone change as an action (ONTOLOGY.md §6.2 `zone.create|update|remove`, level A2). The policy
+ * service holds it for one human confirm, signs the approved command and sends it on
+ * `cmd.map.geofence.{zoneId}.{verb}`; the geofence service (omos #569) applies only signed,
+ * approved, unexpired commands. `params` follow #569 `zone.{verb}.v1.schema.json`.
+ */
+export function zoneRequest(verb: "create" | "update" | "remove", zoneId: string, params: Record<string, unknown>, requester: string, reason?: string): ActionRequest {
+  return {
+    v: 1,
+    request_id: uuid(),
+    action_type: `zone.${verb}`,
+    action_version: 1,
+    target: { entity_type: "zone", entity_id: zoneId },
+    params,
+    requested_by: { kind: "user", id: requester },
+    reason,
+  };
+}
+
 export function simpleRequest(actionType: string, target: Target, requester: string, params: Record<string, unknown> = {}): ActionRequest {
   return { v: 1, request_id: uuid(), action_type: actionType, action_version: 1, target, params, requested_by: { kind: "user", id: requester } };
 }
@@ -122,6 +141,7 @@ export function simpleRequest(actionType: string, target: Target, requester: str
 export interface ActionView {
   action_id: string;
   action_type?: string;
+  action_version?: number;
   target?: Target;
   params?: Record<string, unknown>;
   params_hash?: string;
@@ -139,11 +159,76 @@ export interface ActionView {
 
 type Listener = (a: ActionView) => void;
 
+/**
+ * True once the client holds everything the hash binds: action type and version, target and
+ * params. An action first seen on `evt.so.action.proposed` has no params (the audit event carries
+ * only the hash), so it is not ready until `svc.policy.action.get` answers.
+ */
+export function detailsLoaded(a: ActionView): boolean {
+  return (
+    typeof a.action_type === "string" &&
+    typeof a.action_version === "number" &&
+    !!a.target &&
+    typeof a.target.entity_id === "string" &&
+    typeof a.target.entity_type === "string" &&
+    !!a.params &&
+    typeof a.params === "object" &&
+    !Array.isArray(a.params) &&
+    typeof a.params_hash === "string"
+  );
+}
+
+/** The client's own check of `params_hash` against the parameters it shows. */
+export type HashCheck = "checking" | "verified" | "mismatch" | "unavailable";
+
+export interface ConfirmGate {
+  approve: boolean;
+  reject: boolean;
+  /** why Approve is off, for the dialog ("" when it is on) */
+  why: string;
+}
+
+/**
+ * Whether the confirm dialog may offer Approve and Reject (asset-command.md §4 step 4: the human
+ * sees the exact parameters the hash binds). Approve needs the details loaded and a hash that did
+ * not fail the client's check. Reject needs only the hash: refusing an action is always safe.
+ */
+export function confirmGate(a: ActionView, canConfirm: boolean, hash: HashCheck): ConfirmGate {
+  const pending = a.status === "awaiting_confirmation";
+  const reject = pending && canConfirm && typeof a.params_hash === "string";
+  if (!pending) return { approve: false, reject: false, why: "" };
+  if (!canConfirm) return { approve: false, reject: false, why: "not allowed" };
+  if (!detailsLoaded(a)) return { approve: false, reject, why: "loading parameters" };
+  if (hash === "checking") return { approve: false, reject, why: "checking the hash" };
+  if (hash === "mismatch") return { approve: false, reject, why: "hash mismatch" };
+  return { approve: true, reject, why: "" };
+}
+
+/** How long terminal actions stay listed, and how many at most (older ones are dropped). */
+export const TERMINAL_RETENTION_MS = 30 * 60_000;
+export const MAX_TERMINAL = 200;
+
 /** Merges what the client learns about actions from replies, audit events and polling. */
 export class ActionTracker {
   private actions = new Map<string, ActionView>();
   private listeners = new Set<Listener>();
   constructor(private now: () => number = () => Date.now()) {}
+
+  get size(): number {
+    return this.actions.size;
+  }
+
+  /**
+   * Drop terminal actions older than the retention time, and the oldest beyond `maxTerminal`.
+   * Open actions are never dropped; ids in `keep` (the one in the dialog) neither.
+   */
+  prune(keep: Set<string> = new Set(), retentionMs = TERMINAL_RETENTION_MS, maxTerminal = MAX_TERMINAL): string[] {
+    const now = this.now();
+    const terminal = [...this.actions.values()].filter((a) => TERMINAL.has(a.status) && !keep.has(a.action_id)).sort((a, b) => b.updatedAt - a.updatedAt);
+    const drop = terminal.filter((a, i) => i >= maxTerminal || now - a.updatedAt > retentionMs).map((a) => a.action_id);
+    for (const id of drop) this.actions.delete(id);
+    return drop;
+  }
 
   onChange(fn: Listener): () => void {
     this.listeners.add(fn);
@@ -189,6 +274,7 @@ export class ActionTracker {
       r.action_id || `local-${req.request_id}`,
       {
         action_type: req.action_type,
+        action_version: req.action_version,
         target: req.target,
         params: req.params,
         params_hash: r.params_hash,
@@ -211,8 +297,9 @@ export class ActionTracker {
       a.action_id,
       {
         action_type: a.action_type as string,
+        action_version: typeof a.action_version === "number" ? a.action_version : undefined,
         target: a.target as Target,
-        params: a.params as Record<string, unknown>,
+        params: a.params && typeof a.params === "object" && !Array.isArray(a.params) ? (a.params as Record<string, unknown>) : undefined,
         params_hash: a.params_hash as string,
         level: a.level as string,
         confirm_by: a.confirm_by as string,

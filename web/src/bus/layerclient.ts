@@ -288,6 +288,7 @@ export class LayerFeed {
       };
       const sub = this.bus.subscribe(inbox, {
         callback: (_e, m) => {
+          if (_e) return done(new LayerError("not_permitted", _e.message));
           if (isNoResponders(m)) return done(new NoResponders(subject));
           const c = parse<SnapshotChunk>(m);
           if (!c) return done(new LayerError("bad_reply", subject));
@@ -318,6 +319,7 @@ export class LayerFeed {
       }, this.o.snapshotTimeoutMs);
       this.watchSub = this.bus.subscribe(inbox, {
         callback: (_e, m) => {
+          if (_e) return;
           if (isNoResponders(m)) {
             if (first) {
               first = false;
@@ -494,6 +496,10 @@ export class LayerFeed {
       this.subs.push(
         this.bus.subscribe(entSubject(t), {
           callback: (_e, m) => {
+            // nats-core hands a refused subscription (Permissions Violation) to the callback with
+            // an empty message; reading it would throw inside the connection's read loop and stop
+            // every delivery on the connection (omos #562 CLIENT users may not subscribe ent.*).
+            if (_e) return;
             const body = parse<Record<string, unknown>>(m);
             if (!body) {
               this.store.stats.invalid++;

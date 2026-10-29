@@ -2,7 +2,10 @@
 //
 // Real components, built from their omos branches when available:
 //   - policy service, omos #554 feat/policy-service (services/policy), POLICY_AUTHZ=local with the
-//     branch's OpenFGA model and a per-run tuples file
+//     branch's OpenFGA model and a per-run tuples file. Built from a temp copy with
+//     policy-zone-actions.patch applied: owner proposal D1-P4 of omos #569 (the `zone.*` catalogue
+//     entries, A2, executed on `cmd.map.geofence.{id}.{verb}`), which #554 does not carry yet; the
+//     schema dir adds #569's `zone.{create,update,remove}.v1` (test/fixtures/schemas/actions)
 //   - MAVLink bridge, omos #550 feat/mavlink-bridge-fleet (services/bridge/bridges/mavlink), with
 //     signature checking on (Ed25519 key generated per run)
 //   - the scripted MAVLink drone, onemind-xr scripts/sim/mavlink_sim_drone.py (sim-x1)
@@ -10,9 +13,11 @@
 //   - entity: omos #552 never sets `capabilities`, so the real policy would deny every goto
 //     `not_capable`; this stand-in turns `tel.fleet.drone.sim-x1.*` into `ent.drone.sim-x1.state`
 //     and answers `svc.entity.get` with the capabilities the bridge accepts
-//   - geofence writer and watcher: D1's writer of KV `geofences` and the Tile38 watcher do not
-//     exist yet; this one applies `cmd.map.geofence.*`, mirrors zones to `ent.zone.*`, and raises
-//     `evt.map.geofence.{id}.{enter|exit}`
+//   - geofence writer and watcher (omos #569 is not runnable from this suite yet): like #569, it
+//     applies a `cmd.map.geofence.{id}.{verb}` only when it carries a valid policy `sig` (Ed25519
+//     over the JCS envelope), a future `expires_at` and `approval.status: approved`; it answers
+//     on `evt.map.geofence.{created|updated|deleted|refused}` (D1-P2) so the policy service closes
+//     the action, mirrors zones to `ent.zone.*`, and raises `evt.map.geofence.{id}.{enter|exit}`
 //   - feeds: `tel.feed.{source}.status` heartbeats in the omos #553 feed-status.v1 shape
 //   - Hermes: a scripted model (no paid model API may be called here) on
 //     `agents.prompt.hermes.zeus.legacy` with the AGENTS permissions of omos #562
@@ -20,15 +25,17 @@
 //     `tak.cot.out`
 // Every password is random per run and lives only in the temp dir; nothing is committed.
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
-import { createHash, generateKeyPairSync, randomBytes } from "node:crypto";
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { createHash, generateKeyPairSync, randomBytes, randomUUID, verify as edVerify, type KeyObject } from "node:crypto";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { createServer, connect as tcpConnect } from "node:net";
 import { createSocket } from "node:dgram";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { headers, wsconnect, type NatsConnection } from "@nats-io/nats-core";
 import { splitPrompt } from "../../src/act/hermes";
 import { destination, distanceM, type LonLat } from "../../src/act/geo";
 import { xmlEscape } from "../../src/act/cot";
+import { canonicalize } from "../../src/act/jcs";
 
 const WORK = process.env.ONEMIND_WORK ?? "/Users/danielcarku/Desktop/work";
 const TMP_ROOT = process.env.ACT_TMP ?? join(WORK, ".run", "tmp-m4-web");
@@ -36,6 +43,11 @@ const POLICY_DIR = process.env.OMOS_POLICY_DIR ?? join(WORK, "wt/i4-policy");
 const BRIDGE_DIR = process.env.OMOS_BRIDGE_DIR ?? join(WORK, "wt/h2-mavlink");
 const SIM = process.env.SIM_DRONE ?? join(WORK, "onemind-xr/scripts/sim/mavlink_sim_drone.py");
 const PY = process.env.PYTHON ?? join(WORK, ".tools/py/bin/python");
+const HERE = dirname(fileURLToPath(import.meta.url));
+const POLICY_PATCH = join(HERE, "policy-zone-actions.patch");
+const ZONE_SCHEMAS = join(HERE, "..", "fixtures", "schemas", "actions");
+/** A non-simulated drone record (a fixture: nothing commands it; the policy must refuse it). */
+export const NONSIM_ID = "nonsim-x9";
 
 export const CENTER: LonLat = [-97.7431, 30.2672];
 /** Fixture places for Hermes, east of home (zones published at start). */
@@ -112,6 +124,23 @@ function goBuild(dir: string, pkg: string, out: string): string | null {
   return r.status === 0 ? out : null;
 }
 
+/** The #554 policy service with D1-P4 applied (a temp copy; the branch worktree is never touched). */
+function buildPatchedPolicy(out: string): string | null {
+  const src = join(POLICY_DIR, "services/policy");
+  if (!existsSync(src)) return null;
+  const copy = join(TMP_ROOT, "policy-src");
+  rmSync(copy, { recursive: true, force: true });
+  cpSync(src, copy, { recursive: true });
+  const r = spawnSync("patch", ["-p1", "--forward", "-s", "-i", POLICY_PATCH], { cwd: copy, encoding: "utf8" });
+  if (r.status !== 0) {
+    process.stderr.write(`policy-zone-actions.patch does not apply to ${src}:\n${r.stdout}${r.stderr}\n`);
+    return null;
+  }
+  const bin = goBuild(copy, "./cmd/policy", out);
+  rmSync(copy, { recursive: true, force: true });
+  return bin;
+}
+
 export interface Availability {
   policy: string | null;
   bridge: string | null;
@@ -123,7 +152,7 @@ let built: Availability | null = null;
 export function buildReal(binDir = join(TMP_ROOT, "bin")): Availability {
   if (built) return built;
   mkdirSync(binDir, { recursive: true });
-  const policy = process.env.POLICY_BIN && existsSync(process.env.POLICY_BIN) ? process.env.POLICY_BIN : goBuild(join(POLICY_DIR, "services/policy"), "./cmd/policy", join(binDir, "policy"));
+  const policy = process.env.POLICY_BIN && existsSync(process.env.POLICY_BIN) ? process.env.POLICY_BIN : buildPatchedPolicy(join(binDir, "policy"));
   const bridge = process.env.BRIDGE_BIN && existsSync(process.env.BRIDGE_BIN) ? process.env.BRIDGE_BIN : goBuild(join(BRIDGE_DIR, "services/bridge/bridges/mavlink"), ".", join(binDir, "bridge-mavlink"));
   const python = existsSync(PY) && existsSync(SIM) && spawnSync(PY, ["-I", "-c", "import pymavlink"]).status === 0;
   const miss = [!policy && `policy (${POLICY_DIR})`, !bridge && `bridge (${BRIDGE_DIR})`, !python && "python with pymavlink"].filter(Boolean);
@@ -135,6 +164,11 @@ function natsConf(dir: string, port: number, wsPort: number, p: Record<string, s
   const clientPerms = `permissions: {
           publish: { allow: ["svc.>", "cmd.map.>", "agents.prompt.hermes.>", "_INBOX.>"], deny: ["cmd.fleet.>"] }
           subscribe: { allow: ["_INBOX.>", "cmd.map.>", "ent.>", "evt.so.action.>", "evt.map.>", "tel.feed.>", "tak.cot.>"] } }`;
+  // Exactly the CLIENT user of omos #562 (platform/nats/identities/identities.yaml): requests and
+  // cmd.map only; no subscription to evt.so.action, tel.feed, tak.cot or ent.
+  const client562 = `permissions: {
+          publish: { allow: ["svc.layer.>", "svc.entity.>", "svc.policy.>", "svc.cot.send", "cmd.map.>", "agents.prompt.hermes.>"] }
+          subscribe: { allow: ["cmd.map.>", "_INBOX.>"] } }`;
   return `
 listen: "127.0.0.1:${port}"
 websocket { listen: "127.0.0.1:${wsPort}", no_tls: true }
@@ -146,7 +180,7 @@ accounts {
       { user: admin, password: "${p.admin}" }
       { user: policy, password: "${p.policy}", permissions: {
           publish: { allow: ["cmd.>", "evt.so.action.>", "svc.entity.get", "$JS.API.>", "_INBOX.>"] }
-          subscribe: { allow: ["svc.policy.>", "evt.drone.>", "evt.robot.>", "evt.vehicle.>", "evt.mission.>", "evt.entity.>", "_INBOX.>"] }
+          subscribe: { allow: ["svc.policy.>", "evt.drone.>", "evt.robot.>", "evt.vehicle.>", "evt.mission.>", "evt.entity.>", "evt.map.geofence.*", "_INBOX.>"] }
           allow_responses: true } }
       { user: bridge, password: "${p.bridge}", permissions: {
           publish: { allow: ["tel.fleet.drone.sim-x1.>", "evt.drone.sim-x1.>"] }
@@ -166,6 +200,7 @@ accounts {
       { user: zeus, password: "${p.zeus}", ${clientPerms} }
       { user: alice, password: "${p.alice}", ${clientPerms} }
       { user: newbie, password: "${p.newbie}", ${clientPerms} }
+      { user: carol, password: "${p.carol}", ${client562} }
     ]
     exports: [ { stream: "cmd.map.>" } ]
     imports: [
@@ -201,13 +236,18 @@ accounts {
 }
 
 function actionTypes(): string[] {
-  return ["goto", "hold", "rtl", "land", "orbit", "observe", "estop", "disarm", "arm", "takeoff", "estop_release", "geofence_override"].map((v) => `asset.${v}`).concat(["alert.acknowledge", "alert.resolve"]);
+  return ["goto", "hold", "rtl", "land", "orbit", "observe", "estop", "disarm", "arm", "takeoff", "estop_release", "geofence_override"]
+    .map((v) => `asset.${v}`)
+    .concat(["alert.acknowledge", "alert.resolve", "zone.create", "zone.update", "zone.remove"]);
 }
 
 function tuples(): { user: string; relation: string; object: string }[] {
   const t: { user: string; relation: string; object: string }[] = [
     { user: "user:zeus", relation: "operator", object: "asset:sim-x1" },
     { user: "user:alice", relation: "operator", object: "asset:sim-x1" },
+    // carol: the #562 CLIENT permission run (status by polling only)
+    { user: "user:carol", relation: "operator", object: "asset:sim-x1" },
+    ...["asset.rtl", "asset.goto", "asset.estop"].flatMap((a) => ["proposer", "approver"].map((r) => ({ user: "user:carol", relation: r, object: `action_type:${a}` }))),
   ];
   for (const a of actionTypes()) {
     for (const u of ["user:zeus", "user:alice"]) {
@@ -261,8 +301,9 @@ class EntityStandin {
       location: { lat: d.lat, lon: d.lon, hae_m: d.hae, course_deg: d.course, speed_mps: d.speed, measured_t: d.t },
       health: { overall: d.connection === "online" ? "ok" : "degraded", connection: d.connection, battery_pct: d.battery },
       status: { mode: d.mode },
-      // The task types the bridge accepts (omos #550 status meta commands_accepted).
-      capabilities: ["onemind.task.goto.v1", "onemind.task.rtl.v1", "onemind.task.land.v1", "onemind.task.hold.v1"],
+      // The task types the bridge accepts (omos #550 status meta commands_accepted:
+      // goto,rtl,land,arm,disarm,estop,takeoff; it has no hold, and refuses it unknown_action).
+      capabilities: ["onemind.task.goto.v1", "onemind.task.rtl.v1", "onemind.task.land.v1"],
       traits: ["locatable", "trackable", "taskable", "observable"],
       indicators: { simulated: true, exercise: false, emergency: false, starred: false, egress_tak: false },
       provenance: { primary: "bridge-mavlink", how: "m-s", source_t: d.t },
@@ -314,6 +355,17 @@ class EntityStandin {
         disposition: "unknown", indicators: { simulated: true }, provenance: { primary: "fixture", how: "m-s", source_t: now },
       });
     }, 1000));
+    // A non-simulated drone (fixture record only): the D3 not_simulated case proposes to it.
+    const nonsim = destination(CENTER, 180, 3000);
+    this.timers.push(setInterval(() => {
+      const now = Date.now();
+      this.publish({
+        v: 1, uid: NONSIM_ID, entity_id: NONSIM_ID, entity_type: "drone", kind: "multirotor", callsign: "NONSIM-X9", live: true, seq: this.next(NONSIM_ID),
+        t: now, stale: 10, expiry_t: now + 60_000, lat: nonsim[1], lon: nonsim[0], hae: 200, course: -1, speed: 0,
+        location: { lat: nonsim[1], lon: nonsim[0], hae_m: 200, measured_t: now }, disposition: "friendly",
+        indicators: { simulated: false }, provenance: { primary: "fixture", how: "m-s", source_t: now },
+      });
+    }, 1000));
     this.nc.subscribe("svc.entity.get", {
       callback: (_e, m) => {
         let q: { entity_id?: string } = {};
@@ -334,27 +386,110 @@ class EntityStandin {
   }
 }
 
+/** What the stand-in did with each `cmd.map.geofence.*` it received. */
+export interface GeofenceResult {
+  subject: string;
+  zone_id: string;
+  outcome: "created" | "updated" | "deleted" | "refused";
+  code?: string;
+  message?: string;
+  signed: boolean;
+  action_id?: string;
+  at: number;
+}
+
 class GeofenceStandin {
   zones = new Map<string, Record<string, unknown>>();
   inside = new Map<string, boolean>();
+  results: GeofenceResult[] = [];
   seq = 0;
-  constructor(private nc: NatsConnection, private kv: { put(k: string, v: Uint8Array): Promise<unknown>; delete(k: string): Promise<unknown> }, private entity: EntityStandin) {}
+  constructor(
+    private nc: NatsConnection,
+    private kv: { put(k: string, v: Uint8Array): Promise<unknown>; delete(k: string): Promise<unknown> },
+    private entity: EntityStandin,
+    private policyKeys: Map<string, KeyObject>,
+  ) {}
 
-  async apply(id: string, verb: string, body: Record<string, unknown>): Promise<void> {
-    if (!/^[A-Za-z0-9_-]{1,64}$/.test(id)) return;
-    if (verb === "remove") {
-      await this.kv.delete(id);
-      const z = this.zones.get(id);
-      this.zones.delete(id);
-      if (z) this.entity.publish({ ...z, live: false, seq: this.entity.next(id), t: Date.now() });
-      return;
+  /** Fixture zones present before the run (as if already in KV `geofences`). */
+  async seed(id: string, rec: Record<string, unknown>): Promise<void> {
+    await this.write(id, rec);
+  }
+
+  private async write(id: string, rec: Record<string, unknown>): Promise<void> {
+    const full = { ...rec, zone_id: id, entity_id: id, uid: id, entity_type: "zone", live: true, pinned: true, expiry_t: null, t: Date.now(), seq: this.entity.next(id) };
+    this.zones.set(id, full);
+    await this.kv.put(id, enc.encode(JSON.stringify(full)));
+    this.entity.publish(full);
+  }
+
+  /** The #569 command gate: policy signature, not expired, approved. Returns a refusal or null. */
+  gate(env: Record<string, unknown>): { code: string; message: string } | null {
+    const sig = env.sig as { alg?: string; kid?: string; value?: string } | undefined;
+    if (!sig || typeof sig !== "object") return { code: "unsigned", message: "command carries no policy signature" };
+    const key = this.policyKeys.get(sig.kid ?? "");
+    if (sig.alg !== "ed25519" || !key || typeof sig.value !== "string") return { code: "bad_signature", message: `unknown key or algorithm (${sig.kid}/${sig.alg})` };
+    const { sig: _drop, ...rest } = env;
+    void _drop;
+    let ok = false;
+    try {
+      ok = edVerify(null, Buffer.from(canonicalize(rest)), key, Buffer.from(sig.value, "base64"));
+    } catch {
+      ok = false;
     }
-    const zone = (body.zone ?? null) as Record<string, unknown> | null;
-    if (!zone || typeof zone.geo !== "object") return;
-    const rec = { ...zone, entity_id: id, uid: id, entity_type: "zone", live: true, pinned: true, expiry_t: null, t: Date.now(), seq: this.entity.next(id) };
-    this.zones.set(id, rec);
-    await this.kv.put(id, enc.encode(JSON.stringify(rec)));
-    this.entity.publish(rec);
+    if (!ok) return { code: "bad_signature", message: "signature does not verify" };
+    const exp = Date.parse(String(env.expires_at ?? ""));
+    if (!(exp > Date.now())) return { code: "expired", message: "expires_at is missing or past" };
+    if ((env.approval as { status?: string } | undefined)?.status !== "approved") return { code: "not_approved", message: "approval.status is not approved" };
+    return null;
+  }
+
+  private result(subject: string, zone: string, outcome: GeofenceResult["outcome"], env: Record<string, unknown>, refusal?: { code: string; message: string }): void {
+    const action_id = typeof env.action_id === "string" ? env.action_id : undefined;
+    this.results.push({ subject, zone_id: zone, outcome, signed: !!env.sig, action_id, at: Date.now(), ...refusal });
+    const s = `evt.map.geofence.${outcome}`;
+    const ev = {
+      v: 1, id: randomUUID(), ts: new Date().toISOString(), source: "geofence-standin", subject: s,
+      ...(typeof env.id === "string" ? { causation: env.id } : {}),
+      data: { zone_id: zone, action_id, ...(refusal ?? {}) },
+    };
+    this.nc.publish(s, enc.encode(JSON.stringify(ev)));
+  }
+
+  /** Apply one command envelope as omos #569 does (zone.{verb}.v1 params in `data`). */
+  async onCommand(subject: string, env: Record<string, unknown>): Promise<void> {
+    const [, , , id, verb] = subject.split(".");
+    if (!/^[a-z0-9_][a-z0-9_-]{0,63}$/.test(id ?? "")) return this.result(subject, id ?? "", "refused", env, { code: "schema_invalid", message: "zone id is not one lowercase token" });
+    const refusal = this.gate(env);
+    if (refusal) return this.result(subject, id, "refused", env, refusal);
+    const data = (env.data ?? {}) as Record<string, unknown>;
+    const cur = this.zones.get(id);
+    if (verb === "remove" || verb === "delete") {
+      if (!cur) return this.result(subject, id, "refused", env, { code: "not_found", message: "no such zone" });
+      await this.kv.delete(id);
+      this.zones.delete(id);
+      this.entity.publish({ ...cur, live: false, seq: this.entity.next(id), t: Date.now() });
+      return this.result(subject, id, "deleted", env);
+    }
+    if (verb !== "create" && verb !== "update") return this.result(subject, id, "refused", env, { code: "schema_invalid", message: `unknown verb ${verb}` });
+    if (verb === "create" && cur) return this.result(subject, id, "refused", env, { code: "conflict", message: "zone exists" });
+    if (verb === "update" && !cur) return this.result(subject, id, "refused", env, { code: "not_found", message: "no such zone" });
+    const geo = (data.geo ?? cur?.geo) as { shape?: string; kind?: string; coords?: { coordinates?: unknown } } | undefined;
+    if (!geo?.shape || !geo.kind || !geo.coords) return this.result(subject, id, "refused", env, { code: "schema_invalid", message: "geo is required" });
+    let center: LonLat;
+    if (geo.shape === "circle") center = geo.coords.coordinates as LonLat;
+    else {
+      const ring = ((geo.coords.coordinates as LonLat[][])[0] ?? []).slice(0, -1);
+      center = [ring.reduce((t, p) => t + p[0], 0) / ring.length, ring.reduce((t, p) => t + p[1], 0) / ring.length];
+    }
+    const name = (data.name as string | undefined) ?? (cur?.name as string | undefined) ?? id;
+    const approval = env.approval as { approver?: string } | undefined;
+    await this.write(id, {
+      ...(cur ?? {}), v: 1, name, callsign: name, active: data.active ?? cur?.active ?? true, geo, lat: center[1], lon: center[0],
+      watch: data.watch ?? cur?.watch ?? true,
+      properties: { applies_to: (data.applies_to as string[] | undefined) ?? (cur?.properties as { applies_to?: string[] } | undefined)?.applies_to ?? [] },
+      updated_by: approval?.approver ?? null, action_id: env.action_id, command_id: env.id, simulated: true,
+    });
+    return this.result(subject, id, verb === "create" ? "created" : "updated", env);
   }
 
   contains(z: Record<string, unknown>, p: LonLat): boolean {
@@ -373,14 +508,13 @@ class GeofenceStandin {
   start(): NodeJS.Timeout {
     this.nc.subscribe("cmd.map.geofence.*.*", {
       callback: (_e, m) => {
-        const [, , , id, verb] = m.subject.split(".");
-        let body: Record<string, unknown> = {};
+        let env: Record<string, unknown> = {};
         try {
-          body = JSON.parse(dec.decode(m.data));
+          env = JSON.parse(dec.decode(m.data));
         } catch {
-          /* empty */
+          /* refused below as unsigned */
         }
-        void this.apply(id, verb, body);
+        void this.onCommand(m.subject, env && typeof env === "object" ? env : {});
       },
     });
     // Pinned zones are republished (same seq) so a client that joins later sees them, as a layer
@@ -562,7 +696,7 @@ class TakStandin {
 export interface ActStack {
   wsUrl: string;
   url: string;
-  users: Record<"zeus" | "alice" | "newbie", { user: string; pass: string }>;
+  users: Record<"zeus" | "alice" | "newbie" | "carol", { user: string; pass: string }>;
   admin: NatsConnection;
   feeds: FeedStandin;
   hermes: HermesStandin;
@@ -571,6 +705,8 @@ export interface ActStack {
   geofence: GeofenceStandin;
   audit: { subject: string; data: Record<string, unknown>; at: number }[];
   commands: { subject: string; data: Record<string, unknown>; at: number }[];
+  /** every `cmd.map.geofence.*` seen (from the policy service, or anyone else) */
+  mapCommands: { subject: string; data: Record<string, unknown>; at: number }[];
   kvGet(key: string): Promise<Record<string, unknown> | null>;
   log(): string;
   stop(): Promise<void>;
@@ -585,7 +721,7 @@ export async function startActStack(): Promise<ActStack> {
   let logs = "";
   const port = await freePort();
   const wsPort = await freePort();
-  const p: Record<string, string> = Object.fromEntries(["admin", "policy", "bridge", "zeus", "alice", "newbie", "hermes"].map((u) => [u, pw()]));
+  const p: Record<string, string> = Object.fromEntries(["admin", "policy", "bridge", "zeus", "alice", "newbie", "carol", "hermes"].map((u) => [u, pw()]));
   writeFileSync(join(dir, "nats.conf"), natsConf(dir, port, wsPort, p), { mode: 0o600 });
   const spawnLogged = (name: string, cmd: string, args: string[], env: Record<string, string> = {}) => {
     const c = spawn(cmd, args, { env: { ...process.env, ...env }, stdio: ["ignore", "pipe", "pipe"], cwd: dir });
@@ -636,11 +772,15 @@ export async function startActStack(): Promise<ActStack> {
     });
   tap("evt.so.action.>", audit);
   tap("cmd.fleet.>", commands);
+  const mapCommands: ActStack["commands"] = [];
+  tap("cmd.map.geofence.>", mapCommands);
+  // The policy signing key comes first: the geofence stand-in trusts only its public half.
+  const { privateKey, publicKey } = generateKeyPairSync("ed25519");
 
   // Stand-ins first: the policy service reads svc.entity.get and KV geofences at start.
   const entity = new EntityStandin(admin);
   entity.start();
-  const geofence = new GeofenceStandin(admin, kv, entity);
+  const geofence = new GeofenceStandin(admin, kv, entity, new Map([["act-run", publicKey]]));
   const gTimer = geofence.start();
   const feeds = new FeedStandin(admin);
   feeds.start("nws-alerts", 6);
@@ -651,15 +791,17 @@ export async function startActStack(): Promise<ActStack> {
   tak.start();
   // Hermes' places: two AOIs (pinned zones from KV geofences).
   for (const [id, name, c] of [["zone-north-field", "NORTH FIELD", NORTH_FIELD], ["zone-home-field", "HOME FIELD", HOME_FIELD]] as const) {
-    await geofence.apply(id, "create", { zone: { callsign: name, lat: c[1], lon: c[0], geo: { shape: "circle", kind: "aoi", radius_m: 250, coords: { type: "Point", coordinates: [c[0], c[1]] } }, properties: { applies_to: [] } } });
+    await geofence.seed(id, { v: 1, name, callsign: name, active: true, lat: c[1], lon: c[0], geo: { shape: "circle", kind: "aoi", radius_m: 250, coords: { type: "Point", coordinates: [c[0], c[1]] } }, watch: true, properties: { applies_to: [] } });
   }
   await admin.flush();
 
-  // Real policy service (omos #554).
-  const { privateKey, publicKey } = generateKeyPairSync("ed25519");
+  // Real policy service (omos #554, with D1-P4), on a schema dir that adds #569's zone schemas.
   writeFileSync(join(dir, "policy-signing.pem"), privateKey.export({ type: "pkcs8", format: "pem" }), { mode: 0o600 });
   const pubRaw = (publicKey.export({ type: "spki", format: "der" }) as Buffer).subarray(-32).toString("base64");
   writeFileSync(join(dir, "tuples.json"), JSON.stringify(tuples()));
+  const schemaDir = join(dir, "schemas");
+  cpSync(join(POLICY_DIR, "services/schemas"), schemaDir, { recursive: true });
+  for (const f of readdirSync(ZONE_SCHEMAS)) cpSync(join(ZONE_SCHEMAS, f), join(schemaDir, "actions", f));
   writeFileSync(
     join(dir, "principals.json"),
     JSON.stringify({
@@ -669,6 +811,7 @@ export async function startActStack(): Promise<ActStack> {
         { account: "CLIENT", user: "zeus", kind: "user", id: "user:zeus" },
         { account: "CLIENT", user: "alice", kind: "user", id: "user:alice" },
         { account: "CLIENT", user: "newbie", kind: "user", id: "user:newbie" },
+        { account: "CLIENT", user: "carol", kind: "user", id: "user:carol" },
         { account: "AGENTS", user: "hermes", kind: "agent", id: "agent:hermes/zeus/legacy" },
       ],
     }),
@@ -677,7 +820,7 @@ export async function startActStack(): Promise<ActStack> {
   spawnLogged("policy", av.policy!, [], {
     NATS_URL: url, NATS_USER: "policy", NATS_PASSWORD: p.policy, POLICY_AUTHZ: "local",
     POLICY_MODEL_FILE: join(POLICY_DIR, "platform/security/openfga/onemind-actions.json"), POLICY_TUPLES_FILE: join(dir, "tuples.json"),
-    POLICY_SCHEMA_DIR: join(POLICY_DIR, "services/schemas"), POLICY_PRINCIPALS_FILE: join(dir, "principals.json"),
+    POLICY_SCHEMA_DIR: schemaDir, POLICY_PRINCIPALS_FILE: join(dir, "principals.json"),
     POLICY_SIGNING_KEY_FILE: join(dir, "policy-signing.pem"), POLICY_SIGNING_KID: "act-run", HEALTH_ADDR: `127.0.0.1:${healthPort}`,
   });
   await waitTcp(healthPort);
@@ -693,8 +836,8 @@ export async function startActStack(): Promise<ActStack> {
 
   const stack: ActStack = {
     wsUrl, url,
-    users: { zeus: { user: "zeus", pass: p.zeus }, alice: { user: "alice", pass: p.alice }, newbie: { user: "newbie", pass: p.newbie } },
-    admin, feeds, hermes, tak, entity, geofence, audit, commands,
+    users: { zeus: { user: "zeus", pass: p.zeus }, alice: { user: "alice", pass: p.alice }, newbie: { user: "newbie", pass: p.newbie }, carol: { user: "carol", pass: p.carol } },
+    admin, feeds, hermes, tak, entity, geofence, audit, commands, mapCommands,
     async kvGet(key) {
       const r = await admin.request(`$JS.API.DIRECT.GET.KV_geofences`, enc.encode(JSON.stringify({ last_by_subj: `$KV.geofences.${key}` })), { timeout: 3000 });
       if (r.headers?.get("Status") === "404" || !r.data.length) return null;

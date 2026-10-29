@@ -4,11 +4,12 @@ import { alertFromStaleAsset, alertsFromGaps } from "../../src/bus/alerts";
 import type { EntityRecord } from "../../src/bus/store";
 import { ALL_ROOM, ChatStore, geochatRequest } from "../../src/act/chat";
 import { cotForDrawing, element, parseCot, xmlEscape } from "../../src/act/cot";
-import { areaRings, buffer, canBeZone, lassoSelect, measure, zoneBody, zoneIdFor, type Drawing } from "../../src/act/drawing";
+import { areaRings, buffer, canBeZone, lassoSelect, loosens, measure, zoneIdFor, zoneParams, type Drawing } from "../../src/act/drawing";
 import { bearingDeg, bufferLine, circleRing, destination, distanceM, pointInRing, rectangleRing, ringAreaM2, sectorRing, type LonLat } from "../../src/act/geo";
 import { FeedGaps, layersForSource, toMs } from "../../src/act/gaps";
 import { buildPrompt, parseMapCommand, parseReply, splitPrompt, zoomToHeight, type MapContext } from "../../src/act/hermes";
-import { ActionTracker, gotoRequest, permissionFromCheck, roleProbe, uuid } from "../../src/act/policy";
+import { canonicalize, paramsHash } from "../../src/act/jcs";
+import { ActionTracker, confirmGate, detailsLoaded, gotoRequest, MAX_TERMINAL, permissionFromCheck, roleProbe, uuid, zoneRequest } from "../../src/act/policy";
 import { abilities, effectiveRole, parseRole } from "../../src/act/roles";
 
 const C: LonLat = [-97.7431, 30.2672];
@@ -61,25 +62,43 @@ describe("drawings", () => {
     expect(m.distanceM).toBeCloseTo(2500, 2);
     expect(m.bearingDeg).toBeCloseTo(120, 3);
   });
-  it("zone body uses only shapes the policy service can evaluate", () => {
+  it("zone params follow omos #569 zone.create v1 and use only shapes the policy can evaluate", () => {
     const rect = D("rectangle", [C, [C[0] + 0.01, C[1] + 0.01]]);
-    const z = zoneBody(rect, "keep_out", { now: 1 })!;
-    const zone = z.zone as { entity_id: string; geo: { shape: string; kind: string; coords: { type: string; coordinates: number[][][] } } };
-    expect(zone.geo.shape).toBe("polygon");
-    expect(zone.geo.coords.type).toBe("Polygon");
-    expect(zone.geo.coords.coordinates[0]).toHaveLength(5);
-    expect(zone.geo.kind).toBe("keep_out");
-    expect(zone.entity_id).toBe(zoneIdFor(rect));
-    expect(z.polygon).toHaveLength(5); // doctrine §9.7 field
-    const circ = zoneBody(D("circle", [C, destination(C, 0, 250)]), "aoi", { now: 1 })!;
-    const cz = circ.zone as { geo: { shape: string; radius_m: number; coords: { type: string } } };
-    expect(cz.geo).toMatchObject({ shape: "circle", coords: { type: "Point" } });
-    expect(cz.geo.radius_m).toBeCloseTo(250, 0);
-    expect(zoneBody(D("line", [C, destination(C, 0, 250)]), "aoi", { now: 1 })).toBeNull();
+    const z = zoneParams(rect, "keep_out")!;
+    // zone.create v1 has additionalProperties: false at the top and in geo
+    for (const k of Object.keys(z)) expect(["name", "geo", "polygon", "kind", "watch", "watch_types", "applies_to", "active", "reason"]).toContain(k);
+    const geo = z.geo as { shape: string; kind: string; coords: { type: string; coordinates: number[][][] } };
+    for (const k of Object.keys(geo)) expect(["shape", "kind", "coords", "radius_m", "alt_min_m", "alt_max_m"]).toContain(k);
+    expect(geo.shape).toBe("polygon");
+    expect(geo.coords.type).toBe("Polygon");
+    expect(geo.coords.coordinates[0]).toHaveLength(5);
+    expect(geo.kind).toBe("keep_out");
+    expect(z.name).toBe("T");
+    const circ = zoneParams(D("circle", [C, destination(C, 0, 250)]), "aoi", { appliesTo: ["sim-x1"] })!;
+    const cg = circ.geo as { shape: string; radius_m: number; coords: { type: string; coordinates: number[] } };
+    expect(cg).toMatchObject({ shape: "circle", coords: { type: "Point" } });
+    expect(cg.radius_m).toBeCloseTo(250, 0);
+    expect(circ.applies_to).toEqual(["sim-x1"]);
+    expect(zoneParams(D("line", [C, destination(C, 0, 250)]), "aoi")).toBeNull();
     expect(canBeZone(D("rings", [C, destination(C, 0, 250)]))).toBe(false);
+    expect((zoneParams(D("polygon", [C, destination(C, 0, 100), destination(C, 90, 100)], { label: "x".repeat(300) }), "aoi")!.name as string).length).toBe(120);
   });
-  it("zone ids are safe subject tokens", () => {
+  it("zone changes are policy actions on the zone target", () => {
+    const r = zoneRequest("remove", "zone-d1", {}, "user:zeus");
+    expect(r).toMatchObject({ action_type: "zone.remove", action_version: 1, target: { entity_type: "zone", entity_id: "zone-d1" }, params: {}, requested_by: { kind: "user", id: "user:zeus" } });
+    expect(zoneRequest("create", "zone-d1", { name: "A" }, "user:zeus").action_type).toBe("zone.create");
+  });
+  it("loosening a keep-in or keep-out is flagged; tightening and AOI edits are not", () => {
+    expect(loosens("keep_out", null)).toBe(true);
+    expect(loosens("keep_out", "aoi")).toBe(true);
+    expect(loosens("keep_in", "keep_out")).toBe(true);
+    expect(loosens("keep_out", "keep_out")).toBe(false);
+    expect(loosens("aoi", null)).toBe(false);
+    expect(loosens(undefined, null)).toBe(false);
+  });
+  it("zone ids are safe lowercase subject tokens", () => {
     expect(zoneIdFor({ ...D("polygon", []), id: "a.b>c*d e" })).toBe("zone-abcde");
+    expect(zoneIdFor({ ...D("polygon", []), id: "dMKX9a1" })).toBe("zone-dmkx9a1");
   });
   it("buffer of a point, a line and a polygon", () => {
     const pt = buffer(D("point", [C]), 200, "b1", 0)!;
@@ -164,6 +183,47 @@ describe("policy tracker and role probe", () => {
     expect(permissionFromCheck({ allowed: false, decision: { denial: { code: "not_authorized" } } }).permission).toBe("denied");
     expect(permissionFromCheck({ allowed: false, decision: { denial: { code: "policy_unavailable" } } }).permission).toBe("unknown");
     expect(permissionFromCheck(null).permission).toBe("unknown");
+  });
+  it("an action seen first on the audit stream cannot be approved until action.get returns its parameters", () => {
+    const tr = new ActionTracker();
+    // evt.so.action.proposed carries the hash but no params (asset-command.md §5)
+    const a0 = tr.fromAudit("evt.so.action.proposed", { data: { action_id: "act-9", action_type: "asset.goto", target: { entity_type: "drone", entity_id: "sim-x1" }, params_hash: "sha256:aa", requested_by: { kind: "agent", id: "agent:hermes/zeus/legacy", on_behalf_of: "user:zeus" } } })!;
+    expect(a0.status).toBe("awaiting_confirmation");
+    expect(detailsLoaded(a0)).toBe(false);
+    expect(confirmGate(a0, true, "checking")).toEqual({ approve: false, reject: true, why: "loading parameters" });
+    // action.get failed (timeout, policy restart): nothing changes, Approve stays off
+    expect(tr.fromGet(null)).toBeNull();
+    expect(tr.fromGet({ action: null, denial: { code: "conflict" } })).toBeNull();
+    expect(confirmGate(tr.get("act-9")!, true, "verified").approve).toBe(false);
+    // a reply without params is still not enough
+    tr.fromGet({ action: { action_id: "act-9", status: "awaiting_confirmation", action_type: "asset.goto", action_version: 1, target: { entity_type: "drone", entity_id: "sim-x1" }, params_hash: "sha256:aa" } });
+    expect(detailsLoaded(tr.get("act-9")!)).toBe(false);
+    // action.get answers in full
+    tr.fromGet({ action: { action_id: "act-9", status: "awaiting_confirmation", action_type: "asset.goto", action_version: 1, target: { entity_type: "drone", entity_id: "sim-x1" }, params: { lat: 30.27, lon: -97.73, hae_m: 60 }, params_hash: "sha256:aa" } });
+    const a1 = tr.get("act-9")!;
+    expect(detailsLoaded(a1)).toBe(true);
+    expect(confirmGate(a1, true, "checking").approve).toBe(false);
+    expect(confirmGate(a1, true, "mismatch")).toEqual({ approve: false, reject: true, why: "hash mismatch" });
+    expect(confirmGate(a1, true, "verified")).toEqual({ approve: true, reject: true, why: "" });
+    expect(confirmGate(a1, true, "unavailable").approve).toBe(true); // no Web Crypto: shown as not checked
+    expect(confirmGate(a1, false, "verified")).toEqual({ approve: false, reject: false, why: "not allowed" });
+    expect(confirmGate({ ...a1, status: "executed" }, true, "verified").approve).toBe(false);
+  });
+  it("prunes terminal actions after the retention time and above the cap, never open ones", () => {
+    let now = 0;
+    const tr = new ActionTracker(() => now);
+    tr.fromAudit("evt.so.action.proposed", { data: { action_id: "open-1" } });
+    for (let i = 0; i < MAX_TERMINAL + 20; i++) {
+      now++;
+      tr.fromAudit("evt.so.action.executed", { data: { action_id: `done-${i}` } });
+    }
+    expect(tr.prune().length).toBe(20);
+    expect(tr.size).toBe(MAX_TERMINAL + 1);
+    expect(tr.get("done-0")).toBeUndefined();
+    expect(tr.get(`done-${MAX_TERMINAL + 19}`)).toBeDefined();
+    now += 31 * 60_000;
+    expect(tr.prune(new Set(["done-100"])).length).toBe(MAX_TERMINAL - 1);
+    expect(tr.list().map((a) => a.action_id).sort()).toEqual(["done-100", "open-1"]);
   });
   it("uuid is v4 shaped", () => {
     expect(uuid()).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
@@ -292,5 +352,20 @@ describe("GeoChat and contacts", () => {
     expect(s.messages(ALL_ROOM)[0]).toMatchObject({ mine: true, state: "sent" });
     expect(geochatRequest(room, "x".repeat(2000), { uid: "OM-web-1", callsign: "WEB" }, "m2")).toMatchObject({ v: 1, kind: "geochat", room: { id: ALL_ROOM } });
     expect(geochatRequest(room, "x".repeat(2000), { uid: "u", callsign: "c" }, "m2").text).toHaveLength(1000);
+  });
+});
+
+describe("JCS and params_hash", () => {
+  it("canonicalises numbers, strings and key order as RFC 8785 (same output as the policy service's Go code)", () => {
+    const v = { n: [1e21, 1e-7, 0.000001, 333333333.3333333, -0, 1e2], "\u20ac": 1, "\r": 2, "\ufb33": 3, "1": 4, "\ud83d\ude00": 5, "\u0080": 6, "\u00f6": 7 };
+    // Go: services/policy/internal/policy/jcs.go Canonicalize on the same input
+    expect(canonicalize(v)).toBe('{"\\r":2,"1":4,"n":[1e+21,1e-7,0.000001,333333333.3333333,0,100],"\u0080":6,"\u00f6":7,"\u20ac":1,"\ud83d\ude00":5,"\ufb33":3}');
+    expect(() => canonicalize({ x: NaN })).toThrow();
+  });
+  it("params_hash matches the policy service's ParamsHash", async () => {
+    // Vectors from omos #554 ParamsHash (Go), docs/evidence/M4/WEB/jcs-vectors.txt
+    expect(await paramsHash({ action_type: "asset.goto", action_version: 1, target: { entity_type: "drone", entity_id: "sim-x1" }, params: { lon: -97.7295421, lat: 30.2672, hae_m: 60, speed_mps: 2.5 } })).toBe("sha256:f904a693de190fd5ec15baa70bb5a048758b61e2c942e276cc32be22bf9131ef");
+    expect(await paramsHash({ action_type: "zone.create", action_version: 1, target: { entity_type: "zone", entity_id: "zone-dabc1" }, params: { name: 'NO FLY ✈ "x"', geo: { shape: "circle", kind: "keep_out", coords: { type: "Point", coordinates: [-97.7431, 30.275294] }, radius_m: 200.1 }, watch: true } })).toBe("sha256:557bb878d1b25cb3a44e4964653315439b3ad3310eb57d8d37e8689468d3fae3");
+    expect(await paramsHash({ action_type: "zone.remove", action_version: 1, target: { entity_type: "zone", entity_id: "zone-dabc1", extra: "ignored" } as never, params: {} })).toBe("sha256:54f4af18e44c2bfbf329d57c2a5298874fd8cbd8bb70c699246ce06f01b4e066");
   });
 });

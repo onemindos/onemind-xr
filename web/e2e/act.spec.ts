@@ -5,9 +5,10 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { expect, test, type Browser, type Page } from "@playwright/test";
+import { wsconnect } from "@nats-io/nats-core";
 import { parseCot } from "../src/act/cot";
 import { destination, distanceM, type LonLat } from "../src/act/geo";
-import { armAndTakeoff, buildReal, CENTER, NORTH_FIELD, startActStack, TRACK_ID, type ActStack } from "../test/standins/stack";
+import { armAndTakeoff, buildReal, CENTER, NONSIM_ID, NORTH_FIELD, startActStack, TRACK_ID, type ActStack } from "../test/standins/stack";
 
 const SHOTS = process.env.L0_EVIDENCE_DIR ?? "test-results/screens";
 const TRANSCRIPT = process.env.ACT_TRANSCRIPT ?? join(dirname(SHOTS), "act-transcript.json");
@@ -21,13 +22,14 @@ type L0 = {
     overlay: { highlighted: string[]; annotationIds: string[] };
     cotFor(id: string): string;
     lassoed: string[];
+    proposeSimple(assetId: string, actionType: string): Promise<unknown>;
   };
-  store: { get(id: string): { r: { lat: number; lon: number } } | undefined };
+  store: { get(id: string): { r: { lat: number; lon: number } } | undefined; apply(raw: unknown, layer: string): string };
   toScreen(lon: number, lat: number): { x: number; y: number } | null;
   flyTo(lon: number, lat: number, height: number): void;
 };
 
-async function open(browser: Browser, s: ActStack, user: "zeus" | "alice" | "newbie", viewport = { width: 1440, height: 900 }) {
+async function open(browser: Browser, s: ActStack, user: "zeus" | "alice" | "newbie" | "carol", viewport = { width: 1440, height: 900 }) {
   const page = await browser.newPage({ viewport });
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -76,6 +78,8 @@ test.describe.serial("Act features on the real policy service and MAVLink bridge
       ...notes,
       audit: s?.audit.map((a) => ({ subject: a.subject, action_id: (a.data.data as Record<string, unknown>)?.action_id, action_type: (a.data.data as Record<string, unknown>)?.action_type, requested_by: (a.data.data as Record<string, unknown>)?.requested_by, approvals: (a.data.data as Record<string, unknown>)?.approvals, code: (a.data.data as Record<string, unknown>)?.code, detail: (a.data.data as Record<string, unknown>)?.detail, at: new Date(a.at).toISOString() })),
       commands: s?.commands.map((c) => ({ subject: c.subject, action_id: c.data.action_id, approver: (c.data.approval as Record<string, unknown>)?.approver, signed: !!c.data.sig, simulated: c.data.simulated, data: c.data.data, at: new Date(c.at).toISOString() })),
+      map_commands: s?.mapCommands.map((c) => ({ subject: c.subject, action_id: c.data.action_id, approval: (c.data.approval as Record<string, unknown>)?.status, approver: (c.data.approval as Record<string, unknown>)?.approver, signed: !!c.data.sig, data: c.data.data, at: new Date(c.at).toISOString() })),
+      geofence_results: s?.geofence.results.map((r) => ({ ...r, at: new Date(r.at).toISOString() })),
       hermes: s?.hermes.log,
       tak_injected: s?.tak.injected,
       page_errors: errors,
@@ -86,7 +90,7 @@ test.describe.serial("Act features on the real policy service and MAVLink bridge
     await s?.stop();
   });
 
-  test("D1: drawing an AOI writes a zone to KV geofences and it shows as a zone", async () => {
+  test("D1: an AOI goes through policy and a human confirm, then the geofence writer applies the signed command", async () => {
     await page.getByTestId("tab-draw").click();
     await page.getByTestId("draw-label").fill("PATROL AOI");
     await page.getByTestId("tool-rectangle").click();
@@ -96,12 +100,42 @@ test.describe.serial("Act features on the real policy service and MAVLink bridge
     await expect(drawing).toBeVisible();
     await page.getByTestId("zone-kind").selectOption("aoi");
     await page.getByTestId("share-zone").click();
-    const zid = await l0(page, (l) => [...l.act.shared.values()][0]?.zoneId);
-    expect(zid).toMatch(/^zone-d/);
-    await expect.poll(async () => ((await s.kvGet(zid!))?.geo as { kind?: string } | undefined)?.kind, { timeout: 10_000 }).toBe("aoi");
-    const kv = await s.kvGet(zid!);
-    notes.d1 = { zone_id: zid, kv_value: kv };
+    // zone.create is A2: the policy service holds it and the confirm dialog shows what it binds.
+    const dlg = page.getByTestId("confirm-dialog");
+    await expect(dlg).toBeVisible();
+    await expect(page.getByTestId("confirm-action")).toContainText("zone.create (level A2)");
+    await expect(page.getByTestId("confirm-parameters")).toContainText('"kind":"aoi"');
+    await expect(page.getByTestId("confirm-hash-check")).toHaveAttribute("data-state", "verified");
+    await expect(page.getByTestId("confirm-safety")).toHaveCount(0); // an AOI constrains nothing
+    const zidPending = (await page.getByTestId("confirm-target").textContent())!.replace("zone ", "");
+    expect(zidPending).toMatch(/^zone-d[a-z0-9]+$/);
+    // Nothing is written before the human confirms.
+    expect(await s.kvGet(zidPending)).toBeNull();
+    expect(s.mapCommands).toHaveLength(0);
+    await shot(page, "d1-zone-confirm.png");
+    await page.getByTestId("confirm-approve").click();
+    await expect(dlg).toBeHidden();
+    await expect.poll(() => l0(page, (l) => [...l.act.shared.values()][0]?.zoneId), { timeout: 10_000 }).toBe(zidPending);
+    const zid = zidPending;
+    await expect.poll(async () => ((await s.kvGet(zid))?.geo as { kind?: string } | undefined)?.kind, { timeout: 10_000 }).toBe("aoi");
+    const kv = await s.kvGet(zid);
     expect((kv!.geo as { shape: string }).shape).toBe("polygon");
+    // The write came from the policy service: signed, approved by zeus, and the action executed.
+    const cmd = s.mapCommands.find((c) => c.subject === `cmd.map.geofence.${zid}.create`)!;
+    expect(cmd.data.sig).toBeTruthy();
+    expect(cmd.data.approval).toMatchObject({ status: "approved", approver: "user:zeus", level: "A2" });
+    const actionId = cmd.data.action_id as string;
+    await expect.poll(() => s.audit.filter((a) => (a.data.data as Record<string, unknown>).action_id === actionId).map((a) => a.subject.split(".")[3]), { timeout: 10_000 }).toContain("executed");
+    expect(s.geofence.results.find((r) => r.zone_id === zid)).toMatchObject({ outcome: "created", signed: true, action_id: actionId });
+
+    // Anyone who may publish cmd.map.> (here a CLIENT user) cannot write a zone without policy.
+    const rogue = await wsconnect({ servers: s.wsUrl, user: s.users.zeus.user, pass: s.users.zeus.pass, name: "act-rogue" });
+    rogue.publish("cmd.map.geofence.zone-rogue.create", new TextEncoder().encode(JSON.stringify({ v: 1, data: { name: "ROGUE", geo: { shape: "circle", kind: "aoi", coords: { type: "Point", coordinates: CENTER }, radius_m: 9000 } } })));
+    await rogue.flush();
+    await rogue.close();
+    await expect.poll(() => s.geofence.results.find((r) => r.zone_id === "zone-rogue")?.code, { timeout: 5000 }).toBe("unsigned");
+    expect(await s.kvGet("zone-rogue")).toBeNull();
+    notes.d1 = { zone_id: zid, action_id: actionId, kv_value: kv, rogue: s.geofence.results.find((r) => r.zone_id === "zone-rogue") };
     await page.getByRole("tab", { name: /Entities/ }).click();
     await expect(page.getByTestId(`entity-${zid}`)).toBeVisible();
     await shot(page, "d1-aoi-shared.png");
@@ -121,6 +155,8 @@ test.describe.serial("Act features on the real policy service and MAVLink bridge
     await expect(page.getByTestId("confirm-parameters")).toContainText('"hae_m":60');
     const hash = await page.getByTestId("confirm-params-hash").textContent();
     expect(hash).toMatch(/^sha256:[0-9a-f]{64}$/);
+    // The client's own JCS + SHA-256 of what it shows equals the policy service's hash.
+    await expect(page.getByTestId("confirm-hash-check")).toHaveAttribute("data-state", "verified");
     // Nothing is commanded before the human confirms.
     expect(s.commands.filter((c) => c.subject.endsWith(".goto"))).toHaveLength(0);
     await shot(page, "d3-confirm-dialog.png");
@@ -166,8 +202,11 @@ test.describe.serial("Act features on the real policy service and MAVLink bridge
     await clickMap(page, destination(c, 90, 200));
     await page.getByTestId("zone-kind").selectOption("keep_out");
     await page.getByTestId("share-zone").click();
-    await expect(page.getByTestId("ask-dialog")).toBeVisible();
-    await page.getByTestId("ask-yes").click();
+    await expect(page.getByTestId("confirm-dialog")).toBeVisible();
+    await expect(page.getByTestId("confirm-safety")).toContainText("keep-out zone will constrain");
+    await expect(page.getByTestId("confirm-hash-check")).toHaveAttribute("data-state", "verified");
+    await page.getByTestId("confirm-approve").click();
+    await expect(page.getByTestId("confirm-dialog")).toBeHidden();
     let zid: string | undefined;
     await expect.poll(async () => (zid = await l0(page, (l) => [...l.act.shared.values()].find((z) => z.kind === "keep_out")?.zoneId))).toMatch(/^zone-d/);
     await expect.poll(async () => ((await s.kvGet(zid!))?.geo as { kind?: string } | undefined)?.kind, { timeout: 10_000 }).toBe("keep_out");
@@ -180,6 +219,55 @@ test.describe.serial("Act features on the real policy service and MAVLink bridge
     const denied = page.getByTestId("tasks").locator('[data-status="denied"]').first();
     await expect(denied).toContainText("precondition_failed (keep_out)");
     await shot(page, "d1-keep-out-denied.png");
+  });
+
+  test("D1: loosening or removing a keep-out needs the same policy confirm; a rejected downgrade changes nothing", async () => {
+    await page.getByTestId("tab-draw").click();
+    if (!(await page.getByTestId("zone-kind").isVisible())) await page.getByRole("button", { name: "NO FLY", exact: true }).click();
+    const zid = (await l0(page, (l) => [...l.act.shared.values()].find((z) => z.kind === "keep_out")?.zoneId))!;
+    // Re-share as an AOI: an update that frees assets from the keep-out.
+    await page.getByTestId("zone-kind").selectOption("aoi");
+    await page.getByTestId("share-zone").click();
+    await expect(page.getByTestId("confirm-dialog")).toBeVisible();
+    await expect(page.getByTestId("confirm-action")).toContainText("zone.update");
+    await expect(page.getByTestId("confirm-safety")).toContainText("changes a keep-out zone to aoi");
+    await shot(page, "d1-downgrade-confirm.png");
+    await page.getByTestId("confirm-reason").fill("keep the no-fly area");
+    await page.getByTestId("confirm-reject").click();
+    await expect(page.getByTestId("confirm-dialog")).toBeHidden();
+    await page.waitForTimeout(500);
+    expect(((await s.kvGet(zid))?.geo as { kind: string }).kind).toBe("keep_out");
+    expect(s.mapCommands.some((c) => c.subject === `cmd.map.geofence.${zid}.update`)).toBe(false);
+    expect(await l0(page, (l, z) => [...l.act.shared.values()].find((v) => v.zoneId === z)?.kind, zid)).toBe("keep_out");
+    // Remove: the same confirm, with the warning.
+    await page.getByTestId("tab-draw").click();
+    if (!(await page.getByTestId("unshare-zone").isVisible())) await page.getByRole("button", { name: "NO FLY", exact: true }).click();
+    await page.getByTestId("unshare-zone").click();
+    await expect(page.getByTestId("confirm-dialog")).toBeVisible();
+    await expect(page.getByTestId("confirm-action")).toContainText("zone.remove");
+    await expect(page.getByTestId("confirm-safety")).toContainText("removes a keep-out zone");
+    expect(await s.kvGet(zid)).not.toBeNull(); // nothing removed before the confirm
+    await shot(page, "d1-remove-confirm.png");
+    await page.getByTestId("confirm-approve").click();
+    await expect.poll(() => s.kvGet(zid), { timeout: 10_000 }).toBeNull();
+    const rm = s.mapCommands.find((c) => c.subject === `cmd.map.geofence.${zid}.remove`)!;
+    expect(rm.data.sig).toBeTruthy();
+    expect(rm.data.approval).toMatchObject({ status: "approved", approver: "user:zeus" });
+    await expect(page.getByTestId("unshare-zone")).toHaveCount(0, { timeout: 10_000 });
+    notes.d1_keep_out_lifecycle = { zone_id: zid, rejected_update: true, removed_by: rm.data.action_id };
+  });
+
+  test("D3: a proposal for a non-sim asset is denied not_simulated and shows in the tasks list", async () => {
+    await page.getByRole("tab", { name: /Entities/ }).click();
+    await expect(page.getByTestId(`entity-${NONSIM_ID}`)).toBeVisible({ timeout: 10_000 });
+    // The detail panel never offers commands for it (the role probe is refused before authz),
+    // so propose through the client's own propose path, as a click would.
+    await l0(page, (l, id) => l.act.proposeSimple(id as string, "asset.hold"), NONSIM_ID);
+    await page.getByTestId("tab-tasks").click();
+    const row = page.getByTestId("tasks").locator('[data-status="denied"]').filter({ hasText: `asset.hold → ${NONSIM_ID}` });
+    await expect(row).toContainText("not_simulated");
+    expect(s.commands.some((c) => c.subject.includes(NONSIM_ID))).toBe(false);
+    await shot(page, "d3-not-simulated.png");
   });
 
   test("B20 + D6: stopping a feed shows in the gaps panel within its freshness limit, naming the layer", async () => {
@@ -327,6 +415,37 @@ test.describe.serial("Act features on the real policy service and MAVLink bridge
     expect(errors).toEqual([]);
     // Cesium reports render failures in its own panel, not as page errors.
     await expect(page.locator(".cesium-widget-errorPanel")).toHaveCount(0);
+  });
+
+  test("WEB-P2: with the omos #562 CLIENT permissions, status comes from action.get polling alone", async ({ browser }) => {
+    const c = await open(browser, s, "carol");
+    // #562 lets a CLIENT user subscribe only cmd.map.> and _INBOX.>: the audit stream is refused.
+    await c.page.getByTestId("tab-tasks").click();
+    await expect(c.page.getByTestId("bus-notes")).toContainText("evt.so.action.> — action audit: not permitted", { timeout: 10_000 });
+    // No ent.> either (entities come from svc.layer.*, not run here): hand the page sim-x1's record.
+    await l0(c.page, (l, rec) => l.store.apply(rec, "fleet"), s.entity.droneRecord(s.entity.seq.get("sim-x1")));
+    await c.page.getByTestId("role").selectOption("operator");
+    await c.page.getByRole("tab", { name: /Entities/ }).click();
+    await c.page.getByTestId("entity-sim-x1").click();
+    await expect(c.page.getByTestId("task-rtl")).toBeVisible({ timeout: 15_000 });
+    await c.page.getByTestId("task-rtl").click();
+    await expect(c.page.getByTestId("confirm-dialog")).toBeVisible();
+    await expect(c.page.getByTestId("confirm-hash-check")).toHaveAttribute("data-state", "verified");
+    await c.page.getByTestId("confirm-approve").click();
+    await c.page.getByTestId("tab-tasks").click();
+    const row = c.page.getByTestId("tasks").locator("li").filter({ hasText: "asset.rtl → sim-x1" }).first();
+    await expect(row).toHaveAttribute("data-status", "executed", { timeout: 30_000 });
+    // Every status after the confirm reply came from polling (no audit events reach this page).
+    const vias = await l0(c.page, (l) => {
+      const t = (l.act as unknown as { tracker: { list(): { action_type?: string; history: { status: string; via: string }[] }[] } }).tracker;
+      return t.list().find((a) => a.action_type === "asset.rtl")!.history;
+    });
+    expect((vias as { via: string }[]).some((h) => h.via === "audit")).toBe(false);
+    expect((vias as { status: string; via: string }[]).some((h) => h.status === "executed" && h.via === "get")).toBe(true);
+    notes.web_p2_polling = vias;
+    await shot(c.page, "web-p2-polling-only.png");
+    expect(c.errors).toEqual([]);
+    await c.page.close();
   });
 
   test("phone layout: tasks and detail at 390×844", async ({ browser }) => {

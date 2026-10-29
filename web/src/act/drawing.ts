@@ -1,6 +1,7 @@
 // Drawings and tactical graphics (FEATURES B11) and their geofence form (FEATURES D1).
-// A drawing is client state until the operator shares it: as a zone through
-// `cmd.map.geofence.{id}.create` (omos docs/NATS-DOCTRINE.md §9.7), or as CoT XML (cot.ts).
+// A drawing is client state until the operator shares it: as a zone through the policy service
+// (`zone.create`, A2, one human confirm; executed as `cmd.map.geofence.{id}.create`, omos
+// docs/NATS-DOCTRINE.md §9.7), or as CoT XML (cot.ts).
 import {
   bearingDeg,
   bufferLine,
@@ -59,7 +60,7 @@ export interface Drawing {
 
 export type ZoneKind = "aoi" | "keep_in" | "keep_out" | "hazard" | "control_area";
 export const ZONE_KINDS: ZoneKind[] = ["aoi", "keep_in", "keep_out", "hazard", "control_area"];
-/** Kinds that constrain asset movement; the client puts these behind a confirm. */
+/** Kinds that constrain asset movement; the confirm dialog warns when a change creates or frees one. */
 export const SAFETY_KINDS = new Set<ZoneKind>(["keep_in", "keep_out"]);
 
 export function radiusM(d: Drawing): number {
@@ -154,49 +155,32 @@ export function anchor(d: Drawing): LonLat {
   return centroid(r.length ? r[0] : d.points);
 }
 
-/** A zone id from a drawing id: KV keys and subject tokens allow [A-Za-z0-9_-] only. */
+/** A zone id from a drawing id: one lowercase subject token, as the policy service requires. */
 export function zoneIdFor(d: Drawing): string {
-  return `zone-${d.id.replace(/[^A-Za-z0-9_-]/g, "")}`.slice(0, 64);
+  return `zone-${d.id.toLowerCase().replace(/[^a-z0-9_-]/g, "")}`.slice(0, 64);
+}
+
+/** True when changing a zone from `from` to `to` (null: removed) frees assets it constrained. */
+export function loosens(from: ZoneKind | undefined, to: ZoneKind | null): boolean {
+  return !!from && SAFETY_KINDS.has(from) && to !== from;
 }
 
 /**
- * Body of `cmd.map.geofence.{id}.create|update` (owner proposal WEB-P1). It carries the doctrine
- * §9.7 fields (`polygon`, `watch`, `alert`) and the zone record that KV `geofences` stores, which
- * is the shape the policy service (omos #554 `ParseZone`) and the projector (omos #563 A6-P2)
- * read: `geo.shape` is `polygon` or `circle` only, because the policy treats any other keep-in or
- * keep-out shape as unevaluable and denies movement.
+ * Parameters of `zone.create` / `zone.update` (omos #569 `zone.{verb}.v1.schema.json`, the
+ * ActionRequest params the policy service copies into `cmd.map.geofence.{id}.{verb}` once a
+ * human approved it). `geo.shape` is `polygon` or `circle` only: the policy service treats any
+ * other keep-in or keep-out shape as unevaluable and denies movement (#554 POL-9).
  */
-export function zoneBody(
-  d: Drawing,
-  kind: ZoneKind,
-  opts: { now: number; appliesTo?: string[]; watch?: boolean; createdBy?: string },
-): Record<string, unknown> | null {
+export function zoneParams(d: Drawing, kind: ZoneKind, opts: { appliesTo?: string[]; watch?: boolean } = {}): Record<string, unknown> | null {
   if (!canBeZone(d)) return null;
-  const id = zoneIdFor(d);
-  const isCircle = d.kind === "circle";
   const ring = areaRings(d)[0];
-  const c = isCircle ? d.points[0] : centroid(ring);
-  const geo = isCircle
-    ? { shape: "circle", kind, coords: { type: "Point", coordinates: [c[0], c[1]] }, radius_m: Math.round(radiusM(d) * 10) / 10 }
-    : { shape: "polygon", kind, coords: { type: "Polygon", coordinates: [ring.map(([lon, lat]) => [round6(lon), round6(lat)])] } };
-  return {
-    v: 1,
-    polygon: ring.map(([lon, lat]) => [round6(lon), round6(lat)]),
-    watch: opts.watch ?? true,
-    alert: "evt.map.geofence",
-    zone: {
-      entity_id: id,
-      entity_type: "zone",
-      v: 1,
-      live: true,
-      callsign: d.label,
-      t: opts.now,
-      lat: round6(c[1]),
-      lon: round6(c[0]),
-      geo,
-      properties: { applies_to: opts.appliesTo ?? [], drawn_as: d.kind, created_by: opts.createdBy ?? null },
-    },
-  };
+  const geo =
+    d.kind === "circle"
+      ? { shape: "circle", kind, coords: { type: "Point", coordinates: [round6(d.points[0][0]), round6(d.points[0][1])] }, radius_m: Math.round(radiusM(d) * 10) / 10 }
+      : { shape: "polygon", kind, coords: { type: "Polygon", coordinates: [ring.map(([lon, lat]) => [round6(lon), round6(lat)])] } };
+  const p: Record<string, unknown> = { name: d.label.slice(0, 120), geo, watch: opts.watch ?? true };
+  if (opts.appliesTo?.length) p.applies_to = opts.appliesTo;
+  return p;
 }
 
 const round6 = (n: number) => Math.round(n * 1e6) / 1e6;

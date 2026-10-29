@@ -80,8 +80,8 @@ The Act panels live in `src/act/` (logic, unit tested) and `src/ui/act.ts`, `src
 
 | Feature | What the operator does | Bus (all existing grammar) |
 |---|---|---|
-| D1 AOIs and geofences | Draw an area, pick a kind (`aoi`, `keep_in`, `keep_out`, `hazard`, `control_area`), Share as zone. Keep-in and keep-out ask for a confirm first | publishes `cmd.map.geofence.{id}.create\|update\|remove` (doctrine §9.7); the body carries the doctrine fields plus the zone record KV `geofences` stores, with `geo.shape` `polygon` or `circle` only (the policy service treats any other keep-in/keep-out shape as unevaluable) |
-| D3 click to task | Select a `sim-*` asset, Go to point, click the map. The confirm dialog shows the exact parameters, the `params_hash`, the level and the deadline; Confirm or Reject (with a reason). Status updates live in Tasks and Detail | `svc.policy.command.propose`, `svc.policy.command.confirm`, `svc.policy.action.get` (polled), `evt.so.action.>` when the connection may subscribe |
+| D1 AOIs and geofences | Draw an area, pick a kind (`aoi`, `keep_in`, `keep_out`, `hazard`, `control_area`), then Share as zone, Update zone or Remove zone. Every one opens the confirm dialog (A2, one human). It warns when a change creates a keep-in or keep-out, or loosens or removes one. The zone exists only once a human approves | `svc.policy.command.propose` with `zone.create\|update\|remove` (ONTOLOGY §6.2), target `{entity_type: zone, entity_id}`, params per omos #569 `zone.{verb}.v1` (`name`, `geo{shape, kind, coords, radius_m?}`, `watch`). `geo.shape` is `polygon` or `circle` only, because the policy service treats any other keep-in or keep-out shape as unevaluable. The policy service signs the approved command onto `cmd.map.geofence.{id}.{verb}`; the client publishes no `cmd.*` subject |
+| D3 click to task | Select a `sim-*` asset, Go to point, click the map. The confirm dialog shows the exact parameters, the `params_hash`, the level and the deadline. Confirm stays off until the action type, target and parameters have arrived (from the propose reply or `svc.policy.action.get`). It also stays off while the client checks the hash (JCS + SHA-256 of what it shows, where Web Crypto exists), and on a mismatch. Reject (with a reason) needs only the hash. Status updates live in Tasks and Detail | `svc.policy.command.propose`, `svc.policy.command.confirm`, `svc.policy.action.get` (polled), `evt.so.action.>` when the connection may subscribe |
 | B11 drawing | Point, label, line, polygon, rectangle, circle, sector, range rings, range and bearing, lasso select, buffer; measurements on the map; CoT export (copy or download) | none until shared; CoT types per cot-projection.md §5.5 (`src/act/cot.ts` header) |
 | B20 intelligence gaps | Gaps tab: stale, failing, silent or never-fetched feeds and down layers, each naming the layers and alerts it weakens | `tel.feed.*.status` (omos #553 shape) when permitted; layer manifests' `freshness` otherwise |
 | D4 Hermes | Ask about the map; the question goes with the selection, viewport, layers, visible entities (≤ 50), zones and gaps. Hermes' highlights and annotations show on the map; its proposals appear as pending confirms | request (single reply or chunks) on `agents.prompt.hermes.zeus.legacy` (`?hermes=` to change); renders `cmd.map.highlight\|annotation\|viewport\|filter` |
@@ -107,9 +107,15 @@ npx playwright test e2e/act.spec.ts       # the Act stack below, in headless Chr
 per-run tuples file; the **real MAVLink bridge** (omos #550, `$OMOS_BRIDGE_DIR`, default
 `work/wt/h2-mavlink`) with an Ed25519 key per run and signatures required; and the scripted drone
 `sim-x1`. Setup arms and takes off through policy with two humans (A4), never around it.
+The policy binary is built from a temp copy with `test/standins/policy-zone-actions.patch`
+applied: owner proposal D1-P4 of omos #569 (the `zone.*` catalogue entries), which #554 does not
+carry yet. Its schema dir adds #569's `zone.*.v1` schemas (`test/fixtures/schemas/actions`). One
+user, `carol`, has exactly the omos #562 CLIENT permissions (subscribe `cmd.map.>` and `_INBOX.>`
+only), so the polling path is tested too.
 Stand-ins, in test fixtures only: entity (omos #552 sets no `capabilities`, so the real policy
-would deny every goto `not_capable`), the KV `geofences` writer and geofence watcher (not built
-yet), feed heartbeats, a scripted Hermes (no model API may be called here), `svc.cot.send` (not
+would deny every goto `not_capable`); the KV `geofences` writer and geofence watcher, which like
+omos #569 apply only commands with a valid policy signature, a future `expires_at` and
+`approval.status: approved`; feed heartbeats; a scripted Hermes (no model API may be called here), `svc.cot.send` (not
 built anywhere) and a scripted ATAK peer. The spec is skipped with the reason when Go, the omos
 worktrees or pymavlink are missing (`POLICY_BIN`, `BRIDGE_BIN`, `PYTHON`, `SIM_DRONE` override).
 
