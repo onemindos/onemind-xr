@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>OneMind L0</title>
+    <script>
+      // CesiumJS loads its workers and assets from here (copied by vite.config.ts).
+      window.CESIUM_BASE_URL = "./cesium/";
+    </script>
+  </head>
+  <body>
+    <header class="bar">
+      <strong class="brand">OneMind <span>L0</span></strong>
+      <span id="conn" class="chip" data-state="connecting" data-testid="conn">connecting</span>
+      <button id="alert-chip" class="chip alert-chip" type="button" data-testid="alert-chip">
+        Alerts <span id="alert-count">0</span>
+      </button>
+      <span class="spacer"></span>
+      <button id="mission-toggle" class="btn" type="button" aria-pressed="false" data-testid="mission-toggle">
+        Mission tier: off
+      </button>
+      <button id="mode-toggle" class="btn" type="button" aria-label="Switch 2D or 3D">2D</button>
+    </header>
+    <main class="layout">
+      <div id="globe" class="globe" data-testid="globe" aria-label="Globe"></div>
+      <aside class="side">
+        <nav class="tabs" role="tablist" aria-label="Panels">
+          <button role="tab" type="button" data-tab="alerts" aria-selected="true">Alerts</button>
+          <button role="tab" type="button" data-tab="entities">Entities <span id="entity-count" class="muted">0</span></button>
+          <button role="tab" type="button" data-tab="detail" data-testid="tab-detail">Detail</button>
+          <button role="tab" type="button" data-tab="layers">Layers</button>
+          <button role="tab" type="button" data-tab="conn">Connection</button>
+        </nav>
+        <section id="tab-alerts" role="tabpanel" class="panel" aria-label="Alerts"></section>
+        <section id="tab-entities" role="tabpanel" class="panel" aria-label="Entities" hidden></section>
+        <section id="tab-detail" role="tabpanel" class="panel" aria-label="Detail" hidden>
+          <div id="detail-body"></div>
+          <div id="video-panel" class="video-panel" data-testid="video-panel" data-transport="none">
+            <h3>Video</h3>
+            <video id="video" muted playsinline autoplay data-testid="video"></video>
+            <p id="video-state" class="muted">Select an entity with video.</p>
+          </div>
+        </section>
+        <section id="tab-layers" role="tabpanel" class="panel" aria-label="Layers" hidden></section>
+        <section id="tab-conn" role="tabpanel" class="panel" aria-label="Connection" hidden>
+          <form id="conn-form" class="conn-form">
+            <label>NATS WebSocket URL <input id="nats-url" type="url" autocomplete="off" /></label>
+            <label>User (optional) <input id="nats-user" autocomplete="username" /></label>
+            <label>Password (optional) <input id="nats-pass" type="password" autocomplete="current-password" /></label>
+            <button class="btn" type="submit">Connect</button>
+            <p class="muted">
+              Credentials stay in this browser tab (sessionStorage) and are never put in the URL.
+              Viewer groups for the marking check: <span id="viewer-groups"></span> (set with <code>?groups=</code>).
+            </p>
+          </form>
+        </section>
+      </aside>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

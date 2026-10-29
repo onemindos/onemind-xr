@@ -1,0 +1,32 @@
+{
+  "name": "onemind-l0-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OneMind L0 light web client (FEATURES J1): CesiumJS globe on the same NATS contracts as the Unreal client",
+  "license": "GPL-3.0-only",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "fixture": "node tools/fixture-publisher.mjs"
+  },
+  "dependencies": {
+    "@nats-io/nats-core": "3.4.0",
+    "cesium": "1.146.0",
+    "hls.js": "1.7.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "@types/node": "22.18.0",
+    "typescript": "6.0.3",
+    "vite": "8.3.4",
+    "vitest": "4.1.12"
+  }
+}
