@@ -1,0 +1,2 @@
+?   	github.com/onemindos/omos/services/mission/cmd/mission	[no test files]
+ok  	github.com/onemindos/omos/services/mission/internal/mission	10.092s

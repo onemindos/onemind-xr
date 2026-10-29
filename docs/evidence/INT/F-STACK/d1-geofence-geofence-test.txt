@@ -1,0 +1,6 @@
+?   	github.com/onemindos/omos/services/geofence/cmd/geofence-service	[no test files]
+ok  	github.com/onemindos/omos/services/geofence/internal/bus	11.819s
+ok  	github.com/onemindos/omos/services/geofence/internal/engine	1.816s
+ok  	github.com/onemindos/omos/services/geofence/internal/geo	1.531s
+ok  	github.com/onemindos/omos/services/geofence/internal/sig	2.210s
+ok  	github.com/onemindos/omos/services/geofence/internal/zone	1.970s

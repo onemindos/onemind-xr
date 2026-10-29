@@ -1,0 +1,14 @@
+=== RUN   TestReceivedBeforeDispatchAudit
+time=2026-10-29T13:29:57.775-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestReceivedBeforeDispatchAudit (0.25s)
+=== RUN   TestDispatchAuditReportRace
+time=2026-10-29T13:29:58.007-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestDispatchAuditReportRace (0.40s)
+=== RUN   TestContract1Lifecycle
+time=2026-10-29T13:29:58.407-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestContract1Lifecycle (0.25s)
+=== RUN   TestBridgeRestartAndEarlyReport
+time=2026-10-29T13:29:58.656-04:00 level=INFO msg="task service ready" bucket=mission-state records=0
+--- PASS: TestBridgeRestartAndEarlyReport (0.28s)
+PASS
+ok  	github.com/onemindos/omos/services/mission/internal/mission	2.704s

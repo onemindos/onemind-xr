@@ -1,0 +1,31 @@
+E2E-3 test-only workarounds: removed vs remaining (diff: harness/changes-from-E2E-2.diff)
+
+REMOVED (fixes made them unnecessary)
+- MISSION_ARRIVAL=true, MISSION_ARRIVAL_RADIUS_M=25 -> mission runs with the deployment.yaml value
+  MISSION_ARRIVAL=false (feat/mission-service e69ea4c9). Every goto task now closes on the bridge's own
+  done_ok (feat/mavlink-bridge-fleet 6e4f29ea, default ARRIVAL_RADIUS_M=5): 6 of 6 tasks done_ok with
+  result {arrived:true, source:"bridge", distance_m 3-4, vertical_m 0}.
+- MISSION_SWEEP_EVERY=200ms -> default (1s). geofence TICK=1s -> default (5s), and REQUIRE_SIGNATURE=true,
+  REQUIRE_APPROVAL=true from geofence deployment.yaml. entity START_LOOKBACK=0 -> deployment value 10m.
+  None of these changed any result.
+- Web step: no workaround was needed for the alert list (F-ALERT, run/m4-web a38ab8a): the CLIENT user
+  zeus sees the geofence service's alert with data-source="service" and alert feed status ok/ok.
+
+REMAINING (still differ from a deployment)
+- POLICY_AUTHZ=local with a tuples file (deployment: openfga); hand-written principals files for policy,
+  mission and layer; ephemeral Ed25519 policy signing key (deployment: SealedSecret).
+- Streams/KV created from the branch CRs through the JetStream API with replicas forced to 1 (deployment: NACK, R3).
+- NWS source served from the recorded fixture in feat/ingest-framework by a local HTTP stub (no internet).
+- alice is the branch's test_only human (A4 two-human actions need two humans; the live layout has one).
+- Hermes is a scripted client (no model API), through the feat/nats-identities stand-in sidecar.
+- Web step: int.spec.ts/int.config.ts dropped into a scratch worktree of run/m4-web; credentials put in
+  sessionStorage exactly as the client's own e2e (act.spec.ts open()) does, standing in for the Connection form.
+- Harness-only choices that do not mask a defect: the scripted drone (sim-x1) on its own UDP port; the
+  bridge GEOFENCE_JSON keep-in circle; projector/layer/entity run with their deployment values where set.
+
+TEST-DESIGN NOTE (not a service bug)
+- The scripted drone's takeoff after an estop resumes its 40 m orbit around HOME, so the reflight carried
+  sim-x1 back into zone-e2e-pad and the geofence service correctly resolved step 4's alert (reason
+  "returned", 18:14:27Z). The first browser attempt (web/attempt1-alert-before-goto/) checked for that
+  alert before the goto and found none. The spec now checks after the browser goto takes sim-x1 out of the
+  pad; the service raised a new alert at 18:16:33Z and the client listed it.

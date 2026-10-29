@@ -1,0 +1,18 @@
+
+Running 13 tests using 1 worker
+
+  ✓   1 e2e/act.spec.ts:93:3 › Act features on the real policy service and MAVLink bridge › D1: an AOI goes through policy and a human confirm, then the geofence writer applies the signed command (8.1s)
+  ✓   2 e2e/act.spec.ts:144:3 › Act features on the real policy service and MAVLink bridge › D3 + D6: click to task sim-x1, pending, human confirm, it moves; leaving the AOI raises an alert (46.7s)
+  ✓   3 e2e/act.spec.ts:196:3 › Act features on the real policy service and MAVLink bridge › D1 + D3: a keep-out drawn in the client is enforced by the policy service (4.9s)
+  ✓   4 e2e/act.spec.ts:224:3 › Act features on the real policy service and MAVLink bridge › D1: loosening or removing a keep-out needs the same policy confirm; a rejected downgrade changes nothing (1.5s)
+  ✓   5 e2e/act.spec.ts:260:3 › Act features on the real policy service and MAVLink bridge › D3: a proposal for a non-sim asset is denied not_simulated and shows in the tasks list (755ms)
+  ✓   6 e2e/act.spec.ts:273:3 › Act features on the real policy service and MAVLink bridge › B20 + D6: stopping a feed shows in the gaps panel within its freshness limit, naming the layer (6.1s)
+  ✓   7 e2e/act.spec.ts:291:3 › Act features on the real policy service and MAVLink bridge › D4: Hermes answers from map context, highlights on the map, and its proposal waits for a human (10.7s)
+  ✓   8 e2e/act.spec.ts:319:3 › Act features on the real policy service and MAVLink bridge › C8: contacts, channels and GeoChat both ways (1.7s)
+  ✓   9 e2e/act.spec.ts:345:3 › Act features on the real policy service and MAVLink bridge › B11: every drawing tool, buffer, lasso and CoT export (17.4s)
+  ✓  10 e2e/act.spec.ts:396:3 › Act features on the real policy service and MAVLink bridge › J2: a newcomer cannot see asset commands; operator mode needs the policy grant (10.5s)
+  ✓  11 e2e/act.spec.ts:420:3 › Act features on the real policy service and MAVLink bridge › F-ALERT: a #562 CLIENT user sees the geofence service's open alert live; a J2 newcomer sees no alert and no asset command (25.6s)
+  ✓  12 e2e/act.spec.ts:488:3 › Act features on the real policy service and MAVLink bridge › WEB-P2: with the omos #562 CLIENT permissions, status comes from action.get polling alone (10.4s)
+  ✓  13 e2e/act.spec.ts:519:3 › Act features on the real policy service and MAVLink bridge › phone layout: tasks and detail at 390×844 (7.9s)
+
+  13 passed (2.7m)

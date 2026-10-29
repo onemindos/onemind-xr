@@ -1,0 +1,19 @@
+== j2-roles validate_changed_yaml (base origin/main merge-base 62e3d22bc05814178c2d531e77a9fa4a228f6f3a)
+Changed YAML gate passed (13 files checked)
+rc=0
+== validate_manifests
+Summary: 9 resources found in 9 files - Valid: 9, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 9 manifest file(s)
+rc=0
+== check_onemind_mcp_coverage
+platform-auth-callout: add an explicit app mapping or supporting-infrastructure disposition
+rc=1
+== gitleaks dir
+[90m2:01PM[0m [32mINF[0m [1mscanned ~13073261 bytes (13.07 MB) in 3.52s[0m
+[90m2:01PM[0m [32mINF[0m [1mno leaks found[0m
+rc=0
+== gitleaks commits 62e3d22bc05814178c2d531e77a9fa4a228f6f3a..HEAD
+[90m2:01PM[0m [32mINF[0m [1m5 commits scanned.[0m
+[90m2:01PM[0m [32mINF[0m [1mscanned ~443661 bytes (443.66 KB) in 99.4ms[0m
+[90m2:01PM[0m [32mINF[0m [1mno leaks found[0m
+rc=0

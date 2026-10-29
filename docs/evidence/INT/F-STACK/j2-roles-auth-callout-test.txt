@@ -1,0 +1,2 @@
+?   	github.com/onemindos/omos/services/auth-callout/cmd/auth-callout	[no test files]
+ok  	github.com/onemindos/omos/services/auth-callout/internal/callout	14.495s

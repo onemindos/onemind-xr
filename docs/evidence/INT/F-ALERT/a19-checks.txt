@@ -1,0 +1,10 @@
+..................................                                       [100%]
+34 passed in 1.48s
+yamllint ok
+Changed YAML gate passed (4 files checked)
+No changed plain manifests to validate
+gitleaks
+[90m1:21PM[0m [32mINF[0m [1mscanned ~338286 bytes (338.29 KB) in 98.1ms[0m
+[90m1:21PM[0m [32mINF[0m [1mno leaks found[0m
+[90m1:21PM[0m [32mINF[0m [1mscanned ~13083748 bytes (13.08 MB) in 3.6s[0m
+[90m1:21PM[0m [33mWRN[0m [1mleaks found: 9[0m

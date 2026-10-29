@@ -1,0 +1,9 @@
+{"time":"2026-10-29T14:10:56.458735-04:00","level":"INFO","msg":"waiting for lease","bucket":"entity-correlation","key":"lease.entity-service","holder":"Daniels-MacBook-Pro.local-13297"}
+{"time":"2026-10-29T14:10:56.459226-04:00","level":"INFO","msg":"lease acquired"}
+{"time":"2026-10-29T14:10:56.459884-04:00","level":"INFO","msg":"restored entities","count":0}
+{"time":"2026-10-29T14:11:56.459304-04:00","level":"INFO","msg":"counters","c":{"entities":2,"expired_on_arrival":2,"published":278,"skip_echo":58,"skip_no_position":9}}
+{"time":"2026-10-29T14:12:56.459219-04:00","level":"INFO","msg":"counters","c":{"entities":2,"expired_on_arrival":2,"older_source_t":1,"published":566,"skip_echo":117,"skip_no_position":9}}
+{"time":"2026-10-29T14:13:56.46022-04:00","level":"INFO","msg":"counters","c":{"entities":2,"expired_on_arrival":2,"older_source_t":2,"published":854,"skip_echo":176,"skip_no_position":9}}
+{"time":"2026-10-29T14:14:56.459931-04:00","level":"INFO","msg":"counters","c":{"entities":2,"expired_on_arrival":2,"older_source_t":6,"published":1139,"skip_echo":236,"skip_no_position":9}}
+{"time":"2026-10-29T14:15:56.461151-04:00","level":"INFO","msg":"counters","c":{"entities":2,"expired_on_arrival":2,"older_source_t":8,"published":1427,"skip_echo":295,"skip_no_position":9}}
+{"time":"2026-10-29T14:16:56.461633-04:00","level":"INFO","msg":"counters","c":{"entities":2,"expired_on_arrival":2,"older_source_t":9,"published":1717,"skip_echo":354,"skip_no_position":9}}

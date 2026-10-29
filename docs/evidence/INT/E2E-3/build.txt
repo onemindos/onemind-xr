@@ -1,0 +1,8 @@
+built entity from entity-service/services/entity/cmd/entity-service (4f4f65d8)
+built policy from policy-service/services/policy/cmd/policy (39570a54)
+built bridge-mavlink from mavlink-bridge-fleet/services/bridge/bridges/mavlink/. (6e4f29ea)
+built layer from layer-service/services/layer/cmd/layer-service (14ef80a5)
+built projector from projector-aoi/services/projector/cmd/tak-projector (127375a5)
+built geofence from geofence-alerts/services/geofence/cmd/geofence-service (9952d3c3)
+built mission from mission-service/services/mission/cmd/mission (e69ea4c9)
+built ingest from ingest-framework/services/bridge/ingest/cmd/omos-ingest (61d8bc29)

@@ -1,0 +1,191 @@
+--- E2E-2/harness/main.go	2026-10-29 13:07:05
++++ E2E-3/harness/main.go	2026-10-29 14:17:56
+@@ -30,7 +30,7 @@
+ 
+ var (
+ 	RUN  = "/Users/danielcarku/Desktop/work/.run/tmp-e2e/run"
+-	EV   = envOr("E2E_EV", "/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/INT/E2E-2")
++	EV   = envOr("E2E_EV", "/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/INT/E2E-3")
+ 	BIN  = "/Users/danielcarku/Desktop/work/.run/tmp-e2e/bin"
+ 	SRC  = "/Users/danielcarku/Desktop/work/.run/tmp-e2e/src"
+ 	PY   = "/Users/danielcarku/Desktop/work/.tools/py/bin/python"
+@@ -553,12 +553,12 @@
+ 		"POLICY_PUBKEYS=e2e="+base64.StdEncoding.EncodeToString(pub), "SIG_REQUIRED=true",
+ 		fmt.Sprintf(`GEOFENCE_JSON={"keep_in":[{"id":"sim-range","circle":{"lat":%f,"lon":%f,"radius_m":2000}}],"max_hae_m":300}`, HOME[0], HOME[1])),
+ 		filepath.Join(BIN, "bridge-mavlink"))
+-	h.start("entity", append(nenv("entity"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["entity"]), "START_LOOKBACK=0", "OWN_RELEASABLE_TO=homestead"), filepath.Join(BIN, "entity"))
++	h.start("entity", append(nenv("entity"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["entity"]), "START_LOOKBACK=10m", "OWN_RELEASABLE_TO=homestead"), filepath.Join(BIN, "entity"))
+ 	h.start("layer", append(nenv("layer"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["layer"]), "PRINCIPALS_FILE="+lprPath), filepath.Join(BIN, "layer"))
+ 	h.start("projector", append(nenv("projector-gated"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["projector"]), "PROJECTOR_TARGET=server", "TAK_RELEASE_GROUPS=homestead"), filepath.Join(BIN, "projector")) // deployment.yaml value (A6-P15)
+-	h.start("geofence", append(nenv("geofence"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["geofence"]), "POLICY_KEYS_DIR="+keysDir, "TICK=1s"), filepath.Join(BIN, "geofence"))
++	h.start("geofence", append(nenv("geofence"), fmt.Sprintf("HTTP_ADDR=127.0.0.1:%d", hp["geofence"]), "POLICY_KEYS_DIR="+keysDir, "REQUIRE_SIGNATURE=true", "REQUIRE_APPROVAL=true"), filepath.Join(BIN, "geofence"))
+ 	h.start("mission", append(nenv("mission"), fmt.Sprintf("HEALTH_ADDR=127.0.0.1:%d", hp["mission"]), "MISSION_PRINCIPALS_FILE="+prPath,
+-		"MISSION_SWEEP_EVERY=200ms", "MISSION_ARRIVAL=true", "MISSION_ARRIVAL_RADIUS_M=25"), filepath.Join(BIN, "mission"))
++		"MISSION_REPORT_CLASSES=drone,robot", "MISSION_ARRIVAL=false"), filepath.Join(BIN, "mission"))
+ 	h.start("policy", append(nenv("policy"), fmt.Sprintf("HEALTH_ADDR=127.0.0.1:%d", hp["policy"]), "POLICY_AUTHZ=local",
+ 		"POLICY_MODEL_FILE="+filepath.Join(SRC, "policy-service/platform/security/openfga/onemind-actions.json"),
+ 		"POLICY_TUPLES_FILE="+tuPath, "POLICY_SCHEMA_DIR="+schemas, "POLICY_PRINCIPALS_FILE="+prPath,
+@@ -593,10 +593,12 @@
+ 	h.step3()
+ 	h.step4()
+ 	h.step5()
++	h.step5b()
+ 	h.step6()
+ 	h.reflight()
+ 	h.step7()
+ 	h.invariant()
++	h.sentInvariant("harness steps")
+ 
+ 	// ---- hold the stack for the browser (step 8) ----
+ 	st := map[string]any{"ws": h.ws, "nats": h.url, "users": map[string]any{
+@@ -1032,7 +1034,16 @@
+ 		}
+ 		if dist > 60 {
+ 			why = append(why, fmt.Sprintf("drone %.0f m from goal", dist))
++		}
++		tf := facts(tsk)
++		if !contains(tf, "sent") {
++			why = append(why, "no evt.mission."+tsk+".sent")
++		} else if i := indexOf(tf, "sent"); i > indexOf(tf, "received") && indexOf(tf, "received") >= 0 {
++			why = append(why, fmt.Sprintf("sent after received: %v", tf))
+ 		}
++		if src := dget(st, "result", "source"); src != "bridge" {
++			why = append(why, fmt.Sprintf("done_ok result.source=%v (want bridge)", src))
++		}
+ 		if len(why) > 0 {
+ 			res = "fail"
+ 		}
+@@ -1041,8 +1052,92 @@
+ 				msn, h.r.actionEvents(mc), tsk, act, early, errA, errB, viol, c["status"], ev, trunc(dget(cmd, "approval")), outcomes, taskReports, trunc(st), facts(tsk), facts(msn), dist, why),
+ 			map[string]any{"action_get_before_confirm": get})
+ 	})
++}
++
++func indexOf(l []string, s string) int {
++	for i, x := range l {
++		if x == s {
++			return i
++		}
++	}
++	return -1
+ }
+ 
++// step5b: the D2-P14 race (a bridge report beating the dispatch audit) was intermittent, so
++// "evt.mission.{task}.sent always present" is probed with several more human-confirmed gotos.
++func (h *H) step5b() {
++	h.guard("5b repeat", func() {
++		const n = 5
++		var outs []string
++		bad := 0
++		for i := 0; i < n; i++ {
++			tsk := newID("tsk")
++			glat, glon := destination(HOME[0], HOME[1], float64(72*i), 350)
++			body := actionReq("task.assign", "drone", "sim-x1", map[string]any{"task_id": tsk, "parent_id": nil,
++				"type": "onemind.task.goto.v1", "spec": map[string]any{"lat": glat, "lon": glon, "hae_m": 60.0}})
++			act, _, err := h.approve("zeus", body, "zeus")
++			if err != nil {
++				outs = append(outs, fmt.Sprintf("#%d %s: %v", i, tsk, err))
++				bad++
++				continue
++			}
++			var st map[string]any
++			ok := waitFor(60*time.Second, func() bool {
++				e, err := h.kvGet("mission-state", tsk)
++				if err != nil {
++					return false
++				}
++				st, _ = e["status"].(map[string]any)
++				s, _ := st["state"].(string)
++				return s == "done_ok" || s == "done_not_ok"
++			})
++			time.Sleep(300 * time.Millisecond)
++			var f []string
++			for _, m := range h.r.find("evt.mission."+tsk+".", nil) {
++				f = append(f, strings.TrimPrefix(m.Subject, "evt.mission."+tsk+"."))
++			}
++			good := ok && st["state"] == "done_ok" && contains(f, "sent") && indexOf(f, "sent") < indexOf(f, "received") && dget(st, "result", "source") == "bridge"
++			if !good {
++				bad++
++			}
++			outs = append(outs, fmt.Sprintf("#%d %s action %s: state=%v facts=%v result=%s ok=%v", i, tsk, act, st["state"], f, trunc(dget(st, "result")), good))
++		}
++		h.result("5b repeat: 5 more human-confirmed goto tasks each reach done_ok from the bridge with evt.mission.{task}.sent before received",
++			map[bool]string{true: "pass", false: "fail"}[bad == 0], strings.Join(outs, " | "), nil)
++	})
++}
++
++// sentInvariant: every task the bus saw a lifecycle report for also has evt.mission.{task}.sent.
++func (h *H) sentInvariant(label string) {
++	h.guard("sent invariant", func() {
++		seen := map[string][]string{}
++		var order []string
++		for _, m := range h.r.find("evt.mission.tsk-", nil) {
++			parts := strings.Split(m.Subject, ".")
++			if len(parts) != 4 {
++				continue
++			}
++			if _, ok := seen[parts[2]]; !ok {
++				order = append(order, parts[2])
++			}
++			seen[parts[2]] = append(seen[parts[2]], parts[3])
++		}
++		var missing []string
++		n := 0
++		for _, t := range order {
++			f := seen[t]
++			if contains(f, "received") || contains(f, "executing") || contains(f, "done_ok") || contains(f, "done_not_ok") {
++				n++
++				if !contains(f, "sent") {
++					missing = append(missing, fmt.Sprintf("%s %v", t, f))
++				}
++			}
++		}
++		h.result("invariant ("+label+"): every reported task has evt.mission.{task}.sent", map[bool]string{true: "pass", false: "fail"}[len(missing) == 0],
++			fmt.Sprintf("%d reported tasks, missing sent: %v", n, missing), nil)
++	})
++}
++
+ func cdSuffix(c string) string {
+ 	if c == "" {
+ 		return ""
+@@ -1226,5 +1321,7 @@
+ 		gotos = append(gotos, map[string]any{"subject": m.Subject, "action_id": dget(m.Data, "data", "action_id"), "requested_by": dget(m.Data, "data", "requested_by"), "at": m.At.Format(time.RFC3339Nano)})
+ 	}
+ 	h.r.note("browser-window-audit", gotos)
++	h.sentInvariant("after browser")
++	h.writeResults()
+ 	_ = hex.EncodeToString
+ }
+--- E2E-2/harness/int.spec.ts	2026-10-29 13:07:05
++++ E2E-3/harness/int.spec.ts	2026-10-29 14:17:56
+@@ -32,6 +32,9 @@
+   for (let i = 0; i < 6; i++) { samples.push((await pos())!); await page.waitForTimeout(1000); }
+   const moved = Math.max(...samples.map((p) => distanceM(p, samples[0])));
+   notes.samples = samples; notes.moved_m = moved;
++  // E2E-3: before the browser goto the service has no open alert (the reflight took sim-x1 back
++  // into zone-e2e-pad and the service resolved step 4's alert, reason "returned").
++  notes.alerts_before = { service_items: await page.locator('[data-testid="alert-item"][data-source="service"]').count(), feed_status: await page.evaluate(() => (window as any).__l0.alertFeed?.status) };
+   await page.getByRole("tab", { name: /Entities/ }).click();
+   await expect(page.getByTestId("entity-sim-x1")).toBeVisible({ timeout: 20_000 });
+   await page.screenshot({ path: join(SHOTS, "w1-drone-on-globe.png") });
+@@ -74,6 +77,20 @@
+   expect(distinct, "the client showed sim-x1 at several positions while it flew").toBeGreaterThan(3);
+   notes.d0_m = Math.round(d0); notes.d1_m = Math.round(distanceM((await pos())!, target));
+   await page.screenshot({ path: join(SHOTS, "w4-executed-arrived.png") });
++  // E2E-3 (F-ALERT): the geofence service's alert raised live when the browser-driven goto
++  // takes sim-x1 out of keep-in zone-e2e-pad is listed for the CLIENT user zeus, from svc.geofence.alerts + evt.so.alert.*.
++  await page.getByTestId("alert-chip").click();
++  const alertItem = page.locator('[data-testid="alert-item"][data-source="service"]').filter({ hasText: /zone-e2e-pad/i });
++  await expect(alertItem.first()).toBeVisible({ timeout: 20_000 });
++  await expect(page.locator("#tab-alerts")).toHaveAttribute("data-alert-service", "ok/ok", { timeout: 20_000 });
++  notes.alert = {
++    text: await alertItem.first().textContent(),
++    key: await alertItem.first().getAttribute("data-key"),
++    feed_status: await page.evaluate(() => (window as any).__l0.alertFeed?.status),
++    service_items: await page.locator('[data-testid="alert-item"][data-source="service"]').count(),
++    chip_level: await page.getByTestId("alert-chip").getAttribute("data-level"),
++  };
++  await page.screenshot({ path: join(SHOTS, "w0-open-geofence-alert.png") });
+   notes.page_errors = errors;
+   notes.console_tail = consoleLines.slice(-40);
+   writeFileSync(join(SHOTS, "..", "web-notes.json"), JSON.stringify(notes, null, 2));

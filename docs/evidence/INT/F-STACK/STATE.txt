@@ -1,0 +1,14 @@
+F-STACK: stacked branches brought up to date by merging base into head (no rebase, no force-push). 2026-10-29.
+branch (repo)                     base                  before: head  behind/ahead  -> after: head (merge)  behind/ahead
+feat/layer-service (omos #561)    feat/entity-service   0bcd36a5  6/5              -> 14ef80a5  0/6   clean merge
+feat/projector-aoi (omos #563)    feat/layer-service    345eb7f5  2/5 (8 after #561 merge) -> 127375a5  0/6   clean merge
+feat/agent-eval-redteam (#557)    feat/policy-service   1a1fbdf7  2/2              -> e3cd8d1b  0/3   conflict: owner-proposals POL-16 collision; eval rows renumbered POL-17..21, redteam_test.go POL-20->POL-21
+feat/geofence-alerts (#569)       feat/entity-service   9c9b5aeb  4/2              -> 9952d3c3  0/3   clean merge
+feat/roles-authentik (#565)       feat/policy-service   59b20c30  2/1              -> 834a2bc7  0/2   conflict: harness_test.go (geofence user + role users); onemind-roles.tuples.json regenerated (53 -> 59, zone.* A2)
+run/m2-client (xr #3)             run/m0                e92a2d2   4/2              -> e81505e   0/3   clean (docs/evidence, STATUS.md, scripts/sim only)
+run/m3-web (xr #2)                run/m0                3f9df3e   4/2              -> 8944f65   0/3   clean (same)
+run/m4-client (xr #4)             run/m2-client         0ef0727   0/2 (1 after m2 merge) -> d3ad939   0/3   clean
+run/m4-web (xr #5)                run/m3-web            a38ab8a   0/3 (1 after m3 merge) -> 55618af   0/4   clean
+Tests: see *-test.txt, *-host-tests.txt, *-ci-equivalent.txt in this dir. All pass.
+Pre-existing, not changed: #565 check_onemind_mcp_coverage fails "platform-auth-callout: add an explicit app mapping or supporting-infrastructure disposition" (also fails at 59b20c30, before the merge).
+GitHub CI: #561, #563, #569 test=pass on new heads; #557 and #565 get no checks (stacked on a non-main base) -> CI-equivalent run locally.

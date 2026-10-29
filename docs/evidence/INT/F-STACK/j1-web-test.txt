@@ -1,0 +1,9 @@
+
+ RUN  v4.1.12 /Users/danielcarku/Desktop/work/wt/j1-web/web
+
+
+ Test Files  5 passed (5)
+      Tests  63 passed | 1 skipped (64)
+   Start at  13:53:27
+   Duration  12.79s (transform 334ms, setup 0ms, import 450ms, tests 13.56s, environment 0ms)
+
