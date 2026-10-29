@@ -1,0 +1,224 @@
+{
+ "label": "go-chaos",
+ "sources": {
+  "usgs": {
+   "stored": 61,
+   "distinctMsgIds": 61,
+   "duplicates": 0,
+   "emitted": 53,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    60
+   ],
+   "storedSeqGaps": []
+  },
+  "nws": {
+   "stored": 76,
+   "distinctMsgIds": 76,
+   "duplicates": 0,
+   "emitted": 66,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    75
+   ],
+   "storedSeqGaps": []
+  },
+  "eonet": {
+   "stored": 151,
+   "distinctMsgIds": 151,
+   "duplicates": 0,
+   "emitted": 131,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    150
+   ],
+   "storedSeqGaps": []
+  },
+  "ais": {
+   "stored": 11239,
+   "distinctMsgIds": 11239,
+   "duplicates": 0,
+   "emitted": 9432,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  },
+  "cap": {
+   "stored": 72,
+   "distinctMsgIds": 72,
+   "duplicates": 0,
+   "emitted": 61,
+   "missingVsEmitted": 2,
+   "missingSample": [
+    "c38",
+    "c39"
+   ],
+   "storedSeqRange": [
+    1,
+    74
+   ],
+   "storedSeqGaps": [
+    "38..39"
+   ]
+  },
+  "mqtt": {
+   "stored": 361,
+   "distinctMsgIds": 275,
+   "duplicates": 86,
+   "emitted": 236,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    1,
+    275
+   ],
+   "storedSeqGaps": []
+  },
+  "celestrak": {
+   "stored": 20,
+   "distinctMsgIds": 20,
+   "duplicates": 0,
+   "emitted": 20
+  },
+  "gdacs": {
+   "stored": 31,
+   "distinctMsgIds": 31,
+   "duplicates": 0,
+   "emitted": 27,
+   "missingVsEmitted": 0,
+   "missingSample": [],
+   "storedSeqRange": [
+    0,
+    30
+   ],
+   "storedSeqGaps": []
+  },
+  "outages": {
+   "stored": 20,
+   "distinctMsgIds": 20,
+   "duplicates": 0,
+   "emitted": 17,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  }
+ },
+ "rejects": [
+  {
+   "source": "ais",
+   "reason": "invalid character 'n' looking for beginning of object key string",
+   "count": 14
+  },
+  {
+   "source": "usgs",
+   "reason": "jsonschema validation failed with 'file:///Users/danielcarku/Desktop/work/.run/ingest/s.js",
+   "count": 3
+  }
+ ],
+ "latestStatus": {
+  "ais": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:21:03.171572-04:00",
+   "ageSec": 0.01642225,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "cap": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:21:02.382968-04:00",
+   "ageSec": 0.805031583,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "celestrak": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:20:43.191926-04:00",
+   "ageSec": 19.996324,
+   "count": 0,
+   "lastError": null,
+   "stale": false
+  },
+  "eonet": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:21:03.000927-04:00",
+   "ageSec": 0.187069458,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "gdacs": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:20:53.194437-04:00",
+   "ageSec": 9.993683375,
+   "count": 10,
+   "lastError": null,
+   "stale": false
+  },
+  "mediamtx": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:20:53.189227-04:00",
+   "ageSec": 9.998898792,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "mqtt": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:21:02.67338-04:00",
+   "ageSec": 0.51462075,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "nws": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:21:03.068064-04:00",
+   "ageSec": 0.119926458,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "outages": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:20:58.197544-04:00",
+   "ageSec": 4.990517834,
+   "count": 5,
+   "lastError": null,
+   "stale": false
+  },
+  "tiles": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:20:43.190859-04:00",
+   "ageSec": 19.997388791,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "usgs": {
+   "engine": "go",
+   "fetchedAt": "2026-10-29T05:20:58.19341-04:00",
+   "ageSec": 4.99464125,
+   "count": 20,
+   "lastError": null,
+   "stale": false
+  }
+ },
+ "videoRegistryKV": {
+  "sim-cam1": {
+   "engine": "go",
+   "path": "sim-cam1",
+   "ready": true,
+   "rtsp": "rtsp://127.0.0.1:38554/sim-cam1",
+   "seenAt": "2026-10-29T05:21:03.188597-04:00",
+   "tracks": [
+    "H264"
+   ]
+  }
+ }
+}

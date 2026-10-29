@@ -1,0 +1,25 @@
+# Source 10 - Map tiles (XYZ). Tiles go client -> caching tile proxy, never through NATS.
+# The pipeline only probes availability and feeds the freshness/health status.
+input:
+  generate: { interval: 30s, mapping: 'root = ""' }   # empty body: the http processor sends the message as the request body
+pipeline:
+  processors:
+    - http:
+        url: http://127.0.0.1:38080/tiles/3/2/3.png
+        verb: HEAD
+        rate_limit: rl_tiles
+        retries: 1
+        timeout: 10s
+    - catch:
+        - branch:
+            request_map: 'root = {"fetchedAt": null, "code": @http_status_code.or("0"), "count": 0, "lastError": error(), "errorAt": now()}'
+            processors:
+              - cache: { resource: live, operator: set, key: "status.tiles.error", value: '${! content() }' }
+        - mapping: root = deleted()
+    - branch:
+        request_map: 'root = {"fetchedAt": now(), "code": @http_status_code.or("0"), "count": 1, "lastError": null}'
+        processors:
+          - cache: { resource: live, operator: set, key: "status.tiles", value: '${! content() }' }
+    - mapping: root = deleted()
+output:
+  drop: {}

@@ -1,0 +1,67 @@
+# Source 7 - Bulk file download (CelesTrak-style TLE text), If-Modified-Since, parsed into records.
+input:
+  generate: { interval: 30s, mapping: 'root = ""' }   # empty body: the http processor sends the message as the request body
+pipeline:
+  processors:
+    - branch:
+        request_map: 'root = ""'
+        processors:
+          - cache: { resource: live, operator: get, key: lm.celestrak }
+          - catch: [ { mapping: 'root = ""' } ]
+        result_map: 'meta ims = content().string()'
+    - http:
+        url: http://127.0.0.1:38080/celestrak/stations.txt
+        verb: GET
+        headers: { If-Modified-Since: '${! @ims }' }
+        rate_limit: rl_celestrak
+        successful_on: [ 304 ]
+        backoff_on: [ 429, 503 ]
+        retries: 3
+        retry_period: 5s
+        timeout: 30s
+        extract_headers: { include_patterns: [ '(?i)^last-modified$' ] }
+    - catch:
+        - branch:
+            request_map: 'root = {"fetchedAt": null, "code": @http_status_code.or("0"), "count": 0, "lastError": error(), "errorAt": now()}'
+            processors:
+              - cache: { resource: live, operator: set, key: "status.celestrak.error", value: '${! content() }' }
+        - mapping: root = deleted()
+    - branch:
+        request_map: 'root = {"fetchedAt": now(), "code": @http_status_code.or("0"), "count": if @http_status_code == "200" { content().string().trim().split("\n").length() / 3 } else { 0 }, "lastError": null}'
+        processors:
+          - cache: { resource: live, operator: set, key: "status.celestrak", value: '${! content() }' }
+    - branch:
+        request_map: 'root = if @http_status_code == "200" { @Last-Modified.or(@last-modified.or(deleted())) } else { deleted() }'
+        processors:
+          - cache: { resource: live, operator: set, key: lm.celestrak, value: '${! content() }' }
+    - mapping: |
+        let lines = content().string().trim().split("\n")
+        root = if @http_status_code == "304" { deleted() } else {
+          range(0, $lines.length() / 3).map_each(i -> {"name": $lines.index(i*3).trim(), "l1": $lines.index(i*3+1), "l2": $lines.index(i*3+2)})
+        }
+    - unarchive: { format: json_array }
+    - json_schema:
+        schema: '{"type":"object","required":["name","l1","l2"],"properties":{"l1":{"type":"string","pattern":"^1 "},"l2":{"type":"string","pattern":"^2 "}}}'
+    - mapping: |
+        let norad = this.l1.slice(2, 7)
+        let epoch = this.l1.slice(18, 32)
+        meta subject = "intel.space.celestrak.tle"
+        meta msgid = "tle:" + $norad + ":" + $epoch
+        root = this.merge({"norad": $norad, "epoch": $epoch, "source": "celestrak", "fetchedAt": now()})
+    - catch:
+        - mapping: |
+            meta subject = "evt.feed.celestrak.rejected"
+            meta msgid = "rej:celestrak:" + content().string().hash("xxhash64").encode("hex") + ":" + timestamp_unix_nano().string()
+            root = {"source": "celestrak", "reason": error(), "raw": content().string().slice(0, 2000), "at": now()}
+    - dedupe: { cache: seen, key: '${! @msgid }' }   # in-memory seen-set; restart replays are caught by Nats-Msg-Id
+output:
+  retry:
+    max_retries: 0          # forever: a NATS outage blocks (backpressure), never drops
+    backoff: { initial_interval: 500ms, max_interval: 10s, max_elapsed_time: 0s }
+    output:
+      nats_jetstream:
+        urls: [ "${NATS_URL:nats://127.0.0.1:34222}" ]
+        subject: ${! @subject }
+        headers:
+          Nats-Msg-Id: ${! @msgid }
+        max_in_flight: 64

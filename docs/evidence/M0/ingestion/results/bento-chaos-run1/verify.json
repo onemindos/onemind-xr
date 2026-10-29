@@ -1,0 +1,194 @@
+{
+ "label": "bento-chaos",
+ "sources": {
+  "usgs": {
+   "stored": 73,
+   "distinctMsgIds": 59,
+   "duplicates": 14,
+   "emitted": 53,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  },
+  "nws": {
+   "stored": 79,
+   "distinctMsgIds": 76,
+   "duplicates": 3,
+   "emitted": 66,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  },
+  "eonet": {
+   "stored": 125,
+   "distinctMsgIds": 125,
+   "duplicates": 0,
+   "emitted": 107,
+   "missingVsEmitted": 2,
+   "missingSample": [
+    "e81",
+    "e82"
+   ]
+  },
+  "ais": {
+   "stored": 11451,
+   "distinctMsgIds": 11451,
+   "duplicates": 0,
+   "emitted": 9613,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  },
+  "cap": {
+   "stored": 71,
+   "distinctMsgIds": 71,
+   "duplicates": 0,
+   "emitted": 60,
+   "missingVsEmitted": 2,
+   "missingSample": [
+    "c37",
+    "c38"
+   ]
+  },
+  "mqtt": {
+   "stored": 276,
+   "distinctMsgIds": 275,
+   "duplicates": 1,
+   "emitted": 235,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  },
+  "celestrak": {
+   "stored": 20,
+   "distinctMsgIds": 20,
+   "duplicates": 0,
+   "emitted": 20
+  },
+  "gdacs": {
+   "stored": 37,
+   "distinctMsgIds": 30,
+   "duplicates": 7,
+   "emitted": 26,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  },
+  "outages": {
+   "stored": 22,
+   "distinctMsgIds": 19,
+   "duplicates": 3,
+   "emitted": 17,
+   "missingVsEmitted": 0,
+   "missingSample": []
+  }
+ },
+ "rejects": [
+  {
+   "source": "ais",
+   "reason": "failed assignment (line 1): unable to reference message as structured (with 'this.mmsi'): ",
+   "count": 1
+  },
+  {
+   "source": "usgs",
+   "reason": "failed assignment (line 3): failed to resolve 'lon' value: expected array value, got null ",
+   "count": 1
+  }
+ ],
+ "latestStatus": {
+  "ais": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:37:19.778878-04:00",
+   "ageSec": 0.007,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "cap": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:37:19.195909-04:00",
+   "ageSec": 0.59,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "celestrak": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:36:29.770566-04:00",
+   "ageSec": 50.015,
+   "count": 0,
+   "lastError": null,
+   "stale": false
+  },
+  "eonet": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:37:18.584191-04:00",
+   "ageSec": 1.201,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "gdacs": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:37:09.777347-04:00",
+   "ageSec": 10.008,
+   "count": 10,
+   "lastError": null,
+   "stale": false
+  },
+  "mediamtx": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:37:19.773644-04:00",
+   "ageSec": 0.012,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "mqtt": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:37:19.103763-04:00",
+   "ageSec": 0.682,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "nws": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:37:18.557051-04:00",
+   "ageSec": 1.228,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "outages": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:36:59.783736-04:00",
+   "ageSec": 20.002,
+   "count": 5,
+   "lastError": null,
+   "stale": false
+  },
+  "tiles": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:36:29.78467-04:00",
+   "ageSec": 50.001,
+   "count": 1,
+   "lastError": null,
+   "stale": false
+  },
+  "usgs": {
+   "engine": "bento",
+   "fetchedAt": "2026-10-29T04:37:09.762212-04:00",
+   "ageSec": 10.023,
+   "count": 0,
+   "lastError": "http://127.0.0.1:38080/usgs.geojson: HTTP request returned unexpected response code (501): 501 Unsupported method ('{}GET'), Error: <!DOCTYPE HTML><html lang=\"en\">    <head>        <meta charset=\"utf-8\">        <title>Error response</title>    </head>    <body>        <h1>Error response</h1>        <p>Error code: 501</p>        <p>Message: Unsupported method ('{}GET').</p>        <p>Error code explanation: 501 - Server does not support this operation.</p>    </body></html>",
+   "stale": false
+  }
+ },
+ "videoRegistryKV": {
+  "sim-cam1": {
+   "path": "sim-cam1",
+   "ready": true,
+   "rtsp": "rtsp://127.0.0.1:38554/sim-cam1",
+   "seenAt": "2026-10-29T04:37:19.773725-04:00",
+   "tracks": [
+    "H264"
+   ]
+  }
+ }
+}

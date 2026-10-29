@@ -1,0 +1,12 @@
+ingest_published_total 1511
+ingest_feed_leader{source="nws",instance="a"} 1
+ingest_feed_leader{source="celestrak",instance="a"} 1
+ingest_feed_leader{source="gdacs",instance="a"} 1
+ingest_feed_leader{source="outages",instance="a"} 1
+ingest_feed_leader{source="tiles",instance="a"} 1
+ingest_feed_leader{source="mediamtx",instance="a"} 1
+ingest_feed_leader{source="eonet",instance="a"} 1
+ingest_feed_leader{source="ais",instance="a"} 1
+ingest_feed_leader{source="cap",instance="a"} 1
+ingest_feed_leader{source="mqtt",instance="a"} 1
+ingest_feed_leader{source="usgs",instance="a"} 1

@@ -1,0 +1,41 @@
+# Source 3 - Server-Sent Events stream (EONET-style). Reconnects; cannot resend Last-Event-ID (engine limit).
+input:
+  http_client:
+    url: http://127.0.0.1:38080/eonet/sse
+    verb: GET
+    headers: { Accept: text/event-stream }
+    timeout: 0s
+    stream:
+      enabled: true
+      reconnect: true
+      scanner: { lines: {} }
+pipeline:
+  processors:
+    - mapping: |
+        root = if content().string().has_prefix("data: ") { content().string().trim_prefix("data: ").parse_json() } else { deleted() }
+    - json_schema:
+        schema: '{"type":"object","required":["id","lon","lat"],"properties":{"id":{"type":"string"}}}'
+    - mapping: |
+        meta subject = "intel.natural.eonet.event"
+        meta msgid = "eonet:" + this.id
+        root = this.merge({"source": "eonet", "fetchedAt": now()})
+    - branch:
+        request_map: 'root = {"fetchedAt": now(), "count": 1, "lastError": null}'
+        processors:
+          - cache: { resource: live, operator: set, key: status.eonet, value: '${! content() }' }
+    - catch:
+        - mapping: |
+            meta subject = "evt.feed.eonet.rejected"
+            meta msgid = "rej:eonet:" + content().string().hash("xxhash64").encode("hex") + ":" + timestamp_unix_nano().string()
+            root = {"source": "eonet", "reason": error(), "raw": content().string().slice(0, 2000), "at": now()}
+output:
+  retry:
+    max_retries: 0          # forever: a NATS outage blocks (backpressure), never drops
+    backoff: { initial_interval: 500ms, max_interval: 10s, max_elapsed_time: 0s }
+    output:
+      nats_jetstream:
+        urls: [ "${NATS_URL:nats://127.0.0.1:34222}" ]
+        subject: ${! @subject }
+        headers:
+          Nats-Msg-Id: ${! @msgid }
+        max_in_flight: 64

@@ -1,0 +1,51 @@
+# Source 8 - RSS (GDACS-style). XML parsed to JSON; guid is the dedup key.
+input:
+  generate: { interval: 10s, mapping: 'root = ""' }   # empty body: the http processor sends the message as the request body
+pipeline:
+  processors:
+    - http:
+        url: http://127.0.0.1:38080/gdacs/rss.xml
+        verb: GET
+        rate_limit: rl_gdacs
+        backoff_on: [ 429, 503 ]
+        retries: 3
+        retry_period: 2s
+        timeout: 10s
+    - catch:
+        - branch:
+            request_map: 'root = {"fetchedAt": null, "code": @http_status_code.or("0"), "count": 0, "lastError": error(), "errorAt": now()}'
+            processors:
+              - cache: { resource: live, operator: set, key: "status.gdacs.error", value: '${! content() }' }
+        - mapping: root = deleted()
+    - xml: { operator: to_json, cast: true }
+    - mapping: |
+        root = this.rss.channel.item.or([])
+        root = if root.type() == "object" { [root] } else { root }
+    - branch:
+        request_map: 'root = {"fetchedAt": now(), "code": @http_status_code.or("0"), "count": this.length(), "lastError": null}'
+        processors:
+          - cache: { resource: live, operator: set, key: "status.gdacs", value: '${! content() }' }
+    - unarchive: { format: json_array }
+    - json_schema:
+        schema: '{"type":"object","required":["guid","title"]}'
+    - mapping: |
+        meta subject = "intel.disaster.gdacs.event"
+        meta msgid = "gdacs:" + this.guid.string()
+        root = {"id": this.guid.string(), "title": this.title, "lat": this."geo:lat".or(this.lat), "lon": this."geo:long".or(this.long), "source": "gdacs", "fetchedAt": now()}
+    - catch:
+        - mapping: |
+            meta subject = "evt.feed.gdacs.rejected"
+            meta msgid = "rej:gdacs:" + content().string().hash("xxhash64").encode("hex") + ":" + timestamp_unix_nano().string()
+            root = {"source": "gdacs", "reason": error(), "raw": content().string().slice(0, 2000), "at": now()}
+    - dedupe: { cache: seen, key: '${! @msgid }' }   # in-memory seen-set; restart replays are caught by Nats-Msg-Id
+output:
+  retry:
+    max_retries: 0          # forever: a NATS outage blocks (backpressure), never drops
+    backoff: { initial_interval: 500ms, max_interval: 10s, max_elapsed_time: 0s }
+    output:
+      nats_jetstream:
+        urls: [ "${NATS_URL:nats://127.0.0.1:34222}" ]
+        subject: ${! @subject }
+        headers:
+          Nats-Msg-Id: ${! @msgid }
+        max_in_flight: 64

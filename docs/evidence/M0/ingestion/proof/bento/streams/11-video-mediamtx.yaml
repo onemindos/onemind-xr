@@ -1,0 +1,31 @@
+# Source 11 - Video (MediaMTX). Video stays in MediaMTX; only the stream registry goes to KV.
+input:
+  generate: { interval: 10s, mapping: 'root = ""' }   # empty body: the http processor sends the message as the request body
+pipeline:
+  processors:
+    - http:
+        url: http://127.0.0.1:39997/v3/paths/list
+        verb: GET
+        rate_limit: rl_mediamtx
+        retries: 2
+        timeout: 5s
+    - catch:
+        - branch:
+            request_map: 'root = {"fetchedAt": null, "code": @http_status_code.or("0"), "count": 0, "lastError": error(), "errorAt": now()}'
+            processors:
+              - cache: { resource: live, operator: set, key: "status.mediamtx.error", value: '${! content() }' }
+        - mapping: root = deleted()
+    - branch:
+        request_map: 'root = {"fetchedAt": now(), "code": @http_status_code.or("0"), "count": this.items.length(), "lastError": null}'
+        processors:
+          - cache: { resource: live, operator: set, key: "status.mediamtx", value: '${! content() }' }
+    - mapping: 'root = this.items'
+    - unarchive: { format: json_array }
+    - mapping: |
+        meta key = this.name
+        root = {"path": this.name, "ready": this.ready, "tracks": this.tracks, "rtsp": "rtsp://127.0.0.1:38554/" + this.name, "seenAt": now()}
+output:
+  nats_kv:
+    urls: [ "${NATS_URL:nats://127.0.0.1:34222}" ]
+    bucket: overwatch-video
+    key: ${! @key }

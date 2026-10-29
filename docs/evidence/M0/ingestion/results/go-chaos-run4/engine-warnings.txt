@@ -1,0 +1,40 @@
+   1 {"time":"2026-10-29T05:09:45.174671-04:00","level":"WARN","msg":"fetch failed","source":"nws","err":"http 503"}
+   1 {"time":"2026-10-29T05:09:44.832806-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:44.832399-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:43.831395-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:43.830774-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:42.828956-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:42.827679-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:41.827974-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:41.823942-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:40.826641-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:40.816596-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:39.825229-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:39.814438-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:38.823063-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:38.806604-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:37.819901-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:37.800875-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:37.169335-04:00","level":"WARN","msg":"fetch failed","source":"nws","err":"http 503"}
+   1 {"time":"2026-10-29T05:09:36.816066-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:36.796962-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:35.814673-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:35.795759-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:35.784246-04:00","level":"WARN","msg":"fetch failed","source":"usgs","err":"http 503"}
+   1 {"time":"2026-10-29T05:09:34.813036-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:34.792577-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:33.807257-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:33.790368-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:32.806058-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:32.788669-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:31.804687-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:31.787972-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:30.803355-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:30.786365-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:29.802163-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:29.785878-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:29.165518-04:00","level":"WARN","msg":"fetch failed","source":"nws","err":"http 503"}
+   1 {"time":"2026-10-29T05:09:28.801039-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:28.784242-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
+   1 {"time":"2026-10-29T05:09:27.799901-04:00","level":"WARN","msg":"fetch failed","source":"eonet","err":"sse stream ended"}
+   1 {"time":"2026-10-29T05:09:27.78274-04:00","level":"WARN","msg":"fetch failed","source":"ais","err":"failed to get reader: received close frame: status = StatusNormalClosure and reason = \"\""}
