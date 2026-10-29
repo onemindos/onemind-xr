@@ -4,7 +4,7 @@
 Simulated asset only (`sim-*`, decision 0004 #13). It speaks real MAVLink 2 via
 pymavlink: HEARTBEAT, SYS_STATUS, GLOBAL_POSITION_INT, ATTITUDE and VFR_HUD,
 orbiting a centre point, and it ACKs COMMAND_LONG (arm, disarm, takeoff, land,
-RTL) by changing its simulated state. MAV_CMD_DO_REPOSITION (goto) is accepted
+RTL, flight termination for estop) by changing its simulated state. MAV_CMD_DO_REPOSITION (goto) is accepted
 over COMMAND_INT (x/y degE7, z altitude) or COMMAND_LONG (param5/6/7) when armed
 and airborne: the drone flies to the point and holds there until land or RTL.
 It never talks to real hardware.
@@ -107,6 +107,9 @@ def main():
                 airborne = True
             elif msg.command in (M.MAV_CMD_NAV_LAND, M.MAV_CMD_NAV_RETURN_TO_LAUNCH):
                 airborne = False
+            elif msg.command == M.MAV_CMD_DO_FLIGHTTERMINATION and msg.param1 >= 1:
+                # estop: simulated flight termination, motors off at once.
+                armed, airborne, alt = False, False, 0.0
             else:
                 result = M.MAV_RESULT_UNSUPPORTED
             if not airborne:

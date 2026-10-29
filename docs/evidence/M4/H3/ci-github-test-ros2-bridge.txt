@@ -1,0 +1,9 @@
+test	pytest	2026-10-29T13:41:50.6255565Z tests/test_zenoh.py::test_key_mapping PASSED                             [ 98%]
+test	pytest	2026-10-29T13:41:53.1503731Z tests/test_zenoh.py::test_transport_odom_goal_cancel PASSED              [ 99%]
+test	pytest	2026-10-29T13:41:55.5917836Z tests/test_zenoh.py::test_bridge_end_to_end_over_zenoh PASSED            [100%]
+test	pytest	2026-10-29T13:41:55.5918721Z ======================== 150 passed, 1 skipped in 5.73s ========================
+Helm render check	pass	40s	https://github.com/onemindos/omos/actions/runs/40884280093/job/123483697825	
+Kubernetes manifest schema (kubeconform)	pass	7s	https://github.com/onemindos/omos/actions/runs/40884280093/job/123483697714	
+Lint & Validate	pass	23s	https://github.com/onemindos/omos/actions/runs/40884280093/job/123483697209	
+Secret scan (gitleaks)	pass	8s	https://github.com/onemindos/omos/actions/runs/40884280093/job/123483697640	
+test	pass	16s	https://github.com/onemindos/omos/actions/runs/40884280198/job/123483697512	

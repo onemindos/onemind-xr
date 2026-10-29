@@ -1,0 +1,24 @@
+# omos CI-equivalent checks, 2026-10-29T13:46:23Z, worktree feat/agents-watch-briefs
+## yamllint
+yamllint: ok
+## validate_changed_yaml.py
+Changed YAML gate passed (1 files checked)
+## check_onemind_mcp_coverage.py
+All 58 Git-declared Argo Applications mapped to MCP access dispositions
+## validate_manifests.py (changed files)
+Summary: 3 resources found in 1 file - Valid: 3, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)
+## validate_manifests.py platform/omos/agentops/deployment.yaml
+Summary: 3 resources found in 1 file - Valid: 3, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)
+## validate_manifests.py platform/omos/agentops/configmap.yaml
+Summary: 3 resources found in 1 file - Valid: 3, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)
+## validate_manifests.py platform/argocd/platform-omos-agentops.yaml
+Summary: 3 resources found in 1 file - Valid: 3, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)
+## gitleaks dir services/agentops, platform/omos/agentops, proposal, workflow
+[90m9:46AM[0m [32mINF[0m [1mno leaks found[0m
+[90m9:46AM[0m [32mINF[0m [1mno leaks found[0m
+[90m9:46AM[0m [32mINF[0m [1mno leaks found[0m
+[90m9:46AM[0m [32mINF[0m [1mno leaks found[0m

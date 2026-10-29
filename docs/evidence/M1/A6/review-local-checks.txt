@@ -1,0 +1,16 @@
+[Errno 2] No such file or directory: 'platform/argocd/platform-omos-projector.yaml platform/omos/projector/deployment.yaml platform/omos/tak-projector.yaml platform/hermes/mcp/coverage.yaml .github/workflows/build-tak-projector.yml'
+yamllint=255
+Changed YAML gate passed (0 files checked)
+No changed plain manifests to validate
+check_onemind_mcp_coverage.py
+/Users/danielcarku/Desktop/work/.tools/bin/gitleaks
+[90m8:46AM[0m [32mINF[0m [1m2 commits scanned.[0m
+[90m8:46AM[0m [32mINF[0m [1mscanned ~151444 bytes (151.44 KB) in 67.5ms[0m
+[90m8:46AM[0m [32mINF[0m [1mno leaks found[0m
+yamllint=0
+Changed YAML gate passed (0 files checked)
+No changed plain manifests to validate
+All 60 Git-declared Argo Applications mapped to MCP access dispositions
+Changed YAML gate passed (5 files checked)
+Summary: 4 resources found in 3 files - Valid: 4, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 3 manifest file(s)

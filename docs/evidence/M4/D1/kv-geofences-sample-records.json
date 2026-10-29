@@ -1,0 +1,275 @@
+{
+  "barn-keepout": {
+    "v": 1,
+    "zone_id": "barn-keepout",
+    "entity_id": "barn-keepout",
+    "entity_type": "zone",
+    "active": true,
+    "live": true,
+    "lifecycle": "active",
+    "pinned": true,
+    "geo": {
+      "shape": "circle",
+      "kind": "keep_out",
+      "coords": {
+        "type": "Point",
+        "coordinates": [
+          -97.74,
+          30.27
+        ]
+      },
+      "radius_m": 300
+    },
+    "watch": true,
+    "properties": {},
+    "created_t": 1000,
+    "updated_t": 1000,
+    "created_by": "user:zeus",
+    "updated_by": "user:zeus",
+    "action_id": "act-1",
+    "command_id": "c1",
+    "simulated": true
+  },
+  "barn-keepout-inactive": {
+    "v": 1,
+    "zone_id": "barn-keepout",
+    "entity_id": "barn-keepout",
+    "entity_type": "zone",
+    "active": false,
+    "live": false,
+    "lifecycle": "inactive",
+    "pinned": true,
+    "geo": {
+      "shape": "circle",
+      "kind": "keep_out",
+      "coords": {
+        "type": "Point",
+        "coordinates": [
+          -97.74,
+          30.27
+        ]
+      },
+      "radius_m": 300
+    },
+    "watch": true,
+    "properties": {},
+    "created_t": 1000,
+    "updated_t": 1000,
+    "created_by": "user:zeus",
+    "updated_by": "user:zeus",
+    "action_id": "act-1",
+    "command_id": "c1",
+    "simulated": true
+  },
+  "home-keepin": {
+    "v": 1,
+    "zone_id": "home-keepin",
+    "entity_id": "home-keepin",
+    "entity_type": "zone",
+    "active": true,
+    "live": true,
+    "lifecycle": "active",
+    "pinned": true,
+    "geo": {
+      "shape": "polygon",
+      "kind": "keep_in",
+      "coords": {
+        "coordinates": [
+          [
+            [
+              -97.75,
+              30.26
+            ],
+            [
+              -97.73,
+              30.26
+            ],
+            [
+              -97.73,
+              30.28
+            ],
+            [
+              -97.75,
+              30.28
+            ],
+            [
+              -97.75,
+              30.26
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    },
+    "watch": true,
+    "properties": {
+      "applies_to": [
+        "sim-x1"
+      ]
+    },
+    "created_t": 1000,
+    "updated_t": 1000,
+    "created_by": "user:zeus",
+    "updated_by": "user:zeus",
+    "action_id": "act-1",
+    "command_id": "c1",
+    "simulated": true
+  },
+  "pond-hazard": {
+    "v": 1,
+    "zone_id": "pond-hazard",
+    "entity_id": "pond-hazard",
+    "entity_type": "zone",
+    "active": true,
+    "live": true,
+    "lifecycle": "active",
+    "pinned": true,
+    "geo": {
+      "shape": "polygon",
+      "kind": "hazard",
+      "coords": {
+        "coordinates": [
+          [
+            [
+              -97.75,
+              30.26
+            ],
+            [
+              -97.73,
+              30.26
+            ],
+            [
+              -97.73,
+              30.28
+            ],
+            [
+              -97.75,
+              30.28
+            ],
+            [
+              -97.75,
+              30.26
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "alt_min_m": 0,
+      "alt_max_m": 120
+    },
+    "watch": true,
+    "properties": {},
+    "created_t": 1000,
+    "updated_t": 1000,
+    "created_by": "user:zeus",
+    "updated_by": "user:zeus",
+    "action_id": "act-1",
+    "command_id": "c1",
+    "simulated": true
+  },
+  "road-aoi": {
+    "v": 1,
+    "zone_id": "road-aoi",
+    "entity_id": "road-aoi",
+    "entity_type": "zone",
+    "active": true,
+    "live": true,
+    "lifecycle": "active",
+    "pinned": true,
+    "geo": {
+      "shape": "corridor",
+      "kind": "aoi",
+      "coords": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -97.75,
+            30.27
+          ],
+          [
+            -97.73,
+            30.27
+          ]
+        ]
+      },
+      "radius_m": 200
+    },
+    "watch": false,
+    "properties": {},
+    "created_t": 1000,
+    "updated_t": 1000,
+    "created_by": "user:zeus",
+    "updated_by": "user:zeus",
+    "action_id": "act-1",
+    "command_id": "c1",
+    "simulated": true
+  },
+  "two-fields": {
+    "v": 1,
+    "zone_id": "two-fields",
+    "entity_id": "two-fields",
+    "entity_type": "zone",
+    "active": true,
+    "live": true,
+    "lifecycle": "active",
+    "pinned": true,
+    "geo": {
+      "shape": "multipolygon",
+      "kind": "aoi",
+      "coords": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -97.75,
+                30.26
+              ],
+              [
+                -97.74,
+                30.26
+              ],
+              [
+                -97.74,
+                30.27
+              ],
+              [
+                -97.75,
+                30.26
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                -97.73,
+                30.26
+              ],
+              [
+                -97.72,
+                30.26
+              ],
+              [
+                -97.72,
+                30.27
+              ],
+              [
+                -97.73,
+                30.26
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    "watch": false,
+    "properties": {},
+    "created_t": 1000,
+    "updated_t": 1000,
+    "created_by": "user:zeus",
+    "updated_by": "user:zeus",
+    "action_id": "act-1",
+    "command_id": "c1",
+    "simulated": true
+  }
+}

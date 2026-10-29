@@ -1,0 +1,39 @@
+$ gofmt -l .
+$ go vet ./...
+vet ok
+$ NATS_SERVER_BIN=$(command -v nats-server) go test -race -count=1 ./...
+?   	github.com/onemindos/omos/services/entity/cmd/entity-service	[no test files]
+ok  	github.com/onemindos/omos/services/entity/internal/adapt	1.332s
+ok  	github.com/onemindos/omos/services/entity/internal/bus	20.259s
+ok  	github.com/onemindos/omos/services/entity/internal/engine	2.487s
+ok  	github.com/onemindos/omos/services/entity/internal/fusion	1.541s
+ok  	github.com/onemindos/omos/services/entity/internal/identity	2.029s
+?   	github.com/onemindos/omos/services/entity/internal/model	[no test files]
+ok  	github.com/onemindos/omos/services/entity/internal/orbit	1.342s
+$ go test -race -count=1 -v -run 'Capab|NoCapab|Restore.*Capab|Mavlink|Ros|ClassBounds|Feeds|Bridge' ./internal/adapt ./internal/engine
+=== RUN   TestMavlinkStatusGivesDroneTaskTypes
+--- PASS: TestMavlinkStatusGivesDroneTaskTypes (0.00s)
+=== RUN   TestRosStatusGivesRobotTaskTypes
+--- PASS: TestRosStatusGivesRobotTaskTypes (0.00s)
+=== RUN   TestClassBoundsAdvertisedVerbs
+--- PASS: TestClassBoundsAdvertisedVerbs (0.00s)
+=== RUN   TestNoCapabilitiesWithoutSimIDOrAdvertisement
+--- PASS: TestNoCapabilitiesWithoutSimIDOrAdvertisement (0.00s)
+=== RUN   TestFeedsAndCotNeverGetCapabilities
+--- PASS: TestFeedsAndCotNeverGetCapabilities (0.01s)
+=== RUN   TestBridgeConnectionIsHonoured
+--- PASS: TestBridgeConnectionIsHonoured (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/adapt	1.268s
+=== RUN   TestSimDroneAndRobotAdvertiseCapabilities
+--- PASS: TestSimDroneAndRobotAdvertiseCapabilities (0.02s)
+=== RUN   TestCapabilityAndConnectionChangesPublish
+--- PASS: TestCapabilityAndConnectionChangesPublish (0.00s)
+=== RUN   TestNoCapabilitiesForNonSimFeedsOrCot
+--- PASS: TestNoCapabilitiesForNonSimFeedsOrCot (0.01s)
+=== RUN   TestRestoreKeepsCapabilities
+--- PASS: TestRestoreKeepsCapabilities (0.00s)
+=== RUN   TestSameAircraftTwoFeedsIsOneEntityWithTwoSources
+--- PASS: TestSameAircraftTwoFeedsIsOneEntityWithTwoSources (0.01s)
+PASS
+ok  	github.com/onemindos/omos/services/entity/internal/engine	1.618s

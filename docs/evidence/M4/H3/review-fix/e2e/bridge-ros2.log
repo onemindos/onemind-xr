@@ -1,0 +1,15 @@
+2026-10-29T09:51:41.623 INFO ros2bridge [bridge-ros2] NATS connected: 127.0.0.1:63446
+2026-10-29T09:51:41.632 INFO ros2bridge.zenoh zenoh client session, connect=['tcp/127.0.0.1:63447'] listen=[]; keys sim_tb1/odom, sim_tb1/battery_state, sim_tb1/cmd_vel, sim_tb1/navigate_to_pose/_action/*
+2026-10-29T09:51:41.633 INFO ros2bridge [bridge-ros2] subscribed cmd.fleet.robot.sim-tb1.>; publishing tel.fleet.robot.sim-tb1.position, tel.fleet.robot.sim-tb1.status, evt.robot.sim-tb1.command via zenoh
+2026-10-29T09:51:42.073 INFO ros2bridge [bridge-ros2] home set to the first position heard: 30.2672000, -97.7431000
+2026-10-29T09:51:42.725 INFO ros2bridge [bridge-ros2] command 9eb50b1f-b515-4d43-819b-e4c9be31ee58 goto outcome=acknowledged code= 
+2026-10-29T09:51:42.726 INFO ros2bridge [bridge-ros2] command 9eb50b1f-b515-4d43-819b-e4c9be31ee58 goto outcome=executed code= sim_tb1/navigate_to_pose/_action/send_goal
+2026-10-29T09:51:47.529 INFO ros2bridge [bridge-ros2] goal reached (goto)
+2026-10-29T09:51:47.814 INFO ros2bridge [bridge-ros2] command 9eb50b1f-b515-4d43-819b-e4c9be31ee58 goto outcome=refused code=replayed command id 9eb50b1f-b515-4d43-819b-e4c9be31ee58 already received
+2026-10-29T09:51:47.916 INFO ros2bridge [bridge-ros2] command f3959096-ef02-4cf2-8e8f-305b113913c9 goto outcome=refused code=bad_signature unsigned command
+2026-10-29T09:51:48.020 INFO ros2bridge [bridge-ros2] command 627040eb-f40b-42b0-bbec-3ddec33c41ba goto outcome=refused code=precondition_failed goto target: position outside every keep-in zone
+2026-10-29T09:51:48.129 INFO ros2bridge [bridge-ros2] command aacba656-81b1-4383-9838-4dfa60644a7d estop outcome=acknowledged code= 
+2026-10-29T09:51:48.130 INFO ros2bridge [bridge-ros2] command aacba656-81b1-4383-9838-4dfa60644a7d estop outcome=executed code= cmd_vel zeroed; sim_tb1/navigate_to_pose/_action/cancel_goal return_code=0 canceling=0
+2026-10-29T09:51:48.235 INFO ros2bridge [bridge-ros2] command 07687704-b606-4e1a-8c4d-c4582e939f6f goto outcome=refused code=precondition_failed robot is e-stopped; estop_release (two humans) first
+2026-10-29T09:51:48.340 WARNING ros2bridge [bridge-ros2] NATS disconnected
+2026-10-29T09:51:48.340 INFO ros2bridge [bridge-ros2] stopped

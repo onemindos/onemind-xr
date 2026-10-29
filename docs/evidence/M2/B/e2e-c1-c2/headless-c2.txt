@@ -1,0 +1,4 @@
+[headless] connected to ws://127.0.0.1:64879 (server 2.15.2)
+[headless] svc.cot.send marker uid=onemind-headless-1-UiErQFEk
+<event version="2.0" how="h-e" uid="onemind-headless-1-UiErQFEk" type="a-u-G" time="2026-10-29T12:38:59.219Z" start="2026-10-29T12:38:59.219Z" stale="2026-10-29T12:43:59.219Z" opex="s"><point lat="30.27" lon="-97.74" hae="9999999.0" ce="9999999.0" le="9999999.0"/><detail><contact callsign="OM-C2-MARK"/><remarks>marker from the OneMind client · SIMULATED</remarks></detail></event>
+[headless] svc.cot.send reply ok=1 uid=onemind-headless-1-UiErQFEk targets=1 error=

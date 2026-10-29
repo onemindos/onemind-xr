@@ -1,0 +1,309 @@
+[
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.606ff9564ba6e3501c3fd04db3d7ead560d8cf68.001.1",
+  "result": "entity",
+  "entity_id": "noaa-cd3ktro3g657ckawkfa6j2z7ig",
+  "entity_type": "event",
+  "kind": "weather_alert",
+  "callsign": "Flood Warning",
+  "integration": "feed-intel-noaa",
+  "lat": 29.0025,
+  "lon": -81.405,
+  "source_t": 1793238960000,
+  "expire_t": 1793289600000,
+  "meta_keys": [
+   "affectedZones",
+   "areaDesc",
+   "category",
+   "certainty",
+   "description",
+   "effective",
+   "ends",
+   "event",
+   "expires",
+   "headline",
+   "instruction",
+   "messageType",
+   "onset",
+   "references",
+   "response",
+   "same",
+   "senderName",
+   "sent",
+   "severity",
+   "status",
+   "ugc",
+   "urgency",
+   "web"
+  ]
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.c7fdda2979f0f8f25569f6cde0da27cc8358a302.001.1",
+  "result": "entity",
+  "entity_id": "noaa-7sy3js7hzgbcczthoufirm67fq",
+  "entity_type": "event",
+  "kind": "weather_alert",
+  "callsign": "Flood Warning",
+  "integration": "feed-intel-noaa",
+  "lat": 29.2125,
+  "lon": -81.545,
+  "source_t": 1793237460000,
+  "expire_t": 1793289600000,
+  "meta_keys": [
+   "affectedZones",
+   "areaDesc",
+   "category",
+   "certainty",
+   "description",
+   "effective",
+   "ends",
+   "event",
+   "expires",
+   "headline",
+   "instruction",
+   "messageType",
+   "onset",
+   "references",
+   "response",
+   "same",
+   "senderName",
+   "sent",
+   "severity",
+   "status",
+   "ugc",
+   "urgency",
+   "web"
+  ]
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.e456a8b989cbe05485479fdd536926c3faf164ce.001.1",
+  "result": "entity",
+  "entity_id": "noaa-j4yqrxihy3cjsuswvrwidyxpfb",
+  "entity_type": "event",
+  "kind": "weather_alert",
+  "callsign": "Flood Warning",
+  "integration": "feed-intel-noaa",
+  "lat": 33.898571,
+  "lon": -106.958571,
+  "source_t": 1793234400000,
+  "expire_t": 1793321100000,
+  "meta_keys": [
+   "affectedZones",
+   "areaDesc",
+   "category",
+   "certainty",
+   "description",
+   "effective",
+   "ends",
+   "event",
+   "expires",
+   "headline",
+   "instruction",
+   "messageType",
+   "onset",
+   "references",
+   "response",
+   "same",
+   "senderName",
+   "sent",
+   "severity",
+   "status",
+   "ugc",
+   "urgency",
+   "web"
+  ]
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.2ae6599a096d368270ba354267308408782921d7.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.a4b7ce5f0a8b2b655844a0c59940618942e3cced.002.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.8e8eb9d9b5f23c305ec192d3fa061d262f95eeeb.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.667fca00993151ace5f2f16e1f2a789f9e15b192.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.a4b7ce5f0a8b2b655844a0c59940618942e3cced.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.87bab9f4c77e70148a88945d8328bff81518a50b.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.f6bf88d5e6f4fe751dedaf48bbd7fd3fa21d0b17.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.b7c43cfef750df8c39bbfd20ab0a558359af4c12.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.e4043b68ab167d968bd2059f10592ccc0fc3417f.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.e456a8b989cbe05485479fdd536926c3faf164ce.001.1",
+  "result": "entity",
+  "entity_id": "noaa-j4yqrxihy3cjsuswvrwidyxpfb",
+  "entity_type": "event",
+  "kind": "weather_alert",
+  "callsign": "Flood Warning",
+  "integration": "feed-intel-noaa",
+  "lat": 33.898571,
+  "lon": -106.958571,
+  "source_t": 1793234400000,
+  "expire_t": 1793321100000,
+  "meta_keys": [
+   "affectedZones",
+   "areaDesc",
+   "category",
+   "certainty",
+   "description",
+   "effective",
+   "ends",
+   "event",
+   "expires",
+   "headline",
+   "instruction",
+   "messageType",
+   "onset",
+   "references",
+   "response",
+   "same",
+   "senderName",
+   "sent",
+   "severity",
+   "status",
+   "ugc",
+   "urgency",
+   "web"
+  ]
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.2ae6599a096d368270ba354267308408782921d7.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.a4b7ce5f0a8b2b655844a0c59940618942e3cced.002.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.8e8eb9d9b5f23c305ec192d3fa061d262f95eeeb.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.667fca00993151ace5f2f16e1f2a789f9e15b192.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.a4b7ce5f0a8b2b655844a0c59940618942e3cced.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.87bab9f4c77e70148a88945d8328bff81518a50b.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.f6bf88d5e6f4fe751dedaf48bbd7fd3fa21d0b17.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.b7c43cfef750df8c39bbfd20ab0a558359af4c12.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.e4043b68ab167d968bd2059f10592ccc0fc3417f.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-active-2026-10-29-next.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.e4043b68ab167d968bd2059f10592ccc0fc3417f.002.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-malformed.golden.json",
+  "msgId": "nws:urn:oid:test.badseverity",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-malformed.golden.json",
+  "msgId": "nws:urn:oid:test.badlat",
+  "result": "error:intel position out of range (201, -74.333333)"
+ },
+ {
+  "file": "nws-malformed.golden.json",
+  "msgId": "nws:urn:oid:test.badsent",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "nws-malformed.golden.json",
+  "msgId": "nws:urn:oid:2.49.0.1.840.0.2ae6599a096d368270ba354267308408782921d7.001.1",
+  "result": "skip:no_position"
+ },
+ {
+  "file": "geojson-usgs.golden.json",
+  "msgId": "usgs:us7000abcd",
+  "result": "entity",
+  "entity_id": "usgs-us7000abcd",
+  "entity_type": "event",
+  "kind": "event",
+  "callsign": "Synthetic place A",
+  "integration": "feed-intel-usgs",
+  "lat": 35.7,
+  "lon": -117.5,
+  "source_t": 1761728400000,
+  "meta_keys": [
+   "mag",
+   "place",
+   "time"
+  ]
+ },
+ {
+  "file": "geojson-usgs.golden.json",
+  "msgId": "usgs:nc75000001",
+  "result": "entity",
+  "entity_id": "usgs-nc75000001",
+  "entity_type": "event",
+  "kind": "event",
+  "callsign": "Synthetic place B",
+  "integration": "feed-intel-usgs",
+  "lat": 38.8,
+  "lon": -122.8,
+  "source_t": 1761729000000,
+  "meta_keys": [
+   "mag",
+   "place",
+   "time"
+  ]
+ }
+]

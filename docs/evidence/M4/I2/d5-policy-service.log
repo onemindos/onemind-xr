@@ -1,0 +1,6 @@
+{"time":"2026-10-29T09:51:33.335052-04:00","level":"WARN","msg":"POLICY_SIGNING_KEY_FILE not set: commands are unsigned; bridges must run sig_required:false"}
+{"time":"2026-10-29T09:51:33.337253-04:00","level":"INFO","msg":"policy service ready","authz":"local","signed":false}
+{"time":"2026-10-29T09:51:37.85837-04:00","level":"INFO","msg":"confirm refused","action_id":"act-01m63yw91s7058zv3ptj1dsfb9","code":"agent_cannot_confirm","by":"user:rogue"}
+{"time":"2026-10-29T09:51:38.573559-04:00","level":"WARN","msg":"command sent unsigned (no signing key configured)","subject":"cmd.fleet.drone.sim-x1.goto"}
+{"time":"2026-10-29T09:51:38.5739-04:00","level":"INFO","msg":"command published","subject":"cmd.fleet.drone.sim-x1.goto","command_id":"0c47f6f2-d433-443c-9d74-c9396108828a","action_id":"act-01m63yw91s7058zv3ptj1dsfb9"}
+{"time":"2026-10-29T09:51:38.780115-04:00","level":"INFO","msg":"denied","action_id":"act-01m63ywe8vwbss888gx2c7scjc","action_type":"asset.orbit","code":"forbidden_action","by":"agent:hermes/zeus/legacy"}

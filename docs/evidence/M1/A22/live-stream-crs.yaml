@@ -1,0 +1,908 @@
+apiVersion: v1
+items:
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/agents
+      description: Agent fabric — prompts, heartbeats, status, tool calls
+      stream.nats.io/state: '{"name":"AGENTS","subjects":["agents.hb.\u003e","agents.status.\u003e","agents.discover","agents.heartbeat"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":604800000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:19Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: agents
+    namespace: nats
+    resourceVersion: "79203076"
+    uid: 51003f8c-5017-475d-a888-1a0f6043f596
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 168h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: AGENTS
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - agents.hb.>
+    - agents.status.>
+    - agents.discover
+    - agents.heartbeat
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-19T15:05:57.936409095Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/cmd
+      description: Commands — every instruction to any actor (drones, robots, nodes,
+        agents)
+      stream.nats.io/state: '{"name":"CMD","subjects":["cmd.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":2592000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:19Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: cmd
+    namespace: nats
+    resourceVersion: "79203072"
+    uid: 64f886bc-d53e-4e5a-baee-18749479db49
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 720h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: CMD
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - cmd.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-10-08T10:35:00.458747113Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/cot
+      description: TAK/CoT — ATAK position reports, bridge feeds, Constellation
+      stream.nats.io/state: '{"name":"COT","subjects":["tak.cot.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":2592000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:19Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: cot
+    namespace: nats
+    resourceVersion: "79447775"
+    uid: e26c86f2-97cb-465e-adc3-88363875c3cd
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 720h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: COT
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - tak.cot.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-10-28T03:30:44.937318337Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/env
+      description: Environmental + biometric telemetry — soil, weather, water, HRV,
+        presence
+      stream.nats.io/state: '{"name":"ENV","subjects":["tel.nature.\u003e","tel.bio.\u003e","tel.weather.\u003e","tel.soil.\u003e","tel.water.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":2592000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:19Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: env
+    namespace: nats
+    resourceVersion: "79203087"
+    uid: 2862ef04-e4ce-4a45-95ee-de7af16e94b0
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 720h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: ENV
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - tel.nature.>
+    - tel.bio.>
+    - tel.weather.>
+    - tel.soil.>
+    - tel.water.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-20T14:36:10.475215191Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/evt
+      description: Homestead semantic events — tasks, HA, cloud, bio alerts, robot/drone/sat
+        events
+      stream.nats.io/state: '{"name":"EVT","subjects":["evt.so.\u003e","evt.hp.\u003e","evt.le.\u003e","evt.ge.\u003e","evt.task.\u003e","evt.cloud.\u003e","evt.bio.\u003e","evt.robot.\u003e","evt.drone.\u003e","evt.sat.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":7776000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:19Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: evt
+    namespace: nats
+    resourceVersion: "79203078"
+    uid: ab4452a2-2a8b-4288-a10e-37830e818d5b
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 2160h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: EVT
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - evt.so.>
+    - evt.hp.>
+    - evt.le.>
+    - evt.ge.>
+    - evt.task.>
+    - evt.cloud.>
+    - evt.bio.>
+    - evt.robot.>
+    - evt.drone.>
+    - evt.sat.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-20T06:00:00.561118972Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/geo
+      description: TACMAP geo layer — TAK events (normalized CoT + fleet positions
+        live in TEL + COT)
+      stream.nats.io/state: '{"name":"GEO","subjects":["evt.tak.cot.\u003e","evt.tak.status.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":2592000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:19Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: geo
+    namespace: nats
+    resourceVersion: "79203077"
+    uid: 62c2fb43-aa2d-47b3-9480-bf8216eeabf4
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 720h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: GEO
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - evt.tak.cot.>
+    - evt.tak.status.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-19T00:22:00.313646227Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/intel
+      description: Curated world intelligence — distilled alerts, geofence events,
+        watch-zone triggers
+      stream.nats.io/state: '{"name":"INTEL","subjects":["intel.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":7776000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:19Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: intel
+    namespace: nats
+    resourceVersion: "79203080"
+    uid: 5cc2e189-f231-4c91-84bc-e9f026ef58ed
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 2160h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: INTEL
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - intel.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-10-08T10:34:13.957016477Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/mission
+      description: Mission lifecycle + TACMAP events — status, waypoint reached, abort,
+        geofence, map annotations
+      stream.nats.io/state: '{"name":"MISSION","subjects":["evt.mission.\u003e","evt.map.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":7776000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:20Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: mission
+    namespace: nats
+    resourceVersion: "79203174"
+    uid: b4fe6da7-fe06-4600-9dfb-16428928cbb9
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 2160h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: MISSION
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - evt.mission.>
+    - evt.map.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-21T08:10:36.838167551Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/saas
+      description: SaaS I/O — Wombat inbound webhooks + outbound API request/response
+      stream.nats.io/state: '{"name":"SAAS","subjects":["saas.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":7776000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:20Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: saas
+    namespace: nats
+    resourceVersion: "79203183"
+    uid: 6270b375-bcd8-48c7-8727-6dd94be86d02
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 2160h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: SAAS
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - saas.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-21T00:50:40.956696212Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/sys
+      description: System health
+      stream.nats.io/state: '{"name":"SYS","subjects":["evt.sys.\u003e","sys.\u003e","tel.host.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":604800000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:20Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: sys
+    namespace: nats
+    resourceVersion: "79203161"
+    uid: d99283f2-be6d-4031-b8f4-919a966287d9
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 168h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: SYS
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - evt.sys.>
+    - sys.>
+    - tel.host.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-19T22:11:57.164965438Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/tel
+      description: 'Telemetry — fleet assets: drones, robots, edge nodes, IoT, industrial,
+        satellites'
+      stream.nats.io/state: '{"name":"TEL","subjects":["tel.fleet.\u003e","tel.drone.\u003e","tel.robot.\u003e","tel.edge.\u003e","tel.iot.\u003e","tel.industrial.\u003e","tel.sat.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":604800000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:20Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: tel
+    namespace: nats
+    resourceVersion: "79203170"
+    uid: cd099d63-2707-40d5-9621-3b654c6f474d
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 168h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: TEL
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - tel.fleet.>
+    - tel.drone.>
+    - tel.robot.>
+    - tel.edge.>
+    - tel.iot.>
+    - tel.industrial.>
+    - tel.sat.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-21T02:47:22.37663219Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/voice
+      description: Voice sessions — transcripts, audio refs, intent routing
+      stream.nats.io/state: '{"name":"VOICE","subjects":["voice.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":2592000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:21Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: voice
+    namespace: nats
+    resourceVersion: "79203165"
+    uid: 603aee68-772b-4a51-8c40-7e83e0585fc7
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 720h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: VOICE
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - voice.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-21T01:16:39.180458136Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/world
+      description: ORP world intel (raw) — AIS, ADS-B, ACLED, wildfires, seismic (24h
+        / 2GB cap)
+      stream.nats.io/state: '{"name":"WORLD","subjects":["evt.world.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":2000000000,"max_age":86400000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:21Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: world
+    namespace: nats
+    resourceVersion: "79203189"
+    uid: 4e682fb6-09b7-4977-90a6-067478f40c5c
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 24h
+    maxBytes: 2000000000
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: WORLD
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - evt.world.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-19T07:49:58.134125818Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+- apiVersion: jetstream.nats.io/v1beta2
+  kind: Stream
+  metadata:
+    annotations:
+      argocd.argoproj.io/tracking-id: platform-nats-streams:jetstream.nats.io/Stream:nats/zeus
+      description: Operator context log
+      stream.nats.io/state: '{"name":"ZEUS","subjects":["zeus.\u003e","op.zeus.\u003e"],"retention":"limits","max_consumers":-1,"max_msgs_per_subject":-1,"max_msgs":-1,"max_bytes":-1,"max_age":31536000000000000,"max_msg_size":-1,"storage":"file","discard":"old","num_replicas":3,"duplicate_window":120000000000,"sealed":false,"deny_delete":false,"deny_purge":false,"allow_rollup_hdrs":false,"allow_direct":false,"mirror_direct":false,"metadata":{"_nats.level":"4","_nats.req.level":"0","_nats.ver":"2.14.2"},"consumer_limits":{}}'
+    creationTimestamp: "2026-07-07T19:42:21Z"
+    finalizers:
+    - stream.nats.io/finalizer
+    generation: 4
+    name: zeus
+    namespace: nats
+    resourceVersion: "79203180"
+    uid: ff5729fe-089b-44bf-9a23-b8cfec97258b
+  spec:
+    allowAtomicPublish: false
+    allowBatched: false
+    allowDirect: false
+    allowMsgCounter: false
+    allowMsgSchedules: false
+    allowMsgTtl: false
+    allowRollup: false
+    compression: ""
+    creds: ""
+    denyDelete: false
+    denyPurge: false
+    discard: old
+    discardPerSubject: false
+    duplicateWindow: 2m
+    firstSequence: 0
+    maxAge: 8760h
+    maxBytes: -1
+    maxConsumers: -1
+    maxMsgSize: -1
+    maxMsgs: -1
+    maxMsgsPerSubject: 0
+    mirrorDirect: false
+    name: ZEUS
+    nkey: ""
+    noAck: false
+    persistMode: ""
+    preventDelete: true
+    preventUpdate: false
+    replicas: 3
+    retention: limits
+    sealed: false
+    servers:
+    - tls://<REDACTED>@nats.nats.svc.cluster.local:4222
+    storage: file
+    subjectDeleteMarkerTtl: ""
+    subjects:
+    - zeus.>
+    - op.zeus.>
+    tlsFirst: false
+  status:
+    conditions:
+    - lastTransitionTime: "2026-09-20T08:33:32.007290884Z"
+      message: Stream successfully created or updated.
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 4
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,42 @@
+package projector
+
+import (
+	"encoding/json"
+	"os"
+	"testing"
+)
+
+// D1 compatibility: every record shape the geofence service writes is readable by the
+// projector's AOI index, with the expected activity and membership.
+func TestD1GeofenceRecords(t *testing.T) {
+	b, err := os.ReadFile(os.Getenv("D1_RECORDS"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var recs map[string]json.RawMessage
+	_ = json.Unmarshal(b, &recs)
+	x := newAOIIndex()
+	for k, v := range recs {
+		if !x.setZone(k, v) {
+			t.Errorf("projector cannot read %s", k)
+		}
+	}
+	type c struct{ lat, lon float64; zone string; in bool }
+	for _, q := range []c{{30.27, -97.74, "home-keepin", true}, {30.27, -97.7401, "barn-keepout", true},
+		{30.2705, -97.745, "road-aoi", true}, {30.262, -97.748, "two-fields", true}, {30.262, -97.735, "two-fields", false}} {
+		z := x.zones[q.zone]
+		if got := z.area.contains(q.lat, q.lon, 0, false); got != q.in {
+			t.Errorf("%s contains(%v,%v)=%v want %v", q.zone, q.lat, q.lon, got, q.in)
+		}
+		t.Logf("projector %s kind=%s active=%v contains(%v,%v)=%v", q.zone, z.kind, z.active, q.lat, q.lon, q.in)
+	}
+	if x.zones["barn-keepout-inactive"].active {
+		t.Error("inactive record read as active")
+	}
+	for _, k := range []string{"home-keepin", "barn-keepout", "road-aoi", "two-fields", "pond-hazard"} {
+		if !x.zones[k].active {
+			t.Errorf("%s read as inactive", k)
+		}
+	}
+	t.Logf("projector: %d zones read, %d active AOI areas", len(x.zones), len(x.active))
+}

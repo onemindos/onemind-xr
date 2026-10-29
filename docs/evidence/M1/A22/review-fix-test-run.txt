@@ -1,0 +1,73 @@
+== review-fix run Thu Oct 29 11:54:22 UTC 2026
+...uuuuuuuuuuuuuuu..uuuuuuuuuuuuuuu.  CMD discard:new 400 B cap: stored=2 refused=3 stream_messages=2 core_subscriber_received=5
+.  CMD discard:new 8 KiB cap: accepted=7 refused err_code=10077 description='maximum bytes exceeded' first_seq=1
+.  CMD discard:old 8 KiB cap: messages=7 first_seq=44 last_seq=50
+..  COT 64 KiB cap after 200 x 1 KiB: messages=61 bytes=65148 first_seq=140
+..  COT after max_age shrink: messages=5 first_seq=51
+..  AGENTS   max_age=    604800s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+u  CMD      max_age=  31536000s max_bytes=  536870912 discard=old per_subject=-1 direct=False
+u  COT      max_age=    259200s max_bytes= 3221225472 discard=old per_subject=-1 direct=False
+u  DET      max_age=    604800s max_bytes= 2147483648 discard=old per_subject=-1 direct=False
+u  ENV      max_age=   2592000s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+u  EVT      max_age=   7776000s max_bytes= 2147483648 discard=old per_subject=-1 direct=False
+u  GEO      max_age=    604800s max_bytes=  536870912 discard=old per_subject=-1 direct=False
+u  INTEL    max_age=   7776000s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+u  MISSION  max_age=   7776000s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+u  SAAS     max_age=   7776000s max_bytes=  536870912 discard=old per_subject=-1 direct=False
+u  SYS      max_age=    604800s max_bytes= 1073741824 discard=old per_subject=-1 direct=False
+u  TEL      max_age=    259200s max_bytes= 4294967296 discard=old per_subject=2000 direct=True
+u  VOICE    max_age=   2592000s max_bytes=  536870912 discard=old per_subject=-1 direct=False
+u  WORLD    max_age=     86400s max_bytes= 2000000000 discard=old per_subject=-1 direct=False
+u  ZEUS     max_age=  31536000s max_bytes=  536870912 discard=old per_subject=-1 direct=False
+u..  INTEL after max_bytes shrink to 32 KiB: messages=30 bytes=32280
+..
+18 passed, 45 subtests passed in 8.12s
+== full scripts/tests
+............................... [ 81%]
+....................................                   [100%]
+184 passed, 15 skipped, 647 subtests passed in 22.71s
+== yamllint
+Traceback (most recent call last):
+  File "/opt/homebrew/bin/yamllint", line 6, in <module>
+    sys.exit(run())
+             ~~~^^
+  File "/opt/homebrew/Cellar/yamllint/1.38.0/libexec/lib/python3.15/site-packages/yamllint/cli.py", line 197, in run
+    conf = YamlLintConfig(file=args.config_file)
+  File "/opt/homebrew/Cellar/yamllint/1.38.0/libexec/lib/python3.15/site-packages/yamllint/config.py", line 41, in __init__
+    with open(file, mode='rb') as f:
+         ~~~~^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '.yamllint'
+rc=1
+== validate_changed_yaml
+Changed YAML gate passed (1 files checked)
+== validate_manifests
+No changed plain manifests to validate
+== promtool
+/Users/danielcarku/Desktop/work/.tools/bin/promtool
+(eval):12: command not found: yq
+== yamllint (CI config: platform/ docs/ platform/takserver/)
+  121:13    error    trailing spaces  (trailing-spaces)
+
+platform/takserver/chart/third-party/ignite/values.yaml
+  87:3      warning  comment not indented like content  (comments-indentation)
+
+rc=1
+== promtool
+Checking /Users/danielcarku/Desktop/work/.run/a22-rules.yaml
+  SUCCESS: 20 rules found
+
+== kubeconform strict on changed CRs
+No changed plain manifests to validate
+== validate_changed_yaml / validate_manifests (YAML_BASE_SHA=origin/main)
+Changed YAML gate passed (15 files checked)
+Summary: 14 resources found in 14 files - Valid: 14, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 14 manifest file(s)
+== gitleaks (branch commits)
+[90m7:56AM[0m [32mINF[0m [1mscanned ~34772 bytes (34.77 KB) in 64.8ms[0m
+[90m7:56AM[0m [32mINF[0m [1mno leaks found[0m
+== with #552/#553 CRs copied in: platform/nats/streams/ent.yaml platform/nats/streams/kv-entity-correlation.yaml platform/nats/streams/kv-ingest-locks.yaml platform/nats/streams/kv-ingest-state.yaml
+18 passed, 48 subtests passed in 8.13s
+Helm render check	pass	42s	https://github.com/onemindos/omos/actions/runs/40869234783/job/123431717925	
+Kubernetes manifest schema (kubeconform)	pass	6s	https://github.com/onemindos/omos/actions/runs/40869234783/job/123431717846	
+Lint & Validate	pass	23s	https://github.com/onemindos/omos/actions/runs/40869234783/job/123431717761	
+Secret scan (gitleaks)	pass	9s	https://github.com/onemindos/omos/actions/runs/40869234783/job/123431717781	

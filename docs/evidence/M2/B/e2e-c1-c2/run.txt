@@ -1,0 +1,64 @@
+== build omos services from their PR branches
+build feat/tak-mesh-gateway@bef11eb104ee services/bridge/bridges/tak -> /Users/danielcarku/Desktop/work/.run/tmp-b-client/e2e/tak-gateway: rc=0 
+build feat/entity-service@886596b188f2 services/entity -> /Users/danielcarku/Desktop/work/.run/tmp-b-client/e2e/entity-service: rc=0 
+[PASS] 0 omos mesh gateway (PR #551) and entity service (PR #552) build -- gw bef11eb104ee es 886596b188f2
+[PASS] 0b streams COT and ENT (ent.yaml settings) created -- b'{"type":"io.nats.jetstream.api.v1.stream_create_response","config":{"name":"ENT","subjects":["ent.*.*.state"],"retention":"limits","max_consumers":-1,"max_msgs"'
+[PASS] 0c nats-server, gateway and entity service running -- nats-server=up, tak-gateway=up, entity-service=up
+== C1: takproto EUD PLI on the mesh -> ent.person.tak-* -> client
+[PASS] C1a mesh PLI becomes ent.person.tak-{uid}.state -- 42 ms
+[PASS] C1b marking AMBER+STRICT and egress_tak false (cot-projection.md §8.3) -- {"tlp": "AMBER+STRICT", "egress_tak": false, "sources": [["tak-mesh", "tak.cot.mesh.rx", "COT", 1]]}
+[headless] connected to ws://127.0.0.1:64879 (server 2.15.2)
+[headless] SEEN tak-android-c1e2e0d9f2494 in layer tak at 30.267200,-97.743100 callsign=C1-EUD type=a-f-G-U-C seq=1 after 1045 ms
+[headless] INSPECTOR tak-android-c1e2e0d9f2494
+    Identity    entity_id                tak-android-c1e2e0d9f2494
+    Identity    entity_type              person
+    Identity    callsign                 C1-EUD
+    Identity    cot_type                 a-f-G-U-C
+    Identity    disposition              friendly
+    Identity    simulated                no
+    Identity    alias cot_uid            ANDROID-c1e2e0d9f2494
+    Identity    alias tak_callsign       C1-EUD
+    State       lifecycle                active
+    State       seq                      1
+    State       updated                  0.1 s ago
+    State       expires in               299.9 s
+    Position    lat, lon                 30.267200, -97.743100
+    Position    hae m                    150.0
+    Position    course, speed            90 deg, 1.5 m/s
+    Position    ce, le m (1-sigma)       9.9, 9.9
+    Confidence  confidence               0.532
+    Confidence  source_prior             0.800
+    Confidence  track_quality            0.330
+    Confidence  corroboration            0.800
+    Sources     source 1                 tak-mesh (cot)
+    Sources     source 1 subject         tak.cot.mesh.rx
+    Sources     source 1 stream/seq      COT #1
+    Sources     source 1 last seen       0.0 s ago
+    Provenance  primary                  tak-mesh
+    Provenance  how                      h-e
+    Marking     tlp                      AMBER+STRICT
+    History     fixes kept               1
+    History     oldest                   0.1 s ago at 30.26720, -97.74310
+    Raw CoT     from                     COT #1 (tak.cot.mesh.rx)
+[headless] RAW COT tak-android-c1e2e0d9f2494
+<event version="2.0" uid="ANDROID-c1e2e0d9f2494" type="a-f-G-U-C" how="h-e" time="2026-10-29T12:38:47.380Z" start="2026-10-29T12:38:47.380Z" stale="2026-10-29T12:43:47.380Z"><point lat="30.2672" lon="-97.7431" hae="150" ce="9.9" le="9999999"/><detail><uid Droid="C1-EUD" /><contact endpoint="127.0.0.1:4242:tcp" callsign="C1-EUD"/><__group name="Cyan" role="Team Member"/><status battery="88"/><takv device="PIXEL" platform="ATAK-CIV" os="34" version="5.6.0.12"/><track speed="1.5" course="90"/></detail></event>
+[headless] layer tak path=direct state=live entities=1 snapshots=1 batches=0 err=
+[headless] layer tak path=direct state=live entities=1 snapshots=1 batches=0 err=
+[headless] final layer tak: 1 entities (added 1, updated 0, removed 0, expired 0, ignored older 0), last snapshot 15 ms
+[headless] final tak tak-android-c1e2e0d9f2494 C1-EUD 30.267200,-97.743100 seq=1
+
+[PASS] C1c the OneMind client core shows the EUD in its tak layer
+[PASS] C1d inspector shows sources and confidence breakdown
+[PASS] C1e inspector raw CoT fetched from COT by sequence
+== C2: client marker -> svc.cot.send -> tak.cot.mesh.tx -> mesh as TAK Protocol v1
+[headless] connected to ws://127.0.0.1:64879 (server 2.15.2)
+[headless] svc.cot.send marker uid=onemind-headless-1-UiErQFEk
+<event version="2.0" how="h-e" uid="onemind-headless-1-UiErQFEk" type="a-u-G" time="2026-10-29T12:38:59.219Z" start="2026-10-29T12:38:59.219Z" stale="2026-10-29T12:43:59.219Z" opex="s"><point lat="30.27" lon="-97.74" hae="9999999.0" ce="9999999.0" le="9999999.0"/><detail><contact callsign="OM-C2-MARK"/><remarks>marker from the OneMind client · SIMULATED</remarks></detail></event>
+[headless] svc.cot.send reply ok=1 uid=onemind-headless-1-UiErQFEk targets=1 error=
+
+[PASS] C2a svc.cot.send accepted the marker (reply ok, target mesh) -- uids=['onemind-headless-1-UiErQFEk']
+[PASS] C2b takproto listener on the mesh group receives the marker as TAK Protocol v1 (mesh, 0xbf 0x01 0xbf) -- uid=onemind-headless-1-UiErQFEk type=a-u-G lat=30.2700 callsign=OM-C2-MARK
+[PASS] C2c marker content intact (type a-u-G, position, callsign, opex simulated in xmlDetail or attrs)
+[PASS] C2d svc.cot.send stand-in refuses the projector's reserved OM. uid prefix
+
+12/12 checks passed

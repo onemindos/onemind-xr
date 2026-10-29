@@ -1,0 +1,71 @@
+== nats-server nats-server: v2.14.2 with auth_callout; callout: "msg":"auth-callout ready","client_account":"CLIENT","roles":5,"xkey":true}
+
+== newcomer nina (onemind-newcomers): layers yes, asset commands no
+$ nats --server ws://127.0.0.1:WS --token <nina token> --inbox-prefix _INBOX.<nina sub> req svc.layer.list {"v":1}
+    09:39:04 Sending request on "svc.layer.list"
+    09:39:04 Received with rtt 588.334µs
+    {"ok":true,"from":"layer"}
+    
+    
+$ nats --server ws://127.0.0.1:WS --token <nina token> --inbox-prefix _INBOX.<nina sub> req svc.policy.command.propose {"v":1,"action_type":"asset.goto"}
+    09:39:04 Sending request on "svc.policy.command.propose"
+    09:39:04 >>> Unexpected NATS error: nats: permissions violation: Permissions Violation for Publish to "svc.policy.command.propose"
+$ nats --server ws://127.0.0.1:WS --token <nina token> --inbox-prefix _INBOX.<nina sub> req svc.policy.action.get {"v":1}
+    09:39:05 Sending request on "svc.policy.action.get"
+    09:39:05 >>> Unexpected NATS error: nats: permissions violation: Permissions Violation for Publish to "svc.policy.action.get"
+$ nats --server ws://127.0.0.1:WS --token <nina token> --inbox-prefix _INBOX.<nina sub> sub cmd.map.> --count 1
+    09:39:06 Subscribing on cmd.map.> 
+    nats: error: nats: permissions violation: Permissions Violation for Subscription to "cmd.map.>"
+
+== viewer vera (onemind-viewers): can read an action, cannot propose
+$ nats --server ws://127.0.0.1:WS --token <vera token> --inbox-prefix _INBOX.<vera sub> req svc.policy.action.get {"v":1}
+    09:39:06 Sending request on "svc.policy.action.get"
+    09:39:06 Received with rtt 348.834µs
+    {"ok":true,"from":"policy"}
+    
+    
+$ nats --server ws://127.0.0.1:WS --token <vera token> --inbox-prefix _INBOX.<vera sub> req svc.policy.command.propose {"v":1}
+    09:39:06 Sending request on "svc.policy.command.propose"
+    09:39:06 >>> Unexpected NATS error: nats: permissions violation: Permissions Violation for Publish to "svc.policy.command.propose"
+
+== operator olga (onemind-operators, argocd-admins): reaches the policy service
+$ nats --server ws://127.0.0.1:WS --token <olga token> --inbox-prefix _INBOX.<olga sub> req svc.policy.command.propose {"v":1,"action_type":"asset.goto"}
+    09:39:07 Sending request on "svc.policy.command.propose"
+    09:39:07 Received with rtt 657.333µs
+    {"ok":true,"from":"policy"}
+    
+    
+
+== refused logins
+$ nats --server ws://127.0.0.1:WS --token <nobody token> --inbox-prefix _INBOX.<nobody sub> req svc.layer.list {}
+    nats: error: nats: Authorization Violation
+$ nats --server ws://127.0.0.1:WS --token <forged token> --inbox-prefix _INBOX.<forged sub> req svc.layer.list {}
+    nats: error: nats: Authorization Violation
+$ nats --user policy --password wrong req svc.layer.list
+    nats: error: nats: Authorization Violation
+
+== what the policy responder saw (Nats-Request-Info, server-set)
+    Nats-Request-Info: {"host":"127.0.0.1","id":16,"acc":"CLIENT","user":"ak:vera;onemind-viewers","name":"NATS CLI Version 0.5.1","lang":"go","ver":"1.55.0","server":"NBTV2KXXTOIQEDG6YQXZNL35NEJM77C6QXV4GMDOKOENWJRIT3K3T2GN","issuer_key":"CLIENT","kind":"Client","client_type":"websocket"}
+    Nats-Request-Info: {"host":"127.0.0.1","id":18,"acc":"CLIENT","user":"ak:olga;onemind-operators","name":"NATS CLI Version 0.5.1","lang":"go","ver":"1.55.0","server":"NBTV2KXXTOIQEDG6YQXZNL35NEJM77C6QXV4GMDOKOENWJRIT3K3T2GN","issuer_key":"CLIENT","kind":"Client","client_type":"websocket"}
+
+== callout decisions (callout.log)
+    "msg":"allowed","username":"nina","role":"newcomer","groups":["onemind-newcomers"],"expires":"2026-10-29T13:49:01Z","client_type":"websocket"}
+    "msg":"allowed","username":"nina","role":"newcomer","groups":["onemind-newcomers"],"expires":"2026-10-29T13:49:01Z","client_type":"websocket"}
+    "msg":"allowed","username":"nina","role":"newcomer","groups":["onemind-newcomers"],"expires":"2026-10-29T13:49:01Z","client_type":"websocket"}
+    "msg":"allowed","username":"nina","role":"newcomer","groups":["onemind-newcomers"],"expires":"2026-10-29T13:49:01Z","client_type":"websocket"}
+    "msg":"allowed","username":"vera","role":"viewer","groups":["onemind-viewers"],"expires":"2026-10-29T13:49:01Z","client_type":"websocket"}
+    "msg":"allowed","username":"vera","role":"viewer","groups":["onemind-viewers"],"expires":"2026-10-29T13:49:01Z","client_type":"websocket"}
+    "msg":"allowed","username":"olga","role":"operator","groups":["onemind-operators"],"expires":"2026-10-29T13:49:01Z","client_type":"websocket"}
+    "msg":"denied","user_nkey":"U…(test public key, masked)","username":"nobody","reason":"no OneMind role group in token","client_type":"websocket",}
+    "msg":"denied","user_nkey":"U…(test public key, masked)","username":"","reason":"invalid token: bad signature","client_type":"websocket",}
+    "msg":"denied","user_nkey":"U…(test public key, masked)","username":"","reason":"no auth_token (password or nkey logins are not handled by the callout)","client_type":"nats",}
+
+== server log: permission and authorization violations
+    [ERR] 127.0.0.1:64687 - wid:13 - "v1.55.0:go:NATS CLI Version 0.5.1" - "CLIENT/user:ak:nina;onemind-newcomers" - Publish Violation - Subject "svc.policy.command.propose"
+    [ERR] 127.0.0.1:64705 - wid:14 - "v1.55.0:go:NATS CLI Version 0.5.1" - "CLIENT/user:ak:nina;onemind-newcomers" - Publish Violation - Subject "svc.policy.action.get"
+    [ERR] 127.0.0.1:64725 - wid:15 - "v1.55.0:go:NATS CLI Version 0.5.1" - "CLIENT/user:ak:nina;onemind-newcomers" - Subscription Violation - Subject "cmd.map.>", SID 1
+    [ERR] 127.0.0.1:64727 - wid:17 - "v1.55.0:go:NATS CLI Version 0.5.1" - "CLIENT/user:ak:vera;onemind-viewers" - Publish Violation - Subject "svc.policy.command.propose"
+/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/M4/J2/binary-demo.sh: line 81: 83425 Terminated: 15          "$R/idp-bin" "$PWD" "https://auth.example.test/application/o/onemind-xr/" "127.0.0.1:$IDP" > idp.log 2>&1
+/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/M4/J2/binary-demo.sh: line 81: 83453 Terminated: 15          $N -s nats://127.0.0.1:$P --user policy --password "$PPW" reply 'svc.policy.>' '{"ok":true,"from":"policy"}' > /dev/null 2>&1
+/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/M4/J2/binary-demo.sh: line 81: 83454 Terminated: 15          $N -s nats://127.0.0.1:$P --user policy --password "$PPW" reply 'svc.layer.>' '{"ok":true,"from":"layer"}' > /dev/null 2>&1
+/Users/danielcarku/Desktop/work/onemind-xr/docs/evidence/M4/J2/binary-demo.sh: line 81: 83455 Terminated: 15          $N -s nats://127.0.0.1:$P --user policy --password "$PPW" sub 'svc.policy.>' > policy-seen.log 2>&1

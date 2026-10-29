@@ -1,0 +1,48 @@
+## base
+62e3d22bc05814178c2d531e77a9fa4a228f6f3a
+ 8 files changed, 1685 insertions(+)
+## validate_changed_yaml.py
+Changed YAML gate passed (0 files checked)
+rc=0
+## validate_manifests.py (changed)
+No changed plain manifests to validate
+rc=0
+## check_onemind_mcp_coverage.py
+All 57 Git-declared Argo Applications mapped to MCP access dispositions
+rc=0
+## check_secret_patterns.py
+platform/matrix/base/redis/manifests/secret.yaml:10: review password configuration
+platform/matrix/base/synapse/manifests/configmap.yaml:28: review password configuration
+platform/matrix/base/synapse/manifests/configmap.yaml:39: review password configuration
+rc=0
+## py_compile + pyflakes-like check
+compiled
+/Users/danielcarku/Desktop/work/.tools/py/bin/python: No module named pyflakes
+pyflakes not installed
+## gitleaks
+gitleaks
+## check_secret_patterns.py full-tree rc (pre-existing hits are outside this PR)
+rc=0
+no findings in files touched by this PR
+## gitleaks git (commits in this change)
+[90m7:41AM[0m [32mINF[0m [1m1 commits scanned.[0m
+[90m7:41AM[0m [32mINF[0m [1mscanned ~74790 bytes (74.79 KB) in 62.6ms[0m
+[90m7:41AM[0m [32mINF[0m [1mno leaks found[0m
+rc=
+## gitleaks dir (files touched)
+[90m7:41AM[0m [32mINF[0m [1mscanned ~12738827 bytes (12.74 MB) in 3.52s[0m
+[90m7:41AM[0m [33mWRN[0m [1mleaks found: 9[0m
+## gitleaks dir, proposal set only
+7:41AM INF scanned ~61157 bytes (61.16 KB) in 12.3ms
+7:41AM INF no leaks found
+## gitleaks dir, checker only
+7:41AM INF scanned ~13633 bytes (13.63 KB) in 7.21ms
+7:41AM INF no leaks found
+## gitleaks dir, whole tree with baseline (CI mode)
+7:41AM INF scanned ~12738827 bytes (12.74 MB) in 3.87s
+7:41AM WRN leaks found: 9
+## exact CI: gitleaks dir . --config .gitleaks.toml --baseline-path .gitleaks-baseline.json --redact --exit-code 1
+7:41AM INF no leaks found
+rc=
+## exact CI: gitleaks git --log-opts=origin/main..HEAD
+7:41AM INF no leaks found

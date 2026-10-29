@@ -1,0 +1,31 @@
+$ entity_load.py --count 10000 --rate 1 --duration 20  (background)
+$ onemind_headless --layer fleet:drone,robot,vehicle,node:direct --duration 15
+[headless] connected to ws://127.0.0.1:65236 (server 2.15.2)
+[headless] layer fleet path=direct state=live entities=10000 snapshots=1 batches=0 err=
+[headless] layer fleet path=direct state=live entities=10000 snapshots=1 batches=0 err=
+[headless] layer fleet path=direct state=live entities=10000 snapshots=1 batches=0 err=
+[headless] layer fleet path=direct state=live entities=10000 snapshots=1 batches=0 err=
+[headless] final layer fleet: 10000 entities (added 10000, updated 150000, removed 0, expired 0, ignored older 0), last snapshot 209 ms
+--- entity_load.py
+created ENT: ok
+round 1: 10000 entities published in 0.42 s
+round 2: 10000 entities published in 0.45 s
+round 3: 10000 entities published in 0.45 s
+round 4: 10000 entities published in 0.49 s
+round 5: 10000 entities published in 0.50 s
+round 6: 10000 entities published in 0.50 s
+round 7: 10000 entities published in 0.50 s
+round 8: 10000 entities published in 0.50 s
+round 9: 10000 entities published in 0.51 s
+round 10: 10000 entities published in 0.50 s
+round 11: 10000 entities published in 0.50 s
+round 12: 10000 entities published in 0.51 s
+round 13: 10000 entities published in 0.51 s
+round 14: 10000 entities published in 0.51 s
+round 15: 10000 entities published in 0.51 s
+round 16: 10000 entities published in 0.50 s
+round 17: 10000 entities published in 0.50 s
+round 18: 10000 entities published in 0.49 s
+round 19: 10000 entities published in 0.45 s
+round 20: 10000 entities published in 0.43 s
+round 21: 10000 entities published in 0.47 s

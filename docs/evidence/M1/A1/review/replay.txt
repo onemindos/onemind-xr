@@ -1,0 +1,57 @@
+== nats-server on 54273
+== extract pipelines from the ConfigMap
+extracted: feed-aircraft.yaml, feed-mta-grammar.yaml, feed-mta.yaml, feed-satellites-grammar.yaml, feed-ships.yaml
+== encode GTFS-RT fixtures and serve them on 54274
+== grammar pipelines (about 3 polls each)
+== negative control: legacy feed-mta rewritten to the local fixture and NATS
+== check
+captured 344 messages, 176 feed messages on 29 subjects
+     4  evt.sys.celestrak.rejected
+     4  evt.sys.mta.rejected
+     4  evt.world.rail.mta-lirr-go202_26_1017
+     4  evt.world.rail.mta-lirr-go202_26_1019
+     4  evt.world.rail.mta-lirr-go202_26_122
+     4  evt.world.rail.mta-lirr-go202_26_1511
+     4  evt.world.rail.mta-lirr-go202_26_1611
+     4  evt.world.rail.mta-lirr-go202_26_35
+     4  evt.world.rail.mta-lirr-go202_26_37
+     4  evt.world.rail.mta-lirr-go202_26_5
+     4  evt.world.rail.mta-lirr-go202_26_611
+     4  evt.world.rail.mta-lirr-go202_26_7
+     4  evt.world.rail.mta-lirr-go202_26_713
+     4  evt.world.rail.mta-lirr-go202_26_809
+     4  evt.world.rail.mta-mnr-1211
+     4  evt.world.rail.mta-mnr-1221
+     4  evt.world.rail.mta-mnr-1313
+     4  evt.world.rail.mta-mnr-1315
+     4  evt.world.rail.mta-mnr-1317
+     4  evt.world.rail.mta-mnr-1321
+     4  evt.world.rail.mta-mnr-1408
+     4  evt.world.rail.mta-mnr-1417
+     4  evt.world.rail.mta-mnr-1419
+     4  evt.world.rail.mta-mnr-1427
+     4  evt.world.rail.mta-mnr-1429
+     4  evt.world.rail.mta-mnr-1431
+    64  intel.space.celestrak.tle
+     4  tel.feed.celestrak.status
+     4  tel.feed.mta.status
+PASS only grammar subjects published (off-grammar: [])
+PASS nothing published on tak.cot.* (incl. tak.cot.inject)
+PASS the grammar run published something
+PASS evt.world.rail subjects match the fixtures (24 seen, 24 expected)
+PASS tel.feed.mta.status once per poll (4 polls)
+PASS every rail record has the §9.2 envelope (uid = subject id, type, lat, lon, t) and a Nats-Msg-Id
+PASS intel.space.celestrak.tle covers every valid TLE (16 of 16)
+PASS TLE records present (64)
+PASS each TLE carries Nats-Msg-Id tle:{norad}:{epoch}
+PASS TLE records carry no position (raw source data, no propagation)
+PASS evt.sys.mta.rejected: 1 per poll with a reason (4 over 4 polls)
+PASS evt.sys.celestrak.rejected: 1 per fetch with a reason (4 over 4 fetches)
+PASS tel.feed.mta.status reports the published and rejected counts, no error, not stale
+PASS WORLD stored each train once across 4 polls (Nats-Msg-Id dedup: 24 stored, 24 trains)
+PASS INTEL stored each TLE once (16)
+PASS COT stream empty after the grammar run (0)
+negative control (legacy feed-mta): {'tak.cot.inject': 48}
+PASS negative control: the capture does see legacy CoT on tak.cot.inject
+
+RESULT: PASS (0 failed)

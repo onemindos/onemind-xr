@@ -1,0 +1,5 @@
+REJECT {"action_id": "act-01m63yggj05ranvm6v52tm1ejn", "status": "rejected", "approvals_needed": 1, "approvals_received": 0, "denial": {"code": "rejected_by_human", "message": "not now"}}
+R1 {"action_id": "act-01m63yggj05ranvm6v52tm1ejn", "status": "awaiting_confirmation", "level": "A3", "approvals_needed": 1, "confirm_by": "2026-10-29T13:47:07.904Z", "params_hash": "sha256:54ad0ab97c10d51f6f89a605a6a8807b012347db32bc65d4806b2e05f7e8d1d6", "note": "Proposed only. A human must confirm it in the OneMind UI; you cannot confirm or execute it. Do not say it was done. Report the action_id and that it awaits
+R2 {"action_id": "act-01m63yggj05ranvm6v52tm1ejn", "status": "rejected", "level": "A3", "approvals_needed": 1, "confirm_by": "2026-10-29T13:47:07.904Z", "params_hash": "sha256:54ad0ab97c10d51f6f89a605a6a8807b012347db32bc65d4806b2e05f7e8d1d6", "denial": {"code": "rejected_by_human", "message": "not now"}, "note": "Denied by policy and recorded in the audit log. Tell the user it was refused and why."}
+        print("REJECT", json.dumps(rj)[:300])
+1 failed, 5 deselected in 0.49s

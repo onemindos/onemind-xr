@@ -1,0 +1,30 @@
+[ RUN  ] it_ws_connect_pubsub_request_reply
+[  OK  ] it_ws_connect_pubsub_request_reply (390 ms)
+[ RUN  ] it_kv_get_direct_fallback_and_watch
+    kv put -> watch delivery: 3 ms (B3 target: marker within 1 s)
+[  OK  ] it_kv_get_direct_fallback_and_watch (303 ms)
+[ RUN  ] it_reconnect_after_server_restart
+    reconnected 1559 ms after the server went down (server restarted after 1.5 s)
+    after reconnect: kv put -> client in 3 ms
+[  OK  ] it_reconnect_after_server_restart (2260 ms)
+[ RUN  ] it_direct_path_ent_snapshot_live_ttl_markers_and_live_false
+    direct path: 1000-entity snapshot in 19 ms
+    Nats-TTL 1s -> removed by delete marker after 1001 ms (expired counter 1)
+[  OK  ] it_direct_path_ent_snapshot_live_ttl_markers_and_live_false (1439 ms)
+[ RUN  ] it_layer_off_means_no_subscription_on_the_server
+    server-side subscriptions: before=0 on=6 off=1; ENT consumers after off=0
+[  OK  ] it_layer_off_means_no_subscription_on_the_server (1997 ms)
+[ RUN  ] it_direct_layers_camera_aoi_small_keeps_all_large_reloads_on_pan
+    after pan: large direct layer 16 entities (16 in the new view), small layer 400
+[  OK  ] it_direct_layers_camera_aoi_small_keeps_all_large_reloads_on_pan (408 ms)
+[ RUN  ] it_watch_path_snapshot_deltas_aoi_and_unwatch
+[  OK  ] it_watch_path_snapshot_deltas_aoi_and_unwatch (319 ms)
+[ RUN  ] it_dead_watch_resnapshots_after_30s_silence
+    silent watch -> new snapshot after 30011 ms (contract: 30 s)
+[  OK  ] it_dead_watch_resnapshots_after_30s_silence (30302 ms)
+[ RUN  ] it_10k_entities_snapshot_and_update_throughput
+    10,000-entity snapshot over svc.layer.snapshot (5 chunks): 77 ms wall, 76 ms in client (A5 contract target < 2 s)
+    30,000 delta upserts applied in 0.27 s (110294 updates/s, 30 batches) -> 10000 journal changes
+[  OK  ] it_10k_entities_snapshot_and_update_throughput (658 ms)
+
+9 tests, 9 passed, 0 failed, 99 checks, 38080 ms

@@ -1,0 +1,26 @@
+## validate_changed_yaml
+Changed YAML gate passed (1 files checked)
+## validate_manifests (changed)
+Summary: 3 resources found in 1 file - Valid: 3, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)
+## shellcheck
+ok
+## yamllint
+ok
+## gitleaks (staged)
+[90m9:38AM[0m [32mINF[0m [1m0 commits scanned.[0m
+[90m9:38AM[0m [32mINF[0m [1mscanned ~193955 bytes (193.96 KB) in 61.1ms[0m
+[90m9:38AM[0m [32mINF[0m [1mno leaks found[0m
+## gitleaks dir
+[90m9:38AM[0m [32mINF[0m [1mscanned ~12850105 bytes (12.85 MB) in 3.51s[0m
+[90m9:38AM[0m [33mWRN[0m [1mleaks found: 9[0m
+## gitleaks dir services/bridge/bridges/ros2
+[90m9:38AM[0m [32mINF[0m [1mscanned ~197857 bytes (197.86 KB) in 32ms[0m
+[90m9:38AM[0m [32mINF[0m [1mno leaks found[0m
+## gitleaks dir docs/proposals
+[90m9:38AM[0m [32mINF[0m [1mscanned ~4712 bytes (4.71 KB) in 3.33ms[0m
+[90m9:38AM[0m [32mINF[0m [1mno leaks found[0m
+## gitleaks dir .github/workflows/test-ros2-bridge.yml
+[90m9:38AM[0m [32mINF[0m [1mscanned ~1635 bytes (1.63 KB) in 1.86ms[0m
+[90m9:38AM[0m [32mINF[0m [1mno leaks found[0m
+(note: the earlier 'leaks found: 9' line came from a scan of the whole tree; 9 is the count recorded in .gitleaks-baseline.json. Scans of the new paths only, above, found none.)

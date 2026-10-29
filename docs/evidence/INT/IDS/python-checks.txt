@@ -1,0 +1,39 @@
+ok: 24 users, 5 accounts, invariants hold, values file current
+test_agents_never_confirm (scripts.tests.test_nats_identities.InvariantTests.test_agents_never_confirm) ... ok
+test_auth_account_has_no_jetstream (scripts.tests.test_nats_identities.InvariantTests.test_auth_account_has_no_jetstream) ... ok
+test_callout_usernames_are_reserved (scripts.tests.test_nats_identities.InvariantTests.test_callout_usernames_are_reserved) ... ok
+test_client_and_agents_have_no_jetstream (scripts.tests.test_nats_identities.InvariantTests.test_client_and_agents_have_no_jetstream) ... ok
+test_no_credentials_in_spec (scripts.tests.test_nats_identities.InvariantTests.test_no_credentials_in_spec) ... ok
+test_no_inbox_publish_and_no_stream_admin (scripts.tests.test_nats_identities.InvariantTests.test_no_inbox_publish_and_no_stream_admin) ... ok
+test_only_entity_publishes_entities (scripts.tests.test_nats_identities.InvariantTests.test_only_entity_publishes_entities) ... ok
+test_only_policy_publishes_commands (scripts.tests.test_nats_identities.InvariantTests.test_only_policy_publishes_commands) ... ok
+test_only_projector_injects_into_tak (scripts.tests.test_nats_identities.InvariantTests.test_only_projector_injects_into_tak) ... ok
+test_services_never_confirm (scripts.tests.test_nats_identities.InvariantTests.test_services_never_confirm) ... ok
+test_single_writers (scripts.tests.test_nats_identities.InvariantTests.test_single_writers) ... ok
+test_spec_holds (scripts.tests.test_nats_identities.InvariantTests.test_spec_holds) ... ok
+test_values_files_current (scripts.tests.test_nats_identities.InvariantTests.test_values_files_current) ... ok
+test_live_a2_removes_leaf_authorization (scripts.tests.test_nats_identities.LiveMergeTests.test_live_a2_removes_leaf_authorization) ... ok
+test_live_round_trip_keeps_bare_tokens_and_live_hashes (scripts.tests.test_nats_identities.LiveMergeTests.test_live_round_trip_keeps_bare_tokens_and_live_hashes) ... ok
+test_refuses_credentials_inside_the_repo (scripts.tests.test_nats_identities.LiveMergeTests.test_refuses_credentials_inside_the_repo) ... ok
+test_every_new_user_is_restricted (scripts.tests.test_nats_identities.RenderTests.test_every_new_user_is_restricted) ... ok
+test_hermes_sidecar_carries_the_hub_allow_lists (scripts.tests.test_nats_identities.RenderTests.test_hermes_sidecar_carries_the_hub_allow_lists) ... ok
+test_jetstream_expansion_is_per_stream (scripts.tests.test_nats_identities.RenderTests.test_jetstream_expansion_is_per_stream) ... ok
+test_legacy_connection_types_from_a2 (scripts.tests.test_nats_identities.RenderTests.test_legacy_connection_types_from_a2) ... ok
+test_sidecar_only_on_leaf_users (scripts.tests.test_nats_identities.RenderTests.test_sidecar_only_on_leaf_users) ... ok
+test_stage_a1_is_additive (scripts.tests.test_nats_identities.RenderTests.test_stage_a1_is_additive) ... ok
+test_stage_a2_moves_the_leaf_user (scripts.tests.test_nats_identities.RenderTests.test_stage_a2_moves_the_leaf_user) ... ok
+test_stage_c_drops_shared_users_only (scripts.tests.test_nats_identities.RenderTests.test_stage_c_drops_shared_users_only) ... ok
+test_fixture_fits (scripts.tests.test_nats_identities.RoleTests.test_fixture_fits) ... ok
+test_newcomer_and_viewer_never_confirm (scripts.tests.test_nats_identities.RoleTests.test_newcomer_and_viewer_never_confirm) ... ok
+test_no_role_commands_or_forges (scripts.tests.test_nats_identities.RoleTests.test_no_role_commands_or_forges) ... ok
+test_subjects_need_a_client_import (scripts.tests.test_nats_identities.RoleTests.test_subjects_need_a_client_import) ... ok
+test_within (scripts.tests.test_nats_identities.RoleTests.test_within) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 1.108s
+
+OK
+--- check-roles (#565 file as of origin/feat/roles-authentik)
+ok: 5 roles fit the CLIENT account; none publishes cmd.*/ent.*/inject, newcomer and viewer never confirm
+--- check-roles (fixture with A19-P11 proposals)
+ok: 5 roles fit the CLIENT account; none publishes cmd.*/ent.*/inject, newcomer and viewer never confirm

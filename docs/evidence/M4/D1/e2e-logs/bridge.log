@@ -1,0 +1,6 @@
+2026/10/29 10:04:58.775188 [bridge-mavlink] NATS connected: nats://127.0.0.1:4291
+2026/10/29 10:04:58.780403 [bridge-mavlink] MAVLink endpoint udpserver:127.0.0.1:14651, vehicle sysid 1, out V2
+2026/10/29 10:04:58.780427 [bridge-mavlink] WARNING: no keep-in zone; goto, takeoff, arm and land-at-point are refused (fail closed)
+2026/10/29 10:04:58.780594 [bridge-mavlink] subscribed cmd.fleet.drone.sim-x1.>; publishing tel.fleet.drone.sim-x1.position, tel.fleet.drone.sim-x1.status, evt.drone.sim-x1.command
+2026/10/29 10:04:58.855987 [bridge-mavlink] MAVLink channel open: udp:127.0.0.1:53614
+2026/10/29 10:06:54.391099 [bridge-mavlink] shutting down

@@ -1,0 +1,31 @@
+# INT/CAP cross-PR e2e 2026-10-29T15:25:44Z: disposable nats-server, entity-service built from feat/entity-service
+$ nats pub tel.fleet.drone.sim-x1.position '{"uid":"sim-x1","type":"fleet.drone","lat":30.2672,"lon":-97.7431,"hae":152.4,"course":-1,"speed":0,"callsign":"SIM-X1","stale":60,"t":1793287544871,"meta":{"battery_pct":80,"mode":"GUIDED","kind":"multirotor","simulated":true}}'
+11:25:44 Published 228 bytes to "tel.fleet.drone.sim-x1.position"
+$ nats pub tel.fleet.drone.sim-x1.status '{"uid":"sim-x1","type":"fleet.drone","lat":30.2672,"lon":-97.7431,"hae":152.4,"course":-1,"speed":0,"callsign":"SIM-X1","stale":60,"t":1793287544971,"meta":{"battery_pct":80,"mode":"GUIDED","armed":true,"connection":"online","link_rssi":-1,"kind":"multirotor","simulated":true,"commands_accepted":"goto,rtl,land,arm,disarm,estop,takeoff"}}'
+11:25:44 Published 339 bytes to "tel.fleet.drone.sim-x1.status"
+$ nats pub tel.fleet.robot.sim-tb1.position '{"uid":"sim-tb1","type":"fleet.robot","lat":30.27,"lon":-97.74,"hae":150,"course":-1,"speed":0,"callsign":"SIM-TB1","stale":30,"t":1793287544871,"meta":{"kind":"ugv","battery_pct":90,"simulated":true}}'
+11:25:44 Published 201 bytes to "tel.fleet.robot.sim-tb1.position"
+$ nats pub tel.fleet.robot.sim-tb1.status '{"uid":"sim-tb1","type":"fleet.robot","lat":30.27,"lon":-97.74,"hae":150,"course":-1,"speed":0,"callsign":"SIM-TB1","stale":30,"t":1793287544971,"meta":{"kind":"ugv","battery_pct":90,"mode":"idle","connection":"online","link_rssi":-1,"simulated":true,"commands_accepted":"goto,hold,rtl,estop,estop_release"}}'
+11:25:44 Published 308 bytes to "tel.fleet.robot.sim-tb1.status"
+$ nats pub tel.fleet.drone.x47.position '{"uid":"x47","type":"fleet.drone","lat":30.1,"lon":-97.7,"stale":60,"t":1793287544871,"meta":{"battery_pct":70}}'
+11:25:44 Published 112 bytes to "tel.fleet.drone.x47.position"
+$ nats pub tel.fleet.drone.x47.status '{"uid":"x47","type":"fleet.drone","lat":30.1,"lon":-97.7,"stale":60,"t":1793287544971,"meta":{"battery_pct":70,"connection":"online","commands_accepted":"goto,rtl,land"}}'
+11:25:44 Published 170 bytes to "tel.fleet.drone.x47.status"
+$ nats req svc.entity.get '{"entity_type":"drone","entity_id":"sim-x1"}'
+{"entity_id": "sim-x1", "entity_type": "drone", "kind": "multirotor", "traits": ["locatable", "trackable", "taskable", "observable"], "capabilities": ["onemind.task.goto.v1", "onemind.task.rtl.v1", "onemind.task.land.v1"], "health": {"battery_pct": 80, "connection": "online", "link_rssi": -1}, "indicators": {"simulated": true, "exercise": false, "emergency": false, "starred": false, "egress_tak": true}}
+$ nats req svc.entity.get '{"entity_type":"robot","entity_id":"sim-tb1"}'
+{"entity_id": "sim-tb1", "entity_type": "robot", "kind": "ugv", "traits": ["locatable", "trackable", "taskable"], "capabilities": ["onemind.task.goto.v1", "onemind.task.hold.v1", "onemind.task.rtl.v1"], "health": {"battery_pct": 90, "connection": "online", "link_rssi": -1}, "indicators": {"simulated": true, "exercise": false, "emergency": false, "starred": false, "egress_tak": true}}
+$ nats req svc.entity.get '{"entity_type":"drone","entity_id":"fleet-x47"}'
+{"entity_id": "fleet-x47", "entity_type": "drone", "kind": "multirotor", "traits": ["locatable", "trackable", "taskable", "observable"], "capabilities": null, "health": {"battery_pct": 70, "connection": "online"}, "indicators": {"simulated": false, "exercise": false, "emergency": false, "starred": false, "egress_tak": true}}
+## policy #554 resolver NATSEntities.Get + checkAsset rules (temporary test file in feat/policy-service worktree, removed after the run, not committed)
+=== RUN   TestCapE2E
+    zz_cap_e2e_test.go:47: sim-x1 onemind.task.goto.v1: capabilities=[onemind.task.goto.v1 onemind.task.rtl.v1 onemind.task.land.v1] simulated=true online=true -> passes capability gate=true
+    zz_cap_e2e_test.go:47: sim-x1 onemind.task.rtl.v1: capabilities=[onemind.task.goto.v1 onemind.task.rtl.v1 onemind.task.land.v1] simulated=true online=true -> passes capability gate=true
+    zz_cap_e2e_test.go:47: sim-x1 onemind.task.orbit.v1: capabilities=[onemind.task.goto.v1 onemind.task.rtl.v1 onemind.task.land.v1] simulated=true online=true -> passes capability gate=false
+    zz_cap_e2e_test.go:47: sim-tb1 onemind.task.goto.v1: capabilities=[onemind.task.goto.v1 onemind.task.hold.v1 onemind.task.rtl.v1] simulated=true online=true -> passes capability gate=true
+    zz_cap_e2e_test.go:47: sim-tb1 onemind.task.hold.v1: capabilities=[onemind.task.goto.v1 onemind.task.hold.v1 onemind.task.rtl.v1] simulated=true online=true -> passes capability gate=true
+    zz_cap_e2e_test.go:47: sim-tb1 onemind.task.land.v1: capabilities=[onemind.task.goto.v1 onemind.task.hold.v1 onemind.task.rtl.v1] simulated=true online=true -> passes capability gate=false
+    zz_cap_e2e_test.go:47: fleet-x47 onemind.task.goto.v1: capabilities=[] simulated=false online=true -> passes capability gate=false
+--- PASS: TestCapE2E (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/policy/internal/policy	0.387s

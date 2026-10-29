@@ -1,0 +1,5 @@
+    acceptance_test.go:375: CLIENT bob (team-b): 2500 items in 2 chunks; alice (team-a, org): 2502 items in 2 chunks
+    acceptance_test.go:411: cross-account watches over 25 s (lease 10 s, response_threshold 3s): alice 100 batches, 0 resnapshots []; bob 41 batches, 0 resnapshots []
+--- PASS: TestA5Releasability (25.35s)
+PASS
+ok  	github.com/onemindos/omos/services/layer/internal/layer	25.706s

@@ -1,0 +1,16 @@
+## gofmt
+## yamllint
+rc=0
+## validate_changed_yaml
+Changed YAML gate passed (4 files checked)
+rc=0
+## validate_manifests
+No changed plain manifests to validate
+rc=0
+## gitleaks
+[90m11:47AM[0m [32mINF[0m [1m4 commits scanned.[0m
+[90m11:47AM[0m [32mINF[0m [1mscanned ~216971 bytes (216.97 KB) in 83.7ms[0m
+[90m11:47AM[0m [32mINF[0m [1mno leaks found[0m
+[90m11:47AM[0m [32mINF[0m [1mscanned ~13015099 bytes (13.02 MB) in 3.66s[0m
+[90m11:47AM[0m [33mWRN[0m [1mleaks found: 9[0m
+gitleaks dir: the 9 findings are the pre-existing baseline files (docs/infra/CONSTELLATION-OVERWATCH.md, docs/references/ai/orp.md, infra/edge/takserver/deploy/docs/enrollment.md x2, platform/hermes/agent/SECRETS.md x2, platform/monitoring/deployment.yaml, services/om_presence.py x2); none in files this change touches. gitleaks git on origin/main..HEAD: no leaks.

@@ -1,0 +1,62 @@
+?   	github.com/onemindos/omos/services/auth-callout/cmd/auth-callout	[no test files]
+=== RUN   TestNewcomerCannotSeeOrProposeAssetCommands
+    callout_test.go:63: newcomer: 15 permission violations, 0 policy requests delivered
+--- PASS: TestNewcomerCannotSeeOrProposeAssetCommands (1.71s)
+=== RUN   TestViewerSeesActionsButCannotProposeOrConfirm
+--- PASS: TestViewerSeesActionsButCannotProposeOrConfirm (1.59s)
+=== RUN   TestOperatorReachesPolicyWithVerifiedIdentity
+--- PASS: TestOperatorReachesPolicyWithVerifiedIdentity (0.35s)
+=== RUN   TestInboxIsolationBetweenClients
+--- PASS: TestInboxIsolationBetweenClients (0.65s)
+=== RUN   TestRejectedTokens
+--- PASS: TestRejectedTokens (0.17s)
+=== RUN   TestPasswordUsersAreNotCalledOut
+--- PASS: TestPasswordUsersAreNotCalledOut (0.12s)
+=== RUN   TestLeafNodes
+=== RUN   TestLeafNodes/leafnodes.authorization_user_(today,_stage_A1)
+    callout_test.go:284: leaf connected=true, callout requests=0 allowed=0 denied=0
+=== RUN   TestLeafNodes/account_user_with_LEAFNODE_type_(stage_A2)
+    callout_test.go:284: leaf connected=false, callout requests=3 allowed=0 denied=3
+--- PASS: TestLeafNodes (3.33s)
+    --- PASS: TestLeafNodes/leafnodes.authorization_user_(today,_stage_A1) (0.16s)
+    --- PASS: TestLeafNodes/account_user_with_LEAFNODE_type_(stage_A2) (3.16s)
+=== RUN   TestTokenExpiryDisconnects
+    callout_test.go:316: close reason: EOF
+--- PASS: TestTokenExpiryDisconnects (2.14s)
+=== RUN   TestCalloutDownFailsClosed
+    callout_test.go:329: refused after 2.007s: nats: Authorization Violation
+--- PASS: TestCalloutDownFailsClosed (2.14s)
+=== RUN   TestJWKSOutageAndRotation
+--- PASS: TestJWKSOutageAndRotation (0.12s)
+=== RUN   TestEncryptedCallout
+--- PASS: TestEncryptedCallout (0.20s)
+=== RUN   TestUserJWTShape
+=== RUN   TestUserJWTShape/newcomer
+=== RUN   TestUserJWTShape/viewer
+=== RUN   TestUserJWTShape/operator
+=== RUN   TestUserJWTShape/commander
+=== RUN   TestUserJWTShape/admin
+--- PASS: TestUserJWTShape (0.15s)
+    --- PASS: TestUserJWTShape/newcomer (0.01s)
+    --- PASS: TestUserJWTShape/viewer (0.01s)
+    --- PASS: TestUserJWTShape/operator (0.01s)
+    --- PASS: TestUserJWTShape/commander (0.01s)
+    --- PASS: TestUserJWTShape/admin (0.01s)
+=== RUN   TestConfigMapMatchesSource
+--- PASS: TestConfigMapMatchesSource (0.00s)
+=== RUN   TestBlueprintHasEveryRoleGroup
+--- PASS: TestBlueprintHasEveryRoleGroup (0.00s)
+=== RUN   TestVerifierClaims
+--- PASS: TestVerifierClaims (0.11s)
+=== RUN   TestVerifierJWKSUnavailableAtStart
+--- PASS: TestVerifierJWKSUnavailableAtStart (0.07s)
+=== RUN   TestParseJWKSSkipsWeakAndForeignKeys
+--- PASS: TestParseJWKSSkipsWeakAndForeignKeys (0.04s)
+=== RUN   TestRoleMapSourceRules
+--- PASS: TestRoleMapSourceRules (0.00s)
+=== RUN   TestParseRoleMapRejectsUnsafeGrants
+--- PASS: TestParseRoleMapRejectsUnsafeGrants (0.01s)
+=== RUN   TestResolveHighestRole
+--- PASS: TestResolveHighestRole (0.00s)
+PASS
+ok  	github.com/onemindos/omos/services/auth-callout/internal/callout	14.450s

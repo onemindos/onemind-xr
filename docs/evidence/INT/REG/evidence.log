@@ -1,0 +1,41 @@
+# REG review fixes, omos #556 docs/grammar-proposals, commit fdb29297 (2026-10-29T15:38:06Z)
+
+## check_proposal_subjects.py
+docs/proposals/2026-10-29-grammar-register/bus.md:249	legacy	int.result.{id}	OFF-GRAMMAR	stored-today=none
+docs/proposals/2026-10-29-grammar-register/ontology.md:264	legacy	evt.command.{result}	OFF-GRAMMAR	stored-today=none
+docs/proposals/2026-10-29-grammar-register/ontology.md:265	alternative	evt.policy.{decision}.{result}	G:evt	stored-today=none
+docs/proposals/2026-10-29-grammar-register/reference-architecture.md:56	legacy	evt.command.{result}	OFF-GRAMMAR	stored-today=none
+subjects checked: 345 (proposed 104, interim 3, current 55, filter 85, legacy 58, alternative 31, action 9); off-grammar (legacy, alternative or action only): 57
+result: PASS (0 errors)
+## --self-test
+result: PASS (0 errors)
+## gitleaks dir (register folder)
+[90m11:38AM[0m [32mINF[0m [1mno leaks found[0m
+## validate_changed_yaml
+Changed YAML gate passed (0 files checked)
+
+## facts checked
+#554 f4519b17 POL-16 = D2-P1 (approved action's own hash); vectors services/schemas/command/testdata/params-hash-vectors.json
+#550 2b724093, #566 44de8068: recompute only without task_id, rely on signature with task_id
+#552 73823045: capabilities for sim-* only, class-bounded
+#557 copy of policy proposals: POL-16 = rate limit (RT14) -> clash recorded
+A19 (wt a19-identities) and COT (wt a6-projector) changes: uncommitted at fix time; register records them as open contradictions, not as carried
+
+commit fdb2929772fde9d80d3beb40834089894ee428d3
+Author: Daniel Carku <danielcarku@Daniels-MacBook-Pro.local>
+Date:   Thu Oct 29 11:36:56 2026 -0400
+
+    docs(proposals): align INT-R1..R4 with the pushed fixes; record POL-16 clash (A24 review)
+    
+    - INT-R1 now records the decision carried by #554 f4519b17 (POL-16 = D2-P1),
+      #550 2b724093 and #566 44de8068: a command carries the approved action's
+      own params_hash; bridges recompute only without task_id and otherwise rely
+      on the Ed25519 signature. Vectors path is
+      services/schemas/command/testdata/params-hash-vectors.json. The per-command
+      asset.{verb} hash (#568 patch) moves to Not chosen.
+
+## GitHub CI on #556 after fdb29297
+Helm render check: pass
+Kubernetes manifest schema (kubeconform): pass
+Lint & Validate: pass
+Secret scan (gitleaks): pass

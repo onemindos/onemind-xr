@@ -1,0 +1,10 @@
+[WebServer] 
+[WebServer] (!) outDir /Users/danielcarku/Desktop/work/.run/tmp-e2e/web-dist is not inside project root and will not be emptied.
+[WebServer] Use --emptyOutDir to override.
+[WebServer] 
+
+Running 1 test using 1 worker
+
+  ✓  1 e2e-int/int.spec.ts:15:1 › web client on the real stack: drone moving, pending confirm, human confirm, it flies (1.2m)
+
+  1 passed (1.3m)

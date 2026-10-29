@@ -1,0 +1,28 @@
+# CI-equivalent checks, omos feat/mission-service 21453fe8, 2026-10-29T14:14:17Z
+== yamllint changed YAML
+ok
+== validate_changed_yaml.py
+Changed YAML gate passed (1 files checked)
+== validate_manifests.py (changed)
+Summary: 1 resource found in 1 file - Valid: 1, Invalid: 0, Errors: 0, Skipped: 0
+kubeconform: validating 1 manifest file(s)
+== shellcheck
+ok
+== gitleaks (commits origin/main..HEAD)
+[90m10:14AM[0m [32mINF[0m [1mscanned ~218708 bytes (218.71 KB) in 88.8ms[0m
+[90m10:14AM[0m [32mINF[0m [1mno leaks found[0m
+== gitleaks dir (baseline)
+[90m10:14AM[0m [32mINF[0m [1mscanned ~13326205 bytes (13.33 MB) in 3.59s[0m
+[90m10:14AM[0m [33mWRN[0m [1mleaks found: 9[0m
+(the 9 dir-scan hits are the pre-existing baseline files: docs/infra/CONSTELLATION-OVERWATCH.md, docs/references/ai/orp.md, infra/edge/takserver/deploy/docs/enrollment.md, platform/hermes/agent/SECRETS.md, platform/monitoring/deployment.yaml, services/om_presence.py; none touched by this PR; the commit scan is clean)
+
+== GitHub CI on PR #568 @21453fe8 (2026-10-29T14:16:47Z)
+Lint & Validate	pass	21s	https://github.com/onemindos/omos/actions/runs/40889558144/job/123502334672	
+test-and-image	pass	18s	https://github.com/onemindos/omos/actions/runs/40889558336/job/123502335165	
+image	skipping	0	https://github.com/onemindos/omos/actions/runs/40889558203/job/123502621120	
+Helm render check	pass	42s	https://github.com/onemindos/omos/actions/runs/40889558144/job/123502334464	
+Kubernetes manifest schema (kubeconform)	pass	6s	https://github.com/onemindos/omos/actions/runs/40889558144/job/123502334548	
+Secret scan (gitleaks)	pass	9s	https://github.com/onemindos/omos/actions/runs/40889558144/job/123502334166	
+preflight	pass	36s	https://github.com/onemindos/omos/actions/runs/40889558336/job/123502334816	
+test	pass	27s	https://github.com/onemindos/omos/actions/runs/40889558203/job/123502334637	
+acceptance	skipping	0	https://github.com/onemindos/omos/actions/runs/40889558336/job/123502336582	

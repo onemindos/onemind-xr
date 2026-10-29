@@ -1,0 +1,25 @@
+# omos CI-equivalent checks, branch feat/hermes-nats-tools @ 10b098c2, 2026-10-29T13:37:22Z
+## validate_changed_yaml.py
+Changed YAML gate passed (2 files checked)
+## check_onemind_mcp_coverage.py
+All 57 Git-declared Argo Applications mapped to MCP access dispositions
+## validate_manifests.py (changed)
+No changed plain manifests to validate
+## gitleaks dir (baseline)
+9:37AM INF scanned ~12799545 bytes (12.80 MB) in 3.66s
+9:37AM INF no leaks found
+## gitleaks git origin/main..HEAD
+9:37AM INF 3 commits scanned.
+9:37AM INF scanned ~153989 bytes (153.99 KB) in 69.1ms
+9:37AM INF no leaks found
+## python compile
+ok
+## go vet / go test -race: not applicable (no Go code in this PR); the D5 test runs the PR #554 Go binary built at 66900872
+test	pytest	2026-10-29T13:38:10.4617002Z test_policy_integration.py::test_4_follow_that_person_is_denied_and_recorded SKIPPED [ 18%]
+test	pytest	2026-10-29T13:38:10.4625196Z test_policy_integration.py::test_5_invariant_no_fleet_command_without_a_human_approval SKIPPED [ 21%]
+test	pytest	2026-10-29T13:38:33.3311695Z SKIPPED [1] test_policy_integration.py:264: POLICY_BIN, POLICY_SRC and nats-server are required
+test	pytest	2026-10-29T13:38:33.3313813Z SKIPPED [1] test_policy_integration.py:279: POLICY_BIN, POLICY_SRC and nats-server are required
+test	pytest	2026-10-29T13:38:33.3315819Z SKIPPED [1] test_policy_integration.py:300: POLICY_BIN, POLICY_SRC and nats-server are required
+test	pytest	2026-10-29T13:38:33.3317786Z SKIPPED [1] test_policy_integration.py:314: POLICY_BIN, POLICY_SRC and nats-server are required
+test	pytest	2026-10-29T13:38:33.3319780Z SKIPPED [1] test_policy_integration.py:325: POLICY_BIN, POLICY_SRC and nats-server are required
+test	pytest	2026-10-29T13:38:33.3321323Z ======================== 28 passed, 5 skipped in 24.22s ========================
