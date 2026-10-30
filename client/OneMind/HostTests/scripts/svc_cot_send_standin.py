@@ -13,7 +13,7 @@ import argparse, asyncio, json, os
 
 import nats
 
-KINDS = ("marker", "spi", "route", "geofence", "chat")
+KINDS = ("marker", "spi", "route", "geofence", "chat", "shape")  # shape: B11 (Docs/svc-cot-send.md)
 
 
 async def main():

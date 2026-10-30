@@ -22,15 +22,26 @@ client/OneMind/
       Entity, RenderPlan        SoA entity store (seq rule, live:false, expiry, picking), inspector rows, LOD/cluster/horizon plan
       CoT, MilStd2525           VR-TAK VH_COT port (event model, 2525 ids), CoT parse/build, svc.cot.send body
       ClientCore                everything above in one object, driven by Tick(now)
+      TakProto, TakStream       M4 C3: TAK Protocol v1 codec; 8089 streaming client (XML, v1 negotiation, ping), directed sends
+      TakEnroll                 M4 C3: /Marti/api/tls/signClient/v2 enrollment, HTTPS over a transport (HttpExchange)
+      TakContacts               M4 C8: contacts from SA, GeoChat conversations (direct, group), channel filter
+      TakMissions               M4 C7: Data Sync missions through tak-client (Docs/svc-tak-mission.md, proposed)
+      Drawing                   M4 B11: point, line, polygon, rectangle, circle, sector, range rings, R&B, buffer, lasso
+      FeedGaps                  M4 B20: stale, failed and missing feeds from tel.feed.*.status and manifests
+      AssetTasking              M4 D3: click-to-task through svc.policy.command.*, JCS params_hash, audit trail
     OneMindBus/                 UOneMindBusSubsystem + FOneMindUeWebSocketTransport (engine WebSockets module)
     OneMindGlobe/               AOneMindGlobe: georeference, ellipsoid or URL terrain, open raster overlay, sun/sky
-    OneMindLayers/              UOneMindLayerSubsystem: layer catalogue, toggles, AOI from the camera
+    OneMindLayers/              UOneMindLayerSubsystem: layer catalogue, toggles, AOI from the camera, gaps panel (B20)
     OneMindEntities/            AOneMindEntityRenderer (ISM per class and band, near actors, clusters), overlay + inspector
-    OneMindCoT/                 UOneMindCoTSubsystem: marker, SPI, route, geofence, chat through svc.cot.send
+    OneMindCoT/                 UOneMindCoTSubsystem: marker, SPI, route, geofence, chat, B11 shapes through svc.cot.send;
+                                UOneMindTakSubsystem (C3/C8): own TAK stream (SA + chat, UE-P5), enrollment, contacts, channels;
+                                FOneMindUeTlsTransport (FSocket + Tls/OmTlsSession, OpenSSL), OneMindKeychain (Mac keychain)
+    OneMindMission/             UOneMindMissionSubsystem: TAK missions (C7), click-to-task with the confirm dialog (D3)
   HostTests/                    CMake build of OneMindCore, unit + integration tests, headless client, e2e scripts
   Tools/entity_load.py          10,000 simulated entities into ENT for the render check
   Tools/mac/build-and-run.sh    owner's one command: checks, build, package, run
   Docs/svc-cot-send.md          proposed svc.cot.send body (C2)
+  Docs/tak-own-stream.md        proposal UE-P5: what the client may send over its own TAK stream (C3)
   THIRD_PARTY.md                VR-TAK attribution and other notices
 ```
 
@@ -51,14 +62,26 @@ FEATURES B3 is not included: its build was blocked on the build machine (PREFLIG
 WebSocket path covers the Mac (local leaf's WebSocket listener) and the headset. A `nats.c`
 transport can be added behind the same `om::ITransport` later.
 
+## M4 (Act): what the client adds
+
+Lane UE, branch `run/m4-client`: B11, B20, C3, C7, C8, D3. Keys: T task the selected `sim-*` asset
+to the cursor, Y/N confirm or reject in the dialog, B drawing tools (click points, Enter sends),
+G gaps panel. Console: `OneMindTakEnroll <user>` (password from `ONEMIND_TAK_ENROLL_PASSWORD`),
+`OneMindTakConnect`, `OneMindTakChat <uid|All> <text>`, `OneMindChannel <team>`,
+`OneMindMissionList`, `OneMindMissionOpen <name>`, `OneMindMissionAdd <name> <callsign>`,
+`OneMindTask <asset> <class> <lat> <lon> <hae>`. The client speaks TAK itself only on its own
+stream (C3); everything it receives there is shown, never republished to the bus. Evidence:
+`docs/evidence/M4/UE/`; engine build steps: `docs/evidence/M4/UE/OWNER-STEPS.md`.
+
 ## Build and test on a host without Unreal
 
 ```bash
-client/OneMind/HostTests/scripts/run-host-tests.sh     # C++17 and C++20 builds, unit, integration, ASan/UBSan, 10k load, C1/C2 e2e
+client/OneMind/HostTests/scripts/run-host-tests.sh     # C++17 and C++20 builds, unit, integration, ASan/UBSan, 10k load, C1/C2, C3 and D3 e2e
 ```
 
-Needs CMake 3.20+, a C++17 compiler, `nats-server` 2.11+ (per-message TTL and delete markers), Go
-(to build the omos services for the e2e) and a Python venv with `nats-py` and `takproto`.
+Needs CMake 3.20+, a C++17 compiler, OpenSSL 1.1.1+ (Homebrew `openssl@3` on the Mac), `nats-server`
+2.11+ (per-message TTL and delete markers), Go (to build the omos services for the e2e) and a Python
+venv with `nats-py` and `takproto`.
 
 ## Build and run on the Mac
 

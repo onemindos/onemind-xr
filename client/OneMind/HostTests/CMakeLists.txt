@@ -31,9 +31,16 @@ add_library(onemind_core STATIC ${OM_CORE_SRC})
 target_include_directories(onemind_core PUBLIC ${OM_CORE_DIR}/Public)
 target_compile_options(onemind_core PRIVATE ${OM_WARN})
 
-add_library(onemind_host STATIC host/PosixWsTransport.cpp)
-target_include_directories(onemind_host PUBLIC host)
-target_link_libraries(onemind_host PUBLIC onemind_core)
+# TLS (feature C3): the OpenSSL session shared with the Unreal transport, and the host
+# byte-stream transport and enrollment platform built on it.
+if(APPLE AND NOT OPENSSL_ROOT_DIR AND EXISTS /opt/homebrew/opt/openssl@3)
+  set(OPENSSL_ROOT_DIR /opt/homebrew/opt/openssl@3)
+endif()
+find_package(OpenSSL 1.1.1 REQUIRED)
+set(OM_COT_PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Plugins/OneMindCoT/Source/OneMindCoT/Private)
+add_library(onemind_host STATIC host/PosixWsTransport.cpp host/PosixTlsTransport.cpp ${OM_COT_PRIVATE}/Tls/OmTlsSession.cpp)
+target_include_directories(onemind_host PUBLIC host ${OM_COT_PRIVATE})
+target_link_libraries(onemind_host PUBLIC onemind_core OpenSSL::SSL OpenSSL::Crypto)
 target_compile_options(onemind_host PRIVATE ${OM_WARN})
 find_package(Threads REQUIRED)
 target_link_libraries(onemind_host PUBLIC Threads::Threads)
@@ -55,3 +62,7 @@ target_compile_definitions(om_integration_tests PRIVATE OM_FIXTURES_DIR="${CMAKE
 add_executable(onemind_headless tools/onemind_headless.cpp)
 target_link_libraries(onemind_headless PRIVATE onemind_host)
 target_compile_options(onemind_headless PRIVATE ${OM_WARN})
+
+add_executable(onemind_tak tools/onemind_tak.cpp)
+target_link_libraries(onemind_tak PRIVATE onemind_host)
+target_compile_options(onemind_tak PRIVATE ${OM_WARN})

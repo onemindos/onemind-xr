@@ -32,6 +32,28 @@ Each ported file carries a header naming the origin, the commit and the modifica
   standards. `DaysFromCivil`/`CivilFromDays` follow Howard Hinnant's public-domain date algorithms.
 - worldmonitor (AGPL-3.0), worldwideview (Elastic 2.0) and CloudTAK (AGPL-3.0): not read for this
   code and nothing copied (decision 0004 #15).
+- TAK Protocol v1 (M4, `TakProto`, `TakStream`): written from the published spec, atak-civ
+  `takproto/README.txt` and `takproto/*.proto` at commit `9f6893dd` (field numbers and the
+  detail mapping rules); no Commo or TAK Server code is included. The keep-alive constants
+  (15 s / 4.5 s / 25 s) are Common Commo's documented behaviour (docs/research/tak-protocols.md S5).
+- Enrollment (M4, `TakEnroll`): the request sequence follows Common Commo's
+  `enrollmentmanager.cpp` (atak-civ `9f6893dd`) and TAK Server's `CertManagerApi.java`
+  (TAK-Product-Center/Server `5.7-RELEASE-14`), both read for behaviour only; the code is new.
+- CoT shape layouts (M4, `Drawing`): element and attribute names taken from the ATAK-written
+  examples in atak-civ `takcot/examples/*.cot` and `takcot/xsd` (`9f6893dd`); these are data
+  formats, no code was copied.
+- The client's `params_hash` follows RFC 8785 (JCS) and was checked against golden values printed
+  by the omos policy service's `jcs.go` (PR #554, Apache-2.0); nothing was copied from it.
+- OpenSSL is linked for TLS and CSRs; it is not vendored here. Two copies, two licences:
+  - host tests: Homebrew `openssl@3` (OpenSSL 3.x, Apache-2.0, compatible with GPL-3.0);
+  - Unreal build: the engine's bundled OpenSSL (`AddEngineThirdPartyPrivateStaticDependencies(Target,
+    "OpenSSL")` in `Plugins/OneMindCoT/Source/OneMindCoT/OneMindCoT.Build.cs`). Its version in UE 5.8
+    is **unverified** (owner step UE-1 checks `Engine/Source/ThirdParty/OpenSSL`). Earlier UE 5
+    releases bundled OpenSSL 1.1.1 (reviewer's finding on PR #4, not checked here), which is under the
+    OpenSSL/SSLeay licence; that licence is not compatible with GPL-3.0-or-later without a linking
+    exception. If UE 5.8 bundles 1.1.1, owner decision UE-P6 (`docs/evidence/M4/UE/OWNER-STEPS.md`)
+    chooses between adding an OpenSSL linking exception to this project's licence and linking an
+    OpenSSL 3.x build instead. Until then the Unreal build's OpenSSL licence status is open.
 
 ## Map data shown by default
 
