@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Synthetic ATAK-style PLI (EUD self-report) for tests. Same shape as the takproto peer
+     in docs/evidence/M1/A7/mesh_peer_e2e.py (eud_sa). Not captured from a real device. -->
+<event version="2.0" uid="ANDROID-e2e-eud-01" type="a-f-G-U-C" how="h-e" time="2026-10-29T12:00:00.000Z" start="2026-10-29T12:00:00.000Z" stale="2026-10-29T12:05:00.000Z">
+  <point lat="30.2672" lon="-97.7431" hae="150" ce="9.9" le="9999999"/>
+  <detail>
+    <takv os="34" version="5.6.0.12" device="PIXEL" platform="ATAK-CIV"/>
+    <contact endpoint="127.0.0.1:4242:tcp" callsign="E2E-EUD"/>
+    <uid Droid="E2E-EUD"/>
+    <__group role="Team Member" name="Cyan"/>
+    <status battery="88"/>
+    <track course="90" speed="1.5"/>
+  </detail>
+</event>

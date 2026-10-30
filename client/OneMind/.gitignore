@@ -1,0 +1,13 @@
+# Unreal build output
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+Build/
+Plugins/*/Binaries/
+Plugins/*/Intermediate/
+*.xcworkspace
+*.xcodeproj
+# Host test builds
+HostTests/build*/
+__pycache__/
