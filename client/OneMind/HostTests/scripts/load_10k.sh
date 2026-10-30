@@ -6,21 +6,23 @@
 # Usage: load_10k.sh <headless-binary> <work-dir> [extra headless args, e.g. --camera-aoi ...]
 set -euo pipefail
 HEADLESS=$1; RUN=$2; shift 2
-TOOLS=/Users/danielcarku/Desktop/work/.tools
 HERE=$(cd "$(dirname "$0")" && pwd)
+TOOLS=${ONEMIND_TOOLS:-${ONEMIND_WORK:-$(cd "$HERE/../../../../.." && pwd)}/.tools}
+PY=${ONEMIND_PYTHON:-$TOOLS/py/bin/python}; [ -x "$PY" ] || PY=python3
+NATS_SERVER_BIN=${NATS_SERVER_BIN:-$TOOLS/bin/nats-server}; [ -x "$NATS_SERVER_BIN" ] || NATS_SERVER_BIN=nats-server
 rm -rf "$RUN"; mkdir -p "$RUN/js"
-free_port() { "$TOOLS/py/bin/python" -I -c 'import socket;s=socket.socket();s.bind(("127.0.0.1",0));print(s.getsockname()[1])'; }
+free_port() { "$PY" -I -c 'import socket;s=socket.socket();s.bind(("127.0.0.1",0));print(s.getsockname()[1])'; }
 P=$(free_port); W=$(free_port)
 cat > "$RUN/nats.conf" <<CONF
 listen: 127.0.0.1:$P
 jetstream { store_dir: "$RUN/js", max_file_store: 2GB, max_memory_store: 256MB }
 websocket { listen: "127.0.0.1:$W", no_tls: true }
 CONF
-"$TOOLS/bin/nats-server" -c "$RUN/nats.conf" > "$RUN/server.log" 2>&1 & SRV=$!
+"$NATS_SERVER_BIN" -c "$RUN/nats.conf" > "$RUN/server.log" 2>&1 & SRV=$!
 trap 'kill $SRV 2>/dev/null; wait $SRV 2>/dev/null; rm -rf "$RUN/js"' EXIT
 sleep 1
 echo "\$ entity_load.py --count 10000 --rate 1 --duration 20  (background)"
-"$TOOLS/py/bin/python" -I "$HERE/../../Tools/entity_load.py" --url "nats://127.0.0.1:$P" --count 10000 --rate 1 --duration 20 > "$RUN/load.log" 2>&1 & LOAD=$!
+"$PY" -I "$HERE/../../Tools/entity_load.py" --url "nats://127.0.0.1:$P" --count 10000 --rate 1 --duration 20 > "$RUN/load.log" 2>&1 & LOAD=$!
 sleep 3
 echo "\$ onemind_headless --layer fleet:drone,robot,vehicle,node:direct --duration 15 $*"
 "$HEADLESS" --url "ws://127.0.0.1:$W" --layer fleet:drone,robot,vehicle,node:direct --duration 15 --print-every 3 "$@" | grep -v '^\[headless\] final fleet '

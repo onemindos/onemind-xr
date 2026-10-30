@@ -27,9 +27,18 @@ import takproto
 from takproto import TAKProtoVer
 
 HEADLESS, OMOS, RUN = sys.argv[1], sys.argv[2], sys.argv[3]
-TOOLS = "/Users/danielcarku/Desktop/work/.tools"
-NATS_SERVER = f"{TOOLS}/bin/nats-server"
-GO = f"{TOOLS}/bin/go"
+# Tools: $ONEMIND_TOOLS, else work/.tools beside the onemind-xr checkout if it exists, else PATH.
+WORK = os.environ.get("ONEMIND_WORK") or os.path.abspath(os.path.join(os.path.dirname(__file__), *[".."] * 5))
+TOOLS = os.environ.get("ONEMIND_TOOLS") or os.path.join(WORK, ".tools")
+
+
+def tool(name):
+    p = os.path.join(TOOLS, "bin", name)
+    return p if os.access(p, os.X_OK) else (shutil.which(name) or name)
+
+
+NATS_SERVER = os.environ.get("NATS_SERVER_BIN") or tool("nats-server")
+GO = tool("go")
 LO = "127.0.0.1"
 SA_GROUP = ("239.2.3.1", 36969)      # not the real 6969
 CHAT_GROUP = ("224.10.10.1", 37012)  # not the real 17012
@@ -112,8 +121,9 @@ def build(branch, subdir, pkg, out):
     arch = subprocess.run(["git", "-C", OMOS, "archive", f"origin/{branch}", subdir], capture_output=True, check=True)
     subprocess.run(["tar", "-x", "-C", src], input=arch.stdout, check=True)
     sha = subprocess.run(["git", "-C", OMOS, "rev-parse", f"origin/{branch}"], capture_output=True, text=True).stdout.strip()
-    env = dict(os.environ, GOPATH=f"{TOOLS}/gopath", GOMODCACHE=f"{TOOLS}/gopath/pkg/mod", GOFLAGS="-mod=readonly",
-               PATH=f"{TOOLS}/bin:" + os.environ.get("PATH", ""))
+    env = dict(os.environ, GOFLAGS="-mod=readonly", PATH=f"{TOOLS}/bin:" + os.environ.get("PATH", ""))
+    if os.path.isdir(TOOLS):
+        env.update(GOPATH=f"{TOOLS}/gopath", GOMODCACHE=f"{TOOLS}/gopath/pkg/mod")
     r = subprocess.run([GO, "build", "-o", out, pkg], cwd=os.path.join(src, subdir), env=env, capture_output=True, text=True)
     print(f"build {branch}@{sha[:12]} {subdir} -> {out}: rc={r.returncode} {r.stderr.strip()[:400]}", flush=True)
     return r.returncode == 0, sha

@@ -76,14 +76,16 @@ inline std::string HttpGet(int port, const std::string& path) {
   return b == std::string::npos ? std::string() : resp.substr(b + 4);
 }
 
-/// A nats-server child process. Binary: $NATS_SERVER_BIN or the run's .tools copy.
+/// A nats-server child process. Binary: $NATS_SERVER_BIN, else nats-server on PATH.
+/// Scratch directory: $OM_IT_TMP, else $TMPDIR (or /tmp).
 class NatsServer {
  public:
   explicit NatsServer(const std::string& name) {
     const char* bin = std::getenv("NATS_SERVER_BIN");
-    bin_ = bin ? bin : "/Users/danielcarku/Desktop/work/.tools/bin/nats-server";
+    bin_ = bin ? bin : "nats-server";
     const char* root = std::getenv("OM_IT_TMP");
-    dir_ = std::string(root ? root : "/Users/danielcarku/Desktop/work/.run/tmp-b-client") + "/it-" + name + "-" +
+    if (!root) root = std::getenv("TMPDIR");
+    dir_ = std::string(root ? root : "/tmp") + "/it-" + name + "-" +
            std::to_string(::getpid());
     std::string mk = "mkdir -p '" + dir_ + "/js'";
     if (std::system(mk.c_str()) != 0) std::printf("    mkdir failed\n");
@@ -106,7 +108,7 @@ class NatsServer {
     std::string conf = dir_ + "/nats.conf";
     std::string log = dir_ + "/server.log";
     const char* argv[] = {bin_.c_str(), "-c", conf.c_str(), "-l", log.c_str(), nullptr};
-    if (posix_spawn(&pid_, bin_.c_str(), nullptr, nullptr, const_cast<char* const*>(argv), environ) != 0) return false;
+    if (posix_spawnp(&pid_, bin_.c_str(), nullptr, nullptr, const_cast<char* const*>(argv), environ) != 0) return false;
     for (int i = 0; i < 100; ++i) {
       if (PortOpen(ws_port_) && PortOpen(port_)) return true;
       std::this_thread::sleep_for(std::chrono::milliseconds(50));

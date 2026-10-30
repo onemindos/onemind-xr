@@ -29,6 +29,7 @@ import socket
 import ssl
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 
@@ -36,11 +37,14 @@ import nats
 import takproto
 from takproto import TAKProtoVer
 
-TOOLS = "/Users/danielcarku/Desktop/work/.tools"
+# Tools: $ONEMIND_TOOLS, else work/.tools beside the onemind-xr checkout (missing tools come from PATH).
+WORK = os.environ.get("ONEMIND_WORK") or os.path.abspath(os.path.join(os.path.dirname(__file__), *[".."] * 5))
+TOOLS = os.environ.get("ONEMIND_TOOLS") or os.path.join(WORK, ".tools")
 OPENSSL = "/opt/homebrew/opt/openssl@3/bin/openssl"
-NATS_SERVER = os.environ.get("NATS_SERVER_BIN", TOOLS + "/bin/nats-server")
-GOENV = dict(os.environ, PATH=TOOLS + "/bin:" + os.environ.get("PATH", ""), GOPATH=TOOLS + "/gopath",
-             GOMODCACHE=TOOLS + "/gopath/pkg/mod", GOPROXY="off", GOFLAGS="-mod=mod")
+NATS_SERVER = os.environ.get("NATS_SERVER_BIN") or (TOOLS + "/bin/nats-server" if os.access(TOOLS + "/bin/nats-server", os.X_OK) else shutil.which("nats-server") or "nats-server")
+GOENV = dict(os.environ, PATH=TOOLS + "/bin:" + os.environ.get("PATH", ""), GOFLAGS="-mod=mod")
+if os.path.isdir(TOOLS + "/gopath"):  # the build machine's offline module cache
+    GOENV.update(GOPATH=TOOLS + "/gopath", GOMODCACHE=TOOLS + "/gopath/pkg/mod", GOPROXY="off")
 UID, CS = "ONEMIND-e2e", "OM-E2E"
 results, transcript = [], []
 SHAPE_SUFFIXES = ["point", "line", "polygon", "rect", "circle", "sector", "rings.r1", "rings.r2", "rings.r3", "rb", "buffer"]
@@ -494,7 +498,7 @@ async def part_bc(tak, work):
 
 
 async def main(tak, omos, out):
-    work = "/Users/danielcarku/Desktop/work/.run/tmp-m4-ue/c3-" + str(os.getpid())
+    work = os.path.join(tempfile.gettempdir(), "onemind-m4-ue", "c3-" + str(os.getpid()))
     os.makedirs(work, mode=0o700)
     try:
         await part_a(tak, omos, work)

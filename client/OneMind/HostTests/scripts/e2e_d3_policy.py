@@ -26,14 +26,18 @@ import shutil
 import socket
 import subprocess
 import sys
+import tempfile
 import time
 
 import nats
 
-TOOLS = "/Users/danielcarku/Desktop/work/.tools"
-NATS_SERVER = os.environ.get("NATS_SERVER_BIN", TOOLS + "/bin/nats-server")
-GOENV = dict(os.environ, PATH=TOOLS + "/bin:" + os.environ.get("PATH", ""), GOPATH=TOOLS + "/gopath",
-             GOMODCACHE=TOOLS + "/gopath/pkg/mod", GOPROXY="off", GOFLAGS="-mod=mod")
+# Tools: $ONEMIND_TOOLS, else work/.tools beside the onemind-xr checkout (missing tools come from PATH).
+WORK = os.environ.get("ONEMIND_WORK") or os.path.abspath(os.path.join(os.path.dirname(__file__), *[".."] * 5))
+TOOLS = os.environ.get("ONEMIND_TOOLS") or os.path.join(WORK, ".tools")
+NATS_SERVER = os.environ.get("NATS_SERVER_BIN") or (TOOLS + "/bin/nats-server" if os.access(TOOLS + "/bin/nats-server", os.X_OK) else shutil.which("nats-server") or "nats-server")
+GOENV = dict(os.environ, PATH=TOOLS + "/bin:" + os.environ.get("PATH", ""), GOFLAGS="-mod=mod")
+if os.path.isdir(TOOLS + "/gopath"):  # the build machine's offline module cache
+    GOENV.update(GOPATH=TOOLS + "/gopath", GOMODCACHE=TOOLS + "/gopath/pkg/mod", GOPROXY="off")
 VERBS = ["goto", "hold", "rtl", "land", "orbit", "observe", "estop", "arm", "disarm", "takeoff", "estop_release",
          "geofence_override"]
 results = []
@@ -89,7 +93,7 @@ accounts {{
 
 
 async def main(tak_bin, omos, out):
-    work = "/Users/danielcarku/Desktop/work/.run/tmp-m4-ue/d3-" + str(os.getpid())
+    work = os.path.join(tempfile.gettempdir(), "onemind-m4-ue", "d3-" + str(os.getpid()))
     os.makedirs(work, mode=0o700)
     src = work + "/src"
     os.makedirs(src)
