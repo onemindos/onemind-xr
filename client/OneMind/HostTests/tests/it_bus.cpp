@@ -15,7 +15,9 @@ TEST(it_ws_connect_pubsub_request_reply) {
   EXPECT_TRUE(srv.Start());
   Client a(srv.ws_url(), "it-a"), b(srv.ws_url(), "it-b");
   EXPECT_TRUE(PollUntil({a.nc.get(), b.nc.get()}, [&] { return a.nc->connected() && b.nc->connected(); }, 5000));
-  EXPECT_EQ(a.nc->server_info().str("version"), std::string("2.15.2"));
+  // Any 2.14+ server: the cluster runs 2.14.x and the build machine had 2.15.x.
+  const std::string ver = a.nc->server_info().str("version");
+  EXPECT_TRUE(ver.rfind("2.", 0) == 0 && std::atoi(ver.c_str() + 2) >= 14);
   std::vector<std::string> got;
   a.nc->Subscribe("tel.fleet.drone.sim-x1.position", [&](const NatsMsg& m) { got.push_back(m.data); });
   // Responder on b; header round trip too.
